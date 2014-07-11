@@ -3,6 +3,7 @@ using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using UKP.Website.Service;
 
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UKP.Web.App_Start.NinjectWebCommon), "PreStart")]
@@ -53,6 +54,7 @@ namespace UKP.Web.App_Start
 
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IEventService>().To<EventService>();
         }        
     }
 }
