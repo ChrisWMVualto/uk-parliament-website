@@ -17,18 +17,23 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(int id, DateTime? inPoint = null, DateTime? outPoint = null)
+        public virtual ActionResult Index(Guid id, DateTime? inPoint = null, DateTime? outPoint = null)
         {
+            var video = _videoService.GetVideo(id);
             return null;
         }
 
 
         [HttpGet]
-        public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan st)
+        public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
-            var startTime = legacyVideo.EventModel.ScheduledStartTime.Date.Add(st);
-            return RedirectToActionPermanent(MVC.Meeting.Index(meetingId, startTime));
+            if (st.HasValue)
+            {
+                var startTime = legacyVideo.EventModel.ScheduledStartTime.Date.Add(st.Value);
+                return RedirectToActionPermanent(MVC.Meeting.Index(legacyVideo.EventModel.Id, startTime));
+            }
+            return RedirectToActionPermanent(MVC.Meeting.Index(legacyVideo.EventModel.Id));
         }
     }
 }

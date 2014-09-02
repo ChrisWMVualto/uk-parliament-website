@@ -26,9 +26,6 @@ namespace UKP.Website.Controllers
     public partial class MeetingController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public MeetingController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected MeetingController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -136,10 +133,10 @@ namespace UKP.Website.Controllers
         public T4MVC_MeetingController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, System.DateTime? inPoint, System.DateTime? outPoint);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, System.DateTime? inPoint, System.DateTime? outPoint);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(int id, System.DateTime? inPoint, System.DateTime? outPoint)
+        public override System.Web.Mvc.ActionResult Index(System.Guid id, System.DateTime? inPoint, System.DateTime? outPoint)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -150,10 +147,10 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void LegacyPageRouteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int meetingId, System.TimeSpan st);
+        partial void LegacyPageRouteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int meetingId, System.TimeSpan? st);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult LegacyPageRoute(int meetingId, System.TimeSpan st)
+        public override System.Web.Mvc.ActionResult LegacyPageRoute(int meetingId, System.TimeSpan? st)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "meetingId", meetingId);

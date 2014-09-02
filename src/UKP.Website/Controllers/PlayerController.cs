@@ -8,7 +8,7 @@ using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
 {
-    public class PlayerController : Controller
+    public partial class PlayerController : Controller
     {
         private readonly IVideoService _videoService;
 
@@ -19,7 +19,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public ActionResult LegacyPlayerRoute()
+        public virtual ActionResult LegacyPlayerRoute()
         {
             //TODO: add support for in point timecode
             if (Request.Url != null)
@@ -30,8 +30,7 @@ namespace UKP.Website.Controllers
                     var embedString = decodedUrl.Replace("?", "").Split(new[] { ' ' });
                     var meetingId = embedString[0];
                     var legacyVideo = _videoService.GetLegacyVideo(int.Parse(meetingId));
-                    var script = string.Format("document.write('{0}');", legacyVideo.EmbedCode);
-                    return JavaScript(script);
+                    return JavaScript(legacyVideo.LegacyEmbedCode);
                 }
             }
 
