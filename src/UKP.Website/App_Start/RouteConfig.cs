@@ -14,6 +14,18 @@ namespace UKP.Website
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "LegacyPageRoute",
+                url: "main/player.aspx",
+                defaults: new { controller = "Meeting", action = "LegacyPageRoute", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "LegacyPlayerRoute",
+                url: "embed/js.ashx",
+                defaults: new { controller = "Player", action = "LegacyPlayerRoute", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
