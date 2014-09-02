@@ -3,7 +3,9 @@ using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using RestSharp.Extensions;
 using UKP.Website.Service;
+using UKP.Website.Application;
 
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UKP.Web.App_Start.NinjectWebCommon), "PreStart")]
@@ -54,7 +56,11 @@ namespace UKP.Web.App_Start
 
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IEventService>().To<EventService>();
+            kernel.Bind<IConfiguration>().To<Website.Application.Configuration>();
+            kernel.Bind<IRestClientWrapper>().To<RestClientWrapper>();
+            kernel.Bind<IRestSharpLogger>().To<RestSharpLogger>();
+
+            kernel.Bind<IVideoService>().To<VideoService>();
         }        
     }
 }
