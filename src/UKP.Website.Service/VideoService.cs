@@ -24,7 +24,6 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-
         public VideoModel GetVideo(Guid id)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);

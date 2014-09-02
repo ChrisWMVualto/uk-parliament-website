@@ -37,7 +37,8 @@ namespace UKP.Website.Service.Transforms
             var publishedStartTime = (DateTime?)jObject.publishedStartTime;
             var actualStartTime = (DateTime?)jObject.actualStartTime;
 
-            return new EventModel(id, new EventStates(planningEventState, recordingEventState, recordedEventState), actualLiveStartTime, scheduledStartTime, publishedStartTime, actualStartTime);
+            return new EventModel(id, new EventStates(planningEventState, recordingEventState, recordedEventState), actualLiveStartTime,
+                scheduledStartTime, publishedStartTime, actualStartTime);
         }
 
         public static IEnumerable<EventModel> TransformEPG(dynamic json)
@@ -57,8 +58,9 @@ namespace UKP.Website.Service.Transforms
 
             var @event = Transform(jObject.@event.ToString());
             var embedCode = (string)jObject.embedCode;
+            var legacyEmbedCode = (string)jObject.legacyEmbedCode;
 
-            return new VideoModel(@event, embedCode);
+            return new VideoModel(@event, embedCode, legacyEmbedCode);
         }
     }
 }
