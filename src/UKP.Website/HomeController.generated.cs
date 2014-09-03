@@ -26,9 +26,6 @@ namespace UKP.Website.Controllers
     public partial class HomeController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public HomeController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected HomeController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -73,13 +70,19 @@ namespace UKP.Website.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
+            public readonly string All = "All";
+            public readonly string Commons = "Commons";
+            public readonly string Lords = "Lords";
+            public readonly string Committees = "Committees";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
+            public const string All = "All";
+            public const string Commons = "Commons";
+            public const string Lords = "Lords";
+            public const string Committees = "Committees";
         }
 
 
@@ -93,7 +96,15 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string All = "All";
+                public readonly string Commitees = "Commitees";
+                public readonly string Commons = "Commons";
+                public readonly string Lords = "Lords";
             }
+            public readonly string All = "~/Views/Home/All.cshtml";
+            public readonly string Commitees = "~/Views/Home/Commitees.cshtml";
+            public readonly string Commons = "~/Views/Home/Commons.cshtml";
+            public readonly string Lords = "~/Views/Home/Lords.cshtml";
         }
     }
 
@@ -103,13 +114,46 @@ namespace UKP.Website.Controllers
         public T4MVC_HomeController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void AllOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult All()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.All);
+            AllOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CommonsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Commons()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Commons);
+            CommonsOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LordsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Lords()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Lords);
+            LordsOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CommitteesOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Committees()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Committees);
+            CommitteesOverride(callInfo);
             return callInfo;
         }
 

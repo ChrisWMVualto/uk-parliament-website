@@ -66,6 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EpgService.cs" />
+    <Compile Include="IEpgService.cs" />
     <Compile Include="IVideoService.cs" />
     <Compile Include="Model\EventModel.cs" />
     <Compile Include="Model\EventStates.cs" />
