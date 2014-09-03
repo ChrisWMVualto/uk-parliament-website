@@ -5,6 +5,6 @@
         ALL,
         COMMONS, 
         LORDS, 
-        COMMITEES
+        COMMITTEES
     }
 }
