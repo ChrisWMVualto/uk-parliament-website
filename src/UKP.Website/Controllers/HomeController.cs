@@ -34,19 +34,22 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Commons()
         {
-            throw new NotImplementedException();
+            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.COMMONS), _epgService.GetGuide(EventFilter.COMMONS), _epgService.GetRecentlyArchived(EventFilter.COMMONS));
+            return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Lords()
         {
-            throw new NotImplementedException();
+            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.LORDS), _epgService.GetGuide(EventFilter.LORDS), _epgService.GetRecentlyArchived(EventFilter.LORDS));
+            return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Committees()
         {
-            throw new NotImplementedException();
+            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.COMMITTEES), _epgService.GetGuide(EventFilter.COMMITTEES), _epgService.GetRecentlyArchived(EventFilter.COMMITTEES));
+            return View(model);
         }
     }
 }

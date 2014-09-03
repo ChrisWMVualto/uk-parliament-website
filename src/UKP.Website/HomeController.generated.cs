@@ -99,12 +99,12 @@ namespace UKP.Website.Controllers
             public class _ViewNamesClass
             {
                 public readonly string All = "All";
-                public readonly string Commitees = "Commitees";
+                public readonly string Committees = "Committees";
                 public readonly string Commons = "Commons";
                 public readonly string Lords = "Lords";
             }
             public readonly string All = "~/Views/Home/All.cshtml";
-            public readonly string Commitees = "~/Views/Home/Commitees.cshtml";
+            public readonly string Committees = "~/Views/Home/Committees.cshtml";
             public readonly string Commons = "~/Views/Home/Commons.cshtml";
             public readonly string Lords = "~/Views/Home/Lords.cshtml";
         }
