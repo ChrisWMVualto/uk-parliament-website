@@ -5,8 +5,8 @@ namespace UKP.Website.Service
 {
     public interface IEpgService
     {
-        NowAndNextModel GetNowEvents(int target = 6);
-        IEnumerable<EventModel> GetGuide();
-        IEnumerable<EventModel> GetRecentlyArchived();
+        NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.ALL, int target = 6);
+        IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.ALL);
+        IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL);
     }
 }
