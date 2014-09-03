@@ -7,11 +7,11 @@ using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
 {
-    public partial class MeetingController : Controller
+    public partial class EventController : Controller
     {
         private readonly IVideoService _videoService;
 
-        public MeetingController(IVideoService videoService)
+        public EventController(IVideoService videoService)
         {
             _videoService = videoService;
         }
@@ -31,9 +31,9 @@ namespace UKP.Website.Controllers
             if (st.HasValue)
             {
                 var startTime = legacyVideo.EventModel.ScheduledStartTime.Date.Add(st.Value);
-                return RedirectToActionPermanent(MVC.Meeting.Index(legacyVideo.EventModel.Id, startTime));
+                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id, startTime));
             }
-            return RedirectToActionPermanent(MVC.Meeting.Index(legacyVideo.EventModel.Id));
+            return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id));
         }
     }
 }

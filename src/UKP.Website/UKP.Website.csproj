@@ -127,15 +127,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MeetingController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="EventController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MeetingController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PlayerController.generated.cs">
@@ -176,8 +176,8 @@
     <Folder Include="Content\" />
     <Folder Include="Extensions\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Event\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Meeting\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
