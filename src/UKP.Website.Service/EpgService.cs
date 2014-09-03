@@ -42,9 +42,18 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformEPG(response.Content);;
         }
 
-        public NowAndNextModel GetNowEvents(int target = 6)
+        public NowAndNextModel GetNowEvents(string eventFilter = null, int target = 6)
         {
-            var events = GetEvents();//.Where(x => !x.States.PlanningState.Equals(PlanningEventState.VOID) || !x.States.RecordingState.Equals(RecordingEventState.VOID) || !x.States.RecordedState.Equals(RecordedEventState.VOID));
+            var events = GetEvents();
+
+            if (eventFilter != null)
+            {
+                if (eventFilter == "Commons")
+                {
+                    events = events.Where(x => x.House.Equals("Commons"));
+                }
+            }
+
             var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
             var nextEvents = events.Where(x => !x.States.PlanningState.Equals(PlanningEventState.VOID));
 
@@ -58,13 +67,13 @@ namespace UKP.Website.Service
             return new NowAndNextModel(nowEvents, false);
         }
 
-        public IEnumerable<EventModel> GetGuide()
+        public IEnumerable<EventModel> GetGuide(string eventFilter = null)
         {
             var events = GetEvents();
             return events;
         }
 
-        public IEnumerable<EventModel> GetRecentlyArchived()
+        public IEnumerable<EventModel> GetRecentlyArchived(string eventFilter = null)
         {
             // TODO: Find a way to get ten most recently archived events, and return here
             return null;
