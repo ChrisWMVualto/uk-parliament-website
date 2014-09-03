@@ -70,6 +70,7 @@ namespace UKP.Website.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string Index = "Index";
             public readonly string All = "All";
             public readonly string Commons = "Commons";
             public readonly string Lords = "Lords";
@@ -79,6 +80,7 @@ namespace UKP.Website.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string Index = "Index";
             public const string All = "All";
             public const string Commons = "Commons";
             public const string Lords = "Lords";
@@ -112,6 +114,17 @@ namespace UKP.Website.Controllers
     public partial class T4MVC_HomeController : UKP.Website.Controllers.HomeController
     {
         public T4MVC_HomeController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
+            return callInfo;
+        }
 
         [NonAction]
         partial void AllOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
