@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Date.Extensions;
 using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
@@ -17,8 +18,12 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(Guid id, DateTime? inPoint = null, DateTime? outPoint = null)
+        public virtual ActionResult Index(Guid id, string @in = null, string @out = null)
         {
+            // iso86601 strings used to be human url friendly
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
             var video = _videoService.GetVideo(id);
             return null;
         }
@@ -30,8 +35,9 @@ namespace UKP.Website.Controllers
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
             if (st.HasValue)
             {
-                var startTime = legacyVideo.EventModel.ScheduledStartTime.Date.Add(st.Value);
-                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id, startTime));
+                var timeOfDay = legacyVideo.EventModel.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
+                var date = timeOfDay.ToISO8601String();
+                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id, date));
             }
             return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id));
         }

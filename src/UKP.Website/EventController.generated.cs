@@ -101,8 +101,8 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_Index
         {
             public readonly string id = "id";
-            public readonly string inPoint = "inPoint";
-            public readonly string outPoint = "outPoint";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -133,16 +133,16 @@ namespace UKP.Website.Controllers
         public T4MVC_EventController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, System.DateTime? inPoint, System.DateTime? outPoint);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(System.Guid id, System.DateTime? inPoint, System.DateTime? outPoint)
+        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "inPoint", inPoint);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "outPoint", outPoint);
-            IndexOverride(callInfo, id, inPoint, outPoint);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            IndexOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 
