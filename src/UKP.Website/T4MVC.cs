@@ -25,8 +25,8 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
+    public static UKP.Website.Controllers.EventController Event = new UKP.Website.Controllers.T4MVC_EventController();
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
-    public static UKP.Website.Controllers.MeetingController Meeting = new UKP.Website.Controllers.T4MVC_MeetingController();
     public static UKP.Website.Controllers.PlayerController Player = new UKP.Website.Controllers.T4MVC_PlayerController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }

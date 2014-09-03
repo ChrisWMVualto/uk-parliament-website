@@ -16,7 +16,7 @@ namespace UKP.Website
             routes.MapRoute(
                 name: "LegacyPageRoute",
                 url: "main/player.aspx",
-                defaults: new { controller = "Meeting", action = "LegacyPageRoute", id = UrlParameter.Optional }
+                defaults: new { controller = "Event", action = "LegacyPageRoute", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

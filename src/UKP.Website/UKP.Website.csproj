@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Date.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Date.Extensions.1.0.0\lib\net40\Date.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
@@ -131,15 +135,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MeetingController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="EventController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HomeController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MeetingController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewsModel.cs" />
@@ -184,7 +188,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Views\Meeting\" />
+    <Folder Include="Views\Event\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
