@@ -47,17 +47,19 @@ namespace UKP.Website.Service
         {
             var events = GetEvents();
 
-            if (eventFilter != null)
+            if (eventFilter == EventFilter.COMMONS)
             {
-                if (eventFilter == EventFilter.COMMONS)
-                {
-                    events = events.Where(x => x.House.Equals("Commons"));
-                }
+                events = events.Where(x => x.House.Equals("Commons"));
+            }
 
-                if (eventFilter == EventFilter.LORDS)
-                {
-                    events = events.Where(x => x.House.Equals("Lords"));
-                }
+            if (eventFilter == EventFilter.LORDS)
+            {
+                events = events.Where(x => x.House.Equals("Lords"));
+            }
+
+            if (eventFilter == EventFilter.COMMITTEES)
+            {
+                events = events.Where(x => x.Business.Equals("Committee"));
             }
 
             var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
