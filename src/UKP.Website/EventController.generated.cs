@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace UKP.Website.Controllers
 {
-    public partial class MeetingController
+    public partial class EventController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected MeetingController(Dummy d) { }
+        protected EventController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -68,13 +68,13 @@ namespace UKP.Website.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public MeetingController Actions { get { return MVC.Meeting; } }
+        public EventController Actions { get { return MVC.Event; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Meeting";
+        public readonly string Name = "Event";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Meeting";
+        public const string NameConst = "Event";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -128,9 +128,9 @@ namespace UKP.Website.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_MeetingController : UKP.Website.Controllers.MeetingController
+    public partial class T4MVC_EventController : UKP.Website.Controllers.EventController
     {
-        public T4MVC_MeetingController() : base(Dummy.Instance) { }
+        public T4MVC_EventController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, System.DateTime? inPoint, System.DateTime? outPoint);
