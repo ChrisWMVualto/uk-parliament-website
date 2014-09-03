@@ -19,6 +19,12 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        public virtual ActionResult Index()
+        {
+            return All();
+        }
+
+        [HttpGet]
         public virtual ActionResult All()
         {
             var model = new HomeViewsModel(_epgService.GetNowEvents(), _epgService.GetGuide(), _epgService.GetRecentlyArchived());
