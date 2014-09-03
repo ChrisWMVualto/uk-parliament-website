@@ -71,6 +71,7 @@
     <Compile Include="IVideoService.cs" />
     <Compile Include="Model\EventModel.cs" />
     <Compile Include="Model\EventStates.cs" />
+    <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transforms\VideoTransforms.cs" />

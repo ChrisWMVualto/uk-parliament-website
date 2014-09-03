@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog.Targets;
 using RestSharp;
 using RestSharp.Deserializers;
 using RestSharp.Extensions;
@@ -30,7 +31,7 @@ namespace UKP.Website.Service
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("date", "2014-05-13T12:14:41+01:00");
+            request.AddParameter("date", "2014-05-12T00:00:00+00:00");
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);
@@ -41,11 +42,20 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformEPG(response.Content);;
         }
 
-        public IEnumerable<EventModel> GetNowEvents()
+        public NowAndNextModel GetNowEvents(int target = 6)
         {
-            // TODO: Filter based on event states (recording/upcoming)
-            var events = GetEvents();
-            return events;
+            var events = GetEvents();//.Where(x => !x.States.PlanningState.Equals(PlanningEventState.VOID) || !x.States.RecordingState.Equals(RecordingEventState.VOID) || !x.States.RecordedState.Equals(RecordedEventState.VOID));
+            var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
+            var nextEvents = events.Where(x => !x.States.PlanningState.Equals(PlanningEventState.VOID));
+
+            if (nowEvents.Count() >= target)
+            {
+                var more = nowEvents.Count() > target;
+                return new NowAndNextModel(nowEvents, more);
+            }
+
+            nowEvents = nowEvents.Concat(nextEvents.Take(target - nowEvents.Count()));
+            return new NowAndNextModel(nowEvents, false);
         }
 
         public IEnumerable<EventModel> GetGuide()
