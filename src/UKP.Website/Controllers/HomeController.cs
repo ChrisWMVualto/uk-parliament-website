@@ -34,7 +34,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Commons()
         {
-            var model = new HomeViewsModel(_epgService.GetNowEvents("Commons"), _epgService.GetGuide("Commons"), _epgService.GetRecentlyArchived("Commons"));
+            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.COMMONS), _epgService.GetGuide(EventFilter.COMMONS), _epgService.GetRecentlyArchived(EventFilter.COMMONS));
             return View(model);
         }
 

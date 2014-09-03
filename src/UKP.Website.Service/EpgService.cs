@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog.Targets;
@@ -42,15 +43,20 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformEPG(response.Content);;
         }
 
-        public NowAndNextModel GetNowEvents(string eventFilter = null, int target = 6)
+        public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.ALL, int target = 6)
         {
             var events = GetEvents();
 
             if (eventFilter != null)
             {
-                if (eventFilter == "Commons")
+                if (eventFilter == EventFilter.COMMONS)
                 {
                     events = events.Where(x => x.House.Equals("Commons"));
+                }
+
+                if (eventFilter == EventFilter.LORDS)
+                {
+                    events = events.Where(x => x.House.Equals("Lords"));
                 }
             }
 
@@ -67,13 +73,13 @@ namespace UKP.Website.Service
             return new NowAndNextModel(nowEvents, false);
         }
 
-        public IEnumerable<EventModel> GetGuide(string eventFilter = null)
+        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.ALL)
         {
             var events = GetEvents();
             return events;
         }
 
-        public IEnumerable<EventModel> GetRecentlyArchived(string eventFilter = null)
+        public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL)
         {
             // TODO: Find a way to get ten most recently archived events, and return here
             return null;
