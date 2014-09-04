@@ -170,10 +170,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Home\All.cshtml" />
     <Content Include="Views\Home\Commons.cshtml" />
     <Content Include="Views\Home\Lords.cshtml" />
-    <Content Include="Views\Home\Commitees.cshtml" />
+    <Content Include="Views\Home\_NowAndNext.cshtml" />
+    <Content Include="Views\Home\_Guide.cshtml" />
+    <Content Include="Views\Home\_RecentlyArchived.cshtml" />
+    <Content Include="Views\Home\Committees.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -21,15 +21,9 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            return All();
+            return RedirectToAction(MVC.Home.Commons());
         }
 
-        [HttpGet]
-        public virtual ActionResult All()
-        {
-            var model = new HomeViewsModel(_epgService.GetNowEvents(), _epgService.GetGuide(), _epgService.GetRecentlyArchived());
-            return View(model);
-        }
 
         [HttpGet]   
         public virtual ActionResult Commons()
