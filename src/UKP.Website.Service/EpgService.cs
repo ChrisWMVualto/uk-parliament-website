@@ -85,8 +85,25 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL, int numEvents = 10)
         {
+            var url = string.Format("api/event/archived/{0}/", numEvents);
+
+            if (eventFilter == EventFilter.COMMONS)
+            {
+                url += "filter/commons";
+            }
+
+            if (eventFilter == EventFilter.LORDS)
+            {
+                url += "filter/lords";
+            }
+
+            if (eventFilter == EventFilter.COMMITTEES)
+            {
+                url += "filter/committee";
+            }
+
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest(string.Format("api/event/archived/{0}", numEvents), Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
 
             var response = client.Execute(request);
 
