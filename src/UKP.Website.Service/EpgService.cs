@@ -32,6 +32,8 @@ namespace UKP.Website.Service
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
+
+            // TODO: Remove hardcoded date
             request.AddParameter("date", "2014-05-12T00:00:00+00:00");
             request.AddParameter("format", "json");
 
