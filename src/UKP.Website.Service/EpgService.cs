@@ -83,10 +83,17 @@ namespace UKP.Website.Service
             return events;
         }
 
-        public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL)
+        public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL, int numEvents = 10)
         {
-            // TODO: Find a way to get ten most recently archived events, and return here
-            return null;
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest(string.Format("api/event/archived/{0}", numEvents), Method.GET, _configuration.IasAuthKey);
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
+            if (!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
+
+            return VideoTransforms.TransformArray(response.Content);
         }
     }
 }
