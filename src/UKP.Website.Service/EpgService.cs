@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Policy;
+using Date.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog.Targets;
@@ -34,7 +35,11 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
-            request.AddParameter("date", "2014-05-12T00:00:00+00:00");
+            var start = new DateTime(2014, 05, 12);
+            var end = start.AddDays(30);
+
+            request.AddParameter("date", start.ToISO8601String());
+            request.AddParameter("endDate", end.ToISO8601String());
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);
@@ -77,10 +82,9 @@ namespace UKP.Website.Service
             return new NowAndNextModel(nowEvents, false);
         }
 
-        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.ALL)
+        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.ALL, int target = 15)
         {
-            var events = GetEvents();
-            return events;
+            return GetNowEvents(eventFilter, target).Events;
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.ALL, int numEvents = 10)

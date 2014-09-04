@@ -71,7 +71,6 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string All = "All";
             public readonly string Commons = "Commons";
             public readonly string Lords = "Lords";
             public readonly string Committees = "Committees";
@@ -81,7 +80,6 @@ namespace UKP.Website.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string All = "All";
             public const string Commons = "Commons";
             public const string Lords = "Lords";
             public const string Committees = "Committees";
@@ -98,13 +96,17 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string All = "All";
-                public readonly string Commitees = "Commitees";
+                public readonly string _Guide = "_Guide";
+                public readonly string _NowAndNext = "_NowAndNext";
+                public readonly string _RecentlyArchived = "_RecentlyArchived";
+                public readonly string Committees = "Committees";
                 public readonly string Commons = "Commons";
                 public readonly string Lords = "Lords";
             }
-            public readonly string All = "~/Views/Home/All.cshtml";
-            public readonly string Commitees = "~/Views/Home/Commitees.cshtml";
+            public readonly string _Guide = "~/Views/Home/_Guide.cshtml";
+            public readonly string _NowAndNext = "~/Views/Home/_NowAndNext.cshtml";
+            public readonly string _RecentlyArchived = "~/Views/Home/_RecentlyArchived.cshtml";
+            public readonly string Committees = "~/Views/Home/Committees.cshtml";
             public readonly string Commons = "~/Views/Home/Commons.cshtml";
             public readonly string Lords = "~/Views/Home/Lords.cshtml";
         }
@@ -123,17 +125,6 @@ namespace UKP.Website.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void AllOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult All()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.All);
-            AllOverride(callInfo);
             return callInfo;
         }
 
