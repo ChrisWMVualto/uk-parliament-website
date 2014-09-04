@@ -63,12 +63,12 @@ namespace UKP.Website.Service
             }
 
             var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
-            var nextEvents = events.Where(x => !x.States.PlanningState.Equals(PlanningEventState.VOID));
+            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.NEW) || x.States.PlanningState.Equals(PlanningEventState.PROPOSED));
 
             if (nowEvents.Count() >= target)
             {
                 var more = nowEvents.Count() > target;
-                return new NowAndNextModel(nowEvents, more);
+                return new NowAndNextModel(nowEvents.Take(target), more);
             }
 
             nowEvents = nowEvents.Concat(nextEvents.Take(target - nowEvents.Count()));
