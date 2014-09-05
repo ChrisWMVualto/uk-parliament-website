@@ -27,17 +27,17 @@ namespace UKP.Website.Service
 
             if (eventFilter == EventFilter.COMMITTEES)
             {
-                url += "3";
+                url += (int)RecessMessageType.ALL_COMMITTEES;
             }
 
             if (eventFilter == EventFilter.COMMONS)
             {
-                url += "1";
+                url += (int)RecessMessageType.HOUSE_OF_COMMONS; ;
             }
 
             if (eventFilter == EventFilter.LORDS)
             {
-                url += "2";
+                url += (int)RecessMessageType.HOUSE_OF_LORDS; ;
             }
             
             var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
