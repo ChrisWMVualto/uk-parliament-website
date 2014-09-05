@@ -20,13 +20,11 @@ namespace UKP.Website.Service
     {
         private readonly IRestClientWrapper _restClientWrapper;
         private readonly IConfiguration _configuration;
-        private readonly IVideoService _videoService;
 
-        public EpgService(IRestClientWrapper restClientWrapper, IConfiguration configuration, IVideoService videoService)
+        public EpgService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
         {
             _restClientWrapper = restClientWrapper;
             _configuration = configuration;
-            _videoService = videoService;
         }
 
         private IEnumerable<EventModel> GetEvents()
@@ -36,7 +34,7 @@ namespace UKP.Website.Service
 
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 05, 12);
-            var end = start.AddDays(30);
+            var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
@@ -56,21 +54,21 @@ namespace UKP.Website.Service
 
             if (eventFilter == EventFilter.COMMONS)
             {
-                events = events.Where(x => x.House.Equals("Commons"));
+                events = events.Where(x => x.House.Equals(EventConstants.BUSINESS_COMMITTEE));
             }
 
             if (eventFilter == EventFilter.LORDS)
             {
-                events = events.Where(x => x.House.Equals("Lords"));
+                events = events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
             }
 
             if (eventFilter == EventFilter.COMMITTEES)
             {
-                events = events.Where(x => x.Business.Equals("Committee"));
+                events = events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
             }
 
             var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
-            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.NEW) || x.States.PlanningState.Equals(PlanningEventState.PROPOSED));
+            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.PROPOSED) || x.States.PlanningState.Equals(PlanningEventState.CONFIRMED));
 
             if (nowEvents.Count() >= target)
             {
