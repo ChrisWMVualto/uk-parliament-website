@@ -30,7 +30,7 @@ namespace UKP.Website.Controllers
         [HttpGet]   
         public virtual ActionResult Commons()
         {
-            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.COMMONS), _epgService.GetGuide(EventFilter.COMMONS), _epgService.GetRecentlyArchived(EventFilter.COMMONS), _recessService.GetRecessMessage(EventFilter.COMMONS));
+            var model = new HomeViewsModel(_epgService.GetNowEvents(), _epgService.GetGuide(), _epgService.GetRecentlyArchived(), _recessService.GetRecessMessage());
             return View(model);
         }
 

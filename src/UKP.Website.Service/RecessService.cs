@@ -19,28 +19,11 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public RecessMessageModel GetRecessMessage(EventFilter eventFilter = EventFilter.ALL)
+        public RecessMessageModel GetRecessMessage(EventFilter eventFilter = EventFilter.COMMONS)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
 
-            var url = "api/recess/";
-
-            if (eventFilter == EventFilter.COMMITTEES)
-            {
-                url += "3";
-            }
-
-            if (eventFilter == EventFilter.COMMONS)
-            {
-                url += "1";
-            }
-
-            if (eventFilter == EventFilter.LORDS)
-            {
-                url += "2";
-            }
-            
-            var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/recess/" + Convert.ChangeType(EventFilter.COMMONS, EventFilter.COMMONS.GetTypeCode()), Method.GET, _configuration.IasAuthKey);
             var response = client.Execute(request);
 
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
