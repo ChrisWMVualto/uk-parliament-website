@@ -62,6 +62,7 @@ namespace UKP.Web.App_Start
 
             kernel.Bind<IVideoService>().To<VideoService>();
             kernel.Bind<IEpgService>().To<EpgService>();
+            kernel.Bind<IRecessService>().To<RecessService>();
         }        
     }
 }
