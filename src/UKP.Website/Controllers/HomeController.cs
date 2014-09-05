@@ -11,12 +11,12 @@ namespace UKP.Website.Controllers
 {
     public partial class HomeController : Controller
     {
-        private readonly IEpgService _epgService;
+        private readonly IEventService _eventService;
         private readonly IRecessService _recessService;
 
-        public HomeController(IEpgService epgService, IRecessService recessService)
+        public HomeController(IEventService eventService, IRecessService recessService)
         {
-            _epgService = epgService;
+            _eventService = eventService;
             _recessService = recessService;
         }
 
@@ -30,21 +30,21 @@ namespace UKP.Website.Controllers
         [HttpGet]   
         public virtual ActionResult Commons()
         {
-            var model = new HomeViewsModel(_epgService.GetNowEvents(), _epgService.GetGuide(), _epgService.GetRecentlyArchived(), _recessService.GetRecessMessage());
+            var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetGuide(), _eventService.GetRecentlyArchived(), _recessService.GetRecessMessage());
             return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Lords()
         {
-            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.LORDS), _epgService.GetGuide(EventFilter.LORDS), _epgService.GetRecentlyArchived(EventFilter.LORDS), _recessService.GetRecessMessage(EventFilter.LORDS));
+            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.LORDS), _eventService.GetGuide(EventFilter.LORDS), _eventService.GetRecentlyArchived(EventFilter.LORDS), _recessService.GetRecessMessage(EventFilter.LORDS));
             return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Committees()
         {
-            var model = new HomeViewsModel(_epgService.GetNowEvents(EventFilter.COMMITTEES), _epgService.GetGuide(EventFilter.COMMITTEES), _epgService.GetRecentlyArchived(EventFilter.COMMITTEES), _recessService.GetRecessMessage(EventFilter.COMMITTEES));
+            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.COMMITTEES), _eventService.GetGuide(EventFilter.COMMITTEES), _eventService.GetRecentlyArchived(EventFilter.COMMITTEES), _recessService.GetRecessMessage(EventFilter.COMMITTEES));
             return View(model);
         }
     }

@@ -61,7 +61,7 @@ namespace UKP.Web.App_Start
             kernel.Bind<IRestSharpLogger>().To<RestSharpLogger>();
 
             kernel.Bind<IVideoService>().To<VideoService>();
-            kernel.Bind<IEpgService>().To<EpgService>();
+            kernel.Bind<IEventService>().To<EventService>();
             kernel.Bind<IRecessService>().To<RecessService>();
         }        
     }
