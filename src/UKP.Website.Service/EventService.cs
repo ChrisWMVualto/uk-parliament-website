@@ -11,12 +11,12 @@ using UKP.Website.Service.Transforms;
 
 namespace UKP.Website.Service
 {
-    public class EpgService : IEpgService
+    public class EventService : IEventService
     {
         private readonly IRestClientWrapper _restClientWrapper;
         private readonly IConfiguration _configuration;
 
-        public EpgService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
+        public EventService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
         {
             _restClientWrapper = restClientWrapper;
             _configuration = configuration;

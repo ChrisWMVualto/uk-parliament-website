@@ -66,7 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EpgService.cs" />
+    <Compile Include="EventService.cs" />
     <Compile Include="IEpgService.cs" />
     <Compile Include="IRecessService.cs" />
     <Compile Include="IVideoService.cs" />
