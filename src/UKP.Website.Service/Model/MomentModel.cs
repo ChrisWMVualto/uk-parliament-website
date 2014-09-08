@@ -2,14 +2,13 @@
 {
     public class MomentModel
     {
-        public int Number { get; private set; }
-        public string Title { get; private set; }
-        public string Url { get; private set; }
+        public string Id { get; set; }
+        public string Title { get; set; }
 
-        public MomentModel(int number, string title, string url)
+        public MomentModel(string id, string title)
         {
+            Id = id;
             Title = title;
-            Url = url;
         }
     }
 }
