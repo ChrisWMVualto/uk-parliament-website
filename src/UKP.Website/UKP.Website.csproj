@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -198,6 +199,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Recess.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -213,7 +215,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="Views\Event\" />
     <Folder Include="Views\Player\" />
-    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UKP.Website.Application\UKP.Website.Application.csproj">

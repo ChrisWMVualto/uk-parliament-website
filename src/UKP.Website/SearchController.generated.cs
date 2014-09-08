@@ -21,10 +21,64 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace T4MVC
+namespace UKP.Website.Controllers
 {
-    public class SearchController
+    public partial class SearchController
     {
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected SearchController(Dummy d) { }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(ActionResult result)
+        {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToAction(Task<ActionResult> taskResult)
+        {
+            return RedirectToAction(taskResult.Result);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result)
+        {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(Task<ActionResult> taskResult)
+        {
+            return RedirectToActionPermanent(taskResult.Result);
+        }
+
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public SearchController Actions { get { return MVC.Search; } }
+        [GeneratedCode("T4MVC", "2.0")]
+        public readonly string Area = "";
+        [GeneratedCode("T4MVC", "2.0")]
+        public readonly string Name = "Search";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Search";
+
+        static readonly ActionNamesClass s_actions = new ActionNamesClass();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionNamesClass ActionNames { get { return s_actions; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNamesClass
+        {
+            public readonly string Index = "Index";
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants
+        {
+            public const string Index = "Index";
+        }
+
 
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -36,10 +90,29 @@ namespace T4MVC
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Views/Search/Index.cshtml";
         }
     }
 
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public partial class T4MVC_SearchController : UKP.Website.Controllers.SearchController
+    {
+        public T4MVC_SearchController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Index()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
+            return callInfo;
+        }
+
+    }
 }
 
 #endregion T4MVC
