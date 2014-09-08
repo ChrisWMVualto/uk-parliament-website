@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using RestSharp;
+using RestSharp.Contrib;
 using RestSharp.Extensions;
 using UKP.Website.Application;
 using UKP.Website.Models;
@@ -23,11 +25,15 @@ namespace UKP.Website.Service
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("keywords", search.Keywords);
+            request.AddParameter("keywords", HttpUtility.UrlEncode(search.Keywords));
+            request.AddParameter("tags", HttpUtility.UrlEncode(search.Tags));
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.NotFound) return null;
+            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+
             var transforms = SearchTransforms.TransformArray(response.Content);
             return transforms;
         }
