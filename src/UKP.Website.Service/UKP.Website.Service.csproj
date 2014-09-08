@@ -66,7 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EpgService.cs" />
+    <Compile Include="EventService.cs" />
     <Compile Include="IEpgService.cs" />
     <Compile Include="IRecessService.cs" />
     <Compile Include="ISearchService.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Model\MomentModel.cs" />
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
+    <Compile Include="Model\RecessMessageType.cs" />
     <Compile Include="Model\SearchModel.cs" />
     <Compile Include="Model\SearchQueryModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
