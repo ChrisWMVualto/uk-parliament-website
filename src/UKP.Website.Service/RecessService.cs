@@ -23,11 +23,13 @@ namespace UKP.Website.Service
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
 
-            var request = _restClientWrapper.AuthRestRequest("api/recess/" + Convert.ChangeType(EventFilter.COMMONS, EventFilter.COMMONS.GetTypeCode()), Method.GET, _configuration.IasAuthKey);
+            var url = string.Format("api/recess/{0}", (int)eventFilter.GetRecessMessageType());
+            var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
+
             var response = client.Execute(request);
 
-            if (response.StatusCode == HttpStatusCode.NotFound) return null;
-            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+            if(response.StatusCode == HttpStatusCode.NotFound) return null;
+            if(response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
             dynamic json = JObject.Parse(response.Content);
             var date = json.expireMessage.Value;

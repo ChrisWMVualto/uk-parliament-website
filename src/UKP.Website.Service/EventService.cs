@@ -11,12 +11,12 @@ using UKP.Website.Service.Transforms;
 
 namespace UKP.Website.Service
 {
-    public class EpgService : IEpgService
+    public class EventService : IEventService
     {
         private readonly IRestClientWrapper _restClientWrapper;
         private readonly IConfiguration _configuration;
 
-        public EpgService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
+        public EventService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
         {
             _restClientWrapper = restClientWrapper;
             _configuration = configuration;
@@ -29,7 +29,7 @@ namespace UKP.Website.Service
 
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 05, 12);
-            var end = start.AddDays(30);
+            var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
@@ -45,10 +45,25 @@ namespace UKP.Website.Service
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
-            var events = GetEvents().Where(x => x.House.Equals(EventString.GetString(eventFilter)));
+            var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
+
+            if (eventFilter == EventFilter.COMMONS)
+            {
+                events = events.Where(x => x.House.Equals(EventConstants.BUSINESS_COMMITTEE));
+            }
+
+            if (eventFilter == EventFilter.LORDS)
+            {
+                events = events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
+            }
+
+            if (eventFilter == EventFilter.COMMITTEES)
+            {
+                events = events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+            }
 
             var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
-            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.NEW) || x.States.PlanningState.Equals(PlanningEventState.PROPOSED));
+            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.PROPOSED) || x.States.PlanningState.Equals(PlanningEventState.CONFIRMED));
 
             if (nowEvents.Count() >= target)
             {
@@ -67,15 +82,15 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
         {
-            var url = string.Format(String.Format("api/event/archived/{0}/filter/{1}", numEvents, EventString.GetString(eventFilter)).ToLower(), numEvents);
+            var url = string.Format(String.Format("api/event/archived/{0}/filter/{1}", numEvents, eventFilter.GetEventType()).ToLower(), numEvents);
 
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
 
             var response = client.Execute(request);
 
-            if (response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
-            if (!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
+            if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
+            if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
             return VideoTransforms.TransformArray(response.Content);
         }

@@ -33,12 +33,13 @@ namespace UKP.Website.Service.Transforms
             var planningEventState = (PlanningEventState)jObject.states.planningState;
             var recordingEventState = (RecordingEventState)jObject.states.recordingState;
             var recordedEventState = (RecordedEventState)jObject.states.recordedState;
+            var simpleEventState = (SimpleEventState)jObject.states.simpleState;
             var actualLiveStartTime = (DateTime?)jObject.actualLiveStartTime;
             var scheduledStartTime = (DateTime)jObject.scheduledStartTime;
             var publishedStartTime = (DateTime?)jObject.publishedStartTime;
             var actualStartTime = (DateTime?)jObject.actualStartTime;
 
-            return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState), actualLiveStartTime,
+            return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState, simpleEventState), actualLiveStartTime,
                 scheduledStartTime, publishedStartTime, actualStartTime);
         }
 
