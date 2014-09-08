@@ -32,10 +32,12 @@ namespace UKP.Website.Service.Transforms
 
             var pageUrl = jObject.webPageUrl.Value;
             var @event = jObject.@event;
+            var moments = jObject.logMomentVideoItems;
 
             var eventModel = VideoTransforms.Transform(@event.ToString());
+            var momentModel = MomentTransforms.TransformArray(moments.ToString());
 
-            return new SearchModel(eventModel, null, pageUrl);
+            return new SearchModel(eventModel, momentModel, pageUrl);
         }
     }
 }

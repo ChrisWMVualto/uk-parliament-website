@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventService.cs" />
-    <Compile Include="IEpgService.cs" />
+    <Compile Include="IEventService.cs" />
     <Compile Include="IRecessService.cs" />
     <Compile Include="ISearchService.cs" />
     <Compile Include="IVideoService.cs" />
@@ -84,6 +84,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecessService.cs" />
     <Compile Include="SearchService.cs" />
+    <Compile Include="Transforms\MomentTransform.cs" />
     <Compile Include="Transforms\SearchTransforms.cs" />
     <Compile Include="Transforms\VideoTransforms.cs" />
     <Compile Include="VideoService.cs" />
