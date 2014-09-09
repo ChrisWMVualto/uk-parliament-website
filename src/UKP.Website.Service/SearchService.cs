@@ -4,7 +4,6 @@ using RestSharp;
 using RestSharp.Contrib;
 using RestSharp.Extensions;
 using UKP.Website.Application;
-using UKP.Website.Models;
 using UKP.Website.Service.Model;
 using UKP.Website.Service.Transforms;
 
@@ -27,6 +26,7 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
             request.AddParameter("keywords", HttpUtility.UrlEncode(search.Keywords));
             request.AddParameter("tags", HttpUtility.UrlEncode(search.Tags));
+            request.AddParameter("memberId", HttpUtility.HtmlEncode(search.MemberId.ToString()));
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
 

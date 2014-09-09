@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UKP.Website.Models;
 using UKP.Website.Service.Model;
 
 namespace UKP.Website.Service

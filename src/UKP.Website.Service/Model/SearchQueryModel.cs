@@ -1,21 +1,20 @@
 ﻿using System;
 using Date.Extensions;
-using RestSharp.Extensions;
 
-namespace UKP.Website.Models
+namespace UKP.Website.Service.Model
 {
     public class SearchQueryModel
     {
         public string Keywords { get; set; }
         public string Tags { get; set; }
-        public string MemberIds { get; set; }
+        public int? MemberId { get; set; }
         public DateTime? Period { get; set; }
 
-        public SearchQueryModel(string keywords, string tags, string memberIds, string period)
+        public SearchQueryModel(string keywords, string tags, int? memberId, string period)
         {
             Keywords = keywords;
             Tags = tags;
-            MemberIds = memberIds;
+            MemberId = memberId;
             Period = period.FromISO8601String();
         }
     }

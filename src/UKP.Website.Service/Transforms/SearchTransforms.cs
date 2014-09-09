@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using UKP.Website.Models;
 using UKP.Website.Service.Model;
 
 namespace UKP.Website.Service.Transforms
