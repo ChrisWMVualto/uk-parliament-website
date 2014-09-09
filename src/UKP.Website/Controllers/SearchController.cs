@@ -16,7 +16,7 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Index()
         {
             // TODO: Remove faked query
-            var searchQuery = new SearchQueryModel("commons", "Commons, Lords", 29, null);
+            var searchQuery = new SearchQueryModel("commons", "Commons, Lords", 29, 30);
 
             var results = _searchService.Search(searchQuery);
             return View(results);

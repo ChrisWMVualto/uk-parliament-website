@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using Date.Extensions;
 using RestSharp;
 using RestSharp.Contrib;
 using RestSharp.Extensions;
@@ -26,7 +27,8 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
             request.AddParameter("keywords", HttpUtility.UrlEncode(search.Keywords));
             request.AddParameter("tags", HttpUtility.UrlEncode(search.Tags));
-            request.AddParameter("memberId", HttpUtility.HtmlEncode(search.MemberId.ToString()));
+            request.AddParameter("memberId", HttpUtility.UrlEncode(search.MemberId.ToString()));
+            request.AddParameter("fromDate", HttpUtility.UrlEncode(search.Period.ToISO8601String()));
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
 
