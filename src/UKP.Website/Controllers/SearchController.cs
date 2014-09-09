@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using UKP.Website.Models;
 using UKP.Website.Service;
+using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
@@ -16,7 +16,7 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Index()
         {
             // TODO: Remove faked query
-            SearchQueryModel searchQuery = new SearchQueryModel("commons", "Commons, Lords", null, null);
+            var searchQuery = new SearchQueryModel("commons", "Commons, Lords", 29, null);
 
             var results = _searchService.Search(searchQuery);
             return View(results);
