@@ -29,6 +29,7 @@ public static partial class MVC
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
     public static UKP.Website.Controllers.PlayerController Player = new UKP.Website.Controllers.T4MVC_PlayerController();
     public static UKP.Website.Controllers.SearchController Search = new UKP.Website.Controllers.T4MVC_SearchController();
+    public static T4MVC.SearchApiController SearchApi = new T4MVC.SearchApiController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -88,6 +89,24 @@ namespace Links
         public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
              
         public static readonly string bootstrap_min_css = Url("bootstrap.min.css");
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class css {
+            private const string URLPATH = "~/Content/css";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string styles_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/styles.min.css") ? Url("styles.min.css") : Url("styles.css");
+                 
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class js {
+            private const string URLPATH = "~/Content/js";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
+            public static readonly string jquery_min_js = Url("jquery.min.js");
+        }
+    
         public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
              
     }

@@ -1,1 +1,27 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="text/stylesheet" href="@Url.Content("~/Content/css/style.css")" />
+        <script src="@Url.Content("~/Content/js/jquery.min.js")"></script>
+        <script src="@Url.Content("~/Content/js/jquery.autocomplete.js")"></script>
+    </head>
+    <body>
+        <form>
+            <div>
+                <label for="keywords">Keywords</label>
+                <input type="text" name="keywords" id="keywords" />
+            </div>
+        </form>
+        
+        <script>
+            var a = $('#keywords').autocomplete({
+                serviceUrl: 'http://data.parliament.uk/membersdataplatform/services/mnis/members/query/name*',
+                minChars: 3,
+                // callback function:
+                onSelect: function (member) {
+                    console.log(member['@@Member_Id']);
+                },
+            });
+        </script>
+    </body>
+</html>

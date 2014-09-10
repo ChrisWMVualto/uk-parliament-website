@@ -1,16 +1,20 @@
 ﻿using System.Web.Mvc;
+using System.Web.Services;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
+
 
 namespace UKP.Website.Controllers
 {
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
+        private readonly IMemberService _memberService;
 
-        public SearchController(ISearchService _searchService)
+        public SearchController(ISearchService searchService, IMemberService memberService)
         {
-            this._searchService = _searchService;
+            _searchService = searchService;
+            _memberService = memberService;
         }
 
         public virtual ActionResult Index()
@@ -20,6 +24,13 @@ namespace UKP.Website.Controllers
 
             var results = _searchService.Search(searchQuery);
             return View(results);
+        }
+
+        [WebMethod]
+        public string Member(string query)
+        {
+            var results = _memberService.Search(query);
+            return results;
         }
     }
 }
