@@ -535,7 +535,6 @@
             params = options.ignoreParams ? null : options.params;
 
             serviceUrl = serviceUrl + params.query;
-            console.log(serviceUrl);
 
             if (that.isLocal) {
                 response = that.getSuggestionsLocal(q);
