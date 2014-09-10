@@ -534,7 +534,7 @@
             options.params[options.paramName] = q;
             params = options.ignoreParams ? null : options.params;
 
-            serviceUrl = serviceUrl + params.query;
+            serviceUrl = serviceUrl + encodeURIComponent(params.query);
 
             if (that.isLocal) {
                 response = that.getSuggestionsLocal(q);
@@ -718,7 +718,7 @@
             var hintValue = '',
                 that = this;
             if (suggestion) {
-                hintValue = that.currentValue + suggestion.DisplayAs.substr(that.currentValue.length);
+                hintValue = that.currentValue + that.navigateByString(suggestion, that.options.displayItem).substr(that.currentValue.length);
             }
             if (that.hintValue !== hintValue) {
                 that.hintValue = hintValue;
@@ -854,7 +854,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.suggestions[index].value));
+            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)));
             that.signalHint(null);
         },
 
@@ -866,7 +866,7 @@
             that.currentValue = that.getValue(that.navigateByString(suggestion, that.options.displayItem));
 
             if (that.currentValue !== that.el.val()) {
-                that.el.val(that.currentValue);
+                that.el.val(that.currentValue + that.options.delimiter);
             }
 
             that.signalHint(null);

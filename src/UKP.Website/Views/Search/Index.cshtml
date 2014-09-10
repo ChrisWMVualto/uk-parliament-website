@@ -35,8 +35,9 @@
         
         <script>
             var a = $('#tags').autocomplete({
-                serviceUrl: "http://local.ias.ukp/api/search/tags/",
-                displayItem: "tag",
+                serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
+                delimiter: ', ',
+                displayItem: "displayTag",
                 objectPath: "",
                 minChars: 1,
                 // callback function:
