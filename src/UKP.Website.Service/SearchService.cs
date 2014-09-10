@@ -25,10 +25,10 @@ namespace UKP.Website.Service
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("keywords", HttpUtility.UrlEncode(search.Keywords));
-            request.AddParameter("tags", HttpUtility.UrlEncode(search.Tags));
-            request.AddParameter("memberId", HttpUtility.UrlEncode(search.MemberId.ToString()));
-            request.AddParameter("fromDate", HttpUtility.UrlEncode(search.Period.ToISO8601String()));
+            request.AddParameter("keywords", search.Keywords);
+            request.AddParameter("tags", search.Tags);
+            request.AddParameter("memberId", search.MemberId.ToString());
+            request.AddParameter("fromDate", search.Period.ToISO8601String());
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
 
