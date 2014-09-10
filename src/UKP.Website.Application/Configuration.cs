@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 
 namespace UKP.Website.Application
 {
@@ -17,6 +12,11 @@ namespace UKP.Website.Application
         public string IasAuthKey
         {
             get { return ConfigurationManager.AppSettings["IasAuthKey"]; }
+        }
+
+        public string MemberAutocompleteApi
+        {
+            get { return ConfigurationManager.AppSettings["MemberAutocompleteApi"]; }
         }
     }
 }

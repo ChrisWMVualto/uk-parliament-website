@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model UKP.Website.Models.SearchViewModel
+
+<!DOCTYPE html>
 <html>
     <head>
         <link rel="text/stylesheet" href="@Url.Content("~/Content/css/style.css")" />
@@ -15,7 +17,7 @@
         
         <script>
             var a = $('#keywords').autocomplete({
-                serviceUrl: 'http://data.parliament.uk/membersdataplatform/services/mnis/members/query/name*',
+                serviceUrl: "@Model.MemberAutocompleteUrl",
                 minChars: 3,
                 // callback function:
                 onSelect: function (member) {

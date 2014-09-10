@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Services;
+using UKP.Website.Application;
+using UKP.Website.Models;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
 
@@ -10,11 +12,13 @@ namespace UKP.Website.Controllers
     {
         private readonly ISearchService _searchService;
         private readonly IMemberService _memberService;
+        private readonly IConfiguration _configuration;
 
-        public SearchController(ISearchService searchService, IMemberService memberService)
+        public SearchController(ISearchService searchService, IMemberService memberService, IConfiguration configuration)
         {
             _searchService = searchService;
             _memberService = memberService;
+            _configuration = configuration;
         }
 
         public virtual ActionResult Index()
@@ -23,7 +27,8 @@ namespace UKP.Website.Controllers
             var searchQuery = new SearchQueryModel("commons", "Commons, Lords", 29, 30);
 
             var results = _searchService.Search(searchQuery);
-            return View(results);
+            var model = new SearchViewModel(results, _configuration.MemberAutocompleteApi);
+            return View(model);
         }
 
         [WebMethod]
