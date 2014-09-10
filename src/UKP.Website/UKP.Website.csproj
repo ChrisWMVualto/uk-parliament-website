@@ -169,6 +169,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeViewsModel.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="PlayerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
