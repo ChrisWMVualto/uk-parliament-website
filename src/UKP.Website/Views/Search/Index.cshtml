@@ -13,11 +13,18 @@
                 <label for="keywords">Keywords</label>
                 <input type="text" name="keywords" id="keywords" />
             </div>
+            
+            <div>
+                <label for="tags">Tags</label>
+                <input type="text" name="tags" id="tags" />
+            </div>
         </form>
         
         <script>
             var a = $('#keywords').autocomplete({
                 serviceUrl: "@Model.MemberAutocompleteUrl",
+                displayItem: "DisplayAs",
+                objectPath: "Members.Member",
                 minChars: 3,
                 // callback function:
                 onSelect: function (member) {
@@ -25,5 +32,20 @@
                 },
             });
         </script>
+        
+        <script>
+            var a = $('#tags').autocomplete({
+                serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
+                delimiter: ', ',
+                displayItem: "displayTag",
+                objectPath: "",
+                minChars: 1,
+                // callback function:
+                onSelect: function (member) {
+                    console.log(member.category + " " + member.tag);
+                },
+            });
+        </script>
+
     </body>
 </html>
