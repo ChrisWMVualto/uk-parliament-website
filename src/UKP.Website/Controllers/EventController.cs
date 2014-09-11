@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Date.Extensions;
+using UKP.Website.Extensions.SignalR;
+using UKP.Website.Models.Event;
 using UKP.Website.Service;
+using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
@@ -33,13 +37,20 @@ namespace UKP.Website.Controllers
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
-            if (st.HasValue)
+            if(st.HasValue)
             {
                 var timeOfDay = legacyVideo.EventModel.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
                 var date = timeOfDay.ToISO8601String();
                 return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id, date));
             }
             return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id));
+        }
+
+        [HttpPost]
+        public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
+        {
+            EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.SimpleState), stateChangeModel.StateChanged);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
