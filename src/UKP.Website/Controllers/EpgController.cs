@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace UKP.Website.Controllers
 {
-    public class EpgController : Controller
+    public partial class EpgController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }
