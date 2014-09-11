@@ -606,9 +606,9 @@
             that.signalHint(null);
         },
 
-        suggest: function () {
+        suggest: function() {
             if (this.suggestions.length === 0) {
-                this.options.showNoSuggestionNotice ? this.noSuggestions() : this.hide();               
+                this.options.showNoSuggestionNotice ? this.noSuggestions() : this.hide();
                 return;
             }
 
@@ -634,14 +634,26 @@
 
             // Build suggestions inner HTML:
             var categoriesUsed = [];
+
+            if (that.options.categoryItem != null) {
+                $.each(that.suggestions, function(i, suggestion) {
+                    var alreadySelected = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
+
+                    if (alreadySelected != -1)
+                        categoriesUsed.push(that.navigateByString(suggestion, that.options.categoryItem));
+                });
+            }
+
             $.each(that.suggestions, function (i, suggestion) {
                 var alreadySelected = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
-                var categorySelected = categoriesUsed.indexOf(that.navigateByString(suggestion, that.options.categoryItem));
+
+                if (that.options.categoryItem)
+                    var categorySelected = categoriesUsed.indexOf(that.navigateByString(suggestion, that.options.categoryItem));
+                else
+                    var categorySelected = -1;
 
                 if (alreadySelected == -1 && categorySelected == -1)
                     html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, options) + '</div>';
-                else
-                    categoriesUsed.push(that.navigateByString(suggestion, that.options.categoryItem));
             });
 
             this.adjustContainerWidth();      
