@@ -66,6 +66,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult State()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.State);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventController Actions { get { return MVC.Event; } }
@@ -84,6 +90,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string Index = "Index";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
+            public readonly string State = "State";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -91,6 +98,7 @@ namespace UKP.Website.Controllers
         {
             public const string Index = "Index";
             public const string LegacyPageRoute = "LegacyPageRoute";
+            public const string State = "State";
         }
 
 
@@ -113,6 +121,14 @@ namespace UKP.Website.Controllers
             public readonly string meetingId = "meetingId";
             public readonly string st = "st";
         }
+        static readonly ActionParamsClass_State s_params_State = new ActionParamsClass_State();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_State StateParams { get { return s_params_State; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_State
+        {
+            public readonly string stateChangeModel = "stateChangeModel";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -123,7 +139,9 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Views/Event/Index.cshtml";
         }
     }
 
@@ -156,6 +174,18 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "meetingId", meetingId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "st", st);
             LegacyPageRouteOverride(callInfo, meetingId, st);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void StateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, UKP.Website.Models.Event.StateChangeModel stateChangeModel);
+
+        [NonAction]
+        public override System.Web.Mvc.HttpStatusCodeResult State(UKP.Website.Models.Event.StateChangeModel stateChangeModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.State);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "stateChangeModel", stateChangeModel);
+            StateOverride(callInfo, stateChangeModel);
             return callInfo;
         }
 

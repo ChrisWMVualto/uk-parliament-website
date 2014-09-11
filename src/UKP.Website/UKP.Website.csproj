@@ -181,6 +181,9 @@
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SearchApiController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="EpgController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
