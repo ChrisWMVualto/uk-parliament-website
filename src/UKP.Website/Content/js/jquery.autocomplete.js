@@ -633,7 +633,9 @@
 
             // Build suggestions inner HTML:
             $.each(that.suggestions, function (i, suggestion) {
-                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, options) + '</div>';
+                var magic = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
+                if (magic == -1)
+                    html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, options) + '</div>';
             });
 
             this.adjustContainerWidth();      
