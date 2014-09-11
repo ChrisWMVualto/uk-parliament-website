@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 
-<script src="~/Scripts/jquery.signalR-2.1.0.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
 <script src="~/signalr/hubs"></script>
 
 
@@ -21,6 +21,7 @@
     }
 
     function stateChanged(planningState, recordingState, recordedState, simpleState) {
+        alert(simpleState);
     }
 
     stateChanged('@Model.States.PlanningState.ToString()', '@Model.States.RecordingState.ToString()', '@Model.States.RecordedState.ToString()', '@Model.States.SimpleEventState.ToString()');
