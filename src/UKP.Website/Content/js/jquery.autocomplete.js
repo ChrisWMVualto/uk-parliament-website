@@ -93,6 +93,7 @@
                 forceFixPosition: false,
                 displayItem: null,
                 objectPath: null,
+                categoryItem: null
             };
 
         // Shared variables:
@@ -632,10 +633,15 @@
             }
 
             // Build suggestions inner HTML:
+            var categoriesUsed = [];
             $.each(that.suggestions, function (i, suggestion) {
-                var magic = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
-                if (magic == -1)
+                var alreadySelected = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
+                var categorySelected = categoriesUsed.indexOf(that.navigateByString(suggestion, that.options.categoryItem));
+
+                if (alreadySelected == -1 && categorySelected == -1)
                     html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, options) + '</div>';
+                else
+                    categoriesUsed.push(that.navigateByString(suggestion, that.options.categoryItem));
             });
 
             this.adjustContainerWidth();      
