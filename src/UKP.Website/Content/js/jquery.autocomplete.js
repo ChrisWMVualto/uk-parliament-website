@@ -90,7 +90,9 @@
                 showNoSuggestionNotice: false,
                 noSuggestionNotice: 'No results',
                 orientation: 'bottom',
-                forceFixPosition: false
+                forceFixPosition: false,
+                displayItem: null,
+                objectPath: null,
             };
 
         // Shared variables:
@@ -125,10 +127,10 @@
 
     $.Autocomplete = Autocomplete;
 
-    Autocomplete.formatResult = function (suggestion, currentValue) {
+    Autocomplete.formatResult = function (suggestion, currentValue, options) {
         var pattern = '(' + utils.escapeRegExChars(currentValue) + ')';
 
-        return suggestion.DisplayAs.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
+        return Autocomplete.prototype.navigateByString(suggestion, options.displayItem).replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
     };
 
     Autocomplete.prototype = {
@@ -479,7 +481,7 @@
                 queryLowerCase = query.toLowerCase();
 
             $.each(that.suggestions, function (i, suggestion) {
-                if (suggestion.DisplayAs.toLowerCase() === queryLowerCase) {
+                if (that.navigateByString(suggestion, that.options.displayItem).toLowerCase() === queryLowerCase) {
                     index = i;
                     return false;
                 }
@@ -532,8 +534,7 @@
             options.params[options.paramName] = q;
             params = options.ignoreParams ? null : options.params;
 
-            serviceUrl = serviceUrl + params.query;
-            console.log(serviceUrl);
+            serviceUrl = serviceUrl + encodeURIComponent(params.query);
 
             if (that.isLocal) {
                 response = that.getSuggestionsLocal(q);
@@ -572,7 +573,7 @@
                     that.currentRequest = null;
                     result = options.transformResult(data);
                     that.processResponse(result, q, cacheKey);
-                    options.onSearchComplete.call(that.element, q, result.Members.Member);
+                    options.onSearchComplete.call(that.element, q, that.navigateByString(result, that.options.objectPath));
                 }).fail(function (jqXHR, textStatus, errorThrown) {
                     options.onSearchError.call(that.element, q, jqXHR, textStatus, errorThrown);
                 });
@@ -632,7 +633,9 @@
 
             // Build suggestions inner HTML:
             $.each(that.suggestions, function (i, suggestion) {
-                html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value) + '</div>';
+                var magic = that.currentValue.indexOf(that.navigateByString(suggestion, that.options.displayItem));
+                if (magic == -1)
+                    html += '<div class="' + className + '" data-index="' + i + '">' + formatResult(suggestion, value, options) + '</div>';
             });
 
             this.adjustContainerWidth();      
@@ -703,7 +706,7 @@
             }
 
             $.each(that.suggestions, function (i, suggestion) {
-                var foundMatch = suggestion.DisplayAs.toLowerCase().indexOf(value) === 0;
+                var foundMatch = that.navigateByString(suggestion, that.options.displayItem).toLowerCase().indexOf(value) === 0;
                 if (foundMatch) {
                     bestMatch = suggestion;
                 }
@@ -717,7 +720,7 @@
             var hintValue = '',
                 that = this;
             if (suggestion) {
-                hintValue = that.currentValue + suggestion.DisplayAs.substr(that.currentValue.length);
+                hintValue = that.currentValue + that.navigateByString(suggestion, that.options.displayItem).substr(that.currentValue.length);
             }
             if (that.hintValue !== hintValue) {
                 that.hintValue = hintValue;
@@ -751,7 +754,7 @@
             var that = this,
                 options = that.options;
 
-            result.suggestions = that.verifySuggestionsFormat(result.Members.Member);
+            result.suggestions = that.verifySuggestionsFormat(that.navigateByString(result, that.options.objectPath));
 
             // Cache results if cache is not disabled:
             if (!options.noCache) {
@@ -853,7 +856,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.suggestions[index].value));
+            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)));
             that.signalHint(null);
         },
 
@@ -862,10 +865,10 @@
                 onSelectCallback = that.options.onSelect,
                 suggestion = that.suggestions[index];
 
-            that.currentValue = that.getValue(suggestion.DisplayAs);
+            that.currentValue = that.getValue(that.navigateByString(suggestion, that.options.displayItem));
 
             if (that.currentValue !== that.el.val()) {
-                that.el.val(that.currentValue);
+                that.el.val(that.currentValue + that.options.delimiter);
             }
 
             that.signalHint(null);
@@ -903,6 +906,24 @@
             that.disableKillerFn();
             $(window).off('resize.autocomplete', that.fixPositionCapture);
             $(that.suggestionsContainer).remove();
+        },
+
+        navigateByString: function (o, s) {
+            if (s == "" || s == null)
+                return o;
+
+            s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+            s = s.replace(/^\./, '');           // strip a leading dot
+            var a = s.split('.');
+            while (a.length) {
+                var n = a.shift();
+                if (n in o) {
+                    o = o[n];
+                } else {
+                    return;
+                }
+            }
+            return o;
         }
     };
 
