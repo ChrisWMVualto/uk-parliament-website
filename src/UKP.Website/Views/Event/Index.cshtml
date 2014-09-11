@@ -1,0 +1,41 @@
+﻿@using UKP.Website.Service.Model
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<script src="~/Scripts/jquery.signalR-2.1.0.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
+
+
+<script>
+
+    function loadPlayerUrl(url) {
+        $.get(url, function (data) {
+            $('.player-content').html(data);
+        });
+    }
+
+    function stateChanged(planningState, recordingState, recordedState, simpleState) {
+    }
+
+    stateChanged('@Model.States.PlanningState.ToString()', '@Model.States.RecordingState.ToString()', '@Model.States.RecordedState.ToString()', '@Model.States.SimpleEventState.ToString()');
+
+    $(function () {
+
+        var eventStateHub = $.connection.eventStateHub;
+        var eventId = '@Model.Id';
+
+        eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
+            if (eventId == changedId) {
+                stateChanged(planningState, recordingState, recordedState, simpleState);
+            }
+        };
+
+        $.connection.hub.start().done(function () { });
+    });
+</script>
