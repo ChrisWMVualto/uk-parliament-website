@@ -179,7 +179,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\SearchApiController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="EpgController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -235,10 +234,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Recess.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

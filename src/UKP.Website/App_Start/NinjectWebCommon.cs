@@ -64,7 +64,6 @@ namespace UKP.Web.App_Start
             kernel.Bind<IEventService>().To<EventService>();
             kernel.Bind<IRecessService>().To<RecessService>();
             kernel.Bind<ISearchService>().To<SearchService>();
-            kernel.Bind<IMemberService>().To<MemberService>();
         }        
     }
 }

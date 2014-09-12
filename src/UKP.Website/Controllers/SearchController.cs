@@ -11,13 +11,11 @@ namespace UKP.Website.Controllers
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
-        private readonly IMemberService _memberService;
         private readonly IConfiguration _configuration;
 
-        public SearchController(ISearchService searchService, IMemberService memberService, IConfiguration configuration)
+        public SearchController(ISearchService searchService, IConfiguration configuration)
         {
             _searchService = searchService;
-            _memberService = memberService;
             _configuration = configuration;
         }
 
@@ -29,13 +27,6 @@ namespace UKP.Website.Controllers
             var results = _searchService.Search(searchQuery);
             var model = new SearchViewModel(results, _configuration.MemberAutocompleteApi);
             return View(model);
-        }
-
-        [WebMethod]
-        public string Member(string query)
-        {
-            var results = _memberService.Search(query);
-            return results;
         }
     }
 }
