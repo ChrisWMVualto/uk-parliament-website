@@ -28,7 +28,10 @@ namespace UKP.Website.Service
             request.AddParameter("keywords", search.Keywords);
             request.AddParameter("house", search.House);
             request.AddParameter("business", search.Business);
-            request.AddParameter("memberId", search.MemberId.ToString());
+
+            if (search.MemberId.HasValue)
+                request.AddParameter("memberId", search.MemberId.ToString());
+
             request.AddParameter("fromDate", search.Period.ToISO8601String());
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
