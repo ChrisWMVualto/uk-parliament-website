@@ -7,12 +7,12 @@ namespace UKP.Website.Service.Transforms
 {
     public static class SearchTransforms
     {
-        public static IEnumerable<SearchModel> TransformArray(string jsonArray)
+        public static IEnumerable<SearchResultsModel> TransformArray(string jsonArray)
         {
             dynamic jArray = JArray.Parse(jsonArray);
-            if (jArray == null) return Enumerable.Empty<SearchModel>();
+            if (jArray == null) return Enumerable.Empty<SearchResultsModel>();
 
-            var list = new List<SearchModel>();
+            var list = new List<SearchResultsModel>();
             foreach (var json in jArray)
             {
                 list.Add(Transform(json));
@@ -21,7 +21,7 @@ namespace UKP.Website.Service.Transforms
             return list;
         }
 
-        public static SearchModel Transform(dynamic json)
+        public static SearchResultsModel Transform(dynamic json)
         {
             dynamic jObject = JObject.Parse(json.ToString());
             if (jObject == null) return null;
@@ -33,7 +33,7 @@ namespace UKP.Website.Service.Transforms
             var eventModel = VideoTransforms.Transform(@event.ToString());
             var momentModel = MomentTransforms.TransformArray(moments.ToString());
 
-            return new SearchModel(eventModel, momentModel, pageUrl);
+            return new SearchResultsModel(eventModel, momentModel, pageUrl);
         }
     }
 }

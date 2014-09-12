@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public IEnumerable<SearchModel> Search(SearchQueryModel search)
+        public IEnumerable<SearchResultsModel> Search(SearchQueryModel search)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
