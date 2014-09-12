@@ -30,7 +30,7 @@ namespace UKP.Website.Service
             request.AddParameter("business", search.Business);
 
             if (search.MemberId.HasValue)
-                request.AddParameter("memberId", search.MemberId.ToString());
+                request.AddParameter("memberId", search.MemberId.Value);
 
             request.AddParameter("fromDate", search.Period.ToISO8601String());
             request.AddParameter("archiveOnly", true);
