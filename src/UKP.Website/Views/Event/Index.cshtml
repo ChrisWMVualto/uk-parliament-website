@@ -1,4 +1,4 @@
-﻿@using UKP.Website.Service.Model
+﻿@model UKP.Website.Models.Event.EventViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 
 
 
-<script>
+<script type="text/javascript">
 
     function loadPlayerUrl(url) {
         $.get(url, function (data) {
@@ -24,14 +24,15 @@
         alert(simpleState);
     }
 
-    stateChanged('@Model.States.PlanningState.ToString()', '@Model.States.RecordingState.ToString()', '@Model.States.RecordedState.ToString()', '@Model.States.SimpleEventState.ToString()');
+    stateChanged('@Model.VideoModel.EventModel.States.PlanningState.ToString()', '@Model.VideoModel.EventModel.States.RecordingState.ToString()', '@Model.VideoModel.EventModel.States.RecordedState.ToString()', '@Model.VideoModel.EventModel.States.SimpleEventState.ToString()');
 
     $(function () {
 
         var eventStateHub = $.connection.eventStateHub;
-        var eventId = '@Model.Id';
+        var eventId = '@Model.VideoModel.EventModel.Id';
 
         eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
+  
             if (eventId == changedId) {
                 stateChanged(planningState, recordingState, recordedState, simpleState);
             }

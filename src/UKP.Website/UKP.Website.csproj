@@ -193,6 +193,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event\EventVIewModel.cs" />
     <Compile Include="Models\Event\StateChangedModel.cs" />
     <Compile Include="Models\HomeViewsModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
