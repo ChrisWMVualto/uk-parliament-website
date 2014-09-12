@@ -26,7 +26,8 @@ namespace UKP.Website.Service
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
             request.AddParameter("keywords", search.Keywords);
-            request.AddParameter("tags", search.Tags);
+            request.AddParameter("house", search.House);
+            request.AddParameter("business", search.Business);
             request.AddParameter("memberId", search.MemberId.ToString());
             request.AddParameter("fromDate", search.Period.ToISO8601String());
             request.AddParameter("archiveOnly", true);
