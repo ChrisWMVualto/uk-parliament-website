@@ -78,7 +78,7 @@
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
-    <Compile Include="Model\SearchModel.cs" />
+    <Compile Include="Model\SearchResultsModel.cs" />
     <Compile Include="Model\SearchQueryModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

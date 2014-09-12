@@ -2,9 +2,9 @@
 
 namespace UKP.Website.Service.Model
 {
-    public class SearchModel
+    public class SearchResultsModel
     {
-        public SearchModel(EventModel @event, IEnumerable<MomentModel> moments, string pageUrl)
+        public SearchResultsModel(EventModel @event, IEnumerable<MomentModel> moments, string pageUrl)
         {
             Event = @event;
             Moments = moments;
