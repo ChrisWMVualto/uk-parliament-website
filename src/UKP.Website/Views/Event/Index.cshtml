@@ -1,0 +1,43 @@
+﻿@model UKP.Website.Models.Event.EventViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
+
+
+<script type="text/javascript">
+
+    function loadPlayerUrl(url) {
+        $.get(url, function (data) {
+            $('.player-content').html(data);
+        });
+    }
+
+    function stateChanged(planningState, recordingState, recordedState, simpleState) {
+        alert(simpleState);
+    }
+
+    stateChanged('@Model.VideoModel.EventModel.States.PlanningState.ToString()', '@Model.VideoModel.EventModel.States.RecordingState.ToString()', '@Model.VideoModel.EventModel.States.RecordedState.ToString()', '@Model.VideoModel.EventModel.States.SimpleEventState.ToString()');
+
+    $(function () {
+
+        var eventStateHub = $.connection.eventStateHub;
+        var eventId = '@Model.VideoModel.EventModel.Id';
+
+        eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
+  
+            if (eventId == changedId) {
+                stateChanged(planningState, recordingState, recordedState, simpleState);
+            }
+        };
+
+        $.connection.hub.start().done(function () { });
+    });
+</script>
