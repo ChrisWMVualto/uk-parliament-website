@@ -49,7 +49,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
         {
-            EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.SimpleState), stateChangeModel.StateChanged);
+            EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState), stateChangeModel.StateChanged);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }

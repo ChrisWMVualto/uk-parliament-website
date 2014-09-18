@@ -2,18 +2,16 @@
 {
     public class EventStates
     {
-        public EventStates(PlanningEventState planningState, RecordingEventState recordingState, RecordedEventState recordedState, SimpleEventState simpleEventState)
+        public EventStates(PlanningEventState planningState, RecordingEventState recordingState, RecordedEventState recordedState)
         {
             PlanningState = planningState;
             RecordingState = recordingState;
             RecordedState = recordedState;
-            SimpleEventState = simpleEventState;
         }
 
         public PlanningEventState PlanningState { get; private set; }
         public RecordingEventState RecordingState { get; private set; }
         public RecordedEventState RecordedState { get; private set; }
-        public SimpleEventState SimpleEventState { get; private set; }
     }
 
     public enum PlanningEventState
@@ -41,13 +39,5 @@
         REVOKE,
         HOLD,
         BASIC
-    }
-
-    public enum SimpleEventState
-    {
-        PRELIVE = 0,
-        LIVE = 1,
-        ARCHIVE = 2,
-        ERROR = 3
     }
 }

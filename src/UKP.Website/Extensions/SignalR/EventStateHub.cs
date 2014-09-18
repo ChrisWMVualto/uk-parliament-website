@@ -38,7 +38,7 @@ namespace UKP.Website.Extensions.SignalR
                 || InterestedRecordedStates.Contains(states.RecordedState)) ;
             {
                 var context = GlobalHost.ConnectionManager.GetHubContext<EventStateHub>();
-                context.Clients.All.eventStateChanged(id, states.PlanningState.ToString(), states.RecordingState.ToString(), states.RecordedState.ToString(), states.SimpleEventState.ToString());
+                context.Clients.All.eventStateChanged(id, states.PlanningState.ToString(), states.RecordingState.ToString(), states.RecordedState.ToString());
             }
         }
     }
