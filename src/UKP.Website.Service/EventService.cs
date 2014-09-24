@@ -67,12 +67,14 @@ namespace UKP.Website.Service
 
             if (nowEvents.Count() >= target)
             {
-                var more = nowEvents.Count() > target;
-                return new NowAndNextModel(nowEvents.Take(target), more);
+                var allLive = nowEvents.Count() == target;
+                return new NowAndNextModel(nowEvents.Take(target), allLive, true);
             }
 
+            bool live = nowEvents.Count() != 0;
+
             nowEvents = nowEvents.Concat(nextEvents.Take(target - nowEvents.Count()));
-            return new NowAndNextModel(nowEvents, false);
+            return new NowAndNextModel(nowEvents, false, live);
         }
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 15)
