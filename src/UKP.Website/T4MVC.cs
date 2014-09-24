@@ -105,8 +105,191 @@ namespace Links
             private const string URLPATH = "~/Content/css";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string styles_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/styles.min.css") ? Url("styles.min.css") : Url("styles.css");
+            public static readonly string ajax_loader_gif = Url("ajax-loader.gif");
+            public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
                  
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class fonts {
+                private const string URLPATH = "~/Content/css/fonts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string slick_eot = Url("slick.eot");
+                public static readonly string slick_svg = Url("slick.svg");
+                public static readonly string slick_ttf = Url("slick.ttf");
+                public static readonly string slick_woff = Url("slick.woff");
+            }
+        
+            public static readonly string theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/theme.min.css") ? Url("theme.min.css") : Url("theme.css");
+                 
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class fonts {
+            private const string URLPATH = "~/Content/fonts";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class font_app {
+                private const string URLPATH = "~/Content/fonts/font-app";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class fonts {
+                    private const string URLPATH = "~/Content/fonts/font-app/fonts";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string app_eot = Url("app.eot");
+                    public static readonly string app_svg = Url("app.svg");
+                    public static readonly string app_ttf = Url("app.ttf");
+                    public static readonly string app_woff = Url("app.woff");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class less {
+                    private const string URLPATH = "~/Content/fonts/font-app/less";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string font_app_less = Url("font-app.less");
+                }
+            
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class font_awesome {
+                private const string URLPATH = "~/Content/fonts/font-awesome";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Content/fonts/font-awesome/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string font_awesome_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/font-awesome.min.css") ? Url("font-awesome.min.css") : Url("font-awesome.css");
+                         
+                    public static readonly string font_awesome_min_css = Url("font-awesome.min.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class fonts {
+                    private const string URLPATH = "~/Content/fonts/font-awesome/fonts";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string fontawesome_webfont_eot = Url("fontawesome-webfont.eot");
+                    public static readonly string fontawesome_webfont_svg = Url("fontawesome-webfont.svg");
+                    public static readonly string fontawesome_webfont_ttf = Url("fontawesome-webfont.ttf");
+                    public static readonly string fontawesome_webfont_woff = Url("fontawesome-webfont.woff");
+                    public static readonly string FontAwesome_otf = Url("FontAwesome.otf");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class less {
+                    private const string URLPATH = "~/Content/fonts/font-awesome/less";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string bordered_pulled_less = Url("bordered-pulled.less");
+                    public static readonly string core_less = Url("core.less");
+                    public static readonly string fixed_width_less = Url("fixed-width.less");
+                    public static readonly string font_awesome_less = Url("font-awesome.less");
+                    public static readonly string icons_less = Url("icons.less");
+                    public static readonly string larger_less = Url("larger.less");
+                    public static readonly string list_less = Url("list.less");
+                    public static readonly string mixins_less = Url("mixins.less");
+                    public static readonly string path_less = Url("path.less");
+                    public static readonly string rotated_flipped_less = Url("rotated-flipped.less");
+                    public static readonly string spinning_less = Url("spinning.less");
+                    public static readonly string stacked_less = Url("stacked.less");
+                    public static readonly string variables_less = Url("variables.less");
+                }
+            
+            }
+        
+            public static readonly string glyphicons_halflings_regular_eot = Url("glyphicons-halflings-regular.eot");
+            public static readonly string glyphicons_halflings_regular_svg = Url("glyphicons-halflings-regular.svg");
+            public static readonly string glyphicons_halflings_regular_ttf = Url("glyphicons-halflings-regular.ttf");
+            public static readonly string glyphicons_halflings_regular_woff = Url("glyphicons-halflings-regular.woff");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class karla {
+                private const string URLPATH = "~/Content/fonts/karla";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Content/fonts/karla/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class fonts {
+                    private const string URLPATH = "~/Content/fonts/karla/fonts";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string karla_bold_webfont_eot = Url("karla-bold-webfont.eot");
+                    public static readonly string karla_bold_webfont_svg = Url("karla-bold-webfont.svg");
+                    public static readonly string karla_bold_webfont_ttf = Url("karla-bold-webfont.ttf");
+                    public static readonly string karla_bold_webfont_woff = Url("karla-bold-webfont.woff");
+                    public static readonly string karla_regular_webfont_eot = Url("karla-regular-webfont.eot");
+                    public static readonly string karla_regular_webfont_svg = Url("karla-regular-webfont.svg");
+                    public static readonly string karla_regular_webfont_ttf = Url("karla-regular-webfont.ttf");
+                    public static readonly string karla_regular_webfont_woff = Url("karla-regular-webfont.woff");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class less {
+                    private const string URLPATH = "~/Content/fonts/karla/less";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string karla_bold_less = Url("karla_bold.less");
+                    public static readonly string karla_regular_less = Url("karla_regular.less");
+                }
+            
+            }
+        
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class img {
+            private const string URLPATH = "~/Content/img";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string arrow_scroll_left_png = Url("arrow-scroll-left.png");
+            public static readonly string arrow_scroll_right_png = Url("arrow-scroll-right.png");
+            public static readonly string blank_png = Url("blank.png");
+            public static readonly string channel_five_logo_png = Url("channel-five-logo.png");
+            public static readonly string channel_four_logo_png = Url("channel-four-logo.png");
+            public static readonly string channel_one_logo_png = Url("channel-one-logo.png");
+            public static readonly string channel_three_logo_png = Url("channel-three-logo.png");
+            public static readonly string channel_two_logo_png = Url("channel-two-logo.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class favicons {
+                private const string URLPATH = "~/Content/img/favicons";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string apple_touch_icon_114x114_precomposed_png = Url("apple-touch-icon-114x114-precomposed.png");
+                public static readonly string apple_touch_icon_144x144_precomposed_png = Url("apple-touch-icon-144x144-precomposed.png");
+                public static readonly string apple_touch_icon_57x57_precomposed_png = Url("apple-touch-icon-57x57-precomposed.png");
+                public static readonly string apple_touch_icon_72x72_precomposed_png = Url("apple-touch-icon-72x72-precomposed.png");
+                public static readonly string apple_touch_icon_precomposed_png = Url("apple-touch-icon-precomposed.png");
+                public static readonly string favicon_ico = Url("favicon.ico");
+                public static readonly string favicon_png = Url("favicon.png");
+                public static readonly string metro_tileicon_png = Url("metro-tileicon.png");
+                public static readonly string Thumbs_db = Url("Thumbs.db");
+            }
+        
+            public static readonly string filler_player_image_jpg = Url("filler-player-image.jpg");
+            public static readonly string filler_thumb_1_jpg = Url("filler-thumb-1.jpg");
+            public static readonly string filler_thumb_2_jpg = Url("filler-thumb-2.jpg");
+            public static readonly string filler_thumb_3_jpg = Url("filler-thumb-3.jpg");
+            public static readonly string filler_thumb_4_jpg = Url("filler-thumb-4.jpg");
+            public static readonly string icons_png = Url("icons.png");
+            public static readonly string logo_main_png = Url("logo-main.png");
+            public static readonly string shadow_right_png = Url("shadow-right.png");
+            public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
+            public static readonly string theme_committees_normal_jpg = Url("theme-committees-normal.jpg");
+            public static readonly string theme_commons_blurred_jpg = Url("theme-commons-blurred.jpg");
+            public static readonly string theme_commons_normal_jpg = Url("theme-commons-normal.jpg");
+            public static readonly string theme_lords_blurred_jpg = Url("theme-lords-blurred.jpg");
+            public static readonly string theme_lords_normal_jpg = Url("theme-lords-normal.jpg");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -114,12 +297,27 @@ namespace Links
             private const string URLPATH = "~/Content/js";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
-            public static readonly string jquery_min_js = Url("jquery.min.js");
+            public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+            public static readonly string scripts_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/scripts.min.js") ? Url("scripts.min.js") : Url("scripts.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class vendor {
+                private const string URLPATH = "~/Content/js/vendor";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bootstrap_checkbox_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-checkbox.min.js") ? Url("bootstrap-checkbox.min.js") : Url("bootstrap-checkbox.js");
+                public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
+                public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
+                public static readonly string bootstrap_timepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker.min.js") ? Url("bootstrap-timepicker.min.js") : Url("bootstrap-timepicker.js");
+                public static readonly string breakpoints_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/breakpoints.min.js") ? Url("breakpoints.min.js") : Url("breakpoints.js");
+                public static readonly string jquery_1_10_1_min_js = Url("jquery-1.10.1.min.js");
+                public static readonly string jquery_pep_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.pep.min.js") ? Url("jquery.pep.min.js") : Url("jquery.pep.js");
+                public static readonly string jquery_slimscroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.slimscroll.min.js") ? Url("jquery.slimscroll.min.js") : Url("jquery.slimscroll.js");
+                public static readonly string modernizr_2_6_2_respond_1_1_0_min_js = Url("modernizr-2.6.2-respond-1.1.0.min.js");
+                public static readonly string slick_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/slick.min.js") ? Url("slick.min.js") : Url("slick.js");
+            }
+        
         }
     
-        public static readonly string Site_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Site.min.css") ? Url("Site.min.css") : Url("Site.css");
-             
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
