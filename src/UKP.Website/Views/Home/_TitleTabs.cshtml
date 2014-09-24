@@ -1,0 +1,57 @@
+﻿@model UKP.Website.Service.Model.NowAndNextModel
+
+<div class="row">
+    <div class="col-md-12">
+        <header class="title-main">
+            @if (Model.AllLive)
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Now</span></h2>
+            }
+            else if (Model.HasLive)
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Now & Next</span></h2>
+            }
+            else if (Model.Events.Any())
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Coming Up</span></h2>
+            }
+            else
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span></span></h2>
+            }
+            <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a>
+        </header>
+    </div>
+</div>
+
+<!--START:TAB SELECT-->
+<div class="visible-xs clearfix">
+    <select class="selectpicker select-home-tabs">
+        <option value="0" class="select-commons" data-icon="">House of Commons</option>
+        <option value="1" class="select-lords" data-icon="">House of Lords</option>
+        <option value="2" class="select-committees" data-icon="">All Committees</option>
+    </select>
+</div>
+<!--END:TABS SELECT-->
+<!--START:TABS-->
+<ul class="nav nav-tabs home-nav-tabs row-no-padding hidden-xs" role="tablist">
+    <li class="col-md-4 col-sm-4 tab-commons active">
+        <a href="@Url.Action(MVC.Home.Commons())">
+            House of Commons
+            <hr />
+        </a>
+    </li>
+    <li class="col-md-4 col-sm-4 tab-lords">
+        <a href="@Url.Action(MVC.Home.Lords())">
+            House of Lords
+            <hr />
+        </a>
+    </li>
+    <li class="col-md-4 col-sm-4 tab-committees">
+        <a href="@Url.Action(MVC.Home.Committees())">
+            All Committees
+            <hr />
+        </a>
+    </li>
+</ul>
+<!--END:TABS-->

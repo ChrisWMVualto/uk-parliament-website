@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace UKP.Website.Service.Model
 {
     public class NowAndNextModel
     {
-        public NowAndNextModel(IEnumerable<EventModel> events, bool moreEvents)
+        public NowAndNextModel(IEnumerable<EventModel> events, bool allLive, bool hasLive)
         {
             Events = events;
-            MoreEvents = moreEvents;
+            AllLive = allLive;
+            HasLive = hasLive;
         }
 
         public IEnumerable<EventModel> Events { get; set; }
-        public bool MoreEvents { get; set; }
+        public bool AllLive{ get; set; }
+        public bool HasLive { get; set; }
     }
 }
