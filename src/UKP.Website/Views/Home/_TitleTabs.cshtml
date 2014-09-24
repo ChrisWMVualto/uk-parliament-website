@@ -1,7 +1,24 @@
-﻿<div class="row">
+﻿@model UKP.Website.Service.Model.NowAndNextModel
+
+<div class="row">
     <div class="col-md-12">
         <header class="title-main">
-            <h2><i class="fa fa-now fa-lg"></i> <span>Now & Next</span></h2>
+            @if (Model.AllLive)
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Now</span></h2>
+            }
+            else if (Model.HasLive)
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Now & Next</span></h2>
+            }
+            else if (Model.Events.Any())
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span>Coming Up</span></h2>
+            }
+            else
+            {
+                <h2><i class="fa fa-now fa-lg"></i> <span></span></h2>
+            }
             <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a>
         </header>
     </div>
