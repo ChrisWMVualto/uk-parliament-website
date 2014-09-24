@@ -10,7 +10,11 @@
             <!--START:COMMONS CONTENT-->
             <div class="theme-bg theme-commons">
                 
-                @Html.Partial(MVC.Home.Views._NowAndNext)
+                @if (Model.NowNext.Events.Any())
+                {
+                    @Html.Partial(MVC.Home.Views._NowAndNext)
+                }
+                
                 @Html.Partial(MVC.Home.Views._Guide)
                 @Html.Partial(MVC.Home.Views._RecentlyArchived)
                 

@@ -1,6 +1,8 @@
-﻿<div class="container main-container home-container">
+﻿@model UKP.Website.Models.HomeViewsModel
 
-    @Html.Partial(MVC.Home.Views._TitleTabs)
+<div class="container main-container home-container">
+
+    @Html.Partial(MVC.Home.Views._TitleTabs, Model.NowNext)
 
     <div class="tab-content">
         <div class="tab-pane fade active in" id="lords">
@@ -8,7 +10,11 @@
             <!--START:COMMONS CONTENT-->
             <div class="theme-bg theme-lords">
 
-                @Html.Partial(MVC.Home.Views._NowAndNext)
+                @if (Model.NowNext.Events.Any())
+                {
+                    @Html.Partial(MVC.Home.Views._NowAndNext)
+                }
+                
                 @Html.Partial(MVC.Home.Views._Guide)
                 @Html.Partial(MVC.Home.Views._RecentlyArchived)
 

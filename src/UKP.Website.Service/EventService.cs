@@ -48,21 +48,26 @@ namespace UKP.Website.Service
             var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
 
             if (eventFilter == EventFilter.COMMONS)
-            {
                 events = events.Where(x => x.House.Equals(EventConstants.BUSINESS_COMMITTEE));
-            }
 
             if (eventFilter == EventFilter.LORDS)
-            {
                 events = events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
-            }
 
             if (eventFilter == EventFilter.COMMITTEES)
-            {
                 events = events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-            }
 
-            var nowEvents = events.Where(x => x.States.RecordingState.Equals(RecordingEventState.RECORDING));
+            // TODO: Finish adding RecordedEventState conditions (VT)
+            var nowEvents =
+                events.Where(
+                    x =>
+                        x.States.PlanningState.Equals(PlanningEventState.CONFIRMED) ||
+                        x.States.PlanningState.Equals(PlanningEventState.STOP_DVR))
+                    .Where(
+                        x =>
+                            x.States.RecordingState.Equals(RecordingEventState.RECORDING) ||
+                            x.States.RecordingState.Equals(RecordingEventState.COMPLETED))
+                    .Where(x => x.States.RecordedState.Equals(RecordedEventState.NEW));
+
             var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.PROPOSED) || x.States.PlanningState.Equals(PlanningEventState.CONFIRMED));
 
             if (nowEvents.Count() >= target)
@@ -71,7 +76,7 @@ namespace UKP.Website.Service
                 return new NowAndNextModel(nowEvents.Take(target), allLive, true);
             }
 
-            bool live = nowEvents.Count() != 0;
+            var live = nowEvents.Count() != 0;
 
             nowEvents = nowEvents.Concat(nextEvents.Take(target - nowEvents.Count()));
             return new NowAndNextModel(nowEvents, false, live);
