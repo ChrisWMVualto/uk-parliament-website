@@ -97,6 +97,7 @@ namespace UKP.Website.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _Guide = "_Guide";
+                public readonly string _HomeBody = "_HomeBody";
                 public readonly string _NowAndNext = "_NowAndNext";
                 public readonly string _RecentlyArchived = "_RecentlyArchived";
                 public readonly string _TitleTabs = "_TitleTabs";
@@ -106,6 +107,7 @@ namespace UKP.Website.Controllers
                 public readonly string Recess = "Recess";
             }
             public readonly string _Guide = "~/Views/Home/_Guide.cshtml";
+            public readonly string _HomeBody = "~/Views/Home/_HomeBody.cshtml";
             public readonly string _NowAndNext = "~/Views/Home/_NowAndNext.cshtml";
             public readonly string _RecentlyArchived = "~/Views/Home/_RecentlyArchived.cshtml";
             public readonly string _TitleTabs = "~/Views/Home/_TitleTabs.cshtml";

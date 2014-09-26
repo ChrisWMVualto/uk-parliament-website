@@ -325,6 +325,7 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\_TitleTabs.cshtml" />
+    <Content Include="Views\Home\_HomeBody.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
