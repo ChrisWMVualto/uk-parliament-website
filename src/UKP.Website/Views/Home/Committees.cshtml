@@ -9,13 +9,7 @@
 
             <div class="theme-bg theme-committees">
                 
-                @if (Model.NowNext.Events.Any())
-                {
-                    @Html.Partial(MVC.Home.Views._NowAndNext)
-                }
-                
-                @Html.Partial(MVC.Home.Views._Guide)
-                @Html.Partial(MVC.Home.Views._RecentlyArchived)
+                @Html.Partial(MVC.Home.Views._HomeBody, Model);
 
             </div>
 

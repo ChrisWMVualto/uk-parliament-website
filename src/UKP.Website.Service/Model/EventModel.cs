@@ -26,5 +26,25 @@ namespace UKP.Website.Service.Model
         public DateTime ScheduledStartTime { get; private set; }
         public DateTime? PublishedStartTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
+
+        // TODO: Set states as par spec
+        public bool Live
+        {
+            get
+            {
+                return States.PlanningState.Equals(PlanningEventState.CONFIRMED) &&
+                       States.RecordingState.Equals(RecordingEventState.RECORDING) &&
+                       States.RecordedState.Equals(RecordedEventState.HOLD);
+            }
+        }
+
+        // TODO: Write in some logic to return tre if this is a 'next' event, or false otherwise
+        public bool Next
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

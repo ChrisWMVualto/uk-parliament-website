@@ -28,7 +28,7 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
-            var start = new DateTime(2014, 05, 12);
+            var start = new DateTime(2014, 07, 06);
             var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
@@ -48,7 +48,7 @@ namespace UKP.Website.Service
             var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
 
             if (eventFilter == EventFilter.COMMONS)
-                events = events.Where(x => x.House.Equals(EventConstants.BUSINESS_COMMITTEE));
+                events = events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS));
 
             if (eventFilter == EventFilter.LORDS)
                 events = events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
@@ -56,19 +56,8 @@ namespace UKP.Website.Service
             if (eventFilter == EventFilter.COMMITTEES)
                 events = events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
 
-            // TODO: Finish adding RecordedEventState conditions (VT)
-            var nowEvents =
-                events.Where(
-                    x =>
-                        x.States.PlanningState.Equals(PlanningEventState.CONFIRMED) ||
-                        x.States.PlanningState.Equals(PlanningEventState.STOP_DVR))
-                    .Where(
-                        x =>
-                            x.States.RecordingState.Equals(RecordingEventState.RECORDING) ||
-                            x.States.RecordingState.Equals(RecordingEventState.COMPLETED))
-                    .Where(x => x.States.RecordedState.Equals(RecordedEventState.NEW));
-
-            var nextEvents = events.Where(x => x.States.PlanningState.Equals(PlanningEventState.PROPOSED) || x.States.PlanningState.Equals(PlanningEventState.CONFIRMED));
+            var nowEvents = events.Where(x => x.Live);
+            var nextEvents = events.Where(x => x.Next);
 
             if (nowEvents.Count() >= target)
             {
