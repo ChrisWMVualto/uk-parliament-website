@@ -71,7 +71,7 @@ namespace UKP.Website.Service
             return new NowAndNextModel(nowEvents, false, live);
         }
 
-        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 15)
+        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             return GetNowEvents(eventFilter, target).Events;
         }
