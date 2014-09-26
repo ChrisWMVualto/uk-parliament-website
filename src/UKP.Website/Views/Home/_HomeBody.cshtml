@@ -7,7 +7,7 @@
 
 @if (Model.Epg.Any())
 {
-    @Html.Partial(MVC.Home.Views._Guide)
+    @Html.Partial(MVC.Home.Views._Guide, Model.Epg)
 }
 
 @Html.Partial(MVC.Home.Views._RecentlyArchived)
