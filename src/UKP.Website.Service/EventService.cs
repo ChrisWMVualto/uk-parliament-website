@@ -88,7 +88,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformArray(response.Content);
+            return VideoTransforms.TransformArray(response.Content).Where(x => x.Archived);
         }
     }
 }
