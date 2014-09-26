@@ -38,12 +38,21 @@ namespace UKP.Website.Service.Model
             }
         }
 
-        // TODO: Write in some logic to return tre if this is a 'next' event, or false otherwise
+        // TODO: Write in some logic to return true if this is a 'next' event, or false otherwise
         public bool Next
         {
             get
             {
                 return true;
+            }
+        }
+
+        // TODO: Fill in with correct logic
+        public bool Archived
+        {
+            get
+            {
+                return false;
             }
         }
     }

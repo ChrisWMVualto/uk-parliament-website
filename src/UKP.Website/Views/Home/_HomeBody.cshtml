@@ -10,4 +10,7 @@
     @Html.Partial(MVC.Home.Views._Guide, Model.Epg)
 }
 
-@Html.Partial(MVC.Home.Views._RecentlyArchived)
+@if (Model.RecentlyArchived.Any())
+{
+    @Html.Partial(MVC.Home.Views._RecentlyArchived, Model.RecentlyArchived)
+}
