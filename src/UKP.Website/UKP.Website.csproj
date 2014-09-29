@@ -280,6 +280,7 @@
     </Compile>
     <Compile Include="Models\Event\EventVIewModel.cs" />
     <Compile Include="Models\Event\StateChangedModel.cs" />
+    <Compile Include="Models\HomeEventModel.cs" />
     <Compile Include="Models\HomeViewsModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="PlayerController.generated.cs">

@@ -27,32 +27,33 @@ namespace UKP.Website.Service.Model
         public DateTime? PublishedStartTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
 
-        // TODO: Set states as par spec
         public bool Live
         {
             get
             {
-                return States.PlanningState.Equals(PlanningEventState.CONFIRMED) &&
-                       States.RecordingState.Equals(RecordingEventState.RECORDING) &&
-                       States.RecordedState.Equals(RecordedEventState.HOLD);
+                return (States.PlanningState.Equals(PlanningEventState.CONFIRMED) || States.PlanningState.Equals(PlanningEventState.STOP_DVR)) &&
+                       States.RecordedState.Equals(RecordedEventState.NEW) &&
+                       (States.RecordingState.Equals(RecordingEventState.RECORDING) || States.RecordingState.Equals(RecordingEventState.COMPLETED));
             }
         }
 
-        // TODO: Write in some logic to return true if this is a 'next' event, or false otherwise
         public bool Next
         {
             get
             {
-                return true;
+                return States.PlanningState.Equals(PlanningEventState.CONFIRMED) &&
+                       States.RecordingState.Equals(RecordingEventState.IDLE) &&
+                       States.RecordedState.Equals(RecordedEventState.VOID);
             }
         }
 
-        // TODO: Fill in with correct logic
         public bool Archived
         {
             get
             {
-                return false;
+                return (States.PlanningState.Equals(PlanningEventState.CONFIRMED) || States.PlanningState.Equals(PlanningEventState.STOP_DVR)) &&
+                       States.RecordingState.Equals(RecordingEventState.COMPLETED) &&
+                       States.RecordedState.Equals(RecordedEventState.BASIC);
             }
         }
     }
