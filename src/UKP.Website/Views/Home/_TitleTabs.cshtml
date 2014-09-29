@@ -35,19 +35,19 @@
 <!--END:TABS SELECT-->
 <!--START:TABS-->
 <ul class="nav nav-tabs home-nav-tabs row-no-padding hidden-xs" role="tablist">
-    <li class="col-md-4 col-sm-4 tab-commons active">
+    <li class="col-md-4 col-sm-4 tab-commons @if (Url.Action() == Url.Action(MVC.Home.Commons())) { @Html.Raw("active") } ">
         <a href="@Url.Action(MVC.Home.Commons())">
             House of Commons
             <hr />
         </a>
     </li>
-    <li class="col-md-4 col-sm-4 tab-lords">
+    <li class="col-md-4 col-sm-4 tab-lords @if (Url.Action() == Url.Action(MVC.Home.Lords())) { @Html.Raw("active") }">
         <a href="@Url.Action(MVC.Home.Lords())">
             House of Lords
             <hr />
         </a>
     </li>
-    <li class="col-md-4 col-sm-4 tab-committees">
+    <li class="col-md-4 col-sm-4 tab-committees @if (Url.Action() == Url.Action(MVC.Home.Committees())) { @Html.Raw("active") }">
         <a href="@Url.Action(MVC.Home.Committees())">
             All Committees
             <hr />
