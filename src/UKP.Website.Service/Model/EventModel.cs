@@ -4,7 +4,7 @@ namespace UKP.Website.Service.Model
 {
     public class EventModel
     {
-        public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime? publishedStartTime, DateTime? actualStartTime)
+        public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime? publishedStartTime, DateTime? actualStartTime, DateTime? actualEndTime)
         {
             Id = id;
             Title = title;
@@ -15,6 +15,7 @@ namespace UKP.Website.Service.Model
             ScheduledStartTime = scheduledStartTime;
             PublishedStartTime = publishedStartTime;
             ActualStartTime = actualStartTime;
+            ActualEndTime = actualEndTime;
         }
 
         public Guid Id { get; private set; }
@@ -26,6 +27,7 @@ namespace UKP.Website.Service.Model
         public DateTime ScheduledStartTime { get; private set; }
         public DateTime? PublishedStartTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
+        public DateTime? ActualEndTime { get; private set; }
 
         public bool Live
         {
@@ -56,5 +58,6 @@ namespace UKP.Website.Service.Model
                        States.RecordedState.Equals(RecordedEventState.BASIC);
             }
         }
+
     }
 }
