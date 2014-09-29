@@ -12,19 +12,19 @@
     <div class="archived-wrapper">
         <a href="#" id="recentNextCommons" class="recent-next visible-lg">
             <div class="inner">
-                <p>Westminster Hall</p>
+                <p>@Model.ElementAtOrDefault(1).Title</p>
                 <i class="fa fa-arrow-scroll-right"></i>
             </div>
         </a> <a href="#" id="recentPrevCommons" class="recent-prev visible-lg">
             <div class="inner">
-                <p>Northern Ireland Affairs Committee</p>
+                <p>@Model.Last().Title</p>
                 <i class="fa fa-arrow-scroll-left"></i>
             </div>
         </a>
         <div class="archived-outer">
             <div class="archived-inner">
                 <div id="recentlyArchivedCommons" class="slider center">
-                    @foreach (var item in Model)
+                    @for (var i = 0; i < Model.Count(); i++)
                     {
                         <div class="archived-item col-md-6 col-sm-6">
                             <a href="#" class="clearfix">
@@ -33,9 +33,9 @@
                                     <div class="overlay">
                                         <div class="overlay-inner">
                                             <span class="small-play fa-stack fa-lg hidden-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-recently-archived"></span>
-                                            <h5>@item.ScheduledStartTime.ToString("dddd") <span>@item.ScheduledStartTime.ToString("d MMMM yyyy")</span>  @item.ScheduledStartTime.ToString("h:mmtt")</h5>
-                                            <p>High Speed Rail (London - West Midlands) Bill Committee, and some further text to see how much this area can take before it breaks.</p>
-                                            <span class="count">1 of 10</span>
+                                            <h5>@Model.ElementAt(i).ScheduledStartTime.ToString("dddd") <span>@Model.ElementAt(i).ScheduledStartTime.ToString("d MMMM yyyy")</span> @Model.ElementAt(i).ScheduledStartTime.ToString("h:mmtt")</h5>
+                                            <p>@Model.ElementAt(i).Title</p>
+                                            <span class="count">@(i + 1) of @Model.Count()</span>
                                         </div>
                                     </div>
                                 </div>

@@ -28,7 +28,7 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
-            var start = new DateTime(2014, 07, 06);
+            var start = new DateTime(2014, 07, 04);
             var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
@@ -88,7 +88,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformArray(response.Content).Where(x => x.Archived);
+            return VideoTransforms.TransformArray(response.Content);
         }
     }
 }
