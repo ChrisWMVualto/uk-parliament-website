@@ -37,9 +37,10 @@ namespace UKP.Website.Service.Transforms
             var scheduledStartTime = (DateTime)jObject.scheduledStartTime;
             var publishedStartTime = (DateTime?)jObject.publishedStartTime;
             var actualStartTime = (DateTime?)jObject.actualStartTime;
+            var actualEndTime = (DateTime?)jObject.actualEndTime;
 
             return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState), actualLiveStartTime,
-                scheduledStartTime, publishedStartTime, actualStartTime);
+                scheduledStartTime, publishedStartTime, actualStartTime, actualEndTime);
         }
 
         public static IEnumerable<EventModel> TransformEPG(dynamic json)
