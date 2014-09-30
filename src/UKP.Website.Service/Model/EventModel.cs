@@ -59,5 +59,10 @@ namespace UKP.Website.Service.Model
             }
         }
 
+        public DateTime DisplayTime
+        {
+            get { return PublishedStartTime.HasValue ? PublishedStartTime.Value : ScheduledStartTime; }
+        }
+
     }
 }
