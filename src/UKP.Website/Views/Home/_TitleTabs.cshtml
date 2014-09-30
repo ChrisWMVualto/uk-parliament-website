@@ -27,9 +27,9 @@
 <!--START:TAB SELECT-->
 <div class="visible-xs clearfix">
     <select class="selectpicker select-home-tabs">
-        <option value="0" class="select-commons" data-icon="">House of Commons</option>
-        <option value="1" class="select-lords" data-icon="">House of Lords</option>
-        <option value="2" class="select-committees" data-icon="">All Committees</option>
+        <option value="0" class="select-commons" data-icon="" data-url="@Url.Action(MVC.Home.Commons(), Request.Url.Scheme)">House of Commons</option>
+        <option value="1" class="select-lords" data-icon="" data-url="@Url.Action(MVC.Home.Lords(), Request.Url.Scheme)">House of Lords</option>
+        <option value="2" class="select-committees" data-icon="" data-url="@Url.Action(MVC.Home.Committees(), Request.Url.Scheme)">All Committees</option>
     </select>
 </div>
 <!--END:TABS SELECT-->
