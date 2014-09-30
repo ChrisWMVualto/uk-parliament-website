@@ -45,8 +45,7 @@ namespace UKP.Website.Service
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
-            var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
-            events = RunEventFilter(events, eventFilter);
+            var events = RunEventFilter(GetEvents(), eventFilter);
 
             var nowEvents = events.Where(x => x.Live);
             var nextEvents = events.Where(x => x.Next);
@@ -65,9 +64,7 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
-            var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
-            events = RunEventFilter(events, eventFilter);
-
+            var events = RunEventFilter(GetEvents(), eventFilter);
             var nowEvents = events.Where(x => x.Live);
             var nextEvents = events.Where(x => x.Next);
 
