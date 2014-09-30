@@ -65,15 +65,12 @@ namespace UKP.Website.Service
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.Live);
-            var nextEvents = events.Where(x => x.Next);
+            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
+            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
 
-            if (nowEvents.Count() >= target)
-                return nowEvents.OrderBy(x => x.DisplayTime).Take(target).Select(
-                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
+            var eventsDifference = target - nowEvents.Count();
+            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
 
-            var additionalRequired = target - nowEvents.Count();
-            nowEvents = nextEvents.Take(additionalRequired).Any() ? nowEvents.OrderBy(x => x.DisplayTime).Concat(nextEvents.Take(additionalRequired)) : nowEvents;
             return nowEvents.Take(target).Select(
                             x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
         }
