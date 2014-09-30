@@ -99,12 +99,15 @@ namespace UKP.Website.Service
         internal IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
         {
             if (filter == EventFilter.COMMONS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS));
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
 
             if (filter == EventFilter.LORDS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
 
-            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
+                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
         }
     }
 }
