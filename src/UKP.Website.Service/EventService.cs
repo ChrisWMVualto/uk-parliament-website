@@ -46,19 +46,16 @@ namespace UKP.Website.Service
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-
-            var nowEvents = events.Where(x => x.Live);
+            var nowEvents = events.Where(x => x.Live).Take(target);
             var nextEvents = events.Where(x => x.Next);
 
-            if (nowEvents.Count() >= target)
-            {
-                var allLive = nowEvents.Count() == target;
-                return new NowAndNextModel(nowEvents.Take(target), allLive, true);
-            }
+            if (nowEvents.Count() == target)
+                return new NowAndNextModel(nowEvents, true, true);
 
             var live = nowEvents.Count() != 0;
+            var eventsDifference = target - nowEvents.Count();
 
-            nowEvents = nextEvents.Take(target - nowEvents.Count()).Count() > 1 ? nowEvents.Concat(nextEvents.Take(target - nowEvents.Count())) : nowEvents;
+            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
             return new NowAndNextModel(nowEvents, false, live);
         }
 
@@ -71,7 +68,7 @@ namespace UKP.Website.Service
             var eventsDifference = target - nowEvents.Count();
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
 
-            return nowEvents.Take(target).Select(
+            return nowEvents.Select(
                             x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
         }
 
