@@ -46,15 +46,7 @@ namespace UKP.Website.Service
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
-
-            if (eventFilter == EventFilter.COMMONS)
-                events = events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS));
-
-            if (eventFilter == EventFilter.LORDS)
-                events = events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
-
-            if (eventFilter == EventFilter.COMMITTEES)
-                events = events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+            events = RunEventFilter(events, eventFilter);
 
             var nowEvents = events.Where(x => x.Live);
             var nextEvents = events.Where(x => x.Next);
@@ -73,7 +65,20 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
-            return GetNowEvents(eventFilter, target).Events;
+            var events = GetEvents().Where(x => x.House.Equals(EventString.GetEventType(eventFilter)));
+            events = RunEventFilter(events, eventFilter);
+
+            var nowEvents = events.Where(x => x.Live);
+            var nextEvents = events.Where(x => x.Next);
+
+            if (nowEvents.Count() >= target)
+                return nowEvents.Take(target).Select(
+                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
+
+            var additionalRequired = target - nowEvents.Count();
+            nowEvents = nextEvents.Take(additionalRequired).Any() ? nowEvents.Concat(nextEvents.Take(additionalRequired)) : nowEvents;
+            return nowEvents.Take(target).Select(
+                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
@@ -89,6 +94,17 @@ namespace UKP.Website.Service
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
             return VideoTransforms.TransformArray(response.Content).OrderBy(x => x.ActualEndTime).Take(numEvents);
+        }
+
+        internal IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
+        {
+            if (filter == EventFilter.COMMONS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS));
+
+            if (filter == EventFilter.LORDS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS));
+
+            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
         }
     }
 }
