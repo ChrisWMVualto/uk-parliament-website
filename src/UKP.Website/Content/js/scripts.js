@@ -14,15 +14,6 @@ $(document).ready(function() {
       }
   });
 
-  ////////////////////////////////////////////
-  //home-select menu
-  ////////////////////////////////////////////
-  if ($(".select-home-tabs").length) {
-    $('.select-home-tabs').selectpicker({
-        style: 'btn-home-select',
-        size: 4
-    });
-  }
 
   ////////////////////////////////////////////
   //search select param
@@ -76,8 +67,21 @@ $(document).ready(function() {
   ////////////////////////////////////////////
   //home-tabs joined to responsive select
   ////////////////////////////////////////////
-  $('.select-home-tabs').on('change', function (e) {
-      $('.home-nav-tabs li a').eq($(this).val()).tab('show');
+  $.each($('select.select-home-tabs').children(), function () {
+      if ($(this).attr('data-url') == window.location.href) {
+          $(this).attr('selected', 'selected');
+
+          if ($(".select-home-tabs").length) {
+              $('.select-home-tabs').selectpicker({
+                  style: 'btn-home-select',
+                  size: 4
+              });
+          }
+      }
+  });
+  
+  $('select.select-home-tabs').on('change', function() {
+      window.location = $(this).children(':selected').attr('data-url');
   });
 
   ////////////////////////////////////////////
@@ -177,18 +181,18 @@ $(document).ready(function() {
     hardwareAccelerate: false
   });
 
-  $('.draggable').find('a').on('touchstart mousedown MSPointerDown', function(e){
-    e.stopPropagation();
+    $('.draggable').find('a').on('touchstart mousedown MSPointerDown', function(e) {
+        e.stopPropagation();
 
-    // We'll have to pass an event ID in here in the long run.
-    // They'll be added to the HTML sever-side.
-    $('#epgInfoPopup').show();
-    loadInfoPopup(this);
-  })
+        // We'll have to pass an event ID in here in the long run.
+        // They'll be added to the HTML sever-side.
+        $('#epgInfoPopup').show();
+        loadInfoPopup(this);
+    });
 
-  $('[data-hide]').bind("click", function() {
-    $("." + $(this).attr("data-hide")).hide();
-  })
+    $('[data-hide]').bind("click", function() {
+        $("." + $(this).attr("data-hide")).hide();
+    });
 
   /*
   					//Enable swiping...
