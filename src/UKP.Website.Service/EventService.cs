@@ -67,7 +67,7 @@ namespace UKP.Website.Service
 
             var live = nowEvents.Count() != 0;
 
-            nowEvents = nowEvents.Concat(nextEvents.Take(target - nowEvents.Count()));
+            nowEvents = nextEvents.Take(target - nowEvents.Count()).Count() > 1 ? nowEvents.Concat(nextEvents.Take(target - nowEvents.Count())) : nowEvents;
             return new NowAndNextModel(nowEvents, false, live);
         }
 
