@@ -72,11 +72,11 @@ namespace UKP.Website.Service
             var nextEvents = events.Where(x => x.Next);
 
             if (nowEvents.Count() >= target)
-                return nowEvents.Take(target).Select(
+                return nowEvents.OrderBy(x => x.DisplayTime).Take(target).Select(
                             x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
 
             var additionalRequired = target - nowEvents.Count();
-            nowEvents = nextEvents.Take(additionalRequired).Any() ? nowEvents.Concat(nextEvents.Take(additionalRequired)) : nowEvents;
+            nowEvents = nextEvents.Take(additionalRequired).Any() ? nowEvents.OrderBy(x => x.DisplayTime).Concat(nextEvents.Take(additionalRequired)) : nowEvents;
             return nowEvents.Take(target).Select(
                             x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
         }
