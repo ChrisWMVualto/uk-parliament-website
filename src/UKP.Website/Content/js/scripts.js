@@ -71,12 +71,12 @@ $(document).ready(function() {
       if ($(this).attr('data-url') == window.location.href) {
           $(this).attr('selected', 'selected');
 
-          if ($(".select-home-tabs").length) {
-              $('.select-home-tabs').selectpicker({
-                  style: 'btn-home-select',
-                  size: 4
-              });
-          }
+          $('.select-home-tabs').selectpicker({
+            style: 'btn-home-select',
+            size: 4
+          });
+
+          return false;
       }
   });
   
