@@ -1,0 +1,99 @@
+﻿@model UKP.Website.Models.SearchViewModel
+
+@if (Model.SearchResults != null && Model.SearchResults.Any()) {
+    foreach (var item in Model.SearchResults)
+    {
+        <div class="col-md-12 search-item">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5">
+                    <a href="#" class="search-thumb-inner">
+                        <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        <div class="overlay">
+                            <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                            <strong>Play event from start</strong>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-7">
+                    <div class="search-text-inner">
+                        <h5><i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> Thursday 9 May 2014 09:00</h5>  <h5 class="date-divider"><i class="fa fa-circle hidden-lg"></i><strong>End Time:</strong> Friday 10 May 2014 10:00</h5>
+
+                        <p><strong>HoC Political and Constitutional Reform Committee</strong></p>
+                        <p>Broadcast General Election Debates</p>
+
+                        <div class="row moments">
+                            <div class="col-md-12 moment-item">
+                                <a href="#" class="outer-border">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                                            <div class="moment-thumb">
+                                                <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                                            <div class="inner">
+                                                <p><strong>5: Questions to the Secretary of State for Education</strong></p>
+                                                <span class="moment-play visible-md visible-lg">
+                                                    Play item
+                                                    <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-12 moment-item">
+                                <a href="#" class="outer-border">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                                            <div class="moment-thumb">
+                                                <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                                            <div class="inner">
+                                                <p><strong>5: Questions to the Secretary of State for Education</strong></p>
+                                                <span class="moment-play visible-md visible-lg">
+                                                    Play item
+                                                    <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-12 moment-item">
+                                <a href="#" class="outer-border">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                                            <div class="moment-thumb">
+                                                <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                                            <div class="inner">
+                                                <p><strong>5: Questions to the Secretary of State for Education</strong></p>
+                                                <span class="moment-play visible-md visible-lg">
+                                                    Play item
+                                                    <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+        </div>
+    }
+}
