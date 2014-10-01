@@ -19,13 +19,18 @@ namespace UKP.Website.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet]
         public virtual ActionResult Index()
         {
-            // TODO: Remove faked query
-            var searchQuery = new SearchQueryModel("commons", "Commons", "Committee", 29, 30);
+            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchQueryModel());
+            return View(model);
+        }
 
+        [HttpPost]
+        public virtual ActionResult Index(SearchQueryModel searchQuery)
+        {
             var results = _searchService.Search(searchQuery);
-            var model = new SearchViewModel(results, _configuration.MemberAutocompleteApi);
+            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, searchQuery, results);
             return View(model);
         }
     }

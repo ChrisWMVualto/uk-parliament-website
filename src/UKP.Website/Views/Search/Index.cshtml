@@ -1,4 +1,5 @@
-﻿@model UKP.Website.Models.SearchViewModel
+﻿@using Links
+@model UKP.Website.Models.SearchViewModel
 
 
 <div class="container main-container">
@@ -33,7 +34,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="keyword"><h4>1. Keywords</h4></label>
-                                <input type="text" class="form-control input-lg" id="keyword">
+                                @Html.TextBoxFor(x => x.QueryModel.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
 
@@ -41,6 +42,7 @@
                             <div class="form-group search-param">
                                 <label for="members"><h4>2. Members</h4></label>
                                 <input type="text" class="form-control input-lg" id="members">
+                                @Html.HiddenFor(x => x.QueryModel.MemberId, new { @class = "form-control input-lg" })
                             </div>
                         </div>
 
@@ -48,6 +50,8 @@
                             <div class="form-group search-param">
                                 <label for="tags"><h4>3. Tags</h4></label>
                                 <input type="text" class="form-control input-lg" id="tags">
+                                @Html.HiddenFor(x => x.QueryModel.House)
+                                @Html.HiddenFor(x => x.QueryModel.Business)
                             </div>
                         </div>
                     </div>
@@ -93,3 +97,34 @@
         @Html.Partial(MVC.Search.Views._SearchEvent, Model)
     </div>
 </div>
+
+@section scripts {
+    <script src="@Url.Content("~/Content/js/jquery.autocomplete.js")"></script>
+    
+    <script>
+        $('#members').autocomplete({
+            serviceUrl: "@Model.MemberAutocompleteUrl",
+            displayItem: "DisplayAs",
+            objectPath: "Members.Member",
+            minChars: 3,
+            // callback function:
+            onSelect: function (member) {
+                console.log(member['@@Member_Id']);
+                $('#QueryModel_MemberId').val(member['@@Member_Id']);
+            },
+        });
+
+        $('#tags').autocomplete({
+            serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
+            delimiter: ', ',
+            displayItem: "displayTag",
+            objectPath: "",
+            categoryItem: "category",
+            minChars: 1,
+            // callback function:
+            onSelect: function (member) {
+                console.log(member.category + " " + member.tag);
+            },
+        });
+    </script>
+}
