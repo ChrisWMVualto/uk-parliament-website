@@ -81,7 +81,24 @@
                         {
                             <strong>0 Search Results for:</strong>
                         }
-                        Election  - Lords, Commons, Party
+                        
+                        @Model.QueryModel.Keywords - 
+                        
+                        @if (Model.QueryModel.House != null)
+                        {
+                            foreach (var house in Model.QueryModel.House)
+                            {
+                                Html.Raw(string.Format("House: {0}, ", house));
+                            }
+                        }
+                        
+                        @if (Model.QueryModel.Business != null)
+                        {
+                            foreach (var business in Model.QueryModel.Business)
+                            {
+                                Html.Raw(string.Format("Business: {0}, ", business));
+                            }
+                        }
                     </h4>
                 </div>
                 <div class="col-md-2">
