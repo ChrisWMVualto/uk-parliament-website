@@ -5,13 +5,15 @@ namespace UKP.Website.Models
 {
     public class SearchViewModel
     {
-        public SearchViewModel(IEnumerable<SearchResultsModel> searchResults, string memberAutocompleteUrl)
+        public SearchViewModel(string memberAutocompleteUrl, SearchQueryModel queryModel, IEnumerable<SearchResultsModel> searchResults = null)
         {
             SearchResults = searchResults;
             MemberAutocompleteUrl = memberAutocompleteUrl;
+            QueryModel = queryModel;
         }
 
         public string MemberAutocompleteUrl { get; set; }
+        public SearchQueryModel QueryModel { get; set; }
         public IEnumerable<SearchResultsModel> SearchResults { get; set; }
     }
 }

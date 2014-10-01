@@ -18,5 +18,10 @@ namespace UKP.Website.Service.Model
             MemberId = memberId;
             Period = DateTime.Today.AddDays(period * -1);
         }
+
+        public SearchQueryModel()
+        {
+            
+        }
     }
 }
