@@ -90,8 +90,10 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _SearchEvent = "_SearchEvent";
                 public readonly string Index = "Index";
             }
+            public readonly string _SearchEvent = "~/Views/Search/_SearchEvent.cshtml";
             public readonly string Index = "~/Views/Search/Index.cshtml";
         }
     }
