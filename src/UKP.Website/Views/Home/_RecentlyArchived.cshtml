@@ -33,7 +33,7 @@
                                     <div class="overlay">
                                         <div class="overlay-inner">
                                             <span class="small-play fa-stack fa-lg hidden-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-recently-archived"></span>
-                                            <h5>@Model.ElementAt(i).ScheduledStartTime.ToString("dddd") <span>@Model.ElementAt(i).ScheduledStartTime.ToString("d MMMM yyyy")</span> @Model.ElementAt(i).ScheduledStartTime.ToString("h:mmtt")</h5>
+                                            <h5>@Model.ElementAt(i).DisplayTime.ToString("dddd") <span>@Model.ElementAt(i).DisplayTime.ToString("d MMMM yyyy")</span> @Model.ElementAt(i).DisplayTime.ToString("h:mmtt")</h5>
                                             <p>@Model.ElementAt(i).Title</p>
                                             <span class="count">@(i + 1) of @Model.Count()</span>
                                         </div>

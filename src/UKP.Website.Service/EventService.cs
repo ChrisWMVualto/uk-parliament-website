@@ -46,8 +46,8 @@ namespace UKP.Website.Service
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.Live).Take(target);
-            var nextEvents = events.Where(x => x.Next);
+            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
+            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
 
             if (nowEvents.Count() == target)
                 return new NowAndNextModel(nowEvents, true, true);
@@ -55,7 +55,7 @@ namespace UKP.Website.Service
             var live = nowEvents.Count() != 0;
             var eventsDifference = target - nowEvents.Count();
 
-            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
+            nowEvents = nextEvents.Take(eventsDifference).Count() > 1 ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
             return new NowAndNextModel(nowEvents, false, live);
         }
 
@@ -84,7 +84,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformArray(response.Content).OrderBy(x => x.ActualEndTime).Take(numEvents);
+            return VideoTransforms.TransformArray(response.Content).OrderByDescending(x => x.ActualEndTime).Take(numEvents);
         }
 
         internal IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
