@@ -122,9 +122,23 @@
             categoryItem: "category",
             minChars: 1,
             // callback function:
-            onSelect: function (member) {
-                console.log(member.category + " " + member.tag);
+            onSelect: function (tag) {
+                console.log(tag.category + " " + tag.tag);
+
+                if (tag.category == "House")
+                    TagAppender(tag.tag, $('#QueryModel_House'));
+
+                if (tag.category == "Business")
+                    TagAppender(tag.tag, $('#QueryModel_Business'));
             },
         });
+
+        function TagAppender(tag, selector) {
+            if (selector.val().length > 0)
+                selector.val(selector.val() + ", " + tag);
+
+            else
+                selector.val(tag);
+        }
     </script>
 }
