@@ -58,9 +58,8 @@
                 </div>
 
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default btn-tag btn-lg">lords <i class="fa fa-close fa-lg"></i></button>
-                    <button type="button" class="btn btn-default btn-tag btn-lg">commons <i class="fa fa-close fa-lg"></i></button>
-                    <button type="button" class="btn btn-default btn-tag btn-lg">party <i class="fa fa-close fa-lg"></i></button>
+                    <div id="selectedTags">
+                    </div>
 
                     <div>
                         <button type="submit" class="btn btn-default btn-go btn-lg">Search <i class="fa fa-arrow-right-thin fa-lg"></i></button>
@@ -125,7 +124,7 @@
             objectPath: "Members.Member",
             minChars: 3,
             // callback function:
-            onSelect: function (member) {
+            onSelect: function(member) {
                 console.log(member['@@Member_Id']);
                 $('#QueryModel_MemberId').val(member['@@Member_Id']);
             },
@@ -139,14 +138,17 @@
             categoryItem: "category",
             minChars: 1,
             // callback function:
-            onSelect: function (tag) {
-                console.log(tag.category + " " + tag.tag);
+            onSelect: function(selection) {
+                console.log(selection.category + " " + selection.tag);
 
-                if (tag.category == "House")
-                    TagAppender(tag.tag, $('#QueryModel_House'));
+                if (selection.category == "House")
+                    TagAppender(selection.tag, $('#QueryModel_House'));
 
-                if (tag.category == "Business")
-                    TagAppender(tag.tag, $('#QueryModel_Business'));
+                if (selection.category == "Business")
+                    TagAppender(selection.tag, $('#QueryModel_Business'));
+
+                $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + selection.displayTag + ' <i class="fa fa-close fa-lg"></i></button> ');
+                $('#selectedTags button').bind('click', TagDestroy);
             },
         });
 
@@ -156,6 +158,19 @@
 
             else
                 selector.val(tag);
+        }
+
+        function TagDestroy() {
+            var tag = $(this).text();
+            tag = tag.replace(/(,)?(\s)?$/, '');
+
+            var inputContent = $('#tags').val();
+            var removeTagRegEx = new RegExp("(" + tag.replace(' ', '\\s') + "){1}(,)?(\\s)*");
+
+            inputContent = inputContent.replace(removeTagRegEx, '');
+            $('#tags').val(inputContent);
+
+            $(this).remove();
         }
     </script>
 }
