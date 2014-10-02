@@ -376,7 +376,7 @@
 
             switch (e.which) {
                 case keys.ESC:
-                    that.el.val(that.currentValue);
+                    that.el.val(that.currentValue).trigger('input');
                     that.hide();
                     break;
                 case keys.RIGHT:
@@ -834,7 +834,7 @@
             if (that.selectedIndex === 0) {
                 $(that.suggestionsContainer).children().first().removeClass(that.classes.selected);
                 that.selectedIndex = -1;
-                that.el.val(that.currentValue);
+                that.el.val(that.currentValue).trigger('input');
                 that.findBestHint();
                 return;
             }
@@ -874,7 +874,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)) + that.options.delimiter);
+            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)) + that.options.delimiter).trigger('input');
             that.signalHint(null);
         },
 
@@ -886,7 +886,7 @@
             that.currentValue = that.getValue(that.navigateByString(suggestion, that.options.displayItem));
 
             if (that.currentValue !== that.el.val()) {
-                that.el.val(that.currentValue + that.options.delimiter);
+                that.el.val(that.currentValue + that.options.delimiter).trigger('input');
             }
 
             that.signalHint(null);
