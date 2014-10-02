@@ -130,27 +130,16 @@
             },
         });
 
-        $('#tags').autocomplete({
-            serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
-            delimiter: ', ',
-            displayItem: "displayTag",
-            objectPath: "",
-            categoryItem: "category",
-            minChars: 1,
-            // callback function:
-            onSelect: function(selection) {
-                console.log(selection.category + " " + selection.tag);
-
-                if (selection.category == "House")
-                    TagAppender(selection.tag, $('#QueryModel_House'));
-
-                if (selection.category == "Business")
-                    TagAppender(selection.tag, $('#QueryModel_Business'));
-
-                $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + selection.displayTag + ' <i class="fa fa-close fa-lg"></i></button> ');
-                $('#selectedTags button').bind('click', TagDestroy);
-            },
-        });
+        $('#tags')
+            .autocomplete({
+                serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
+                delimiter: ', ',
+                displayItem: "displayTag",
+                objectPath: "",
+                categoryItem: "category",
+                minChars: 1,
+            })
+            .bind('input', TagInputParser);
 
         function TagAppender(tag, selector) {
             if (selector.val().length > 0)
@@ -168,9 +157,35 @@
             var removeTagRegEx = new RegExp("(" + tag.replace(' ', '\\s') + "){1}(,)?(\\s)*");
 
             inputContent = inputContent.replace(removeTagRegEx, '');
-            $('#tags').val(inputContent);
+            $('#tags').val(inputContent).trigger('input');
 
             $(this).remove();
+        }
+
+        function TagInputParser() {
+            var inputValue = $(this).val();
+            inputValue = inputValue.split(', ');
+            inputValue.pop();
+            var validTags = [];
+
+            $.each(inputValue, function () {
+                var tag = this.split(": ");
+                
+                if (tag[0] == "House")
+                    TagAppender(tag[1], $('#QueryModel_House'));
+                
+                if (tag[0] == "Business")
+                    TagAppender(tag[1], $('#QueryModel_Business'));
+
+                if (tag[1] != null && tag[1] != "")
+                    validTags.push(this);
+            });
+
+            $('#selectedTags').empty();
+            $.each(validTags, function() {
+                $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + this + ' <i class="fa fa-close fa-lg"></i></button> ');
+            });
+            $('#selectedTags button').bind('click', TagDestroy);
         }
     </script>
 }
