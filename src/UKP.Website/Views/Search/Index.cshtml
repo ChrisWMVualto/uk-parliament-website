@@ -164,7 +164,7 @@
 
         function TagInputParser() {
             var inputValue = $(this).val();
-            inputValue = inputValue.split(', ');
+            inputValue = inputValue.split(',');
             inputValue.pop();
             var validTags = [];
 
@@ -183,7 +183,7 @@
 
             $('#selectedTags').empty();
             $.each(validTags, function() {
-                $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + this + ' <i class="fa fa-close fa-lg"></i></button> ');
+                $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + this.replace(/^\s/, '') + ' <i class="fa fa-close fa-lg"></i></button> ');
             });
             $('#selectedTags button').bind('click', TagDestroy);
         }
