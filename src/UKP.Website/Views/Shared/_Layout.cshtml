@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <title>Parliamentlive.tv</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- [57x57 (precomposed) for iPhone 3GS, 2011 iPod Touch and older Android devices]-->
+    <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-precomposed.png")" rel="apple-touch-icon-precomposed" />
+    <!-- [72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini]-->
+    <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-72x72-precomposed.png")" rel="apple-touch-icon-precomposed" sizes="72x72" />
+    <!-- [114x114 (precomposed) for iPhone 4, 4S, 5 and 2012 iPod Touch]-->
+    <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-114x114-precomposed.png")" rel="apple-touch-icon-precomposed" sizes="114x114" />
+    <!-- [144x144 (precomposed) for iPad 3rd and 4th generation]-->
+    <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-144x144-precomposed.png")" rel="apple-touch-icon-precomposed" sizes="144x144" />
+    <link rel="icon" href="@Url.Content("~/Content//img/favicons/favicon.png")">
+    <!--[if IE]><link rel="shortcut icon" href="@Url.Content("~/Content/img/favicons/favicon.ico")"><![endif]-->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="@Url.Content("~/Content/img/favicons/metro-tileicon.png")">
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+    <script src="@Url.Content("~/Content/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js")"></script>
+</head>
+
+<body class="">
+    <header class="header-main">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-xs-9 clearfix">
+                        <h1><a class="" href="#"><img class="img-responsive" alt="Parliamentlive.tv" src="@Url.Content("~/Content/img/logo-main.png")"></a></h1>
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed col-xs-2" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <i class="fa fa-hamburger fa-2x"></i> </button>
+                    <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="navbar-collapse collapse">
+                            <ul class="main-nav row">
+                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Home.Commons()) || Url.Action() == Url.Action(MVC.Home.Lords()) || Url.Action() == Url.Action(MVC.Home.Committees())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Home.Index())"><i class="page-icon fa fa-home fa-lg"></i> Home <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Epg.Index())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Epg.Index())"><i class="page-icon fa fa-guide fa-lg"></i> Event Guide <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3"><a href="help.html"><i class="page-icon fa fa-help fa-lg"></i> Help <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Search.Index())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Search.Index())"><i class="page-icon fa fa-search fa-lg"></i> Search <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 visible-xs"><a href="#" class="rss-link"><i class="fa fa-rss fa-2x"></i> RSS</a></li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    @RenderBody()
+
+    <div class="container">
+        <footer class="footer-main">
+            <ul>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> UKParliament Site</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> A-Z index</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Glossary</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Contact us</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Freedom of Information</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Jobs</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Using this website</a></li>
+                <li><a href="#"> <i class="fa fa-external fa-lg"></i> Copyright</a></li>
+            </ul>
+        </footer>
+    </div>
+
+
+    <script src="@Url.Content("~/Content/js/vendor/jquery-1.10.1.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/bootstrap-checkbox.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/jquery.pep.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/breakpoints.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/jquery.slimscroll.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/slick.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/bootstrap-timepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/vendor/bootstrap-select.js")"></script>
+    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/scripts.js")"></script>
+    
+    
+    @RenderSection("scripts", false)
+</body>
+</html>
