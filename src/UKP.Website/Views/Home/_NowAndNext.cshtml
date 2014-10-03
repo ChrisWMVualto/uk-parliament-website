@@ -1,4 +1,5 @@
-﻿@model IEnumerable<UKP.Website.Service.Model.EventModel>
+﻿@using UKP.Website.Application
+@model IEnumerable<UKP.Website.Service.Model.EventModel>
 
 <section id="carouselCommons" class="carousel section-home-carousel slide" data-ride="carousel" data-interval="false">
     <!-- Wrapper for slides -->
@@ -11,10 +12,10 @@
                     <a href="player.html">
                         <div class="carousel-light-bg col-xs-8 col-sm-6 col-md-4">
                             <div class="carousel-caption-inner">
-                                <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToString("dddd d MMMM h:mmtt")</h3>
+                                <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToString(ApplicationConstants.DateFormat)</h3>
                                 <p>@Model.ElementAt(i).Title</p>
                                 
-                                @if (Model.ElementAt(i).Live)
+                                @if (Model.ElementAt(i).HomeFilters.Live)
                                 {
                                     <span class="live-badge"><i class="fa fa-live-badge fa-2x"></i> Live</span>
                                     <span class="vr-caption"></span>

@@ -1,4 +1,6 @@
-﻿@model UKP.Website.Models.SearchViewModel
+﻿@using RestSharp.Extensions
+@using UKP.Website.Application
+@model UKP.Website.Models.SearchViewModel
 
 @if (Model.SearchResults != null && Model.SearchResults.Any()) {
     foreach (var item in Model.SearchResults)
@@ -7,7 +9,15 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
                     <a href="#" class="search-thumb-inner">
-                        <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        @if (item.Event.ThumbnalUrl.HasValue())
+                        {
+                            <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        }
+                            
                         <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         <div class="overlay">
                             <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
@@ -17,7 +27,7 @@
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-7">
                     <div class="search-text-inner">
-                        <h5><i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayTime.ToString("dddd d MMMM yyyy h:mmtt")</h5>  <h5 class="date-divider"><i class="fa fa-circle hidden-lg"></i><strong>End Time:</strong> @item.Event.EndDisplayTime.ToString("dddd d MMMM yyyy h:mmtt")</h5>
+                        <h5><i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToString(ApplicationConstants.DateFormat)</h5>  <h5 class="date-divider"><i class="fa fa-circle hidden-lg"></i><strong>End Time:</strong> @item.Event.DisplayEndDate.ToString("dddd d MMMM yyyy h:mmtt")</h5>
 
                         <p><strong>@item.Event.Title</strong></p>
                         <p>Broadcast General Election Debates</p>

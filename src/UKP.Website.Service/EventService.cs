@@ -24,14 +24,32 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetEpg()
         {
-            return GetEvents().Where(x => x.States.PlanningState == PlanningEventState.CONFIRMED || x.States.PlanningState == PlanningEventState.STOP_DVR);
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+            var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
+
+            // TODO: Remove hardcoded date
+            var start = new DateTime(2014, 07, 04);
+            //var start = DateTime.Now.Date;
+            var end = start.AddMonths(1);
+
+            request.AddParameter("date", start.ToISO8601String());
+            request.AddParameter("endDate", end.ToISO8601String());
+            request.AddParameter("format", "json");
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.NotFound) return null;
+            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+
+            return VideoTransforms.TransformEPG(response.Content);;
         }
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = RunEventFilter(GetEvents(), eventFilter).ToList();
-            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             if (nowEvents.Count() == target)
                 return new NowAndNextModel(nowEvents, true, true);
@@ -46,13 +64,14 @@ namespace UKP.Website.Service
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter).ToList();
-            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
 
-            return nowEvents;
+            return nowEvents.Select(
+                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.DisplayStartDate, x.DisplayEndDate, x.ActualLiveStartTime, x.ScheduledStartTime, x.ScheduledEndTime, x.PublishedStartTime, x.PublishedEndTime, x.ActualStartTime, x.ActualEndTime, x.ThumbnalUrl));
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
