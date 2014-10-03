@@ -33,8 +33,8 @@ namespace UKP.Website.Service.Transforms
             var planningEventState = (PlanningEventState)jObject.states.planningState;
             var recordingEventState = (RecordingEventState)jObject.states.recordingState;
             var recordedEventState = (RecordedEventState)jObject.states.recordedState;
-            var displayStartDate = (DateTime)jObject.dissplayStartTime;
-            var displayEndDate = (DateTime)jObject.dissplayEndTime;
+            var displayStartDate = (DateTime)jObject.displayStartTime;
+            var displayEndDate = (DateTime)jObject.displayEndTime;
             var actualLiveStartTime = (DateTime?)jObject.actualLiveStartTime;
             var scheduledStartTime = (DateTime)jObject.scheduledStartTime;
             var scheduledEndTime = (DateTime)jObject.scheduledEndTime;
