@@ -22,7 +22,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        private IEnumerable<EventModel> GetEvents()
+        public IEnumerable<EventModel> GetEpg()
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
@@ -30,6 +30,7 @@ namespace UKP.Website.Service
 
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 07, 04);
+            //var start = DateTime.Now.Date;
             var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
@@ -46,7 +47,7 @@ namespace UKP.Website.Service
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
-            var events = RunEventFilter(GetEvents(), eventFilter);
+            var events = RunEventFilter(GetEvents(), eventFilter).ToList();
             var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
@@ -62,7 +63,7 @@ namespace UKP.Website.Service
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
-            var events = RunEventFilter(GetEvents(), eventFilter);
+            var events = RunEventFilter(GetEvents(), eventFilter).ToList();
             var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
@@ -88,7 +89,29 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content).OrderByDescending(x => x.ActualEndTime).Take(numEvents);
         }
 
-        internal IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
+        private IEnumerable<EventModel> GetEvents()
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
+
+            // TODO: Remove hardcoded date
+            var start = new DateTime(2014, 07, 04);
+            //var start = DateTime.Now.Date;
+            var end = start.AddMonths(1);
+
+            request.AddParameter("date", start.ToISO8601String());
+            request.AddParameter("endDate", end.ToISO8601String());
+            request.AddParameter("format", "json");
+
+            var response = client.Execute(request);
+
+            if(response.StatusCode == HttpStatusCode.NotFound) return null;
+            if(response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+
+            return VideoTransforms.TransformEPG(response.Content); ;
+        }
+
+        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
         {
             if (filter == EventFilter.COMMONS)
                 return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
