@@ -4,7 +4,7 @@ namespace UKP.Website.Service.Model
 {
     public class EventModel
     {
-        public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime displayStartDate, DateTime displayEndDate, DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime, DateTime? publishedEndTime, DateTime? actualStartTime, DateTime? actualEndTime)
+        public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime displayStartDate, DateTime displayEndDate, DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime, DateTime? publishedEndTime, DateTime? actualStartTime, DateTime? actualEndTime, string thumbnalUrl)
         {
             Id = id;
             Title = title;
@@ -20,6 +20,7 @@ namespace UKP.Website.Service.Model
             PublishedEndTime = publishedEndTime;
             ActualStartTime = actualStartTime;
             ActualEndTime = actualEndTime;
+            ThumbnalUrl = thumbnalUrl;
 
             HomeFilters = new HomeFilter(States);
         }
@@ -38,6 +39,7 @@ namespace UKP.Website.Service.Model
         public DateTime? PublishedEndTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
         public DateTime? ActualEndTime { get; private set; }
+        public string ThumbnalUrl { get; set; }
         public HomeFilter HomeFilters { get; private set; }
     }
 }
