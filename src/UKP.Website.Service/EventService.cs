@@ -25,7 +25,7 @@ namespace UKP.Website.Service
         private IEnumerable<EventModel> GetEvents()
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
@@ -47,8 +47,8 @@ namespace UKP.Website.Service
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayTime).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayTime);
 
             if (nowEvents.Count() == target)
                 return new NowAndNextModel(nowEvents, true, true);
@@ -63,8 +63,8 @@ namespace UKP.Website.Service
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayTime).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayTime);
 
             var eventsDifference = target - nowEvents.Count();
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;

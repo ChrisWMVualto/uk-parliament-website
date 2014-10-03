@@ -14,7 +14,7 @@
                                 <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToString("dddd d MMMM h:mmtt")</h3>
                                 <p>@Model.ElementAt(i).Title</p>
                                 
-                                @if (Model.ElementAt(i).Live)
+                                @if (Model.ElementAt(i).HomeFilters.Live)
                                 {
                                     <span class="live-badge"><i class="fa fa-live-badge fa-2x"></i> Live</span>
                                     <span class="vr-caption"></span>
