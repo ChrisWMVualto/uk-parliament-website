@@ -47,8 +47,8 @@ namespace UKP.Website.Service
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             if (nowEvents.Count() == target)
                 return new NowAndNextModel(nowEvents, true, true);
@@ -63,14 +63,14 @@ namespace UKP.Website.Service
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter);
-            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayTime).Take(target);
-            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayTime);
+            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
 
             return nowEvents.Select(
-                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.ScheduledEndTime, x.PublishedStartTime, x.PublishedEndTime, x.ActualStartTime, x.ActualEndTime));
+                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.DisplayStartDate, x.DisplayEndDate, x.ActualLiveStartTime, x.ScheduledStartTime, x.ScheduledEndTime, x.PublishedStartTime, x.PublishedEndTime, x.ActualStartTime, x.ActualEndTime));
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
