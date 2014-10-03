@@ -2,7 +2,6 @@
 using System.Net;
 using Date.Extensions;
 using RestSharp;
-using RestSharp.Contrib;
 using RestSharp.Extensions;
 using UKP.Website.Application;
 using UKP.Website.Service.Model;
@@ -24,10 +23,18 @@ namespace UKP.Website.Service
         public IEnumerable<SearchResultsModel> Search(SearchQueryModel search)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("keywords", search.Keywords);
-            request.AddParameter("house", search.House);
-            request.AddParameter("business", search.Business);
+
+            if (search.Keywords.HasValue())
+                request.AddParameter("keywords", search.Keywords);
+            
+            if (search.House.HasValue())
+                request.AddParameter("house", search.House);
+
+            if (search.Business.HasValue())
+                request.AddParameter("business", search.Business);
 
             if (search.MemberId.HasValue)
                 request.AddParameter("memberId", search.MemberId.Value);
