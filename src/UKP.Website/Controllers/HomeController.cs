@@ -26,7 +26,6 @@ namespace UKP.Website.Controllers
             return RedirectToAction(MVC.Home.Commons());
         }
 
-
         [HttpGet]   
         public virtual ActionResult Commons()
         {
