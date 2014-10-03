@@ -54,6 +54,12 @@ namespace UKP.Website.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult RecentlyArchive()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.RecentlyArchive);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public HomeController Actions { get { return MVC.Home; } }
@@ -74,6 +80,7 @@ namespace UKP.Website.Controllers
             public readonly string Commons = "Commons";
             public readonly string Lords = "Lords";
             public readonly string Committees = "Committees";
+            public readonly string RecentlyArchive = "RecentlyArchive";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -83,9 +90,18 @@ namespace UKP.Website.Controllers
             public const string Commons = "Commons";
             public const string Lords = "Lords";
             public const string Committees = "Committees";
+            public const string RecentlyArchive = "RecentlyArchive";
         }
 
 
+        static readonly ActionParamsClass_RecentlyArchive s_params_RecentlyArchive = new ActionParamsClass_RecentlyArchive();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RecentlyArchive RecentlyArchiveParams { get { return s_params_RecentlyArchive; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RecentlyArchive
+        {
+            public readonly string eventFilter = "eventFilter";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -164,6 +180,18 @@ namespace UKP.Website.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Committees);
             CommitteesOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void RecentlyArchiveOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Service.Model.EventFilter eventFilter);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult RecentlyArchive(UKP.Website.Service.Model.EventFilter eventFilter)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.RecentlyArchive);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventFilter", eventFilter);
+            RecentlyArchiveOverride(callInfo, eventFilter);
             return callInfo;
         }
 
