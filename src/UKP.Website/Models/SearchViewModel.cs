@@ -12,6 +12,11 @@ namespace UKP.Website.Models
             QueryModel = queryModel;
         }
 
+        public SearchViewModel()
+        {
+            
+        }
+
         public string MemberAutocompleteUrl { get; set; }
         public SearchQueryModel QueryModel { get; set; }
         public IEnumerable<SearchResultsModel> SearchResults { get; set; }

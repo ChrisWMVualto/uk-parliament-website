@@ -25,6 +25,7 @@ namespace UKP.Website.Service
         private IEnumerable<EventModel> GetEvents()
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
@@ -69,7 +70,7 @@ namespace UKP.Website.Service
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
 
             return nowEvents.Select(
-                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.PublishedStartTime, x.ActualStartTime, x.ActualEndTime));
+                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.ActualLiveStartTime, x.ScheduledStartTime, x.ScheduledEndTime, x.PublishedStartTime, x.PublishedEndTime, x.ActualStartTime, x.ActualEndTime));
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)

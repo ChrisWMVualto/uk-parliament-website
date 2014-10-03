@@ -86,7 +86,7 @@ namespace UKP.Website.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
-            public readonly string searchQuery = "searchQuery";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -123,14 +123,14 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Service.Model.SearchQueryModel searchQuery);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(UKP.Website.Service.Model.SearchQueryModel searchQuery)
+        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "searchQuery", searchQuery);
-            IndexOverride(callInfo, searchQuery);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            IndexOverride(callInfo, model);
             return callInfo;
         }
 

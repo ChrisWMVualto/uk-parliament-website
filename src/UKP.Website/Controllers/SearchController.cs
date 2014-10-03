@@ -27,11 +27,11 @@ namespace UKP.Website.Controllers
         }
 
         [HttpPost]
-        public virtual ActionResult Index(SearchQueryModel searchQuery)
+        public virtual ActionResult Index(SearchViewModel model)
         {
-            var results = _searchService.Search(searchQuery);
-            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, searchQuery, results);
-            return View(model);
+            var results = _searchService.Search(model.QueryModel);
+            var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.QueryModel, results);
+            return View(response);
         }
     }
 }
