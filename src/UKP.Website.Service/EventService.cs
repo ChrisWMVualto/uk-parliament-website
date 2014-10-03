@@ -68,10 +68,7 @@ namespace UKP.Website.Service
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
-            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
-
-            return nowEvents.Select(
-                            x => new EventModel(x.Id, x.Title, x.House, x.Business, x.States, x.DisplayStartDate, x.DisplayEndDate, x.ActualLiveStartTime, x.ScheduledStartTime, x.ScheduledEndTime, x.PublishedStartTime, x.PublishedEndTime, x.ActualStartTime, x.ActualEndTime, x.ThumbnalUrl));
+            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
         }
 
         public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
