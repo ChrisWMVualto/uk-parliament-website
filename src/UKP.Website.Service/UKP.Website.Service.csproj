@@ -74,6 +74,7 @@
     <Compile Include="Model\EventFilter.cs" />
     <Compile Include="Model\EventModel.cs" />
     <Compile Include="Model\EventStates.cs" />
+    <Compile Include="Model\HomeFilter.cs" />
     <Compile Include="Model\MomentModel.cs" />
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
