@@ -28,8 +28,9 @@ namespace UKP.Website.Service.Transforms
 
             var id = jObject.log.id.Value;
             var title = jObject.log.title.Value;
+            var thumbnailUrl = jObject.thumbnailImageUrl.Value;
 
-            return new MomentModel(id, title);
+            return new MomentModel(id, title, thumbnailUrl);
         }
     }
 }
