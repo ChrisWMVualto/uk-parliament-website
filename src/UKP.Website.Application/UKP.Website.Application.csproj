@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationConstants.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="EventConstants.cs" />
     <Compile Include="IConfiguration.cs" />
