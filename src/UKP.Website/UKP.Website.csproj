@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Date.Extensions.1.0.0\lib\net40\Date.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
