@@ -1,4 +1,5 @@
-﻿@using UKP.Website.Application
+﻿@using RestSharp.Extensions
+@using UKP.Website.Application
 @model UKP.Website.Models.SearchViewModel
 
 @if (Model.SearchResults != null && Model.SearchResults.Any()) {
@@ -8,7 +9,15 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
                     <a href="#" class="search-thumb-inner">
-                        <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        @if (item.Event.ThumbnalUrl.HasValue())
+                        {
+                            <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        }
+                            
                         <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         <div class="overlay">
                             <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
