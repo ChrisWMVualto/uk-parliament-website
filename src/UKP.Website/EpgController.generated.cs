@@ -26,9 +26,6 @@ namespace UKP.Website.Controllers
     public partial class EpgController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public EpgController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected EpgController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

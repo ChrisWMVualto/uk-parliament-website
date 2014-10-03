@@ -27,27 +27,27 @@
 <!--START:TAB SELECT-->
 <div class="visible-xs clearfix">
     <select class="selectpicker select-home-tabs">
-        <option value="0" class="select-commons" data-icon="" data-url="@Url.Action(MVC.Home.Commons(), Request.Url.Scheme)">House of Commons</option>
-        <option value="1" class="select-lords" data-icon="" data-url="@Url.Action(MVC.Home.Lords(), Request.Url.Scheme)">House of Lords</option>
-        <option value="2" class="select-committees" data-icon="" data-url="@Url.Action(MVC.Home.Committees(), Request.Url.Scheme)">All Committees</option>
+        <option value="0" class="select-commons" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Commons())">House of Commons</option>
+        <option value="1" class="select-lords" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Lords())">House of Lords</option>
+        <option value="2" class="select-committees" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Committees())">All Committees</option>
     </select>
 </div>
 <!--END:TABS SELECT-->
 <!--START:TABS-->
 <ul class="nav nav-tabs home-nav-tabs row-no-padding hidden-xs" role="tablist">
-    <li class="col-md-4 col-sm-4 tab-commons @if (Url.Action() == Url.Action(MVC.Home.Commons())) { @Html.Raw("active") } ">
+    <li class="col-md-4 col-sm-4 tab-commons @Html.IsActiveRoute(MVC.Home.Commons())">
         <a href="@Url.Action(MVC.Home.Commons())">
             House of Commons
             <hr />
         </a>
     </li>
-    <li class="col-md-4 col-sm-4 tab-lords @if (Url.Action() == Url.Action(MVC.Home.Lords())) { @Html.Raw("active") }">
+    <li class="col-md-4 col-sm-4 tab-lords @Html.IsActiveRoute(MVC.Home.Lords())">
         <a href="@Url.Action(MVC.Home.Lords())">
             House of Lords
             <hr />
         </a>
     </li>
-    <li class="col-md-4 col-sm-4 tab-committees @if (Url.Action() == Url.Action(MVC.Home.Committees())) { @Html.Raw("active") }">
+    <li class="col-md-4 col-sm-4 tab-committees @Html.IsActiveRoute(MVC.Home.Committees())">
         <a href="@Url.Action(MVC.Home.Committees())">
             All Committees
             <hr />

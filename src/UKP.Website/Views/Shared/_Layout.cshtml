@@ -27,7 +27,7 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
     <script src="@Url.Content("~/Content/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js")"></script>
 </head>
@@ -44,10 +44,10 @@
                     <div class="col-lg-9 col-sm-8 col-xs-12">
                         <div class="navbar-collapse collapse">
                             <ul class="main-nav row">
-                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Home.Commons()) || Url.Action() == Url.Action(MVC.Home.Lords()) || Url.Action() == Url.Action(MVC.Home.Committees())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Home.Index())"><i class="page-icon fa fa-home fa-lg"></i> Home <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Epg.Index())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Epg.Index())"><i class="page-icon fa fa-guide fa-lg"></i> Event Guide <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Home.Commons(), MVC.Home.Lords(), MVC.Home.Committees() })"><a href="@Url.Action(MVC.Home.Index())"><i class="page-icon fa fa-home fa-lg"></i> Home <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Epg.Index() })"><a href="@Url.Action(MVC.Epg.Index())"><i class="page-icon fa fa-guide fa-lg"></i> Event Guide <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
                                 <li class="col-sm-3"><a href="help.html"><i class="page-icon fa fa-help fa-lg"></i> Help <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                <li class="col-sm-3 @if (Url.Action() == Url.Action(MVC.Search.Index())) { @Html.Raw("active")}"><a href="@Url.Action(MVC.Search.Index())"><i class="page-icon fa fa-search fa-lg"></i> Search <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Search.Index() })"><a href="@Url.Action(MVC.Search.Index())"><i class="page-icon fa fa-search fa-lg"></i> Search <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
                                 <li class="col-sm-3 visible-xs"><a href="#" class="rss-link"><i class="fa fa-rss fa-2x"></i> RSS</a></li>
                             </ul>
                         </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
     </header>
-    
+
     @RenderBody()
 
     <div class="container">
@@ -87,8 +87,8 @@
     <script src="@Url.Content("~/Content/js/vendor/bootstrap-select.js")"></script>
     <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
     <script src="@Url.Content("~/Content/js/scripts.js")"></script>
-    
-    
+
+
     @RenderSection("scripts", false)
 </body>
 </html>

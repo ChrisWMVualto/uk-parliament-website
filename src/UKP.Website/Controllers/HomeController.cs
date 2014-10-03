@@ -30,22 +30,32 @@ namespace UKP.Website.Controllers
         [HttpGet]   
         public virtual ActionResult Commons()
         {
-            var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetGuide(), _eventService.GetRecentlyArchived(), _recessService.GetRecessMessage());
+            var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetGuide(), _recessService.GetRecessMessage(), EventFilter.COMMONS);
             return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Lords()
         {
-            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.LORDS), _eventService.GetGuide(EventFilter.LORDS), _eventService.GetRecentlyArchived(EventFilter.LORDS), _recessService.GetRecessMessage(EventFilter.LORDS));
+            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.LORDS), _eventService.GetGuide(EventFilter.LORDS), _recessService.GetRecessMessage(EventFilter.LORDS), EventFilter.LORDS);
             return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Committees()
         {
-            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.COMMITTEES), _eventService.GetGuide(EventFilter.COMMITTEES), _eventService.GetRecentlyArchived(EventFilter.COMMITTEES), _recessService.GetRecessMessage(EventFilter.COMMITTEES));
+            var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.COMMITTEES), _eventService.GetGuide(EventFilter.COMMITTEES), _recessService.GetRecessMessage(EventFilter.COMMITTEES), EventFilter.COMMITTEES);
             return View(model);
         }
+
+        [ChildActionOnly]
+        public virtual PartialViewResult RecentlyArchive(EventFilter eventFilter)
+        {
+            var model = _eventService.GetRecentlyArchived(eventFilter);
+            return PartialView(MVC.Home.Views._RecentlyArchived, model);
+        }
+
+
+
     }
 }
