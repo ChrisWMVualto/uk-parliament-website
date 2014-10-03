@@ -29,6 +29,9 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual ActionResult Index(SearchViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.QueryModel));
+
             var results = _searchService.Search(model.QueryModel);
             var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.QueryModel, results);
             return View(response);
