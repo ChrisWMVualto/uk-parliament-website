@@ -33,6 +33,8 @@ namespace UKP.Website.Service.Transforms
             var planningEventState = (PlanningEventState)jObject.states.planningState;
             var recordingEventState = (RecordingEventState)jObject.states.recordingState;
             var recordedEventState = (RecordedEventState)jObject.states.recordedState;
+            var displayStartDate = (DateTime)jObject.dissplayStartTime;
+            var displayEndDate = (DateTime)jObject.dissplayEndTime;
             var actualLiveStartTime = (DateTime?)jObject.actualLiveStartTime;
             var scheduledStartTime = (DateTime)jObject.scheduledStartTime;
             var scheduledEndTime = (DateTime)jObject.scheduledEndTime;
@@ -41,7 +43,7 @@ namespace UKP.Website.Service.Transforms
             var actualStartTime = (DateTime?)jObject.actualStartTime;
             var actualEndTime = (DateTime?)jObject.actualEndTime;
 
-            return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState), actualLiveStartTime,
+            return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState), displayStartDate, displayEndDate, actualLiveStartTime,
                 scheduledStartTime, scheduledEndTime, publishedStartTime, publishedEndTime, actualStartTime, actualEndTime);
         }
 
