@@ -6,6 +6,7 @@
 <script src="~/Content/js/event.js"></script>
 
 
+@Html.Hidden("eventId", Model.VideoModel.EventModel.Id)
 
 <div id="eventTimesContainer" data-load-url="@Url.Action(MVC.Event.EventTimes(Model.VideoModel.EventModel.Id))"></div>
 

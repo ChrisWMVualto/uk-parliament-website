@@ -5,9 +5,6 @@
     });
 }
 
-function loadStacksOrLogs() {
-
-}
 
 updateTimes();
 
@@ -19,7 +16,7 @@ function stateChanged(planningState, recordingState, recordedState) {
 $(function () {
 
     var eventStateHub = $.connection.eventStateHub;
-    var eventId = '@Model.VideoModel.EventModel.Id';
+    var eventId = $('#eventId').val();
 
     eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
 
