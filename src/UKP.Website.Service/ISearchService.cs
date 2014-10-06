@@ -5,6 +5,6 @@ namespace UKP.Website.Service
 {
     public interface ISearchService
     {
-        IEnumerable<SearchResultsModel> Search(SearchQueryModel search);
+        SearchModel Search(SearchFormModel search);
     }
 }

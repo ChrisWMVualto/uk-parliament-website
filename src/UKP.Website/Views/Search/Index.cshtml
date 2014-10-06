@@ -37,7 +37,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="keyword"><h4>1. Keywords</h4></label>
-                                @Html.TextBoxFor(x => x.QueryModel.Keywords, new {@class = "form-control input-lg"})
+                                @Html.TextBoxFor(x => x.FormModel.Keywords, new {@class = "form-control input-lg"})
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                             <div class="form-group search-param">
                                 <label for="members"><h4>2. Members</h4></label>
                                 <input type="text" class="form-control input-lg" id="members">
-                                @Html.HiddenFor(x => x.QueryModel.MemberId, new {@class = "form-control input-lg"})
+                                @Html.HiddenFor(x => x.FormModel.MemberId, new {@class = "form-control input-lg"})
                             </div>
                         </div>
 
@@ -53,8 +53,8 @@
                             <div class="form-group search-param">
                                 <label for="tags"><h4>3. Tags</h4></label>
                                 <input type="text" class="form-control input-lg" id="tags">
-                                @Html.HiddenFor(x => x.QueryModel.House)
-                                @Html.HiddenFor(x => x.QueryModel.Business)
+                                @Html.HiddenFor(x => x.FormModel.House)
+                                @Html.HiddenFor(x => x.FormModel.Business)
                             </div>
                         </div>
                     </div>
@@ -77,26 +77,26 @@
                     <h4>
                         @if (Model.SearchResults != null)
                         {
-                            <strong>@Model.SearchResults.Count() Search Results for:</strong>
+                            <strong>@Model.SearchResults.TotalCount Search Results for:</strong>
                         }
                         else
                         {
                             <strong>0 Search Results for:</strong>
                         }
                         
-                        @Model.QueryModel.Keywords - 
+                        @Model.FormModel.Keywords - 
                         
-                        @if (Model.QueryModel.House != null)
+                        @if (Model.FormModel.House != null)
                         {
-                            foreach (var house in Model.QueryModel.House)
+                            foreach (var house in Model.FormModel.House)
                             {
                                 Html.Raw(string.Format("House: {0}, ", house));
                             }
                         }
                         
-                        @if (Model.QueryModel.Business != null)
+                        @if (Model.FormModel.Business != null)
                         {
-                            foreach (var business in Model.QueryModel.Business)
+                            foreach (var business in Model.FormModel.Business)
                             {
                                 Html.Raw(string.Format("Business: {0}, ", business));
                             }
