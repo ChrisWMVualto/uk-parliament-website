@@ -83,7 +83,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformArray(response.Content).OrderByDescending(x => x.ActualEndTime).Take(numEvents);
+            return VideoTransforms.TransformArray(response.Content);
         }
 
         private IEnumerable<EventModel> GetEvents()
