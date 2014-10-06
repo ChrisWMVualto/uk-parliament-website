@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Date.Extensions;
+using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
 using UKP.Website.Models.Event;
 using UKP.Website.Service;
@@ -22,14 +23,35 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(Guid id, string @in = null, string @out = null)
+        public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
         {
             // iso86601 strings used to be human url friendly
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video = _videoService.GetVideo(id);
+            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly);
+
             return View(new EventViewModel(video));
+        }
+
+
+        [HttpGet]
+        public virtual JsonResult GetVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
+        {
+            // iso86601 strings used to be human url friendly
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
+            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly);
+
+            return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult EventTimes(Guid id)
+        {
+            var video = _videoService.GetVideo(id);
+            return PartialView(MVC.Event.Views._EventTimes, video);
         }
 
 

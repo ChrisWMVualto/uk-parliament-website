@@ -62,6 +62,18 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult GetVideo()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EventTimes()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTimes);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult LegacyPageRoute()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
@@ -89,6 +101,8 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string GetVideo = "GetVideo";
+            public readonly string EventTimes = "EventTimes";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
         }
@@ -97,6 +111,8 @@ namespace UKP.Website.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string GetVideo = "GetVideo";
+            public const string EventTimes = "EventTimes";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
         }
@@ -111,6 +127,26 @@ namespace UKP.Website.Controllers
             public readonly string id = "id";
             public readonly string @in = "in";
             public readonly string @out = "out";
+            public readonly string audioOnly = "audioOnly";
+        }
+        static readonly ActionParamsClass_GetVideo s_params_GetVideo = new ActionParamsClass_GetVideo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetVideo GetVideoParams { get { return s_params_GetVideo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetVideo
+        {
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
+            public readonly string audioOnly = "audioOnly";
+        }
+        static readonly ActionParamsClass_EventTimes s_params_EventTimes = new ActionParamsClass_EventTimes();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EventTimes EventTimesParams { get { return s_params_EventTimes; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EventTimes
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -139,8 +175,10 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _EventTimes = "_EventTimes";
                 public readonly string Index = "Index";
             }
+            public readonly string _EventTimes = "~/Views/Event/_EventTimes.cshtml";
             public readonly string Index = "~/Views/Event/Index.cshtml";
         }
     }
@@ -151,16 +189,44 @@ namespace UKP.Website.Controllers
         public T4MVC_EventController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out)
+        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out, bool? audioOnly)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
-            IndexOverride(callInfo, id, @in, @out);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
+            IndexOverride(callInfo, id, @in, @out, audioOnly);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, string @in, string @out, bool? audioOnly)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
+            GetVideoOverride(callInfo, id, @in, @out, audioOnly);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EventTimesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EventTimes(System.Guid id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTimes);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EventTimesOverride(callInfo, id);
             return callInfo;
         }
 

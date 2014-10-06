@@ -9,7 +9,7 @@
             <!--item-->
             <div class="item @if (i == 0) { @Html.Raw("active") }">
                 <div class="carousel-caption row-no-padding">
-                    <a href="player.html">
+                    <a href="@Url.Action(MVC.Event.Index(Model.ElementAt(i).Id))">
                         <div class="carousel-light-bg col-xs-8 col-sm-6 col-md-4">
                             <div class="carousel-caption-inner">
                                 <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToString(ApplicationConstants.DateFormat)</h3>

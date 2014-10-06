@@ -20,11 +20,15 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoModel GetVideo(Guid id)
+        public VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
             request.AddUrlSegment("id", id.ToString());
+            if(inPoint.HasValue) request.AddParameter("in", inPoint);
+            if(outPoint.HasValue) request.AddParameter("out", outPoint);
+            if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
+
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);

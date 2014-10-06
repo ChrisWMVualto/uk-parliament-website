@@ -21,7 +21,6 @@ namespace UKP.Website.Service.Model
             ActualStartTime = actualStartTime;
             ActualEndTime = actualEndTime;
             ThumbnalUrl = thumbnalUrl;
-
             HomeFilters = new HomeFilter(States);
         }
 
