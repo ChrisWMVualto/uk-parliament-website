@@ -1,4 +1,5 @@
-﻿@using RestSharp.Extensions
+﻿@using Date.Extensions
+@using RestSharp.Extensions
 @using UKP.Website.Application
 @model UKP.Website.Models.SearchViewModel
 
@@ -8,7 +9,7 @@
         <div class="col-md-12 search-item">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
-                    <a href="#" class="search-thumb-inner">
+                    <a href="@Url.Action(MVC.Event.Index(item.Event.Id))" class="search-thumb-inner">
                         @if (item.Event.ThumbnalUrl.HasValue())
                         {
                             <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
@@ -17,7 +18,7 @@
                         {
                             <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
                         }
-                            
+
                         <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         <div class="overlay">
                             <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
@@ -36,7 +37,7 @@
                             @foreach (var moment in item.Moments)
                             {
                                 <div class="col-md-12 moment-item">
-                                    <a href="#" class="outer-border">
+                                    <a href="@Url.Action(MVC.Event.Index(item.Event.Id, moment.InPoint.ToISO8601String()))" class="outer-border">
                                         <div class="row">
                                             <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
                                                 <div class="moment-thumb">
