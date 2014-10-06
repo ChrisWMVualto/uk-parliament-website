@@ -61,11 +61,11 @@ namespace UKP.Website.Controllers
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
             if(st.HasValue)
             {
-                var timeOfDay = legacyVideo.EventModel.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
+                var timeOfDay = legacyVideo.Event.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
                 var date = timeOfDay.ToISO8601String();
-                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id, date));
+                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, date));
             }
-            return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.EventModel.Id));
+            return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id));
         }
 
         [HttpPost]

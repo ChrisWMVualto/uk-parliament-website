@@ -5,6 +5,6 @@ namespace UKP.Website.Service
 {
     public interface ISearchService
     {
-        SearchModel Search(SearchFormModel search);
+        VideoCollectionModel Search(SearchFormModel search);
     }
 }

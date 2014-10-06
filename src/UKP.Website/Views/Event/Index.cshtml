@@ -7,9 +7,9 @@
 
 <div class="container main-container">
 
-    @Html.Hidden("eventId", Model.VideoModel.EventModel.Id)
+    @Html.Hidden("eventId", Model.VideoModel.Event.Id)
 
-    <div id="eventTimesContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.EventModel.Id))"></div>
+    <div id="eventTimesContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))"></div>
     <div class="row">
         <div class="col-md-12">
             <header class="title-main"><h2><i class="fa fa-play-circle fa-lg"></i> <span>Player</span></h2>     <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>

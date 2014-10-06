@@ -42,7 +42,7 @@ namespace UKP.Website.Service
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformEPG(response.Content);;
+            return EventTransforms.TransformEPG(response.Content);;
         }
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
@@ -83,7 +83,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformArray(response.Content);
+            return EventTransforms.TransformArray(response.Content);
         }
 
         private IEnumerable<EventModel> GetEvents()
@@ -105,7 +105,7 @@ namespace UKP.Website.Service
             if(response.StatusCode == HttpStatusCode.NotFound) return null;
             if(response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            return VideoTransforms.TransformEPG(response.Content); ;
+            return EventTransforms.TransformEPG(response.Content); ;
         }
 
         private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)

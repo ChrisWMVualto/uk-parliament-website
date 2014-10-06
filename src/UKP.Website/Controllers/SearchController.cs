@@ -32,6 +32,7 @@ namespace UKP.Website.Controllers
             if (!ModelState.IsValid)
                 return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel));
 
+            // TODO: Refactor. don't pass models into service. Use params or create a class such as SearchParams.
             var results = _searchService.Search(model.FormModel);
             var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
             return View(response);

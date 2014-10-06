@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using RestSharp;
 using RestSharp.Extensions;
@@ -43,7 +44,7 @@ namespace UKP.Website.Service
                 throw new RestSharpException(response);
             }
 
-            return VideoTransforms.TransformVideo(response.Content);
+            return VideoTransforms.Transform(response.Content);
         }
 
 
@@ -66,7 +67,7 @@ namespace UKP.Website.Service
                 throw new RestSharpException(response);
             }
 
-            return VideoTransforms.TransformVideo(response.Content);
+            return VideoTransforms.Transform(response.Content);
         }
     }
 }
