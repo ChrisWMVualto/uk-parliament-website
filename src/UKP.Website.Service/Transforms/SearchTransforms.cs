@@ -7,21 +7,25 @@ namespace UKP.Website.Service.Transforms
 {
     public static class SearchTransforms
     {
-        public static IEnumerable<SearchResultsModel> TransformArray(string jsonArray)
+        public static SearchModel Transform(string jsonArray)
         {
-            dynamic jArray = JArray.Parse(jsonArray);
-            if (jArray == null) return Enumerable.Empty<SearchResultsModel>();
+            dynamic jObject = JObject.Parse(jsonArray);
+            if (jObject == null) return new SearchModel(null, 0, 0);
 
+            var jArray = JArray.Parse(jObject.results.ToString());
             var list = new List<SearchResultsModel>();
             foreach (var json in jArray)
             {
-                list.Add(Transform(json));
+                list.Add(TransformResult(json));
             }
 
-            return list;
+            var totalCount = (int)jObject.totalCount.Value;
+            var pageSize = (int)jObject.pageSize.Value;
+
+            return new SearchModel(list, totalCount, pageSize);
         }
 
-        public static SearchResultsModel Transform(dynamic json)
+        public static SearchResultsModel TransformResult(dynamic json)
         {
             dynamic jObject = JObject.Parse(json.ToString());
             if (jObject == null) return null;

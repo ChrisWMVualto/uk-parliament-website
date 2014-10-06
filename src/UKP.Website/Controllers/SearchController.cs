@@ -22,7 +22,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchQueryModel());
+            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchFormModel());
             return View(model);
         }
 
@@ -30,10 +30,10 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Index(SearchViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.QueryModel));
+                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel));
 
-            var results = _searchService.Search(model.QueryModel);
-            var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.QueryModel, results);
+            var results = _searchService.Search(model.FormModel);
+            var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
             return View(response);
         }
     }
