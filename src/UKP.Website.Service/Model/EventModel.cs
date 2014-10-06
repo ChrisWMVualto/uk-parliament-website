@@ -30,8 +30,8 @@ namespace UKP.Website.Service.Model
         public string House { get; private set; }
         public string Business { get; private set; }
         public EventStates States { get; private set; }
-        public DateTime DisplayStartDate { get; set; }
-        public DateTime DisplayEndDate { get; set; }
+        public DateTime DisplayStartDate { get; private set; }
+        public DateTime DisplayEndDate { get; private set; }
         public DateTime? ActualLiveStartTime { get; private set; }
         public DateTime ScheduledStartTime { get; private set; }
         public DateTime ScheduledEndTime { get; private set; }
@@ -39,7 +39,7 @@ namespace UKP.Website.Service.Model
         public DateTime? PublishedEndTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
         public DateTime? ActualEndTime { get; private set; }
-        public string ThumbnalUrl { get; set; }
+        public string ThumbnalUrl { get; private set; }
         public HomeFilter HomeFilters { get; private set; }
     }
 }
