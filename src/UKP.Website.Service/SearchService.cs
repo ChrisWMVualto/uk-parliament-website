@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Date.Extensions;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Extensions;
 using UKP.Website.Application;
@@ -20,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public IEnumerable<SearchResultsModel> Search(SearchQueryModel search)
+        public SearchModel Search(SearchFormModel search)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
@@ -47,7 +48,7 @@ namespace UKP.Website.Service
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            var transforms = SearchTransforms.TransformArray(response.Content);
+            var transforms = SearchTransforms.Transform(response.Content);
             return transforms;
         }
     }
