@@ -48,10 +48,10 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult EventTimes(Guid id)
+        public virtual PartialViewResult EventTitle(Guid id)
         {
             var video = _videoService.GetVideo(id);
-            return PartialView(MVC.Event.Views._EventTimes, video);
+            return PartialView(MVC.Event.Views._EventTitle, video);
         }
 
 

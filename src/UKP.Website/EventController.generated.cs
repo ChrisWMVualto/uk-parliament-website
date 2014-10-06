@@ -68,9 +68,9 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult EventTimes()
+        public virtual System.Web.Mvc.PartialViewResult EventTitle()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTimes);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTitle);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -102,7 +102,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string Index = "Index";
             public readonly string GetVideo = "GetVideo";
-            public readonly string EventTimes = "EventTimes";
+            public readonly string EventTitle = "EventTitle";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
         }
@@ -112,7 +112,7 @@ namespace UKP.Website.Controllers
         {
             public const string Index = "Index";
             public const string GetVideo = "GetVideo";
-            public const string EventTimes = "EventTimes";
+            public const string EventTitle = "EventTitle";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
         }
@@ -140,11 +140,11 @@ namespace UKP.Website.Controllers
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
         }
-        static readonly ActionParamsClass_EventTimes s_params_EventTimes = new ActionParamsClass_EventTimes();
+        static readonly ActionParamsClass_EventTitle s_params_EventTitle = new ActionParamsClass_EventTitle();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_EventTimes EventTimesParams { get { return s_params_EventTimes; } }
+        public ActionParamsClass_EventTitle EventTitleParams { get { return s_params_EventTitle; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_EventTimes
+        public class ActionParamsClass_EventTitle
         {
             public readonly string id = "id";
         }
@@ -175,10 +175,10 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string _EventTimes = "_EventTimes";
+                public readonly string _EventTitle = "_EventTitle";
                 public readonly string Index = "Index";
             }
-            public readonly string _EventTimes = "~/Views/Event/_EventTimes.cshtml";
+            public readonly string _EventTitle = "~/Views/Event/_EventTitle.cshtml";
             public readonly string Index = "~/Views/Event/Index.cshtml";
         }
     }
@@ -219,14 +219,14 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void EventTimesOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void EventTitleOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult EventTimes(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult EventTitle(System.Guid id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTimes);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTitle);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EventTimesOverride(callInfo, id);
+            EventTitleOverride(callInfo, id);
             return callInfo;
         }
 
