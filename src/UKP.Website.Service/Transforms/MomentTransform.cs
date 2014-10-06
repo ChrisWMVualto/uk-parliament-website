@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UKP.Website.Service.Model;
@@ -29,8 +30,9 @@ namespace UKP.Website.Service.Transforms
             var id = jObject.log.id.Value;
             var title = jObject.log.title.Value;
             var thumbnailUrl = jObject.thumbnailImageUrl.Value;
+            var inPoint = (DateTime)jObject.inPoint.Value;
 
-            return new MomentModel(id, title, thumbnailUrl);
+            return new MomentModel(id, title, thumbnailUrl, inPoint);
         }
     }
 }
