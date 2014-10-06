@@ -1,0 +1,13 @@
+﻿@model UKP.Website.Models.Event.EventViewModel
+
+
+<script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script src="~/Content/js/event.js"></script>
+
+
+
+<div id="eventTimesContainer" data-load-url="@Url.Action(MVC.Event.EventTimes(Model.VideoModel.EventModel.Id))"></div>
+
+
+
