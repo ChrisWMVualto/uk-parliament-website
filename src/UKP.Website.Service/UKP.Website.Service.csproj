@@ -81,7 +81,7 @@
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
     <Compile Include="Model\SearchResultsModel.cs" />
-    <Compile Include="Model\SearchQueryModel.cs" />
+    <Compile Include="Model\SearchFormModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecessService.cs" />
@@ -92,6 +92,7 @@
     <Compile Include="VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\SearchModel.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
