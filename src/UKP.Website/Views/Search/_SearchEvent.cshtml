@@ -3,8 +3,8 @@
 @using UKP.Website.Application
 @model UKP.Website.Models.SearchViewModel
 
-@if (Model.SearchResults != null && Model.SearchResults.Results.Any()) {
-    foreach (var item in Model.SearchResults.Results)
+@if (Model.VideoCollectionResult != null && Model.VideoCollectionResult.Results.Any()) {
+    foreach (var item in Model.VideoCollectionResult.Results)
     {
         <div class="col-md-12 search-item">
             <div class="row">

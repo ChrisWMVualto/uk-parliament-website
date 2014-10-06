@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public SearchModel Search(SearchFormModel search)
+        public VideoCollectionModel Search(SearchFormModel search)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
@@ -48,8 +48,8 @@ namespace UKP.Website.Service
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            var transforms = SearchTransforms.Transform(response.Content);
-            return transforms;
+            var results = VideoTransforms.TransformArray(response.Content);
+            return results;
         }
     }
 }

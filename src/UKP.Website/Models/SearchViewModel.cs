@@ -5,9 +5,9 @@ namespace UKP.Website.Models
 {
     public class SearchViewModel
     {
-        public SearchViewModel(string memberAutocompleteUrl, SearchFormModel formModel, SearchModel searchResults = null)
+        public SearchViewModel(string memberAutocompleteUrl, SearchFormModel formModel, VideoCollectionModel videoCollectionResult = null)
         {
-            SearchResults = searchResults;
+            VideoCollectionResult = videoCollectionResult;
             MemberAutocompleteUrl = memberAutocompleteUrl;
             FormModel = formModel;
         }
@@ -19,6 +19,6 @@ namespace UKP.Website.Models
 
         public string MemberAutocompleteUrl { get; set; }
         public SearchFormModel FormModel { get; set; }
-        public SearchModel SearchResults { get; set; }
+        public VideoCollectionModel VideoCollectionResult { get; set; }
     }
 }

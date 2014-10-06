@@ -330,7 +330,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Recess.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

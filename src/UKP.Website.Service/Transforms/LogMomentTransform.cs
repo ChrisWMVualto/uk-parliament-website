@@ -6,14 +6,14 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Service.Transforms
 {
-    public static class MomentTransforms
+    public static class LogMomentTransforms
     {
-        public static IEnumerable<MomentModel> TransformArray(string jsonArray)
+        public static IEnumerable<LogMomentModel> TransformArray(string jsonArray)
         {
             dynamic jArray = JArray.Parse(jsonArray);
-            if (jArray == null) return Enumerable.Empty<MomentModel>();
+            if (jArray == null) return Enumerable.Empty<LogMomentModel>();
 
-            var list = new List<MomentModel>();
+            var list = new List<LogMomentModel>();
             foreach (var json in jArray)
             {
                 list.Add(Transform(json));
@@ -22,7 +22,7 @@ namespace UKP.Website.Service.Transforms
             return list;
         }
 
-        public static MomentModel Transform(dynamic json)
+        public static LogMomentModel Transform(dynamic json)
         {
             dynamic jObject = JObject.Parse(json.ToString());
             if (jObject == null) return null;
@@ -32,7 +32,7 @@ namespace UKP.Website.Service.Transforms
             var thumbnailUrl = jObject.thumbnailImageUrl.Value;
             var inPoint = (DateTime)jObject.inPoint.Value;
 
-            return new MomentModel(id, title, thumbnailUrl, inPoint);
+            return new LogMomentModel(id, title, thumbnailUrl, inPoint);
         }
     }
 }

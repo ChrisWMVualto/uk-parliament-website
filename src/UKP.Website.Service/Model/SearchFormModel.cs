@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace UKP.Website.Service.Model
 {
@@ -8,7 +7,6 @@ namespace UKP.Website.Service.Model
         public string Business { get; set; }
         public string House { get; set; }
 
-        [Required]
         public string Keywords { get; set; }
         public int? MemberId { get; set; }
         public DateTime Period { get; set; }
