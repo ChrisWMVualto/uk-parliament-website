@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UKP.Website.Service.Model
 {
-    public class SearchQueryModel
+    public class SearchFormModel
     {
         public string Business { get; set; }
         public string House { get; set; }
@@ -13,7 +13,7 @@ namespace UKP.Website.Service.Model
         public int? MemberId { get; set; }
         public DateTime Period { get; set; }
 
-        public SearchQueryModel(string keywords, string house, string business, int? memberId, int period)
+        public SearchFormModel(string keywords, string house, string business, int? memberId, int period)
         {
             Business = business;
             House = house;
@@ -22,7 +22,7 @@ namespace UKP.Website.Service.Model
             Period = DateTime.Today.AddDays(period * -1);
         }
 
-        public SearchQueryModel()
+        public SearchFormModel()
         {
             
         }
