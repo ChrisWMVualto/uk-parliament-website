@@ -120,7 +120,6 @@ namespace UKP.Website.Controllers
                 public readonly string Committees = "Committees";
                 public readonly string Commons = "Commons";
                 public readonly string Lords = "Lords";
-                public readonly string Recess = "Recess";
             }
             public readonly string _Guide = "~/Views/Home/_Guide.cshtml";
             public readonly string _HomeBody = "~/Views/Home/_HomeBody.cshtml";
@@ -130,7 +129,6 @@ namespace UKP.Website.Controllers
             public readonly string Committees = "~/Views/Home/Committees.cshtml";
             public readonly string Commons = "~/Views/Home/Commons.cshtml";
             public readonly string Lords = "~/Views/Home/Lords.cshtml";
-            public readonly string Recess = "~/Views/Home/Recess.cshtml";
         }
     }
 
