@@ -27,7 +27,7 @@
                 </header>
             </div>
             
-            @using (Html.BeginForm(MVC.Search.Index(), FormMethod.Post))
+            @using (Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
             {
                 <div class="col-md-12">
                     <div class="row">
@@ -112,13 +112,16 @@
             </div>
             <hr />
         </div>
-
-        @Html.Partial(MVC.Search.Views._SearchEvent, Model)
+        
+        <div id="searchResultsContainer">
+            @Html.Partial(MVC.Search.Views._SearchEvent, Model)
+        </div>
     </div>
 </div>
 
 @section scripts {
     <script src="@Url.Content("~/Content/js/jquery.autocomplete.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.infinitescroll.js")"></script>
     
     <script>
         $('#members').autocomplete({
@@ -171,12 +174,12 @@
             inputValue.pop();
             var validTags = [];
 
-            $.each(inputValue, function () {
+            $.each(inputValue, function() {
                 var tag = this.split(": ");
-                
+
                 if (tag[0] == "House")
                     TagAppender(tag[1], $('#QueryModel_House'));
-                
+
                 if (tag[0] == "Business")
                     TagAppender(tag[1], $('#QueryModel_Business'));
 
@@ -190,5 +193,20 @@
             });
             $('#selectedTags button').bind('click', TagDestroy);
         }
+
+        $('#searchResultsContainer').append('<span class="pagination"><a href="' + window.location + '"></a></span>');
+        $('#searchResultsContainer').infinitescroll({
+            debug: true,
+            prefill: true,
+            itemSelector: '.search-item',
+            nextSelector: $('.pagination a'),
+            navSelector: $('.pagination'),
+            path: function(pageNum) {
+                return window.location + '&pageNum=' + pageNum;
+            },
+            loading: {
+                finishedMsg: ''
+            }
+        });
     </script>
 }

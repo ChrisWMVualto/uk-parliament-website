@@ -87,6 +87,7 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_Index
         {
             public readonly string model = "model";
+            public readonly string pageNum = "pageNum";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -112,25 +113,15 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model, int? pageNum);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model)
+        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model, int? pageNum)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            IndexOverride(callInfo, model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pageNum", pageNum);
+            IndexOverride(callInfo, model, pageNum);
             return callInfo;
         }
 
