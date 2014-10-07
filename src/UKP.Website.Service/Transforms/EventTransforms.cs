@@ -43,9 +43,13 @@ namespace UKP.Website.Service.Transforms
             var actualStartTime = (DateTime?)jObject.actualStartTime;
             var actualEndTime = (DateTime?)jObject.actualEndTime;
             var thumbnailUrl = (string) jObject.thumbnailUrl;
+            var channelName = (string)jObject.channelName;
+            var room = (string)jObject.room;
+            var eventType = (string)jObject.eventType;
+            var productionSource = (string)jObject.productionSource;
 
             return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState), displayStartDate, displayEndDate, actualLiveStartTime,
-                scheduledStartTime, scheduledEndTime, publishedStartTime, publishedEndTime, actualStartTime, actualEndTime, thumbnailUrl);
+                scheduledStartTime, scheduledEndTime, publishedStartTime, publishedEndTime, actualStartTime, actualEndTime, thumbnailUrl, channelName, room, eventType, productionSource);
         }
 
         public static IEnumerable<EventModel> TransformEPG(dynamic json)

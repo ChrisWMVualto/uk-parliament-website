@@ -15,16 +15,17 @@ namespace UKP.Website.Service.Transforms
             dynamic jObject = JObject.Parse(json.ToString());
             if(jObject == null) return null;
 
-            var pageUrl = jObject.webPageUrl.Value;
             var @event = jObject.@event;
             var moments = jObject.logMomentVideoItems;
             var embedCode = (string)jObject.embedCode;
             var legacyEmbedCode = (string)jObject.legacyEmbedCode;
+            var pageUrl = (string)jObject.webPageUrl;
+            var shortWebPageUrl = (string)jObject.shortWebPageUrl;
 
             var eventModel = EventTransforms.Transform(@event.ToString());
             var momentModel = LogMomentTransforms.TransformArray(moments.ToString());
 
-            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl);
+            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl);
         }
 
         public static VideoCollectionModel TransformArray(string jsonArray)

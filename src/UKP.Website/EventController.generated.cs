@@ -176,9 +176,13 @@ namespace UKP.Website.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _EventTitle = "_EventTitle";
+                public readonly string _Info = "_Info";
+                public readonly string _Share = "_Share";
                 public readonly string Index = "Index";
             }
             public readonly string _EventTitle = "~/Views/Event/_EventTitle.cshtml";
+            public readonly string _Info = "~/Views/Event/_Info.cshtml";
+            public readonly string _Share = "~/Views/Event/_Share.cshtml";
             public readonly string Index = "~/Views/Event/Index.cshtml";
         }
     }
