@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
+using System.Web.UI.WebControls;
+using UKP.Website.Application;
 
 namespace System.Web.Mvc.Html
 {
@@ -123,6 +126,37 @@ namespace System.Web.Mvc.Html
             items.First(x => x.Value == selectedValue).Selected = true;
 
             return items;
+        }
+
+        public static string TwitterLink(this UrlHelper url, string title)
+        {
+            const int maxChars = 140;
+            const string twitterPrefix = "https://twitter.com/home?status=";
+
+            var pageUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+            var charsLeft = maxChars - pageUrl.Length - 1;
+            title = title.Length < charsLeft ? title : title.Substring(0, charsLeft);
+            
+            var status = string.Format("{0} {1}", title, pageUrl);
+            return twitterPrefix + url.Encode(status);
+        }
+
+        public static string FacebookLink(this UrlHelper url)
+        {
+            return "https://www.facebook.com/sharer/sharer.php?u=" + url.Encode(HttpContext.Current.Request.Url.AbsoluteUri);
+        }
+
+        public static string GooglePlusLink(this UrlHelper url)
+        {
+            return "https://plus.google.com/share?url=" + url.Encode(HttpContext.Current.Request.Url.AbsoluteUri);
+        }
+
+        public static string LinkedinLink(this UrlHelper url, string title, DateTime date)
+        {
+            var pageUrl = HttpContext.Current.Request.Url.AbsoluteUri;
+            var summary = string.Format("Watch the {0} from {1}", title, date.ToString(ApplicationConstants.DateFormat));
+
+            return string.Format("https://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}", url.Encode(pageUrl), url.Encode(title), url.Encode(summary));
         }
     }
 }
