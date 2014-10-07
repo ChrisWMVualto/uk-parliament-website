@@ -29,7 +29,7 @@
                         @for (var i = 0; i < Model.Count(); i++)
                         {
                             <div class="archived-item col-md-6 col-sm-6">
-                                <a href="#" class="clearfix">
+                                <a href="@Url.Action(MVC.Event.Index(Model.ElementAt(i).Id))" class="clearfix">
                                     <div class="inner">
                                         <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive"><span class="big-play fa-stack fa-lg visible-lg visible-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                                         <div class="overlay">
