@@ -113,10 +113,10 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model, int pageNum);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model, int? pageNum);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model, int pageNum)
+        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model, int? pageNum)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);

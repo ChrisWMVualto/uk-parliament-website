@@ -21,9 +21,9 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(SearchViewModel model = null, int pageNum = 1)
+        public virtual ActionResult Index(SearchViewModel model = null, int? pageNum = null)
         {
-            if (model == null)
+            if (model.FormModel == null)
             {
                 return View(new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchFormModel()));
             }
@@ -31,7 +31,7 @@ namespace UKP.Website.Controllers
             if (!ModelState.IsValid)
                 return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel));
 
-            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.Period, pageNum);
+            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.Period, pageNum.HasValue ? pageNum.Value : 1);
             var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
             return View(response);
         }
