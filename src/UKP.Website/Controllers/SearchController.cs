@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Services;
 using UKP.Website.Application;
 using UKP.Website.Models;
@@ -20,20 +21,17 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(SearchViewModel model = null, int pageNum = 1)
         {
-            var model = new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchFormModel());
-            return View(model);
-        }
+            if (model == null)
+            {
+                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchFormModel()));
+            }
 
-        [HttpPost]
-        public virtual ActionResult Index(SearchViewModel model)
-        {
             if (!ModelState.IsValid)
                 return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel));
 
-            // TODO: Refactor. don't pass models into service. Use params or create a class such as SearchParams.
-            var results = _searchService.Search(model.FormModel);
+            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.Period, pageNum);
             var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
             return View(response);
         }
