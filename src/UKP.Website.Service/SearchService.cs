@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Net;
 using Date.Extensions;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Extensions;
 using UKP.Website.Application;
@@ -21,28 +20,29 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoCollectionModel Search(SearchFormModel search)
+        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime period, int pageNum)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
 
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
 
-            if (search.Keywords.HasValue())
-                request.AddParameter("keywords", search.Keywords);
+            if (keywords.HasValue())
+                request.AddParameter("keywords", keywords);
             
-            if (search.House.HasValue())
-                request.AddParameter("house", search.House);
+            if (house.HasValue())
+                request.AddParameter("house", house);
 
-            if (search.Business.HasValue())
-                request.AddParameter("business", search.Business);
+            if (business.HasValue())
+                request.AddParameter("business", business);
 
-            if (search.MemberId.HasValue)
-                request.AddParameter("memberId", search.MemberId.Value);
+            if (memberId.HasValue)
+                request.AddParameter("memberId", memberId);
 
-            request.AddParameter("fromDate", search.Period.ToISO8601String());
+            request.AddParameter("fromDate", period.ToISO8601String());
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
+            request.AddParameter("pageNumber", pageNum);
 
             var response = client.Execute(request);
             if (response.StatusCode == HttpStatusCode.NotFound) return null;

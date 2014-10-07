@@ -326,6 +326,7 @@ namespace Links
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
+            public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
             public static readonly string scripts_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/scripts.min.js") ? Url("scripts.min.js") : Url("scripts.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class vendor {
@@ -337,6 +338,7 @@ namespace Links
                 public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
                 public static readonly string bootstrap_timepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker.min.js") ? Url("bootstrap-timepicker.min.js") : Url("bootstrap-timepicker.js");
                 public static readonly string breakpoints_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/breakpoints.min.js") ? Url("breakpoints.min.js") : Url("breakpoints.js");
+                public static readonly string jquery_1_10_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.1.min.js") ? Url("jquery-1.10.1.min.js") : Url("jquery-1.10.1.js");
                 public static readonly string jquery_1_10_1_min_js = Url("jquery-1.10.1.min.js");
                 public static readonly string jquery_pep_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.pep.min.js") ? Url("jquery.pep.min.js") : Url("jquery.pep.js");
                 public static readonly string jquery_slimscroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.slimscroll.min.js") ? Url("jquery.slimscroll.min.js") : Url("jquery.slimscroll.js");
