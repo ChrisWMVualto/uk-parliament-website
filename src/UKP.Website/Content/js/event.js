@@ -59,6 +59,7 @@ function reloadShareData() {
         var that = this;
         this.checkbox.bind('click', function() {
             that.enabled = !that.enabled;
+            ajaxRequest();
         });
         if (this.hasOwnProperty('input'))
             this.input.bind('focusout', ajaxRequest);
@@ -92,6 +93,9 @@ function reloadShareData() {
     }
 
     function timeToIso(time) {
+        if (time.length < 1)
+            return "";
+
         var splitTime = time.split(/(\.|,|:){1}/);
 
         var seconds = "00";
