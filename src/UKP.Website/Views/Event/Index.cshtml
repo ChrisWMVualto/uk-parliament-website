@@ -232,3 +232,12 @@
 <script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
 <script src="~/signalr/hubs"></script>
 <script src="~/Content/js/event.js"></script>
+
+@section scripts {
+    <script type="text/javascript">
+        var inputs = $('textarea, input');
+        inputs.bind('focus', function () {
+            this.select();
+        });
+    </script>
+}
