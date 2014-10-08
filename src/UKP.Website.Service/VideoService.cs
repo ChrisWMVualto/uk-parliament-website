@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using Date.Extensions;
 using RestSharp;
 using RestSharp.Extensions;
 using UKP.Website.Application;
@@ -26,8 +27,8 @@ namespace UKP.Website.Service
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
             request.AddUrlSegment("id", id.ToString());
-            if(inPoint.HasValue) request.AddParameter("in", inPoint);
-            if(outPoint.HasValue) request.AddParameter("out", outPoint);
+            if(inPoint.HasValue) request.AddParameter("in", inPoint.ToISO8601String());
+            if(outPoint.HasValue) request.AddParameter("out", outPoint.ToISO8601String());
             if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
 
             request.AddParameter("format", "json");
