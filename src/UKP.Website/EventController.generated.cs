@@ -208,10 +208,10 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly);
+        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, string @in, string @out, bool? audioOnly)
+        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
