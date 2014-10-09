@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\ajax-loader.gif" />
+    <Content Include="Content\css\application.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\fonts\slick.svg" />
     <Content Include="Content\css\theme.css" />

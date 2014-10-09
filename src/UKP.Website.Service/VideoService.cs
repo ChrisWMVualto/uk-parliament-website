@@ -48,6 +48,20 @@ namespace UKP.Website.Service
             return VideoTransforms.Transform(response.Content);
         }
 
+        public VideoModel GetVideo(Guid id, TimeSpan? inPoint, TimeSpan? outPoint, bool? audioOnly = null)
+        {
+            var videoData = GetVideo(id);
+
+            DateTime? inPointDate = null;
+            if (inPoint.HasValue)
+                inPointDate = videoData.Event.ActualStartTime.Value.Add(inPoint.Value);
+
+            DateTime? outPointDate = null;
+            if (outPoint.HasValue)
+                outPointDate = videoData.Event.ActualStartTime.Value.Add(outPoint.Value);
+
+            return GetVideo(id, inPointDate, outPointDate, audioOnly);
+        }
 
         public VideoModel GetLegacyVideo(int id)
         {

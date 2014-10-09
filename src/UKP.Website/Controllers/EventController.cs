@@ -36,13 +36,18 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual JsonResult GetVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
+        public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null)
         {
-            // iso86601 strings used to be human url friendly
-            var inPoint = @in.FromISO8601String();
-            var outPoint = @out.FromISO8601String();
+            DateTime? inpoint = null;
+            DateTime? outpoint = null;
 
-            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly);
+            if (@in.HasValue)
+                inpoint = DateTime.Now.Add(@in.Value);
+
+            if (@out.HasValue)
+                outpoint = DateTime.Now.Add(@out.Value);
+
+            var video = _videoService.GetVideo(id, inpoint, outpoint, audioOnly);
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
