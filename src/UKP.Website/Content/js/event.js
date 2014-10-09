@@ -26,7 +26,7 @@ function reloadEmbedData() {
                 enabled: false
             },
             audio: {
-                checkbox: $('#audio-toggle'),
+                checkbox: $('.audio-toggle'),
                 enabled: false
             }
         },
