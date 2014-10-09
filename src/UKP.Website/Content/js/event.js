@@ -36,29 +36,30 @@ function reloadEmbedData() {
             shortUrl: $('#smallUrl'),
             longUrl: $('#url'),
             embed: $('#embed')
+        },
+        timepickerOpts: {
+            defaultTime: false,
+            showSeconds: true,
+            showMeridian: false,
+            minuteStep: 1,
+            secondStep: 1,
         }
     };
 
     $.each(settings.options, function () {
         var that = this;
+
         this.checkbox.bind('click', function() {
             that.enabled = !that.enabled;
             ajaxRequest();
         });
-        if (this.hasOwnProperty('input'))
+
+        if (this.hasOwnProperty('input')) {
             this.input.bind('focusout', ajaxRequest);
+            this.input.timepicker(settings.timepickerOpts);
+            this.input.on('changeTime.timepicker', ajaxRequest);
+        }
     });
-
-    var timepickerOpts = {
-        defaultTime: false,
-        showSeconds: true,
-        showMeridian: false,
-        minuteStep: 1,
-        secondStep: 1,
-    };
-
-    settings.options.start.input.timepicker(timepickerOpts);
-    settings.options.end.input.timepicker(timepickerOpts);
 
     function ajaxRequest() {
         var start = "",
