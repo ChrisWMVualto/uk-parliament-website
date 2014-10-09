@@ -48,8 +48,11 @@ namespace UKP.Website.Service
             return VideoTransforms.Transform(response.Content);
         }
 
-        public VideoModel GetVideo(Guid id, TimeSpan? inPoint, TimeSpan? outPoint, bool? audioOnly = null)
+        public VideoModel GetVideoTime(Guid id, TimeSpan? inPoint, TimeSpan? outPoint, bool? audioOnly = null)
         {
+            if (!inPoint.HasValue && !outPoint.HasValue)
+                return GetVideo(id, null, null, audioOnly);
+
             var videoData = GetVideo(id);
 
             DateTime? inPointDate = null;

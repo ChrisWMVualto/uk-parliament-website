@@ -38,16 +38,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null)
         {
-            DateTime? inpoint = null;
-            DateTime? outpoint = null;
-
-            if (@in.HasValue)
-                inpoint = DateTime.Now.Add(@in.Value);
-
-            if (@out.HasValue)
-                outpoint = DateTime.Now.Add(@out.Value);
-
-            var video = _videoService.GetVideo(id, inpoint, outpoint, audioOnly);
+            var video = _videoService.GetVideoTime(id, @in, @out, audioOnly);
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
