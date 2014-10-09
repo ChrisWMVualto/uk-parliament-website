@@ -12,23 +12,7 @@ function stateChanged(planningState, recordingState, recordedState) {
     updateTimes();
 }
 
-
-$(function () {
-
-    var eventStateHub = $.connection.eventStateHub;
-    var eventId = $('#eventId').val();
-
-    eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
-
-        if (eventId == changedId) {
-            stateChanged(planningState, recordingState, recordedState, simpleState);
-        }
-    };
-
-    $.connection.hub.start().done(function () { });
-});
-
-function reloadShareData() {
+function reloadEmbedData() {
     var settings = {
         options: {
             start: {
@@ -135,4 +119,25 @@ function reloadShareData() {
     }
 }
 
-reloadShareData();
+$(function () {
+    var eventStateHub = $.connection.eventStateHub;
+    var eventId = $('#eventId').val();
+
+    eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
+
+        if (eventId == changedId) {
+            stateChanged(planningState, recordingState, recordedState, simpleState);
+        }
+    };
+
+    $.connection.hub.start().done(function () { });
+
+    $('.embed-code').hide();
+    $('.embed-terms .btn-agree').bind('click', function (e) {
+        e.preventDefault();
+
+        $('.embed-terms').fadeOut();
+        $('.embed-code').fadeIn();
+    });
+    reloadEmbedData();
+});
