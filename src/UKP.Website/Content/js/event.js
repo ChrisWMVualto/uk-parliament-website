@@ -65,6 +65,17 @@ function reloadShareData() {
             this.input.bind('focusout', ajaxRequest);
     });
 
+    var timepickerOpts = {
+        defaultTime: false,
+        showSeconds: true,
+        showMeridian: false,
+        minuteStep: 1,
+        secondStep: 1,
+    };
+
+    settings.options.start.input.timepicker(timepickerOpts);
+    settings.options.end.input.timepicker(timepickerOpts);
+
     function ajaxRequest() {
         var start = "",
             end = "";
