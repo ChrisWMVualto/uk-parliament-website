@@ -31,7 +31,7 @@ function reloadEmbedData() {
             }
         },
         urlBase: '/Event/GetVideo/',
-        eventId: getEventId(),
+        eventId: $('#eventId').val(),
         fields: {
             shortUrl: $('#smallUrl'),
             longUrl: $('#url'),
@@ -82,10 +82,6 @@ function reloadEmbedData() {
         settings.fields.shortUrl.val(data.shortWebPageUrl);
         settings.fields.longUrl.val(data.pageUrl);
         settings.fields.embed.text(data.embedCode);
-    }
-
-    function getEventId() {
-        return window.location.toString().match(/(\d|[a-z]){8}-(\d|[a-z]){4}-(\d|[a-z]){4}-(\d|[a-z]){4}-(\d|[a-z]){12}/i)[0];
     }
 }
 
