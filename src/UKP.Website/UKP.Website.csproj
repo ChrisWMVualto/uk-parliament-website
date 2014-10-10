@@ -270,11 +270,15 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\CookieController.cs" />
     <Compile Include="Controllers\EpgController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="CookieController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EpgController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -355,6 +359,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
+    <Folder Include="Views\Cookie\" />
     <Folder Include="Views\Epg\" />
     <Folder Include="Views\Player\" />
     <Folder Include="Views\SearchApi\" />

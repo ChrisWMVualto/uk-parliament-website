@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Web;
-using System.Web.UI.WebControls;
 using UKP.Website.Application;
 
 namespace System.Web.Mvc.Html
@@ -157,6 +153,17 @@ namespace System.Web.Mvc.Html
             var summary = string.Format("Watch the {0} from {1}", title, date.ToString(ApplicationConstants.DateFormat));
 
             return string.Format("https://www.linkedin.com/shareArticle?mini=true&url={0}&title={1}&summary={2}", url.Encode(pageUrl), url.Encode(title), url.Encode(summary));
+        }
+
+        public static bool CookieStateSet(this HttpRequestBase request)
+        {
+            return (request.Cookies.Get("Cookies") != null || HttpContext.Current.Session["Cookies"] != null);
+        }
+
+        public static bool CookiesAllowed(this HttpRequestBase request)
+        {
+            var cookie = request.Cookies.Get("Cookies");
+            return cookie != null && cookie.Value == "true";
         }
     }
 }
