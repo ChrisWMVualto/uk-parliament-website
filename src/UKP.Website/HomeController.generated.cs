@@ -81,6 +81,7 @@ namespace UKP.Website.Controllers
             public readonly string Lords = "Lords";
             public readonly string Committees = "Committees";
             public readonly string RecentlyArchive = "RecentlyArchive";
+            public readonly string _404 = "_404";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -91,6 +92,7 @@ namespace UKP.Website.Controllers
             public const string Lords = "Lords";
             public const string Committees = "Committees";
             public const string RecentlyArchive = "RecentlyArchive";
+            public const string _404 = "_404";
         }
 
 
@@ -190,6 +192,17 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.RecentlyArchive);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventFilter", eventFilter);
             RecentlyArchiveOverride(callInfo, eventFilter);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void _404Override(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult _404()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._404);
+            _404Override(callInfo);
             return callInfo;
         }
 
