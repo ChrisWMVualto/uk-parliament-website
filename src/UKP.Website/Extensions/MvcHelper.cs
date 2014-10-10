@@ -163,7 +163,11 @@ namespace System.Web.Mvc.Html
         public static bool CookiesAllowed(this HttpRequestBase request)
         {
             var cookie = request.Cookies.Get("Cookies");
-            return cookie != null && cookie.Value == "true";
+
+            if (cookie != null)
+                return cookie.Value.ToLower() == "true";
+
+            return false;
         }
     }
 }
