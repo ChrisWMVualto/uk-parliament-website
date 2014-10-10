@@ -4,14 +4,14 @@
     <h3>House of Commons</h3>
     <h4>
         <i class="fa fa-vod-badge fa-2x state-badge-sm hidden-lg hidden-md pending-badge"></i>
-        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToString("dddd d MMMM yyyy h:mmtt")</span> <i class="pipe hideen-"></i> 
-        @if (Model.Event.DisplayStartDate.Date == Model.Event.DisplayEndDate.Date)
+        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd d MMMM yyyy h.mmtt")</span> <i class="pipe hideen-"></i> 
+        @if (Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
         {
-            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToString("h:mmtt")</span>
+            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</span>
         }
         else
         {
-            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToString("dddd d MMMM yyyy h:mmtt")</span>
+            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString("dddd d MMMM yyyy h.mmtt")</span>
         }
     </h4>
 </header>
