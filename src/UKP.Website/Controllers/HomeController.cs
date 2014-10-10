@@ -53,5 +53,10 @@ namespace UKP.Website.Controllers
             var model = _eventService.GetRecentlyArchived(eventFilter);
             return PartialView(MVC.Home.Views._RecentlyArchived, model);
         }
+
+        public virtual ActionResult _404()
+        {
+            return View();
+        }
     }
 }
