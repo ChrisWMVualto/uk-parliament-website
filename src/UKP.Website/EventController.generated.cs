@@ -74,6 +74,12 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult Clipping()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Clipping);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult LegacyPageRoute()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
@@ -103,6 +109,7 @@ namespace UKP.Website.Controllers
             public readonly string Index = "Index";
             public readonly string GetVideo = "GetVideo";
             public readonly string EventTitle = "EventTitle";
+            public readonly string Clipping = "Clipping";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
         }
@@ -113,6 +120,7 @@ namespace UKP.Website.Controllers
             public const string Index = "Index";
             public const string GetVideo = "GetVideo";
             public const string EventTitle = "EventTitle";
+            public const string Clipping = "Clipping";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
         }
@@ -148,6 +156,14 @@ namespace UKP.Website.Controllers
         {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_Clipping s_params_Clipping = new ActionParamsClass_Clipping();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Clipping ClippingParams { get { return s_params_Clipping; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Clipping
+        {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_LegacyPageRoute LegacyPageRouteParams { get { return s_params_LegacyPageRoute; } }
@@ -175,11 +191,13 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _Clipping = "_Clipping";
                 public readonly string _EventTitle = "_EventTitle";
                 public readonly string _Info = "_Info";
                 public readonly string _Share = "_Share";
                 public readonly string Index = "Index";
             }
+            public readonly string _Clipping = "~/Views/Event/_Clipping.cshtml";
             public readonly string _EventTitle = "~/Views/Event/_EventTitle.cshtml";
             public readonly string _Info = "~/Views/Event/_Info.cshtml";
             public readonly string _Share = "~/Views/Event/_Share.cshtml";
@@ -231,6 +249,18 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTitle);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             EventTitleOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ClippingOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult Clipping(System.Guid id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Clipping);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ClippingOverride(callInfo, id);
             return callInfo;
         }
 

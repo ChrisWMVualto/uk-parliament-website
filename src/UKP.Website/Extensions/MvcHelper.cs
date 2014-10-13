@@ -157,12 +157,12 @@ namespace System.Web.Mvc.Html
 
         public static bool CookieStateSet(this HttpRequestBase request)
         {
-            return (request.Cookies.Get("Cookies") != null || HttpContext.Current.Session["Cookies"] != null);
+            return (request.Cookies.Get(ApplicationConstants.AcceptCookieName) != null || HttpContext.Current.Session[ApplicationConstants.AcceptCookieName] != null);
         }
 
         public static bool CookiesAllowed(this HttpRequestBase request)
         {
-            var cookie = request.Cookies.Get("Cookies");
+            var cookie = request.Cookies.Get(ApplicationConstants.AcceptCookieName);
 
             if (cookie != null)
                 return cookie.Value.ToLower() == "true";

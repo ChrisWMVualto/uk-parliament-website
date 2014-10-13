@@ -54,51 +54,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row form-inline time-start-end">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <input type="checkbox" class="checkbox" id="startTimeCheck" />
-                                    <label class="hide" for="startTimeCheck">
-                                        Start Time Active
-                                    </label>
-                                </div>
-
-                                <div class="form-group start-time">
-                                    <label class="" for="startTime">
-                                        <h4>Start time:</h4>
-                                    </label>
-                                    <span class="bootstrap-timepicker">
-                                        <input type="text" class="form-control input-lg time-input" id="startTime" />
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
-                                <div class="form-group">
-                                    <input type="checkbox" class="checkbox" id="endTimeCheck" />
-                                    <label class="hide" for="endTimeCheck">
-                                        End Time Active
-                                    </label>
-                                </div>
-
-                                <div class="form-group end-time">
-                                    <label class="" for="endTime">
-                                        <h4>End time:</h4>
-                                    </label>
-                                    <span class="bootstrap-timepicker">
-                                        <input type="text" class="form-control input-lg time-input" id="endTime" />
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>  
+        <div id="clippingContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.VideoModel.Event.Id))"></div>
         <div class="row embed-terms">
             <div class="col-md-12">
                 <div class="row">
