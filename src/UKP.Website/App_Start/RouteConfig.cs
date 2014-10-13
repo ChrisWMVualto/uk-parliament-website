@@ -25,6 +25,25 @@ namespace UKP.Website
                 defaults: new { controller = "Player", action = "LegacyPlayerRoute", id = UrlParameter.Optional }
             );
 
+
+            routes.MapRoute(
+                name: "CommonsRoute",
+                url: "Commons",
+                defaults: new { controller = "Home", action = "Commons", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "LordsRoute",
+                url: "Lords",
+                defaults: new { controller = "Home", action = "Lords", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "CommitteesRoute",
+                url: "Committees",
+                defaults: new { controller = "Home", action = "Committees", id = UrlParameter.Optional }
+                );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
