@@ -24,13 +24,11 @@ function reloadEmbedData() {
         options: {
             start: {
                 input: $('#startTime'),
+                checkbox: $('#startTimeCheck')
             },
             end: {
                 input: $('#endTime'),
-            },
-            audio: {
-                checkbox: $('.audio-toggle'),
-                enabled: false
+                checkbox: $('#endTimeCheck')
             }
         },
         urlBase: '/Event/GetVideo/',
@@ -50,33 +48,31 @@ function reloadEmbedData() {
     };
 
     $.each(settings.options, function () {
-        var that = this;
-
-        if (this.hasOwnProperty('checkbox')) {
-            this.checkbox.bind('click', function () {
-                that.enabled = !that.enabled;
-                generateEmbedCode();
-            });
-        }
-
         if (this.hasOwnProperty('input')) {
-            this.input.bind('focusout', generateEmbedCode);
+            this.input.bind('change', generateEmbedCode);
             this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }
     });
 
     function generateEmbedCode() {
-
         var start = settings.options.start.input.val();
         var end = settings.options.end.input.val();
 
-        if (settings.options.start.input.val() == "") {
-            start = settings.options.start.input.val("00:00:00");
+        if (start == "" && end != "") {
+            settings.options.start.input.val("00:00:00");
+            start = settings.options.start.input.val();
         }
 
-        var url = settings.urlBase + settings.eventId + "?in=" + start + "&out=" + end + "&audioOnly=" + settings.options.audio.enabled;
+        if (start != '') {
+            settings.options.start.checkbox.prop("checked", true);
+        }
 
+        if (end != '') {
+            settings.options.end.checkbox.prop("checked", true);
+        }
+
+        var url = settings.urlBase + settings.eventId + "?in=" + start + "&out=" + end;
         $.ajax(url, {
             success: handleSuccessResponse
         });
@@ -87,6 +83,19 @@ function reloadEmbedData() {
         settings.fields.longUrl.val(data.pageUrl);
         settings.fields.embed.text(data.embedCode);
     }
+
+
+    $(settings.options.start.checkbox).click(function () {
+        settings.options.start.input.val("");
+        settings.options.end.input.val("");
+        settings.options.end.checkbox.prop("checked", false);
+        generateEmbedCode();
+    });
+
+    settings.options.end.checkbox.click(function () {
+        settings.options.end.input.val("");
+        generateEmbedCode();
+    });
 }
 
 
