@@ -154,6 +154,9 @@
     <Reference Include="T4MVCExtensions">
       <HintPath>..\packages\T4MVCExtensions.3.9.2\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="UAParser">
+      <HintPath>..\packages\UAParser.1.2.0.0\lib\net35-Client\UAParser.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
@@ -274,6 +277,7 @@
     <Compile Include="Controllers\EpgController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\NotSupportedController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="CookieController.generated.cs">
@@ -285,6 +289,7 @@
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\BrowserFilterAttribute.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\JsonDotNetResult.cs" />
     <Compile Include="Extensions\MvcHelper.cs" />
@@ -299,6 +304,9 @@
     <Compile Include="Models\Event\StateChangedModel.cs" />
     <Compile Include="Models\HomeViewsModel.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
+    <Compile Include="NotSupportedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="PlayerController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -346,6 +354,7 @@
     <Content Include="Views\Event\_EventTitle.cshtml" />
     <Content Include="Views\Event\_Info.cshtml" />
     <Content Include="Views\Event\_Share.cshtml" />
+    <Content Include="Views\NotSupported\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

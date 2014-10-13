@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using UKP.Website.Extensions;
 using UKP.Website.Models;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
@@ -26,7 +23,7 @@ namespace UKP.Website.Controllers
             return RedirectToAction(MVC.Home.Commons());
         }
 
-        [HttpGet]   
+        [HttpGet]
         public virtual ActionResult Commons()
         {
             var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetGuide(), _recessService.GetRecessMessage(), EventFilter.COMMONS);

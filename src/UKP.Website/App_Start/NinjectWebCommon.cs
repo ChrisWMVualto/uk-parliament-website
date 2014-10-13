@@ -1,10 +1,13 @@
 using System;
 using System.Web;
+using System.Web.Mvc;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using Ninject.Web.Mvc.FilterBindingSyntax;
 using RestSharp.Extensions;
+using UKP.Website.Extensions;
 using UKP.Website.Service;
 using UKP.Website.Application;
 
@@ -65,6 +68,8 @@ namespace UKP.Web.App_Start
             kernel.Bind<IEventService>().To<EventService>();
             kernel.Bind<IRecessService>().To<RecessService>();
             kernel.Bind<ISearchService>().To<SearchService>();
+
+            kernel.BindFilter<BrowserFilterAttribute>(FilterScope.Global, 0);
         }        
     }
 }

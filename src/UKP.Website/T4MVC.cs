@@ -29,6 +29,7 @@ public static partial class MVC
     public static UKP.Website.Controllers.EpgController Epg = new UKP.Website.Controllers.T4MVC_EpgController();
     public static UKP.Website.Controllers.EventController Event = new UKP.Website.Controllers.T4MVC_EventController();
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
+    public static UKP.Website.Controllers.NotSupportedController NotSupported = new UKP.Website.Controllers.T4MVC_NotSupportedController();
     public static UKP.Website.Controllers.PlayerController Player = new UKP.Website.Controllers.T4MVC_PlayerController();
     public static UKP.Website.Controllers.SearchController Search = new UKP.Website.Controllers.T4MVC_SearchController();
     public static T4MVC.SearchApiController SearchApi = new T4MVC.SearchApiController();
