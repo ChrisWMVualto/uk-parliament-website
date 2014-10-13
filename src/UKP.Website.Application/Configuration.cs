@@ -48,5 +48,10 @@ namespace UKP.Website.Application
         {
             get { return ConfigurationManager.AppSettings["share-linkedin"]; }
         }
+
+        public static string GetGoogleAnalyticsId
+        {
+            get { return ConfigurationManager.AppSettings["GoogleAnalyticsId"]; }
+        }
     }
 }
