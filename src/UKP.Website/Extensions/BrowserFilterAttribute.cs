@@ -30,7 +30,7 @@ namespace UKP.Website.Extensions
                     return;
             }
 
-            if (BrowserSupported("Firefox", 31) || BrowserSupported("Safari", 6) || BrowserSupported("IE", 9))
+            if (BrowserSupported("Firefox", 31) || BrowserSupported("Safari", 6) || BrowserSupported("IE", 9) || BrowserSupported("Chrome", 0))
             {
                 return;
             }
