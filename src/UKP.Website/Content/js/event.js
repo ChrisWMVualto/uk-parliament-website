@@ -72,7 +72,7 @@ function reloadEmbedData() {
             settings.options.end.checkbox.prop("checked", true);
         }
 
-        var url = settings.urlBase + settings.eventId + "?in=" + start + "&out=" + end;
+        var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
         $.ajax(url, {
             success: handleSuccessResponse
         });
