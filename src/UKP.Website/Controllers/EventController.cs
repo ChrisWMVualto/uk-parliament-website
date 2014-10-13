@@ -45,12 +45,12 @@ namespace UKP.Website.Controllers
             if (video == null) return null;
 
             DateTime? inPointDate = null;
-            if(@in.HasValue && video.Event.ActualStartTime.HasValue)
-                inPointDate = video.Event.ActualStartTime.Value.Add(@in.Value);
+            if(@in.HasValue && video.Event.PublishedStartTime.HasValue)
+                inPointDate = video.Event.PublishedStartTime.Value.Add(@in.Value);
 
             DateTime? outPointDate = null;
-            if(@out.HasValue & video.Event.ActualStartTime.HasValue)
-                outPointDate = video.Event.ActualStartTime.Value.Add(@out.Value);
+            if(@out.HasValue & video.Event.PublishedStartTime.HasValue)
+                outPointDate = video.Event.PublishedStartTime.Value.Add(@out.Value);
 
             var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, audioOnly, autoStart);
             return this.JsonFormatted(videoModel, JsonRequestBehavior.AllowGet);
