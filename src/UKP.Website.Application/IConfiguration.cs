@@ -5,5 +5,6 @@
         string IasBaseUrl { get; }
         string IasAuthKey { get; }
         string MemberAutocompleteApi { get; }
+        string RssUrl { get; }
     }
 }

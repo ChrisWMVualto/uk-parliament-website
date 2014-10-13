@@ -346,6 +346,7 @@
     <Content Include="Views\Event\_EventTitle.cshtml" />
     <Content Include="Views\Event\_Info.cshtml" />
     <Content Include="Views\Event\_Share.cshtml" />
+    <Content Include="Views\Event\_Clipping.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

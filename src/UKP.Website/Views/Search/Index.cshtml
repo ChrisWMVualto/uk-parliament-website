@@ -1,4 +1,5 @@
-﻿@model UKP.Website.Models.SearchViewModel
+﻿@using UKP.Website.Application
+@model UKP.Website.Models.SearchViewModel
 
 
 <div class="container main-container">
@@ -10,7 +11,7 @@
                     <i class="fa fa-search"></i> 
                     <span>Search</span>
                 </h2>
-                <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a>
+                <a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a>
             </header>
         </div>
         

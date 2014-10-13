@@ -18,5 +18,15 @@ namespace UKP.Website.Application
         {
             get { return ConfigurationManager.AppSettings["MemberAutocompleteApi"]; }
         }
+
+        public string RssUrl
+        {
+            get { return ConfigurationManager.AppSettings["RssUrl"]; }
+        }
+
+        public static string GetRssUrl
+        {
+            get { return ConfigurationManager.AppSettings["RssUrl"]; }
+        }
     }
 }

@@ -1,29 +1,32 @@
 ﻿function updateTimes() {
-    var timesUrl = $('#eventTimesContainer').data("load-url");
-    $.get(timesUrl, function (data) {
-        $('#eventTimesContainer').html(data);
+    var titleUrl = $('#eventTitleContainer').data("load-url");
+    $.get(titleUrl, function (data) {
+        $('#eventTitleContainer').html(data);
+    });
+}
+
+function updateClipping() {
+    var clippingUrl = $('#clippingContainer').data("load-url");
+    $.get(clippingUrl, function (data) {
+        $('#clippingContainer').html(data);
+        reloadEmbedData();
     });
 }
 
 
-updateTimes();
-
 function stateChanged(planningState, recordingState, recordedState) {
     updateTimes();
+    updateClipping();
 }
 
 function reloadEmbedData() {
     var settings = {
         options: {
             start: {
-                checkbox: $('#startTimeCheck'),
                 input: $('#startTime'),
-                enabled: false
             },
             end: {
-                checkbox: $('#endTimeCheck'),
                 input: $('#endTime'),
-                enabled: false
             },
             audio: {
                 checkbox: $('.audio-toggle'),
@@ -49,27 +52,28 @@ function reloadEmbedData() {
     $.each(settings.options, function () {
         var that = this;
 
-        this.checkbox.bind('click', function() {
-            that.enabled = !that.enabled;
-            ajaxRequest();
-        });
+        if (this.hasOwnProperty('checkbox')) {
+            this.checkbox.bind('click', function () {
+                that.enabled = !that.enabled;
+                generateEmbedCode();
+            });
+        }
 
         if (this.hasOwnProperty('input')) {
-            this.input.bind('focusout', ajaxRequest);
+            this.input.bind('focusout', generateEmbedCode);
             this.input.timepicker(settings.timepickerOpts);
-            this.input.on('changeTime.timepicker', ajaxRequest);
+            this.input.on('changeTime.timepicker', generateEmbedCode);
         }
     });
 
-    function ajaxRequest() {
-        var start = "",
-            end = "";
+    function generateEmbedCode() {
 
-        if (settings.options.start.enabled)
-            start = settings.options.start.input.val();
+        var start = settings.options.start.input.val();
+        var end = settings.options.end.input.val();
 
-        if (settings.options.end.enabled)
-            end = settings.options.end.input.val();
+        if (settings.options.start.input.val() == "") {
+            start = settings.options.start.input.val("00:00:00");
+        }
 
         var url = settings.urlBase + settings.eventId + "?in=" + start + "&out=" + end + "&audioOnly=" + settings.options.audio.enabled;
 
@@ -83,6 +87,14 @@ function reloadEmbedData() {
         settings.fields.longUrl.val(data.pageUrl);
         settings.fields.embed.text(data.embedCode);
     }
+}
+
+
+function selectableEmbedCode() {
+    var inputs = $('#embed, #smallUrl, #url');
+    inputs.bind('click', function () {
+        this.select();
+    });
 }
 
 $(function () {
@@ -105,5 +117,8 @@ $(function () {
         $('.embed-terms').fadeOut();
         $('.embed-code').fadeIn();
     });
-    reloadEmbedData();
+
+    updateTimes();
+    updateClipping();
+    selectableEmbedCode();
 });
