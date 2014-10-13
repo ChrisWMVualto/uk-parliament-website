@@ -19,6 +19,21 @@ $(document).ready(function() {
 
 
     ////////////////////////////////////////////
+    //embedcode terms slimscroll
+    ////////////////////////////////////////////
+    if ($('#embedCodeTerms').length) {
+        $('#embedCodeTerms').slimScroll({
+            railVisible: true,
+            railColor: '#ffffff',
+            railOpacity: 0.3,
+            color: '#ffffff',
+            size: '12px',
+            height: 'auto'
+        });
+    }
+
+
+    ////////////////////////////////////////////
     //popover
     ////////////////////////////////////////////
     $('.popover-markup > .trigger').popover({
