@@ -38,9 +38,22 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null)
         {
-            var video = _videoService.GetVideoTime(id, @in, @out, audioOnly);
+            var video =_videoService.GetVideo(id, null, null, audioOnly);
 
-            return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
+            if (!@in.HasValue && !@out.HasValue) return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
+
+            if (video == null) return null;
+
+            DateTime? inPointDate = null;
+            if(@in.HasValue && video.Event.ActualStartTime.HasValue)
+                inPointDate = video.Event.ActualStartTime.Value.Add(@in.Value);
+
+            DateTime? outPointDate = null;
+            if(@out.HasValue & video.Event.ActualStartTime.HasValue)
+                outPointDate = video.Event.ActualStartTime.Value.Add(@out.Value);
+
+            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, audioOnly);
+            return this.JsonFormatted(videoModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -48,6 +61,13 @@ namespace UKP.Website.Controllers
         {
             var video = _videoService.GetVideo(id);
             return PartialView(MVC.Event.Views._EventTitle, video);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult Clipping(Guid id)
+        {
+            var video = _videoService.GetVideo(id);
+            return PartialView(MVC.Event.Views._Clipping, video);
         }
 
 

@@ -10,5 +10,6 @@ namespace UKP.Website.Application
     {
         public const string DateFormat = "dddd d MMMM h.mmtt";
         public const string YearDateFormat = "dddd d MMMM yyyy h.mmtt";
+        public const string AcceptCookieName = "Cookies";
     }
 }
