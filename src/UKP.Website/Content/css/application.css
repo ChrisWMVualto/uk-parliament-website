@@ -1,0 +1,12 @@
+﻿/* Keep end time timepicker within view */
+.end-time .dropdown-menu {
+    left: -48px;
+}
+
+.end-time .bootstrap-timepicker-widget.dropdown-menu:before {
+    left: 60px;
+}
+
+.end-time .bootstrap-timepicker-widget.dropdown-menu:after {
+    left: 61px;
+}
