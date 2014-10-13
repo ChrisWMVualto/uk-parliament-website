@@ -31,7 +31,7 @@ function reloadEmbedData() {
                 checkbox: $('#endTimeCheck')
             }
         },
-        urlBase: '/Event/GetVideo/',
+        urlBase: $('#share').data('url'),
         eventId: $('#eventId').val(),
         fields: {
             shortUrl: $('#smallUrl'),
