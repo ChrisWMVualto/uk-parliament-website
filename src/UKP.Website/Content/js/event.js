@@ -82,6 +82,8 @@ function reloadEmbedData() {
         settings.fields.shortUrl.val(data.shortWebPageUrl);
         settings.fields.longUrl.val(data.pageUrl);
         settings.fields.embed.text(data.embedCode);
+
+        settings.fields.shortUrl.trigger("updated-short-url", data.shortWebPageUrl);
     }
 
 
@@ -106,6 +108,19 @@ function selectableEmbedCode() {
     });
 }
 
+function updateSocialLinks(e, url) {
+    var buttons = [
+            $('.btn-facebook'),
+            $('.btn-twitter'),
+            $('.btn-google'),
+            $('.btn-linkedin')
+    ];
+
+    $.each(buttons, function () {
+        $(this).attr('href', $(this).data('share-url') + url);
+    });
+}
+
 $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
@@ -126,6 +141,9 @@ $(function () {
         $('.embed-terms').fadeOut();
         $('.embed-code').fadeIn();
     });
+
+    updateSocialLinks(null, $('#smallUrl').val());
+    $('#smallUrl').bind("updated-short-url", updateSocialLinks);
 
     updateTimes();
     updateClipping();
