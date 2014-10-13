@@ -1,4 +1,5 @@
-﻿@model UKP.Website.Models.Event.EventViewModel
+﻿@using UKP.Website.Application
+@model UKP.Website.Models.Event.EventViewModel
 
 <div class="tab-pane fade" id="share" data-url="@Url.Action(MVC.Event.GetVideo())">
     <form role="form">
@@ -13,10 +14,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="share-container">
-                            <a href="@Url.FacebookLink()" class="btn-facebook" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
-                            <a href="@Url.TwitterLink(Model.VideoModel.Event.Title)" class="btn-twitter" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
-                            <a href="@Url.GooglePlusLink()" class="btn-google" target="_blank"><i class="fa fa-google fa-2x"></i></a>
-                            <a href="@Url.LinkedinLink(Model.VideoModel.Event.Title, Model.VideoModel.Event.DisplayStartDate)" class="btn-linkedin" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+                            <a href="@Configuration.GetShareFacebook" data-share-url="@Configuration.GetShareFacebook" class="btn-facebook" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                            <a href="@Configuration.GetShareTwitter" data-share-url="@Configuration.GetShareTwitter" class="btn-twitter" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+                            <a href="@Configuration.GetShareGooglePlus" data-share-url="@Configuration.GetShareGooglePlus" class="btn-google" target="_blank"><i class="fa fa-google fa-2x"></i></a>
+                            <a href="@Configuration.GetShareLinkedIn" data-share-url="@Configuration.GetShareLinkedIn" class="btn-linkedin" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
                         </div>
                     </div>
                 </div>
