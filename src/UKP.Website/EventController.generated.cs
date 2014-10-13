@@ -136,6 +136,7 @@ namespace UKP.Website.Controllers
             public readonly string @in = "in";
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
+            public readonly string autoStart = "autoStart";
         }
         static readonly ActionParamsClass_GetVideo s_params_GetVideo = new ActionParamsClass_GetVideo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -147,6 +148,7 @@ namespace UKP.Website.Controllers
             public readonly string @in = "in";
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
+            public readonly string autoStart = "autoStart";
         }
         static readonly ActionParamsClass_EventTitle s_params_EventTitle = new ActionParamsClass_EventTitle();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -211,32 +213,34 @@ namespace UKP.Website.Controllers
         public T4MVC_EventController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out, bool? audioOnly)
+        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
-            IndexOverride(callInfo, id, @in, @out, audioOnly);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "autoStart", autoStart);
+            IndexOverride(callInfo, id, @in, @out, audioOnly, autoStart);
             return callInfo;
         }
 
         [NonAction]
-        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly);
+        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly, bool? autoStart);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly)
+        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly, bool? autoStart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
-            GetVideoOverride(callInfo, id, @in, @out, audioOnly);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "autoStart", autoStart);
+            GetVideoOverride(callInfo, id, @in, @out, audioOnly, autoStart);
             return callInfo;
         }
 
