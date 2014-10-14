@@ -22,6 +22,19 @@ namespace UKP.Website.Service.Transforms
             return list;
         }
 
+        public static LogMomentResultModel TransformObject(string jsonObject)
+        {
+            dynamic jObject = JObject.Parse(jsonObject);
+
+            var logMoments = Enumerable.Empty<LogMomentModel>();
+            var total = (int) jObject.totalResults;
+            
+            if (total > 0)
+                logMoments = TransformArray(jObject.results.ToString());
+
+            return new LogMomentResultModel(logMoments, total);
+        }
+
         public static LogMomentModel Transform(dynamic json)
         {
             dynamic jObject = JObject.Parse(json.ToString());

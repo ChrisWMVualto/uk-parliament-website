@@ -4,7 +4,7 @@ namespace UKP.Website.Service.Model
 {
     public class VideoModel
     {
-        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, IEnumerable<LogMomentModel> moments, string pageUrl, string shortWebPageUrl)
+        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, LogMomentResultModel moments, string pageUrl, string shortWebPageUrl)
         {
             Event = @event;
             EmbedCode = embedCode;
@@ -16,7 +16,7 @@ namespace UKP.Website.Service.Model
 
         public string EmbedCode { get; private set; }
         public string LegacyEmbedCode { get; private set; }
-        public IEnumerable<LogMomentModel> Moments { get; private set; }
+        public LogMomentResultModel Moments { get; private set; }
         public string PageUrl { get; private set; }
         public string ShortWebPageUrl { get; private set; }
         public EventModel Event { get; private set; }
