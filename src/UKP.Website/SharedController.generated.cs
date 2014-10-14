@@ -37,10 +37,12 @@ namespace T4MVC
             public class _ViewNamesClass
             {
                 public readonly string _404 = "_404";
+                public readonly string _GoogleAnalytics = "_GoogleAnalytics";
                 public readonly string _Layout = "_Layout";
                 public readonly string Error = "Error";
             }
             public readonly string _404 = "~/Views/Shared/_404.cshtml";
+            public readonly string _GoogleAnalytics = "~/Views/Shared/_GoogleAnalytics.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
         }

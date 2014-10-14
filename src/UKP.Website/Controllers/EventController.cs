@@ -23,36 +23,36 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
+        public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
             // iso86601 strings used to be human url friendly
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly);
+            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true));
 
             return View(new EventViewModel(video));
         }
 
 
         [HttpGet]
-        public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null)
+        public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null, bool? autoStart = false)
         {
-            var video =_videoService.GetVideo(id, null, null, audioOnly);
+            var video =_videoService.GetVideo(id, null, null, audioOnly, autoStart);
 
             if (!@in.HasValue && !@out.HasValue) return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
 
             if (video == null) return null;
 
             DateTime? inPointDate = null;
-            if(@in.HasValue && video.Event.ActualStartTime.HasValue)
-                inPointDate = video.Event.ActualStartTime.Value.Add(@in.Value);
+            if(@in.HasValue && video.Event.PublishedStartTime.HasValue)
+                inPointDate = video.Event.PublishedStartTime.Value.Add(@in.Value);
 
             DateTime? outPointDate = null;
-            if(@out.HasValue & video.Event.ActualStartTime.HasValue)
-                outPointDate = video.Event.ActualStartTime.Value.Add(@out.Value);
+            if(@out.HasValue & video.Event.PublishedStartTime.HasValue)
+                outPointDate = video.Event.PublishedStartTime.Value.Add(@out.Value);
 
-            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, audioOnly);
+            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, audioOnly, autoStart);
             return this.JsonFormatted(videoModel, JsonRequestBehavior.AllowGet);
         }
 
