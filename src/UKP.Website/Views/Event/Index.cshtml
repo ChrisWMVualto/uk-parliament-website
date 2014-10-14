@@ -21,10 +21,8 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="video-container">
-                        <img alt="" class="img-responsive" src="@Url.Content("~/Content/img/filler-player-image.jpg")" />
-                        <span class="big-play fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-arrow-right-thin fa-stack-1x fa-inverse"></i> </span>
+                        @Html.Raw(Model.VideoModel.EmbedCode)
                     </div>
-
 
                     <!--start: player tabs-->
                     <!-- Nav tabs -->
@@ -235,4 +233,5 @@
     <script src="~/signalr/hubs"></script>
     <script src="~/Content/js/vendor/bootstrap-timepicker.js"></script>
     <script src="~/Content/js/event.js"></script>
+    <script src="~/Content/js/responsive-player.js"></script>
 }

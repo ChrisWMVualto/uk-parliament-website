@@ -209,6 +209,7 @@
     <Content Include="Content\js\event.js" />
     <Content Include="Content\js\jquery.autocomplete.js" />
     <Content Include="Content\js\jquery.infinitescroll.js" />
+    <Content Include="Content\js\responsive-player.js" />
     <Content Include="Content\js\scripts.js" />
     <Content Include="Content\js\vendor\bootstrap-checkbox.js" />
     <Content Include="Content\js\vendor\bootstrap-datepicker.js" />

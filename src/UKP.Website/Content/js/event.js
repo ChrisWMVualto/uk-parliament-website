@@ -98,6 +98,8 @@ function reloadEmbedData() {
         settings.options.end.input.val("");
         generateEmbedCode();
     });
+
+    generateEmbedCode();
 }
 
 
