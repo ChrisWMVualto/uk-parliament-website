@@ -33,7 +33,7 @@
                         <p><strong>@item.Event.Title</strong></p>
 
                         <div class="row moments">
-                            @foreach (var moment in item.Moments)
+                            @foreach (var moment in item.Moments.Results)
                             {
                                 <div class="col-md-12 moment-item">
                                     <a href="@Url.Action(MVC.Event.Index(item.Event.Id, moment.InPoint.ToISO8601String()))" class="outer-border">
