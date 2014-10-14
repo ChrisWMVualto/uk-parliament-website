@@ -5,7 +5,7 @@ namespace UKP.Website.Controllers
 {
     public partial class NotSupportedController : Controller
     {
-        // GET: NotSupported
+        [HttpGet]
         [SkipBrowserFilter]
         public virtual ActionResult Index()
         {
