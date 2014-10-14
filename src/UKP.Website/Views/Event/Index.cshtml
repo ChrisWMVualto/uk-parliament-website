@@ -1,0 +1,237 @@
+﻿@using UKP.Website.Application
+@model UKP.Website.Models.Event.EventViewModel
+
+<div class="container main-container">
+
+    @Html.Hidden("eventId", Model.VideoModel.Event.Id)
+
+    <div class="row">
+        <div class="col-md-12">
+            <header class="title-main"><h2><i class="fa fa-play-circle fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+        </div>
+        <div class="col-md-12 page-title-bar">
+            <div class="row">
+                <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))"></div>
+                <div class="col-md-2">
+                    <span class="state-badge pending-badge visible-lg visible-md">Vod</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="video-container">
+                        @Html.Raw(Model.VideoModel.EmbedCode)
+                    </div>
+
+                    <!--start: player tabs-->
+                    <!-- Nav tabs -->
+                    <div class="player-tabs">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
+                            <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                            <li class="audio-toggle"><a href="#"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            @Html.Partial(MVC.Event.Views._Info, Model)
+                            @Html.Partial(MVC.Event.Views._Share, Model)
+                        </div>
+                    </div>
+                    <!--end: player tabs-->
+                </div>
+                <div class="col-md-5">
+                    <div class="stack-player">
+                        <div class="stack">
+                            <ol>
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">1</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                Speaker's Statement
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">2</span>
+                                        <header class="stack-item">
+                                            <a href="#">
+                                                <h4>
+                                                    Motion for an Unopposed Return
+                                                </h4>
+                                            </a>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li class="active">
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">3</span>
+                                        <header class="stack-item">
+                                            <a href="#">
+                                                <h4>
+                                                    1. What recent assessment he has made of the role of the Prime Minister's Challenge Fund in improving access to GP services. (904103)
+                                                </h4>
+                                            </a>
+                                        </header>
+                                        <hr />
+                                        <div class="stack-item">
+                                            <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong> 11.34.53</h5><strong>Member:</strong> Robin Walker
+                                        </div>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">4</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                If he will commission a review of the safety of polypropylene transvaginal mesh implants. (904104)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">5</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What progress his Department has made in introducing a cap on care costs. (904105)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">6</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What assessment he has made of the role of the comprehensive delivery dashboard in holding clinical commissioning groups accountable for their one-year cancer survival rates. (904106)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">7</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What the planned timetable is for his Department's congenital heart disease review. (904115)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">8</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                If he will meet the Chair of the College of Emergency Medicine to discuss A&E units. (904107)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">9</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What recent assessment he has made of the performance of the A&E department at Kettering General Hospital. (904108)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">10</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What discussions he has had with NHS England on the future of the Cancer Drugs Fund. (904109)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">11</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What steps his Department is taking to improve access to and standards of dental care. (904110)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">12</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What steps he is taking to ensure that whistle-blowers in the NHS are protected from (a) dismissal and (b) other punitive measures by their employers. (904111)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">13</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What statistics his Department keeps on babies damaged by alcohol consumed in pregnancy; and if he will make a statement. (904112)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+
+                                <li>
+                                    <article>
+                                        <span class="vr-stack"></span>
+                                        <span class="stack-number">14</span>
+                                        <header class="stack-item">
+                                            <h4>
+                                                What assessment he has made of the potential effect on health outcomes of phasing out minimum practice income guarantee funding from GP practices in England. (904114)
+                                            </h4>
+                                        </header>
+                                    </article>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Content/js/vendor/bootstrap-timepicker.js"></script>
+    <script src="~/Content/js/event.js"></script>
+    <script src="~/Content/js/responsive-player.js"></script>
+}
