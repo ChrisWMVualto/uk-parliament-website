@@ -199,6 +199,7 @@
     <Content Include="Content\img\icons.png" />
     <Content Include="Content\img\logo-main.png" />
     <Content Include="Content\img\shadow-right.png" />
+    <Content Include="Content\img\share.jpg" />
     <Content Include="Content\img\theme-committees-blurred.jpg" />
     <Content Include="Content\img\theme-committees-normal.jpg" />
     <Content Include="Content\img\theme-commons-blurred.jpg" />
@@ -259,7 +260,6 @@
     <Content Include="Content\fonts\karla\fonts\karla-regular-webfont.woff" />
     <Content Include="Content\fonts\karla\less\karla_bold.less" />
     <Content Include="Content\fonts\karla\less\karla_regular.less" />
-    <Content Include="Content\img\favicons\Thumbs.db" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
