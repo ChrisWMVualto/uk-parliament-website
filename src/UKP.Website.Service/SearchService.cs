@@ -23,7 +23,7 @@ namespace UKP.Website.Service
         public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime period, int pageNum)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
 
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
 
