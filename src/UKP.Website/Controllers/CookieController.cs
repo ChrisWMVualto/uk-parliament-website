@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UKP.Website.Application;
-using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
 {
@@ -14,21 +11,20 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(bool accepted)
         {
-            if (accepted)
+            if (!accepted)
             {
-                var cookie = new HttpCookie(ApplicationConstants.AcceptCookieName, true.ToString());
-                cookie.Expires = DateTime.Now.AddYears(1);
-                Response.Cookies.Add(cookie);
+                foreach (var toDelete in Response.Cookies.AllKeys)
+                    Response.Cookies.Get(toDelete).Expires = DateTime.Now.AddDays(-1);
             }
-            else
-            {
-                foreach (var cookie in Response.Cookies.AllKeys)
-                    Response.Cookies.Get(cookie).Expires = DateTime.Now.AddDays(-1);
 
-                Session.Add(ApplicationConstants.AcceptCookieName, false);
-            }
-            
+            var cookie = Response.Cookies.Get(ApplicationConstants.AcceptCookieName) ?? new HttpCookie(ApplicationConstants.AcceptCookieName);
+
+            cookie.Value = accepted.ToString();
+            cookie.Expires = DateTime.Now.AddYears(1);
+            Response.Cookies.Add(cookie);
+
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
+
 }
