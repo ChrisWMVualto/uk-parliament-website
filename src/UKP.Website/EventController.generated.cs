@@ -62,9 +62,15 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.JsonResult GetVideo()
+        public virtual System.Web.Mvc.JsonResult GetShareVideo()
         {
-            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetShareVideo);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult GetMainVideo()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetMainVideo);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -107,7 +113,8 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string GetVideo = "GetVideo";
+            public readonly string GetShareVideo = "GetShareVideo";
+            public readonly string GetMainVideo = "GetMainVideo";
             public readonly string EventTitle = "EventTitle";
             public readonly string Clipping = "Clipping";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
@@ -118,7 +125,8 @@ namespace UKP.Website.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string GetVideo = "GetVideo";
+            public const string GetShareVideo = "GetShareVideo";
+            public const string GetMainVideo = "GetMainVideo";
             public const string EventTitle = "EventTitle";
             public const string Clipping = "Clipping";
             public const string LegacyPageRoute = "LegacyPageRoute";
@@ -138,17 +146,26 @@ namespace UKP.Website.Controllers
             public readonly string audioOnly = "audioOnly";
             public readonly string autoStart = "autoStart";
         }
-        static readonly ActionParamsClass_GetVideo s_params_GetVideo = new ActionParamsClass_GetVideo();
+        static readonly ActionParamsClass_GetShareVideo s_params_GetShareVideo = new ActionParamsClass_GetShareVideo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GetVideo GetVideoParams { get { return s_params_GetVideo; } }
+        public ActionParamsClass_GetShareVideo GetShareVideoParams { get { return s_params_GetShareVideo; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GetVideo
+        public class ActionParamsClass_GetShareVideo
+        {
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
+        }
+        static readonly ActionParamsClass_GetMainVideo s_params_GetMainVideo = new ActionParamsClass_GetMainVideo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetMainVideo GetMainVideoParams { get { return s_params_GetMainVideo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetMainVideo
         {
             public readonly string id = "id";
             public readonly string @in = "in";
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
-            public readonly string autoStart = "autoStart";
         }
         static readonly ActionParamsClass_EventTitle s_params_EventTitle = new ActionParamsClass_EventTitle();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -165,6 +182,8 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_Clipping
         {
             public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -229,18 +248,31 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void GetVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly, bool? autoStart);
+        partial void GetShareVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult GetVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out, bool? audioOnly, bool? autoStart)
+        public override System.Web.Mvc.JsonResult GetShareVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetVideo);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetShareVideo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            GetShareVideoOverride(callInfo, id, @in, @out);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GetMainVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult GetMainVideo(System.Guid id, string @in, string @out, bool? audioOnly)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetMainVideo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "autoStart", autoStart);
-            GetVideoOverride(callInfo, id, @in, @out, audioOnly, autoStart);
+            GetMainVideoOverride(callInfo, id, @in, @out, audioOnly);
             return callInfo;
         }
 
@@ -257,14 +289,16 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void ClippingOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void ClippingOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Clipping(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult Clipping(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Clipping);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ClippingOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            ClippingOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 

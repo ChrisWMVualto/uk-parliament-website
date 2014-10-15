@@ -12,6 +12,7 @@ namespace UKP.Website.Models.Event
         public PlanningEventState PlanningState { get; set; }
         public RecordingEventState RecordingState { get; set; }
         public RecordedEventState RecordedState { get; set; }
+        public PlayerEventState PlayerState { get; set; }
         public bool StateChanged { get; set; }
     }
 }

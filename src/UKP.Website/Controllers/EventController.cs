@@ -36,9 +36,9 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual JsonResult GetVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null, bool? audioOnly = null, bool? autoStart = false)
+        public virtual JsonResult GetShareVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null)
         {
-            var video =_videoService.GetVideo(id, null, null, audioOnly, autoStart);
+            var video =_videoService.GetVideo(id, null, null, null, false);
 
             if (!@in.HasValue && !@out.HasValue) return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
 
@@ -52,8 +52,19 @@ namespace UKP.Website.Controllers
             if(@out.HasValue & video.Event.PublishedStartTime.HasValue)
                 outPointDate = video.Event.PublishedStartTime.Value.Add(@out.Value);
 
-            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, audioOnly, autoStart);
+            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, null, false);
             return this.JsonFormatted(videoModel, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
+        {
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
+            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, true);
+            return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -64,10 +75,22 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult Clipping(Guid id)
+        public virtual PartialViewResult Clipping(Guid id, string @in = null, string @out = null)
         {
-            var video = _videoService.GetVideo(id);
-            return PartialView(MVC.Event.Views._Clipping, video);
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
+            var video = _videoService.GetVideo(id, inPoint, outPoint);
+
+            TimeSpan? inPointTime = null;
+            if (video.RequestedInPoint.HasValue && video.Event.PublishedStartTime.HasValue)
+                inPointTime = video.Event.PublishedStartTime - video.RequestedInPoint;
+
+            TimeSpan? outPointTime = null;
+            if(video.RequestedOutPoint.HasValue && video.Event.PublishedStartTime.HasValue)
+                outPointTime = video.Event.PublishedStartTime - video.RequestedOutPoint;
+
+            return PartialView(MVC.Event.Views._Clipping, new ClippingViewModel(video, inPointTime, outPointTime));
         }
 
 
@@ -87,7 +110,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
         {
-            EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState), stateChangeModel.StateChanged);
+            EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.PlayerState), stateChangeModel.StateChanged);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }

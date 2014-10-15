@@ -1,9 +1,12 @@
-﻿@using UKP.Website.Application
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@using UKP.Website.Service.Model
 @model UKP.Website.Models.Event.EventViewModel
 
 <div class="container main-container">
 
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
+    @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
 
     <div class="row">
         <div class="col-md-12">
@@ -13,14 +16,23 @@
             <div class="row">
                 <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))"></div>
                 <div class="col-md-2">
-                    <span class="state-badge pending-badge visible-lg visible-md">Vod</span>
+                    <span class="state-badge pending-badge visible-lg visible-md">
+                        @if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
+                        {
+                            <text>Live</text>
+                        }
+                        else if (Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE)
+                        {
+                            <text>Archive</text>
+                        }
+                    </span>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-7">
-                    <div class="video-container">
+                    <div id="videoContainer" class="video-container">
                         @Html.Raw(Model.VideoModel.EmbedCode)
                     </div>
 
@@ -30,7 +42,10 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
                             <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
-                            <li class="audio-toggle"><a href="#"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></a></li>
+                            @if (Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
+                            {
+                                 <li class="audio-toggle"><a id="audioToggle" href="#"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></a></li>
+                            }
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">

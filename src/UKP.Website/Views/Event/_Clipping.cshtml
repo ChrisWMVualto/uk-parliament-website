@@ -1,6 +1,6 @@
-﻿@model UKP.Website.Service.Model.VideoModel
+﻿@model UKP.Website.Models.Event.ClippingViewModel
 
-@if (Model.Event.ActualStartTime.HasValue)
+@if (Model.VideoModel.Event.PublishedStartTime.HasValue)
 {
     <div class="row">
         <div class="col-md-12">
@@ -19,7 +19,7 @@
                                     <h4>Start time:</h4>
                                 </label>
                                 <span class="bootstrap-timepicker">
-                                    <input type="text" class="form-control input-lg time-input" id="startTime" />
+                                    <input type="text" class="form-control input-lg time-input" id="startTime" value="@(Model.Start.HasValue ? Model.Start.Value.ToString() : "")" />
                                 </span>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                     <h4>End time:</h4>
                                 </label>
                                 <span class="bootstrap-timepicker">
-                                    <input type="text" class="form-control input-lg time-input" id="endTime" />
+                                    <input type="text" class="form-control input-lg time-input" id="endTime" value="@(Model.End.HasValue ? Model.End.Value.ToString() : "")" />
                                 </span>
                             </div>
                         </div>

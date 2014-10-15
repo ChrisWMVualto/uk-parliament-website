@@ -21,11 +21,13 @@ namespace UKP.Website.Service.Transforms
             var legacyEmbedCode = (string)jObject.legacyEmbedCode;
             var pageUrl = (string)jObject.webPageUrl;
             var shortWebPageUrl = (string)jObject.shortWebPageUrl;
+            var requestedInPoint = (DateTime?)jObject.requestedInPoint;
+            var requestedOutPoint = (DateTime?)jObject.requestedOutPoint;
 
             var eventModel = EventTransforms.Transform(@event.ToString());
             var momentModel = LogMomentTransforms.TransformArray(moments.ToString());
 
-            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl);
+            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint);
         }
 
         public static VideoCollectionModel TransformArray(string jsonArray)
