@@ -303,7 +303,6 @@ namespace Links
                 public static readonly string favicon_ico = Url("favicon.ico");
                 public static readonly string favicon_png = Url("favicon.png");
                 public static readonly string metro_tileicon_png = Url("metro-tileicon.png");
-                public static readonly string Thumbs_db = Url("Thumbs.db");
             }
         
             public static readonly string filler_player_image_jpg = Url("filler-player-image.jpg");
@@ -314,6 +313,7 @@ namespace Links
             public static readonly string icons_png = Url("icons.png");
             public static readonly string logo_main_png = Url("logo-main.png");
             public static readonly string shadow_right_png = Url("shadow-right.png");
+            public static readonly string share_jpg = Url("share.jpg");
             public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
             public static readonly string theme_committees_normal_jpg = Url("theme-committees-normal.jpg");
             public static readonly string theme_commons_blurred_jpg = Url("theme-commons-blurred.jpg");

@@ -53,6 +53,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="EventConstants.cs" />
     <Compile Include="IConfiguration.cs" />
+    <Compile Include="ProductionSourceConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

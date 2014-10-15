@@ -2,16 +2,18 @@
 {
     public class EventStates
     {
-        public EventStates(PlanningEventState planningState, RecordingEventState recordingState, RecordedEventState recordedState)
+        public EventStates(PlanningEventState planningState, RecordingEventState recordingState, RecordedEventState recordedState, PlayerEventState playerState)
         {
             PlanningState = planningState;
             RecordingState = recordingState;
             RecordedState = recordedState;
+            PlayerState = playerState;
         }
 
         public PlanningEventState PlanningState { get; private set; }
         public RecordingEventState RecordingState { get; private set; }
         public RecordedEventState RecordedState { get; private set; }
+        public PlayerEventState PlayerState { get; private set; }
     }
 
     public enum PlanningEventState
@@ -39,5 +41,13 @@
         REVOKE = 2,
         HOLD = 3,
         BASIC = 4
+    }
+
+    public enum PlayerEventState
+    {
+        PRELIVE = 0,
+        LIVE = 1,
+        ARCHIVE = 2,
+        ERROR = 3
     }
 }

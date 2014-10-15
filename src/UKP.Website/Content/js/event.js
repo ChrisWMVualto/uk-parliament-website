@@ -1,4 +1,14 @@
-﻿function updateTimes() {
+﻿var auidoOnlyButtonState = false;
+var embedGenTimeoutId = null;
+
+function loadPlayer(audioOnly) {
+    var url = $('#getVideoUrl').val();
+    $.getJSON(url, { audioOnly: audioOnly }, function (video) {
+        $('#videoContainer').html(video.embedCode);
+    });
+}
+
+function updateTitle() {
     var titleUrl = $('#eventTitleContainer').data("load-url");
     $.get(titleUrl, function (data) {
         $('#eventTitleContainer').html(data);
@@ -15,7 +25,7 @@ function updateClipping() {
 
 
 function stateChanged(planningState, recordingState, recordedState) {
-    updateTimes();
+    updateTitle();
     updateClipping();
 }
 
@@ -49,40 +59,45 @@ function reloadEmbedData() {
 
     $.each(settings.options, function () {
         if (this.hasOwnProperty('input')) {
-            this.input.bind('change', generateEmbedCode);
+            //this.input.bind('change', generateEmbedCode);
             this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }
     });
 
     function generateEmbedCode() {
-        var start = settings.options.start.input.val();
-        var end = settings.options.end.input.val();
 
-        if (start == "" && end != "") {
-            settings.options.start.input.val("00:00:00");
-            start = settings.options.start.input.val();
-        }
+        clearTimeout(embedGenTimeoutId);
 
-        if (start != '') {
-            settings.options.start.checkbox.prop("checked", true);
-        }
+         embedGenTimeoutId = setTimeout(function() {
+            var start = settings.options.start.input.val();
+            var end = settings.options.end.input.val();
 
-        if (end != '') {
-            settings.options.end.checkbox.prop("checked", true);
-        }
+            if (start == "" && end != "") {
+                settings.options.start.input.val("00:00:00");
+                start = settings.options.start.input.val();
+            }
 
-        var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
-        $.ajax(url, {
-            success: handleSuccessResponse
-        });
+            if (start != '') {
+                settings.options.start.checkbox.prop("checked", true);
+            }
+
+            if (end != '') {
+                settings.options.end.checkbox.prop("checked", true);
+            }
+
+            var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
+            $.ajax(url, {
+                success: updateEmbedCodes
+            });
+        }, 500);
+
     }
 
-    function handleSuccessResponse(data) {
+    function updateEmbedCodes(data) {
         settings.fields.shortUrl.val(data.shortWebPageUrl);
         settings.fields.longUrl.val(data.pageUrl);
         settings.fields.embed.text(data.embedCode);
-
         settings.fields.shortUrl.trigger("updated-short-url", data.shortWebPageUrl);
     }
 
@@ -123,6 +138,23 @@ function updateSocialLinks(e, url) {
     });
 }
 
+function audiOnlySwitch() {
+    $(document).on('click', '#audioToggle', null, function () {
+
+        if (auidoOnlyButtonState == false) {
+            auidoOnlyButtonState = true;
+            loadPlayer(true);
+            return;
+        }
+
+        if (auidoOnlyButtonState == true) {
+            auidoOnlyButtonState = false;
+            loadPlayer(false);
+            return;
+        }
+    });
+}
+
 $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
@@ -147,7 +179,8 @@ $(function () {
     updateSocialLinks(null, $('#smallUrl').val());
     $('#smallUrl').bind("updated-short-url", updateSocialLinks);
 
-    updateTimes();
+    updateTitle();
     updateClipping();
     selectableEmbedCode();
+    audiOnlySwitch();
 });

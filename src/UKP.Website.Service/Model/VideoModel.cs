@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace UKP.Website.Service.Model
 {
     public class VideoModel
     {
-        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, IEnumerable<LogMomentModel> moments, string pageUrl, string shortWebPageUrl)
+        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, IEnumerable<LogMomentModel> moments, string pageUrl,
+            string shortWebPageUrl, DateTime? requestedInPoint, DateTime? requestedOutPoint)
         {
             Event = @event;
             EmbedCode = embedCode;
@@ -12,6 +14,8 @@ namespace UKP.Website.Service.Model
             Moments = moments;
             PageUrl = pageUrl;
             ShortWebPageUrl = shortWebPageUrl;
+            RequestedInPoint = requestedInPoint;
+            RequestedOutPoint = requestedOutPoint;
         }
 
         public string EmbedCode { get; private set; }
@@ -19,6 +23,8 @@ namespace UKP.Website.Service.Model
         public IEnumerable<LogMomentModel> Moments { get; private set; }
         public string PageUrl { get; private set; }
         public string ShortWebPageUrl { get; private set; }
+        public DateTime? RequestedInPoint { get; private set; }
+        public DateTime? RequestedOutPoint { get; private set; }
         public EventModel Event { get; private set; }
     }
 }
