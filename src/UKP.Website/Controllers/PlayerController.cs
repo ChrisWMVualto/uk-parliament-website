@@ -25,7 +25,10 @@ namespace UKP.Website.Controllers
             {
                 var embedString = Request.QueryString.ToString().Split(' ', '+');
                 var meetingId = embedString[0];
+
                 var legacyVideo = _videoService.GetLegacyVideo(int.Parse(meetingId));
+                if(legacyVideo == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
                 var script = string.Format("document.write('{0}');", legacyVideo.EmbedCode);
                 return JavaScript(script);
             }

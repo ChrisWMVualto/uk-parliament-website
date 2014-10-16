@@ -98,6 +98,8 @@ namespace UKP.Website.Controllers
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
+            if (legacyVideo == null) return RedirectToAction(MVC.Home._404());
+
             if(st.HasValue)
             {
                 var timeOfDay = legacyVideo.Event.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
