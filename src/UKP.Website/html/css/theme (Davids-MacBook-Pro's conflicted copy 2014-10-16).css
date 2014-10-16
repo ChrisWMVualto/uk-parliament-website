@@ -10705,7 +10705,7 @@ div.select-home-tabs .fa-arrow-down {
 }
 .timeline ol li {
   color: #292c2d;
-  width: 120px;
+  width: 150px;
   height: 100%;
   float: left;
   padding-top: 8px;
@@ -10790,22 +10790,19 @@ ol.channel-list {
   padding-top: 14px;
 }
 ol.channel-list li {
-  width: 120px;
+  width: 150px;
   height: 85px;
   white-space: nowrap;
   display: block;
   overflow: hidden;
   float: left;
   position: relative;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 ol.channel-list li .outer {
-  width: 120px;
+  width: 150px;
   position: absolute;
   height: 100%;
+  z-index: 0;
 }
 ol.channel-list li .inner {
   border: 1px solid #000000;
@@ -10894,19 +10891,12 @@ ol.channel-list p {
 ol.channel-list p br {
   display: none;
 }
-ol.channel-list li.event:hover {
-  overflow: visible;
-  z-index: 1000;
-  width: auto!important;
-}
-ol.channel-list li.event:hover > div {
-  width: auto!important;
-}
 .channels {
+  margin-top: 52px;
   z-index: 40;
   position: absolute;
   height: 2000px;
-  top: 45px;
+  top: 46px;
   left: 0px;
   margin: 0;
   padding: 0;
@@ -11018,9 +11008,6 @@ ol.channel-list li.event:hover > div {
 }
 .date-nav {
   border-bottom: 10px solid #085196;
-}
-.time-nav {
-  border-bottom: 2px solid #000000;
 }
 .days-tab-outer {
   position: relative;
@@ -11356,31 +11343,8 @@ dl.description dt {
 .internal-scroll {
   position: absolute;
   top: 300px;
-  z-index: 20;
-  width: 44px;
-  height: 100px;
-  background-color: #292c2d;
-  border: 0;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-.internal-scroll i {
-  color: white;
-}
-.internal-scroll:hover,
-.internal-scroll:focus {
-  background-color: #085196;
-  outline: 0;
-}
-.left-scroll {
-  left: 44px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-}
-.right-scroll {
-  right: 0;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  left: 0;
+  z-index: 4000;
 }
 .footer-main {
   padding-bottom: 20px;
@@ -12201,15 +12165,6 @@ a.search-thumb-inner:hover {
   }
   .moments .inner {
     margin-right: 140px;
-  }
-  .stream-container-inner ol.channel-list {
-    margin: 0 0 0 141px;
-  }
-  .timeline ol {
-    margin-left: 105px;
-  }
-  .left-scroll {
-    left: 132px;
   }
 }
 @media (min-width: 550px) {
