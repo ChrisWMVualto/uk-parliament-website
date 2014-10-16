@@ -1476,8 +1476,7 @@ margin-left: -5px;
   width: 3000px;
     ol.channel-list{
     width: 3720px;
-    //float: left;
-    margin: 0 0 0 135px;
+    margin: 0 0 0 36px;
     height: 100px;
     }
 }
@@ -1485,6 +1484,7 @@ margin-left: -5px;
   width: 0 !important;
 }
 .timeline{
+  margin-left: 36px;
   width: 80000px;
   background-color: white;
   display: block;
@@ -1492,11 +1492,11 @@ margin-left: -5px;
   clear: both;
   z-index: @zindex-timeline;
   border-bottom: 2px solid @brand-primary;
-  ol{
+  ol{margin-left: 36px;
     height: 45px;
   li{
      color: @brand-secondary;
-    width: 150px;
+    width: 120px;
     height: 100%;
     float: left;
     padding-top: 8px;
@@ -1601,18 +1601,18 @@ ol.channel-four{
 ol.channel-list{
     padding-top: 14px;
 li{
-  width: 150px;  //inline width
+  width: 120px;  //inline width
   height: 85px;
   white-space: nowrap;
   display: block;
   overflow: hidden;
   float: left;
   position: relative;
+  .transition-fade;
   .outer{
-    width: 150px; //inline width
+    width: 120px; //inline width
     position: absolute;
     height: 100%;
-    z-index: 0;
   }
     .inner{
       border: 1px solid @brand-primary;
@@ -1702,16 +1702,31 @@ p{
   text-overflow: ellipsis;
   overflow: hidden;
   height: 52px;
+  br{
+    display: none;
+  }
 }
 }
+
+//item hover states
+ol.channel-list li.event:hover{
+overflow: visible;
+z-index: 1000;
+width: auto!important;
+}
+
+ol.channel-list li.event:hover > div{
+width: auto!important;
+}
+
 //channel labels
 .channels{
-  margin-top: 52px;
+  //margin-top: 52px;
   z-index: @zindex-channel-list;
   position: absolute;
   height: 2000px;
   //width: 132px;
-  top: 46px;
+  top: 45px;
   left: 0px;
   margin: 0;
   padding: 0;
@@ -1739,6 +1754,11 @@ li{
 }
    
 }
+
+
+
+
+
 
 
  .channel-one-logo{
@@ -1829,6 +1849,9 @@ li{
 }
 .date-nav{
   border-bottom: 10px solid @brand-tertiary;
+}
+.time-nav{
+  border-bottom: 2px solid @brand-primary;
 }
 
 .days-tab-outer{
@@ -2183,7 +2206,27 @@ white-space: normal;
 .internal-scroll{
   position: absolute;
   top: 300px;
-  left: 0;
+  z-index: @zindex-internal-scroll;
+  width: 44px;
+  height: 100px;
+  background-color: @brand-secondary;
+  border: 0;
+  .transition-fade;
+  i{
+    color: white;
+  }
+  &:hover, &:focus{
+    background-color: @brand-tertiary;
+    outline: 0;
+  }
+}
+.left-scroll{
+left: 44px;
+box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.right-scroll{
+  right: 0;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -3021,10 +3064,25 @@ width: 70%;
   padding-left: 53px;
 }
 
+.timeline{
+  ol{
+    margin-left: 0;
+  }
+}
+
 
 }
 
 
+
+
+@media (max-width: 768px){
+.jump-container{
+.hidden-xs {
+display: none !important;
+}
+}
+}
 
 
 
@@ -3238,9 +3296,20 @@ i{
 
 
 
+.stream-container-inner{
+    ol.channel-list{
+    margin: 0 0 0 141px;
+  }
+}
+
+.timeline ol {
+margin-left: 105px;
+}
 
 
-
+.left-scroll{
+left: 132px;
+}
 
 
 }

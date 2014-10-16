@@ -10797,15 +10797,12 @@ ol.channel-list li {
   overflow: hidden;
   float: left;
   position: relative;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 ol.channel-list li .outer {
-  width: 120px;
+  width: 150px;
   position: absolute;
   height: 100%;
+  z-index: 0;
 }
 ol.channel-list li .inner {
   border: 1px solid #000000;
@@ -10893,14 +10890,6 @@ ol.channel-list p {
 }
 ol.channel-list p br {
   display: none;
-}
-ol.channel-list li.event:hover {
-  overflow: visible;
-  z-index: 1000;
-  width: auto!important;
-}
-ol.channel-list li.event:hover > div {
-  width: auto!important;
 }
 .channels {
   z-index: 40;
@@ -11356,31 +11345,19 @@ dl.description dt {
 .internal-scroll {
   position: absolute;
   top: 300px;
-  z-index: 20;
+  z-index: 4000;
   width: 44px;
   height: 100px;
   background-color: #292c2d;
-  border: 0;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 .internal-scroll i {
   color: white;
 }
-.internal-scroll:hover,
-.internal-scroll:focus {
-  background-color: #085196;
-  outline: 0;
-}
 .left-scroll {
-  left: 44px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  left: 0;
 }
 .right-scroll {
   right: 0;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .footer-main {
   padding-bottom: 20px;
@@ -12207,9 +12184,6 @@ a.search-thumb-inner:hover {
   }
   .timeline ol {
     margin-left: 105px;
-  }
-  .left-scroll {
-    left: 132px;
   }
 }
 @media (min-width: 550px) {

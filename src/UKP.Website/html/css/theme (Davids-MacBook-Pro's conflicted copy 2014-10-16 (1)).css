@@ -10797,15 +10797,12 @@ ol.channel-list li {
   overflow: hidden;
   float: left;
   position: relative;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 ol.channel-list li .outer {
-  width: 120px;
+  width: 150px;
   position: absolute;
   height: 100%;
+  z-index: 0;
 }
 ol.channel-list li .inner {
   border: 1px solid #000000;
@@ -10893,14 +10890,6 @@ ol.channel-list p {
 }
 ol.channel-list p br {
   display: none;
-}
-ol.channel-list li.event:hover {
-  overflow: visible;
-  z-index: 1000;
-  width: auto!important;
-}
-ol.channel-list li.event:hover > div {
-  width: auto!important;
 }
 .channels {
   z-index: 40;
