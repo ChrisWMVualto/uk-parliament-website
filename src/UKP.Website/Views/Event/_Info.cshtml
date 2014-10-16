@@ -3,9 +3,13 @@
 <div class="tab-pane fade in active" id="info">
     <dl class="description">
         <a href="#" class="close-pane close-info hidden">close</a>
-        <dt>Channel:</dt>
-        <dd>@Model.VideoModel.Event.ChannelName</dd>
-        <hr />
+
+        @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
+        {
+            <dt>Channel:</dt>
+            <dd>@Model.VideoModel.Event.ChannelName</dd>
+            <hr />
+        }
         <dt>House:</dt>
         <dd>@Model.VideoModel.Event.House</dd>
         <hr />

@@ -216,12 +216,14 @@ namespace UKP.Website.Controllers
                 public readonly string _EventTitle = "_EventTitle";
                 public readonly string _Info = "_Info";
                 public readonly string _Share = "_Share";
+                public readonly string _Stack = "_Stack";
                 public readonly string Index = "Index";
             }
             public readonly string _Clipping = "~/Views/Event/_Clipping.cshtml";
             public readonly string _EventTitle = "~/Views/Event/_EventTitle.cshtml";
             public readonly string _Info = "~/Views/Event/_Info.cshtml";
             public readonly string _Share = "~/Views/Event/_Share.cshtml";
+            public readonly string _Stack = "~/Views/Event/_Stack.cshtml";
             public readonly string Index = "~/Views/Event/Index.cshtml";
         }
     }
