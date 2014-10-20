@@ -48,8 +48,35 @@ namespace UKP.Website.Service
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            var results = VideoTransforms.TransformArray(response.Content);
-            return results;
+            return VideoTransforms.TransformArray(response.Content);
+        }
+
+        public LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business, int skipItems)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            client.Proxy = new WebProxy("127.0.0.1", 8888);
+
+            var request = _restClientWrapper.AuthRestRequest(string.Format("api/search/logs/{0}", eventId), Method.GET, _configuration.IasAuthKey);
+
+            if (keywords.HasValue())
+                request.AddParameter("keywords", keywords);
+
+            if (house.HasValue())
+                request.AddParameter("house", house);
+
+            if (business.HasValue())
+                request.AddParameter("business", business);
+
+            if (memberId.HasValue)
+                request.AddParameter("memberId", memberId);
+
+            request.AddParameter("skipItems", skipItems);
+
+            var response = client.Execute(request);
+            if (response.StatusCode == HttpStatusCode.NotFound) return null;
+            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+
+            return LogMomentTransforms.TransformObject(response.Content);
         }
     }
 }

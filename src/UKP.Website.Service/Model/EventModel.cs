@@ -31,6 +31,11 @@ namespace UKP.Website.Service.Model
             HomeFilters = new HomeFilter(States);
         }
 
+        public EventModel(Guid id)
+        {
+            Id = id;
+        }
+
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public string House { get; private set; }

@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Web.Mvc;
-using System.Web.Services;
 using UKP.Website.Application;
+using UKP.Website.Extensions;
 using UKP.Website.Models;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
@@ -13,11 +14,13 @@ namespace UKP.Website.Controllers
     {
         private readonly ISearchService _searchService;
         private readonly IConfiguration _configuration;
+        private readonly IEventService _eventService;
 
-        public SearchController(ISearchService searchService, IConfiguration configuration)
+        public SearchController(ISearchService searchService, IConfiguration configuration, IEventService eventService)
         {
             _searchService = searchService;
             _configuration = configuration;
+            _eventService = eventService;
         }
 
         [HttpGet]
@@ -34,6 +37,22 @@ namespace UKP.Website.Controllers
             var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.Period, pageNum.HasValue ? pageNum.Value : 1);
             var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
             return View(response);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult Moments(SearchViewModel model, string eventId, int skipItems = 5)
+        {
+            if (model.FormModel == null || !ModelState.IsValid)
+            {
+                Response.StatusCode = 400;
+                return null;
+            }
+
+            var results = _searchService.SearchMoments(eventId, model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, skipItems);
+            var @event = new EventModel(Guid.Parse(eventId));
+            var resultModel = new VideoModel(@event, null, null, results, null, null);
+
+            return PartialView(MVC.Search.Views._SearchMoment, resultModel);
         }
     }
 }
