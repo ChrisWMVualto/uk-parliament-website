@@ -54,6 +54,12 @@ namespace UKP.Website.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult Moments()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SearchController Actions { get { return MVC.Search; } }
@@ -71,12 +77,14 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Moments = "Moments";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Moments = "Moments";
         }
 
 
@@ -89,6 +97,16 @@ namespace UKP.Website.Controllers
             public readonly string model = "model";
             public readonly string pageNum = "pageNum";
         }
+        static readonly ActionParamsClass_Moments s_params_Moments = new ActionParamsClass_Moments();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Moments MomentsParams { get { return s_params_Moments; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Moments
+        {
+            public readonly string model = "model";
+            public readonly string eventId = "eventId";
+            public readonly string skipItems = "skipItems";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -100,9 +118,11 @@ namespace UKP.Website.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _SearchEvent = "_SearchEvent";
+                public readonly string _SearchMoment = "_SearchMoment";
                 public readonly string Index = "Index";
             }
             public readonly string _SearchEvent = "~/Views/Search/_SearchEvent.cshtml";
+            public readonly string _SearchMoment = "~/Views/Search/_SearchMoment.cshtml";
             public readonly string Index = "~/Views/Search/Index.cshtml";
         }
     }
@@ -122,6 +142,20 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pageNum", pageNum);
             IndexOverride(callInfo, model, pageNum);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Models.SearchViewModel model, string eventId, int skipItems);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Models.SearchViewModel model, string eventId, int skipItems)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventId", eventId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skipItems", skipItems);
+            MomentsOverride(callInfo, model, eventId, skipItems);
             return callInfo;
         }
 

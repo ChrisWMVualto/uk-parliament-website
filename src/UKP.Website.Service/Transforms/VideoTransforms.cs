@@ -25,7 +25,7 @@ namespace UKP.Website.Service.Transforms
             var requestedOutPoint = (DateTime?)jObject.requestedOutPoint;
 
             var eventModel = EventTransforms.Transform(@event.ToString());
-            var momentModel = LogMomentTransforms.TransformArray(moments.ToString());
+            var momentModel = LogMomentTransforms.TransformObject(moments.ToString());
 
             return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint);
         }

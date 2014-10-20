@@ -76,6 +76,7 @@
     <Compile Include="Model\EventStates.cs" />
     <Compile Include="Model\HomeFilter.cs" />
     <Compile Include="Model\LogMomentModel.cs" />
+    <Compile Include="Model\LogMomentResultModel.cs" />
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
