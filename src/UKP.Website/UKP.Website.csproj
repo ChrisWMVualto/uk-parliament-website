@@ -211,6 +211,7 @@
     <Content Include="Content\js\jquery.infinitescroll.js" />
     <Content Include="Content\js\responsive-player.js" />
     <Content Include="Content\js\scripts.js" />
+    <Content Include="Content\js\search.js" />
     <Content Include="Content\js\vendor\bootstrap-checkbox.js" />
     <Content Include="Content\js\vendor\bootstrap-datepicker.js" />
     <Content Include="Content\js\vendor\bootstrap-select.js" />
@@ -358,6 +359,7 @@
     <Content Include="Views\Event\_Clipping.cshtml" />
     <Content Include="Views\NotSupported\Index.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
+    <Content Include="Views\Search\_SearchMoment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
