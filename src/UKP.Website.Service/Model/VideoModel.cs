@@ -17,6 +17,12 @@ namespace UKP.Website.Service.Model
             RequestedOutPoint = requestedOutPoint;
         }
 
+        public VideoModel(EventModel @event, LogMomentResultModel moments)
+        {
+            Event = @event;
+            Moments = moments;
+        }
+
         public string EmbedCode { get; private set; }
         public string LegacyEmbedCode { get; private set; }
         public LogMomentResultModel Moments { get; private set; }

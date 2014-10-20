@@ -50,7 +50,7 @@ namespace UKP.Website.Controllers
 
             var results = _searchService.SearchMoments(eventId, model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, skipItems);
             var @event = new EventModel(Guid.Parse(eventId));
-            var resultModel = new VideoModel(@event, null, null, results, null, null);
+            var resultModel = new VideoModel(@event, results);
 
             return PartialView(MVC.Search.Views._SearchMoment, resultModel);
         }
