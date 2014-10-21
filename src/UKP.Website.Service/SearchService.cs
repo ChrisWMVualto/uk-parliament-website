@@ -51,7 +51,7 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content);
         }
 
-        public LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business, int skipItems)
+        public LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             client.Proxy = new WebProxy("127.0.0.1", 8888);
@@ -69,8 +69,6 @@ namespace UKP.Website.Service
 
             if (memberId.HasValue)
                 request.AddParameter("memberId", memberId);
-
-            request.AddParameter("skipItems", skipItems);
 
             var response = client.Execute(request);
             if (response.StatusCode == HttpStatusCode.NotFound) return null;
