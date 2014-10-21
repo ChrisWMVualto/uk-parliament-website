@@ -18,16 +18,15 @@
                     @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
                 </div>
                 <div class="col-md-2">
-                    <span class="state-badge pending-badge visible-lg visible-md">
-                        @if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
-                        {
-                            <text>Live</text>
-                        }
-                        else if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE)
-                        {
-                            <text>Archive</text>
-                        }
-                    </span>
+
+                    @if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
+                    {
+                        <span class="state-badge pending-badge visible-lg visible-md">Live</span>
+                    }
+                    else if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE)
+                    {
+                        <span class="state-badge pending-badge visible-lg visible-md">Archive</span>
+                    }
                 </div>
             </div>
         </div>
@@ -63,7 +62,7 @@
                 <div class="col-md-5">
                     @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
                     {
-                        <div id="eventStackContainer" data-load-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))">
+                        <div id="eventStackContainer" data-load-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))">
                             @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))
                         </div>
                     }
@@ -78,5 +77,6 @@
     <script src="~/signalr/hubs"></script>
     <script src="~/Content/js/vendor/bootstrap-timepicker.js"></script>
     <script src="~/Content/js/event.js"></script>
+    <script src="~/Content/js/log-moments.js"></script>
     <script src="~/Content/js/responsive-player.js"></script>
 }

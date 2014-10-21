@@ -23,7 +23,6 @@ function updateClipping() {
     });
 }
 
-
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
@@ -59,7 +58,6 @@ function reloadEmbedData() {
 
     $.each(settings.options, function () {
         if (this.hasOwnProperty('input')) {
-            //this.input.bind('change', generateEmbedCode);
             this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }

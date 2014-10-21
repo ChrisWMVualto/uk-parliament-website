@@ -207,6 +207,7 @@
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\log-moments.js" />
     <Content Include="Content\js\event.js" />
     <Content Include="Content\js\jquery.autocomplete.js" />
     <Content Include="Content\js\jquery.infinitescroll.js" />
@@ -361,6 +362,7 @@
     <Content Include="Views\NotSupported\Index.cshtml" />
     <Content Include="Views\Event\_Stack.cshtml" />
     <Content Include="Views\Search\_SearchMoment.cshtml" />
+    <Content Include="Views\Event\_LogMoment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
