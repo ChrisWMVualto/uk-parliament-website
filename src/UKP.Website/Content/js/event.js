@@ -26,6 +26,12 @@ function updateClipping() {
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
+
+    if (recordingState == "RECORDING") {
+        $('#StackPollingInterval').val('10000');
+    } else {
+        $('#StackPollingInterval').val('15000');
+    }
 }
 
 function reloadEmbedData() {
@@ -158,7 +164,6 @@ $(function () {
     var eventId = $('#eventId').val();
 
     eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
-
         if (eventId == changedId) {
             stateChanged(planningState, recordingState, recordedState, simpleState);
         }

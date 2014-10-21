@@ -24,10 +24,8 @@ function updateLogMoments() {
     setTimeout(updateLogMoments, stackPollingInterval);
 }
 
-
-
 $(function () {
 
     updateStacks();
-    updateLogMoments();
+    //updateLogMoments();
 });
