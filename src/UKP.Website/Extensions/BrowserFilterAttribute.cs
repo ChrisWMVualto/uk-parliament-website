@@ -11,6 +11,7 @@ namespace UKP.Website.Extensions
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            return;
             var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
             var browser = ua.UserAgent;
 

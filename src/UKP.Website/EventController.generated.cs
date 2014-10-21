@@ -92,12 +92,6 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult LogMoments()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.LogMoments);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult LegacyPageRoute()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
@@ -130,7 +124,6 @@ namespace UKP.Website.Controllers
             public readonly string EventTitle = "EventTitle";
             public readonly string Clipping = "Clipping";
             public readonly string Stack = "Stack";
-            public readonly string LogMoments = "LogMoments";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
         }
@@ -144,7 +137,6 @@ namespace UKP.Website.Controllers
             public const string EventTitle = "EventTitle";
             public const string Clipping = "Clipping";
             public const string Stack = "Stack";
-            public const string LogMoments = "LogMoments";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
         }
@@ -206,14 +198,6 @@ namespace UKP.Website.Controllers
         public ActionParamsClass_Stack StackParams { get { return s_params_Stack; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Stack
-        {
-            public readonly string id = "id";
-        }
-        static readonly ActionParamsClass_LogMoments s_params_LogMoments = new ActionParamsClass_LogMoments();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_LogMoments LogMomentsParams { get { return s_params_LogMoments; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_LogMoments
         {
             public readonly string id = "id";
         }
@@ -347,18 +331,6 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             StackOverride(callInfo, id);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void LogMomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult LogMoments(System.Guid id)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.LogMoments);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            LogMomentsOverride(callInfo, id);
             return callInfo;
         }
 
