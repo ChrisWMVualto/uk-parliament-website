@@ -179,7 +179,6 @@ $(function () {
     updateSocialLinks(null, $('#smallUrl').val());
     $('#smallUrl').bind("updated-short-url", updateSocialLinks);
 
-    updateTitle();
     updateClipping();
     selectableEmbedCode();
     audiOnlySwitch();
