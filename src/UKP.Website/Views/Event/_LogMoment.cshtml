@@ -1,5 +1,9 @@
 ﻿@using UKP.Website.Service.Model
 @model VideoModel
+           
+@Html.Hidden("ContainsLogMoments", Model.LogMoments.ContainsLogMoments)
+@Html.Hidden("StackPollingInterval", Model.Event.States.RecordingState == RecordingEventState.RECORDING ?  5000 : 10000 /* TODO: really high value */)
+
 <div class="stack-player">
     <div class="stack">
         <ol>

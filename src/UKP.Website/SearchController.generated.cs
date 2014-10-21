@@ -77,14 +77,14 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string Moments = "LogMoments";
+            public readonly string Moments = "Moments";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string Moments = "LogMoments";
+            public const string Moments = "Moments";
         }
 
 

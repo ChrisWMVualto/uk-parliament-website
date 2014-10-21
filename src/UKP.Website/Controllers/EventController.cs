@@ -101,7 +101,6 @@ namespace UKP.Website.Controllers
             return PartialView(MVC.Event.Views._Stack, video);
         }
 
-
         [HttpGet]
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
