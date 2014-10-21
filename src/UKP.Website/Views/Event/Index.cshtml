@@ -14,7 +14,9 @@
         </div>
         <div class="col-md-12 page-title-bar">
             <div class="row">
-                <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))"></div>
+                <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))">
+                    @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
+                </div>
                 <div class="col-md-2">
                     <span class="state-badge pending-badge visible-lg visible-md">
                         @if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
@@ -61,7 +63,9 @@
                 <div class="col-md-5">
                     @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
                     {
-                        @Html.Partial(MVC.Event.Views._Stack, Model)
+                        <div id="eventStackContainer" data-load-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))">
+                            @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))
+                        </div>
                     }
                 </div>
             </div>
