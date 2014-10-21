@@ -28,9 +28,9 @@ function stateChanged(planningState, recordingState, recordedState) {
     updateClipping();
 
     if (recordingState == "RECORDING") {
-        $('#StackPollingInterval').val('10000');
+        $('#StackPollingInterval').val('6000');
     } else {
-        $('#StackPollingInterval').val('15000');
+        $('#StackPollingInterval').val('60000');
     }
 }
 

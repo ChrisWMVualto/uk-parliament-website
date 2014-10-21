@@ -7,7 +7,7 @@
 
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
-    @Html.Hidden("StackPollingInterval", 15000)
+    @Html.Hidden("StackPollingInterval", 60000)
 
     <div class="row">
         <div class="col-md-12">
