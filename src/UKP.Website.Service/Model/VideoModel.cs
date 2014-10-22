@@ -5,31 +5,34 @@ namespace UKP.Website.Service.Model
 {
     public class VideoModel
     {
-        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, LogMomentResultModel moments, string pageUrl, string shortWebPageUrl, DateTime? requestedInPoint, DateTime? requestedOutPoint)
+        public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, LogMomentResultModel logMoments, string pageUrl, string shortWebPageUrl,
+            DateTime? requestedInPoint, DateTime? requestedOutPoint, IEnumerable<StackModel> stacks)
         {
             Event = @event;
             EmbedCode = embedCode;
             LegacyEmbedCode = legacyEmbedCode;
-            Moments = moments;
+            LogMoments = logMoments;
             PageUrl = pageUrl;
             ShortWebPageUrl = shortWebPageUrl;
             RequestedInPoint = requestedInPoint;
             RequestedOutPoint = requestedOutPoint;
+            Stacks = stacks;
         }
 
-        public VideoModel(EventModel @event, LogMomentResultModel moments)
+        public VideoModel(EventModel @event, LogMomentResultModel logMoments)
         {
             Event = @event;
-            Moments = moments;
+            LogMoments = logMoments;
         }
 
         public string EmbedCode { get; private set; }
         public string LegacyEmbedCode { get; private set; }
-        public LogMomentResultModel Moments { get; private set; }
+        public LogMomentResultModel LogMoments { get; private set; }
         public string PageUrl { get; private set; }
         public string ShortWebPageUrl { get; private set; }
         public DateTime? RequestedInPoint { get; private set; }
         public DateTime? RequestedOutPoint { get; private set; }
+        public IEnumerable<StackModel> Stacks { get; private set; }
         public EventModel Event { get; private set; }
     }
 }

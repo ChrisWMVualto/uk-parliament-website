@@ -95,6 +95,13 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
+        public virtual PartialViewResult Stack(Guid id)
+        {
+            var video = _videoService.GetVideo(id);
+            return PartialView(MVC.Event.Views._Stack, video);
+        }
+
+        [HttpGet]
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
