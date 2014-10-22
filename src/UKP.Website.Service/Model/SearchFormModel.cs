@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace UKP.Website.Service.Model
 {
@@ -9,20 +10,27 @@ namespace UKP.Website.Service.Model
 
         public string Keywords { get; set; }
         public int? MemberId { get; set; }
-        public DateTime Period { get; set; }
 
-        public SearchFormModel(string keywords, string house, string business, int? memberId, int period)
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime StartDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime EndDate { get; set; }
+
+        public SearchFormModel(string keywords, string house, string business, int? memberId, DateTime? start, DateTime? end)
         {
             Business = business;
             House = house;
             Keywords = keywords;
             MemberId = memberId;
-            Period = DateTime.Today.AddDays(period * -1);
+            StartDate = start.HasValue ? start.Value : DateTime.Now;
+            EndDate = end.HasValue ? end.Value : DateTime.Now.AddMonths(-1);
         }
 
         public SearchFormModel()
         {
-            
+            StartDate = DateTime.Now;
+            EndDate = DateTime.Now.AddMonths(-1);
         }
     }
 }

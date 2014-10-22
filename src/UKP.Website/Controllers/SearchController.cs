@@ -13,14 +13,10 @@ namespace UKP.Website.Controllers
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
-        private readonly IConfiguration _configuration;
-        private readonly IEventService _eventService;
 
-        public SearchController(ISearchService searchService, IConfiguration configuration, IEventService eventService)
+        public SearchController(ISearchService searchService)
         {
             _searchService = searchService;
-            _configuration = configuration;
-            _eventService = eventService;
         }
 
         [HttpGet]
@@ -28,14 +24,14 @@ namespace UKP.Website.Controllers
         {
             if (model.FormModel == null)
             {
-                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, new SearchFormModel()));
+                return View(new SearchViewModel(new SearchFormModel()));
             }
 
             if (!ModelState.IsValid)
-                return View(new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel));
+                return View(model);
 
-            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.Period, pageNum.HasValue ? pageNum.Value : 1);
-            var response = new SearchViewModel(_configuration.MemberAutocompleteApi, model.FormModel, results);
+            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.StartDate, model.FormModel.EndDate, pageNum.HasValue ? pageNum.Value : 1);
+            var response = new SearchViewModel(model.FormModel, results);
             return View(response);
         }
 

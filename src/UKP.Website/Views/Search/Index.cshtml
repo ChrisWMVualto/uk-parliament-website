@@ -45,7 +45,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="members"><h4>2. Members</h4></label>
-                                <input type="text" class="form-control input-lg" id="members">
+                                <input type="text" class="form-control input-lg" id="members" data-ajax-url="@Configuration.GetMemberAutocompleteApi">
                                 @Html.HiddenFor(x => x.FormModel.MemberId, new {@class = "form-control input-lg"})
                             </div>
                         </div>
@@ -56,6 +56,29 @@
                                 <input type="text" class="form-control input-lg" id="tags">
                                 @Html.HiddenFor(x => x.FormModel.House)
                                 @Html.HiddenFor(x => x.FormModel.Business)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="startDate"><h4>4. Start Date</h4></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
+                                    @Html.TextBox("FormModel.StartDate", Model.FormModel.StartDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="endDate"><h4>5. End Date</h4></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
+                                   @Html.TextBox("FormModel.EndDate", Model.FormModel.EndDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
+                                </div>
                             </div>
                         </div>
                     </div>

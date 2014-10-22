@@ -46,15 +46,15 @@ $('.moment-more button').on('click', momentSearch);
 
 $(function () {
     $('#members').autocomplete({
-        serviceUrl: "@Model.MemberAutocompleteUrl",
+        serviceUrl: $('#members').attr('data-ajax-url'),
         displayItem: "DisplayAs",
         objectPath: "Members.Member",
         minChars: 3,
         // callback function:
         onSelect: function (member) {
-            console.log(member['@@Member_Id']);
-            $('#QueryModel_MemberId').val(member['@@Member_Id']);
+            $('#FormModel_MemberId').val(member['@Member_Id']);
         },
+        noCache: true
     });
 
     $('#tags')
@@ -95,14 +95,17 @@ $(function () {
         inputValue.pop();
         var validTags = [];
 
+        $('#FormModel_House').val('');
+        $('#FormModel_Business').val('');
+
         $.each(inputValue, function () {
             var tag = this.split(": ");
 
-            if (tag[0] == "House")
-                tagAppender(tag[1], $('#QueryModel_House'));
+            if (tag[0].trim() == "House")
+                tagAppender(tag[1], $('#FormModel_House'));
 
-            if (tag[0] == "Business")
-                tagAppender(tag[1], $('#QueryModel_Business'));
+            if (tag[0].trim() == "Business")
+                tagAppender(tag[1], $('#FormModel_Business'));
 
             if (tag[1] != null && tag[1] != "")
                 validTags.push(this);
@@ -132,4 +135,15 @@ $(function () {
             }
         }
     });
+});
+
+
+$('.end-date').datepicker({
+    autoclose: true,
+    format: 'dd/mm/yyyy'
+});
+
+$('.start-date').datepicker({
+    autoclose: true,
+    format: 'dd/mm/yyyy'
 });

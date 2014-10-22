@@ -874,7 +874,7 @@
                 $(that.suggestionsContainer).scrollTop(offsetTop - that.options.maxHeight + heightDelta);
             }
 
-            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)) + that.options.delimiter).trigger('input');
+            that.el.val(that.getValue(that.navigateByString(that.suggestions[index], that.options.displayItem)) + (that.options.delimiter != null ? that.options.delimiter : "")).trigger('input');
             that.signalHint(null);
         },
 

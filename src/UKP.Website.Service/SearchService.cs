@@ -20,7 +20,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime period, int pageNum)
+        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? start, DateTime? end, int pageNum)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
@@ -39,7 +39,12 @@ namespace UKP.Website.Service
             if (memberId.HasValue)
                 request.AddParameter("memberId", memberId);
 
-            request.AddParameter("fromDate", period.ToISO8601String());
+            if (start.HasValue)
+                request.AddParameter("fromDate", start.ToISO8601String());
+
+            if (end.HasValue)
+                request.AddParameter("toDate", end.ToISO8601String());
+
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
             request.AddParameter("pageNumber", pageNum);
@@ -54,7 +59,7 @@ namespace UKP.Website.Service
         public LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business, int skipItems)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            client.Proxy = new WebProxy("127.0.0.1", 8888);
+            //client.Proxy = new WebProxy("127.0.0.1", 8888);
 
             var request = _restClientWrapper.AuthRestRequest(string.Format("api/search/logs/{0}", eventId), Method.GET, _configuration.IasAuthKey);
 
