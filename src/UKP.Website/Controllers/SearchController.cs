@@ -36,7 +36,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments(SearchViewModel model, string eventId, int skipItems = 5)
+        public virtual PartialViewResult Moments(SearchViewModel model, string eventId)
         {
             if (model.FormModel == null || !ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
                 return null;
             }
 
-            var results = _searchService.SearchMoments(eventId, model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, skipItems);
+            var results = _searchService.SearchMoments(eventId, model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business);
             var @event = new EventModel(Guid.Parse(eventId));
             var resultModel = new VideoModel(@event, results);
 

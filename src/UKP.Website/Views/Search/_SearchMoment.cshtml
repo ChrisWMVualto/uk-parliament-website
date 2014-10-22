@@ -2,7 +2,7 @@
 @using RestSharp.Extensions
 @model UKP.Website.Service.Model.VideoModel
 
-@foreach (var moment in @Model.Moments.Results)
+@foreach (var moment in @Model.LogMoments.Results.Skip(5))
 {
     <div class="col-md-12 moment-item">
         <a href="@Url.Action(MVC.Event.Index(@Model.Event.Id, moment.InPoint.ToISO8601String()))" class="outer-border">

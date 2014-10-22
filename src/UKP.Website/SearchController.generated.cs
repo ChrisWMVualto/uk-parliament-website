@@ -105,7 +105,6 @@ namespace UKP.Website.Controllers
         {
             public readonly string model = "model";
             public readonly string eventId = "eventId";
-            public readonly string skipItems = "skipItems";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -146,16 +145,15 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Models.SearchViewModel model, string eventId, int skipItems);
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Models.SearchViewModel model, string eventId);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Models.SearchViewModel model, string eventId, int skipItems)
+        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Models.SearchViewModel model, string eventId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventId", eventId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "skipItems", skipItems);
-            MomentsOverride(callInfo, model, eventId, skipItems);
+            MomentsOverride(callInfo, model, eventId);
             return callInfo;
         }
 

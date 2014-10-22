@@ -23,10 +23,15 @@ function updateClipping() {
     });
 }
 
-
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
+
+    if (recordingState == "RECORDING") {
+        $('#StackPollingInterval').val('6000');
+    } else {
+        $('#StackPollingInterval').val('60000');
+    }
 }
 
 function reloadEmbedData() {
@@ -59,7 +64,6 @@ function reloadEmbedData() {
 
     $.each(settings.options, function () {
         if (this.hasOwnProperty('input')) {
-            //this.input.bind('change', generateEmbedCode);
             this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }
@@ -160,7 +164,6 @@ $(function () {
     var eventId = $('#eventId').val();
 
     eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
-
         if (eventId == changedId) {
             stateChanged(planningState, recordingState, recordedState, simpleState);
         }
@@ -179,7 +182,6 @@ $(function () {
     updateSocialLinks(null, $('#smallUrl').val());
     $('#smallUrl').bind("updated-short-url", updateSocialLinks);
 
-    updateTitle();
     updateClipping();
     selectableEmbedCode();
     audiOnlySwitch();

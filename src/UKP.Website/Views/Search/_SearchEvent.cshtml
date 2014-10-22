@@ -35,10 +35,10 @@
                         <div class="row moments">
                             @Html.Partial(MVC.Search.Views._SearchMoment, item)
                             
-                            @if (item.Moments.Results.Count() < item.Moments.Total)
+                            @if (item.LogMoments.Results.Count() < item.LogMoments.Total)
                             {
                                 <div class="col-md-12 moment-item moment-more">
-                                    <button class="btn-link text-center" data-event-id="@item.Event.Id" data-item-skip="@item.Moments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments())">@(item.Moments.Total - item.Moments.Results.Count())  more moments</button>
+                                    <button class="btn-link text-center" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments())">@(item.LogMoments.Total - item.LogMoments.Results.Count())  more moments</button>
                                 </div>
                             }
                         </div>

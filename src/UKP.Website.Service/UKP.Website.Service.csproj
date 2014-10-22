@@ -82,12 +82,14 @@
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
     <Compile Include="Model\SearchFormModel.cs" />
+    <Compile Include="Model\StackModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecessService.cs" />
     <Compile Include="SearchService.cs" />
     <Compile Include="Transforms\LogMomentTransform.cs" />
     <Compile Include="Transforms\EventTransforms.cs" />
+    <Compile Include="Transforms\StackTransforms.cs" />
     <Compile Include="Transforms\VideoTransforms.cs" />
     <Compile Include="VideoService.cs" />
   </ItemGroup>
