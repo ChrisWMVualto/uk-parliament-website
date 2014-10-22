@@ -1,0 +1,18 @@
+﻿@using UKP.Website.Application
+@model UKP.Website.Service.Model.VideoModel
+
+<header class="col-md-10">
+    <h3>House of Commons</h3>
+    <h4>
+        <i class="fa fa-vod-badge fa-2x state-badge-sm hidden-lg hidden-md pending-badge"></i>
+        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span> <i class="pipe hideen-"></i> 
+        @if (Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
+        {
+            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</span>
+        }
+        else
+        {
+            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span>
+        }
+    </h4>
+</header>

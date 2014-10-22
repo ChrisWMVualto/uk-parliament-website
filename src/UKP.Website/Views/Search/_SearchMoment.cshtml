@@ -1,0 +1,35 @@
+﻿@using Date.Extensions
+@using RestSharp.Extensions
+@model UKP.Website.Service.Model.VideoModel
+
+@foreach (var moment in @Model.Moments.Results)
+{
+    <div class="col-md-12 moment-item">
+        <a href="@Url.Action(MVC.Event.Index(@Model.Event.Id, moment.InPoint.ToISO8601String()))" class="outer-border">
+            <div class="row">
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                    <div class="moment-thumb">
+                        <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        @if (moment.ThumbnailUrl.HasValue())
+                        {
+                            <img src="@moment.ThumbnailUrl" alt="alt tag here" class="img-responsive">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                    <div class="inner">
+                        <p><strong>@moment.Title</strong></p>
+                        <span class="moment-play visible-md visible-lg">
+                            Play item
+                            <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

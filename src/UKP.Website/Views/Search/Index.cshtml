@@ -1,0 +1,150 @@
+﻿@using UKP.Website.Application
+@model UKP.Website.Models.SearchViewModel
+
+
+<div class="container main-container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <header class="title-main">
+                <h2>
+                    <i class="fa fa-search"></i> 
+                    <span>Search</span>
+                </h2>
+                <a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a>
+            </header>
+        </div>
+        
+        <div class="col-md-12">
+            <button type="button" class="btn btn-default btn-go btn-lg btn-search-panel btn-block visible-xs" data-toggle="collapse" data-target="#searchPanel">
+                Search now <i class="fa fa-plus"></i>
+            </button>
+        </div>
+
+        <div id="searchPanel" class="collapse in">
+            <div class="col-md-12 page-title-bar">
+                <header>
+                    <h3>Enter a Keyword & add tags to help if required:</h3>
+                </header>
+            </div>
+            
+            @using (Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
+            {
+                <div class="col-md-12">
+                    <div class="row">
+                        @Html.ValidationSummary()
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="keyword"><h4>1. Keywords</h4></label>
+                                @Html.TextBoxFor(x => x.FormModel.Keywords, new {@class = "form-control input-lg"})
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="members"><h4>2. Members</h4></label>
+                                <input type="text" class="form-control input-lg" id="members" data-ajax-url="@Configuration.GetMemberAutocompleteApi">
+                                @Html.HiddenFor(x => x.FormModel.MemberId, new {@class = "form-control input-lg"})
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="tags"><h4>3. Tags</h4></label>
+                                <input type="text" class="form-control input-lg" id="tags">
+                                @Html.HiddenFor(x => x.FormModel.House)
+                                @Html.HiddenFor(x => x.FormModel.Business)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="startDate"><h4>4. Start Date</h4></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
+                                    @Html.TextBox("FormModel.StartDate", Model.FormModel.StartDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group search-param">
+                                <label for="endDate"><h4>5. End Date</h4></label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
+                                   @Html.TextBox("FormModel.EndDate", Model.FormModel.EndDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div id="selectedTags">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-default btn-go btn-lg">Search <i class="fa fa-arrow-right-thin fa-lg"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-12 page-filter-bar">
+            <div class="row">
+                <div class="col-md-10">
+                    <h4>
+                        @if (Model.VideoCollectionResult != null)
+                        {
+                            <strong>@Model.VideoCollectionResult.TotalCount Search Results for:</strong>
+                        }
+                        else
+                        {
+                            <strong>0 Search Results for:</strong>
+                        }
+                        
+                        @Model.FormModel.Keywords - 
+                        
+                        @if (Model.FormModel.House != null)
+                        {
+                            foreach (var house in Model.FormModel.House)
+                            {
+                                Html.Raw(string.Format("House: {0}, ", house));
+                            }
+                        }
+                        
+                        @if (Model.FormModel.Business != null)
+                        {
+                            foreach (var business in Model.FormModel.Business)
+                            {
+                                Html.Raw(string.Format("Business: {0}, ", business));
+                            }
+                        }
+                    </h4>
+                </div>
+                <div class="col-md-2">
+                    <select class="selectpicker select-filter form-control">
+                        <option value="0">Last 30 days</option>
+                        <option value="1">Last 10 days</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
+        </div>
+        
+        <div id="searchResultsContainer">
+            @Html.Partial(MVC.Search.Views._SearchEvent, Model)
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/Content/js/jquery.autocomplete.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.infinitescroll.js")"></script>
+    <script src="@Url.Content("~/Content/js/search.js")"></script>
+}

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<UKP.Website.Service.Model.EventModel>
+
+<section class="section-mini-guide clearfix">
+    <div class="row">
+        <div class="col-md-12">
+            <header class="title-middle">
+                <h2>Brief Guide</h2>
+                <a href="@Url.Action(MVC.Epg.Index())" class="btn btn-lg btn-generic btn-title hidden-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></a>
+            </header>
+        </div>
+    </div>
+    <div class="row-no-padding">
+        <div id="miniGuideCommons" class="slider center">
+            @foreach (var item in Model)
+            {
+                <div class="mini-item col-md-4 col-sm-6 @if (item.HomeFilters.Live) { @Html.Raw("live") }">
+                    <div class="inner">
+                        <a href="@Url.Action(MVC.Event.Index(item.Id))">
+                            <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-mini-guide"></span>
+                            <h5>@item.DisplayStartDate.ToLocalTime().ToString("dddd") <span>@item.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy")</span>  @item.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</h5>
+                            <p>
+                                @item.Title
+                            </p>
+                        
+                            @if (item.HomeFilters.Live)
+                            {
+                                <i class="fa fa-live-badge fa-2x"></i>
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-12">
+        <button class="btn btn-lg btn-block btn-generic btn-backup visible-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></button>
+    </div>
+</section>
