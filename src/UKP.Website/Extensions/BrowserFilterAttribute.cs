@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Elmah;
 using RestSharp.Extensions;
 using UAParser;
 
@@ -11,40 +12,42 @@ namespace UKP.Website.Extensions
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            return;
-            var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
-            var browser = ua.UserAgent;
-
-            if (filterContext.ActionDescriptor.GetCustomAttributes(typeof (SkipBrowserFilterAttribute), false).Any())
+            try
             {
-                return;
-            }
+                var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
 
-            if (ua.OS.Family == "Linux")
-            {
-                if (BrowserSupported("Opera", 10))
-                    return;
-            }
-            else
-            {
-                if (BrowserSupported("Opera", 23))
-                    return;
-            }
+                if(filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipBrowserFilterAttribute), false).Any()) return;
 
-            if (BrowserSupported("Firefox", 31) || BrowserSupported("Safari", 6) || BrowserSupported("IE", 9) || BrowserSupported("Chrome", 0))
-            {
-                return;
-            }
+                if(ua.OS.Family == "Linux")
+                {
+                    if(BrowserNotSupported("Opera", 10, ua.UserAgent))
+                        filterContext.Result = NotSuppotedRouteResult();
+                }
+                else
+                {
+                    if(BrowserNotSupported("Opera", 23, ua.UserAgent))
+                        filterContext.Result = NotSuppotedRouteResult();
+                }
 
-            filterContext.Result = new RedirectToRouteResult(MVC.NotSupported.Index().GetRouteValueDictionary());
+                if(BrowserNotSupported("Firefox", 31, ua.UserAgent) || BrowserNotSupported("Safari", 6, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent))
+                {
+                    filterContext.Result = NotSuppotedRouteResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+            }
         }
 
-        private static bool BrowserSupported(string browserName, int minVersion, string operatingSystem = null)
+        private static bool BrowserNotSupported(string browserName, int minVersion, UserAgent userAgent)
         {
-            var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
-            var browser = ua.UserAgent;
+            return userAgent.Family.ToLower() == browserName.ToLower() && int.Parse(userAgent.Major) < minVersion;
+        }
 
-            return browser.Family == browserName && Int32.Parse(browser.Major) >= minVersion;
+        private static ActionResult NotSuppotedRouteResult()
+        {
+            return new RedirectToRouteResult(MVC.NotSupported.Index().GetRouteValueDictionary());
         }
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
