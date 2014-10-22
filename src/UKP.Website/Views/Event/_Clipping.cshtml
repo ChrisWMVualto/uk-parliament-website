@@ -1,5 +1,7 @@
 ﻿@model UKP.Website.Models.Event.ClippingViewModel
 
+@Html.Hidden("AllowClippingRefresh", !Model.VideoModel.Event.PublishedStartTime.HasValue)
+
 @if (Model.VideoModel.Event.PublishedStartTime.HasValue)
 {
     <div class="row">
