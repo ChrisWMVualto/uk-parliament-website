@@ -2,6 +2,11 @@
 @using UKP.Website.Application
 @model UKP.Website.Models.Event.EventViewModel
 
+@{
+    ViewBag.Title = "Parliamentlive.tv";
+    ViewBag.Description = Model.VideoModel.Event.Title;
+}
+
 <div class="container main-container">
 
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)

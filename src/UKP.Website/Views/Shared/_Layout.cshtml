@@ -1,5 +1,4 @@
 ﻿@using UKP.Website.Application
-@using Cookie = Microsoft.AspNet.SignalR.Cookie
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -24,6 +23,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="@Url.Content("~/Content/img/favicons/metro-tileicon.png")">
     <meta property="og:image" content="@Url.Content("~/Content/img/share.jpg")" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
     <!-- Bootstrap -->
     
     <!-- Remove when we have the .less file in -->
