@@ -1,5 +1,10 @@
-﻿@using UKP.Website.Application
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@using UKP.Website.Service.Model
 @model UKP.Website.Service.Model.VideoModel
+
+
+
 
 <header class="col-md-10">
     <h3>House of Commons</h3>
@@ -16,3 +21,15 @@
         }
     </h4>
 </header>
+
+<div class="col-md-2">
+
+    @if(Model.Event.States.PlayerState == PlayerEventState.LIVE)
+    {
+        <span class="state-badge pending-badge visible-lg visible-md">Live</span>
+    }
+    else if(Model.Event.States.PlayerState == PlayerEventState.ARCHIVE)
+    {
+        <span class="state-badge pending-badge visible-lg visible-md">Archive</span>
+    }
+</div>
