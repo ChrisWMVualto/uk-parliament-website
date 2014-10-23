@@ -1,0 +1,52 @@
+﻿@using Date.Extensions
+@using RestSharp.Extensions
+@using UKP.Website.Application
+@model UKP.Website.Models.SearchViewModel
+
+@if (Model.VideoCollectionResult != null && Model.VideoCollectionResult.Results.Any()) {
+    foreach (var item in Model.VideoCollectionResult.Results)
+    {
+        <div class="col-md-12 search-item">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-5">
+                    <a href="@Url.Action(MVC.Event.Index(item.Event.Id))" class="search-thumb-inner">
+                        @if (item.Event.ThumbnalUrl.HasValue())
+                        {
+                            <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                        }
+
+                        <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        <div class="overlay">
+                            <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                            <strong>Play event from start</strong>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-7">
+                    <div class="search-text-inner">
+                        <h5><i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</h5>  <h5 class="date-divider"><i class="fa fa-circle hidden-lg"></i><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</h5>
+
+                        <p><strong>@item.Event.Title</strong></p>
+
+                        <div class="row moments">
+                            @Html.Partial(MVC.Search.Views._SearchMoment, item)
+                            
+                            @if (item.LogMoments.Results.Count() < item.LogMoments.Total)
+                            {
+                                <div class="col-md-12 moment-item moment-more">
+                                    <button class="btn-link text-center" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments())">@(item.LogMoments.Total - item.LogMoments.Results.Count())  more moments</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr />
+        </div>
+    }
+}

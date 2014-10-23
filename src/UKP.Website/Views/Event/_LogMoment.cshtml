@@ -1,0 +1,31 @@
+﻿@using UKP.Website.Service.Model
+@model VideoModel
+           
+@Html.Hidden("ContainsLogMoments", Model.LogMoments.ContainsLogMoments)
+
+<div class="stack-player">
+    <div class="stack">
+        <ol>
+            @foreach(var stack in Model.Stacks)
+            {
+                <li class="active">
+                    <article>
+                        <span class="vr-stack"></span>
+                        <span class="stack-number">3</span>
+                        <header class="stack-item">
+                            <a href="#">
+                                <h4>
+                                    1. What recent assessment he has made of the role of the Prime Minister's Challenge Fund in improving access to GP services. (904103)
+                                </h4>
+                            </a>
+                        </header>
+                        <hr />
+                        <div class="stack-item">
+                            <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong> 11.34.53</h5><strong>Member:</strong> Robin Walker
+                        </div>
+                    </article>
+                </li>
+            }
+        </ol>
+    </div>
+</div>

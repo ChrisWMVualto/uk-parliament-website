@@ -1,0 +1,28 @@
+﻿@using UKP.Website.Service.Model
+@model VideoModel
+           
+@Html.Hidden("ContainsLogMoments", Model.LogMoments.ContainsLogMoments)
+
+@if(!Model.LogMoments.ContainsLogMoments)
+{
+    <div class="stack-player">
+        <div class="stack">
+            <ol>
+                @foreach(var stack in Model.Stacks)
+                {
+                    <li>
+                        <article>
+                            <span class="vr-stack"></span>
+                            <span class="stack-number">3</span>
+                            <header class="stack-item">
+                                <h4>
+                                    @stack.Title
+                                </h4>
+                            </header>
+                        </article>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+}
