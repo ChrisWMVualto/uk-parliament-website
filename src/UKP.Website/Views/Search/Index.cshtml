@@ -1,5 +1,5 @@
 ﻿@using UKP.Website.Application
-@model UKP.Website.Service.Model.SearchFormModel
+@model UKP.Website.Models.Search.SearchViewModel
 
 
 <div class="container main-container">
@@ -68,7 +68,7 @@
                                 <label for="startDate"><h4>4. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                    @Html.TextBox("FormModel.StartDate", Model.StartDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
+                                    @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <label for="endDate"><h4>5. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                   @Html.TextBox("FormModel.EndDate", Model.EndDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
+                                   @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
         </div>
         
         <div id="searchResultsContainer">
-            
+            @Html.Partial(MVC.Search.Views._SearchEvent, Model)
         </div>
     </div>
 </div>

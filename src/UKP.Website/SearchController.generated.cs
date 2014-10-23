@@ -56,9 +56,9 @@ namespace UKP.Website.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Moments()
+        public virtual System.Web.Mvc.ActionResult Index()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -94,17 +94,13 @@ namespace UKP.Website.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
-            public readonly string model = "model";
-            public readonly string pageNum = "pageNum";
-        }
-        static readonly ActionParamsClass_Moments s_params_Moments = new ActionParamsClass_Moments();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Moments MomentsParams { get { return s_params_Moments; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Moments
-        {
-            public readonly string model = "model";
-            public readonly string eventId = "eventId";
+            public readonly string keywords = "keywords";
+            public readonly string memberId = "memberId";
+            public readonly string house = "house";
+            public readonly string business = "business";
+            public readonly string start = "start";
+            public readonly string end = "end";
+            public readonly string page = "page";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -132,28 +128,31 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Service.Model.SearchFormModel model, int? pageNum);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string keywords, int? memberId, string house, string business, string start, string end, int page);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(UKP.Website.Service.Model.SearchFormModel model, int? pageNum)
+        public override System.Web.Mvc.ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "pageNum", pageNum);
-            IndexOverride(callInfo, model, pageNum);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keywords", keywords);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "memberId", memberId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "house", house);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "business", business);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "start", start);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "end", end);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            IndexOverride(callInfo, keywords, memberId, house, business, start, end, page);
             return callInfo;
         }
 
         [NonAction]
-        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Service.Model.SearchFormModel model, string eventId);
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Service.Model.SearchFormModel model, string eventId)
+        public override System.Web.Mvc.PartialViewResult Moments()
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventId", eventId);
-            MomentsOverride(callInfo, model, eventId);
+            MomentsOverride(callInfo);
             return callInfo;
         }
 

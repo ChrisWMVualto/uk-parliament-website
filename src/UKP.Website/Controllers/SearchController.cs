@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using UKP.Website.Models;
+using UKP.Website.Models.Search;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
 
@@ -16,25 +17,41 @@ namespace UKP.Website.Controllers
             _searchService = searchService;
         }
 
+
         [HttpGet]
-        public virtual ActionResult Index(SearchFormModel model = null, int? pageNum = null)
+        public virtual ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, int page = 1)
         {
-            if (model == null)
+            DateTime fromDate;
+            if(!DateTime.TryParse(start, out fromDate))
             {
-                //return View(new SearchViewModel(new SearchFormModel()));
-                return View(new SearchFormModel());
+                fromDate = DateTime.Now.AddMonths(-1);
+            }
+            DateTime toDate;
+            if(!DateTime.TryParse(end, out toDate))
+            {
+                toDate = DateTime.Today;
             }
 
-            if (!ModelState.IsValid)
-                return View(model);
 
-            model.Results = _searchService.Search(model.Keywords, model.MemberId, model.House, model.Business, model.StartDate, model.EndDate, pageNum.HasValue ? pageNum.Value : 1);
-            return View(model);
+            var searchResults = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
+
+            var searchModel = new SearchViewModel()
+                              {
+                                  Keywords = keywords,
+                                  MemberId = memberId,
+                                  House = house,
+                                  Business = business,
+                                  Start = fromDate,
+                                  End = toDate,
+                                  SearchResult = searchResults
+                              };
+            return View(searchModel);
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments(SearchFormModel model, string eventId)
+        public virtual PartialViewResult Moments()
         {
+            /*
             if (model == null || !ModelState.IsValid)
             {
                 Response.StatusCode = 400;
@@ -43,9 +60,9 @@ namespace UKP.Website.Controllers
 
             var results = _searchService.SearchMoments(eventId, model.Keywords, model.MemberId, model.House, model.Business);
             var @event = new EventModel(Guid.Parse(eventId));
-            var resultModel = new VideoModel(@event, results);
+            var resultModel = new VideoModel(@event, results);*/
 
-            return PartialView(MVC.Search.Views._SearchMoment, resultModel);
+            return PartialView(MVC.Search.Views._SearchMoment);
         }
     }
 }

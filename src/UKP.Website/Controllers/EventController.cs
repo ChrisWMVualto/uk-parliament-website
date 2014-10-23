@@ -111,6 +111,9 @@ namespace UKP.Website.Controllers
             if(st.HasValue)
             {
                 var timeOfDay = legacyVideo.Event.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
+                if(legacyVideo.Event.ActualStartTime.HasValue) timeOfDay = legacyVideo.Event.ActualStartTime.Value.Date.ToLocalTime().Add(st.Value);
+                if (legacyVideo.Event.PublishedStartTime.HasValue) timeOfDay = legacyVideo.Event.PublishedStartTime.Value.Date.ToLocalTime().Add(st.Value);
+
                 var date = timeOfDay.ToISO8601String();
                 return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, date));
             }

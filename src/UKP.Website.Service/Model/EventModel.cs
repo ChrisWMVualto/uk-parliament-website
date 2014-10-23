@@ -5,7 +5,7 @@ namespace UKP.Website.Service.Model
     public class EventModel
     {
         public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime displayStartDate, DateTime displayEndDate,
-            DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime, DateTime? publishedEndTime,
+            DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime,
             DateTime? actualStartTime, DateTime? actualEndTime, string thumbnalUrl, string channelName, string room, string eventType, string productionSource, int? legacyMeetingId)
         {
             Id = id;
@@ -19,7 +19,6 @@ namespace UKP.Website.Service.Model
             ScheduledStartTime = scheduledStartTime;
             ScheduledEndTime = scheduledEndTime;
             PublishedStartTime = publishedStartTime;
-            PublishedEndTime = publishedEndTime;
             ActualStartTime = actualStartTime;
             ActualEndTime = actualEndTime;
             ThumbnalUrl = thumbnalUrl;
@@ -47,7 +46,6 @@ namespace UKP.Website.Service.Model
         public DateTime ScheduledStartTime { get; private set; }
         public DateTime ScheduledEndTime { get; private set; }
         public DateTime? PublishedStartTime { get; private set; }
-        public DateTime? PublishedEndTime { get; private set; }
         public DateTime? ActualStartTime { get; private set; }
         public DateTime? ActualEndTime { get; private set; }
         public string ThumbnalUrl { get; private set; }

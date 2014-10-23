@@ -1,10 +1,10 @@
 ﻿@using Date.Extensions
 @using RestSharp.Extensions
 @using UKP.Website.Application
-@model UKP.Website.Models.SearchViewModel
+@model UKP.Website.Models.Search.SearchViewModel
 
-@if (Model.VideoCollectionResult != null && Model.VideoCollectionResult.Results.Any()) {
-    foreach (var item in Model.VideoCollectionResult.Results)
+@if (Model.SearchResult.Results.Any()) {
+    foreach (var item in Model.SearchResult.Results)
     {
         <div class="col-md-12 search-item">
             <div class="row">
