@@ -1,7 +1,11 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Application
-@using UKP.Website.Service.Model
 @model UKP.Website.Models.Event.EventViewModel
+
+@{
+    ViewBag.Title = "Parliamentlive.tv";
+    ViewBag.Description = Model.VideoModel.Event.Title;
+}
 
 <div class="container main-container">
 
@@ -14,21 +18,8 @@
             <header class="title-main"><h2><i class="fa fa-play-circle fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
         <div class="col-md-12 page-title-bar">
-            <div class="row">
-                <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))">
-                    @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
-                </div>
-                <div class="col-md-2">
-
-                    @if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
-                    {
-                        <span class="state-badge pending-badge visible-lg visible-md">Live</span>
-                    }
-                    else if(Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE)
-                    {
-                        <span class="state-badge pending-badge visible-lg visible-md">Archive</span>
-                    }
-                </div>
+            <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))" class="row">
+                @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
             </div>
         </div>
         <div class="col-md-12">
