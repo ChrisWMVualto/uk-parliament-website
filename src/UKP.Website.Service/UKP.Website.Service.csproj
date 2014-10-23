@@ -58,7 +58,6 @@
       <HintPath>..\packages\RestSharp.Extensions.1.0.2\lib\net45\RestSharp.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -81,7 +80,6 @@
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
-    <Compile Include="Model\SearchFormModel.cs" />
     <Compile Include="Model\StackModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

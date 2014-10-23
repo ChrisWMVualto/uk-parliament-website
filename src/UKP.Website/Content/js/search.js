@@ -126,7 +126,7 @@ $(function () {
         nextSelector: $('.pagination a'),
         navSelector: $('.pagination'),
         path: function (pageNum) {
-            return window.location + '&pageNum=' + pageNum;
+            return window.location + '&page=' + pageNum;
         },
         loading: {
             finishedMsg: '',

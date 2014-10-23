@@ -5,7 +5,7 @@ namespace UKP.Website.Service
 {
     public interface ISearchService
     {
-        VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? start, DateTime? end, int pageNum);
+        VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? @from, DateTime? to, int pageNum);
         LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business);
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UKP.Website.Service.Model;
 
-namespace UKP.Website.Models
+namespace UKP.Website.Models.Home
 {
     public class HomeViewsModel
     {

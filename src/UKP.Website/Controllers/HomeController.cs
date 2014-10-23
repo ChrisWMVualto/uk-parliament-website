@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using UKP.Website.Extensions;
 using UKP.Website.Models;
+using UKP.Website.Models.Home;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
 
