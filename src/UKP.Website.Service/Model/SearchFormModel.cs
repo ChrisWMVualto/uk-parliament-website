@@ -17,6 +17,8 @@ namespace UKP.Website.Service.Model
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndDate { get; set; }
 
+        public VideoCollectionModel Results{ get; set; }
+
         public SearchFormModel(string keywords, string house, string business, int? memberId, DateTime? start, DateTime? end)
         {
             Business = business;

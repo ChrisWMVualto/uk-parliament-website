@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Web.Mvc;
-using UKP.Website.Application;
-using UKP.Website.Extensions;
 using UKP.Website.Models;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
@@ -20,31 +17,31 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(SearchViewModel model = null, int? pageNum = null)
+        public virtual ActionResult Index(SearchFormModel model = null, int? pageNum = null)
         {
-            if (model.FormModel == null)
+            if (model == null)
             {
-                return View(new SearchViewModel(new SearchFormModel()));
+                //return View(new SearchViewModel(new SearchFormModel()));
+                return View(new SearchFormModel());
             }
 
             if (!ModelState.IsValid)
                 return View(model);
 
-            var results = _searchService.Search(model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business, model.FormModel.StartDate, model.FormModel.EndDate, pageNum.HasValue ? pageNum.Value : 1);
-            var response = new SearchViewModel(model.FormModel, results);
-            return View(response);
+            model.Results = _searchService.Search(model.Keywords, model.MemberId, model.House, model.Business, model.StartDate, model.EndDate, pageNum.HasValue ? pageNum.Value : 1);
+            return View(model);
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments(SearchViewModel model, string eventId)
+        public virtual PartialViewResult Moments(SearchFormModel model, string eventId)
         {
-            if (model.FormModel == null || !ModelState.IsValid)
+            if (model == null || !ModelState.IsValid)
             {
                 Response.StatusCode = 400;
                 return null;
             }
 
-            var results = _searchService.SearchMoments(eventId, model.FormModel.Keywords, model.FormModel.MemberId, model.FormModel.House, model.FormModel.Business);
+            var results = _searchService.SearchMoments(eventId, model.Keywords, model.MemberId, model.House, model.Business);
             var @event = new EventModel(Guid.Parse(eventId));
             var resultModel = new VideoModel(@event, results);
 

@@ -1,5 +1,5 @@
 ﻿@using UKP.Website.Application
-@model UKP.Website.Models.SearchViewModel
+@model UKP.Website.Service.Model.SearchFormModel
 
 
 <div class="container main-container">
@@ -38,7 +38,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="keyword"><h4>1. Keywords</h4></label>
-                                @Html.TextBoxFor(x => x.FormModel.Keywords, new {@class = "form-control input-lg"})
+                                @Html.TextBoxFor(x => x.Keywords, new {@class = "form-control input-lg"})
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
                             <div class="form-group search-param">
                                 <label for="members"><h4>2. Members</h4></label>
                                 <input type="text" class="form-control input-lg" id="members" data-ajax-url="@Configuration.GetMemberAutocompleteApi">
-                                @Html.HiddenFor(x => x.FormModel.MemberId, new {@class = "form-control input-lg"})
+                                @Html.HiddenFor(x => x.MemberId, new {@class = "form-control input-lg"})
                             </div>
                         </div>
 
@@ -54,8 +54,8 @@
                             <div class="form-group search-param">
                                 <label for="tags"><h4>3. Tags</h4></label>
                                 <input type="text" class="form-control input-lg" id="tags">
-                                @Html.HiddenFor(x => x.FormModel.House)
-                                @Html.HiddenFor(x => x.FormModel.Business)
+                                @Html.HiddenFor(x => x.House)
+                                @Html.HiddenFor(x => x.Business)
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                 <label for="startDate"><h4>4. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                    @Html.TextBox("FormModel.StartDate", Model.FormModel.StartDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
+                                    @Html.TextBox("FormModel.StartDate", Model.StartDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date input-lg" })
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                                 <label for="endDate"><h4>5. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                   @Html.TextBox("FormModel.EndDate", Model.FormModel.EndDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
+                                   @Html.TextBox("FormModel.EndDate", Model.EndDate.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date input-lg" })
                                 </div>
                             </div>
                         </div>
@@ -99,28 +99,19 @@
             <div class="row">
                 <div class="col-md-10">
                     <h4>
-                        @if (Model.VideoCollectionResult != null)
-                        {
-                            <strong>@Model.VideoCollectionResult.TotalCount Search Results for:</strong>
-                        }
-                        else
-                        {
-                            <strong>0 Search Results for:</strong>
-                        }
+                        @Model.Keywords - 
                         
-                        @Model.FormModel.Keywords - 
-                        
-                        @if (Model.FormModel.House != null)
+                        @if (Model.House != null)
                         {
-                            foreach (var house in Model.FormModel.House)
+                            foreach (var house in Model.House)
                             {
                                 Html.Raw(string.Format("House: {0}, ", house));
                             }
                         }
                         
-                        @if (Model.FormModel.Business != null)
+                        @if (Model.Business != null)
                         {
-                            foreach (var business in Model.FormModel.Business)
+                            foreach (var business in Model.Business)
                             {
                                 Html.Raw(string.Format("Business: {0}, ", business));
                             }
@@ -138,7 +129,7 @@
         </div>
         
         <div id="searchResultsContainer">
-            @Html.Partial(MVC.Search.Views._SearchEvent, Model)
+            
         </div>
     </div>
 </div>

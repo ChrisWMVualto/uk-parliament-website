@@ -132,10 +132,10 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Models.SearchViewModel model, int? pageNum);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, UKP.Website.Service.Model.SearchFormModel model, int? pageNum);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(UKP.Website.Models.SearchViewModel model, int? pageNum)
+        public override System.Web.Mvc.ActionResult Index(UKP.Website.Service.Model.SearchFormModel model, int? pageNum)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
@@ -145,10 +145,10 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Models.SearchViewModel model, string eventId);
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, UKP.Website.Service.Model.SearchFormModel model, string eventId);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Models.SearchViewModel model, string eventId)
+        public override System.Web.Mvc.PartialViewResult Moments(UKP.Website.Service.Model.SearchFormModel model, string eventId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
