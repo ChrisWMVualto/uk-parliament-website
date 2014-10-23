@@ -30,6 +30,7 @@ namespace UKP.Website.Controllers
             var outPoint = @out.FromISO8601String();
 
             var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true));
+            if(video == null || video.Event.States.RecordedState == RecordedEventState.REVOKE) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
         }

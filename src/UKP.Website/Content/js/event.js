@@ -1,5 +1,9 @@
 ﻿var auidoOnlyButtonState = false;
 var embedGenTimeoutId = null;
+var eventTimePollingsInterval = 5000;
+var stackPollingIntervalLive = 6000;
+var stackPollingIntervalNotLive = 60000;
+
 
 function loadPlayer(audioOnly) {
     var url = $('#getVideoUrl').val();
@@ -23,14 +27,33 @@ function updateClipping() {
     });
 }
 
+
+function pollEventTimes() {
+    setTimeout(function () {
+        
+        updateTitle();
+
+        if ($('#AllowClippingRefresh').val() == "True") {
+            updateClipping();
+        }
+
+        pollEventTimes();
+
+    }, eventTimePollingsInterval);
+}
+
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
 
     if (recordingState == "RECORDING") {
-        $('#StackPollingInterval').val('6000');
+        $('#StackPollingInterval').val(stackPollingIntervalLive);
     } else {
-        $('#StackPollingInterval').val('60000');
+        $('#StackPollingInterval').val(stackPollingIntervalNotLive);
+    }
+
+    if (recordedState == "REVOKE") {
+        window.location.reload();
     }
 }
 
@@ -73,7 +96,7 @@ function reloadEmbedData() {
 
         clearTimeout(embedGenTimeoutId);
 
-         embedGenTimeoutId = setTimeout(function() {
+        embedGenTimeoutId = setTimeout(function () {
             var start = settings.options.start.input.val();
             var end = settings.options.end.input.val();
 
@@ -185,4 +208,5 @@ $(function () {
     updateClipping();
     selectableEmbedCode();
     audiOnlySwitch();
+    pollEventTimes();
 });
