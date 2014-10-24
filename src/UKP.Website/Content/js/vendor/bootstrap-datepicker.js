@@ -1598,7 +1598,7 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev"><i class="fa fa-arrow-right-thin fa-lg fa-flip-horizontal"></i></th>'+
+								'<th class="prev"><i class="fa fa-arrow-left-thin fa-lg"></i></th>'+
 								'<th colspan="5" class="datepicker-switch"></th>'+
 								'<th class="next"><i class="fa fa-arrow-right-thin fa-lg"></i></th>'+
 							'</tr>'+

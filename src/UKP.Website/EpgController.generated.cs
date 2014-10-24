@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace UKP.Website.Controllers
 {
-    public partial class EpgController
+    public partial class GuideController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected EpgController(Dummy d) { }
+        protected GuideController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -56,13 +56,13 @@ namespace UKP.Website.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public EpgController Actions { get { return MVC.Epg; } }
+        public GuideController Actions { get { return MVC.Guide; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Epg";
+        public readonly string Name = "Guide";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Epg";
+        public const string NameConst = "Guide";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -95,9 +95,9 @@ namespace UKP.Website.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_EpgController : UKP.Website.Controllers.EpgController
+    public partial class T4MvcGuideController : UKP.Website.Controllers.GuideController
     {
-        public T4MVC_EpgController() : base(Dummy.Instance) { }
+        public T4MvcGuideController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);

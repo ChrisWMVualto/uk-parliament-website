@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        @if (DateTime.Now.Date <= Model.RecessMessage.ExpirationDate.ToLocalTime().Date)
+        @if(DateTime.Now.Date <= Model.RecessMessage.ExpirationDate.ToLocalTime().Date)
         {
             <div class="alert alert-parliament fade in" role="alert">
                 <span class="vr-alert-parliament"></span>
@@ -44,9 +44,9 @@
 <!--START:TAB SELECT-->
 <div class="visible-xs clearfix">
     <select class="selectpicker select-home-tabs">
-        <option value="0" class="select-commons" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Commons())">House of Commons</option>
-        <option value="1" class="select-lords" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Lords())">House of Lords</option>
-        <option value="2" class="select-committees" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Committees())">All Committees</option>
+        <option value="0" class="select-commons" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Commons())" @(ViewContext.RouteData.Values["action"].ToString().ToLower() ==  MVC.Home.Commons().GetT4MVCResult().Action.ToLower() ? "selected='selected'": "")>House of Commons</option>
+        <option value="1" class="select-lords" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Lords())" @(ViewContext.RouteData.Values["action"].ToString().ToLower() ==  MVC.Home.Lords().GetT4MVCResult().Action.ToLower() ? "selected='selected'": "")>House of Lords</option>
+        <option value="2" class="select-committees" data-icon="" data-url="@Url.ActionAbsolute(MVC.Home.Committees())" @(ViewContext.RouteData.Values["action"].ToString().ToLower() ==  MVC.Home.Committees().GetT4MVCResult().Action.ToLower() ? "selected='selected'": "")>All Committees</option>
     </select>
 </div>
 <!--END:TABS SELECT-->

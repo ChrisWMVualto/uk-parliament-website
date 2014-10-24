@@ -198,6 +198,7 @@
     <Content Include="Content\img\filler-thumb-4.jpg" />
     <Content Include="Content\img\icons.png" />
     <Content Include="Content\img\logo-main.png" />
+    <Content Include="Content\img\rotate.png" />
     <Content Include="Content\img\shadow-right.png" />
     <Content Include="Content\img\share.jpg" />
     <Content Include="Content\img\theme-committees-blurred.jpg" />
@@ -207,6 +208,7 @@
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.autocomplete.mod.js" />
     <Content Include="Content\js\log-moments.js" />
     <Content Include="Content\js\event.js" />
     <Content Include="Content\js\jquery.autocomplete.js" />
@@ -217,14 +219,17 @@
     <Content Include="Content\js\vendor\bootstrap-checkbox.js" />
     <Content Include="Content\js\vendor\bootstrap-datepicker.js" />
     <Content Include="Content\js\vendor\bootstrap-select.js" />
-    <Content Include="Content\js\vendor\bootstrap-timepicker.js" />
+    <Content Include="Content\js\vendor\bootstrap-timepicker-mod.js" />
     <Content Include="Content\js\vendor\breakpoints.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.min.js" />
+    <Content Include="Content\js\vendor\jQuery-Mobile.js" />
     <Content Include="Content\js\vendor\jquery.pep.js" />
     <Content Include="Content\js\vendor\jquery.slimscroll.js" />
+    <Content Include="Content\js\vendor\jquery.succinct.min.js" />
     <Content Include="Content\js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="Content\js\vendor\slick.js" />
+    <Content Include="Content\js\vendor\stickyfloat.min.js" />
     <Content Include="Global.asax" />
     <Content Include="robots.txt" />
     <Content Include="Content\css\fonts\slick.eot" />
@@ -277,7 +282,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\CookieController.cs" />
-    <Compile Include="Controllers\EpgController.cs" />
+    <Compile Include="Controllers\GuideController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\NotSupportedController.cs" />
@@ -377,7 +382,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Epg\" />
+    <Folder Include="Views\Guide\" />
     <Folder Include="Views\Player\" />
     <Folder Include="Views\SearchApi\" />
   </ItemGroup>

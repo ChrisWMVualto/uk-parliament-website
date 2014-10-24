@@ -26,7 +26,7 @@ using T4MVC;
 public static partial class MVC
 {
     public static UKP.Website.Controllers.CookieController Cookie = new UKP.Website.Controllers.T4MVC_CookieController();
-    public static UKP.Website.Controllers.EpgController Epg = new UKP.Website.Controllers.T4MVC_EpgController();
+    public static UKP.Website.Controllers.GuideController Guide = new UKP.Website.Controllers.T4MvcGuideController();
     public static UKP.Website.Controllers.EventController Event = new UKP.Website.Controllers.T4MVC_EventController();
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
     public static UKP.Website.Controllers.NotSupportedController NotSupported = new UKP.Website.Controllers.T4MVC_NotSupportedController();

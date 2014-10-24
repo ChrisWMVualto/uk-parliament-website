@@ -34,16 +34,6 @@ $(document).ready(function () {
     });
 
 
-    ////////////////////////////////////////////
-    //clip date
-    ////////////////////////////////////////////
-    if ($(".clip-date").length) {
-        $('.clip-date').selectpicker({
-            style: 'btn-clip-date form-control input-lg',
-            size: 4
-        });
-    }
-
 
     ////////////////////////////////////////////
     //home-select menu
@@ -120,30 +110,10 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //home-tabs joined to responsive select
     ////////////////////////////////////////////
-    $.each($('select.select-home-tabs').children(), function () {
-        if ($(this).attr('data-url') == window.location.href) {
-            $(this).attr('selected', 'selected');
-
-            $('.select-home-tabs').selectpicker({
-                style: 'btn-home-select',
-                size: 4
-            });
-
-            return false;
-        }
-    });
-
     $('select.select-home-tabs').on('change', function () {
         window.location = $(this).children(':selected').attr('data-url');
     });
 
-
-    ////////////////////////////////////////////
-    //audio active toggle
-    ////////////////////////////////////////////
-    $(".audio-toggle").click(function () {
-        $(this).toggleClass("active");
-    });
 
 
     ////////////////////////////////////////////
@@ -213,7 +183,7 @@ $(document).ready(function () {
     /////////////////////////////////////////////
     //click false
     /////////////////////////////////////////////
-    $('.info, .audio-toggle, .close-pane').click(function (event) {
+    $('.info, .close-pane').click(function (event) {
         event.preventDefault();
         // or use return false;
     });
