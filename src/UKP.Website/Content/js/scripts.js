@@ -194,20 +194,10 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     if ($(".date-picker").length) {
         $('.date-picker').datepicker({
-            weekStart: 1
+            weekStart: 1,
+            autoclose: true
         });
     }
-
-    $('.end-date').datepicker({
-        autoclose: true,
-        weekStart: 1
-    });
-
-
-    $('.start-date').datepicker({
-        autoclose: true,
-        weekStart: 1
-    });
 
 
     ////////////////////////////////////////////
