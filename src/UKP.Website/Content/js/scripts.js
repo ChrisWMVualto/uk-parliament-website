@@ -1,4 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
+
     ////////////////////////////////////////////
     //Cookies
     ////////////////////////////////////////////
@@ -23,13 +25,45 @@ $(document).ready(function() {
     ////////////////////////////////////////////
     $('.popover-markup > .trigger').popover({
         html: true,
-        title: function() {
+        title: function () {
             return $(this).parent().find('.head').html();
         },
-        content: function() {
+        content: function () {
             return $(this).parent().find('.content').html();
         }
     });
+
+
+    ////////////////////////////////////////////
+    //clip date
+    ////////////////////////////////////////////
+    if ($(".clip-date").length) {
+        $('.clip-date').selectpicker({
+            style: 'btn-clip-date form-control input-lg',
+            size: 4
+        });
+    }
+
+
+    ////////////////////////////////////////////
+    //home-select menu
+    ////////////////////////////////////////////
+    if ($(".select-home-tabs").length) {
+        $('.select-home-tabs').selectpicker({
+            style: 'btn-home-select',
+            size: 4
+        });
+    }
+
+
+    ////////////////////////////////////////////
+    //truncate text
+    ////////////////////////////////////////////
+    if ($(".truncate-archive").length) {
+        $('.truncate-archive').succinct({
+            size: 80
+        });
+    }
 
 
     ////////////////////////////////////////////
@@ -46,9 +80,10 @@ $(document).ready(function() {
     ////////////////////////////////////////////
     //remove tag
     ////////////////////////////////////////////
-    $(".btn-tag").click(function() {
+    $(".btn-tag").click(function () {
         $(this).remove();
     });
+
 
     ////////////////////////////////////////////
     //bootstrap checkbox
@@ -67,24 +102,25 @@ $(document).ready(function() {
         });
     }
 
+
     ////////////////////////////////////////////
     //player share & info pane close btn's
     ////////////////////////////////////////////
-
-    $(".close-info").click(function() {
+    $(".close-info").click(function () {
         $("#info").removeClass("active");
         $("#info-tab").removeClass("active");
     });
 
-    $(".close-share").click(function() {
+    $(".close-share").click(function () {
         $("#share").removeClass("active");
         $("#share-tab").removeClass("active");
     });
 
+
     ////////////////////////////////////////////
     //home-tabs joined to responsive select
     ////////////////////////////////////////////
-    $.each($('select.select-home-tabs').children(), function() {
+    $.each($('select.select-home-tabs').children(), function () {
         if ($(this).attr('data-url') == window.location.href) {
             $(this).attr('selected', 'selected');
 
@@ -97,49 +133,52 @@ $(document).ready(function() {
         }
     });
 
-    $('select.select-home-tabs').on('change', function() {
+    $('select.select-home-tabs').on('change', function () {
         window.location = $(this).children(':selected').attr('data-url');
     });
+
 
     ////////////////////////////////////////////
     //audio active toggle
     ////////////////////////////////////////////
-    $(".audio-toggle").click(function() {
+    $(".audio-toggle").click(function () {
         $(this).toggleClass("active");
     });
+
 
     ////////////////////////////////////////////
     //home-recently archived na btns
     ////////////////////////////////////////////
-    $('#recentNextCommons').click(function() {
+    $('#recentNextCommons').click(function () {
         $('#recentlyArchivedCommons').slickNext();
         return false;
     });
 
-    $('#recentPrevCommons').click(function() {
+    $('#recentPrevCommons').click(function () {
         $('#recentlyArchivedCommons').slickPrev();
         return false;
     });
 
-    $('#recentNextLords').click(function() {
+    $('#recentNextLords').click(function () {
         $('#recentlyArchivedLords').slickNext();
         return false;
     });
 
-    $('#recentPrevLords').click(function() {
+    $('#recentPrevLords').click(function () {
         $('#recentlyArchivedLords').slickPrev();
         return false;
     });
 
-    $('#recentNextCommittees').click(function() {
+    $('#recentNextCommittees').click(function () {
         $('#recentlyArchivedCommittees').slickNext();
         return false;
     });
 
-    $('#recentPrevCommittees').click(function() {
+    $('#recentPrevCommittees').click(function () {
         $('#recentlyArchivedCommittees').slickPrev();
         return false;
     });
+
 
     ////////////////////////////////////////////
     //epg-slimscroll details alert stack area
@@ -155,76 +194,127 @@ $(document).ready(function() {
         });
     }
 
+
+    ////////////////////////////////////////////
+    //terms & conditions - share
+    ////////////////////////////////////////////
+    if ($(".tc-box ").length) {
+        $('.tc-box ').slimScroll({
+            railVisible: true,
+            railColor: '#E6EBEE',
+            railOpacity: 0.3,
+            color: '#C1C7C9',
+            size: '12px',
+            height: '300'
+        });
+    }
+
+
     /////////////////////////////////////////////
     //click false
     /////////////////////////////////////////////
-    $('.info, .audio-toggle, .close-pane').click(function(event) {
+    $('.info, .audio-toggle, .close-pane').click(function (event) {
         event.preventDefault();
         // or use return false;
     });
+
 
     ////////////////////////////////////////////
     //epg-datepicker
     ////////////////////////////////////////////
     if ($(".date-picker").length) {
-        $('.date-picker').datepicker();
+        $('.date-picker').datepicker({
+            weekStart: 1
+        });
     }
+
+    $('.end-date').datepicker({
+        autoclose: true,
+        weekStart: 1
+    });
+
+
+    $('.start-date').datepicker({
+        autoclose: true,
+        weekStart: 1
+    });
+
 
     ////////////////////////////////////////////
     //epg-timepicker
     ////////////////////////////////////////////
     if ($("#epgTimepicker").length) {
-        $('#epgTimepicker').timepicker().bind('changeTime.timepicker', changeEpgTime);
+        $('#epgTimepicker').timepicker({
+            timeSeparator: '.'
+        }).on('changeTime.timepicker', changeEpgTime);
     }
+
 
     ////////////////////////////////////////////
     //epg-day tabs
     ////////////////////////////////////////////
     var $li = $('.days-tab li'); // or var $li = $('#id li');
 
-    $li.click(function() {
+    $li.click(function () {
         $li.removeClass('active');
         $(this).addClass('active');
     });
 
+    $('.btn-search-panel').click(function () {
+        $(this).toggleClass('active').find('i').toggleClass('fa-plus fa-minus')
+            .removeClass('active').find('i')
+            .removeClass('fa-minus').addClass('fa-plus');
+
+    });
+
+
     ////////////////////////////////////////////
     //epg-draggable
     ////////////////////////////////////////////
-    $('.draggable').pep({
-        axis: 'x',
-        useCSSTranslation: false,
-        shouldPreventDefault: false,
-        constrainTo: [0, 0, 0, ($('.draggable').width() - $(".drag-wrap").width()) * -1],
-        hardwareAccelerate: false
+    $('.stream-container-inner').scrollLeft(function () {
+        var time = new Date();
+        var leftBuffer = 40;
+        return leftPositionFromTime(time.getHours(), time.getMinutes()) - leftBuffer;
+    });
+    resizeProgrammes($('.stream-container-inner'));
+
+    var resizeProgrammesTimeoutId;
+    $('.stream-container-inner').on('scroll', function () {
+        var that = this;
+        clearInterval(resizeProgrammesTimeoutId);
+        resizeProgrammesTimeoutId = setTimeout(function () {
+            resizeProgrammes(that);
+        }, 250);
     });
 
-    $('.draggable').find('a').on('touchstart mousedown MSPointerDown', function(e) {
+    $('.stream-container-inner').find('a').on('touchstart mousedown MSPointerDown', function (e) {
         e.stopPropagation();
 
         // We'll have to pass an event ID in here in the long run.
         // They'll be added to the HTML sever-side.
         $('#epgInfoPopup').show();
-        loadInfoPopup(this);
     });
 
-    $('[data-hide]').bind("click", function() {
+    $('[data-hide]').on("click", function () {
         $("." + $(this).attr("data-hide")).hide();
     });
 
-    /*
-  					//Enable swiping...
-  					$(".carousel-inner").swipe( {
-  						//Generic swipe handler for all directions
-  						swipeLeft:function(event, direction, distance, duration, fingerCount) {
-  							$(this).parent().carousel('prev');
-  						},
-  						swipeRight: function() {
-  							$(this).parent().carousel('next');
-  						},
-  						//Default is 75px, set to 0 for demo so any distance triggers swipe
-  						threshold:0
-  					});
-  */
+    if ($('.epg-outer').length > 0)
+        floatingNav();
+
+
+    ////////////////////////////////////////////
+    //carousels swipable
+    ////////////////////////////////////////////
+    if ($(".carousel").length) {
+        $("#carouselCommons, #carouselLords, #carouselCommittees").swiperight(function () {
+            $(this).carousel('prev');
+        });
+        $("#carouselCommons, #carouselLords, #carouselCommittees").swipeleft(function () {
+            $(this).carousel('next');
+        });
+    }
+
 
     ////////////////////////////////////////////
     //breakpoints
@@ -241,30 +331,36 @@ $(document).ready(function() {
         ]
     });
 
-    $(window).bind('enterBreakpoint300', function() {
-        /* $('#miniGuideCommons, #miniGuideLords, #miniGuideCommittees').slick({
-          centerMode: true,
-          infinite: true,
-          centerPadding: '60px',
-          slidesToShow: 1,
-      });*/
+    $(window).on('enterBreakpoint300', function () {
+
+        $("#searchPanel").removeClass('in').css("height", "0");
+
+
+        //terms box height
+        $('.tc-box, .tc-box-container .slimScrollDiv').css({
+            height: 'auto'
+        });
+
     });
 
-    $(window).bind('exitBreakpoint300', function() {
+    $(window).on('exitBreakpoint300', function () {
         //console.log('exit');
         // $('#miniGuideCommons, #miniGuideLords, #miniGuideCommittees').unslick();
+        $("#searchPanel").addClass('in').css("height", "auto");
     });
 
-    $(window).bind('enterBreakpoint768', function() {
+    $(window).on('enterBreakpoint768', function () {
 
 
         // $(".stack").slimScroll({destroy: true});
     });
 
-    $(window).bind('exitBreakpoint768', function() {
+    $(window).on('exitBreakpoint768', function () {
+
     });
 
-    $(window).bind('enterBreakpoint1024', function() {
+    $(window).on('enterBreakpoint1024', function () {
+        //add slick
         $('#recentlyArchivedCommons, #recentlyArchivedLords, #recentlyArchivedCommittees').slick({
             centerMode: false,
             infinite: true,
@@ -273,24 +369,67 @@ $(document).ready(function() {
             slidesToShow: 1,
             onAfterChange: updateArrowText
         });
+
+
+        //terms box height
+        $('.tc-box, .tc-box-container .slimScrollDiv').css({
+            height: '300px'
+        });
+
+
     });
 
-    $(window).bind('exitBreakpoint1024', function() {
+    $(window).on('exitBreakpoint1024', function () {
+        //remove slick carousel
         $('#recentlyArchivedCommons, #recentlyArchivedLords, #recentlyArchivedCommittees').unslick();
+
+
     });
-
-
-////////////////////////////////////////////
-//EPG Time Scroll
-////////////////////////////////////////////
-    $('#epgScrollRight, #epgScrollLeft').bind('click', scrollEpg);
 
 
     ////////////////////////////////////////////
     //EPG Time Scroll
     ////////////////////////////////////////////
+    $('#epgScrollRight, #epgScrollLeft').on('click', scrollEpg);
     $('#epgTimeScrollRight, #epgTimeScrollLeft').bind('click', scrollEpg);
     $('#epgDateScrollRight, #epgDateScrollLeft').bind('click', changeDateTab);
+
+
+    ////////////////////////////////////////////
+    //Embed terms
+    ////////////////////////////////////////////
+    $('.embed-code').hide();
+    $('.embed-terms .btn-agree').on('click', function (e) {
+        e.preventDefault();
+
+        $('.embed-terms').fadeOut();
+        $('.embed-code').fadeIn();
+    });
+
+
+    ////////////////////////////////////////////
+    //Embed timepickers
+    ////////////////////////////////////////////
+    var opts = {
+        defaultTime: false,
+        showSeconds: true,
+        showMeridian: true,
+        minuteStep: 1,
+        secondStep: 1
+    };
+    $('#startTime').timepicker(opts);
+    $('#endTime').timepicker(opts);
+
+
+    ////////////////////////////////////////////
+    //EPG Dates window resize handler
+    ////////////////////////////////////////////
+    resize();
+    $(window).on("resize", resize);
+
+    function resize() {
+        $('.days-tab-inner').css('width', $('.stream-container-outer').width());
+    }
 });
 
 
@@ -305,6 +444,7 @@ function updateArrowText() {
         slideActive = null,
         nextIndex = null,
         prevIndex = null;
+
 
     for (var i = 0; i < this.$slides.length; i++) {
         slideActive = this.$slides[i].classList.contains("slick-active");
@@ -331,76 +471,53 @@ function updateArrowText() {
 
 
 ////////////////////////////////////////////
-//EPG Info Popup
-////////////////////////////////////////////
-function loadInfoPopup(obj) {
-    var offset = 2,
-        top = $(obj).parents().eq(3).position().top - offset;
-
-    $('#epgInfoPopup').css('top', top);
-}
-
-
-////////////////////////////////////////////
 //EPG Time Scroll
 ////////////////////////////////////////////
 function scrollEpg() {
-    var container = $('.stream-container-outer'),
-        containerInner = container.find('.stream-container-inner'),
-        leftPosition = containerInner.position().left,
-        oneHour = -300,
+    var container = $('.stream-container-inner'),
+        moveDist = globHourWidth * 2,
         clickedArrow = $(this).attr('id'),
         leftArrow = "epgTimeScrollLeft",
         rightArrow = "epgTimeScrollRight",
-        disableClass = "disable",
-        rightPosition = (container.find('.timeline').width() - container.width() + oneHour) * -1;
+        disableClass = "disable";
 
     if (clickedArrow == rightArrow) {
-        if (rightPosition >= leftPosition) {
-            leftPosition = rightPosition;
-            $("#" + rightArrow).addClass(disableClass);
-        } else {
-            leftPosition += oneHour;
-            $("#" + rightArrow).removeClass(disableClass);
-        }
+        container.scrollLeft(container.scrollLeft() + moveDist);
     }
 
     if (clickedArrow == leftArrow) {
-        if (leftPosition >= oneHour) {
-            leftPosition = 0;
-            $("#" + leftArrow).addClass(disableClass);
-        } else {
-            leftPosition -= oneHour;
-            $("#" + leftArrow).removeClass(disableClass);
-        }
+        container.scrollLeft(container.scrollLeft() - moveDist);
     }
-
-    containerInner.animate({
-        left: leftPosition
-    }, 500);
 }
 
+////////////////////////////////////////////
+//EPG Timepicker scrolling
+////////////////////////////////////////////
 function changeEpgTime(event) {
     var meridian = event.time.meridian,
         hours = event.time.hours,
         minutes = event.time.minutes,
-        hourPx = 300,
-        container = $('.stream-container-inner'),
-        leftPosition;
+        hourPx = globHourWidth,
+        container = $('.stream-container-inner');
 
     if (meridian == "PM")
         hours += 12;
 
-    leftPosition = ((hours * hourPx) + (hourPx * (minutes / 60))) * -1;
-
-    container.animate({
-        left: leftPosition
-    }, 500);
-
-    prevEpgMin = minutes;
-    prevEpgHour = hours;
+    container.scrollLeft(leftPositionFromTime(hours, minutes));
 }
 
+
+////////////////////////////////////////////
+//Position scrolling based on time
+////////////////////////////////////////////
+function leftPositionFromTime(hour, minute) {
+    return ((hour * globHourWidth) + (globHourWidth * (minute / 60)));
+}
+
+
+////////////////////////////////////////////
+//Change the highlighted date tab
+////////////////////////////////////////////
 function changeDateTab(event) {
     var days = $('.days-tab ol')[0].children,
         activeIndex,
@@ -423,5 +540,142 @@ function changeDateTab(event) {
     if ($(this).attr('id') == rightArrow && activeIndex < days.length - 1) {
         $(days[activeIndex]).removeClass(activeClass);
         $(days[activeIndex + 1]).addClass(activeClass);
+    }
+}
+
+
+////////////////////////////////////////////
+//Controls the flaoting EPG dates and times
+////////////////////////////////////////////
+var triggerFloatTimeoutId;
+function floatingNav() {
+    var fixedClass = 'fixed-epg',
+        container = $('.main-container'),
+        epg = $('.epg-outer'),
+        timeline = $('.timeline'),
+        header = $('.header-main div'),
+        title = $('.title-container'),
+        streamContainer = $('.stream-container-inner'),
+        freezeFrom = $('.channel-eightteen'),
+        infoPopup = $('#epgInfoPopup');
+
+
+    $(window).on('scroll', function () {
+        epg.fadeOut(200);
+        timeline.fadeOut(200);
+        clearInterval(triggerFloatTimeoutId);
+        triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
+    });
+
+    function datesOffset(freeze) {
+        if (freeze)
+            return freezeFrom.offset().top - freezeFrom.parent().parent().offset().top + header.outerHeight();
+        else
+            return ($(window).scrollTop() - epg.parent().offset().top) + header.outerHeight();
+    }
+
+    function timesOffset(freeze) {
+        return datesOffset(freeze) + 109;
+    }
+
+    function epgInfoOffset(freeze) {
+        return timesOffset(freeze) + (timeline.height() * 1);
+    }
+
+    function triggerFloat() {
+        applyStyles($(window).scrollTop() >= title.height());
+    }
+
+    function freezeMenu() {
+        return $(window).scrollTop() >= freezeFrom.offset().top;
+    }
+
+    function applyStyles(isActive) {
+        streamContainer.css({
+            'paddingTop': timeline.height()
+        });
+
+        if (isActive) {
+            epg.css({
+                'position': 'absolute',
+                'top': datesOffset(freezeMenu())
+            });
+            timeline.css({
+                'top': timesOffset(freezeMenu())
+            });
+            infoPopup.css({
+                'top': epgInfoOffset(freezeMenu())
+            });
+            container.addClass(fixedClass);
+        } else {
+            epg.css({
+                'position': 'relative',
+                'top': 0
+            });
+            timeline.css({
+                'top': 0
+            });
+            infoPopup.css({
+                'top': timeline.height()
+            });
+            container.removeClass(fixedClass);
+        }
+        epg.fadeIn(200);
+        timeline.fadeIn(200);
+    }
+}
+
+
+////////////////////////////////////////////
+//Resizes the programmes to keep them on screen
+////////////////////////////////////////////
+function resizeProgrammes(container) {
+    var that = this,
+        container = $(container),
+        containerPosition = container.scrollLeft(),
+        edgeOffset = 20;
+
+    $.each(container.find('ol.channel-list'), function () {
+        var preSpace = 0;
+
+        $.each($(this).children('li'), function () {
+            if ($(this).attr('data-width') == null)
+                $(this).attr('data-width', $(this).width())
+
+            if ($(this).has('.blank').length == 0)
+                calculateMove(preSpace, this);
+
+            preSpace += $(this).outerWidth();
+        });
+    });
+
+    function calculateMove(preSpace, context) {
+        preSpace += edgeOffset;
+
+        if (preSpace <= containerPosition) {
+            var margin = containerPosition - preSpace;
+
+            if (width($(context).innerWidth(), margin) < 120) {
+                margin = $(context).innerWidth() - 120;
+                $(context).addClass('event');
+            } else {
+                $(context).removeClass('event');
+            }
+
+            moveTo(margin, context);
+        } else
+            moveTo(0, context);
+    }
+
+    function moveTo(amount, context) {
+        if ($(context).outerWidth() > 120) {
+            $(context).find('.outer .inner').animate({
+                'marginLeft': amount
+            }, 500);
+        }
+    }
+
+    function width(margin, original) {
+        return (original - margin) * -1;
     }
 }
