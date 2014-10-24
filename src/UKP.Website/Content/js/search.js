@@ -136,14 +136,3 @@ $(function () {
         }
     });
 });
-
-
-$('.end-date').datepicker({
-    autoclose: true,
-    format: 'dd/mm/yyyy'
-});
-
-$('.start-date').datepicker({
-    autoclose: true,
-    format: 'dd/mm/yyyy'
-});
