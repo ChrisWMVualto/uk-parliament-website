@@ -37,24 +37,14 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual JsonResult GetShareVideo(Guid id, TimeSpan? @in = null, TimeSpan? @out = null)
+        public virtual JsonResult GetShareVideo(Guid id, string @in = null, string @out = null)
         {
-            var video =_videoService.GetVideo(id, null, null, null, false);
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
 
-            if (!@in.HasValue && !@out.HasValue) return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false);
 
-            if (video == null) return null;
-
-            DateTime? inPointDate = null;
-            if(@in.HasValue && video.Event.PublishedStartTime.HasValue)
-                inPointDate = video.Event.PublishedStartTime.Value.Add(@in.Value);
-
-            DateTime? outPointDate = null;
-            if(@out.HasValue & video.Event.PublishedStartTime.HasValue)
-                outPointDate = video.Event.PublishedStartTime.Value.Add(@out.Value);
-
-            var videoModel = _videoService.GetVideo(id, inPointDate, outPointDate, null, false);
-            return this.JsonFormatted(videoModel, JsonRequestBehavior.AllowGet);
+            return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -80,18 +70,18 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-
             var video = _videoService.GetVideo(id, inPoint, outPoint);
 
             TimeSpan? inPointTime = null;
-            if (video.RequestedInPoint.HasValue && video.Event.PublishedStartTime.HasValue)
-                inPointTime = video.Event.PublishedStartTime - video.RequestedInPoint;
+            if(video.RequestedInPoint.HasValue) inPointTime = video.RequestedInPoint.Value.ToLocalTime().TimeOfDay;
 
             TimeSpan? outPointTime = null;
-            if(video.RequestedOutPoint.HasValue && video.Event.PublishedStartTime.HasValue)
-                outPointTime = video.Event.PublishedStartTime - video.RequestedOutPoint;
+            if(video.RequestedOutPoint.HasValue) outPointTime = video.RequestedOutPoint.Value.ToLocalTime().TimeOfDay;
 
-            return PartialView(MVC.Event.Views._Clipping, new ClippingViewModel(video, inPointTime, outPointTime));
+            var inPointDate = video.RequestedInPoint.HasValue ? video.RequestedInPoint.Value : video.Event.DisplayStartDate;
+            var outPointDate = video.RequestedOutPoint.HasValue ? video.RequestedOutPoint.Value : video.Event.DisplayEndDate;
+
+            return PartialView(MVC.Event.Views._Clipping, new ClippingViewModel(video, inPointTime, outPointTime, inPointDate, outPointDate));
         }
 
 
@@ -111,9 +101,6 @@ namespace UKP.Website.Controllers
             if(st.HasValue)
             {
                 var timeOfDay = legacyVideo.Event.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
-                if(legacyVideo.Event.ActualStartTime.HasValue) timeOfDay = legacyVideo.Event.ActualStartTime.Value.Date.ToLocalTime().Add(st.Value);
-                if (legacyVideo.Event.PublishedStartTime.HasValue) timeOfDay = legacyVideo.Event.PublishedStartTime.Value.Date.ToLocalTime().Add(st.Value);
-
                 var date = timeOfDay.ToISO8601String();
                 return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, date));
             }

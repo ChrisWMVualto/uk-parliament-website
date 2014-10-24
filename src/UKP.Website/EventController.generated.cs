@@ -268,10 +268,10 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void GetShareVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out);
+        partial void GetShareVideoOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.JsonResult GetShareVideo(System.Guid id, System.TimeSpan? @in, System.TimeSpan? @out)
+        public override System.Web.Mvc.JsonResult GetShareVideo(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetShareVideo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);

@@ -26,8 +26,8 @@ using T4MVC;
 public static partial class MVC
 {
     public static UKP.Website.Controllers.CookieController Cookie = new UKP.Website.Controllers.T4MVC_CookieController();
-    public static UKP.Website.Controllers.GuideController Guide = new UKP.Website.Controllers.T4MvcGuideController();
     public static UKP.Website.Controllers.EventController Event = new UKP.Website.Controllers.T4MVC_EventController();
+    public static UKP.Website.Controllers.GuideController Guide = new UKP.Website.Controllers.T4MVC_GuideController();
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
     public static UKP.Website.Controllers.NotSupportedController NotSupported = new UKP.Website.Controllers.T4MVC_NotSupportedController();
     public static UKP.Website.Controllers.PlayerController Player = new UKP.Website.Controllers.T4MVC_PlayerController();
@@ -312,6 +312,7 @@ namespace Links
             public static readonly string filler_thumb_4_jpg = Url("filler-thumb-4.jpg");
             public static readonly string icons_png = Url("icons.png");
             public static readonly string logo_main_png = Url("logo-main.png");
+            public static readonly string rotate_png = Url("rotate.png");
             public static readonly string shadow_right_png = Url("shadow-right.png");
             public static readonly string share_jpg = Url("share.jpg");
             public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
@@ -330,6 +331,7 @@ namespace Links
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
+            public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");
             public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
             public static readonly string log_moments_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/log-moments.min.js") ? Url("log-moments.min.js") : Url("log-moments.js");
             public static readonly string responsive_player_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/responsive-player.min.js") ? Url("responsive-player.min.js") : Url("responsive-player.js");
@@ -343,14 +345,17 @@ namespace Links
                 public static readonly string bootstrap_checkbox_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-checkbox.min.js") ? Url("bootstrap-checkbox.min.js") : Url("bootstrap-checkbox.js");
                 public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
                 public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
-                public static readonly string bootstrap_timepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker.min.js") ? Url("bootstrap-timepicker.min.js") : Url("bootstrap-timepicker.js");
+                public static readonly string bootstrap_timepicker_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker-mod.min.js") ? Url("bootstrap-timepicker-mod.min.js") : Url("bootstrap-timepicker-mod.js");
                 public static readonly string breakpoints_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/breakpoints.min.js") ? Url("breakpoints.min.js") : Url("breakpoints.js");
                 public static readonly string jquery_1_10_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.1.min.js") ? Url("jquery-1.10.1.min.js") : Url("jquery-1.10.1.js");
                 public static readonly string jquery_1_10_1_min_js = Url("jquery-1.10.1.min.js");
+                public static readonly string jQuery_Mobile_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jQuery-Mobile.min.js") ? Url("jQuery-Mobile.min.js") : Url("jQuery-Mobile.js");
                 public static readonly string jquery_pep_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.pep.min.js") ? Url("jquery.pep.min.js") : Url("jquery.pep.js");
                 public static readonly string jquery_slimscroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.slimscroll.min.js") ? Url("jquery.slimscroll.min.js") : Url("jquery.slimscroll.js");
+                public static readonly string jquery_succinct_min_js = Url("jquery.succinct.min.js");
                 public static readonly string modernizr_2_6_2_respond_1_1_0_min_js = Url("modernizr-2.6.2-respond-1.1.0.min.js");
                 public static readonly string slick_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/slick.min.js") ? Url("slick.min.js") : Url("slick.js");
+                public static readonly string stickyfloat_min_js = Url("stickyfloat.min.js");
             }
         
         }
