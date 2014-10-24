@@ -86,10 +86,14 @@ function reloadEmbedData() {
         options: {
             start: {
                 input: $('#startTime'),
+                date: $('#startClipDate'),
+                hiddenStart: $('#hiddenStart'),
                 checkbox: $('#startTimeCheck')
             },
             end: {
                 input: $('#endTime'),
+                date: $('#endClipDate'),
+                hiddenEnd: $('#hiddenEnd'),
                 checkbox: $('#endTimeCheck')
             }
         },
@@ -125,17 +129,20 @@ function reloadEmbedData() {
             var end = settings.options.end.input.val();
 
             if (start == "" && end != "") {
-                settings.options.start.input.val("00:00:00");
+                settings.options.start.input.val(settings.options.start.hiddenStart.val());
                 start = settings.options.start.input.val();
             }
 
             if (start != '') {
                 settings.options.start.checkbox.prop("checked", true);
+                start = settings.options.start.date.val() + 'T' + start;
             }
 
             if (end != '') {
                 settings.options.end.checkbox.prop("checked", true);
+                end = settings.options.end.date.val() + 'T' + end;
             }
+
 
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
             $.ajax(url, {
@@ -154,14 +161,25 @@ function reloadEmbedData() {
 
 
     $(settings.options.start.checkbox).click(function () {
-        settings.options.start.input.val("");
-        settings.options.end.input.val("");
-        settings.options.end.checkbox.prop("checked", false);
+
+        if (settings.options.start.checkbox.prop("checked") == false) {
+            settings.options.start.input.val("");
+            settings.options.end.input.val("");
+            settings.options.end.checkbox.prop("checked", false);
+        } else {
+            settings.options.start.input.val(settings.options.start.hiddenStart.val());
+        }
+
         generateEmbedCode();
     });
 
     settings.options.end.checkbox.click(function () {
-        settings.options.end.input.val("");
+        if (settings.options.end.checkbox.prop("checked") == false) {
+            settings.options.end.input.val("");
+        } else {
+            settings.options.end.input.val(settings.options.end.hiddenEnd.val());
+        }
+
         generateEmbedCode();
     });
 
