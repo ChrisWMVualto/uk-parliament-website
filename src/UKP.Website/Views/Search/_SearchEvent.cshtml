@@ -1,16 +1,16 @@
-﻿@using Date.Extensions
-@using RestSharp.Extensions
+﻿@using RestSharp.Extensions
 @using UKP.Website.Application
 @model UKP.Website.Models.Search.SearchViewModel
 
-@if (Model.SearchResult.Results.Any()) {
-    foreach (var item in Model.SearchResult.Results)
+@if(Model.SearchResult.Results.Any())
+{
+    foreach(var item in Model.SearchResult.Results)
     {
         <div class="col-md-12 search-item">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
                     <a href="@Url.Action(MVC.Event.Index(item.Event.Id))" class="search-thumb-inner">
-                        @if (item.Event.ThumbnalUrl.HasValue())
+                        @if(item.Event.ThumbnalUrl.HasValue())
                         {
                             <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
                         }
@@ -18,7 +18,6 @@
                         {
                             <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
                         }
-
                         <span class="img-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         <div class="overlay">
                             <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
@@ -34,8 +33,8 @@
 
                         <div class="row moments">
                             @Html.Partial(MVC.Search.Views._SearchMoment, item)
-                            
-                            @if (item.LogMoments.Results.Count() < item.LogMoments.Total)
+
+                            @if(item.LogMoments.Results.Count() < item.LogMoments.Total)
                             {
                                 <div class="col-md-12 moment-item moment-more">
                                     <button class="btn-link text-center" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments())">@(item.LogMoments.Total - item.LogMoments.Results.Count())  more moments</button>
