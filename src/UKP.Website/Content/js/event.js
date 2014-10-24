@@ -23,6 +23,30 @@ function updateClipping() {
     var clippingUrl = $('#clippingContainer').data("load-url");
     $.get(clippingUrl, function (data) {
         $('#clippingContainer').html(data);
+
+        // TODO: make into function
+        if ($(".clip-date").length) {
+            $('.clip-date').selectpicker({
+                style: 'btn-clip-date form-control input-lg',
+                size: 4
+            });
+        }
+
+        if ($(".checkbox").length) {
+            $(".checkbox").checkbox({
+                buttonStyle: 'btn-checkbox',
+                buttonStyleChecked: 'btn-checkbox',
+                checkedClass: 'fa fa-tick fa-2x',
+                uncheckedClass: 'fa fa-tick fa-2x fa-dark',
+                constructorCallback: null,
+                defaultState: false,
+                defaultEnabled: true,
+                checked: false,
+                enabled: true
+            });
+        }
+
+
         reloadEmbedData();
     });
 }
@@ -171,12 +195,14 @@ function audiOnlySwitch() {
         if (auidoOnlyButtonState == false) {
             auidoOnlyButtonState = true;
             loadPlayer(true);
+            $(this).addClass("active");
             return;
         }
 
         if (auidoOnlyButtonState == true) {
             auidoOnlyButtonState = false;
             loadPlayer(false);
+            $(this).removeClass("active");
             return;
         }
     });

@@ -7,11 +7,11 @@ using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
 {
-    public partial class EpgController : Controller
+    public partial class GuideController : Controller
     {
         private readonly IEventService _eventService;
 
-        public EpgController(IEventService eventService)
+        public GuideController(IEventService eventService)
         {
             _eventService = eventService;
         }

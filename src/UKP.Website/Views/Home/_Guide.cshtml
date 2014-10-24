@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<UKP.Website.Service.Model.EventModel>
 
+
 <section class="section-mini-guide clearfix">
     <div class="row">
         <div class="col-md-12">
             <header class="title-middle">
                 <h2>Brief Guide</h2>
-                <a href="@Url.Action(MVC.Epg.Index())" class="btn btn-lg btn-generic btn-title hidden-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></a>
+                <a href="@Url.Action(MVC.Guide.Index())" class="btn btn-lg btn-generic btn-title hidden-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></a>
             </header>
         </div>
     </div>
@@ -33,6 +34,6 @@
         </div>
     </div>
     <div class="col-md-12">
-        <button class="btn btn-lg btn-block btn-generic btn-backup visible-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></button>
+        <a href="@Url.Action(MVC.Guide.Index())" class="btn btn-lg btn-generic btn-title btn-block btn-backup visible-xs">View Full Event Guide <i class="fa fa-lg fa-angle-double-right"></i></a>
     </div>
 </section>

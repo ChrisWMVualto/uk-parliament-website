@@ -1,5 +1,6 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Application
+@using UKP.Website.Service.Model
 @model UKP.Website.Models.Event.EventViewModel
 
 @{
@@ -14,9 +15,11 @@
     @Html.Hidden("StackPollingInterval", 60000)
 
     <div class="row">
+        
         <div class="col-md-12">
-            <header class="title-main"><h2><i class="fa fa-play-circle fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+            <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
+
         <div class="col-md-12 page-title-bar">
             <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))" class="row">
                 @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
@@ -32,17 +35,20 @@
                     <!--start: player tabs-->
                     <!-- Nav tabs -->
                     <div class="player-tabs">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
-                            <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
+                                <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                            </ul>
                             @if(Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
                             {
-                                if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
+                                if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
                                 {
-                                    <li class="audio-toggle"><a id="audioToggle" href="#"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></a></li>
+                                    <button id="audioToggle" type="button" class="btn audio-toggle pull-right" data-toggle="button"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></button>
                                 }
-                            }
-                        </ul>
+                            } 
+                        </div>
+
                         <!-- Tab panes -->
                         <div class="tab-content">
                             @Html.Partial(MVC.Event.Views._Info, Model)
@@ -67,7 +73,6 @@
 @section scripts {
     <script src="~/Scripts/jquery.signalR-2.1.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script src="~/Content/js/vendor/bootstrap-timepicker.js"></script>
     <script src="~/Content/js/event.js"></script>
     <script src="~/Content/js/log-moments.js"></script>
     <script src="~/Content/js/responsive-player.js"></script>
