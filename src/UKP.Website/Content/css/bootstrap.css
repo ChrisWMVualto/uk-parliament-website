@@ -11094,16 +11094,16 @@ div.select-home-tabs .fa-arrow-down {
 ol.channel-list .fa-circle {
   color: #292c2d;
 }
-ol.channel-one .fa-circle {
+ol.channel-1 .fa-circle {
   color: #016131;
 }
-ol.channel-two .fa-circle {
+ol.channel-2 .fa-circle {
   color: #a1070f;
 }
-ol.channel-three .fa-circle {
+ol.channel-3 .fa-circle {
   color: #016131;
 }
-ol.channel-four .fa-circle {
+ol.channel-4 .fa-circle {
   color: #a1070f;
 }
 ol.channel-list {
@@ -11256,83 +11256,83 @@ ol.channel-list li.event:hover > div {
   width: 132px;
   height: 26px;
 }
-.channel-one-logo {
+.channel-1-logo {
   background-color: #016131;
   background-image: url("../img/channel-one-logo.png");
 }
-.channel-two-logo {
+.channel-2-logo {
   background-color: #a1070f;
   background-image: url("../img/channel-two-logo.png");
 }
-.channel-three-logo {
+.channel-3-logo {
   background-color: #016131;
   background-image: url("../img/channel-three-logo.png");
 }
-.channel-four-logo {
+.channel-4-logo {
   background-color: #a1070f;
   background-image: url("../img/channel-four-logo.png");
 }
-.channel-five-logo {
+.channel-5-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-six-logo {
+.channel-6-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-seven-logo {
+.channel-7-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-eight-logo {
+.channel-8-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-nine-logo {
+.channel-9-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-ten-logo {
+.channel-10-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-eleven-logo {
+.channel-11-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-twelve-logo {
+.channel-12-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-thirteen-logo {
+.channel-13-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-fourteen-logo {
+.channel-14-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-fifteen-logo {
+.channel-15-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-sixteen-logo {
+.channel-16-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-seventeen-logo {
+.channel-17-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-eighteen-logo {
+.channel-18-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-nineteen-logo {
+.channel-19-logo {
   background-color: #292c2d;
   background-image: url("../img/channel-five-logo.png");
 }
-.channel-twenty-logo {
+.channel-20-logo {
   background-color: #35393a;
   background-image: url("../img/channel-five-logo.png");
 }

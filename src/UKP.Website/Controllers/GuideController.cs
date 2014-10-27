@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using UKP.Website.Models.Guide;
 using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
@@ -19,9 +16,10 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            _eventService.GetEpg();
+            var events = _eventService.GetEpgEvents();
+            var model = new GuideViewModel(events);
 
-            return View();
+            return View(model);
         }
     }
 }
