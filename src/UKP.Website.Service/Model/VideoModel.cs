@@ -6,7 +6,7 @@ namespace UKP.Website.Service.Model
     public class VideoModel
     {
         public VideoModel(EventModel @event, string embedCode, string legacyEmbedCode, LogMomentResultModel logMoments, string pageUrl, string shortWebPageUrl,
-            DateTime? requestedInPoint, DateTime? requestedOutPoint, IEnumerable<StackModel> stacks)
+            DateTime? requestedInPoint, DateTime? requestedOutPoint, IEnumerable<StackModel> stacks, string thumbnailUrl)
         {
             Event = @event;
             EmbedCode = embedCode;
@@ -17,6 +17,7 @@ namespace UKP.Website.Service.Model
             RequestedInPoint = requestedInPoint;
             RequestedOutPoint = requestedOutPoint;
             Stacks = stacks;
+            ThumbnailUrl = thumbnailUrl;
         }
 
         public VideoModel(EventModel @event, LogMomentResultModel logMoments)
@@ -33,6 +34,7 @@ namespace UKP.Website.Service.Model
         public DateTime? RequestedInPoint { get; private set; }
         public DateTime? RequestedOutPoint { get; private set; }
         public IEnumerable<StackModel> Stacks { get; private set; }
+        public string ThumbnailUrl { get; private set; }
         public EventModel Event { get; private set; }
     }
 }
