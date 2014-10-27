@@ -7,7 +7,7 @@ namespace UKP.Website.Service
     {
         NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6);
         IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12);
-        IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10);
+        VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10);
         IEnumerable<EventModel> GetEpg();
         List<EpgChannelModel> GetEpgEvents();
     }

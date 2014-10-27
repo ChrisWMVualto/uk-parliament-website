@@ -88,7 +88,7 @@ namespace UKP.Website.Service
             return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
         }
 
-        public IEnumerable<EventModel> GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
+        public VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
         {
             var url = string.Format(String.Format("api/event/archived/{0}/filter/{1}", numEvents, eventFilter.GetEventType()).ToLower(), numEvents);
 
@@ -100,7 +100,7 @@ namespace UKP.Website.Service
             if(response.StatusCode.Equals(HttpStatusCode.NotFound)) return null;
             if(!response.StatusCode.Equals(HttpStatusCode.OK)) throw new RestSharpException(response);
 
-            return EventTransforms.TransformArray(response.Content);
+            return VideoTransforms.TransformArray(response.Content);
         }
 
         private IEnumerable<EventModel> GetEvents()
