@@ -94,11 +94,16 @@
             <div class="row">
                 <div class="col-md-10">
                     <h4>
-
-                        @if(Model.SearchResult.TotalCount > 0)
+                        
+                        @if(Model.SearchResult.TotalCount == 1)
+                        {
+                            <strong>@Model.SearchResult.TotalCount Search Result for:</strong>
+                        }
+                        else if(Model.SearchResult.TotalCount > 0)
                         {
                             <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
                         }
+                        
 
                         @if(!string.IsNullOrWhiteSpace(Model.Keywords))
                         {
