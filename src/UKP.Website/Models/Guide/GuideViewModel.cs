@@ -6,9 +6,9 @@ namespace UKP.Website.Models.Guide
 {
     public class GuideViewModel
     {
-        public IEnumerable<EpgEventModel> Events { get; private set; }
+        public List<EpgChannelModel> Events { get; private set; }
 
-        public GuideViewModel(IEnumerable<EpgEventModel> events)
+        public GuideViewModel(List<EpgChannelModel> events)
         {
             Events = events;
         }

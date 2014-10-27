@@ -47,35 +47,16 @@ namespace UKP.Website.Service
             return EventTransforms.TransformEPG(response.Content);;
         }
 
-        public IEnumerable<EpgEventModel> GetEpgEvents()
+        public List<EpgChannelModel> GetEpgEvents()
         {
             var events = GetEpg();
-            var epgModel = Enumerable.Empty<EpgEventModel>();
+            var epgModel = new List<EpgChannelModel>();
 
             for (var i = 1; i <= 20; i++)
             {
-                var time = 0;
-                var channel = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x));
-                var fullChannel = new List<EpgEventModel>();
-
-                // TODO: Working progress
-                /*foreach(var channelEvent in channel)
-                {
-                    var startTime = channelEvent.EventData.DisplayStartDate.Subtract(DateTime.Now);
-
-                    while (true)
-                    {
-                        if (time == startTime.TotalMinutes)
-                        {
-                            fullChannel.Add(new EpgEventModel());
-                            time += 60;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }*/
+                var channelEvents = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x));
+                var channel = new EpgChannelModel(i, channelEvents.ToList());
+                epgModel.Add(channel);
             }
 
             return epgModel;
