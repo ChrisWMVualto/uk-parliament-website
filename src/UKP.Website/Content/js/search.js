@@ -12,8 +12,7 @@ function momentSearch() {
     var obj = {
         'parent': $(this).parent().parent(),
         'buttonCont': $(this).parent(),
-        'url': $(this).attr('data-url-base'),
-        'queryParams': '',
+        'url': $(this).attr('data-url-base')
     };
     init();
 
@@ -23,7 +22,7 @@ function momentSearch() {
     }
 
     function buildUrl() {
-        return obj.url + obj.queryParams.format(obj.keywords, obj.memberId, obj.house, obj.business, obj.eventId, obj.skipMoments);
+        return obj.url;
     }
 
     function fetchResults() {
@@ -53,7 +52,7 @@ $(function () {
 
     $('#tags')
         .autocomplete({
-            serviceUrl: "http://local.ias.ukp/api/search/tags?tag=",
+            serviceUrl: $('#tags').data('ajax-url'),
             delimiter: ', ',
             displayItem: "displayTag",
             objectPath: "",
@@ -120,7 +119,7 @@ $(function () {
         nextSelector: $('.pagination a'),
         navSelector: $('.pagination'),
         path: function (pageNum) {
-            return window.location + '&page=' + pageNum;
+            return window.location.href + '&page=' + pageNum;
         },
         loading: {
             finishedMsg: '',

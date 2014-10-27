@@ -33,9 +33,6 @@ namespace UKP.Website.Controllers
                 toDate = DateTime.Today;
             }
 
-
-            var searchResults = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
-
             var searchModel = new SearchViewModel()
                               {
                                   Keywords = keywords,
@@ -44,8 +41,13 @@ namespace UKP.Website.Controllers
                                   Business = business,
                                   Start = fromDate,
                                   End = toDate,
-                                  SearchResult = searchResults
                               };
+
+            if(!string.IsNullOrWhiteSpace(start))
+            {
+                searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
+            }
+
             return View(searchModel);
         }
 
