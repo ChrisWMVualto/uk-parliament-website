@@ -4,12 +4,12 @@
 
 <div class="container main-container">
     <div class="row">
-        
+
         <div class="col-md-12">
             <header class="title-main title-search"><h2><i class="fa fa-search"></i> <span>Search</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
 
-        
+
         <div class="col-md-12">
             <button type="button" class="btn btn-default btn-go btn-lg btn-search-panel btn-block visible-xs" data-toggle="collapse" data-target="#searchPanel">
                 Search now <i class="fa fa-plus"></i>
@@ -24,7 +24,7 @@
                 </header>
 
             </div>
-            @using (Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
+            @using(Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
             {
                 <div class="col-md-12">
                     <div class="row">
@@ -34,7 +34,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="keyword"><h4>1. Keywords</h4></label>
-                                @Html.TextBoxFor(x => x.Keywords, new {@class = "form-control input-lg"})
+                                @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
 
@@ -42,21 +42,21 @@
                             <div class="form-group search-param">
                                 <label for="members"><h4>2. Members</h4></label>
                                 <input type="text" class="form-control input-lg" id="members" data-ajax-url="@Configuration.GetMemberAutocompleteApi">
-                                @Html.HiddenFor(x => x.MemberId, new {@class = "form-control input-lg"})
+                                @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="tags"><h4>3. Tags</h4></label>
-                                <input type="text" class="form-control input-lg" id="tags">
+                                <input type="text" class="form-control input-lg" id="tags" data-ajax-url="@(Configuration.GetIasBaseUrl + "/api/search/tags?tag=")">
                                 @Html.HiddenFor(x => x.House)
                                 @Html.HiddenFor(x => x.Business)
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-4">
@@ -64,7 +64,7 @@
                                 <label for="startDate"><h4>4. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                    @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date date-picker input-lg" })
+                                    @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <label for="endDate"><h4>5. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
-                                   @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date date-picker input-lg" })
+                                    @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
                                 </div>
                             </div>
                         </div>
@@ -94,26 +94,41 @@
             <div class="row">
                 <div class="col-md-10">
                     <h4>
-                        @if (!string.IsNullOrWhiteSpace(Model.Keywords))
+                        
+                        @if(Model.SearchResult.TotalCount == 1)
                         {
-                            @(Model.Keywords + "-")
+                            <strong>@Model.SearchResult.TotalCount Search Result for:</strong>
+                        }
+                        else if(Model.SearchResult.TotalCount > 0)
+                        {
+                            <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
+                        }
+                        
+
+                        @if(!string.IsNullOrWhiteSpace(Model.Keywords))
+                        {
+                            @Model.Keywords
                         }
 
-                        
-                        
-                        @if (Model.House != null)
+                        @if(!string.IsNullOrWhiteSpace(Model.House) || !string.IsNullOrWhiteSpace(Model.Business))
                         {
-                            foreach (var house in Model.House)
+                            <text>-</text>
+                        }
+
+
+                        @if(Model.House != null)
+                        {
+                            foreach(var house in Model.House)
                             {
-                                Html.Raw(string.Format("House: {0}, ", house));
+                                @Html.Raw(string.Format("House: {0}, ", house));
                             }
                         }
-                        
-                        @if (Model.Business != null)
+
+                        @if(Model.Business != null)
                         {
-                            foreach (var business in Model.Business)
+                            foreach(var business in Model.Business)
                             {
-                                Html.Raw(string.Format("Business: {0}, ", business));
+                                @Html.Raw(string.Format("Business: {0}, ", business));
                             }
                         }
                     </h4>
@@ -121,7 +136,7 @@
             </div>
             <hr />
         </div>
-        
+
         <div id="searchResultsContainer">
             @Html.Partial(MVC.Search.Views._SearchEvent, Model)
         </div>

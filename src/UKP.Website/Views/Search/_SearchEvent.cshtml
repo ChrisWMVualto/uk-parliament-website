@@ -1,5 +1,7 @@
 ﻿@using RestSharp.Extensions
 @using UKP.Website.Application
+@using UKP.Website.Models.Event
+@using UKP.Website.Service.Model
 @model UKP.Website.Models.Search.SearchViewModel
 
 @if(Model.SearchResult.Results.Any())
@@ -27,23 +29,34 @@
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-7">
                     <div class="search-text-inner">
-                        <h5><i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</h5>  <h5 class="date-divider"><i class="fa fa-circle hidden-lg"></i><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</h5>
+                        <h5>
+                            <i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)
+                        </h5>
+                        <h5 class="date-divider">
+                            <i class="fa fa-circle hidden-lg"></i>
+                            @if(item.Event.DisplayStartDate.ToLocalTime().Date == item.Event.DisplayEndDate.ToLocalTime().Date)
+                            {
+                                <span><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</span>
+                            }
+                            else
+                            {
+                                <span><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span>
+                            }
+                        </h5>
 
                         <p><strong>@item.Event.Title</strong></p>
-
                         <div class="row moments">
-                            @Html.Partial(MVC.Search.Views._SearchMoment, item)
+                            @Html.Partial(MVC.Search.Views._SearchMoment, new SearchMomentModel(item.Event.Id, item.LogMoments, 0))
 
                             @if(item.LogMoments.Results.Count() < item.LogMoments.Total)
                             {
-                                <div class="col-md-12 moment-item moment-more">
-                                    <button class="btn-link text-center" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments())">@(item.LogMoments.Total - item.LogMoments.Results.Count())  more moments</button>
+                                <div class="col-md-12 moment-more">
+                                    <button type="button" class="btn btn-default btn-show-more btn-lg pull-right" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments(item.Event.Id, Model.Keywords, Model.MemberId, Model.House, Model.Business))">Show More <i class="fa fa-plus"></i></button>
                                 </div>
                             }
                         </div>
                     </div>
                 </div>
-
             </div>
             <hr />
         </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using UKP.Website.Models;
+using UKP.Website.Models.Event;
 using UKP.Website.Models.Search;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
@@ -32,9 +33,6 @@ namespace UKP.Website.Controllers
                 toDate = DateTime.Today;
             }
 
-
-            var searchResults = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
-
             var searchModel = new SearchViewModel()
                               {
                                   Keywords = keywords,
@@ -43,26 +41,22 @@ namespace UKP.Website.Controllers
                                   Business = business,
                                   Start = fromDate,
                                   End = toDate,
-                                  SearchResult = searchResults
                               };
+
+            if(!string.IsNullOrWhiteSpace(start))
+            {
+                searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
+            }
+
             return View(searchModel);
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments()
+        public virtual PartialViewResult Moments(Guid eventId, string keywords, int? memberId, string house, string business)
         {
-            /*
-            if (model == null || !ModelState.IsValid)
-            {
-                Response.StatusCode = 400;
-                return null;
-            }
-
-            var results = _searchService.SearchMoments(eventId, model.Keywords, model.MemberId, model.House, model.Business);
-            var @event = new EventModel(Guid.Parse(eventId));
-            var resultModel = new VideoModel(@event, results);*/
-
-            return PartialView(MVC.Search.Views._SearchMoment);
+            var results = _searchService.SearchMoments(eventId, keywords, memberId, house, business);
+            var searchMomentModel = new SearchMomentModel(eventId, results, 5);
+            return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
         }
     }
 }

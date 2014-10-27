@@ -9,6 +9,11 @@ namespace UKP.Website.Application
             get { return ConfigurationManager.AppSettings["IasBaseUrl"]; }
         }
 
+        public static string GetIasBaseUrl
+        {
+            get { return ConfigurationManager.AppSettings["IasBaseUrl"]; }
+        }
+
         public string IasAuthKey
         {
             get { return ConfigurationManager.AppSettings["IasAuthKey"]; }
