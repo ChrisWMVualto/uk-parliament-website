@@ -1,109 +1,31 @@
-﻿@model IEnumerable<UKP.Website.Service.Model.EventModel>
+﻿@model UKP.Website.Service.Model.EpgChannelModel
 
-<ol class="channel-list channel-1">
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-    <li style="width: 60px">
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
-
-    <li style="width: 1020px">
-        <div class="outer" style="width: 1020px">
-            <div class="inner">
-                <a href="player.html" class="watch">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-arrow-right-thick fa-stack-1x fa-inverse"></i>
-                    </span>
-                </a>
-                <div class="description">
-                    <h4>House of Commons</h4>
-                    <p>
-                        <br /> Commons Chamber
-                    </p>
+<ol class="channel-list channel-@Model.ChannelNum">
+    @foreach (var item in Model.Events)
+    {
+        <li style="width: @item.TemplateWidth()">
+            <div class="outer" style="width: @item.TemplateWidth()">
+                <div class="inner">
+                    <a href="@Url.Action(MVC.Event.Index(@item.EventData.Id))" class="watch">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-arrow-right-thick fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    <div class="description">
+                        <h4>@item.EventData.Title</h4>
+                        <p>
+                            <br /> @item.EventData.Room
+                        </p>
+                    </div>
+                    <a href="#" class="info">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
                 </div>
-                <a href="#" class="info">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                    </span>
-                </a>
             </div>
-        </div>
-    </li>
-    <li>
-        <div class="outer">
-            <div class="inner blank"></div>
-        </div>
-    </li>
+        </li>
+    }
 </ol>
