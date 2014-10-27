@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
                     <a href="@Url.Action(MVC.Event.Index(item.Event.Id))" class="search-thumb-inner">
-                        @if(item.Event.ThumbnalUrl.HasValue())
+                        @if(item.ThumbnailUrl.HasValue())
                         {
-                            <img src="@item.Event.ThumbnalUrl" alt="alt tag here" class="img-responsive">
+                            <img src="@item.ThumbnailUrl" alt="alt tag here" class="img-responsive">
                         }
                         else
                         {
