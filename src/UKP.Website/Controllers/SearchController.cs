@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using UKP.Website.Models;
+using UKP.Website.Models.Event;
 using UKP.Website.Models.Search;
 using UKP.Website.Service;
 using UKP.Website.Service.Model;
@@ -49,20 +50,11 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments()
+        public virtual PartialViewResult Moments(Guid eventId, string keywords, int? memberId, string house, string business)
         {
-            /*
-            if (model == null || !ModelState.IsValid)
-            {
-                Response.StatusCode = 400;
-                return null;
-            }
-
-            var results = _searchService.SearchMoments(eventId, model.Keywords, model.MemberId, model.House, model.Business);
-            var @event = new EventModel(Guid.Parse(eventId));
-            var resultModel = new VideoModel(@event, results);*/
-
-            return PartialView(MVC.Search.Views._SearchMoment);
+            var results = _searchService.SearchMoments(eventId, keywords, memberId, house, business);
+            var searchMomentModel = new SearchMomentModel(eventId, results, 5);
+            return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
         }
     }
 }
