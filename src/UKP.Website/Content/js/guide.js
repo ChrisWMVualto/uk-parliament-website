@@ -1,4 +1,5 @@
-﻿var globHourWidth = 120;
+﻿var globHourWidth = 120,
+    globOneDayWidth = 2920;
 
 $(document).ready(function () {
 
@@ -77,18 +78,18 @@ $(document).ready(function () {
     });
     resizeProgrammes($('.stream-container-inner'));
 
-    $('.stream-container-inner').on('scroll', scrollDayProgression)
+    $('.stream-container-inner').on('scroll', scrollDayProgression);
 
     $('.days-tab li:nth-of-type(1)').on('click', function () {
         $('.stream-container-inner').scrollLeft(0);
     });
 
     $('.days-tab li:nth-of-type(2)').on('click', function () {
-        $('.stream-container-inner').scrollLeft(dayProgressionPoint());
+        $('.stream-container-inner').scrollLeft(globOneDayWidth);
     });
 
     $('.days-tab li:nth-of-type(n+3)').on('click', function () {
-        $('.stream-container-inner').scrollLeft(dayProgressionPoint() * 2);
+        $('.stream-container-inner').scrollLeft(globOneDayWidth * 2);
     });
 
     $('#epgInfoPopup').hide();
@@ -98,11 +99,11 @@ $(document).ready(function () {
         // We'll have to pass an event ID in here in the long run.
         // They'll be added to the HTML sever-side.
         $('#epgInfoPopup').show();
-    })
+    });
 
-    $('[data-hide]').on("click", function () {
+    $('[data-hide]').on("click", function() {
         $("." + $(this).attr("data-hide")).hide();
-    })
+    });
 
     if ($('.epg-outer').length > 0)
         floatingNav();
@@ -147,8 +148,7 @@ function scrollEpg() {
         moveDist = globHourWidth * 2,
         clickedArrow = $(this).attr('id'),
         leftArrow = "epgTimeScrollLeft",
-        rightArrow = "epgTimeScrollRight",
-        disableClass = "disable";
+        rightArrow = "epgTimeScrollRight";
 
     if (clickedArrow == rightArrow) {
         container.scrollLeft(container.scrollLeft() + moveDist);
@@ -166,7 +166,6 @@ function changeEpgTime(event) {
     var meridian = event.time.meridian,
         hours = event.time.hours,
         minutes = event.time.minutes,
-        hourPx = globHourWidth,
         container = $('.stream-container-inner');
 
     if (meridian == "PM")
@@ -220,7 +219,7 @@ function changeDateTab(event) {
     if (tabIndex == 0)
         container.scrollLeft(0);
     else if (tabIndex == 1)
-        container.scrollLeft(2920);
+        container.scrollLeft(globOneDayWidth);
     else
         container.scrollLeft(10000);
 
@@ -312,30 +311,21 @@ function floatingNav() {
 //Resizes the programmes to keep them on screen
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
-    var that = this,
-        container = $(container),
+    var container = $(container),
         containerPosition = container.scrollLeft(),
         edgeOffset = 20;
 
     $.each(container.find('ol.channel-list'), function () {
-        var preSpace = 0;
-
         $.each($(this).children('li'), function () {
-            if ($(this).attr('data-width') == null)
-                $(this).attr('data-width', $(this).width())
-
-            if ($(this).has('.blank').length == 0)
-                calculateMove(preSpace, this);
-
-            preSpace += $(this).outerWidth();
+            calculateMove(this);
         });
     });
 
-    function calculateMove(preSpace, context) {
-        preSpace += edgeOffset;
+    function calculateMove(context) {
+        var leftPos = $(context).css('left').replace('px', '');
 
-        if (preSpace <= containerPosition) {
-            var margin = containerPosition - preSpace;
+        if (leftPos <= containerPosition) {
+            var margin = containerPosition - leftPos;
 
             if (width($(context).innerWidth(), margin) <= 180) {
                 margin = $(context).innerWidth() - 180;
@@ -370,18 +360,14 @@ function resizeProgrammes(container) {
 ////////////////////////////////////////////
 //EPG scroll operations
 ////////////////////////////////////////////
-function dayProgressionPoint() {
-    oneDay = 2920;
-    return oneDay;
-}
 var resizeProgrammesTimeoutId;
 var dateLeft = true;
 function scrollDayProgression() {
     // Select tomorrow
-    if ($(this).scrollLeft() > dayProgressionPoint() && dateLeft) {
+    if ($(this).scrollLeft() > globOneDayWidth && dateLeft) {
         $('#epgDateScrollRight').trigger('click');
         dateLeft = false;
-    } else if ($(this).scrollLeft() < dayProgressionPoint() && !dateLeft) {
+    } else if ($(this).scrollLeft() < globOneDayWidth && !dateLeft) {
         $('#epgDateScrollLeft').trigger('click');
         dateLeft = true;
     }
