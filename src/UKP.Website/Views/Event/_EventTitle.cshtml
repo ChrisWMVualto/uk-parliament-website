@@ -7,14 +7,14 @@
     <h3>@Model.Event.Title</h3>
     <h4>
         <i class="fa fa-vod-badge fa-2x state-badge-sm hidden-lg hidden-md pending-badge"></i>
-        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span> <i class="pipe hideen-"></i> 
+        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</span> <i class="pipe hideen-"></i> 
         @if (Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
         {
             <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</span>
         }
         else
         {
-            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span>
+            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</span>
         }
     </h4>
 </header>
