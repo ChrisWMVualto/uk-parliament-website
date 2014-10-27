@@ -22,17 +22,10 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //epg-datepicker
     ////////////////////////////////////////////
-    if ($(".date-picker").length) {
-        $('.date-picker').datepicker({
-            weekStart: 1
-        });
-    }
-
     $('.end-date').datepicker({
         autoclose: true,
         weekStart: 1
     });
-
 
     $('.start-date').datepicker({
         autoclose: true,
@@ -61,7 +54,7 @@ $(document).ready(function () {
     });
 
     $('.btn-search-panel').click(function () {
-        jQuery(this).toggleClass('active').find('i').toggleClass('fa-plus fa-minus')
+        $(this).toggleClass('active').find('i').toggleClass('fa-plus fa-minus')
             .removeClass('active').find('i')
             .removeClass('fa-minus').addClass('fa-plus');
 
@@ -110,9 +103,9 @@ $(document).ready(function () {
 
 
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////
     //breakpoints
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////
     $(window).on('enterBreakpoint1024', function () {
         $('.stream-container-inner').dragscrollable({
             dragSelector: '*'
@@ -184,7 +177,7 @@ function leftPositionFromTime(hour, minute) {
 ////////////////////////////////////////////
 //Change the highlighted date tab
 ////////////////////////////////////////////
-function changeDateTab(event) {
+function changeDateTab() {
     var days = $('.days-tab ol')[0].children,
         activeIndex,
         activeClass = 'active',
@@ -213,8 +206,6 @@ function changeDateTab(event) {
         tabIndex = activeIndex + 1;
         $(days[tabIndex]).addClass(activeClass);
     }
-
-    console.log(tabIndex);
 
     if (tabIndex == 0)
         container.scrollLeft(0);
