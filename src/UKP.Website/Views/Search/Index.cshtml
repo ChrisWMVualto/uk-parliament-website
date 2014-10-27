@@ -49,7 +49,7 @@
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="tags"><h4>3. Tags</h4></label>
-                                <input type="text" class="form-control input-lg" id="tags">
+                                <input type="text" class="form-control input-lg" id="tags" data-ajax-url="@(Configuration.GetIasBaseUrl + "/api/search/tags?tag=")">
                                 @Html.HiddenFor(x => x.House)
                                 @Html.HiddenFor(x => x.Business)
                             </div>
@@ -94,13 +94,17 @@
             <div class="row">
                 <div class="col-md-10">
                     <h4>
-                        <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
+
+                        @if(Model.SearchResult.TotalCount > 0)
+                        {
+                            <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
+                        }
 
                         @if(!string.IsNullOrWhiteSpace(Model.Keywords))
                         {
                             @Model.Keywords
                         }
-           
+
                         @if(!string.IsNullOrWhiteSpace(Model.House) || !string.IsNullOrWhiteSpace(Model.Business))
                         {
                             <text>-</text>
