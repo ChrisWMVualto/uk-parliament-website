@@ -1,11 +1,11 @@
 ﻿@using Date.Extensions
 @using RestSharp.Extensions
-@model UKP.Website.Service.Model.VideoModel
+@model UKP.Website.Models.Event.SearchMomentModel
 
-@foreach (var moment in @Model.LogMoments.Results.Skip(5))
+@foreach (var moment in @Model.LogMomentResultModel.Results.Skip(Model.SkipCount))
 {
     <div class="col-md-12 moment-item">
-        <a href="@Url.Action(MVC.Event.Index(@Model.Event.Id, moment.InPoint.ToISO8601String()))" class="outer-border">
+        <a href="@Url.Action(MVC.Event.Index(@Model.EventId, moment.InPoint.ToISO8601String()))" class="outer-border">
             <div class="row">
                 <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
                     <div class="moment-thumb">
