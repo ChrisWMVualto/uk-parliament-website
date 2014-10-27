@@ -90,8 +90,14 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _ChannelListing = "_ChannelListing";
+                public readonly string _DateTabs = "_DateTabs";
+                public readonly string _InfoPopup = "_InfoPopup";
                 public readonly string Index = "Index";
             }
+            public readonly string _ChannelListing = "~/Views/Guide/_ChannelListing.cshtml";
+            public readonly string _DateTabs = "~/Views/Guide/_DateTabs.cshtml";
+            public readonly string _InfoPopup = "~/Views/Guide/_InfoPopup.cshtml";
             public readonly string Index = "~/Views/Guide/Index.cshtml";
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using Date.Extensions;
 using RestSharp;
 using RestSharp.Extensions;
@@ -31,7 +33,7 @@ namespace UKP.Website.Service
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 07, 04);
             //var start = DateTime.Now.Date;
-            var end = start.AddMonths(1);
+            var end = start.AddDays(1);
 
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
@@ -43,6 +45,40 @@ namespace UKP.Website.Service
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
             return EventTransforms.TransformEPG(response.Content);;
+        }
+
+        public IEnumerable<EpgEventModel> GetEpgEvents()
+        {
+            var events = GetEpg();
+            var epgModel = Enumerable.Empty<EpgEventModel>();
+
+            for (var i = 1; i <= 20; i++)
+            {
+                var time = 0;
+                var channel = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x));
+                var fullChannel = new List<EpgEventModel>();
+
+                // TODO: Working progress
+                /*foreach(var channelEvent in channel)
+                {
+                    var startTime = channelEvent.EventData.DisplayStartDate.Subtract(DateTime.Now);
+
+                    while (true)
+                    {
+                        if (time == startTime.TotalMinutes)
+                        {
+                            fullChannel.Add(new EpgEventModel());
+                            time += 60;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }*/
+            }
+
+            return epgModel;
         }
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
@@ -94,7 +130,7 @@ namespace UKP.Website.Service
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 07, 04);
             //var start = DateTime.Now.Date;
-            var end = start.AddMonths(1);
+            var end = start.AddHours(12);
 
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
