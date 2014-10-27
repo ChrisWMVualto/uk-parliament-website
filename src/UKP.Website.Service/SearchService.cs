@@ -56,12 +56,14 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content);
         }
 
-        public LogMomentResultModel SearchMoments(string eventId, string keywords, int? memberId, string house, string business)
+        public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId, string house, string business)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             //client.Proxy = new WebProxy("127.0.0.1", 8888);
 
-            var request = _restClientWrapper.AuthRestRequest(string.Format("api/search/logs/{0}", eventId), Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/search/logs/{eventId}", Method.GET, _configuration.IasAuthKey);
+
+            request.AddUrlSegment("eventId", eventId.ToString());
 
             if(keywords.HasValue())
                 request.AddParameter("keywords", keywords);
