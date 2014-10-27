@@ -1,0 +1,165 @@
+﻿@model UKP.Website.Models.Guide.GuideViewModel
+
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-12 title-container">
+            <header class="title-main title-guide"><h2><i class="fa fa-guide fa-lg"></i> <span>Event Guide</span></h2>     <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+        </div>
+
+        <div class="col-md-12">
+            <div class="epg-outer">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="jump-container">
+                            
+                            <div class="date-nav">
+                                <div class="input-group bootstrap-datepicker">
+                                    <span class="date-picker">
+                                        <input type="text" class="form-control hidden">
+                                        <button type="button" class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></button>
+                                    </span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-less" id="epgDateScrollLeft"><i class="fa fa-arrow-left-thin  fa-2x"></i></button></span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-more" id="epgDateScrollRight"><i class="fa fa-arrow-right-thin fa-2x"></i></button></span>
+
+                                </div>
+                            </div>
+
+                            <div class="time-nav">
+                                <div class="input-group bootstrap-timepicker">
+                                    <input id="epgTimepicker" type="text" class="form-control hidden">
+                                    <button type="button" class="input-group-addon">
+                                        <i class="fa fa-time fa-2x"></i>
+                                    </button>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-less" id="epgTimeScrollLeft"><i class="fa fa-arrow-left-thin  fa-2x"></i></button></span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-more" id="epgTimeScrollRight"><i class="fa fa-arrow-right-thin fa-2x"></i></button></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @Html.Partial(MVC.Guide.Views._DateTabs)
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="drag-wrap">
+
+                <div class="stream-container-outer">
+
+                    <div class="shadow-right">
+                    </div>
+
+                    @Html.Partial(MVC.Guide.Views._InfoPopup)
+
+                    <ol class="channels">
+                        @for (var i = 1; i <= 20; i++)
+                        {
+                            <li class="channel-@i-logo">
+                                <a href="#">@i</a>
+                            </li>
+                        }
+                    </ol>
+
+
+                    <div class="stream-container-inner">
+                        <div class="timeline clearfix">
+                            <ol class="clearfix">
+                                <li>
+                                    <span class="vr"></span><strong>12.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>1.00 AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>2.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>3.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>4.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>5.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>6.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>7.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>8.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>9.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>10.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>11.00AM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>12.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>1.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>2.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>3.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>4.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>5.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>6.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>7.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>8.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>9.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>10.00PM</strong>
+                                </li>
+                                <li>
+                                    <span class="vr"></span><strong>11.00PM</strong>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="live-now">
+                            <div class="play-line">
+                                <span></span>
+                            </div>
+                        </div>
+                        
+                        @for (var i = 0; i < 20; i++)
+                        {
+                            @Html.Partial(MVC.Guide.Views._ChannelListing, Model.ChannelOne);
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="@Url.Content("~/Content/js/vendor/dragscrollable.js")"></script>
+    <script src="@Url.Content("~/Content/js/guide.js")"></script>
+}
