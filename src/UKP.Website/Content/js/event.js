@@ -136,6 +136,7 @@ function reloadEmbedData() {
             $.ajax(url, {
                 success: updateEmbedCodes
             });
+            
         }, 500);
 
     }
