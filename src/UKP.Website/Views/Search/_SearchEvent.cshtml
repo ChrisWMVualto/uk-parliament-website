@@ -30,7 +30,7 @@
                 <div class="col-lg-9 col-md-8 col-sm-7">
                     <div class="search-text-inner">
                         <h5>
-                            <i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)
+                            <i class="fa fa-circle hidden-lg"></i><strong>Start Time:</strong> @item.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)
                         </h5>
                         <h5 class="date-divider">
                             <i class="fa fa-circle hidden-lg"></i>
@@ -40,7 +40,7 @@
                             }
                             else
                             {
-                                <span><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</span>
+                                <span><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</span>
                             }
                         </h5>
 
