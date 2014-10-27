@@ -90,14 +90,16 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Views/Guide/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MvcGuideController : UKP.Website.Controllers.GuideController
+    public partial class T4MVC_GuideController : UKP.Website.Controllers.GuideController
     {
-        public T4MvcGuideController() : base(Dummy.Instance) { }
+        public T4MVC_GuideController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);

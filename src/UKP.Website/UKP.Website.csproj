@@ -208,6 +208,7 @@
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\guide.js" />
     <Content Include="Content\js\jquery.autocomplete.mod.js" />
     <Content Include="Content\js\log-moments.js" />
     <Content Include="Content\js\event.js" />
@@ -221,6 +222,7 @@
     <Content Include="Content\js\vendor\bootstrap-select.js" />
     <Content Include="Content\js\vendor\bootstrap-timepicker-mod.js" />
     <Content Include="Content\js\vendor\breakpoints.js" />
+    <Content Include="Content\js\vendor\dragscrollable.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.min.js" />
     <Content Include="Content\js\vendor\jQuery-Mobile.js" />
@@ -291,9 +293,6 @@
     <Compile Include="CookieController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="EpgController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -305,12 +304,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GuideController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Event\ClippingViewModel.cs" />
     <Compile Include="Models\Event\EventVIewModel.cs" />
     <Compile Include="Models\Event\StateChangedModel.cs" />
+    <Compile Include="Models\Guide\GuideViewModel.cs" />
     <Compile Include="Models\Home\HomeViewsModel.cs" />
     <Compile Include="Models\Search\SearchViewModel.cs" />
     <Compile Include="NotSupportedController.generated.cs">
@@ -368,6 +371,7 @@
     <Content Include="Views\Event\_Stack.cshtml" />
     <Content Include="Views\Search\_SearchMoment.cshtml" />
     <Content Include="Views\Event\_LogMoment.cshtml" />
+    <Content Include="Views\Guide\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -382,7 +386,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Guide\" />
     <Folder Include="Views\Player\" />
     <Folder Include="Views\SearchApi\" />
   </ItemGroup>
