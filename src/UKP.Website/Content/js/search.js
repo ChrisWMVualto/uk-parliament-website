@@ -13,13 +13,7 @@ function momentSearch() {
         'parent': $(this).parent().parent(),
         'buttonCont': $(this).parent(),
         'url': $(this).attr('data-url-base'),
-        'queryParams': '?FormModel.Keywords={0}&FormModel.MemberId={1}&FormModel.House={2}&FormModel.Business={3}&eventId={4}&skipItems={5}',
-        'eventId': $(this).attr('data-event-id'),
-        'skipMoments': $(this).attr('data-item-skip'),
-        'keywords': $('#FormModel_Keywords').val(),
-        'memberId': $('#FormModel_MemberId').val(),
-        'house': $('#FormModel_House').val(),
-        'business': $('#FormModel_Business').val(), 
+        'queryParams': '',
     };
     init();
 
@@ -52,7 +46,7 @@ $(function () {
         minChars: 3,
         // callback function:
         onSelect: function (member) {
-            $('#FormModel_MemberId').val(member['@Member_Id']);
+            $('#MemberId').val(member['@Member_Id']);
         },
         noCache: true
     });
@@ -95,17 +89,17 @@ $(function () {
         inputValue.pop();
         var validTags = [];
 
-        $('#FormModel_House').val('');
-        $('#FormModel_Business').val('');
+        $('#House').val('');
+        $('#Business').val('');
 
         $.each(inputValue, function () {
             var tag = this.split(": ");
 
             if (tag[0].trim() == "House")
-                tagAppender(tag[1], $('#FormModel_House'));
+                tagAppender(tag[1], $('#House'));
 
             if (tag[0].trim() == "Business")
-                tagAppender(tag[1], $('#FormModel_Business'));
+                tagAppender(tag[1], $('#Business'));
 
             if (tag[1] != null && tag[1] != "")
                 validTags.push(this);
