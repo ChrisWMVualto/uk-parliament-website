@@ -311,30 +311,21 @@ function floatingNav() {
 //Resizes the programmes to keep them on screen
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
-    var that = this,
-        container = $(container),
+    var container = $(container),
         containerPosition = container.scrollLeft(),
         edgeOffset = 20;
 
     $.each(container.find('ol.channel-list'), function () {
-        var preSpace = 0;
-
         $.each($(this).children('li'), function () {
-            if ($(this).attr('data-width') == null)
-                $(this).attr('data-width', $(this).width())
-
-            if ($(this).has('.blank').length == 0)
-                calculateMove(preSpace, this);
-
-            preSpace += $(this).outerWidth();
+            calculateMove(this);
         });
     });
 
-    function calculateMove(preSpace, context) {
-        preSpace += edgeOffset;
+    function calculateMove(context) {
+        var leftPos = $(context).css('left').replace('px', '');
 
-        if (preSpace <= containerPosition) {
-            var margin = containerPosition - preSpace;
+        if (leftPos <= containerPosition) {
+            var margin = containerPosition - leftPos;
 
             if (width($(context).innerWidth(), margin) <= 180) {
                 margin = $(context).innerWidth() - 180;
