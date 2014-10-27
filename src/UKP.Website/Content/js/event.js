@@ -5,6 +5,15 @@ var stackPollingIntervalLive = 6000;
 var stackPollingIntervalNotLive = 60000;
 
 
+function initSelectDates() {
+    if ($(".clip-date").length) {
+        $('.clip-date').selectpicker({
+            style: 'btn-clip-date form-control input-lg',
+            size: 4
+        });
+    }
+}
+
 function loadPlayer(audioOnly) {
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly }, function (video) {
@@ -24,29 +33,8 @@ function updateClipping() {
     $.get(clippingUrl, function (data) {
         $('#clippingContainer').html(data);
 
-        // TODO: make into function
-        if ($(".clip-date").length) {
-            $('.clip-date').selectpicker({
-                style: 'btn-clip-date form-control input-lg',
-                size: 4
-            });
-        }
-
-        if ($(".checkbox").length) {
-            $(".checkbox").checkbox({
-                buttonStyle: 'btn-checkbox',
-                buttonStyleChecked: 'btn-checkbox',
-                checkedClass: 'fa fa-tick fa-2x',
-                uncheckedClass: 'fa fa-tick fa-2x fa-dark',
-                constructorCallback: null,
-                defaultState: false,
-                defaultEnabled: true,
-                checked: false,
-                enabled: true
-            });
-        }
-
-
+        initSelectDates();
+        initCheckbox();
         reloadEmbedData();
     });
 }
@@ -166,6 +154,8 @@ function reloadEmbedData() {
             settings.options.start.input.val("");
             settings.options.end.input.val("");
             settings.options.end.checkbox.prop("checked", false);
+            initCheckbox();
+
         } else {
             settings.options.start.input.val(settings.options.start.hiddenStart.val());
         }
