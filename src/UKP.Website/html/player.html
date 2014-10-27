@@ -135,7 +135,7 @@
 <!-- Nav tabs -->
 <div class="player-tabs">
   <div>
-<ul class="nav nav-tabs" role="tablist">  
+<ul class="nav nav-tabs" role="tablist">
   <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
   <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
 </ul>
@@ -206,8 +206,8 @@
         <div>
 
 <div class="form-group has-copy small-url">
-  <input type="text" class="form-control input-lg" id="smallUrl">
-  <i class="fa fa-copy fa-2x"></i>
+ <input type="text" class="form-control input-lg" id="smallUrl" value="http://goo.gl/Zyd8Z5o" spellcheck="false">
+  <!--<i class="fa fa-copy fa-2x"></i>-->
 </div>
 </div>
 </div>
@@ -232,8 +232,8 @@
 
 
 <div class="form-group has-copy url">
-  <input type="text" class="form-control input-lg" id="url">
-  <i class="fa fa-copy fa-2x"></i>
+  <input type="text" class="form-control input-lg" id="url" value="http://web.ukparliament.uat.vualto.com/event/index/820cc0cc-48a7-f3b8-f300-038618f23194" spellcheck="false">
+  <!--<i class="fa fa-copy fa-2x"></i>-->
 </div>
 
 </div>
@@ -250,7 +250,17 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row form-inline time-start-end">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+
+
+
+            <div class="col-md-12 start-time-container">
+ <div class="row">
+ <div class="col-md-12">
+             <label class="" for="startTime">
+                        <h5>Start time:</h5>
+                    </label>
+</div>
+ <div class="col-md-12">
                 <div class="form-group">
                     <input type="checkbox" class="checkbox" id="startTimeCheck" />
                     <label class="hide" for="startTimeCheck">
@@ -259,15 +269,38 @@
                 </div>
 
                 <div class="form-group start-time">
-                    <label class="" for="startTime">
-                        <h4>Start time:</h4>
-                    </label>
-                    <span class="bootstrap-timepicker">
-                        <input type="text" class="form-control input-lg time-input" id="startTime" />
+                           <span class="bootstrap-timepicker">
+                        <input type="text" class="form-control input-lg time-input" id="startTime" value="00:00" />
                     </span>
                 </div>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
+
+
+
+              <div class="form-group start-day">
+                    <label class="hide" for="startClipDate">
+                        <h5>Day:</h5>
+                    </label>
+                    <span class="day-dropdown">
+                    <select id="startClipDate" class="clip-date">
+    <option>Monday 7 July 2014</option>
+    <option>Tuesday 8 July 2014</option>
+  </select>
+          </span>
+                </div>
+ </div>
+ </div>
+</div>
+
+
+
+            <div class="col-md-12 end-time-container">
+ <div class="row">
+ <div class="col-md-12">
+             <label class="" for="endTime">
+                        <h5>End time:</h5>
+                    </label>
+</div>
+ <div class="col-md-12">
                 <div class="form-group">
                     <input type="checkbox" class="checkbox" id="endTimeCheck" />
                     <label class="hide" for="endTimeCheck">
@@ -276,19 +309,41 @@
                 </div>
 
                 <div class="form-group end-time">
-                    <label class="" for="endTime">
-                        <h4>End time:</h4>
-                    </label>
-                    <span class="bootstrap-timepicker">
-                        <input type="text" class="form-control input-lg time-input" id="endTime" />
+                           <span class="bootstrap-timepicker">
+                        <input type="text" class="form-control input-lg time-input" id="endTime" value="00:00" />
                     </span>
                 </div>
-            </div>
+
+
+
+              <div class="form-group end-day">
+                    <label class="hide" for="endClipDate">
+                        <h5>Day:</h5>
+                    </label>
+                    <span class="day-dropdown">
+                    <select id="endClipDate" class="clip-date">
+    <option>Monday 7 July 2014</option>
+    <option>Tuesday 8 July 2014</option>
+  </select>
+          </span>
+                </div>
+ </div>
+ </div>
+</div>
+
+
+
         </div>
     </div>
 </div>
 </div>
 </div>
+
+
+
+
+
+
 
 <div class="row embed-terms">
     <div class="col-md-12">
@@ -450,15 +505,22 @@
     <li class="active">
        <article>
     <span class="vr-stack"></span>
-    <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-      <header class="stack-item"><a href="#">
+   <button type="button" class="btn btn-moment-expand" data-toggle="collapse" data-target="#child"><span class="sr-only"></span> <i class="fa fa-plus fa-lg"></i></button>
+      <header class="stack-item stack-parent"><a href="#">
 <h4>1. What recent assessment he has made of the role of the Prime Minister's Challenge Fund in improving access to GP services. (904103)
 </h4>
 </a></header>
+
+<div id="child" class="collapse">
 <hr/>
       <div class="stack-item">
-      <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong> 11.34.53</h5><strong>Member:</strong> Robin Walker
+     <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong> 11.34.53</h5>
+
+     <h5><i class="fa fa-circle"></i> <strong>Member:</strong> Robin Walker</h5>
 	</div>
+
+</div>
+
  </article>
   </li>
 
@@ -616,18 +678,13 @@
 </div>
 
 
-
-
-
-
-
 <script src="js/vendor/jquery-1.10.1.min.js"></script>
 <script src="js/vendor/bootstrap-checkbox.js"></script>
 <script src="js/vendor/jquery.pep.js"></script>
 <script src="js/vendor/breakpoints.js"></script>
 <script src="js/vendor/jquery.slimscroll.js"></script>
 <script src="js/vendor/slick.js"></script>
-<script src="js/vendor/bootstrap-timepicker.js"></script>
+<script src="js/vendor/bootstrap-timepicker-mod.js"></script>
 <script src="js/vendor/bootstrap-datepicker.js"></script>
 <script src="js/vendor/bootstrap-select.js"></script>
 <script src="js/bootstrap.min.js"></script>
