@@ -1,6 +1,44 @@
 ﻿var globHourWidth = 120;
 
 $(document).ready(function () {
+
+
+    ////////////////////////////////////////////
+    //epg-slimscroll details alert stack area
+    ////////////////////////////////////////////
+    if ($(".stack").length) {
+        $('.stack').slimScroll({
+            railVisible: true,
+            railColor: '#ffffff',
+            railOpacity: 0.3,
+            color: '#ffffff',
+            size: '12px',
+            height: 'auto'
+        });
+    }
+
+
+    ////////////////////////////////////////////
+    //epg-datepicker
+    ////////////////////////////////////////////
+    if ($(".date-picker").length) {
+        $('.date-picker').datepicker({
+            weekStart: 1
+        });
+    }
+
+    $('.end-date').datepicker({
+        autoclose: true,
+        weekStart: 1
+    });
+
+
+    $('.start-date').datepicker({
+        autoclose: true,
+        weekStart: 1
+    });
+
+
     ////////////////////////////////////////////
     //epg-timepicker
     ////////////////////////////////////////////
@@ -39,29 +77,7 @@ $(document).ready(function () {
     });
     resizeProgrammes($('.stream-container-inner'));
 
-    function dayProgressionPoint() {
-        return 2920;
-    }
-
-    var resizeProgrammesTimeoutId;
-    var dateLeft = true;
-    $('.stream-container-inner').on('scroll', function () {
-        // Select tomorrow
-        if ($(this).scrollLeft() > dayProgressionPoint() && dateLeft) {
-            $('#epgDateScrollRight').trigger('click');
-            dateLeft = false;
-        } else if ($(this).scrollLeft() < dayProgressionPoint() && !dateLeft) {
-            $('#epgDateScrollLeft').trigger('click');
-            dateLeft = true;
-        }
-
-        // Resize programmes
-        var that = this;
-        clearInterval(resizeProgrammesTimeoutId);
-        resizeProgrammesTimeoutId = setTimeout(function () {
-            resizeProgrammes(that);
-        }, 250);
-    });
+    $('.stream-container-inner').on('scroll', scrollDayProgression)
 
     $('.days-tab li:nth-of-type(1)').on('click', function () {
         $('.stream-container-inner').scrollLeft(0);
@@ -82,16 +98,20 @@ $(document).ready(function () {
         // We'll have to pass an event ID in here in the long run.
         // They'll be added to the HTML sever-side.
         $('#epgInfoPopup').show();
-    });
+    })
 
     $('[data-hide]').on("click", function () {
         $("." + $(this).attr("data-hide")).hide();
-    });
+    })
 
     if ($('.epg-outer').length > 0)
         floatingNav();
 
 
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //breakpoints
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $(window).on('enterBreakpoint1024', function () {
         $('.stream-container-inner').dragscrollable({
             dragSelector: '*'
@@ -139,7 +159,6 @@ function scrollEpg() {
     }
 }
 
-
 ////////////////////////////////////////////
 //EPG Timepicker scrolling
 ////////////////////////////////////////////
@@ -156,7 +175,6 @@ function changeEpgTime(event) {
     container.scrollLeft(leftPositionFromTime(hours, minutes));
 }
 
-
 ////////////////////////////////////////////
 //Position scrolling based on time
 ////////////////////////////////////////////
@@ -164,6 +182,50 @@ function leftPositionFromTime(hour, minute) {
     return ((hour * globHourWidth) + (globHourWidth * (minute / 60)));
 }
 
+////////////////////////////////////////////
+//Change the highlighted date tab
+////////////////////////////////////////////
+function changeDateTab(event) {
+    var days = $('.days-tab ol')[0].children,
+        activeIndex,
+        activeClass = 'active',
+        leftArrow = 'epgDateScrollLeft',
+        rightArrow = 'epgDateScrollRight',
+        container = $('.stream-container-inner'),
+        tabIndex = 0;
+
+    $('.stream-container-inner').off('scroll');
+
+    for (var i = 0; i < days.length; i++) {
+        if ($(days[i]).hasClass(activeClass)) {
+            activeIndex = i;
+            break;
+        }
+    }
+
+    if ($(this).attr('id') == leftArrow && activeIndex - 1 >= 0) {
+        $(days[activeIndex]).removeClass(activeClass);
+        tabIndex = activeIndex - 1;
+        $(days[tabIndex]).addClass(activeClass);
+    }
+
+    if ($(this).attr('id') == rightArrow && activeIndex < days.length - 1) {
+        $(days[activeIndex]).removeClass(activeClass);
+        tabIndex = activeIndex + 1;
+        $(days[tabIndex]).addClass(activeClass);
+    }
+
+    console.log(tabIndex);
+
+    if (tabIndex == 0)
+        container.scrollLeft(0);
+    else if (tabIndex == 1)
+        container.scrollLeft(2920);
+    else
+        container.scrollLeft(10000);
+
+    $('.stream-container-inner').on('scroll', scrollDayProgression);
+}
 
 ////////////////////////////////////////////
 //Controls the flaoting EPG dates and times
@@ -177,7 +239,7 @@ function floatingNav() {
         header = $('.header-main div'),
         title = $('.title-container'),
         streamContainer = $('.stream-container-inner'),
-        freezeFrom = $('.channel-eightteen'),
+        freezeFrom = $('.channel-18-logo'),
         infoPopup = $('#epgInfoPopup');
 
 
@@ -246,13 +308,12 @@ function floatingNav() {
     }
 }
 
-
 ////////////////////////////////////////////
 //Resizes the programmes to keep them on screen
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
-    container = $(container);
     var that = this,
+        container = $(container),
         containerPosition = container.scrollLeft(),
         edgeOffset = 20;
 
@@ -306,31 +367,29 @@ function resizeProgrammes(container) {
 }
 
 
-
 ////////////////////////////////////////////
-//Change the highlighted date tab
+//EPG scroll operations
 ////////////////////////////////////////////
-function changeDateTab(event) {
-    var days = $('.days-tab ol')[0].children,
-        activeIndex,
-        activeClass = 'active',
-        leftArrow = 'epgDateScrollLeft',
-        rightArrow = 'epgDateScrollRight';
-
-    for (var i = 0; i < days.length; i++) {
-        if ($(days[i]).hasClass(activeClass)) {
-            activeIndex = i;
-            break;
-        }
+function dayProgressionPoint() {
+    oneDay = 2920;
+    return oneDay;
+}
+var resizeProgrammesTimeoutId;
+var dateLeft = true;
+function scrollDayProgression() {
+    // Select tomorrow
+    if ($(this).scrollLeft() > dayProgressionPoint() && dateLeft) {
+        $('#epgDateScrollRight').trigger('click');
+        dateLeft = false;
+    } else if ($(this).scrollLeft() < dayProgressionPoint() && !dateLeft) {
+        $('#epgDateScrollLeft').trigger('click');
+        dateLeft = true;
     }
 
-    if ($(this).attr('id') == leftArrow && activeIndex - 1 >= 0) {
-        $(days[activeIndex]).removeClass(activeClass);
-        $(days[activeIndex - 1]).addClass(activeClass);
-    }
-
-    if ($(this).attr('id') == rightArrow && activeIndex < days.length - 1) {
-        $(days[activeIndex]).removeClass(activeClass);
-        $(days[activeIndex + 1]).addClass(activeClass);
-    }
+    // Resize programmes
+    var that = this;
+    clearInterval(resizeProgrammesTimeoutId);
+    resizeProgrammesTimeoutId = setTimeout(function () {
+        resizeProgrammes(that);
+    }, 250);
 }

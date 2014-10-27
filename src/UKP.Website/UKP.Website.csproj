@@ -372,6 +372,9 @@
     <Content Include="Views\Search\_SearchMoment.cshtml" />
     <Content Include="Views\Event\_LogMoment.cshtml" />
     <Content Include="Views\Guide\Index.cshtml" />
+    <Content Include="Views\Guide\_InfoPopup.cshtml" />
+    <Content Include="Views\Guide\_ChannelListing.cshtml" />
+    <Content Include="Views\Guide\_DateTabs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
