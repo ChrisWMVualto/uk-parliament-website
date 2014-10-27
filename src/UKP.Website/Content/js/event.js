@@ -5,6 +5,15 @@ var stackPollingIntervalLive = 6000;
 var stackPollingIntervalNotLive = 60000;
 
 
+function initSelectDates() {
+    if ($(".clip-date").length) {
+        $('.clip-date').selectpicker({
+            style: 'btn-clip-date form-control input-lg',
+            size: 4
+        });
+    }
+}
+
 function loadPlayer(audioOnly) {
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly }, function (video) {
@@ -24,29 +33,8 @@ function updateClipping() {
     $.get(clippingUrl, function (data) {
         $('#clippingContainer').html(data);
 
-        // TODO: make into function
-        if ($(".clip-date").length) {
-            $('.clip-date').selectpicker({
-                style: 'btn-clip-date form-control input-lg',
-                size: 4
-            });
-        }
-
-        if ($(".checkbox").length) {
-            $(".checkbox").checkbox({
-                buttonStyle: 'btn-checkbox',
-                buttonStyleChecked: 'btn-checkbox',
-                checkedClass: 'fa fa-tick fa-2x',
-                uncheckedClass: 'fa fa-tick fa-2x fa-dark',
-                constructorCallback: null,
-                defaultState: false,
-                defaultEnabled: true,
-                checked: false,
-                enabled: true
-            });
-        }
-
-
+        initSelectDates();
+        initCheckbox();
         reloadEmbedData();
     });
 }
@@ -86,10 +74,14 @@ function reloadEmbedData() {
         options: {
             start: {
                 input: $('#startTime'),
+                date: $('#startClipDate'),
+                hiddenStart: $('#hiddenStart'),
                 checkbox: $('#startTimeCheck')
             },
             end: {
                 input: $('#endTime'),
+                date: $('#endClipDate'),
+                hiddenEnd: $('#hiddenEnd'),
                 checkbox: $('#endTimeCheck')
             }
         },
@@ -125,22 +117,26 @@ function reloadEmbedData() {
             var end = settings.options.end.input.val();
 
             if (start == "" && end != "") {
-                settings.options.start.input.val("00:00:00");
+                settings.options.start.input.val(settings.options.start.hiddenStart.val());
                 start = settings.options.start.input.val();
             }
 
             if (start != '') {
                 settings.options.start.checkbox.prop("checked", true);
+                start = settings.options.start.date.val() + 'T' + start;
             }
 
             if (end != '') {
                 settings.options.end.checkbox.prop("checked", true);
+                end = settings.options.end.date.val() + 'T' + end;
             }
+
 
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
             $.ajax(url, {
                 success: updateEmbedCodes
             });
+            
         }, 500);
 
     }
@@ -154,14 +150,27 @@ function reloadEmbedData() {
 
 
     $(settings.options.start.checkbox).click(function () {
-        settings.options.start.input.val("");
-        settings.options.end.input.val("");
-        settings.options.end.checkbox.prop("checked", false);
+
+        if (settings.options.start.checkbox.prop("checked") == false) {
+            settings.options.start.input.val("");
+            settings.options.end.input.val("");
+            settings.options.end.checkbox.prop("checked", false);
+            initCheckbox();
+
+        } else {
+            settings.options.start.input.val(settings.options.start.hiddenStart.val());
+        }
+
         generateEmbedCode();
     });
 
     settings.options.end.checkbox.click(function () {
-        settings.options.end.input.val("");
+        if (settings.options.end.checkbox.prop("checked") == false) {
+            settings.options.end.input.val("");
+        } else {
+            settings.options.end.input.val(settings.options.end.hiddenEnd.val());
+        }
+
         generateEmbedCode();
     });
 
