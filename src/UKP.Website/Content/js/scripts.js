@@ -1,3 +1,24 @@
+function initCheckbox() {
+    ////////////////////////////////////////////
+    //bootstrap checkbox
+    ////////////////////////////////////////////
+    if ($(".checkbox").length) {
+        $(".checkbox").checkbox({
+            buttonStyle: 'btn-checkbox',
+            buttonStyleChecked: 'btn-checkbox',
+            checkedClass: 'fa fa-tick fa-2x',
+            uncheckedClass: 'fa fa-tick fa-2x fa-dark',
+            constructorCallback: null,
+            defaultState: false,
+            defaultEnabled: true,
+            checked: false,
+            enabled: true
+        });
+    }
+}
+
+
+
 $(document).ready(function () {
 
 
@@ -75,23 +96,7 @@ $(document).ready(function () {
     });
 
 
-    ////////////////////////////////////////////
-    //bootstrap checkbox
-    ////////////////////////////////////////////
-    if ($(".checkbox").length) {
-        $(".checkbox").checkbox({
-            buttonStyle: 'btn-checkbox',
-            buttonStyleChecked: 'btn-checkbox',
-            checkedClass: 'fa fa-tick fa-2x',
-            uncheckedClass: 'fa fa-tick fa-2x fa-dark',
-            constructorCallback: null,
-            defaultState: false,
-            defaultEnabled: true,
-            checked: false,
-            enabled: true
-        });
-    }
-
+    initCheckbox();
 
     ////////////////////////////////////////////
     //player share & info pane close btn's
