@@ -51,8 +51,6 @@
                     <div class="shadow-right">
                     </div>
 
-                    @Html.Partial(MVC.Guide.Views._InfoPopup)
-
                     <ol class="channels">
                         @for (var i = 1; i <= 20; i++)
                         {
@@ -141,7 +139,7 @@
                             </ol>
                         </div>
 
-                        <div class="live-now">
+                        <div class="live-now" style="left: @Model.LivePosition()">
                             <div class="play-line">
                                 <span></span>
                             </div>

@@ -54,6 +54,12 @@ namespace UKP.Website.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EpgInfo()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgInfo);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public GuideController Actions { get { return MVC.Guide; } }
@@ -71,15 +77,25 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string EpgInfo = "EpgInfo";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string EpgInfo = "EpgInfo";
         }
 
 
+        static readonly ActionParamsClass_EpgInfo s_params_EpgInfo = new ActionParamsClass_EpgInfo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EpgInfo EpgInfoParams { get { return s_params_EpgInfo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EpgInfo
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -115,6 +131,18 @@ namespace UKP.Website.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EpgInfoOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EpgInfo(System.Guid id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EpgInfoOverride(callInfo, id);
             return callInfo;
         }
 

@@ -1,38 +1,40 @@
-﻿<div id="epgInfoPopup" class="alert alert-side-detail fade in" role="alert">
+﻿@model UKP.Website.Service.Model.VideoModel
+
+<div id="epgInfoPopup" class="alert alert-side-detail fade in" role="alert">
     <button type="button" class="close" data-hide="alert">
         <span aria-hidden="true"><i class="fa fa-close fa-lg"></i></span><span class="sr-only">Close</span>
     </button>
 
 
 
-    <button type="button" class="btn btn-generic btn-play">
+    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, autoStart:true))" type="button" class="btn btn-generic btn-play">
         Play <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-arrow-right-thick fa-stack-1x fa-inverse"></i>
         </span>
-    </button>
+    </a>
     <div class="detail-inner">
         <div class="title">
-            <h4>House of Commons</h4>
-            <h5>Monday <span>5 May 2014</span> 2.30pm</h5>
+            <h4>@Model.Event.Title</h4>
+            <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd") <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy")</span> @Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt")</h5>
 
         </div>
 
         <dl class="description">
             <dt>Channel:</dt>
-            <dd>Commons Chamber</dd>
+            <dd>@Model.Event.ChannelName</dd>
             <hr />
             <dt>House:</dt>
-            <dd>Commons</dd>
+            <dd>@Model.Event.House</dd>
             <hr />
             <dt>Location:</dt>
-            <dd>Commons Chamber</dd>
+            <dd>@Model.Event.Room</dd>
             <hr />
             <dt>Event Type:</dt>
-            <dd>Main chamber</dd>
+            <dd>@Model.Event.EventType</dd>
             <hr />
             <dt>Production:</dt>
-            <dd>TV</dd>
+            <dd>NOT IMPLEMENTED</dd>
         </dl>
 
     </div>
@@ -40,59 +42,18 @@
     <div class="stack-guide">
         <div class="stack">
             <ol>
-                <li>
-                    <article>
-                        <span class="vr-stack"></span>
-                        <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                        <header class="stack-item">
-                            <h4>Urgent Questions, Ministerial Statements (if any)</h4>
-                        </header>
-                    </article>
-                </li>
-
-                <li>
-                    <article>
-                        <span class="vr-stack"></span>
-                        <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                        <header class="stack-item">
-                            <a href="#">
-                                <h4>Queen's Speech (Motion for an Address) (Proposed subject for debate: Health)</h4>
-                            </a>
-                        </header>
-                    </article>
-                </li>
-
-                <li>
-                    <article>
-                        <span class="vr-stack"></span>
-                        <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                        <header class="stack-item">
-                            <a href="#">
-                                <h4>European Union Document (Undeclared Work) (Reasoned Opinion)</h4>
-                            </a>
-                        </header>
-                    </article>
-                </li>
-
-                <li>
-                    <article>
-                        <span class="vr-stack"></span>
-                        <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                        <header class="stack-item">
-                            <h4>Business of the House (Private Members’ Bills) (Motion)</h4>
-                        </header>
-                    </article>
-                </li>
-
-                <li>
-                    <article>
-                        <span class="vr-stack"></span>
-                        <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                        <header class="stack-item">
-                            <h4>Adjournment Debate: Implementation of the Children and Families Act 2014 for children with epilepsy</h4>
-                        </header>
-                    </article>
-                </li>
+                @foreach (var stack in Model.Stacks)
+                {
+                    <li>
+                        <article>
+                            <span class="vr-stack"></span>
+                            <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                            <header class="stack-item">
+                                <h4>@stack.Title</h4>
+                            </header>
+                        </article>
+                    </li>
+                }
             </ol>
         </div>
     </div>

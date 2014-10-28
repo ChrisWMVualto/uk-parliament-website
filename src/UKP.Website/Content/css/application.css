@@ -25,7 +25,7 @@
 
 ol.channel-list {
     border-bottom: 1px solid #000000;
-    margin-top: 14px;
+    margin-top: 15px;
     padding-top: 0;
     padding-left: 0;
 
@@ -54,4 +54,8 @@ ol.channel-list li::before {
     position: absolute;
     left: -1px;
     content: " ";
+}
+
+.live-now {
+    margin-left: 170px;
 }
