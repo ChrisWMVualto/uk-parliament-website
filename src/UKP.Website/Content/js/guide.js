@@ -73,18 +73,6 @@ $(document).ready(function () {
 
     $('.stream-container-inner').on('scroll', scrollDayProgression);
 
-    $('.days-tab li:nth-of-type(1)').on('click', function () {
-        $('.stream-container-inner').scrollLeft(0);
-    });
-
-    $('.days-tab li:nth-of-type(2)').on('click', function () {
-        $('.stream-container-inner').scrollLeft(globOneDayWidth);
-    });
-
-    $('.days-tab li:nth-of-type(n+3)').on('click', function () {
-        $('.stream-container-inner').scrollLeft(globOneDayWidth * 2);
-    });
-
     $('#epgInfoPopup').hide();
     $('.stream-container-inner').find('a:last-of-type').on('click', function (e) {
         e.stopPropagation();
@@ -108,11 +96,7 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //breakpoints
     ////////////////////////////////////////////
-    $(window).on('enterBreakpoint1024', function () {
-        $('.stream-container-inner').dragscrollable({
-            dragSelector: '*'
-        });
-    });
+    enableClickDrag();
 
 
     ////////////////////////////////////////////
@@ -120,7 +104,7 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     $('#epgScrollRight, #epgScrollLeft').on('click', scrollEpg);
     $('#epgTimeScrollRight, #epgTimeScrollLeft').on('click', scrollEpg);
-    $('#epgDateScrollRight, #epgDateScrollLeft').on('click', changeDateTab);
+    changeDateTab();
 
 
     ////////////////////////////////////////////
@@ -176,47 +160,37 @@ function leftPositionFromTime(hour, minute) {
     return ((hour * globHourWidth) + (globHourWidth * (minute / 60)));
 }
 
+
+////////////////////////////////////////////
+//Enables EPG click + drag
+////////////////////////////////////////////
+function enableClickDrag() {
+    $('.stream-container-inner').dragscrollable({
+        dragSelector: '*'
+    });
+}
+
 ////////////////////////////////////////////
 //Change the highlighted date tab
 ////////////////////////////////////////////
 function changeDateTab() {
-    var days = $('.days-tab ol')[0].children,
-        activeIndex,
+    var daysContainer = $('.days-tab ol'),
+        days = daysContainer.find('li'),
         activeClass = 'active',
-        leftArrow = 'epgDateScrollLeft',
-        rightArrow = 'epgDateScrollRight',
-        container = $('.stream-container-inner'),
-        tabIndex = 0;
+        streamContainer = $('.stream-container-inner');
 
-    $('.stream-container-inner').off('scroll');
+    $(days).on('click', function() {
+        days.removeClass(activeClass);
+        $(this).addClass(activeClass);
 
-    for (var i = 0; i < days.length; i++) {
-        if ($(days[i]).hasClass(activeClass)) {
-            activeIndex = i;
-            break;
-        }
-    }
-
-    if ($(this).attr('id') == leftArrow && activeIndex - 1 >= 0) {
-        $(days[activeIndex]).removeClass(activeClass);
-        tabIndex = activeIndex - 1;
-        $(days[tabIndex]).addClass(activeClass);
-    }
-
-    if ($(this).attr('id') == rightArrow && activeIndex < days.length - 1) {
-        $(days[activeIndex]).removeClass(activeClass);
-        tabIndex = activeIndex + 1;
-        $(days[tabIndex]).addClass(activeClass);
-    }
-
-    if (tabIndex == 0)
-        container.scrollLeft(0);
-    else if (tabIndex == 1)
-        container.scrollLeft(globOneDayWidth);
-    else
-        container.scrollLeft(10000);
-
-    $('.stream-container-inner').on('scroll', scrollDayProgression);
+        $.ajax($(this).data('day-view'), {
+            success: function(data) {
+                streamContainer.children('.channel-list').remove();
+                streamContainer.append(data);
+                enableClickDrag();
+            }
+        });
+    });
 }
 
 ////////////////////////////////////////////
@@ -305,8 +279,7 @@ function floatingNav() {
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
     var container = $(container),
-        containerPosition = container.scrollLeft(),
-        edgeOffset = 20;
+        containerPosition = container.scrollLeft();
 
     $.each(container.find('ol.channel-list'), function () {
         $.each($(this).children('li'), function () {
@@ -357,13 +330,13 @@ var resizeProgrammesTimeoutId;
 var dateLeft = true;
 function scrollDayProgression() {
     // Select tomorrow
-    if ($(this).scrollLeft() > globOneDayWidth && dateLeft) {
+    /*if ($(this).scrollLeft() > globOneDayWidth && dateLeft) {
         $('#epgDateScrollRight').trigger('click');
         dateLeft = false;
     } else if ($(this).scrollLeft() < globOneDayWidth && !dateLeft) {
         $('#epgDateScrollLeft').trigger('click');
         dateLeft = true;
-    }
+    }*/
 
     // Resize programmes
     var that = this;

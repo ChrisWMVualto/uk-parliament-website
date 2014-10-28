@@ -145,10 +145,7 @@
                             </div>
                         </div>
                         
-                        @for (var i = 0; i < 20; i++)
-                        {
-                            @Html.Partial(MVC.Guide.Views._ChannelListing, Model.Events[i]);
-                        }
+                        @Html.Partial(MVC.Guide.Views._ChannelListing, Model);
                     </div>
                 </div>
             </div>

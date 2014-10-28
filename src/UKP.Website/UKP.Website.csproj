@@ -453,6 +453,7 @@
     <Content Include="Views\Guide\_InfoPopup.cshtml" />
     <Content Include="Views\Guide\_ChannelListing.cshtml" />
     <Content Include="Views\Guide\_DateTabs.cshtml" />
+    <Content Include="Views\Guide\_ChannelItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -24,15 +24,15 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public IEnumerable<EventModel> GetEpg()
+        public IEnumerable<EventModel> GetEpg(DateTime? date)
         {
+            var dateob = date.HasValue ? date.Value : DateTime.Now;
+
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
-            // TODO: Remove hardcoded date
-            var start = new DateTime(2014, 07, 04);
-            //var start = DateTime.Now.Date;
+            var start = dateob.Date;
             var end = start.AddDays(1);
 
             request.AddParameter("date", start.ToISO8601String());
@@ -47,9 +47,11 @@ namespace UKP.Website.Service
             return EventTransforms.TransformEPG(response.Content);;
         }
 
-        public List<EpgChannelModel> GetEpgEvents()
+        public List<EpgChannelModel> GetEpgEvents(DateTime? date)
         {
-            var events = GetEpg();
+            var dateob = date.HasValue ? date.Value : DateTime.Now;
+
+            var events = GetEpg(dateob);
             var epgModel = new List<EpgChannelModel>();
 
             for (var i = 1; i <= 20; i++)
