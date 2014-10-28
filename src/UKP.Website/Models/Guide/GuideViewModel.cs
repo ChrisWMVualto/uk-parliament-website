@@ -8,10 +8,12 @@ namespace UKP.Website.Models.Guide
     public class GuideViewModel
     {
         public List<EpgChannelModel> Events { get; private set; }
+        public DateTime BaseDate { get; private set; }
 
         public GuideViewModel(List<EpgChannelModel> events)
         {
             Events = events;
+            BaseDate = DateTime.Today;
         }
 
         public string LivePosition()
