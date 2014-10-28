@@ -60,6 +60,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgInfo);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EpgDay()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDay);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public GuideController Actions { get { return MVC.Guide; } }
@@ -78,6 +84,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string Index = "Index";
             public readonly string EpgInfo = "EpgInfo";
+            public readonly string EpgDay = "EpgDay";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -85,6 +92,7 @@ namespace UKP.Website.Controllers
         {
             public const string Index = "Index";
             public const string EpgInfo = "EpgInfo";
+            public const string EpgDay = "EpgDay";
         }
 
 
@@ -96,6 +104,14 @@ namespace UKP.Website.Controllers
         {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_EpgDay s_params_EpgDay = new ActionParamsClass_EpgDay();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EpgDay EpgDayParams { get { return s_params_EpgDay; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EpgDay
+        {
+            public readonly string date = "date";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -106,11 +122,13 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _ChannelItems = "_ChannelItems";
                 public readonly string _ChannelListing = "_ChannelListing";
                 public readonly string _DateTabs = "_DateTabs";
                 public readonly string _InfoPopup = "_InfoPopup";
                 public readonly string Index = "Index";
             }
+            public readonly string _ChannelItems = "~/Views/Guide/_ChannelItems.cshtml";
             public readonly string _ChannelListing = "~/Views/Guide/_ChannelListing.cshtml";
             public readonly string _DateTabs = "~/Views/Guide/_DateTabs.cshtml";
             public readonly string _InfoPopup = "~/Views/Guide/_InfoPopup.cshtml";
@@ -143,6 +161,18 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgInfo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             EpgInfoOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EpgDayOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string date);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EpgDay(string date)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDay);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
+            EpgDayOverride(callInfo, date);
             return callInfo;
         }
 
