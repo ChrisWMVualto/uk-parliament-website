@@ -185,8 +185,9 @@ function changeDateTab() {
 
         $.ajax($(this).data('day-view'), {
             success: function(data) {
-                streamContainer.children('.channel-list').remove();
-                streamContainer.append(data);
+                streamContainer.children('.channel-list').fadeOut(100).remove();
+                streamContainer.scrollLeft(0);
+                streamContainer.append(data).hide().fadeIn(100);
                 enableClickDrag();
             }
         });
