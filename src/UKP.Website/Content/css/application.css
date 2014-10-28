@@ -39,8 +39,19 @@ ol.channel-list {
 
 ol.channel-list li {
     position: absolute;
+    overflow: visible;
 }
 
 ol.channel-list li .outer {
     background-color: #ffffff;
+}
+
+ol.channel-list li::before {
+    display: inline-block;
+    height: 84px;
+    background: white;
+    width: 1px;
+    position: absolute;
+    left: -1px;
+    content: " ";
 }
