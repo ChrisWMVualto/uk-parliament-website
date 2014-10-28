@@ -179,6 +179,7 @@ function changeDateTab() {
         activeClass = 'active',
         streamContainer = $('.stream-container-inner');
 
+
     $(days).on('click', function() {
         days.removeClass(activeClass);
         $(this).addClass(activeClass);
@@ -192,6 +193,37 @@ function changeDateTab() {
             }
         });
     });
+
+
+    var epgNextButton = $('#epgDateScrollRight'),
+        epgPrevButton = $('#epgDateScrollLeft');
+
+    streamContainer.on('scroll', function () {
+        var nextThreshold = 1910,
+            prevThreshold = 0,
+            leftPosition = $(this).scrollLeft();
+
+        if (leftPosition >= nextThreshold) {
+            epgNextButton.trigger('click');
+        } else if (leftPosition <= prevThreshold) {
+            epgPrevButton.trigger('click');
+        }
+    });
+
+
+    epgNextButton.on('click', changeTab);
+    epgPrevButton.on('click', changeTab);
+
+    function changeTab() {
+        var active = daysContainer.find('.active');
+        var index = days.index(active);
+
+        if ($(this).attr('id') == epgNextButton.attr('id'))
+            days.eq(index + 1).trigger('click');
+
+        if ($(this).attr('id') == epgPrevButton.attr('id'))
+            days.eq(index - 1).trigger('click');
+    }
 }
 
 ////////////////////////////////////////////
@@ -279,8 +311,8 @@ function floatingNav() {
 //Resizes the programmes to keep them on screen
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
-    var container = $(container),
-        containerPosition = container.scrollLeft();
+    container = $(container);
+    var containerPosition = container.scrollLeft();
 
     $.each(container.find('ol.channel-list'), function () {
         $.each($(this).children('li'), function () {
