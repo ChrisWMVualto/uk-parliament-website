@@ -20,7 +20,7 @@
             <div class="col-md-12 page-title-bar">
 
                 <header>
-                    <h3>Enter a Keyword and add tags to help if required:</h3>
+                    <h3>Enter a Keyword and use the other fields to refine the results if required:</h3>
                 </header>
 
             </div>
@@ -33,25 +33,32 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="keyword"><h4>1. Keywords</h4></label>
+                                <label for="Keywords"><h4>1. Keywords</h4></label>
                                 @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="members"><h4>2. Members</h4></label>
+                                <label for="MemberId"><h4>2. Members</h4></label>
                                 <input type="text" class="form-control input-lg" id="members" data-ajax-url="@Configuration.GetMemberAutocompleteApi">
                                 @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
                             </div>
                         </div>
-
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="tags"><h4>3. Tags</h4></label>
-                                <input type="text" class="form-control input-lg" id="tags" data-ajax-url="@(Configuration.GetIasBaseUrl + "/api/search/tags?tag=")">
-                                @Html.HiddenFor(x => x.House)
-                                @Html.HiddenFor(x => x.Business)
+                                <label for="SelectedHouse"><h4>3. House</h4></label>
+                                <div>
+                                    @Html.DropDownListFor(x => x.SelectedHouse, Model.HouseTags, "No house selected", new { @class="multiselect-list" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group search-param">
+                                <label for="SelectedBusiness"><h4>4. Business</h4></label>
+                                <div>
+                                    @Html.DropDownListFor(x => x.SelectedBusiness, Model.BusinessTags, "No business selected", new { @class="multiselect-list" })
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -61,7 +68,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="startDate"><h4>4. Start Date</h4></label>
+                                <label for="Start"><h4>5. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
@@ -70,7 +77,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="endDate"><h4>5. End Date</h4></label>
+                                <label for="End"><h4>6. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
@@ -94,7 +101,7 @@
             <div class="row">
                 <div class="col-md-10">
                     <h4>
-                        
+
                         @if(Model.SearchResult.TotalCount == 1)
                         {
                             <strong>@Model.SearchResult.TotalCount Search Result for:</strong>
@@ -103,7 +110,7 @@
                         {
                             <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
                         }
-                        
+
 
                         @if(!string.IsNullOrWhiteSpace(Model.Keywords))
                         {

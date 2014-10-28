@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using UKP.Website.Service.Model;
 
 namespace UKP.Website.Models.Search
@@ -17,6 +18,10 @@ namespace UKP.Website.Models.Search
         public string House { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public SelectList BusinessTags { get; set; }
+        public IEnumerable<string> SelectedBusiness { get; set; }
+        public SelectList HouseTags { get; set; }
+        public IEnumerable<string> SelectedHouse { get; set; }
 
         public VideoCollectionModel SearchResult
         {
