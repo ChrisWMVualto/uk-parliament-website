@@ -111,7 +111,7 @@ namespace UKP.Website.Service
             // TODO: Remove hardcoded date
             var start = new DateTime(2014, 07, 04);
             //var start = DateTime.Now.Date;
-            var end = start.AddHours(12);
+            var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
