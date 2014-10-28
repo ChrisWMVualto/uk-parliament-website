@@ -89,9 +89,13 @@ $(document).ready(function () {
     $('.stream-container-inner').find('a:last-of-type').on('click', function (e) {
         e.stopPropagation();
 
-        // We'll have to pass an event ID in here in the long run.
-        // They'll be added to the HTML sever-side.
-        $('#epgInfoPopup').show();
+        $('#epgInfoPopup').fadeOut(100).remove();
+
+        $.ajax($(this).parents('li').data('epg-info'), {
+            success: function(model) {
+                $('.stream-container-outer').append(model).hide().fadeIn(100);
+            }
+        });
     });
 
     $('[data-hide]').on("click", function() {
