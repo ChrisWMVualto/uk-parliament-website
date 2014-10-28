@@ -18,14 +18,13 @@
 
 
 .stream-container-inner ol.channel-list {
-    margin-top: 14px;
+    margin-top: 15px;
     height: 85px;
     width: 2880px;
 }
 
 ol.channel-list {
     border-bottom: 1px solid #000000;
-    margin-top: 15px;
     padding-top: 0;
     padding-left: 0;
 
