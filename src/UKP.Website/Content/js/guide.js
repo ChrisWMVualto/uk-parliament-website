@@ -89,17 +89,15 @@ $(document).ready(function () {
     $('.stream-container-inner').find('a:last-of-type').on('click', function (e) {
         e.stopPropagation();
 
-        $('#epgInfoPopup').fadeOut(100).remove();
-
         $.ajax($(this).parents('li').data('epg-info'), {
             success: function(model) {
                 $('.stream-container-outer').append(model).hide().fadeIn(100);
             }
         });
-    });
 
-    $('[data-hide]').on("click", function() {
-        $("." + $(this).attr("data-hide")).hide();
+        $(document).one('click', '[data-hide]', function () {
+            $("." + $(this).data("hide")).fadeOut(100).remove();
+        });
     });
 
     if ($('.epg-outer').length > 0)
