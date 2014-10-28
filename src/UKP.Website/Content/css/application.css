@@ -1,0 +1,57 @@
+﻿/* Keep end time timepicker within view */
+.end-time .dropdown-menu {
+    left: -48px;
+}
+
+.end-time .bootstrap-timepicker-widget.dropdown-menu:before {
+    left: 60px;
+}
+
+.end-time .bootstrap-timepicker-widget.dropdown-menu:after {
+    left: 61px;
+}
+
+.video-container iframe {
+    width:100%;
+    height:100%;
+}
+
+
+.stream-container-inner ol.channel-list {
+    margin-top: 14px;
+    height: 85px;
+    width: 2880px;
+}
+
+ol.channel-list {
+    border-bottom: 1px solid #000000;
+    margin-top: 14px;
+    padding-top: 0;
+    padding-left: 0;
+
+    position: relative;
+    left: 40px;
+
+    background-color: white;
+    background-image: url("../img/blank.png");
+    background-repeat: repeat;
+}
+
+ol.channel-list li {
+    position: absolute;
+    overflow: visible;
+}
+
+ol.channel-list li .outer {
+    background-color: #ffffff;
+}
+
+ol.channel-list li::before {
+    display: inline-block;
+    height: 84px;
+    background: white;
+    width: 1px;
+    position: absolute;
+    left: -1px;
+    content: " ";
+}
