@@ -136,6 +136,8 @@ namespace Links
             public static readonly string ajax_loader_gif = Url("ajax-loader.gif");
             public static readonly string application_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/application.min.css") ? Url("application.min.css") : Url("application.css");
                  
+            public static readonly string bootstrap_multiselect_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-multiselect.min.css") ? Url("bootstrap-multiselect.min.css") : Url("bootstrap-multiselect.css");
+                 
             public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
                  
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -345,6 +347,7 @@ namespace Links
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string bootstrap_checkbox_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-checkbox.min.js") ? Url("bootstrap-checkbox.min.js") : Url("bootstrap-checkbox.js");
                 public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
+                public static readonly string bootstrap_multiselect_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-multiselect.min.js") ? Url("bootstrap-multiselect.min.js") : Url("bootstrap-multiselect.js");
                 public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
                 public static readonly string bootstrap_timepicker_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker-mod.min.js") ? Url("bootstrap-timepicker-mod.min.js") : Url("bootstrap-timepicker-mod.js");
                 public static readonly string breakpoints_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/breakpoints.min.js") ? Url("breakpoints.min.js") : Url("breakpoints.js");

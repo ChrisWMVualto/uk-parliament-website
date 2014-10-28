@@ -44,3 +44,30 @@ ol.channel-list li {
 ol.channel-list li .outer {
     background-color: #ffffff;
 }
+
+
+.multiselect.dropdown-toggle {
+    padding-top:12px;
+    padding-bottom:12px;
+}
+
+.multiselect-container > li.active > a {
+    background-image:none;
+    background-color: #085196;
+}
+
+.multiselect-container > li.active > a:hover {
+    background-image:none;
+    background-color: #05325c;
+}
+
+.multiselect-container li a label.checkbox input[type=checkbox], .multiselect-container li a label.radio input[type=radio] {
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+}
+
+button.multiselect {
+    width:160px;
+}
+
+

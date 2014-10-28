@@ -106,6 +106,8 @@ namespace UKP.Website.Controllers
             public readonly string business = "business";
             public readonly string start = "start";
             public readonly string end = "end";
+            public readonly string selectedBusiness = "selectedBusiness";
+            public readonly string SelectedHouse = "SelectedHouse";
             public readonly string page = "page";
         }
         static readonly ActionParamsClass_Moments s_params_Moments = new ActionParamsClass_Moments();
@@ -117,8 +119,6 @@ namespace UKP.Website.Controllers
             public readonly string eventId = "eventId";
             public readonly string keywords = "keywords";
             public readonly string memberId = "memberId";
-            public readonly string house = "house";
-            public readonly string business = "business";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -146,10 +146,10 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string keywords, int? memberId, string house, string business, string start, string end, int page);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string keywords, int? memberId, string house, string business, string start, string end, System.Collections.Generic.IEnumerable<string> selectedBusiness, System.Collections.Generic.IEnumerable<string> SelectedHouse, int page);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, int page)
+        public override System.Web.Mvc.ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, System.Collections.Generic.IEnumerable<string> selectedBusiness, System.Collections.Generic.IEnumerable<string> SelectedHouse, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keywords", keywords);
@@ -158,24 +158,24 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "business", business);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "start", start);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "end", end);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "selectedBusiness", selectedBusiness);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "SelectedHouse", SelectedHouse);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            IndexOverride(callInfo, keywords, memberId, house, business, start, end, page);
+            IndexOverride(callInfo, keywords, memberId, house, business, start, end, selectedBusiness, SelectedHouse, page);
             return callInfo;
         }
 
         [NonAction]
-        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid eventId, string keywords, int? memberId, string house, string business);
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid eventId, string keywords, int? memberId);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Moments(System.Guid eventId, string keywords, int? memberId, string house, string business)
+        public override System.Web.Mvc.PartialViewResult Moments(System.Guid eventId, string keywords, int? memberId)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventId", eventId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keywords", keywords);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "memberId", memberId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "house", house);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "business", business);
-            MomentsOverride(callInfo, eventId, keywords, memberId, house, business);
+            MomentsOverride(callInfo, eventId, keywords, memberId);
             return callInfo;
         }
 
