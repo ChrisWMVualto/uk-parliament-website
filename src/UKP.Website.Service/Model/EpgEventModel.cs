@@ -17,12 +17,15 @@ namespace UKP.Website.Service.Model
             
         }
 
-        public string TemplateWidth()
+        private int TemplateWidthInt()
         {
             var difference = EventData.DisplayEndDate.Subtract(EventData.DisplayStartDate);
-            var width = EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
+            return EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
+        }
 
-            return string.Format("{0}px", width);
+        public string TemplateWidth()
+        {
+            return string.Format("{0}px", TemplateWidthInt());
         }
 
         public string TemplateLeftPosition()
@@ -31,6 +34,11 @@ namespace UKP.Website.Service.Model
             var left = EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
 
             return string.Format("{0}px", left);
+        }
+
+        public bool SmallItem()
+        {
+            return TemplateWidthInt() <= (90 * EventConstants.EPG_MINUTE_SIZE);
         }
     }
 }
