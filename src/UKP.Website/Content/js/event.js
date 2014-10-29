@@ -119,6 +119,10 @@ function reloadEmbedData() {
             var start = settings.options.start.input.val();
             var end = settings.options.end.input.val();
 
+            if (start == undefined || end == undefined) {
+                return;
+            }
+
             if (start == "" && end != "") {
                 settings.options.start.input.val(settings.options.start.hiddenStart.val());
                 start = settings.options.start.input.val();
@@ -134,6 +138,7 @@ function reloadEmbedData() {
                 end = settings.options.end.date.val() + 'T' + end;
             }
 
+            
 
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
             $.ajax(url, {

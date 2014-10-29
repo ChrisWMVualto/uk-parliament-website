@@ -5,22 +5,21 @@
 
 <header class="col-md-10">
     <h3>@Model.Event.Title</h3>
+
     <h4>
         <i class="fa fa-vod-badge fa-2x state-badge-sm hidden-lg hidden-md pending-badge"></i>
-        <span><strong>Start Time:</strong> @Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</span> <i class="pipe hideen-"></i> 
-        @if (Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
+        @if(Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
         {
-            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</span>
+            <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt"), ended @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")  </span>
         }
         else
         {
-            <span><strong>End Time:</strong> @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</span>
+            <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt"), ended @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)  </span>
         }
     </h4>
 </header>
 
 <div class="col-md-2">
-
     @if(Model.Event.States.PlayerState == PlayerEventState.LIVE)
     {
         <span class="state-badge pending-badge visible-lg visible-md">Live</span>
