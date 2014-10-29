@@ -20,7 +20,7 @@ namespace UKP.Website.Controllers
             var cookie = Response.Cookies.Get(ApplicationConstants.AcceptCookieName) ?? new HttpCookie(ApplicationConstants.AcceptCookieName);
 
             cookie.Value = accepted.ToString();
-            cookie.Expires = DateTime.Now.AddYears(1);
+            cookie.Expires = DateTime.Now.AddMonths(2);
             Response.Cookies.Add(cookie);
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
