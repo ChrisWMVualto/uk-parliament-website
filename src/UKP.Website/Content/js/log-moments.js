@@ -1,14 +1,39 @@
 ﻿var playerDateTime;
+var stackPos = 'top';
+
+function scrollStack() {
+    if ($(".stack").length) {
+        $('.stack').slimScroll({
+            railVisible: true,
+            railColor: '#ffffff',
+            railOpacity: 0.3,
+            color: '#ffffff',
+            size: '12px',
+            height: 'auto',
+            alwaysVisible: false,
+            start: stackPos
+        });
+
+
+        $('.stack').slimScroll().bind('slimscroll', function(e, pos){
+            stackPos = pos;
+        });
+    }
+}
+
+
+
 
 function updateStacks() {
     if ($('#ContainsLogMoments').val() == "False") {
         var stackUrl = $('#eventStackContainer').data("load-stack-url");
         $.get(stackUrl, function (data) {
             $('#eventStackContainer').html(data);
+            scrollStack();
         });
     }
     var stackPollingInterval = parseInt($('#StackPollingInterval').val());
-    setTimeout(updateStacks, stackPollingInterval);
+   // setTimeout(updateStacks, stackPollingInterval);
 }
 
 
@@ -24,8 +49,11 @@ function updateLogMoments() {
     setTimeout(updateLogMoments, stackPollingInterval);
 }
 
-$(function () {
 
-    updateStacks();
+
+
+$(function () {
+    scrollStack();
+    //updateStacks();
     //updateLogMoments();
 });
