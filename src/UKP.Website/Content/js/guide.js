@@ -191,12 +191,7 @@ function changeDateTab() {
     ///
 
     $(days).on('scrollnext', function () {
-        console.log('ping');
-
         if (channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
-
-            console.log('pong');
-
             fetchContent({
                 removePast: channelDayContainer.children().length != 1,
                 day: $(this),
@@ -217,13 +212,8 @@ function changeDateTab() {
     function scrollHandler() {
         var leftPosition = $(this).scrollLeft();
 
-        //console.log(leftPosition + ' >= ' + upperThreshold);
-
         if (leftPosition >= upperThreshold) {
             streamContainer.off('scroll', scrollHandler);
-
-            console.log(activeTabIndex());
-
             days.eq(activeTabIndex() + 1).trigger('scrollnext');
         }
     }
