@@ -27,7 +27,7 @@ namespace UKP.Website.Controllers
             DateTime fromDate;
             if(!DateTime.TryParse(start, out fromDate))
             {
-                fromDate = DateTime.Now.AddMonths(-1);
+                fromDate = DateTime.Today.AddMonths(-1);
             }
             DateTime toDate;
             if(!DateTime.TryParse(end, out toDate))
@@ -50,7 +50,7 @@ namespace UKP.Website.Controllers
             
             if(!string.IsNullOrWhiteSpace(start))
             {
-                searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate, toDate, page);
+                searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
             }
 
             return View(searchModel);
