@@ -223,12 +223,13 @@ function changeDateTab() {
             centerThreshold = centerThresholdBase;
         }
 
-        //if (leftPosition <= lowerThreshold) {
-        //    if (activeTabIndex() != 0) {
-        //        streamContainer.off('scroll', scrollHandler);
-        //        days.eq(activeTabIndex() - 1).trigger('scrollNext', false);
-        //    }
-        //}
+
+        if (leftPosition <= lowerThreshold) {
+            if (activeTabIndex() != 0) {
+                streamContainer.off('scroll', scrollHandler);
+                days.eq(activeTabIndex() - 1).trigger('scrollnext', false);
+            }
+        }
 
         if (leftPosition < centerThreshold && !leftTab) {
             devanceTab();
@@ -319,16 +320,23 @@ function changeDateTab() {
                 if (opts.clear)
                     channelDayContainer.children().remove();
 
-                if (opts.removePast)
+                if (opts.removePast && opts.append)
                     channelDayContainer.children().first().remove();
+                else if (opts.removePast)
+                    channelDayContainer.children().last().remove();
+
 
                 if (opts.append)
                     channelDayContainer.append(data);
+                else
+                    channelDayContainer.prepend(data);
 
                 if (opts.resetScroll)
                     streamContainer.scrollLeft(0);
-                else if (opts.removePast)
+                else if (opts.removePast && opts.append)
                     streamContainer.scrollLeft(streamContainer.scrollLeft() - baseWidth);
+                else if (opts.removePast)
+                    streamContainer.scrollLeft(streamContainer.scrollLeft() + baseWidth);
 
                 if (opts.callback.length > 0)
                     opts.callback(data, opts);
@@ -336,6 +344,9 @@ function changeDateTab() {
                 if (opts.append && opts.removePast) {
                     leftTab = true;
                     rightTab = false;
+                } else if (opts.removePast) {
+                    leftTab = false;
+                    rightTab = true;
                 }
 
                 streamContainer.on('scroll', scrollHandler);
