@@ -181,28 +181,33 @@ function changeDateTab() {
 
 
     var lowerThreshold = 150,
-        upperThreshold = 1910,
-        removePast = false;
+        upperThesholdBase = 1910,
+        upperThreshold = upperThesholdBase,
+        baseWidth = 2880;
 
+
+    ///
+    /// Scrolling Behavior
+    ///
 
     $(days).on('scrollnext', function () {
-        days.removeClass(activeClass);
-        $(this).addClass(activeClass);
+        console.log('ping');
 
         if (channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
-            $.ajax($(this).data('day-view'), {
-                success: function (data) {
-                    if (removePast) {
-                        channelDayContainer.children().first().remove();
-                        streamContainer.scrollLeft(streamContainer.scrollLeft() - 2880);
-                    } else {
-                        channelDayContainer.width(2880 * 2);
-                        timeline.width(2880 * 2);
-                        removePast = true;
+
+            console.log('pong');
+
+            fetchContent({
+                removePast: channelDayContainer.children().length != 1,
+                day: $(this),
+                callback: function (data, opts) {
+                    if (!opts.removePast) {
+                        channelDayContainer.width(baseWidth * 2);
+                        timeline.width((baseWidth * 2) + 40);
+                        upperThreshold = upperThesholdBase * 2;
                     }
 
-                    channelDayContainer.append(data);
-                    streamContainer.on('scroll', scrollHandler);
+                    advanceTab();
                 }
             });
         }
@@ -212,44 +217,107 @@ function changeDateTab() {
     function scrollHandler() {
         var leftPosition = $(this).scrollLeft();
 
+        //console.log(leftPosition + ' >= ' + upperThreshold);
+
         if (leftPosition >= upperThreshold) {
             streamContainer.off('scroll', scrollHandler);
-            var index = days.index(daysContainer.find('.active'));
 
-            days.eq(index + 1).trigger('scrollnext');
-            upperThreshold = 1910 * 2;
+            console.log(activeTabIndex());
+
+            days.eq(activeTabIndex() + 1).trigger('scrollnext');
         }
     }
+
+
+    ///
+    /// Change Date Buttons
+    ///
 
     epgNextButton.on('click', changeTab);
     epgPrevButton.on('click', changeTab);
 
     function changeTab() {
-        var active = daysContainer.find('.active');
-        var index = days.index(active);
-
         if ($(this).attr('id') == epgNextButton.attr('id'))
-            days.eq(index + 1).trigger('click');
+            days.eq(activeTabIndex() + 1).trigger('click');
 
         if ($(this).attr('id') == epgPrevButton.attr('id'))
-            days.eq(index - 1).trigger('click');
+            days.eq(activeTabIndex() - 1).trigger('click');
     }
 
     $(days).on('click', function () {
-        days.removeClass(activeClass);
-        $(this).addClass(activeClass);
+        $(this).trigger('activate');
 
-        $.ajax($(this).data('day-view'), {
-            success: function (data) {
-                channelDayContainer.children().remove();
-                streamContainer.scrollLeft(0);
-                removePast = false;
-                upperThreshold = 1910;
-
-                channelDayContainer.append(data);
+        fetchContent({
+            clear: true,
+            removePast: false,
+            day: $(this),
+            resetScroll: true,
+            callback: function() {
+                upperThreshold = upperThesholdBase;
             }
         });
     });
+
+
+    ///
+    /// Tab Activation
+    ///
+
+    function activeTabIndex() {
+        return days.index(daysContainer.find('.active'));
+    }
+
+    days.on('activate', function() {
+        days.removeClass(activeClass);
+        $(this).addClass(activeClass);
+    });
+
+    function advanceTab() {
+        days.eq(activeTabIndex() + 1).trigger('activate');
+    }
+
+    function devanceTab() {
+        days.eq(activeTabIndex() - 1).trigger('activate');
+    }
+
+
+    ///
+    /// Fetch Content
+    ///
+
+    function fetchContent(options) {
+        var opts = $.extend({
+            clear: false,
+            append: true,
+            removePast: true,
+            day: null,
+            callback: null,
+            resetScroll: false
+        }, options);
+
+        $.ajax(opts.day.data('day-view'), {
+            success: function (data) {
+                if (opts.clear)
+                    channelDayContainer.children().remove();
+
+                if (opts.removePast)
+                    channelDayContainer.children().first().remove();
+
+                if (opts.append)
+                    channelDayContainer.append(data);
+
+                if (opts.resetScroll)
+                    streamContainer.scrollLeft(0);
+                else if (opts.removePast)
+                    streamContainer.scrollLeft(streamContainer.scrollLeft() - baseWidth);
+
+                if (opts.callback.length > 0)
+                    opts.callback(data, opts);
+
+                streamContainer.on('scroll', scrollHandler);
+            }
+        });
+    }
 }
 
 ////////////////////////////////////////////
