@@ -22,6 +22,7 @@ namespace UKP.Website.Models.Search
         public SelectList HouseTags { get; set; }
         public string SelectedBusiness { get; set; }
         public string SelectedHouse { get; set; }
+        public string Member { get; set; }
 
         public VideoCollectionModel SearchResult
         {

@@ -1,14 +1,4 @@
-﻿// Adds the ability to use .net stylr string formatting
-if (!String.prototype.format) {
-    String.prototype.format = function () {
-        var args = arguments;
-        return this.replace(/{(\d+)}/g, function (match, number) {
-            return typeof args[number] != 'undefined' ? args[number] : match;
-        });
-    };
-}
-
-function momentSearch() {
+﻿function momentSearch() {
     var obj = {
         'parent': $(this).parent().parent(),
         'buttonCont': $(this).parent(),
@@ -40,16 +30,22 @@ $(function () {
 
     $('.moment-more button').on('click', momentSearch);
 
-    $('#members').autocomplete({
-        serviceUrl: $('#members').attr('data-ajax-url'),
+    $('#Member').autocomplete({
+        serviceUrl: $('#Member').attr('data-ajax-url'),
         displayItem: "DisplayAs",
         objectPath: "Members.Member",
         minChars: 3,
-        // callback function:
+        delimiter: ' ',
         onSelect: function (member) {
             $('#MemberId').val(member['@Member_Id']);
         },
-        noCache: true
+        noCache: false
+    });
+    
+    $('#Member').change(function () {
+        if ($('#Member').val() == '') {
+            $('#MemberId').val('');
+        }
     });
 
 

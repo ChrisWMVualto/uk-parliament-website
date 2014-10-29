@@ -136,6 +136,8 @@ namespace Links
             public static readonly string ajax_loader_gif = Url("ajax-loader.gif");
             public static readonly string application_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/application.min.css") ? Url("application.min.css") : Url("application.css");
                  
+            public static readonly string autocomplete_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/autocomplete.min.css") ? Url("autocomplete.min.css") : Url("autocomplete.css");
+                 
             public static readonly string bootstrap_multiselect_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-multiselect.min.css") ? Url("bootstrap-multiselect.min.css") : Url("bootstrap-multiselect.css");
                  
             public static readonly string bootstrap_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap.min.css") ? Url("bootstrap.min.css") : Url("bootstrap.css");
@@ -334,7 +336,6 @@ namespace Links
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string guide_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/guide.min.js") ? Url("guide.min.js") : Url("guide.js");
             public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
-            public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");
             public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
             public static readonly string log_moments_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/log-moments.min.js") ? Url("log-moments.min.js") : Url("log-moments.js");
             public static readonly string responsive_player_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/responsive-player.min.js") ? Url("responsive-player.min.js") : Url("responsive-player.js");
