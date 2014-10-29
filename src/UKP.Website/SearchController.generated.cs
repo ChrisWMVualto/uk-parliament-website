@@ -106,8 +106,6 @@ namespace UKP.Website.Controllers
             public readonly string business = "business";
             public readonly string start = "start";
             public readonly string end = "end";
-            public readonly string selectedBusiness = "selectedBusiness";
-            public readonly string SelectedHouse = "SelectedHouse";
             public readonly string page = "page";
         }
         static readonly ActionParamsClass_Moments s_params_Moments = new ActionParamsClass_Moments();
@@ -146,10 +144,10 @@ namespace UKP.Website.Controllers
         public T4MVC_SearchController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string keywords, int? memberId, string house, string business, string start, string end, System.Collections.Generic.IEnumerable<string> selectedBusiness, System.Collections.Generic.IEnumerable<string> SelectedHouse, int page);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string keywords, int? memberId, string house, string business, string start, string end, int page);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, System.Collections.Generic.IEnumerable<string> selectedBusiness, System.Collections.Generic.IEnumerable<string> SelectedHouse, int page)
+        public override System.Web.Mvc.ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keywords", keywords);
@@ -158,10 +156,8 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "business", business);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "start", start);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "end", end);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "selectedBusiness", selectedBusiness);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "SelectedHouse", SelectedHouse);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            IndexOverride(callInfo, keywords, memberId, house, business, start, end, selectedBusiness, SelectedHouse, page);
+            IndexOverride(callInfo, keywords, memberId, house, business, start, end, page);
             return callInfo;
         }
 

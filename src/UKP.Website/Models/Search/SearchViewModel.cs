@@ -19,9 +19,9 @@ namespace UKP.Website.Models.Search
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public SelectList BusinessTags { get; set; }
-        public IEnumerable<string> SelectedBusiness { get; set; }
         public SelectList HouseTags { get; set; }
-        public IEnumerable<string> SelectedHouse { get; set; }
+        public string SelectedBusiness { get; set; }
+        public string SelectedHouse { get; set; }
 
         public VideoCollectionModel SearchResult
         {
