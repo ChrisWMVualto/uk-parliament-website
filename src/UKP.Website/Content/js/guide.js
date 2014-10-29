@@ -185,24 +185,29 @@ function changeDateTab() {
         upperThreshold = upperThesholdBase,
         baseWidth = 2880;
 
+    var centerThreshold = null,
+        centerThresholdBase = 2880;
+
+    var leftTab = true,
+        rightTab = false;
+
 
     ///
     /// Scrolling Behavior
     ///
 
-    $(days).on('scrollnext', function () {
+    $(days).on('scrollnext', function (event, append) {
         if (channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
             fetchContent({
                 removePast: channelDayContainer.children().length != 1,
                 day: $(this),
+                append: append,
                 callback: function (data, opts) {
                     if (!opts.removePast) {
                         channelDayContainer.width(baseWidth * 2);
                         timeline.width((baseWidth * 2) + 40);
                         upperThreshold = upperThesholdBase * 2;
                     }
-
-                    advanceTab();
                 }
             });
         }
@@ -214,7 +219,24 @@ function changeDateTab() {
 
         if (leftPosition >= upperThreshold) {
             streamContainer.off('scroll', scrollHandler);
-            days.eq(activeTabIndex() + 1).trigger('scrollnext');
+            days.eq(activeTabIndex() + 1).trigger('scrollnext', true);
+            centerThreshold = centerThresholdBase;
+        }
+
+
+        if (leftPosition <= lowerThreshold) {
+            if (activeTabIndex() != 0) {
+                streamContainer.off('scroll', scrollHandler);
+                days.eq(activeTabIndex() - 1).trigger('scrollnext', false);
+            }
+        }
+
+        if (leftPosition < centerThreshold && !leftTab) {
+            devanceTab();
+        }
+
+        if (leftPosition > centerThreshold && !rightTab) {
+            advanceTab();
         }
     }
 
@@ -254,6 +276,10 @@ function changeDateTab() {
     ///
 
     function activeTabIndex() {
+        return tabIndex(daysContainer.find('.active'));
+    }
+
+    function tabIndex(tab) {
         return days.index(daysContainer.find('.active'));
     }
 
@@ -264,10 +290,14 @@ function changeDateTab() {
 
     function advanceTab() {
         days.eq(activeTabIndex() + 1).trigger('activate');
+        rightTab = true;
+        leftTab = false;
     }
 
     function devanceTab() {
         days.eq(activeTabIndex() - 1).trigger('activate');
+        rightTab = false;
+        leftTab = true;
     }
 
 
@@ -290,19 +320,34 @@ function changeDateTab() {
                 if (opts.clear)
                     channelDayContainer.children().remove();
 
-                if (opts.removePast)
+                if (opts.removePast && opts.append)
                     channelDayContainer.children().first().remove();
+                else if (opts.removePast)
+                    channelDayContainer.children().last().remove();
+
 
                 if (opts.append)
                     channelDayContainer.append(data);
+                else
+                    channelDayContainer.prepend(data);
 
                 if (opts.resetScroll)
                     streamContainer.scrollLeft(0);
-                else if (opts.removePast)
+                else if (opts.removePast && opts.append)
                     streamContainer.scrollLeft(streamContainer.scrollLeft() - baseWidth);
+                else if (opts.removePast)
+                    streamContainer.scrollLeft(streamContainer.scrollLeft() + baseWidth);
 
                 if (opts.callback.length > 0)
                     opts.callback(data, opts);
+
+                if (opts.append && opts.removePast) {
+                    leftTab = true;
+                    rightTab = false;
+                } else if (opts.removePast) {
+                    leftTab = false;
+                    rightTab = true;
+                }
 
                 streamContainer.on('scroll', scrollHandler);
             }
