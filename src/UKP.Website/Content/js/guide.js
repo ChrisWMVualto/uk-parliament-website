@@ -171,7 +171,9 @@ function changeDateTab() {
         days = daysContainer.find('li'),
         activeClass = 'active',
         streamContainer = $('.stream-container-inner'),
-        channelDayContainer = $('.channel-day-container');
+        channelDayContainer = $('.channel-day-container'),
+        timeline = $('.timeline'),
+        liveline = $('.live-now');
     
 
     var epgNextButton = $('#epgDateScrollRight'),
@@ -192,9 +194,11 @@ function changeDateTab() {
                 success: function (data) {
                     if (removePast) {
                         channelDayContainer.children().first().remove();
+                        liveline.hide();
                         streamContainer.scrollLeft(streamContainer.scrollLeft() - 2880);
                     } else {
                         channelDayContainer.width(2880 * 2);
+                        timeline.width(2880 * 2);
                         removePast = true;
                     }
 

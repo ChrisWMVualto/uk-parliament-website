@@ -73,6 +73,10 @@ ol.channel-list li::before {
     clear: none;
 }
 
+.timeline {
+    overflow: hidden;
+}
+
 /* Search */
 
 .multiselect.dropdown-toggle {
