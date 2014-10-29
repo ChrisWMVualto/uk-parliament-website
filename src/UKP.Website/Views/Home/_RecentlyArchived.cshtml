@@ -1,0 +1,74 @@
+﻿@using RestSharp.Extensions
+@model UKP.Website.Service.Model.VideoCollectionModel
+
+@if(Model.Results.Any())
+{
+    <section class="section-recently-archived clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="title-middle">
+                    <h2>Recently Archived</h2>
+                    <a href="@Url.Action(MVC.Search.Index())" class="btn btn-lg btn-generic btn-title hidden-xs">View Archive <i class="fa fa-lg fa-angle-double-right"></i></a>
+                </header>
+            </div>
+        </div>
+        <div class="archived-wrapper">
+            <a href="#" id="recentNextCommons" class="recent-next visible-lg">
+                <div class="inner">
+                    <p>
+                        @{
+    var elementAtOrDefault = Model.Results.ElementAtOrDefault(1);
+                        }
+                        @if(elementAtOrDefault != null)
+                        {
+                            @elementAtOrDefault.Event.Title
+                        }
+                    </p>
+                    <i class="fa fa-arrow-scroll-right"></i>
+                </div>
+            </a> <a href="#" id="recentPrevCommons" class="recent-prev visible-lg">
+                <div class="inner">
+                    <p>@Model.Results.Last().Event.Title</p>
+                    <i class="fa fa-arrow-scroll-left"></i>
+                </div>
+            </a>
+            <div class="archived-outer">
+                <div class="archived-inner">
+                    <div id="recentlyArchivedCommons" class="slider center">
+                        @for(var i = 0; i < Model.Results.Count(); i++)
+                        {
+                            <div class="archived-item col-md-6 col-sm-6">
+                                <a href="@Url.Action(MVC.Event.Index(Model.Results.ElementAt(i).Event.Id))" class="clearfix">
+                                    <div class="inner">
+                                        @if(Model.Results.ElementAt(i).ThumbnailUrl.HasValue())
+                                        {
+                                            //TODO  wait for kaltura API
+                                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                            @*<img src="@Model.Results.ElementAt(i).ThumbnailUrl" alt="alt tag here" class="img-responsive">*@
+                                        }
+                                        else
+                                        {
+                                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                        }
+                                        <span class="big-play fa-stack fa-lg visible-lg visible-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                        <div class="overlay">
+                                            <div class="overlay-inner">
+                                                <span class="small-play fa-stack fa-lg hidden-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-recently-archived"></span>
+                                                <h5>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("dddd") <span>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy")</span> @Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</h5>
+                                                <p>@Model.Results.ElementAt(i).Event.Title</p>
+                                                <span class="count">@(i + 1) of @Model.Results.Count()</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <a href="@Url.Action(MVC.Search.Index())" class="btn btn-lg btn-generic btn-title btn-block btn-backup visible-xs">View Archive <i class="fa fa-lg fa-angle-double-right"></i></a>
+        </div>
+    </section>
+}

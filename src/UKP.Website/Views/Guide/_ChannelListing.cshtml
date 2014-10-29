@@ -1,0 +1,6 @@
+﻿@model UKP.Website.Models.Guide.GuideViewModel
+
+@for (var i = 0; i < 20; i++)
+{
+    @Html.Partial(MVC.Guide.Views._ChannelItems, Model.Events[i])
+}

@@ -1,0 +1,17 @@
+﻿@using Date.Extensions
+@model DateTime
+
+<div class="days-tab-outer">
+    <div class="days-tab-inner">
+        <div class="days-tab">
+            <ol>
+                @for (var i = 0; i < 9; i++)
+                {
+                    <li @if (i == 0) { @Html.Raw("class=\"active\"") } data-day-view="@Url.Action(MVC.Guide.EpgDay(@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()))">
+                        <a href="#">@Model.AddDays(i).ToLocalTime().ToString("ddd d") <span>@Model.AddDays(i).ToLocalTime().ToString("MMM")</span></a>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>
+</div>
