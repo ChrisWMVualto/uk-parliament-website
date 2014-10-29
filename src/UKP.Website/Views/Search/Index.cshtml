@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="SelectedHouse"><h4>3. House</h4></label>
+                                <label for="House"><h4>3. House</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.House, Model.HouseTags, "No house selected", new { @class="multiselect-list" })
                                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="SelectedBusiness"><h4>4. Business</h4></label>
+                                <label for="Business"><h4>4. Business</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.Business, Model.BusinessTags, "No business selected", new { @class="multiselect-list" })
                                 </div>
@@ -117,25 +117,7 @@
 
                         @if(Model.SearchResult.TotalCount > 0)
                         {
-                            if(!string.IsNullOrWhiteSpace(Model.Keywords))
-                            {
-                                @Model.Keywords
-                            }
-
-                            if(!string.IsNullOrWhiteSpace(Model.House) || !string.IsNullOrWhiteSpace(Model.Business))
-                            {
-                                <text>-</text>
-                            }
-
-                            if(!string.IsNullOrWhiteSpace(Model.House))
-                            {
-                                @(Model.House + " ");
-                            }
-
-                            if(!string.IsNullOrWhiteSpace(Model.Business))
-                            {
-                                @Model.Business
-                            }
+                            @Model.Keywords
                         }
                     </h4>
                 </div>
