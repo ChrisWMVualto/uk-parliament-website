@@ -7,7 +7,7 @@
             <ol>
                 @for (var i = 0; i < 9; i++)
                 {
-                    <li @if (i == 0) { @Html.Raw("class=\"active\"") } data-day-view="@Url.Action(MVC.Guide.EpgDay(@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()))">
+                    <li data-day-view="@Url.Action(MVC.Guide.EpgDay(@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()))" data-day="@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()" @if (i == 0) { @Html.Raw("class=\"active\"")  }>
                         <a href="#">@Model.AddDays(i).ToLocalTime().ToString("ddd d") <span>@Model.AddDays(i).ToLocalTime().ToString("MMM")</span></a>
                     </li>
                 }
