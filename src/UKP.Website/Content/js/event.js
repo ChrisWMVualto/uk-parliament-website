@@ -1,7 +1,7 @@
 ﻿var auidoOnlyButtonState = false;
 var embedGenTimeoutId = null;
-var eventTimePollingsInterval = 5000;
-var stackPollingIntervalLive = 6000;
+var eventTimePollingsInterval = 20000;
+var stackPollingIntervalLive = 10000;
 var stackPollingIntervalNotLive = 60000;
 
 
@@ -97,7 +97,7 @@ function reloadEmbedData() {
             showSeconds: true,
             showMeridian: false,
             minuteStep: 1,
-            secondStep: 1,
+            secondStep: 1
         }
     };
 
@@ -105,6 +105,9 @@ function reloadEmbedData() {
         if (this.hasOwnProperty('input')) {
             this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
+        }
+        if (this.hasOwnProperty('date')) {
+            this.date.on('change', generateEmbedCode);
         }
     });
 
@@ -216,6 +219,8 @@ function audiOnlySwitch() {
         }
     });
 }
+
+
 
 $(function () {
     var eventStateHub = $.connection.eventStateHub;
