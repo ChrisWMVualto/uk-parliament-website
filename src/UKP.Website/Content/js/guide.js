@@ -185,7 +185,7 @@ function changeDateTab() {
         removePast = false;
 
 
-    $(days).on('click', function () {
+    $(days).on('scrollnext', function () {
         days.removeClass(activeClass);
         $(this).addClass(activeClass);
 
@@ -212,7 +212,10 @@ function changeDateTab() {
         var leftPosition = $(this).scrollLeft();
 
         if (leftPosition >= upperThreshold) {
-            epgNextButton.trigger('click');
+            var active = daysContainer.find('.active');
+            var index = days.index(active);
+
+            days.eq(index + 1).trigger('scrollnext');
             upperThreshold = upperThreshold * 2;
         }
     });
@@ -231,6 +234,22 @@ function changeDateTab() {
         if ($(this).attr('id') == epgPrevButton.attr('id'))
             days.eq(index - 1).trigger('click');
     }
+
+    $(days).on('click', function () {
+        days.removeClass(activeClass);
+        $(this).addClass(activeClass);
+
+        $.ajax($(this).data('day-view'), {
+            success: function (data) {
+                channelDayContainer.children().remove();
+                liveline.hide();
+                streamContainer.scrollLeft(0);
+                removePast = false;
+
+                channelDayContainer.append(data);
+            }
+        });
+    });
 }
 
 ////////////////////////////////////////////
