@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UKP.Website.Service.Model;
 
 namespace UKP.Website.Service
@@ -6,6 +7,7 @@ namespace UKP.Website.Service
     public interface ISearchService
     {
         VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? @from, DateTime? to, int pageNum);
-        LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId, string house, string business);
+        LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId);
+        IEnumerable<TagModel> GetTags();
     }
 }

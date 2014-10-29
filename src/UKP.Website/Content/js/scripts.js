@@ -120,6 +120,8 @@ $(document).ready(function () {
     });
 
 
+    $('.multiselect-list').multiselect();
+
 
     ////////////////////////////////////////////
     //home-recently archived na btns
