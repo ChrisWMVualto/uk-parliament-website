@@ -30,6 +30,7 @@ $(document).ready(function () {
     });
 
     $('#cookiesAccept, #cookiesReject').bind('click', function () {
+
         var url = '/Cookie?accepted=';
 
         if ($(this).attr('id') == 'cookiesAccept')

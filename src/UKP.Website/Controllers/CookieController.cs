@@ -11,6 +11,8 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(bool accepted)
         {
+            var cookieExpiry = accepted ? DateTime.Now.AddYears(1) : DateTime.Now.AddMonths(2);
+
             if (!accepted)
             {
                 foreach (var toDelete in Response.Cookies.AllKeys)
@@ -20,7 +22,7 @@ namespace UKP.Website.Controllers
             var cookie = Response.Cookies.Get(ApplicationConstants.AcceptCookieName) ?? new HttpCookie(ApplicationConstants.AcceptCookieName);
 
             cookie.Value = accepted.ToString();
-            cookie.Expires = DateTime.Now.AddYears(1);
+            cookie.Expires = cookieExpiry;
             Response.Cookies.Add(cookie);
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
