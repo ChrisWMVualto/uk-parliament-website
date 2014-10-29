@@ -165,6 +165,7 @@
   <ItemGroup>
     <Content Include="Content\css\ajax-loader.gif" />
     <Content Include="Content\css\application.css" />
+    <Content Include="Content\css\autocomplete.css" />
     <Content Include="Content\css\bootstrap-multiselect.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\fonts\slick.svg" />
@@ -211,7 +212,6 @@
     <Content Include="Content\js\vendor\bootstrap-multiselect.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\guide.js" />
-    <Content Include="Content\js\jquery.autocomplete.mod.js" />
     <Content Include="Content\js\log-moments.js" />
     <Content Include="Content\js\event.js" />
     <Content Include="Content\js\jquery.autocomplete.js" />

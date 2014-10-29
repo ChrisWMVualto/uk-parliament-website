@@ -24,8 +24,6 @@ namespace UKP.Website.Service
         public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? from, DateTime? to, int pageNum)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
-
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
 
             if(keywords.HasValue())
@@ -60,8 +58,6 @@ namespace UKP.Website.Service
         public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            //client.Proxy = new WebProxy("127.0.0.1", 8888);
-
             var request = _restClientWrapper.AuthRestRequest("api/search/logs/{eventId}", Method.GET, _configuration.IasAuthKey);
 
             request.AddUrlSegment("eventId", eventId.ToString());
