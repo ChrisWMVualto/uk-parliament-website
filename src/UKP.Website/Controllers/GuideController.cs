@@ -42,7 +42,7 @@ namespace UKP.Website.Controllers
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
 
             var events = _eventService.GetEpgEvents(dateob);
-            var model = new GuideViewModel(events);
+            var model = new GuideViewModel(events, dateob.Value);
             return PartialView(MVC.Guide.Views._ChannelListing, model);
         }
     }

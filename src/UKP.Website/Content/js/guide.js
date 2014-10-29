@@ -46,19 +46,13 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //epg-day tabs
     ////////////////////////////////////////////
-    var $li = $('.days-tab li'); // or var $li = $('#id li');
-
-    $li.click(function () {
-        $li.removeClass('active');
-        $(this).addClass('active');
-    });
-
     $('.btn-search-panel').click(function () {
         $(this).toggleClass('active').find('i').toggleClass('fa-plus fa-minus')
             .removeClass('active').find('i')
             .removeClass('fa-minus').addClass('fa-plus');
 
     });
+    changeDateTab();
 
 
     ////////////////////////////////////////////
@@ -104,7 +98,6 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     $('#epgScrollRight, #epgScrollLeft').on('click', scrollEpg);
     $('#epgTimeScrollRight, #epgTimeScrollLeft').on('click', scrollEpg);
-    changeDateTab();
 
 
     ////////////////////////////////////////////
@@ -177,36 +170,46 @@ function changeDateTab() {
     var daysContainer = $('.days-tab ol'),
         days = daysContainer.find('li'),
         activeClass = 'active',
-        streamContainer = $('.stream-container-inner');
-
-
-    $(days).on('click', function() {
-        days.removeClass(activeClass);
-        $(this).addClass(activeClass);
-
-        $.ajax($(this).data('day-view'), {
-            success: function(data) {
-                streamContainer.children('.channel-list').fadeOut(100).remove();
-                streamContainer.scrollLeft(0);
-                streamContainer.append(data).hide().fadeIn(100);
-                enableClickDrag();
-            }
-        });
-    });
-
+        streamContainer = $('.stream-container-inner'),
+        channelDayContainer = $('.channel-day-container');
+    
 
     var epgNextButton = $('#epgDateScrollRight'),
         epgPrevButton = $('#epgDateScrollLeft');
 
-    streamContainer.on('scroll', function () {
-        var nextThreshold = 1910,
-            prevThreshold = 0,
-            leftPosition = $(this).scrollLeft();
 
-        if (leftPosition >= nextThreshold) {
+    var lowerThreshold = 150,
+        upperThreshold = 1910,
+        removePast = false;
+
+
+    $(days).on('click', function () {
+        days.removeClass(activeClass);
+        $(this).addClass(activeClass);
+
+        if (channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
+            $.ajax($(this).data('day-view'), {
+                success: function (data) {
+                    if (removePast) {
+                        channelDayContainer.children().first().remove();
+                        streamContainer.scrollLeft(streamContainer.scrollLeft() - 2880);
+                    } else {
+                        channelDayContainer.width(2880 * 2);
+                        removePast = true;
+                    }
+
+                    channelDayContainer.append(data);
+                }
+            });
+        }
+    });
+
+    streamContainer.on('scroll', function () {
+        var leftPosition = $(this).scrollLeft();
+
+        if (leftPosition >= upperThreshold) {
             epgNextButton.trigger('click');
-        } else if (leftPosition <= prevThreshold) {
-            epgPrevButton.trigger('click');
+            upperThreshold = upperThreshold * 2;
         }
     });
 

@@ -16,6 +16,7 @@
     height:100%;
 }
 
+/* EPG */
 
 .stream-container-inner ol.channel-list {
     margin-top: 15px;
@@ -27,9 +28,10 @@ ol.channel-list {
     border-bottom: 1px solid #000000;
     padding-top: 0;
     padding-left: 0;
+    margin-left: 0;
 
     position: relative;
-    left: 40px;
+    left: 0;
 
     background-color: white;
     background-image: url("../img/blank.png");
@@ -45,6 +47,33 @@ ol.channel-list li .outer {
     background-color: #ffffff;
 }
 
+ol.channel-list li::before {
+    display: inline-block;
+    height: 84px;
+    background: white;
+    width: 1px;
+    position: absolute;
+    left: -1px;
+    content: " ";
+}
+
+.live-now {
+    margin-left: 170px;
+}
+
+.channel-day-container {
+    position: relative;
+    left: 40px;
+    margin-left: 130px;
+}
+
+.channel-day {
+    width: 2880px;
+    float: left;
+    clear: none;
+}
+
+/* Search */
 
 .multiselect.dropdown-toggle {
     padding-top:12px;
@@ -68,20 +97,4 @@ ol.channel-list li .outer {
 
 button.multiselect {
     width:160px;
-}
-
-
-
-ol.channel-list li::before {
-    display: inline-block;
-    height: 84px;
-    background: white;
-    width: 1px;
-    position: absolute;
-    left: -1px;
-    content: " ";
-}
-
-.live-now {
-    margin-left: 170px;
 }

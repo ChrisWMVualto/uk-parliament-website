@@ -1,6 +1,9 @@
-﻿@model UKP.Website.Models.Guide.GuideViewModel
+﻿@using Date.Extensions
+@model UKP.Website.Models.Guide.GuideViewModel
 
-@for (var i = 0; i < 20; i++)
-{
-    @Html.Partial(MVC.Guide.Views._ChannelItems, Model.Events[i])
-}
+<div class="channel-day" data-day="@Model.BaseDate.ToLocalTime().Date.ToISO8601String()">
+    @for (var i = 0; i < 20; i++)
+    {
+        @Html.Partial(MVC.Guide.Views._ChannelItems, Model.Events[i])
+    }
+</div>
