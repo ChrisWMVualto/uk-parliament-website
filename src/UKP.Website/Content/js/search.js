@@ -14,19 +14,15 @@ function momentSearch() {
         'buttonCont': $(this).parent(),
         'url': $(this).attr('data-url-base')
     };
-    init();
+
 
     function init() {
         obj.buttonCont.remove();
         fetchResults();
     }
 
-    function buildUrl() {
-        return obj.url;
-    }
-
     function fetchResults() {
-        $.ajax(buildUrl(), {
+        $.ajax(obj.url, {
             success: processResults
         });
     }
@@ -34,10 +30,16 @@ function momentSearch() {
     function processResults(data, textStatus, jqXHR) {
         obj.parent.append(data);
     }
+
+    init();
 }
-$('.moment-more button').on('click', momentSearch);
+
+
 
 $(function () {
+
+    $('.moment-more button').on('click', momentSearch);
+
     $('#members').autocomplete({
         serviceUrl: $('#members').attr('data-ajax-url'),
         displayItem: "DisplayAs",
@@ -50,66 +52,6 @@ $(function () {
         noCache: true
     });
 
-    $('#tags')
-        .autocomplete({
-            serviceUrl: $('#tags').data('ajax-url'),
-            delimiter: ', ',
-            displayItem: "displayTag",
-            objectPath: "",
-            categoryItem: "category",
-            minChars: 1,
-        })
-        .bind('input', tagInputParser);
-
-    function tagAppender(tag, selector) {
-        if (selector.val().length > 0)
-            selector.val(selector.val() + ", " + tag);
-
-        else
-            selector.val(tag);
-    }
-
-    function tagDestroy() {
-        var tag = $(this).text();
-        tag = tag.replace(/(,)?(\s)?$/, '');
-
-        var inputContent = $('#tags').val();
-        var removeTagRegEx = new RegExp("(" + tag.replace(' ', '\\s') + "){1}(,)?(\\s)*");
-
-        inputContent = inputContent.replace(removeTagRegEx, '');
-        $('#tags').val(inputContent).trigger('input');
-
-        $(this).remove();
-    }
-
-    function tagInputParser() {
-        var inputValue = $(this).val();
-        inputValue = inputValue.split(',');
-        inputValue.pop();
-        var validTags = [];
-
-        $('#House').val('');
-        $('#Business').val('');
-
-        $.each(inputValue, function () {
-            var tag = this.split(": ");
-
-            if (tag[0].trim() == "House")
-                tagAppender(tag[1], $('#House'));
-
-            if (tag[0].trim() == "Business")
-                tagAppender(tag[1], $('#Business'));
-
-            if (tag[1] != null && tag[1] != "")
-                validTags.push(this);
-        });
-
-        $('#selectedTags').empty();
-        $.each(validTags, function () {
-            $('#selectedTags').append('<button type="button" class="btn btn-default btn-tag btn-lg">' + this.replace(/^\s/, '') + ' <i class="fa fa-close fa-lg"></i></button> ');
-        });
-        $('#selectedTags button').bind('click', tagDestroy);
-    }
 
     $('#searchResultsContainer').append('<span class="pagination"><a href="' + window.location + '"></a></span>');
     $('#searchResultsContainer').infinitescroll({
