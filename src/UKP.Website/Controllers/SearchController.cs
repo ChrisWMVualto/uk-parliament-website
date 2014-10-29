@@ -22,8 +22,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end,
-            IEnumerable<string> SelectedHouse, IEnumerable<string> selectedBusiness, int page = 1)
+        public virtual ActionResult Index(string keywords, int? memberId, string house, string business, string start, string end, int page = 1)
         {
             DateTime fromDate;
             if(!DateTime.TryParse(start, out fromDate))
@@ -44,8 +43,8 @@ namespace UKP.Website.Controllers
                                   Business = business,
                                   Start = fromDate,
                                   End = toDate,
-                                  BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "Tag", "DisplayTag"),
-                                  HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "Tag", "DisplayTag"),
+                                  BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "DisplayTag", "DisplayTag"),
+                                  HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "DisplayTag", "DisplayTag"),
                               };
             
             if(!string.IsNullOrWhiteSpace(start))
