@@ -213,7 +213,7 @@ function changeDateTab() {
         var leftPosition = $(this).scrollLeft();
 
         if (leftPosition >= upperThreshold) {
-            streamContainer.off('scroll');
+            streamContainer.off('scroll', scrollHandler);
             var index = days.index(daysContainer.find('.active'));
 
             days.eq(index + 1).trigger('scrollnext');
