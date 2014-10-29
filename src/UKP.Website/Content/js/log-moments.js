@@ -53,6 +53,7 @@ function updateLogMoments() {
 
 
 $(function () {
-    updateStacks();
+    scrollStack();
+    //updateStacks();
     //updateLogMoments();
 });
