@@ -25,7 +25,7 @@
             {
                 return _states.PlanningState.Equals(PlanningEventState.CONFIRMED) &&
                        _states.RecordingState.Equals(RecordingEventState.IDLE) &&
-                       _states.RecordedState.Equals(RecordedEventState.VOID);
+                       _states.RecordedState.Equals(RecordedEventState.NEW);
             }
         }
 

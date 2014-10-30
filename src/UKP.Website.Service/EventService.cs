@@ -127,20 +127,6 @@ namespace UKP.Website.Service
             return EventTransforms.TransformEPG(response.Content); ;
         }
 
-        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
-        {
-            if (filter == EventFilter.COMMONS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            if (filter == EventFilter.LORDS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
-                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
-        }
-
 
         public LogMomentResultModel GetLogsBetween(Guid id, DateTime startTime, DateTime endTime)
         {
@@ -164,6 +150,20 @@ namespace UKP.Website.Service
             }
             return LogMomentTransforms.TransformObject(response.Content);
 
+        }
+
+        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
+        {
+            if(filter == EventFilter.COMMONS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+
+            if(filter == EventFilter.LORDS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+
+            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
+                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
         }
     }
 }
