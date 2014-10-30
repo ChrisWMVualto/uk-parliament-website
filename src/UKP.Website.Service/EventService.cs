@@ -140,5 +140,30 @@ namespace UKP.Website.Service
             return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
                          .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
         }
+
+
+        public LogMomentResultModel GetLogsBetween(Guid id, DateTime startTime, DateTime endTime)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest("api/event/logs/{id}", Method.GET,
+                _configuration.IasAuthKey);
+            request.AddUrlSegment("id", id.ToString());
+            request.AddParameter("startTime", startTime.ToISO8601String());
+            request.AddParameter("endTime", endTime.ToISO8601String());
+            request.AddParameter("format", "json");
+            var response = client.Execute(request);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new RestSharpException(response);
+            }
+            return LogMomentTransforms.TransformObject(response.Content);
+
+        }
     }
 }

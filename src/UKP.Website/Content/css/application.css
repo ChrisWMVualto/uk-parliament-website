@@ -106,3 +106,7 @@ ol.channel-list li::before {
 button.multiselect {
     width:160px;
 }
+
+.stack-and-logs {
+    display: none;
+}
