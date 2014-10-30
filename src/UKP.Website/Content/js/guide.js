@@ -178,7 +178,7 @@ function changeDateTab() {
         epgNextButton: $('#epgDateScrollRight'),
         epgPrevButton: $('#epgDateScrollLeft'),
         liveline: $('.live-now')
-}
+    }
 
     var settings = {
         activeClass: '.active',
@@ -188,6 +188,10 @@ function changeDateTab() {
         baseWidth: 2880,
         centerThreshold: null,
         centerThresholdBase: 2880,
+
+        singleUpperLimit: 1910,
+        lowerLimit: 150,
+        centerLimit: 2880
     }
 
     var state = {
@@ -196,34 +200,21 @@ function changeDateTab() {
     }
 
 
-
-
     ///
     /// Scrolling Behavior
     ///
 
-    selectors.days.on('scrollnext', function (event, append) {
-        if (selectors.channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
-            fetchContent({
-                removePast: selectors.channelDayContainer.children().length != 1,
-                day: $(this),
-                append: append,
-                callback: function (data, opts) {
-                    if (!opts.removePast) {
-                        selectors.channelDayContainer.width(settings.baseWidth * 2);
-                        selectors.timeline.width((settings.baseWidth * 2) + 40);
-                        settings.upperThreshold = upperThesholdBase * 2;
-                    }
-                }
-            });
-        }
-    });
+    function daysLoaded() {
+        return selectors.channelDayContainer.children().length;
+    }
 
     selectors.streamContainer.on('scroll', scrollHandler);
     function scrollHandler() {
         var leftPosition = $(this).scrollLeft();
+        var upperLimit = daysLoaded() > 1 ? settings.singleUpperLimit * 2 : settings.singleUpperLimit;
+        var centerLimit = daysLoaded() > 1 ? settings.centerLimit : null;
 
-        if (leftPosition >= settings.upperThreshold) {
+        if (leftPosition >= upperLimit) {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
             selectors.streamContainer.off('scroll', scrollHandler);
@@ -232,7 +223,7 @@ function changeDateTab() {
         }
 
 
-        if (leftPosition <= settings.lowerTheshold) {
+        if (leftPosition <= settings.lowerLimit) {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
             if (activeTabIndex() > 0) {
@@ -241,14 +232,24 @@ function changeDateTab() {
             }
         }
 
-        if (settings.centerThreshold != null && leftPosition < settings.centerThreshold && !state.leftTab) {
-            devanceTab();
-        }
+        if (centerLimit != null) {
+            if (leftPosition < centerLimit && !state.leftTab)
+                devanceTab();
 
-        if (settings.centerThreshold != null && leftPosition > settings.centerThreshold && !state.rightTab) {
-            advanceTab();
+            if (leftPosition > centerLimit && !state.rightTab)
+                advanceTab();
         }
     }
+
+    selectors.days.on('scrollnext', function (event, append) {
+        if (selectors.channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
+            fetchContent({
+                removePast: selectors.channelDayContainer.children().length != 1,
+                day: $(this),
+                append: append
+            });
+        }
+    });
 
 
     ///
@@ -267,16 +268,14 @@ function changeDateTab() {
     }
 
     selectors.days.on('click', function () {
+        selectors.streamContainer.off('scroll', scrollHandler);
         $(this).trigger('activate');
 
         fetchContent({
             clear: true,
             removePast: false,
             day: $(this),
-            resetScroll: true,
-            callback: function() {
-                settings.upperThreshold = upperThesholdBase;
-            }
+            resetScroll: true
         });
     });
 
@@ -338,8 +337,10 @@ function changeDateTab() {
             success: function (data) {
                 window.console && console.log('Load day:' + opts.day.data('day-view'));
 
+
                 if (opts.clear)
                     selectors.channelDayContainer.children().remove();
+
 
                 if (opts.removePast && opts.append)
                     selectors.channelDayContainer.children().first().remove();
@@ -352,26 +353,38 @@ function changeDateTab() {
                 else
                     selectors.channelDayContainer.prepend(data);
 
+
+                window.console && console.log('Setting channel day container width ' + (settings.baseWidth * daysLoaded()));
+                selectors.channelDayContainer.width(settings.baseWidth * daysLoaded());
+                selectors.timeline.width((settings.baseWidth * daysLoaded()) + 40);
+
+
                 if (opts.resetScroll)
                     selectors.streamContainer.scrollLeft(0);
                 else if (opts.removePast && opts.append)
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() - settings.baseWidth);
                 else if (opts.removePast)
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() + settings.baseWidth);
+                else
+                    selectors.streamContainer.scrollLeft(settings.baseWidth);
 
-                if (opts.callback.length > 0)
-                    opts.callback(data, opts);
 
                 if ((opts.append && opts.removePast) || opts.clear) {
                     state.leftTab = true;
                     state.rightTab = false;
-                } else if (opts.removePast) {
+                } else if (opts.removePast || (!opts.append && !opts.removePast)) {
                     state.leftTab = false;
                     state.rightTab = true;
                 }
 
-                liveline();
+                console.log(opts);
+                console.log(state);
 
+                if (typeof opts.callback === 'function')
+                    opts.callback(data, opts);
+
+
+                liveline();
                 selectors.streamContainer.on('scroll', scrollHandler);
             }
         });
