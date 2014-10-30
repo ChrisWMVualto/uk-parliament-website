@@ -44,7 +44,7 @@
   <ItemGroup>
     <Reference Include="Date.Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Date.Extensions.1.0.0\lib\net40\Date.Extensions.dll</HintPath>
+      <HintPath>..\packages\Date.Extensions.1.0.2\lib\net40\Date.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>

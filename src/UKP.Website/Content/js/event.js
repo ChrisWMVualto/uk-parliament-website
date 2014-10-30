@@ -70,6 +70,7 @@ function stateChanged(planningState, recordingState, recordedState) {
 }
 
 function reloadEmbedData() {
+
     var settings = {
         options: {
             start: {
@@ -120,7 +121,8 @@ function reloadEmbedData() {
             var end = settings.options.end.input.val();
 
             if (start == undefined || end == undefined) {
-                return;
+                start = "";
+                end = "";
             }
 
             if (start == "" && end != "") {
@@ -138,8 +140,7 @@ function reloadEmbedData() {
                 end = settings.options.end.date.val() + 'T' + end;
             }
 
-            
-
+           
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
             $.ajax(url, {
                 success: updateEmbedCodes
