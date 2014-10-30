@@ -196,8 +196,9 @@ function changeDateTab() {
 
     var state = {
         leftTab: true,
-        rightTab: false
-    }
+        rightTab: false,
+        init: true
+}
 
 
     ///
@@ -365,7 +366,7 @@ function changeDateTab() {
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() - settings.baseWidth);
                 else if (opts.removePast)
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() + settings.baseWidth);
-                else
+                else if (!state.init)
                     selectors.streamContainer.scrollLeft(settings.baseWidth);
 
 
@@ -383,6 +384,7 @@ function changeDateTab() {
                 if (typeof opts.callback === 'function')
                     opts.callback(data, opts);
 
+                state.init = false;
 
                 liveline();
                 selectors.streamContainer.on('scroll', scrollHandler);
