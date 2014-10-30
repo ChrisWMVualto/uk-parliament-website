@@ -69,6 +69,7 @@ namespace System.Web.Mvc.Html
         }
 
         private static readonly long DatetimeMinTimeTicks = (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).Ticks;
+
         public static double ToJavaScriptMilliSeconds(this DateTime dateTime)
         {
             var ticks = (dateTime.ToUniversalTime().Ticks - DatetimeMinTimeTicks);

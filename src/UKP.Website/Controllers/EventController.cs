@@ -16,10 +16,12 @@ namespace UKP.Website.Controllers
     public partial class EventController : Controller
     {
         private readonly IVideoService _videoService;
+        private readonly IEventService _eventService;
 
-        public EventController(IVideoService videoService)
+        public EventController(IVideoService videoService, IEventService eventService)
         {
             _videoService = videoService;
+            _eventService = eventService;
         }
 
         [HttpGet]
@@ -83,10 +85,25 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual PartialViewResult Stack(Guid id)
+        public virtual PartialViewResult StackAndLogs(Guid id)
         {
-            var video = _videoService.GetVideo(id);
+            var video = _videoService.GetVideoWithLogs(id);
+            if (video.LogMoments.ContainsLogMoments)
+            {
+                return PartialView(MVC.Event.Views._LogMoment, video.LogMoments);
+            }
             return PartialView(MVC.Event.Views._Stack, video);
+        }
+
+
+        [HttpGet]
+        public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null)
+        {
+            var endTime = DateTime.Now.AddSeconds(5);
+            var start = string.IsNullOrEmpty(startTime) ? DateTime.Now : DateTime.Parse(startTime);
+            var logs = _eventService.GetLogsBetween(id, start, endTime);
+            return PartialView(MVC.Event.Views._LogMoment, logs);
+
         }
 
         [HttpGet]

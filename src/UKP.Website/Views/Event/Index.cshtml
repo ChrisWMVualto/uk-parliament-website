@@ -15,7 +15,7 @@
     @Html.Hidden("StackPollingInterval", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING ? 10000 : 60000)
 
     <div class="row">
-        
+
         <div class="col-md-12">
             <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
@@ -40,13 +40,13 @@
                                 <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
                                 <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
                             </ul>
-                            @if(Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
+                            @if (Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
                             {
-                                if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
+                                if (!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
                                 {
                                     <button id="audioToggle" type="button" class="btn audio-toggle pull-right" data-toggle="button"><span class="hidden-xs">audio only</span> <i class="fa fa-player-volume fa-2x"></i></button>
                                 }
-                            } 
+                            }
                         </div>
 
                         <!-- Tab panes -->
@@ -58,10 +58,17 @@
                     <!--end: player tabs-->
                 </div>
                 <div class="col-md-5">
-                    @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
+                    @if (!Model.VideoModel.Event.LegacyMeetingId.HasValue)
                     {
-                        <div id="eventStackContainer" data-load-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))">
-                            @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id))
+                        <div id="eventStackContainer" class="stack-and-logs" data-load-new-stack-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id))">
+                            @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
+                            <div class="stack-player">
+                                <div class="stack">
+                                    <ol>
+                                        @Html.Action(MVC.Event.StackAndLogs(Model.VideoModel.Event.Id))
+                                    </ol>
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>

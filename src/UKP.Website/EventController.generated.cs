@@ -86,9 +86,15 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Stack()
+        public virtual System.Web.Mvc.PartialViewResult StackAndLogs()
         {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.StackAndLogs);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EventLogsBetween()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventLogsBetween);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -123,7 +129,8 @@ namespace UKP.Website.Controllers
             public readonly string GetMainVideo = "GetMainVideo";
             public readonly string EventTitle = "EventTitle";
             public readonly string Clipping = "Clipping";
-            public readonly string Stack = "Stack";
+            public readonly string StackAndLogs = "StackAndLogs";
+            public readonly string EventLogsBetween = "EventLogsBetween";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
         }
@@ -136,7 +143,8 @@ namespace UKP.Website.Controllers
             public const string GetMainVideo = "GetMainVideo";
             public const string EventTitle = "EventTitle";
             public const string Clipping = "Clipping";
-            public const string Stack = "Stack";
+            public const string StackAndLogs = "StackAndLogs";
+            public const string EventLogsBetween = "EventLogsBetween";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
         }
@@ -193,13 +201,22 @@ namespace UKP.Website.Controllers
             public readonly string @in = "in";
             public readonly string @out = "out";
         }
-        static readonly ActionParamsClass_Stack s_params_Stack = new ActionParamsClass_Stack();
+        static readonly ActionParamsClass_StackAndLogs s_params_StackAndLogs = new ActionParamsClass_StackAndLogs();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Stack StackParams { get { return s_params_Stack; } }
+        public ActionParamsClass_StackAndLogs StackAndLogsParams { get { return s_params_StackAndLogs; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Stack
+        public class ActionParamsClass_StackAndLogs
         {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_EventLogsBetween s_params_EventLogsBetween = new ActionParamsClass_EventLogsBetween();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EventLogsBetween EventLogsBetweenParams { get { return s_params_EventLogsBetween; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EventLogsBetween
+        {
+            public readonly string id = "id";
+            public readonly string startTime = "startTime";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -323,14 +340,27 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void StackOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void StackAndLogsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Stack(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult StackAndLogs(System.Guid id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.StackAndLogs);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            StackOverride(callInfo, id);
+            StackAndLogsOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EventLogsBetweenOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string startTime);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EventLogsBetween(System.Guid id, string startTime)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventLogsBetween);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "startTime", startTime);
+            EventLogsBetweenOverride(callInfo, id, startTime);
             return callInfo;
         }
 
