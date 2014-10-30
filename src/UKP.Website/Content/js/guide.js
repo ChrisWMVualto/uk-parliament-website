@@ -218,6 +218,8 @@ function changeDateTab() {
         var leftPosition = $(this).scrollLeft();
 
         if (leftPosition >= upperThreshold) {
+            window.console && console.log('Currently active tab: ' + activeTabIndex());
+
             streamContainer.off('scroll', scrollHandler);
             days.eq(activeTabIndex() + 1).trigger('scrollnext', true);
             centerThreshold = centerThresholdBase;
@@ -225,17 +227,19 @@ function changeDateTab() {
 
 
         if (leftPosition <= lowerThreshold) {
-            if (activeTabIndex() != 0) {
+            window.console && console.log('Currently active tab: ' + activeTabIndex());
+
+            if (activeTabIndex() > 0) {
                 streamContainer.off('scroll', scrollHandler);
                 days.eq(activeTabIndex() - 1).trigger('scrollnext', false);
             }
         }
 
-        if (leftPosition < centerThreshold && !leftTab) {
+        if (centerThreshold != null && leftPosition < centerThreshold && !leftTab) {
             devanceTab();
         }
 
-        if (leftPosition > centerThreshold && !rightTab) {
+        if (centerThreshold != null && leftPosition > centerThreshold && !rightTab) {
             advanceTab();
         }
     }
@@ -283,21 +287,30 @@ function changeDateTab() {
         return days.index(daysContainer.find('.active'));
     }
 
-    days.on('activate', function() {
+    days.on('activate', function () {
+        window.console && console.log('Activate tab: ' + $(this).data('day'));
+
         days.removeClass(activeClass);
         $(this).addClass(activeClass);
     });
 
     function advanceTab() {
+        window.console && console.log('Advance tab');
+
         days.eq(activeTabIndex() + 1).trigger('activate');
         rightTab = true;
         leftTab = false;
     }
 
     function devanceTab() {
-        days.eq(activeTabIndex() - 1).trigger('activate');
-        rightTab = false;
-        leftTab = true;
+        window.console && console.log('Devance tab');
+
+        if ((activeTabIndex() - 1) >= 0)
+        {
+            days.eq(activeTabIndex() - 1).trigger('activate');
+            rightTab = false;
+            leftTab = true;
+        }
     }
 
 
@@ -317,6 +330,8 @@ function changeDateTab() {
 
         $.ajax(opts.day.data('day-view'), {
             success: function (data) {
+                window.console && console.log('Load day:' + opts.day.data('day-view'));
+
                 if (opts.clear)
                     channelDayContainer.children().remove();
 
