@@ -11249,7 +11249,7 @@ ol.channel-list li.event:hover > div {
   font-family: 'karlaregular', arial, sans-serif;
   text-align: center;
 }
-.channels li a {
+.channels li span {
   display: block;
   padding-top: 74px;
   color: white;
