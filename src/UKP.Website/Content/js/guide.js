@@ -65,7 +65,7 @@ $(document).ready(function () {
     });
     resizeProgrammes($('.stream-container-inner'));
 
-    $('.stream-container-inner').on('scroll', scrollDayProgression);
+    $('.stream-container-inner').on('scroll', triggerProgramResize);
 
     $('#epgInfoPopup').hide();
     $('.stream-container-inner').find('a:last-of-type').on('click', function (e) {
@@ -362,7 +362,7 @@ function changeDateTab() {
                 if (opts.callback.length > 0)
                     opts.callback(data, opts);
 
-                if (opts.append && opts.removePast) {
+                if ((opts.append && opts.removePast) || opts.clear) {
                     state.leftTab = true;
                     state.rightTab = false;
                 } else if (opts.removePast) {
@@ -389,7 +389,7 @@ function changeDateTab() {
 }
 
 ////////////////////////////////////////////
-//Controls the flaoting EPG dates and times
+//Controls the floating EPG dates and times
 ////////////////////////////////////////////
 var triggerFloatTimeoutId;
 function floatingNav() {
@@ -483,7 +483,7 @@ function resizeProgrammes(container) {
     });
 
     function calculateMove(context) {
-        var leftPos = $(context).css('left').replace('px', '');
+        var leftPos = $(context).position().left + $(context).parent().parent().position().left;
 
         if (leftPos <= containerPosition) {
             var margin = containerPosition - leftPos;
@@ -523,17 +523,7 @@ function resizeProgrammes(container) {
 ////////////////////////////////////////////
 var resizeProgrammesTimeoutId;
 var dateLeft = true;
-function scrollDayProgression() {
-    // Select tomorrow
-    /*if ($(this).scrollLeft() > globOneDayWidth && dateLeft) {
-        $('#epgDateScrollRight').trigger('click');
-        dateLeft = false;
-    } else if ($(this).scrollLeft() < globOneDayWidth && !dateLeft) {
-        $('#epgDateScrollLeft').trigger('click');
-        dateLeft = true;
-    }*/
-
-    // Resize programmes
+function triggerProgramResize() {
     var that = this;
     clearInterval(resizeProgrammesTimeoutId);
     resizeProgrammesTimeoutId = setTimeout(function () {
