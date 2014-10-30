@@ -22,7 +22,7 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Index()
         {
             // TODO: Remove datetime
-            var date = new DateTime(2014, 07, 04);
+            var date = new DateTime(2014, 07, 07);
             var events = _eventService.GetEpgEvents(date);
             var model = new GuideViewModel(events, date);
 
