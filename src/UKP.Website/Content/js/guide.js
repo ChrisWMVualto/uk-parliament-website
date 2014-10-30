@@ -378,9 +378,6 @@ function changeDateTab() {
                     state.rightTab = true;
                 }
 
-                console.log(opts);
-                console.log(state);
-
                 if (typeof opts.callback === 'function')
                     opts.callback(data, opts);
 
