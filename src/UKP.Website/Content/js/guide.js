@@ -176,8 +176,9 @@ function changeDateTab() {
         channelDayContainer: $('.channel-day-container'),
         timeline: $('.timeline'),
         epgNextButton: $('#epgDateScrollRight'),
-        epgPrevButton: $('#epgDateScrollLeft')
-    }
+        epgPrevButton: $('#epgDateScrollLeft'),
+        liveline: $('.live-now')
+}
 
     var settings = {
         activeClass: '.active',
@@ -369,9 +370,21 @@ function changeDateTab() {
                     state.rightTab = true;
                 }
 
+                liveline();
+
                 selectors.streamContainer.on('scroll', scrollHandler);
             }
         });
+    }
+
+    function liveline() {
+        window.console && console.log('Checking live line status');
+
+        if (selectors.channelDayContainer.children().first().data('day') == selectors.days.first().data('day'))
+            selectors.liveline.show();
+
+        else
+            selectors.liveline.hide();
     }
 }
 
