@@ -77,6 +77,10 @@ ol.channel-list li::before {
     overflow: hidden;
 }
 
+.lt-ie10 .timeline {
+    margin-left: 129px;
+}
+
 /* Search */
 
 .multiselect.dropdown-toggle {
