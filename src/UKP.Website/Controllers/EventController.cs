@@ -25,16 +25,14 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
-            // iso86601 strings used to be human url friendly
-            var inPoint = @in.FromISO8601String();
-            var outPoint = @out.FromISO8601String();
+            var inPoint = CovertDateTimeFormatFromPattern(id, @in);
+            var outPoint = CovertDateTimeFormatFromPattern(id, @out);
 
             var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true));
             if(video == null || video.Event.States.RecordedState == RecordedEventState.REVOKE) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
         }
-
 
         [HttpGet]
         public virtual JsonResult GetShareVideo(Guid id, string @in = null, string @out = null)
@@ -46,7 +44,6 @@ namespace UKP.Website.Controllers
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
-
 
         [HttpGet]
         public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
@@ -100,9 +97,7 @@ namespace UKP.Website.Controllers
 
             if(st.HasValue)
             {
-                var timeOfDay = legacyVideo.Event.ScheduledStartTime.Date.ToLocalTime().Add(st.Value);
-                var date = timeOfDay.ToISO8601String();
-                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, date));
+                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, st.ToString()));
             }
             return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id));
         }
@@ -112,6 +107,33 @@ namespace UKP.Website.Controllers
         {
             EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.PlayerState), stateChangeModel.StateChanged);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        private DateTime? CovertDateTimeFormatFromPattern(Guid id, string value)
+        {
+            DateTime? dateTimePoint;
+
+            if(value != null && !value.ToLower().Contains("-"))
+            {
+                if(value.Length < 19)
+                {
+                    // HH:mm:ss
+                    var tempVideo = _videoService.GetVideo(id);
+                    var timeOfDay = TimeSpan.Parse(value);
+                    dateTimePoint = tempVideo.Event.DisplayStartDate.ToLocalTime().Date.Add(timeOfDay);
+                }
+                else
+                {
+                    // HH:mm:ss:ffyyyymmdd
+                    dateTimePoint = value.FromSMPTEString();
+                }
+            }
+            else
+            {
+                // iso86601 strings used to be human url friendly, yyyy-MM-ddTHH:mm:ssK
+                dateTimePoint = value.FromISO8601String();
+            }
+            return dateTimePoint;
         }
     }
 }

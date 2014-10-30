@@ -23,6 +23,7 @@ namespace UKP.Website.Models.Search
         public string SelectedBusiness { get; set; }
         public string SelectedHouse { get; set; }
         public string Member { get; set; }
+        public bool FirstSearchLoad { get; set; }
 
         public VideoCollectionModel SearchResult
         {

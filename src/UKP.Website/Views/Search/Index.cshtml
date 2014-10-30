@@ -101,7 +101,7 @@
                         {
                             <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
                         }
-                        else
+                        else if(!Model.FirstSearchLoad)
                         {
                             <strong>No Search Results found.</strong>
                         }

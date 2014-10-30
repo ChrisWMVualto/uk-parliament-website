@@ -35,6 +35,7 @@ namespace UKP.Website.Controllers
                 toDate = DateTime.Today;
             }
 
+            var firstSearchLoad = string.IsNullOrWhiteSpace(start);
             var searchModel = new SearchViewModel()
                               {
                                   Keywords = keywords,
@@ -46,9 +47,10 @@ namespace UKP.Website.Controllers
                                   Member = member,
                                   BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "DisplayTag", "DisplayTag"),
                                   HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "DisplayTag", "DisplayTag"),
+                                  FirstSearchLoad = firstSearchLoad
                               };
-            
-            if(!string.IsNullOrWhiteSpace(start))
+
+            if(!firstSearchLoad)
             {
                 searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
             }
