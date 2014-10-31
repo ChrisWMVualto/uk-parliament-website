@@ -13,9 +13,21 @@
         {
             get
             {
-                return (_states.PlanningState.Equals(PlanningEventState.CONFIRMED) || _states.PlanningState.Equals(PlanningEventState.STOP_DVR)) &&
-                       _states.RecordedState.Equals(RecordedEventState.NEW) &&
-                       (_states.RecordingState.Equals(RecordingEventState.RECORDING) || _states.RecordingState.Equals(RecordingEventState.COMPLETED));
+                return (_states.PlanningState == PlanningEventState.CONFIRMED || _states.PlanningState == PlanningEventState.STOP_DVR)
+                    && (_states.RecordingState == RecordingEventState.RECORDING || _states.RecordingState == RecordingEventState.COMPLETED)
+                    && (_states.RecordedState == RecordedEventState.NEW || _states.RecordedState == RecordedEventState.HOLD);
+            }
+        }
+
+
+
+        public bool LiveAndArchive
+        {
+            get
+            {
+                return (_states.PlanningState == PlanningEventState.CONFIRMED || _states.PlanningState == PlanningEventState.STOP_DVR)
+                    && (_states.RecordingState == RecordingEventState.RECORDING || _states.RecordingState == RecordingEventState.COMPLETED)
+                    && (_states.RecordedState == RecordedEventState.NEW || _states.RecordedState == RecordedEventState.HOLD || _states.RecordedState == RecordedEventState.BASIC);
             }
         }
 
@@ -23,19 +35,9 @@
         {
             get
             {
-                return _states.PlanningState.Equals(PlanningEventState.CONFIRMED) &&
-                       _states.RecordingState.Equals(RecordingEventState.IDLE) &&
-                       _states.RecordedState.Equals(RecordedEventState.VOID);
-            }
-        }
-
-        public bool Archived
-        {
-            get
-            {
-                return (_states.PlanningState.Equals(PlanningEventState.CONFIRMED) || _states.PlanningState.Equals(PlanningEventState.STOP_DVR)) &&
-                       _states.RecordingState.Equals(RecordingEventState.COMPLETED) &&
-                       _states.RecordedState.Equals(RecordedEventState.BASIC);
+                return _states.PlanningState == PlanningEventState.CONFIRMED &&
+                       _states.RecordingState == RecordingEventState.IDLE &&
+                       _states.RecordedState == RecordedEventState.NEW;
             }
         }
     }

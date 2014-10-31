@@ -76,18 +76,18 @@ namespace UKP.Website.Service
             var live = nowEvents.Count() != 0;
             var eventsDifference = target - nowEvents.Count();
 
-            nowEvents = nextEvents.Take(eventsDifference).Count() > 1 ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
-            return new NowAndNextModel(nowEvents, false, live);
+            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
+            return new NowAndNextModel(nowEvents.Take(target), false, live);
         }
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter).ToList();
-            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nowEvents = events.Where(x => x.HomeFilters.LiveAndArchive).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
-            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
+            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)).OrderBy(x => x.DisplayStartDate).Take(target) : nowEvents.Take(target);
         }
 
         public VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
@@ -127,20 +127,6 @@ namespace UKP.Website.Service
             return EventTransforms.TransformEPG(response.Content); ;
         }
 
-        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
-        {
-            if (filter == EventFilter.COMMONS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            if (filter == EventFilter.LORDS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
-                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
-        }
-
 
         public LogMomentResultModel GetLogsBetween(Guid id, DateTime startTime, DateTime endTime)
         {
@@ -164,6 +150,20 @@ namespace UKP.Website.Service
             }
             return LogMomentTransforms.TransformObject(response.Content);
 
+        }
+
+        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
+        {
+            if(filter == EventFilter.COMMONS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+
+            if(filter == EventFilter.LORDS)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+
+            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
+                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
         }
     }
 }
