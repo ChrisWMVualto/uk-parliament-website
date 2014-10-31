@@ -66,6 +66,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDay);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EpgDayTab()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDayTab);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public GuideController Actions { get { return MVC.Guide; } }
@@ -85,6 +91,7 @@ namespace UKP.Website.Controllers
             public readonly string Index = "Index";
             public readonly string EpgInfo = "EpgInfo";
             public readonly string EpgDay = "EpgDay";
+            public readonly string EpgDayTab = "EpgDayTab";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -93,6 +100,7 @@ namespace UKP.Website.Controllers
             public const string Index = "Index";
             public const string EpgInfo = "EpgInfo";
             public const string EpgDay = "EpgDay";
+            public const string EpgDayTab = "EpgDayTab";
         }
 
 
@@ -112,6 +120,15 @@ namespace UKP.Website.Controllers
         {
             public readonly string date = "date";
         }
+        static readonly ActionParamsClass_EpgDayTab s_params_EpgDayTab = new ActionParamsClass_EpgDayTab();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EpgDayTab EpgDayTabParams { get { return s_params_EpgDayTab; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EpgDayTab
+        {
+            public readonly string date = "date";
+            public readonly string previousDay = "previousDay";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -124,12 +141,16 @@ namespace UKP.Website.Controllers
             {
                 public readonly string _ChannelItems = "_ChannelItems";
                 public readonly string _ChannelListing = "_ChannelListing";
+                public readonly string _ChannelTimes = "_ChannelTimes";
+                public readonly string _DateTab = "_DateTab";
                 public readonly string _DateTabs = "_DateTabs";
                 public readonly string _InfoPopup = "_InfoPopup";
                 public readonly string Index = "Index";
             }
             public readonly string _ChannelItems = "~/Views/Guide/_ChannelItems.cshtml";
             public readonly string _ChannelListing = "~/Views/Guide/_ChannelListing.cshtml";
+            public readonly string _ChannelTimes = "~/Views/Guide/_ChannelTimes.cshtml";
+            public readonly string _DateTab = "~/Views/Guide/_DateTab.cshtml";
             public readonly string _DateTabs = "~/Views/Guide/_DateTabs.cshtml";
             public readonly string _InfoPopup = "~/Views/Guide/_InfoPopup.cshtml";
             public readonly string Index = "~/Views/Guide/Index.cshtml";
@@ -173,6 +194,19 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDay);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
             EpgDayOverride(callInfo, date);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EpgDayTabOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string date, bool previousDay);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EpgDayTab(string date, bool previousDay)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDayTab);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "previousDay", previousDay);
+            EpgDayTabOverride(callInfo, date, previousDay);
             return callInfo;
         }
 
