@@ -19,7 +19,7 @@ function scrollStack() {
         });
 
 
-        $('.stack').slimScroll().bind('slimscroll', function(e, pos){
+        $('.stack').slimScroll().bind('slimscroll', function (e, pos) {
             stackPos = pos;
         });
     }
@@ -41,7 +41,7 @@ function updateStacks() {
         });
     }
     var stackPollingInterval = parseInt($('#StackPollingInterval').val());
-   // setTimeout(updateStacks, stackPollingInterval);
+    // setTimeout(updateStacks, stackPollingInterval);
 }
 
 
@@ -52,57 +52,44 @@ function updateLogMoments() {
         var logUrl = $('#eventStackContainer').data("load-new-stack-url");
         logUrl += '?startTime=' + encodeURIComponent(lastLogTime);
 
-        $.get(logUrl, function(data) {
+        $.get(logUrl, function (data) {
             $('.stack > ol ').append(data);
-            if(data.length > 0 || data)
+            if (data.length > 0 || data)
                 scrollStackToBottom();
         });
-
-
     }
-
-
 }
 
-
-
-
-
-
-
-
-
 $(function () {
-
-
-
     scrollStack();
     //updateStacks();
     setInterval(updateLogMoments, 3000);
 
-    $('.log-moment').click(function() {
+    $('.log-moment').click(function () {
         var time = $(this).parent().find('.time-code').data('time');
         var receiver = document.getElementById("UKPPlayer");
         $.postMessage("GoToLogItem_" + time, src, receiver.contentWindow);
     });
-
+    //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
         var messageSplit = event.data.split('_');
         if (messageSplit.length < 2)
             return;
         var sentTime = Date.parse(messageSplit[1]);
-        $('.stack > ol > li').each(function() {
-            var thisTime = $(this).find('.time-code').data('time');
-            
-            console.log(thisTime);
-            console.log(Date.parse(thisTime));
-            //if (thisTime >= sentTime) {
-            //    $(this).addClass('active');
-            //}
-
-        });
+        var logs = $('.stack > ol').children().toArray();
+        for (var i = 0; i <= logs.length; i++) {
+            var thisTime = Date.parse($(logs[i]).find('.time-code').data('time'));
+            var nextTime = i == logs.length ? Date.now() : Date.parse($(logs[i + 1]).find('.time-code').data('time'));
+            if (sentTime >= thisTime && sentTime < nextTime) {
+                $(logs[i]).addClass('active');
+            } else {
+                $(logs[i]).removeClass('active');
+            }
+        }
     });
 
 });
+
+
 
 
