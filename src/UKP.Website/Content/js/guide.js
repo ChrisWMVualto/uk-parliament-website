@@ -178,11 +178,13 @@ function changeDateTab() {
         epgNextButton: $('#epgDateScrollRight'),
         epgPrevButton: $('#epgDateScrollLeft'),
         liveline: $('.live-now')
-    }
+    };
 
     var settings = {
         activeClass: '.active',
         activeClassString: 'active',
+        todayClass: '.today',
+        todayClassString: 'today',
         lowerTheshold: 150,
         upperThreshold: upperThesholdBase,
         baseWidth: 2880,
@@ -192,13 +194,13 @@ function changeDateTab() {
         singleUpperLimit: 1910,
         lowerLimit: 150,
         centerLimit: 2880
-    }
+    };
 
     var state = {
         leftTab: true,
         rightTab: false,
         init: true
-}
+    };
 
 
     ///
@@ -285,7 +287,7 @@ function changeDateTab() {
     /// Tab Activation
     ///
 
-    selectors.days.eq(1).addClass(settings.activeClassString);
+    selectors.days.eq(1).addClass(settings.activeClassString).addClass(settings.todayClassString);
 
     function activeTabIndex() {
         return tabIndex(selectors.daysContainer.find(settings.activeClass));
@@ -394,7 +396,7 @@ function changeDateTab() {
     function liveline() {
         window.console && console.log('Checking live line status');
 
-        if (selectors.channelDayContainer.children().first().data('day') == selectors.days.first().data('day'))
+        if (selectors.channelDayContainer.children().first().data('day') == selectors.days.find(settings.todayClass).data('day'))
             selectors.liveline.show();
 
         else
