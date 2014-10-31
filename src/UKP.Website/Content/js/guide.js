@@ -457,7 +457,7 @@ function floatingNav() {
         epg.hide();
         timeline.hide();
         clearInterval(triggerFloatTimeoutId);
-        triggerFloatTimeoutId = setTimeout(triggerFloat, 10);
+        triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
     });
 
     function datesOffset(freeze) {
