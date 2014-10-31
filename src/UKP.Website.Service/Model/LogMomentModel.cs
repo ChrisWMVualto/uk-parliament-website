@@ -4,17 +4,19 @@ namespace UKP.Website.Service.Model
 {
     public class LogMomentModel
     {
-        public LogMomentModel(string id, string title, string thumbnailUrl, DateTime inPoint)
+        public LogMomentModel(string id, string title, string thumbnailUrl, DateTime inPoint, string member)
         {
             Id = id;
             Title = title;
             ThumbnailUrl = thumbnailUrl;
             InPoint = inPoint;
+            Member = member;
         }
 
         public string Id { get; private set; }
         public string Title { get; private set; }
         public string ThumbnailUrl { get; private set; }
         public DateTime InPoint { get; private set; }
+        public string Member { get; private set; }
     }
 }
