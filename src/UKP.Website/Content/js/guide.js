@@ -317,8 +317,7 @@ function changeDateTab() {
         state.rightTab = true;
         state.leftTab = false;
 
-        loadNewTab(false);
-        $(selectors.days).first().remove();
+        loadNewTab($(selectors.days).last(), false);
     }
 
     function devanceTab() {
@@ -328,26 +327,28 @@ function changeDateTab() {
         state.rightTab = false;
         state.leftTab = true;
 
-        loadNewTab(true);
-        $(selectors.days).last().remove();
+        loadNewTab($(selectors.days).first(), true);
     }
 
-    function loadNewTab(previousDay) {
+    function loadNewTab(closestDate, previousDay) {
         $(selectors.days).off('scrollnext', scrollnext);
         $(selectors.days).off('activate', activateTab);
 
         var url = $(selectors.daysContainer).data('day-tab-url');
-        url += '?date=' + $(selectors.days).eq(activeTabIndex()).data('day');
+        url += '?date=' + closestDate.data('day');
         url += '&previousDay=' + previousDay;
 
         window.console && console.log('Loading new day tab: ' + url);
 
         $.ajax(url, {
             success: function (data) {
-                if (previousDay)
+                if (previousDay) {
                     $(selectors.daysContainer).prepend(data);
-                else
+                    $(selectors.days).last().remove();
+                } else {
                     $(selectors.daysContainer).append(data);
+                    $(selectors.days).first().remove();
+                }
 
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
