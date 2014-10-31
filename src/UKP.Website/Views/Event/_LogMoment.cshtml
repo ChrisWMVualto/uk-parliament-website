@@ -2,11 +2,11 @@
 @model LogMomentResultModel
 @foreach (var logs in Model.Results)
 {
-    <li class="active">
+    <li class="">
         <article>
             <span class="vr-stack"></span>
             <button type="button" class="btn btn-moment-expand" data-toggle="collapse" data-target="#@logs.Id"><span class="sr-only"></span> <i class="fa fa-plus fa-lg"></i></button>
-            <header class="stack-item stack-parent">
+            <header class="stack-item stack-parent log-moment">
                 <a href="#">
                     <h4>
                         @logs.Title
