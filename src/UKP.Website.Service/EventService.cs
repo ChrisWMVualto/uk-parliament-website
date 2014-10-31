@@ -76,18 +76,18 @@ namespace UKP.Website.Service
             var live = nowEvents.Count() != 0;
             var eventsDifference = target - nowEvents.Count();
 
-            nowEvents = nextEvents.Take(eventsDifference).Count() > 1 ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
+            nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
             return new NowAndNextModel(nowEvents, false, live);
         }
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
             var events = RunEventFilter(GetEvents(), eventFilter).ToList();
-            var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
+            var nowEvents = events.Where(x => x.HomeFilters.LiveAndArchive).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
-            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
+            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)).OrderBy(x => x.DisplayStartDate) : nowEvents;
         }
 
         public VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
