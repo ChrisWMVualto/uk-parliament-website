@@ -1,15 +1,12 @@
-﻿@using Date.Extensions
-@model DateTime
+﻿@model DateTime
 
 <div class="days-tab-outer">
     <div class="days-tab-inner">
         <div class="days-tab">
-            <ol>
-                @for (var i = 0; i < 9; i++)
+            <ol data-day-tab-url="@Url.Action(MVC.Guide.EpgDayTab())">
+                @for (var i = -1; i < 9; i++)
                 {
-                    <li data-day-view="@Url.Action(MVC.Guide.EpgDay(@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()))" data-day="@Model.AddDays(i).ToLocalTime().Date.ToISO8601String()" @if (i == 0) { @Html.Raw("class=\"active\"")  }>
-                        <a href="#">@Model.AddDays(i).ToLocalTime().ToString("ddd d") <span>@Model.AddDays(i).ToLocalTime().ToString("MMM")</span></a>
-                    </li>
+                    @Html.Partial(MVC.Guide.Views._DateTab, Model.AddDays(i))
                 }
             </ol>
         </div>
