@@ -77,7 +77,7 @@ namespace UKP.Website.Service
             var eventsDifference = target - nowEvents.Count();
 
             nowEvents = nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)) : nowEvents;
-            return new NowAndNextModel(nowEvents, false, live);
+            return new NowAndNextModel(nowEvents.Take(target), false, live);
         }
 
         public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
@@ -87,7 +87,7 @@ namespace UKP.Website.Service
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
             var eventsDifference = target - nowEvents.Count();
-            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)).OrderBy(x => x.DisplayStartDate) : nowEvents;
+            return nextEvents.Take(eventsDifference).Any() ? nowEvents.Concat(nextEvents.Take(eventsDifference)).OrderBy(x => x.DisplayStartDate).Take(target) : nowEvents.Take(target);
         }
 
         public VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
