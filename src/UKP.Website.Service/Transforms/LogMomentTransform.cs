@@ -46,8 +46,9 @@ namespace UKP.Website.Service.Transforms
             var title = jObject.log.title.Value;
             var thumbnailUrl = jObject.thumbnailImageUrl.Value;
             var inPoint = (DateTime)jObject.inPoint.Value;
+            var member = (string)jObject.log.member.Value;
 
-            return new LogMomentModel(id, title, thumbnailUrl, inPoint);
+            return new LogMomentModel(id, title, thumbnailUrl, inPoint, member);
         }
     }
 }

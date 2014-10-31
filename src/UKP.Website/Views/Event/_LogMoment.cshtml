@@ -1,24 +1,24 @@
 ﻿@using UKP.Website.Service.Model
 @model LogMomentResultModel
-@foreach (var logs in Model.Results)
+@foreach (var log in Model.Results)
 {
     <li class="active">
         <article>
             <span class="vr-stack"></span>
-            <button type="button" class="btn btn-moment-expand" data-toggle="collapse" data-target="#@logs.Id"><span class="sr-only"></span> <i class="fa fa-plus fa-lg"></i></button>
+            <button type="button" class="btn btn-moment-expand" data-toggle="collapse" data-target="#@log.Id"><span class="sr-only"></span> <i class="fa fa-plus fa-lg"></i></button>
             <header class="stack-item stack-parent">
                 <a href="#">
                     <h4>
-                        @logs.Title
+                        @log.Title
                     </h4>
                 </a>
             </header>
-            <div id="@logs.Id" class="collapse">
+            <div id="@log.Id" class="collapse">
                 <hr />
                 <div class="stack-item">
-                    <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong><span class="time-code" data-time="@logs.InPoint.ToString()"> @logs.InPoint.ToString("T") </span></h5>
+                    <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong><span class="time-code" data-time="@log.InPoint.ToString()"> @log.InPoint.ToString("T") </span></h5>
 
-                    <h5><i class="fa fa-circle"></i> <strong>Member:</strong> Robin Walker</h5>
+                    <h5><i class="fa fa-circle"></i> <strong>Member:</strong> @log.Member</h5>
                 </div>
             </div>
         </article>
