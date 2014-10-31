@@ -209,6 +209,7 @@
     <Content Include="Content\img\theme-commons-normal.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
+    <Content Include="Content\js\jquery.post-message.updated.js" />
     <Content Include="Content\js\vendor\bootstrap-multiselect.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\guide.js" />

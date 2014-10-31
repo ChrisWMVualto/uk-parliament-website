@@ -6,7 +6,7 @@ var playerTempTime;
 function scrollStack() {
     if ($(".stack").length) {
 
-        $('.stack-and-logs').css('display','block');
+        $('.stack-and-logs').removeClass('stack-and-logs');
         $('.stack').slimScroll({
             railVisible: true,
             railColor: '#ffffff',
@@ -70,6 +70,8 @@ function updateLogMoments() {
 
 
 
+
+
 $(function () {
 
 
@@ -77,7 +79,30 @@ $(function () {
     scrollStack();
     //updateStacks();
     setInterval(updateLogMoments, 3000);
-    
+
+    $('.log-moment').click(function() {
+        var time = $(this).parent().find('.time-code').data('time');
+        var receiver = document.getElementById("UKPPlayer");
+        $.postMessage("GoToLogItem_" + time, src, receiver.contentWindow);
+    });
+
+    $.receiveMessage(function (event) {
+        var messageSplit = event.data.split('_');
+        if (messageSplit.length < 2)
+            return;
+        var sentTime = Date.parse(messageSplit[1]);
+        $('.stack > ol > li').each(function() {
+            var thisTime = $(this).find('.time-code').data('time');
+            
+            console.log(thisTime);
+            console.log(Date.parse(thisTime));
+            //if (thisTime >= sentTime) {
+            //    $(this).addClass('active');
+            //}
+
+        });
+    });
+
 });
 
 
