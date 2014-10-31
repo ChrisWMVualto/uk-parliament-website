@@ -29,7 +29,7 @@ namespace UKP.Website.Extensions
                         filterContext.Result = NotSuppotedRouteResult();
                 }
 
-                if(BrowserNotSupported("Firefox", 31, ua.UserAgent) || BrowserNotSupported("Safari", 6, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent))
+                if(BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 6, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent))
                 {
                     filterContext.Result = NotSuppotedRouteResult();
                 }
