@@ -170,19 +170,22 @@ function changeDateTab() {
     var upperThesholdBase = 1910;
 
     var selectors = {
-        daysContainer: $('.days-tab ol'),
-        days: $('.days-tab ol').find('li'),
+        daysContainer: '.days-tab ol',
+        days: '.days-tab ol li',
+        activeDay: '.days-tab ol .active',
         streamContainer: $('.stream-container-inner'),
         channelDayContainer: $('.channel-day-container'),
         timeline: $('.timeline'),
         epgNextButton: $('#epgDateScrollRight'),
         epgPrevButton: $('#epgDateScrollLeft'),
         liveline: $('.live-now')
-    }
+    };
 
     var settings = {
         activeClass: '.active',
         activeClassString: 'active',
+        todayClass: '.today',
+        todayClassString: 'today',
         lowerTheshold: 150,
         upperThreshold: upperThesholdBase,
         baseWidth: 2880,
@@ -192,13 +195,13 @@ function changeDateTab() {
         singleUpperLimit: 1910,
         lowerLimit: 150,
         centerLimit: 2880
-    }
+    };
 
     var state = {
         leftTab: true,
         rightTab: false,
         init: true
-}
+    };
 
 
     ///
@@ -219,17 +222,18 @@ function changeDateTab() {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
             selectors.streamContainer.off('scroll', scrollHandler);
-            selectors.days.eq(activeTabIndex() + 1).trigger('scrollnext', true);
+            $(selectors.days).eq(activeTabIndex() + 1).trigger('scrollnext', true);
             settings.centerThreshold = settings.centerThresholdBase;
         }
-
 
         if (leftPosition <= settings.lowerLimit) {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
             if (activeTabIndex() > 0) {
                 selectors.streamContainer.off('scroll', scrollHandler);
-                selectors.days.eq(activeTabIndex() - 1).trigger('scrollnext', false);
+                var tab = $(selectors.days).eq(activeTabIndex() - 1);
+
+                tab.trigger('scrollnext', false);
             }
         }
 
@@ -242,7 +246,10 @@ function changeDateTab() {
         }
     }
 
-    selectors.days.on('scrollnext', function (event, append) {
+    $(selectors.days).on('scrollnext', scrollnext);
+    function scrollnext(event, append) {
+        window.console && console.log('Checking for next day: ' + $(this).data('day'));
+
         if (selectors.channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
             fetchContent({
                 removePast: selectors.channelDayContainer.children().length != 1,
@@ -250,7 +257,7 @@ function changeDateTab() {
                 append: append
             });
         }
-    });
+    }
 
 
     ///
@@ -262,13 +269,13 @@ function changeDateTab() {
 
     function changeTab() {
         if ($(this).attr('id') == selectors.epgNextButton.attr('id'))
-            selectors.days.eq(activeTabIndex() + 1).trigger('click');
+            $(selectors.days).eq(activeTabIndex() + 1).trigger('click');
 
         if ($(this).attr('id') == selectors.epgPrevButton.attr('id'))
-            selectors.days.eq(activeTabIndex() - 1).trigger('click');
+            $(selectors.days).eq(activeTabIndex() - 1).trigger('click');
     }
 
-    selectors.days.on('click', function () {
+    $(selectors.days).on('click', function () {
         selectors.streamContainer.off('scroll', scrollHandler);
         $(this).trigger('activate');
 
@@ -285,38 +292,68 @@ function changeDateTab() {
     /// Tab Activation
     ///
 
+    $(selectors.days).eq(1).addClass(settings.activeClassString).addClass(settings.todayClassString);
+
     function activeTabIndex() {
-        return tabIndex(selectors.daysContainer.find(settings.activeClass));
+        return tabIndex($(selectors.activeDay));
     }
 
     function tabIndex(tab) {
-        return selectors.days.index(selectors.daysContainer.find(settings.activeClass));
+        return $(selectors.days).index(tab);
     }
 
-    selectors.days.on('activate', function () {
+    $(selectors.days).on('activate', activateTab);
+    function activateTab() {
         window.console && console.log('Activate tab: ' + $(this).data('day'));
 
-        selectors.days.removeClass(settings.activeClassString);
+        $(selectors.days).removeClass(settings.activeClassString);
         $(this).addClass(settings.activeClassString);
-    });
+    };
 
     function advanceTab() {
         window.console && console.log('Advance tab');
 
-        selectors.days.eq(activeTabIndex() + 1).trigger('activate');
+        $(selectors.days).eq(activeTabIndex() + 1).trigger('activate');
         state.rightTab = true;
         state.leftTab = false;
+
+        loadNewTab($(selectors.days).last(), false);
     }
 
     function devanceTab() {
         window.console && console.log('Devance tab');
 
-        if ((activeTabIndex() - 1) >= 0)
-        {
-            selectors.days.eq(activeTabIndex() - 1).trigger('activate');
-            state.rightTab = false;
-            state.leftTab = true;
-        }
+        $(selectors.days).eq(activeTabIndex() - 1).trigger('activate');
+        state.rightTab = false;
+        state.leftTab = true;
+
+        loadNewTab($(selectors.days).first(), true);
+    }
+
+    function loadNewTab(closestDate, previousDay) {
+        $(selectors.days).off('scrollnext', scrollnext);
+        $(selectors.days).off('activate', activateTab);
+
+        var url = $(selectors.daysContainer).data('day-tab-url');
+        url += '?date=' + closestDate.data('day');
+        url += '&previousDay=' + previousDay;
+
+        window.console && console.log('Loading new day tab: ' + url);
+
+        $.ajax(url, {
+            success: function (data) {
+                if (previousDay) {
+                    $(selectors.daysContainer).prepend(data);
+                    $(selectors.days).last().remove();
+                } else {
+                    $(selectors.daysContainer).append(data);
+                    $(selectors.days).first().remove();
+                }
+
+                $(selectors.days).on('scrollnext', scrollnext);
+                $(selectors.days).on('activate', activateTab);
+            }
+        });
     }
 
 
@@ -364,7 +401,7 @@ function changeDateTab() {
                     selectors.streamContainer.scrollLeft(0);
                 else if (opts.removePast && opts.append)
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() - settings.baseWidth);
-                else if (opts.removePast)
+                else if (opts.removePast || (!opts.append && !opts.removePast))
                     selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() + settings.baseWidth);
                 else if (!state.init)
                     selectors.streamContainer.scrollLeft(settings.baseWidth);
@@ -392,7 +429,7 @@ function changeDateTab() {
     function liveline() {
         window.console && console.log('Checking live line status');
 
-        if (selectors.channelDayContainer.children().first().data('day') == selectors.days.first().data('day'))
+        if (selectors.channelDayContainer.children().first().data('day') == $(selectors.days).find(settings.todayClass).data('day'))
             selectors.liveline.show();
 
         else
@@ -420,7 +457,7 @@ function floatingNav() {
         epg.hide();
         timeline.hide();
         clearInterval(triggerFloatTimeoutId);
-        triggerFloatTimeoutId = setTimeout(triggerFloat, 10);
+        triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
     });
 
     function datesOffset(freeze) {
