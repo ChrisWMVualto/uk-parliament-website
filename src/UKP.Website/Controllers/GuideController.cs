@@ -45,5 +45,18 @@ namespace UKP.Website.Controllers
             var model = new GuideViewModel(events, dateob.Value);
             return PartialView(MVC.Guide.Views._ChannelListing, model);
         }
+
+        [HttpGet]
+        public virtual PartialViewResult EpgDayTab(string date, bool previousDay)
+        {
+            var dateob = date.HasValue() ? date.FromISO8601String().Value : DateTime.Today;
+
+            if (previousDay)
+                dateob.AddDays(-1);
+            else
+                dateob.AddDays(1);
+
+            return PartialView(MVC.Guide.Views._DateTab, dateob);
+        }
     }
 }
