@@ -285,12 +285,14 @@ function changeDateTab() {
     /// Tab Activation
     ///
 
+    selectors.days.eq(1).addClass(settings.activeClassString);
+
     function activeTabIndex() {
         return tabIndex(selectors.daysContainer.find(settings.activeClass));
     }
 
     function tabIndex(tab) {
-        return selectors.days.index(selectors.daysContainer.find(settings.activeClass));
+        return selectors.days.index(tab);
     }
 
     selectors.days.on('activate', function () {
