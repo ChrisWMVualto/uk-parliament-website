@@ -233,7 +233,6 @@ function changeDateTab() {
                 selectors.streamContainer.off('scroll', scrollHandler);
                 var tab = $(selectors.days).eq(activeTabIndex() - 1);
 
-                console.log(tab);
                 tab.trigger('scrollnext', false);
             }
         }
@@ -317,20 +316,20 @@ function changeDateTab() {
         $(selectors.days).eq(activeTabIndex() + 1).trigger('activate');
         state.rightTab = true;
         state.leftTab = false;
+
+        loadNewTab(false);
+        $(selectors.days).first().remove();
     }
 
     function devanceTab() {
         window.console && console.log('Devance tab');
 
-        if ((activeTabIndex() - 1) >= 0)
-        {
-            $(selectors.days).eq(activeTabIndex() - 1).trigger('activate');
-            state.rightTab = false;
-            state.leftTab = true;
+        $(selectors.days).eq(activeTabIndex() - 1).trigger('activate');
+        state.rightTab = false;
+        state.leftTab = true;
 
-            if (activeTabIndex() == 0)
-                loadNewTab(true);
-        }
+        loadNewTab(true);
+        $(selectors.days).last().remove();
     }
 
     function loadNewTab(previousDay) {
@@ -344,8 +343,12 @@ function changeDateTab() {
         window.console && console.log('Loading new day tab: ' + url);
 
         $.ajax(url, {
-            success: function(data) {
-                $(selectors.daysContainer).prepend(data);
+            success: function (data) {
+                if (previousDay)
+                    $(selectors.daysContainer).prepend(data);
+                else
+                    $(selectors.daysContainer).append(data);
+
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
             }
