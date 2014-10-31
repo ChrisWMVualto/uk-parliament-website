@@ -3,7 +3,7 @@
 <div class="days-tab-outer">
     <div class="days-tab-inner">
         <div class="days-tab">
-            <ol>
+            <ol data-day-tab-url="@Url.Action(MVC.Guide.EpgDayTab())">
                 @for (var i = -1; i < 9; i++)
                 {
                     @Html.Partial(MVC.Guide.Views._DateTab, Model.AddDays(i))
