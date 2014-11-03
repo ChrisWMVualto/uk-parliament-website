@@ -47,6 +47,12 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        public virtual PartialViewResult EpgDateBar(string date)
+        {
+            return PartialView(MVC.Guide.Views._DateTabs, date.FromISO8601String().Value);
+        }
+
+        [HttpGet]
         public virtual PartialViewResult EpgDayTab(string date, bool previousDay)
         {
             return PartialView(MVC.Guide.Views._DateTab, previousDay ? date.FromISO8601String().Value.AddDays(-1) : date.FromISO8601String().Value.AddDays(1));
