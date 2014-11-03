@@ -479,7 +479,7 @@ function floatingNav() {
         title = $('.title-container'),
         streamContainer = $('.stream-container-inner'),
         freezeFrom = $('.channel-18-logo'),
-        infoPopup = $('#epgInfoPopup');
+        infoPopup = '#epgInfoPopup';
 
 
     $(window).on('scroll', function () {
@@ -525,7 +525,7 @@ function floatingNav() {
             timeline.css({
                 'top': timesOffset(freezeMenu())
             });
-            infoPopup.css({
+            $(infoPopup).css({
                 'top': epgInfoOffset(freezeMenu())
             });
             container.addClass(fixedClass);
@@ -537,7 +537,7 @@ function floatingNav() {
             timeline.css({
                 'top': 0
             });
-            infoPopup.css({
+            $(infoPopup).css({
                 'top': timeline.height()
             });
             container.removeClass(fixedClass);
