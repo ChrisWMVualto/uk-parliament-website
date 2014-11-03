@@ -68,14 +68,16 @@ $(function () {
     $('.log-moment').click(function () {
         var time = $(this).parent().find('.time-code').data('time');
         var receiver = document.getElementById("UKPPlayer");
-        $.postMessage("GoToLogItem_" + time, src, receiver.contentWindow);
+        $.postMessage("seek-program-date-time" + time, src, receiver.contentWindow);
     });
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
         var messageSplit = event.data.split('_');
-        if (messageSplit.length < 2)
-            return;
+        if (messageSplit.length < 2) return;
+        if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
+
         var sentTime = Date.parse(messageSplit[1]);
+
         var logs = $('.stack > ol').children().toArray();
         for (var i = 0; i <= logs.length; i++) {
             var thisTime = Date.parse($(logs[i]).find('.time-code').data('time'));
