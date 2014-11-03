@@ -68,7 +68,7 @@ $(function () {
     $('.log-moment').click(function () {
         var time = $(this).parent().find('.time-code').data('time');
         var receiver = document.getElementById("UKPPlayer");
-        $.postMessage("GoToLogItem_" + time, src, receiver.contentWindow);
+        $.postMessage("seek_program-date-time" + time, src, receiver.contentWindow);
     });
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
