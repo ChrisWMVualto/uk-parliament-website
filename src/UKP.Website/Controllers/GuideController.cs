@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Date.Extensions;
 using RestSharp.Extensions;
+using UKP.Website.Application;
 using UKP.Website.Models.Guide;
 using UKP.Website.Service;
 
@@ -11,11 +12,13 @@ namespace UKP.Website.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IVideoService _videoService;
+        private readonly IConfiguration _configurationService;
 
-        public GuideController(IEventService eventService, IVideoService videoService)
+        public GuideController(IEventService eventService, IVideoService videoService, IConfiguration configurationService)
         {
             _eventService = eventService;
             _videoService = videoService;
+            _configurationService = configurationService;
         }
 
         [HttpGet]
@@ -41,6 +44,12 @@ namespace UKP.Website.Controllers
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
 
+            if (InvalidEpgDate(dateob.Value))
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
             var events = _eventService.GetEpgEvents(dateob);
             var model = new GuideViewModel(events, dateob.Value);
             return PartialView(MVC.Guide.Views._ChannelListing, model);
@@ -49,13 +58,26 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual PartialViewResult EpgDateBar(string date)
         {
-            return PartialView(MVC.Guide.Views._DateTabs, date.FromISO8601String().Value);
+            var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
+
+            if (InvalidEpgDate(dateob.Value))
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            return PartialView(MVC.Guide.Views._DateTabs, dateob.Value);
         }
 
         [HttpGet]
         public virtual PartialViewResult EpgDayTab(string date, bool previousDay)
         {
             return PartialView(MVC.Guide.Views._DateTab, previousDay ? date.FromISO8601String().Value.AddDays(-1) : date.FromISO8601String().Value.AddDays(1));
+        }
+
+        private bool InvalidEpgDate(DateTime date)
+        {
+            return date < _configurationService.EpgStartDate;
         }
     }
 }
