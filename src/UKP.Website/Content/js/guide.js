@@ -20,20 +20,6 @@ $(document).ready(function () {
 
 
     ////////////////////////////////////////////
-    //epg-datepicker
-    ////////////////////////////////////////////
-    $('.end-date').datepicker({
-        autoclose: true,
-        weekStart: 1
-    });
-
-    $('.start-date').datepicker({
-        autoclose: true,
-        weekStart: 1
-    });
-
-
-    ////////////////////////////////////////////
     //epg-timepicker
     ////////////////////////////////////////////
     if ($("#epgTimepicker").length) {
@@ -233,7 +219,7 @@ function changeDateTab() {
         if (selectors.channelDayContainer.find('[data-day=\'' + $(this).data('day') + '\']').length == 0) {
             fetchContent({
                 removePast: selectors.channelDayContainer.children().length != 1,
-                day: $(this),
+                dayUrl: $(this).data('day-view'),
                 append: append
             });
         }
@@ -262,11 +248,24 @@ function changeDateTab() {
         fetchContent({
             clear: true,
             removePast: false,
-            day: $(this),
+            dayUrl: $(this).data('day-view'),
             resetScroll: true
         });
         loadNewTabBar($(this).data('day'));
     };
+
+    $(".date-picker").on('changeDate', function(event) {
+        var date = event.date.toISOString();
+        window.console && console.log('Change to datepicker date: ' + date);
+
+        fetchContent({
+            clear: true,
+            removePast: false,
+            dayUrl: selectors.channelDayContainer.data('day-base-url') + '?date=' + date,
+            resetScroll: true
+        });
+        loadNewTabBar(date);
+    });
 
 
     ///
@@ -372,16 +371,16 @@ function changeDateTab() {
             clear: false,
             append: true,
             removePast: true,
-            day: null,
+            dayUrl: null,
             callback: null,
             resetScroll: false
         }, options);
 
         selectors.streamContainer.off('scroll', scrollHandler);
 
-        $.ajax(opts.day.data('day-view'), {
+        $.ajax(opts.dayUrl, {
             success: function (data) {
-                window.console && console.log('Load day:' + opts.day.data('day-view'));
+                window.console && console.log('Load day:' + opts.dayUrl);
 
 
                 if (opts.clear)
