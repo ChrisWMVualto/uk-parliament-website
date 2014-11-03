@@ -242,7 +242,9 @@ function changeDateTab() {
     }
 
     $(selectors.days).on('click', dayClicked);
-    function dayClicked() {
+    function dayClicked(e) {
+        e.preventDefault();
+
         $(this).trigger('activate');
 
         fetchContent({
@@ -283,7 +285,8 @@ function changeDateTab() {
     }
 
     $(selectors.days).on('activate', activateTab);
-    function activateTab() {
+    function activateTab(e) {
+        e.preventDefault();
         window.console && console.log('Activate tab: ' + $(this).data('day'));
 
         $(selectors.days).removeClass(settings.activeClassString);
