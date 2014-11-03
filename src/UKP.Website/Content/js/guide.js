@@ -28,8 +28,12 @@ $(document).ready(function () {
         }).on('changeTime.timepicker', changeEpgTime);
     }
     $('.channel-day').on('click', function () {
-        $('.datepicker-dropdown').hide();
-        
+        //$('.datepicker-dropdown').hide();
+        $('.dropdown-menu').hide();
+    });
+
+    $('#epgTimepicker').timepicker().on('show.timepicker', function (e) {
+        $('.dropdown-menu').show();
     });
 
 
