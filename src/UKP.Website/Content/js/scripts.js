@@ -190,10 +190,6 @@ $(document).ready(function () {
             weekStart: 1,
             autoclose: true
         });
-
-        $('*:not(.dropdown)').on('click', function() {
-            $('.datepicker-dropdown').hide();
-        });
     }
 
 
