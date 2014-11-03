@@ -371,7 +371,8 @@
       if (this.template === 'modal' && this.$widget.modal) {
         this.$widget.modal('hide');
       } else {
-        this.$widget.removeClass('open');
+          this.$widget.removeClass('open');
+          this.$widget.hide();
       }
 
       $(document).off('mousedown.timepicker');
@@ -696,7 +697,8 @@
         this.$widget.modal('show').on('hidden', $.proxy(this.hideWidget, this));
       } else {
         if (this.isOpen === false) {
-          this.$widget.addClass('open');
+            this.$widget.addClass('open');
+            this.$widget.show();
         }
       }
 
