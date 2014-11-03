@@ -31,7 +31,7 @@ $(function () {
     $('.moment-more button').on('click', momentSearch);
 
     $('#Member').autocomplete({
-        serviceUrl: $('#Member').attr('data-ajax-url'),
+        serviceUrl: $('#Member').attr('data-ajax-url') + '?name=',
         displayItem: "DisplayAs",
         objectPath: "Members.Member",
         minChars: 3,

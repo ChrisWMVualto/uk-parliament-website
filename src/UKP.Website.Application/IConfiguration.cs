@@ -8,5 +8,6 @@ namespace UKP.Website.Application
         string IasAuthKey { get; }
         string RssUrl { get; }
         DateTime EpgStartDate { get; }
+        string GetMemberAutocompleteApi { get; }
     }
 }

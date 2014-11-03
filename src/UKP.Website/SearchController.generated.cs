@@ -66,6 +66,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Members()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Members);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SearchController Actions { get { return MVC.Search; } }
@@ -84,6 +90,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Moments = "Moments";
+            public readonly string Members = "Members";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -91,6 +98,7 @@ namespace UKP.Website.Controllers
         {
             public const string Index = "Index";
             public const string Moments = "Moments";
+            public const string Members = "Members";
         }
 
 
@@ -118,6 +126,14 @@ namespace UKP.Website.Controllers
             public readonly string eventId = "eventId";
             public readonly string keywords = "keywords";
             public readonly string memberId = "memberId";
+        }
+        static readonly ActionParamsClass_Members s_params_Members = new ActionParamsClass_Members();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Members MembersParams { get { return s_params_Members; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Members
+        {
+            public readonly string name = "name";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -174,6 +190,18 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keywords", keywords);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "memberId", memberId);
             MomentsOverride(callInfo, eventId, keywords, memberId);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void MembersOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string name);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Members(string name)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Members);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
+            MembersOverride(callInfo, name);
             return callInfo;
         }
 

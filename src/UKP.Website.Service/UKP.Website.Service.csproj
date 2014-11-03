@@ -69,9 +69,11 @@
   <ItemGroup>
     <Compile Include="EventService.cs" />
     <Compile Include="IEventService.cs" />
+    <Compile Include="IMembersService.cs" />
     <Compile Include="IRecessService.cs" />
     <Compile Include="ISearchService.cs" />
     <Compile Include="IVideoService.cs" />
+    <Compile Include="MembersService.cs" />
     <Compile Include="Model\EpgChannelModel.cs" />
     <Compile Include="Model\EpgEventModel.cs" />
     <Compile Include="Model\EventFilter.cs" />
