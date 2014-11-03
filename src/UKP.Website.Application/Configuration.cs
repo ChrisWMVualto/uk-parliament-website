@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace UKP.Website.Application
 {
@@ -27,6 +28,11 @@ namespace UKP.Website.Application
         public string RssUrl
         {
             get { return ConfigurationManager.AppSettings["RssUrl"]; }
+        }
+
+        public DateTime EpgStartDate
+        {
+            get { return DateTime.Parse(ConfigurationManager.AppSettings["EPGStartDate"]); }
         }
 
         public static string GetRssUrl
