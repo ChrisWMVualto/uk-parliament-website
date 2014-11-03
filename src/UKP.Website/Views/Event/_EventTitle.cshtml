@@ -5,8 +5,6 @@
 <header class="col-md-10">
     <h3>@Model.Event.Title</h3>
     <h4>
-        <i class="fa fa-vod-badge fa-2x state-badge-sm hidden-lg hidden-md pending-badge"></i>
-
         @if(Model.Event.States.PlayerState == PlayerEventState.PRELIVE)
         {
             <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting starts at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</span>
