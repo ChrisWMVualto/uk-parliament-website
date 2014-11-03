@@ -1,11 +1,8 @@
 ﻿@using UKP.Website.Service.Model
 @model VideoModel
 
-@Html.Hidden("ContainsLogMoments", Model.LogMoments.ContainsLogMoments)
-
 @if (!Model.LogMoments.ContainsLogMoments)
 {
-
     foreach (var stack in Model.Stacks)
     {
         <li>
@@ -20,5 +17,4 @@
             </article>
         </li>
     }
-
 }

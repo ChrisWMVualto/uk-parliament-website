@@ -11768,7 +11768,6 @@ dl.description dt {
 .page-title-bar h4 {
   position: relative;
   margin-bottom: 0;
-  margin-left: 45px;
 }
 .page-title-bar h4 strong {
   font-family: 'karlabold', arial, sans-serif;
@@ -12656,9 +12655,6 @@ ol.channel-list {
   }
 }
 @media (max-width: 991px) {
-  .page-title-bar h4 {
-    margin-left: 45px;
-  }
   .footer-main {
     padding-bottom: 20px;
   }
