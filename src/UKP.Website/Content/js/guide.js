@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 
     $('#epgTimepicker').timepicker().on('show.timepicker', function (e) {
-        $('.dropdown-menu').show();
+        $('.bootstrap-timepicker-widget.dropdown-menu').show();
     });
 
 
