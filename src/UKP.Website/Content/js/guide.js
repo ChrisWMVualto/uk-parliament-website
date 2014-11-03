@@ -20,13 +20,17 @@ $(document).ready(function () {
 
 
     ////////////////////////////////////////////
-    //epg-timepicker
+    //epg-date/timepicker
     ////////////////////////////////////////////
     if ($("#epgTimepicker").length) {
         $('#epgTimepicker').timepicker({
             timeSeparator: '.'
         }).on('changeTime.timepicker', changeEpgTime);
     }
+    $('.channel-day').on('click', function () {
+        $('.datepicker-dropdown').hide();
+        
+    });
 
 
     ////////////////////////////////////////////
