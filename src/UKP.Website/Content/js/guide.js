@@ -46,12 +46,6 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //epg-day tabs
     ////////////////////////////////////////////
-    $('.btn-search-panel').click(function () {
-        $(this).toggleClass('active').find('i').toggleClass('fa-plus fa-minus')
-            .removeClass('active').find('i')
-            .removeClass('fa-minus').addClass('fa-plus');
-
-    });
     changeDateTab();
 
 
@@ -66,21 +60,6 @@ $(document).ready(function () {
     resizeProgrammes($('.stream-container-inner'));
 
     $('.stream-container-inner').on('scroll', triggerProgramResize);
-
-    $('#epgInfoPopup').hide();
-    $('.stream-container-inner').find('a:last-of-type').on('click', function (e) {
-        e.stopPropagation();
-
-        $.ajax($(this).parents('li').data('epg-info'), {
-            success: function(model) {
-                $('.stream-container-outer').append(model).hide().fadeIn(100);
-            }
-        });
-
-        $(document).one('click', '[data-hide]', function () {
-            $("." + $(this).data("hide")).fadeOut(100).remove();
-        });
-    });
 
     if ($('.epg-outer').length > 0)
         floatingNav();
@@ -178,7 +157,8 @@ function changeDateTab() {
         timeline: $('.timeline'),
         epgNextButton: $('#epgDateScrollRight'),
         epgPrevButton: $('#epgDateScrollLeft'),
-        liveline: $('.live-now')
+        liveline: $('.live-now'),
+        epgInfoLink: 'a.info'
     };
 
     var settings = {
@@ -450,6 +430,7 @@ function changeDateTab() {
 
                 liveline();
                 selectors.streamContainer.on('scroll', scrollHandler);
+                $(selectors.epgInfoLink).on('click', showEpgInfo);
             }
         });
     }
@@ -463,6 +444,26 @@ function changeDateTab() {
         else
             selectors.liveline.hide();
     }
+
+
+    ///
+    /// EPG Info Popup
+    ///
+    $(selectors.epgInfoLink).on('click', showEpgInfo);
+    function showEpgInfo(e) {
+        e.stopPropagation();
+        $('#epgInfoPopup').remove();
+
+        $.ajax($(this).parents('li').data('epg-info'), {
+            success: function (model) {
+                $('.stream-container-outer').append(model).hide().fadeIn(100);
+            }
+        });
+
+        $(document).one('click', '[data-hide]', function () {
+            $("." + $(this).data("hide")).fadeOut(100);
+        });
+    };
 }
 
 ////////////////////////////////////////////
