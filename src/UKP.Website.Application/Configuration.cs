@@ -20,7 +20,7 @@ namespace UKP.Website.Application
             get { return ConfigurationManager.AppSettings["IasAuthKey"]; }
         }
 
-        public static string GetMemberAutocompleteApi
+        public string GetMemberAutocompleteApi
         {
             get { return ConfigurationManager.AppSettings["MemberAutocompleteApi"]; }
         }

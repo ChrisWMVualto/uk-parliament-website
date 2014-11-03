@@ -14,10 +14,12 @@ namespace UKP.Website.Controllers
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
+        private readonly IMembersService _membersService;
 
-        public SearchController(ISearchService searchService)
+        public SearchController(ISearchService searchService, IMembersService membersService)
         {
             _searchService = searchService;
+            _membersService = membersService;
         }
 
 
@@ -64,6 +66,12 @@ namespace UKP.Website.Controllers
             var results = _searchService.SearchMoments(eventId, keywords, memberId);
             var searchMomentModel = new SearchMomentModel(eventId, results, 5);
             return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
+        }
+
+        [HttpGet]
+        public virtual ActionResult Members(string name)
+        {
+            return  Content(_membersService.WildcardLookup(name));
         }
     }
 }
