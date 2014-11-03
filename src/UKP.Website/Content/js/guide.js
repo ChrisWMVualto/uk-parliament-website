@@ -275,8 +275,8 @@ function changeDateTab() {
             $(selectors.days).eq(activeTabIndex() - 1).trigger('click');
     }
 
-    $(selectors.days).on('click', function () {
-        selectors.streamContainer.off('scroll', scrollHandler);
+    $(selectors.days).on('click', dayClicked);
+    function dayClicked() {
         $(this).trigger('activate');
 
         fetchContent({
@@ -285,7 +285,8 @@ function changeDateTab() {
             day: $(this),
             resetScroll: true
         });
-    });
+        loadNewTabBar($(this).data('day'));
+    };
 
 
     ///
@@ -333,6 +334,7 @@ function changeDateTab() {
     function loadNewTab(closestDate, previousDay) {
         $(selectors.days).off('scrollnext', scrollnext);
         $(selectors.days).off('activate', activateTab);
+        $(selectors.days).off('click', dayClicked);
 
         var url = $(selectors.daysContainer).data('day-tab-url');
         url += '?date=' + closestDate.data('day');
@@ -352,6 +354,30 @@ function changeDateTab() {
 
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
+                $(selectors.days).on('click', dayClicked);
+            }
+        });
+    }
+
+    function loadNewTabBar(date) {
+        $(selectors.days).off('scrollnext', scrollnext);
+        $(selectors.days).off('activate', activateTab);
+        $(selectors.days).off('click', dayClicked);
+
+        var url = $(selectors.daysContainer).data('date-bar-url');
+        url += '?date=' + date;
+
+        window.console && console.log('Loading new date bar: ' + url);
+        $.ajax(url, {
+            success: function (data) {
+                $(selectors.days).remove();
+                $(selectors.daysContainer).append($('li', data));
+                $(selectors.days).eq(1).addClass(settings.activeClassString);
+                liveline();
+
+                $(selectors.days).on('scrollnext', scrollnext);
+                $(selectors.days).on('activate', activateTab);
+                $(selectors.days).on('click', dayClicked);
             }
         });
     }
@@ -370,6 +396,8 @@ function changeDateTab() {
             callback: null,
             resetScroll: false
         }, options);
+
+        selectors.streamContainer.off('scroll', scrollHandler);
 
         $.ajax(opts.day.data('day-view'), {
             success: function (data) {

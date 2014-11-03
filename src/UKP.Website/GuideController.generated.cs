@@ -68,6 +68,12 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult EpgDateBar()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDateBar);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult EpgDayTab()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDayTab);
@@ -91,6 +97,7 @@ namespace UKP.Website.Controllers
             public readonly string Index = "Index";
             public readonly string EpgInfo = "EpgInfo";
             public readonly string EpgDay = "EpgDay";
+            public readonly string EpgDateBar = "EpgDateBar";
             public readonly string EpgDayTab = "EpgDayTab";
         }
 
@@ -100,6 +107,7 @@ namespace UKP.Website.Controllers
             public const string Index = "Index";
             public const string EpgInfo = "EpgInfo";
             public const string EpgDay = "EpgDay";
+            public const string EpgDateBar = "EpgDateBar";
             public const string EpgDayTab = "EpgDayTab";
         }
 
@@ -117,6 +125,14 @@ namespace UKP.Website.Controllers
         public ActionParamsClass_EpgDay EpgDayParams { get { return s_params_EpgDay; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_EpgDay
+        {
+            public readonly string date = "date";
+        }
+        static readonly ActionParamsClass_EpgDateBar s_params_EpgDateBar = new ActionParamsClass_EpgDateBar();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EpgDateBar EpgDateBarParams { get { return s_params_EpgDateBar; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EpgDateBar
         {
             public readonly string date = "date";
         }
@@ -194,6 +210,18 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDay);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
             EpgDayOverride(callInfo, date);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EpgDateBarOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string date);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult EpgDateBar(string date)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EpgDateBar);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "date", date);
+            EpgDateBarOverride(callInfo, date);
             return callInfo;
         }
 
