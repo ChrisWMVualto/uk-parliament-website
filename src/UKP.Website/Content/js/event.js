@@ -216,7 +216,6 @@ function audiOnlySwitch() {
         if (auidoOnlyButtonState == false) {
             auidoOnlyButtonState = true;
             loadPlayer(true);
-            $(this).addClass("active");
             $(this).html(onText);
             return;
         }
@@ -224,7 +223,6 @@ function audiOnlySwitch() {
         if (auidoOnlyButtonState == true) {
             auidoOnlyButtonState = false;
             loadPlayer(false);
-            $(this).removeClass("active");
             $(this).html(offText);
             return;
         }

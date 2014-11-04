@@ -11880,7 +11880,6 @@ dl.description dt {
 .player-tabs .audio-toggle:hover {
   opacity: .5;
 }
-.player-tabs .audio-toggle.active,
 .player-tabs .audio-toggle:focus {
   background-color: #EEF6E8;
   color: #016131;
