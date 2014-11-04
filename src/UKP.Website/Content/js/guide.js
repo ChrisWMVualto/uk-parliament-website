@@ -497,7 +497,7 @@ function floatingNav() {
             epg.hide();
             timeline.hide();
             clearInterval(triggerFloatTimeoutId);
-            triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
+            triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
         }
     });
 
