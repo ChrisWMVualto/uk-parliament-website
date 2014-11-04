@@ -10786,9 +10786,12 @@ div.select-home-tabs .fa-arrow-down {
   right: 44px;
   top: 20px;
 }
+.channel-day .fa-play,
 .mini-item .fa-play {
-  font-size: 88%;
-  margin-left: 2px;
+    font-size: 88%;
+    margin-left: 2px;
+}
+.mini-item .fa-play {
   color: #292c2d;
 }
 .mini-item .fa-circle {
