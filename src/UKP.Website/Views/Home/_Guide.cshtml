@@ -17,7 +17,11 @@
                 <div class="mini-item col-md-4 col-sm-6 @if (item.HomeFilters.Live) { @Html.Raw("live") }">
                     <div class="inner">
                         <a href="@Url.Action(MVC.Event.Index(item.Id))">
-                            <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-mini-guide"></span>
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-play fa-stack-1x fa-inverse"></i> 
+                            </span> 
+                            <span class="vr-mini-guide"></span>
                             <h5>@item.DisplayStartDate.ToLocalTime().ToString("dddd") <span>@item.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy")</span>  @item.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</h5>
                             <p>
                                 @item.Title
