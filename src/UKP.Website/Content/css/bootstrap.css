@@ -11117,9 +11117,9 @@ ol.channel-list li .outer {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  border-left: 1px solid #000000;
 }
 ol.channel-list li .inner {
-  border-left: 1px solid #000000;
   background-color: white;
   height: 100%;
   padding: 0 55px;
