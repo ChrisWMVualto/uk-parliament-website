@@ -19,8 +19,6 @@
 /* EPG */
 
 .stream-container-inner ol.channel-list {
-    margin-top: 15px;
-    height: 85px;
     width: 2880px;
 }
 
@@ -49,7 +47,6 @@ ol.channel-list li .outer {
 
 ol.channel-list li::before {
     display: inline-block;
-    height: 84px;
     background: white;
     width: 1px;
     position: absolute;
