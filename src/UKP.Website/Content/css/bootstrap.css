@@ -11006,7 +11006,7 @@ div.select-home-tabs .fa-arrow-down {
   width: 2920px;
   margin-top: 0;
   margin-bottom: 0;
-  height: 100px;
+  height: 70px;
 }
 .stream-container-inner::-webkit-scrollbar {
   width: 0 !important;
@@ -11102,7 +11102,7 @@ ol.channel-list {
 }
 ol.channel-list li {
   width: 120px;
-  height: 85px;
+  height: 100%;
   white-space: nowrap;
   display: block;
   overflow: hidden;
@@ -11119,11 +11119,9 @@ ol.channel-list li .outer {
   transition: all 0.5s ease;
 }
 ol.channel-list li .inner {
-  border: 1px solid #000000;
-  border-right: none;
-  border-top: none;
+  border-left: 1px solid #000000;
   background-color: white;
-  height: 85px;
+  height: 100%;
   padding: 0 55px;
   position: relative;
 }
@@ -11154,7 +11152,7 @@ ol.channel-list li .inner.blank:after {
 }
 ol.channel-list li .description {
   overflow: hidden;
-  height: 85px;
+  /*height: 85px;*/
 }
 ol.channel-list li .watch {
   background-color: #e6ebee;
@@ -11203,7 +11201,7 @@ ol.channel-list p {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 52px;
+  /*height: 52px;*/
 }
 ol.channel-list p br {
   display: none;
@@ -11232,7 +11230,7 @@ ol.channel-list li.event:hover > div {
   margin: 0;
   padding: 0;
   width: 132px;
-  height: 100px;
+  height: 70px;
   list-style: none;
   background-position: center center;
   background-repeat: no-repeat;
