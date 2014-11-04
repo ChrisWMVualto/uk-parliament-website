@@ -11880,11 +11880,6 @@ dl.description dt {
 .player-tabs .audio-toggle:hover {
   opacity: .5;
 }
-.player-tabs .audio-toggle.active {
-  background-color: #EEF6E8;
-  color: #016131;
-  border: 1px solid #016131;
-}
 .video-container {
   position: relative;
 }
