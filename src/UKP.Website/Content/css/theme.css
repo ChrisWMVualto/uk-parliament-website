@@ -11094,18 +11094,6 @@ div.select-home-tabs .fa-arrow-down {
 ol.channel-list .fa-circle {
   color: #292c2d;
 }
-ol.channel-1 .fa-circle {
-  color: #016131;
-}
-ol.channel-2 .fa-circle {
-  color: #a1070f;
-}
-ol.channel-3 .fa-circle {
-  color: #016131;
-}
-ol.channel-4 .fa-circle {
-  color: #a1070f;
-}
 ol.channel-list {
   padding-top: 14px;
 }
@@ -11257,19 +11245,19 @@ ol.channel-list li.event:hover > div {
   height: 26px;
 }
 .channel-1-logo {
-  background-color: #016131;
+  background-color: #292c2d;
   background-image: url("../img/channel-one-logo.png");
 }
 .channel-2-logo {
-  background-color: #a1070f;
+  background-color: #35393a;
   background-image: url("../img/channel-two-logo.png");
 }
 .channel-3-logo {
-  background-color: #016131;
+  background-color: #292c2d;
   background-image: url("../img/channel-three-logo.png");
 }
 .channel-4-logo {
-  background-color: #a1070f;
+  background-color: #35393a;
   background-image: url("../img/channel-four-logo.png");
 }
 .channel-5-logo {
