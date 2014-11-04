@@ -110,3 +110,9 @@ button.multiselect {
 .stack-and-logs {
     display: none;
 }
+
+/* Cookie modal */
+.btn-accept, .btn-reject {
+    background: #CBCBCB;
+    color: #000000;
+}
