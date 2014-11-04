@@ -17,7 +17,7 @@ function initSelectDates() {
 function loadPlayer(audioOnly) {
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly }, function (video) {
-        $('#videoContainer').html(video.embedCode);
+        $('#videoContainer').html(video.scriptableEmbedCode);
     });
 }
 

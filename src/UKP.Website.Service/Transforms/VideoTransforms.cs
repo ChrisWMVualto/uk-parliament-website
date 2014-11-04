@@ -19,6 +19,7 @@ namespace UKP.Website.Service.Transforms
             var logMoments = jObject.logMomentVideoItems;
             var stacks = jObject.stackVideoItems;
             var embedCode = (string)jObject.embedCode;
+            var scriptableEmbedCode = (string)jObject.scriptableEmbedCode;
             var legacyEmbedCode = (string)jObject.legacyEmbedCode;
             var pageUrl = (string)jObject.webPageUrl;
             var shortWebPageUrl = (string)jObject.shortWebPageUrl;
@@ -30,7 +31,7 @@ namespace UKP.Website.Service.Transforms
             var momentModel = LogMomentTransforms.TransformObject(logMoments.ToString());
             var stacksModels = StackTransforms.TransformArray(stacks.ToString());
 
-            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint, stacksModels, thumbnailUrl);
+            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint, stacksModels, thumbnailUrl, scriptableEmbedCode);
         }
 
         public static VideoCollectionModel TransformArray(string jsonArray)
