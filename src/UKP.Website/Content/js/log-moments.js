@@ -65,10 +65,12 @@ $(function () {
     //updateStacks();
     setInterval(updateLogMoments, 3000);
 
-    $('.log-moment').click(function () {
+    $('.log-moment').click(function (e) {
         var time = $(this).parent().find('.time-code').data('time');
-        var receiver = document.getElementById("UKPPlayer");
-        $.postMessage("seek-program-date-time" + time, src, receiver.contentWindow);
+        var receiver = $('#UKPPlayer')[0];
+        $.postMessage("seek-program-date-time_" + time, src, receiver.contentWindow);
+        e.preventDefault();
+        return false;
     });
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
