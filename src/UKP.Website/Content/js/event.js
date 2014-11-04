@@ -209,11 +209,15 @@ function updateSocialLinks(e, url) {
 
 function audiOnlySwitch() {
     $(document).on('click', '#audioToggle', null, function () {
+        var offText = 'audio only  <i class="fa fa-player-volume fa-2x"></i>',
+            onText = 'video with audio  <i class="fa fa-player-volume fa-2x"></i>';
+
 
         if (auidoOnlyButtonState == false) {
             auidoOnlyButtonState = true;
             loadPlayer(true);
             $(this).addClass("active");
+            $(this).html(onText);
             return;
         }
 
@@ -221,6 +225,7 @@ function audiOnlySwitch() {
             auidoOnlyButtonState = false;
             loadPlayer(false);
             $(this).removeClass("active");
+            $(this).html(offText);
             return;
         }
     });
