@@ -9606,13 +9606,13 @@ input {
   outline: none!important;
 }
 .btn-default {
-  background-image: -webkit-linear-gradient(top, #292c2d 0%, #05325c 100%);
-  background-image: -o-linear-gradient(top, #292c2d 0%, #05325c 100%);
-  background-image: linear-gradient(to bottom, #292c2d 0%, #05325c 100%);
+  background-image: -webkit-linear-gradient(top, #292c2d 0%, #101314 100%);
+  background-image: -o-linear-gradient(top, #292c2d 0%, #101314 100%);
+  background-image: linear-gradient(to bottom, #292c2d 0%, #101314 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff085196', endColorstr='#ff05325c', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
-  border-color: #042c52;
+  border-color: #0A0D0E;
   text-shadow: 0 0 0 #fff;
   border-color: #ccc;
 }
