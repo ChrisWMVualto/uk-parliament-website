@@ -488,7 +488,7 @@ function floatingNav() {
         header = $('.header-main div'),
         title = $('.title-container'),
         streamContainer = $('.stream-container-inner'),
-        freezeFrom = $('.channel-18-logo'),
+        freezeFrom = $('.channel-18'),
         infoPopup = '#epgInfoPopup';
 
 
