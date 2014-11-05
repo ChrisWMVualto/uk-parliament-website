@@ -91,6 +91,9 @@ $(function () {
             }
         }
     });
+    $('.btn-moment-expand').on('click', function() {
+        $($(this).children()[1]).toggleClass('fa-plus').toggleClass('fa-minus');
+    });
 
 });
 
