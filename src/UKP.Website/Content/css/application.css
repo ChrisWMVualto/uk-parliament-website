@@ -64,7 +64,7 @@ ol.channel-list li::before {
     margin-left: 130px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     .channel-day-container {
         margin-left: 36px;
     }
