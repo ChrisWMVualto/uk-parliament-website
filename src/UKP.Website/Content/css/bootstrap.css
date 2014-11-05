@@ -10988,7 +10988,7 @@ div.select-home-tabs .fa-arrow-down {
 }
 .stream-container-outer {
   top: -54px;
-  height: 2046px;
+  height: 1447px;
   position: relative;
 }
 .drag-wrap {
@@ -11152,7 +11152,6 @@ ol.channel-list li .inner.blank:after {
 }
 ol.channel-list li .description {
   overflow: hidden;
-  /*height: 85px;*/
 }
 ol.channel-list li .watch {
   background-color: #e6ebee;
@@ -11176,7 +11175,7 @@ ol.channel-list li .info .fa-circle {
   color: #292c2d;
 }
 ol.channel-list li .fa-stack {
-  margin-top: 20px;
+  margin-top: 26px;
   margin-left: 5px;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -11218,7 +11217,7 @@ ol.channel-list li.event:hover > div {
 .channels {
   z-index: 40;
   position: absolute;
-  height: 2000px;
+  height: 1400px;
   top: 45px;
   left: 0px;
   margin: 0;
@@ -11227,104 +11226,44 @@ ol.channel-list li.event:hover > div {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 .channels li {
-  margin: 0;
-  padding: 0;
-  width: 132px;
-  height: 70px;
-  list-style: none;
-  background-position: center center;
-  background-repeat: no-repeat;
-  font-size: 140%;
-  font-family: 'karlaregular', arial, sans-serif;
-  text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 132px;
+    height: 70px;
+    list-style: none;
+    background-position: center 69%;
+    background-repeat: no-repeat;
+    font-size: 110%;
+    font-family: 'karlaregular', arial, sans-serif;
+    text-align: center;
+    background-color: #292c2d;
+    position: relative;
+    background-image: url("../img/channel-bg.png");
 }
-.channels li span {
-  display: block;
-  padding-top: 74px;
-  color: white;
-  width: 132px;
-  height: 26px;
+.channels li span.channel-number {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    color: white;
+    width: 132px;
 }
-.channel-1-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-one-logo.png");
+.channels li span.channel-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    width: 122px;
+    margin: 8px 5px;
+    height: 31px;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-size: 95%;
+    line-height: 100%;
 }
-.channel-2-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-two-logo.png");
+.channels li:nth-of-type(odd) {
+    background-color: #35393a;
 }
-.channel-3-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-three-logo.png");
-}
-.channel-4-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-four-logo.png");
-}
-.channel-5-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-6-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-7-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-8-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-9-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-10-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-11-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-12-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-13-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-14-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-15-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-16-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-17-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-18-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-19-logo {
-  background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
-}
-.channel-20-logo {
-  background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
-}
+
 .time-nav,
 .date-nav {
   display: block;
@@ -11670,7 +11609,7 @@ dl.description dt {
 }
 .shadow-right {
   width: 6px;
-  height: 2100px;
+  height: 1502.stream-container-outerpx;
   background-image: url("../img/shadow-right.png");
   position: absolute;
   right: 0;
