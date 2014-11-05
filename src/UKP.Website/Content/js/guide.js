@@ -462,11 +462,12 @@ function changeDateTab() {
     $(selectors.epgInfoLink).on('click', showEpgInfo);
     function showEpgInfo(e) {
         e.stopPropagation();
-        $('#epgInfoPopup').remove();
-
+        
         $.ajax($(this).parents('li').data('epg-info'), {
             success: function (model) {
-                $('.stream-container-outer').append(model).hide().fadeIn(100);
+                $('.epg-info').remove();
+                $('.stream-container-outer').append(model);
+                $('.epg-info').hide().fadeIn(100);
             }
         });
 
