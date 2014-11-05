@@ -1824,7 +1824,7 @@ margin-left: -5px;
 }
 .stream-container-outer{
       top: -54px;
-      height: 2046px;
+      height: 1447px;
       position: relative;
 
 }
@@ -1845,7 +1845,7 @@ margin-left: -5px;
     width: 2920px;
     margin-top: 0;
     margin-bottom: 0;
-    height: 100px;
+    height: 70px;
     }
 }
 .stream-container-inner::-webkit-scrollbar {
@@ -1962,14 +1962,13 @@ li{
     width: 120px; //inline width
     position: absolute;
     height: 100%;
-     .transition-fade;
+    .transition-fade;
+    border-left: 1px solid @brand-primary;
+
   }
     .inner{
-      border: 1px solid @brand-primary;
-      border-right: none;
-      border-top: none;
       background-color: white;
-      height: 85px;
+      height: 100px;
       padding: 0 55px;
       position: relative;
   }
@@ -2002,7 +2001,6 @@ li{
 
   .description{
     overflow: hidden;
-    height: 85px;
   }
   .watch{
     background-color: @brand-quinary;
@@ -2078,7 +2076,7 @@ width: auto!important;
   //margin-top: 52px;
   z-index: @zindex-channel-list;
   position: absolute;
-  height: 2000px;
+  height: 1400px;
   //width: 132px;
   top: 45px;
   left: 0px;
@@ -2087,114 +2085,47 @@ width: auto!important;
   .box-shadow(2px 2px 2px rgba(0,0,0,.5));
 
 
-li{
-    margin: 0;
-    padding: 0;
-    width: 132px;
-    height: 100px;
-    list-style: none;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-size: 140%;
-    font-family: 'karlaregular', arial, sans-serif;
-    text-align: center;
-  span{
-      display: block;
-      padding-top: 74px;
-      color: white;
-      width: 132px;
-      height: 26px;
-  }
-}
+    li{
+        margin: 0;
+        padding: 0;
+        width: 132px;
+        height: 70px;
+        list-style: none;
+        background-position: center center;
+        background-repeat: no-repeat;
+        font-size: 110%;
+        font-family: 'karlaregular', arial, sans-serif;
+        text-align: center;
+        background-color: #292c2d;
+        position: relative;
+        background-image: url("../img/channel-bg.png");
+
+        &:nth-of-type(odd) {
+            background-color: #35393a;
+        }
+        span.channel-number {
+            position: absolute;
+            top: 48px;
+            left: 0;
+            color: white;
+            width: 132px;
+        }
+        span.channel-name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            width: 122px;
+            margin: 8px 5px;
+            height: 31px;
+            overflow: hidden;
+            text-transform: uppercase;
+            font-size: 95%;
+            line-height: 100%;
+        }
+    }
 
 }
-
-
-
-
-
-
-
- .channel-one-logo{
-      background-color: @brand-secondary;
-      background-image: url("../img/channel-one-logo.png");
-    }
-        .channel-two-logo{
-      background-color: lighten(@brand-secondary, 5%);
-      background-image: url("../img/channel-two-logo.png");
-    }
-        .channel-three-logo{
-      background-color: @brand-secondary;
-      background-image: url("../img/channel-three-logo.png");
-    }
-        .channel-four-logo{
-      background-color: lighten(@brand-secondary, 5%);
-      background-image: url("../img/channel-four-logo.png");
-    }
-        .channel-five-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-six-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-seven-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-eight-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-nine-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-ten-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-eleven-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-twelve-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-thirteen-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-fourteen-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-fifteen-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-sixteen-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-seventeen-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-eighteen-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-nineteen-logo{
-      background-color: @brand-secondary;
-          background-image: url("../img/channel-five-logo.png");
-    }
-        .channel-twenty-logo{
-      background-color: lighten(@brand-secondary, 5%);
-          background-image: url("../img/channel-five-logo.png");
-    }
 
 
 //time & date selector buttons
