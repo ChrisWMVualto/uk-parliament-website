@@ -11245,7 +11245,7 @@ ol.channel-list li.event:hover > div {
     top: 48px;
     left: 0;
     color: white;
-    width: 132px;
+    width: 100%;
 }
 .channels li span.channel-name {
     position: absolute;
@@ -12386,9 +12386,8 @@ ol.channel-list {
     width: 44px;
     background-image: none;
   }
-  .channels li span {
-    width: 44px;
-    padding-top: 37px;
+  .channels li span.channel-number {
+      top: 30px;
   }
   .jump-container {
     width: 44px;
