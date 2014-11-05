@@ -564,7 +564,8 @@ function floatingNav() {
 ////////////////////////////////////////////
 function resizeProgrammes(container) {
     container = $(container);
-    var containerPosition = container.scrollLeft();
+    var containerPosition = container.scrollLeft(),
+        offset = $('.channels').width() + 40;
 
     $.each(container.find('ol.channel-list'), function () {
         $.each($(this).children('li'), function () {
@@ -578,8 +579,8 @@ function resizeProgrammes(container) {
         if (leftPos <= containerPosition) {
             var margin = containerPosition - leftPos;
 
-            if (width($(context).innerWidth(), margin) <= 180) {
-                margin = $(context).innerWidth() - 180;
+            if (width($(context).innerWidth(), margin) <= offset) {
+                margin = $(context).innerWidth() - offset;
             }
 
             moveTo(margin, context);
@@ -588,14 +589,14 @@ function resizeProgrammes(container) {
     }
 
     function moveTo(amount, context) {
-        if ($(context).outerWidth() > 180) {
+        if ($(context).outerWidth() > offset) {
             $(context).find('.outer .inner').animate({
                 'marginLeft': amount
             }, 500, 'swing', function () {
-                if (width($(context).innerWidth(), amount) <= 180) {
+                if (width($(context).innerWidth(), amount) <= offset) {
                     $(context).addClass('event');
                 }
-                if (width($(context).innerWidth(), amount) > 180) {
+                if (width($(context).innerWidth(), amount) > offset) {
                     $(context).removeClass('event');
                 }
             });
