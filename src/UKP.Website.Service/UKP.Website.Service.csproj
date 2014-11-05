@@ -85,6 +85,7 @@
     <Compile Include="Model\NowAndNextModel.cs" />
     <Compile Include="Model\RecessMessageModel.cs" />
     <Compile Include="Model\RecessMessageType.cs" />
+    <Compile Include="Model\SearchMembersNameModel.cs" />
     <Compile Include="Model\StackModel.cs" />
     <Compile Include="Model\TagModel.cs" />
     <Compile Include="Model\VideoModel.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="SearchService.cs" />
     <Compile Include="Transforms\LogMomentTransform.cs" />
     <Compile Include="Transforms\EventTransforms.cs" />
+    <Compile Include="Transforms\SearchMembersTransforms.cs" />
     <Compile Include="Transforms\StackTransforms.cs" />
     <Compile Include="Transforms\TagTransforms.cs" />
     <Compile Include="Transforms\VideoTransforms.cs" />
