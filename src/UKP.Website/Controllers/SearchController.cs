@@ -71,7 +71,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Members(string name)
         {
-            return  Content(_membersService.WildcardLookup(name));
+            return Content(_membersService.WildcardLookup(name));
         }
     }
 }
