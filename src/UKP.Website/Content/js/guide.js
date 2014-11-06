@@ -152,7 +152,8 @@ function changeDateTab() {
         epgNextButton: $('#epgDateScrollRight'),
         epgPrevButton: $('#epgDateScrollLeft'),
         liveline: $('.live-now'),
-        epgInfoLink: 'a.info'
+        epgInfoLink: 'a.info',
+        epgPopup: '.epg-info'
     };
 
     var settings = {
@@ -465,9 +466,11 @@ function changeDateTab() {
         
         $.ajax($(this).parents('li').data('epg-info'), {
             success: function (model) {
-                $('.epg-info').remove();
+                $(selectors.epgPopup).remove();
                 $('.stream-container-outer').append(model);
-                $('.epg-info').hide().fadeIn(100);
+                $(selectors.epgPopup).hide();
+                $(window).trigger('forcescroll', selectors.streamContainer);
+                $(selectors.epgPopup).fadeIn(100);
             }
         });
 
@@ -499,6 +502,12 @@ function floatingNav() {
             timeline.hide();
             clearInterval(triggerFloatTimeoutId);
             triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
+        }
+    });
+
+    $(window).on('forcescroll', function() {
+        if ($(window).scrollTop() > 0) {
+            triggerFloat();
         }
     });
 

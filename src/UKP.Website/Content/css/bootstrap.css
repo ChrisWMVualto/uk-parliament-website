@@ -11006,7 +11006,7 @@ div.select-home-tabs .fa-arrow-down {
   width: 2920px;
   margin-top: 0;
   margin-bottom: 0;
-  height: 70px;
+  height: 100px;
 }
 .stream-container-inner::-webkit-scrollbar {
   width: 0 !important;
@@ -11118,72 +11118,44 @@ ol.channel-list li .outer {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  overflow: hidden;
 }
 ol.channel-list li .inner {
   background-color: white;
   height: 100%;
-  padding: 0 55px;
+  padding: 0;
   position: relative;
 }
 ol.channel-list li .soft-ending {
   border-left: 1px dashed #000000;
 }
-ol.channel-list li .blank {
-  background-color: white;
-  background-image: url("../img/blank.png");
-  background-repeat: repeat;
-}
-ol.channel-list li .inner:after {
-  right: 30px;
-  top: 79%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(136, 183, 213, 0);
-  border-right-color: #add0f2;
-  border-width: 30px;
-  margin-top: -50px;
-}
-ol.channel-list li .inner.blank:after {
-  border: none;
-}
 ol.channel-list li .description {
-  overflow: hidden;
+    overflow: hidden;
+    /*height: 100%;*/
+    display: inline-block;
+    float: left;
+    padding: 5px 0 0 5px;
 }
 ol.channel-list li .watch {
-  background-color: #e6ebee;
-  width: 44px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 2px;
+    width: 35px;
+    float: left;
+    clear: left;
 }
 ol.channel-list li .info {
-  background-color: #add0f2;
-  width: 44px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 2px;
-  z-index: 1;
+    width: 35px;
+    float: left;
 }
 ol.channel-list li .info .fa-circle {
   opacity: .5;
   color: #292c2d;
 }
 ol.channel-list li .fa-stack {
-  margin-top: 20px;
   margin-left: 5px;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-}
-ol.channel-list li a:hover .fa-stack {
-  opacity: .3;
 }
 ol.channel-list h4 {
   font-family: Verdana, Geneva, sans-serif;
@@ -11200,15 +11172,10 @@ ol.channel-list p {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  /*height: 52px;*/
-}
-ol.channel-list p br {
-  display: none;
 }
 ol.channel-list li.event:hover {
   overflow: visible;
   z-index: 40;
-  /*width: auto!important;*/
   cursor: pointer;
 }
 ol.channel-list li.event:hover > div {
@@ -11229,7 +11196,7 @@ ol.channel-list li.event:hover > div {
     margin: 0;
     padding: 0;
     width: 132px;
-    height: 70px;
+    height: 100px;
     list-style: none;
     background-position: center 69%;
     background-repeat: no-repeat;
@@ -11242,14 +11209,14 @@ ol.channel-list li.event:hover > div {
 }
 .channels li span.channel-number {
     position: absolute;
-    top: 48px;
+    top: 74px;
     left: 0;
     color: white;
     width: 100%;
 }
 .channels li span.channel-name {
     position: absolute;
-    top: 0;
+    top: 15px;
     left: 0;
     color: white;
     width: 122px;
