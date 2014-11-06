@@ -1964,67 +1964,39 @@ li{
     height: 100%;
     .transition-fade;
     border-left: 1px solid @brand-primary;
-
+    overflow: hidden;
   }
     .inner{
       background-color: white;
-      height: 100px;
-      padding: 0 55px;
+      height: 100%;
+      padding: 0;
       position: relative;
   }
   .soft-ending{
      border-left: 1px dashed @brand-primary;
   }
-.blank{
-    background-color: white;
-    background-image: url("../img/blank.png");
-    background-repeat: repeat;
-}
-
-.inner:after {
-  right: 30px;
-  top: 74%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-  border-color: rgba(136, 183, 213, 0);
-  border-right-color: @brand-quaternary;
-  border-width: 30px;
-  margin-top: -50px;
-}
-.inner.blank:after{
-   border: none;
-}
-
   .description{
     overflow: hidden;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    padding: 5px 0 0 5px;
   }
   .watch{
-    background-color: @brand-quinary;
-    width: 44px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 2px;
+    width: 35px;
+    float: left;
+    margin-left: 10px;
   }
   .info{
-    background-color: @brand-quaternary;
-    width: 44px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 2px;
-    z-index: 1;
+    width: 35px;
+    float: left;
+
     .fa-circle{
       opacity: .5;
       color: @brand-tertiary;
     }
   }
   .fa-stack{
-    margin-top: 20px;
     margin-left: 5px;
     .transition-fade;
   }
@@ -2052,7 +2024,6 @@ p{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  height: 52px;
   br{
     display: none;
   }
