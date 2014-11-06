@@ -78,9 +78,6 @@ ol.channel-list li::before {
 
 .timeline {
     overflow: hidden;
-}
-
-.lt-ie10 .timeline {
     margin-left: 129px;
 }
 
