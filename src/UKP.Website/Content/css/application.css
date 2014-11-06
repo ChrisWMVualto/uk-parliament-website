@@ -64,12 +64,6 @@ ol.channel-list li::before {
     margin-left: 130px;
 }
 
-@media (max-width: 768px) {
-    .channel-day-container {
-        margin-left: 36px;
-    }
-}
-
 .channel-day {
     width: 2880px;
     float: left;
@@ -79,6 +73,16 @@ ol.channel-list li::before {
 .timeline {
     overflow: hidden;
     margin-left: 129px;
+}
+
+@media (max-width: 768px) {
+    .channel-day-container {
+        margin-left: 36px;
+    }
+
+    .alert-side-detail {
+        width: 100%;
+    }
 }
 
 /* Search */
