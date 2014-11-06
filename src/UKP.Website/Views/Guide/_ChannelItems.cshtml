@@ -9,7 +9,8 @@
                     <div class="description">
                         <h4>@item.EventData.Title</h4>
                         <p>
-                            <br /> @item.EventData.Room
+                            @item.EventData.Room <br />
+                            @item.EventData.Room
                         </p>
                     </div>
                     <a href="@Url.Action(MVC.Event.Index(@item.EventData.Id))" class="watch">
