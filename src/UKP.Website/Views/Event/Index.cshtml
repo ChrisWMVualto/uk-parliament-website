@@ -1,0 +1,87 @@
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@using UKP.Website.Service.Model
+@model UKP.Website.Models.Event.EventViewModel
+
+@{
+    ViewBag.Title = "Parliamentlive.tv";
+    ViewBag.Description = Model.VideoModel.Event.Title;
+}
+
+<div class="container main-container">
+
+    @Html.Hidden("eventId", Model.VideoModel.Event.Id)
+    @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
+    @Html.Hidden("StackPollingInterval", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING ? 10000 : 60000)
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+        </div>
+
+        <div class="col-md-12 page-title-bar">
+            <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))" class="row">
+                @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="videoContainer" class="video-container">
+                        @Html.Raw(Model.VideoModel.ScriptableEmbedCode)
+                    </div>
+
+                    <!--start: player tabs-->
+                    <!-- Nav tabs -->
+                    <div class="player-tabs">
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
+                                <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                            </ul>
+                            @if(Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
+                            {
+                                if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
+                                {
+                                    <button id="audioToggle" type="button" class="btn audio-toggle pull-right" data-toggle="button">audio only <i class="fa fa-player-volume fa-2x"></i></button>
+                                }
+                            }
+                        </div>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            @Html.Partial(MVC.Event.Views._Info, Model)
+                            @Html.Partial(MVC.Event.Views._Share, Model)
+                        </div>
+                    </div>
+                    <!--end: player tabs-->
+                </div>
+                <div class="col-md-5">
+                    @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
+                    {
+                        <div id="eventStackContainer" class="stack-and-logs" data-load-new-stack-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id))">
+                            @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
+                            <div class="stack-player">
+                                <div class="stack">
+                                    <ol>
+                                        @Html.Action(MVC.Event.StackAndLogs(Model.VideoModel.Event.Id))
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/Scripts/jquery.signalR-2.1.1.min.js")"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="@Url.Content("~/Content/js/event.js")"></script>
+    <script src="@Url.Content("~/Content/js/log-moments.js")"></script>
+    <script src="@Url.Content("~/Content/js/responsive-player.js")"></script>
+    <script src="@Url.Content("~/Content/js/jquery.post-message.updated.js")"></script>
+}
