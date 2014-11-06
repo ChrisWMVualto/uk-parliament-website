@@ -11263,6 +11263,12 @@ ol.channel-list li.event:hover > div {
 .channels li:nth-of-type(odd) {
     background-color: #35393a;
 }
+.channels li.commons {
+    background-color: #016131;
+}
+.channels li.lords {
+    background-color: #a1070f;
+}
 
 .time-nav,
 .date-nav {
