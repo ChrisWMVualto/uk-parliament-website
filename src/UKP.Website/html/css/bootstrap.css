@@ -11140,9 +11140,7 @@ ol.channel-list li .soft-ending {
   border-left: 1px dashed #000000;
 }
 ol.channel-list li .blank {
-  background-color: white;
-  background-image: url("../img/blank.png");
-  background-repeat: repeat;
+  background-color: #e6ebee;
 }
 ol.channel-list li .inner:after {
   right: 30px;
