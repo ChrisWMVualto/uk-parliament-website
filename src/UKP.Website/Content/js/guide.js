@@ -500,6 +500,7 @@ function floatingNav() {
         if ($(window).scrollTop() > 0) {
             epg.hide();
             timeline.hide();
+            $(infoPopup).hide();
             clearInterval(triggerFloatTimeoutId);
             triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
         }
@@ -539,7 +540,11 @@ function floatingNav() {
             'paddingTop': timeline.height()
         });
 
+        
+
         if (isActive) {
+            container.addClass(fixedClass);
+
             epg.css({
                 'position': 'absolute',
                 'top': datesOffset(freezeMenu())
@@ -547,11 +552,24 @@ function floatingNav() {
             timeline.css({
                 'top': timesOffset(freezeMenu())
             });
-            $(infoPopup).css({
-                'top': epgInfoOffset(freezeMenu())
-            });
-            container.addClass(fixedClass);
+
+
+            if ($('.epg-info').length) {
+                $('body:not(.breakpoint-300) .epg-info').css({
+                    'top': epgInfoOffset(freezeMenu())
+                });
+
+                $('body.breakpoint-300 .epg-info').css({
+                    'top': null,
+                });
+                $(infoPopup).show();
+                $('body.breakpoint-300 .epg-info').css({
+                    'height': $(window).height() - $('.epg-info').position().top
+                });
+            }
         } else {
+            container.removeClass(fixedClass);
+
             epg.css({
                 'position': 'relative',
                 'top': 0
@@ -559,13 +577,21 @@ function floatingNav() {
             timeline.css({
                 'top': 0
             });
-            $(infoPopup).css({
-                'top': timeline.height()
-            });
-            container.removeClass(fixedClass);
+
+            if ($('.epg-info').length) {
+                $('.epg-info').css({
+                    'top': null,
+                });
+
+                $(infoPopup).show();
+                $('body.breakpoint-300 .epg-info').css({
+                    'height': $(window).height() - $('.epg-info').position().top
+                });
+            }
         }
         epg.show();
         timeline.show();
+        
     }
 }
 
