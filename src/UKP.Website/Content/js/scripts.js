@@ -188,7 +188,8 @@ $(document).ready(function () {
     if ($(".date-picker").length) {
         $('.date-picker').datepicker({
             weekStart: 1,
-            autoclose: true
+            autoclose: true,
+            zIndex: 2000
         });
     }
 
