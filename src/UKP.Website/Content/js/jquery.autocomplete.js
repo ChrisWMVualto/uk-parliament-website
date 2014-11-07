@@ -749,13 +749,16 @@
 
         verifySuggestionsFormat: function (suggestions) {
             // If suggestions is string array, convert them to supported format:
-            if (suggestions.length && typeof suggestions[0] === 'string') {
-                return $.map(suggestions, function (value) {
-                    return { value: value, data: null };
-                });
+            try {
+                if (suggestions.length && typeof suggestions[0] === 'string') {
+                    return $.map(suggestions, function(value) {
+                        return { value: value, data: null };
+                    });
+                }
+            } catch (e) {
+            } finally {
+                return suggestions;
             }
-
-            return suggestions;
         },
 
         validateOrientation: function (orientation, fallback) {
@@ -786,6 +789,9 @@
             if (originalQuery !== that.getQuery(that.currentValue)) {
                 return;
             }
+
+            if (result.suggestions.constructor.toString().indexOf("Array") == -1)
+                result.suggestions = new Array(result.suggestions);
 
             that.suggestions = result.suggestions;
             that.suggest();
@@ -933,11 +939,16 @@
             s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
             s = s.replace(/^\./, '');           // strip a leading dot
             var a = s.split('.');
-            while (a.length) {
+            while (a.length > 0) {
                 var n = a.shift();
-                if (n in o) {
-                    o = o[n];
-                } else {
+
+                try {
+                    if (n in o) {
+                        o = o[n];
+                    } else {
+                        return;
+                    }
+                } catch (e) {
                     return;
                 }
             }
