@@ -76,10 +76,6 @@ ol.channel-list li::before {
 }
 
 @media (max-width: 768px) {
-    .channel-day-container {
-        margin-left: 36px;
-    }
-
     .alert-side-detail {
         width: 100%;
     }
