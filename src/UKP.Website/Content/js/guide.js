@@ -579,7 +579,7 @@ function floatingNav() {
 
             if ($('.epg-info').length) {
                 $('.epg-info').css({
-                    'top': null
+                    'top': $('.timeline').height()
                 });
                 $('body:not(.breakpoint-300) .epg-info').css({
                     'height': null
