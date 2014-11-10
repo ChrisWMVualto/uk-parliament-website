@@ -556,11 +556,12 @@ function floatingNav() {
 
             if ($('.epg-info').length) {
                 $('body:not(.breakpoint-300) .epg-info').css({
-                    'top': epgInfoOffset(freezeMenu())
+                    'top': epgInfoOffset(freezeMenu()),
+                    'height': null
                 });
 
                 $('body.breakpoint-300 .epg-info').css({
-                    'top': null,
+                    'top': null
                 });
                 $(infoPopup).show();
                 $('body.breakpoint-300 .epg-info').css({
@@ -580,7 +581,10 @@ function floatingNav() {
 
             if ($('.epg-info').length) {
                 $('.epg-info').css({
-                    'top': null,
+                    'top': null
+                });
+                $('body:not(.breakpoint-300) .epg-info').css({
+                    'height': null
                 });
 
                 $(infoPopup).show();
