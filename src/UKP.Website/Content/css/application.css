@@ -79,6 +79,10 @@ ol.channel-list li::before {
     .alert-side-detail {
         width: 100%;
     }
+
+    .channel-name {
+        display: none;
+    }
 }
 
 .alert-side-detail {
