@@ -507,7 +507,7 @@ function floatingNav() {
     });
 
     $(window).on('forcescroll', function() {
-        if ($(window).scrollTop() > 0) {
+        if ($(window).scrollTop() >= 0) {
             triggerFloat();
         }
     });
@@ -539,8 +539,6 @@ function floatingNav() {
         streamContainer.css({
             'paddingTop': timeline.height()
         });
-
-        
 
         if (isActive) {
             container.addClass(fixedClass);
