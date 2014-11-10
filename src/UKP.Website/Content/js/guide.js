@@ -565,7 +565,7 @@ function floatingNav() {
                 });
                 $(infoPopup).show();
                 $('body.breakpoint-300 .epg-info').css({
-                    'height': $(window).height() - $('.epg-info').position().top
+                    'height': window.screen.height - $('.epg-info').position().top
                 });
             }
         } else {
@@ -589,7 +589,7 @@ function floatingNav() {
 
                 $(infoPopup).show();
                 $('body.breakpoint-300 .epg-info').css({
-                    'height': $(window).height() - $('.epg-info').position().top
+                    'height': window.screen.height - $('.epg-info').position().top
                 });
             }
         }
