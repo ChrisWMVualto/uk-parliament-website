@@ -88,7 +88,7 @@ ol.channel-list li::before {
 .alert-side-detail {
     position: absolute;
     top: 0;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .breakpoint-300 .alert-side-detail {
@@ -97,7 +97,7 @@ ol.channel-list li::before {
     width: 290px;
     margin: 0 15px;
     height: 318px;
-    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 .breakpoint-300 .fixed-epg .alert-side-detail {
