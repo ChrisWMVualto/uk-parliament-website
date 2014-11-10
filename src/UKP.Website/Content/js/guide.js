@@ -475,7 +475,7 @@ function changeDateTab() {
         });
 
         $(document).one('click', '[data-hide]', function () {
-            $("." + $(this).data("hide")).fadeOut(100);
+            $("." + $(this).data("hide")).fadeOut(100).remove();
         });
     };
 }
