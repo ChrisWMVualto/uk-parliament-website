@@ -497,7 +497,7 @@ function floatingNav() {
 
 
     $(window).on('scroll', function () {
-        if ($(window).scrollTop() > 0) {
+        if ($(window).scrollTop() >= 0) {
             epg.hide();
             timeline.hide();
             $(infoPopup).hide();
