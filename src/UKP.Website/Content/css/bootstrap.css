@@ -11006,7 +11006,7 @@ div.select-home-tabs .fa-arrow-down {
   width: 2920px;
   margin-top: 0;
   margin-bottom: 0;
-  height: 100px;
+  height: 72px;
 }
 .stream-container-inner::-webkit-scrollbar {
   width: 0 !important;
@@ -11135,6 +11135,7 @@ ol.channel-list li .soft-ending {
 ol.channel-list li .description {
     overflow: hidden;
     padding: 5px 5px 0 5px;
+    line-height: 170%;
 }
 ol.channel-list li .info {
   background-color: #e6ebee;
@@ -11155,7 +11156,7 @@ ol.channel-list li .fa-stack {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-    margin-top: 33px;
+    margin-top: 22px;
 }
 ol.channel-list h4 {
   font-family: Verdana, Geneva, sans-serif;
@@ -11196,7 +11197,7 @@ ol.channel-list li.event:hover > div {
     margin: 0;
     padding: 0;
     width: 132px;
-    height: 100px;
+    height: 72px;
     list-style: none;
     background-position: center 69%;
     background-repeat: no-repeat;
@@ -11209,14 +11210,14 @@ ol.channel-list li.event:hover > div {
 }
 .channels li span.channel-number {
     position: absolute;
-    top: 74px;
+    top: 50px;
     left: 0;
     color: white;
     width: 100%;
 }
 .channels li span.channel-name {
     position: absolute;
-    top: 15px;
+    top: 3px;
     left: 0;
     color: white;
     width: 122px;
@@ -11577,7 +11578,7 @@ dl.description dt {
 }
 .shadow-right {
   width: 6px;
-  height: 1502.stream-container-outerpx;
+  height: 1502px;
   background-image: url("../img/shadow-right.png");
   position: absolute;
   right: 0;
