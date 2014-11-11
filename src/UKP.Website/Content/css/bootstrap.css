@@ -11134,7 +11134,7 @@ ol.channel-list li .soft-ending {
 }
 ol.channel-list li .description {
     overflow: hidden;
-    padding: 5px 0 0 5px;
+    padding: 5px 5px 0 5px;
 }
 ol.channel-list li .info {
   background-color: #e6ebee;
