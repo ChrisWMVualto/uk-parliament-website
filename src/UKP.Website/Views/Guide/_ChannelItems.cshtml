@@ -7,7 +7,7 @@
             <div class="outer" style="width: @item.TemplateWidth()">
                 <div class="inner">
                     <div class="description">
-                        <h4>@item.EventData.Title</h4>
+                        <h4><a href="@Url.Action(MVC.Event.Index(@item.EventData.Id))" class="event">@item.EventData.Title</a></h4>
                         <p>
                             @item.EventData.Room <br />
                             @item.EventData.Room

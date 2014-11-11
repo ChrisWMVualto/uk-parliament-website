@@ -105,6 +105,11 @@ ol.channel-list li::before {
     height: 394px;
 }
 
+a.event:hover {
+    text-decoration: none;
+    color: #35393a;
+}
+
 /* Search */
 
 .multiselect.dropdown-toggle {
