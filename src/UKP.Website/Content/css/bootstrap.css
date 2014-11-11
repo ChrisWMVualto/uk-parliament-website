@@ -11204,22 +11204,21 @@ ol.channel-list li.event:hover > div {
     font-size: 110%;
     font-family: 'karlaregular', arial, sans-serif;
     text-align: center;
-    background-color: #eff2f4;
+    background-color: #d7dfe4;
     position: relative;
-    background-image: url("../img/channel-bg.png");
+    background-image: url("../img/channel-bg-alt.png");
+    color: black;
 }
 .channels li span.channel-number {
     position: absolute;
     top: 50px;
     left: 0;
-    color: black;
     width: 100%;
 }
 .channels li span.channel-name {
     position: absolute;
     top: 3px;
     left: 0;
-    color: black;
     width: 122px;
     margin: 8px 5px;
     height: 31px;
@@ -11229,7 +11228,9 @@ ol.channel-list li.event:hover > div {
     line-height: 100%;
 }
 .channels li:nth-of-type(odd) {
-    background-color: #d7dfe4;
+    background-color: #292c2d;
+    background-image: url("../img/channel-bg.png");
+    color: white;
 }
 
 .time-nav,
