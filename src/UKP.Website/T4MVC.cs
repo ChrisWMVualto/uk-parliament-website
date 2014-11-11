@@ -348,7 +348,7 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string bootstrap_checkbox_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-checkbox.min.js") ? Url("bootstrap-checkbox.min.js") : Url("bootstrap-checkbox.js");
-                public static readonly string bootstrap_datepicker_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.mod.min.js") ? Url("bootstrap-datepicker.mod.min.js") : Url("bootstrap-datepicker.mod.js");
+                public static readonly string bootstrap_datepicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-datepicker.min.js") ? Url("bootstrap-datepicker.min.js") : Url("bootstrap-datepicker.js");
                 public static readonly string bootstrap_multiselect_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-multiselect.min.js") ? Url("bootstrap-multiselect.min.js") : Url("bootstrap-multiselect.js");
                 public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
                 public static readonly string bootstrap_timepicker_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker-mod.min.js") ? Url("bootstrap-timepicker-mod.min.js") : Url("bootstrap-timepicker-mod.js");
