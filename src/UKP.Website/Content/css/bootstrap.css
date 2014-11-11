@@ -11102,6 +11102,7 @@ ol.channel-list {
 }
 ol.channel-list li {
   width: 120px;
+    min-width: 87px;
   height: 100%;
   white-space: nowrap;
   display: block;
@@ -11111,6 +11112,7 @@ ol.channel-list li {
 }
 ol.channel-list li .outer {
   width: 120px;
+  min-width: 87px;
   position: absolute;
   height: 100%;
   -webkit-transition: all 0.5s ease;
@@ -11118,13 +11120,13 @@ ol.channel-list li .outer {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
   border-left: 1px solid #000000;
-  border-right: 1px solid #000000;
+  border-right: 15px solid #e6ebee;
   overflow: hidden;
 }
 ol.channel-list li .inner {
   background-color: white;
   height: 100%;
-  padding: 0;
+  padding: 0 0 0 44px;
   position: relative;
 }
 ol.channel-list li .soft-ending {
@@ -11132,19 +11134,16 @@ ol.channel-list li .soft-ending {
 }
 ol.channel-list li .description {
     overflow: hidden;
-    /*height: 100%;*/
-    display: inline-block;
-    float: left;
     padding: 5px 0 0 5px;
 }
-ol.channel-list li .watch {
-    width: 35px;
-    float: left;
-    clear: left;
-}
 ol.channel-list li .info {
-    width: 35px;
-    float: left;
+  background-color: #e6ebee;
+  width: 44px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 2px;
+  z-index: 1;
 }
 ol.channel-list li .info .fa-circle {
   opacity: .5;
@@ -11156,6 +11155,7 @@ ol.channel-list li .fa-stack {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+    margin-top: 33px;
 }
 ol.channel-list h4 {
   font-family: Verdana, Geneva, sans-serif;
@@ -11441,8 +11441,9 @@ ol.channel-list li.event:hover > div {
 .alert-side-detail .btn-play .fa-stack .fa-circle {
   color: #292c2d;
 }
-.alert-side-detail .btn-play .fa-stack .fa-arrow-right-thick {
+.alert-side-detail .btn-play .fa-stack .fa-play {
   color: white;
+  font-size: 88%;
 }
 .alert-side-detail button.close {
   opacity: 1;

@@ -6,6 +6,12 @@
         <li style="width: @item.TemplateWidth(); left: @item.TemplateLeftPosition()" data-id="@item.EventData.Id" data-epg-info="@Url.Action(MVC.Guide.EpgInfo(item.EventData.Id))" @if (@item.SmallItem()) {@Html.Raw("class=\"event\"")}>
             <div class="outer" style="width: @item.TemplateWidth()">
                 <div class="inner">
+                    <a href="#" class="info">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
                     <div class="description">
                         <h4><a href="@Url.Action(MVC.Event.Index(@item.EventData.Id))" class="event">@item.EventData.Title</a></h4>
                         <p>
@@ -13,12 +19,6 @@
                             @item.EventData.Room
                         </p>
                     </div>
-                    <a href="#" class="info">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-info fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
                 </div>
             </div>
         </li>

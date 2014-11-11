@@ -1952,7 +1952,8 @@ ol.channel-list{
     padding-top: 14px;
 li{
   width: 120px;  //inline width
-  height: 85px;
+  min-width: 87px;
+  height: 100%;
   white-space: nowrap;
   display: block;
   overflow: hidden;
@@ -1960,16 +1961,18 @@ li{
   position: relative;
   .outer{
     width: 120px; //inline width
+    min-width: 87px;
     position: absolute;
     height: 100%;
     .transition-fade;
     border-left: 1px solid @brand-primary;
+    border-right: 15px solid #e6ebee;
     overflow: hidden;
   }
     .inner{
       background-color: white;
       height: 100%;
-      padding: 0;
+      padding: 0 0 0 44px;
       position: relative;
   }
   .soft-ending{
@@ -1977,27 +1980,24 @@ li{
   }
   .description{
     overflow: hidden;
-    height: 100%;
-    display: inline-block;
-    float: left;
     padding: 5px 0 0 5px;
   }
-  .watch{
-    width: 35px;
-    float: left;
-    margin-left: 10px;
-  }
   .info{
-    width: 35px;
-    float: left;
+    width: 44px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 2px;
+    z-index: 1;
 
     .fa-circle{
       opacity: .5;
-      color: @brand-tertiary;
+      color: #e6ebee;
     }
   }
   .fa-stack{
     margin-left: 5px;
+    margin-top: 33px;
     .transition-fade;
   }
 
@@ -2314,8 +2314,9 @@ border-radius: 2px;
 .fa-circle{
       color: @brand-tertiary;
 }
-.fa-arrow-right-thick{
+.fa-play{
 color: white;
+font-size: 88%;
 }
   }
   }
