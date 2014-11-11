@@ -11185,7 +11185,7 @@ ol.channel-list li.event:hover > div {
 .channels {
   z-index: 40;
   position: absolute;
-  height: 1400px;
+  height: 1440px;
   top: 45px;
   left: 0px;
   margin: 0;
@@ -11578,7 +11578,7 @@ dl.description dt {
 }
 .shadow-right {
   width: 6px;
-  height: 1502px;
+  height: 1540p;
   background-image: url("../img/shadow-right.png");
   position: absolute;
   right: 0;
