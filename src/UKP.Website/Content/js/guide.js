@@ -348,6 +348,7 @@ function changeDateTab() {
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
                 $(selectors.days).on('click', dayClicked);
+                selectors.streamContainer.on('scroll', scrollHandler);
             }
         });
     }
