@@ -342,7 +342,9 @@ function changeDateTab() {
                     $(selectors.daysContainer).append(data);
                     $(selectors.days).first().remove();
                 }
-
+            },
+            complete: function () {
+                window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
                 $(selectors.days).on('click', dayClicked);
@@ -365,7 +367,9 @@ function changeDateTab() {
                 $(selectors.daysContainer).append($('li', data));
                 $(selectors.days).eq(1).addClass(settings.activeClassString);
                 liveline();
-
+            },
+            complete: function () {
+                window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
                 $(selectors.days).on('click', dayClicked);
@@ -440,6 +444,9 @@ function changeDateTab() {
                 state.init = false;
 
                 liveline();
+            },
+            complete: function () {
+                window.console && console.log('Rebinding event handlers');
                 selectors.streamContainer.on('scroll', scrollHandler);
                 $(selectors.epgInfoLink).on('click', showEpgInfo);
             }
@@ -503,12 +510,20 @@ function floatingNav() {
             $(infoPopup).hide();
             clearInterval(triggerFloatTimeoutId);
             triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
+        } else {
+            epg.show();
+            timeline.show();
+            $(infoPopup).show();
         }
     });
 
     $(window).on('forcescroll', function() {
         if ($(window).scrollTop() >= 5) {
             triggerFloat();
+        } else {
+            epg.show();
+            timeline.show();
+            $(infoPopup).show();
         }
     });
 
