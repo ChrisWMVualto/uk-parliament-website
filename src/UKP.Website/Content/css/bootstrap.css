@@ -11228,9 +11228,9 @@ ol.channel-list li.event:hover > div {
     line-height: 100%;
 }
 .channels li:nth-of-type(odd) {
-    background-color: #292c2d;
-    background-image: url("../img/channel-bg.png");
-    color: white;
+    background-color: #eff2f4;
+    /*background-image: url("../img/channel-bg.png");
+    color: white;*/
 }
 
 .time-nav,
