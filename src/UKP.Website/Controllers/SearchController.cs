@@ -37,6 +37,9 @@ namespace UKP.Website.Controllers
                 toDate = DateTime.Today;
             }
 
+            if (fromDate > toDate)
+                ModelState.AddModelError("end", "End date cannot occur before the start date");
+
             var firstSearchLoad = string.IsNullOrWhiteSpace(start);
             var searchModel = new SearchViewModel()
                               {
