@@ -18,6 +18,10 @@
 
 /* EPG */
 
+.stream-container-inner {
+    -webkit-overflow-scrolling: none;
+}
+
 .stream-container-inner ol.channel-list {
     width: 2880px;
 }

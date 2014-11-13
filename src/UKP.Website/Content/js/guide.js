@@ -174,10 +174,9 @@ function changeDateTab() {
 
     var state = {
         leftTab: true,
-        rightTab: false,
+        rightTab: true,
         init: true
     };
-
 
     ///
     /// Scrolling Behavior
@@ -188,37 +187,46 @@ function changeDateTab() {
     }
 
     selectors.streamContainer.on('scroll', scrollHandler);
-    function scrollHandler() {
+    function scrollHandler(e) {
+        e.preventDefault();
+        //e.preventBubble();
+
         var leftPosition = $(this).scrollLeft();
         var upperLimit = daysLoaded() > 1 ? settings.singleUpperLimit * 2 : settings.singleUpperLimit;
         var centerLimit = daysLoaded() > 1 ? settings.centerLimit : null;
 
-        if (leftPosition >= upperLimit) {
+        if (leftPosition < 0)
+            return;
+
+        window.console && console.log('Left position of ' + leftPosition + ' is being compared to a upper limit of ' + upperLimit + ' and a lower limit of ' + settings.lowerLimit);
+
+        if (leftPosition >= upperLimit && state.rightTab) {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
-            selectors.streamContainer.off('scroll', scrollHandler);
             $(selectors.days).eq(activeTabIndex() + 1).trigger('scrollnext', true);
             settings.centerThreshold = settings.centerThresholdBase;
         }
 
-        if (leftPosition <= settings.lowerLimit) {
+        if (leftPosition <= settings.lowerLimit && state.leftTab) {
             window.console && console.log('Currently active tab: ' + activeTabIndex());
 
             if (activeTabIndex() > 0) {
-                selectors.streamContainer.off('scroll', scrollHandler);
-                var tab = $(selectors.days).eq(activeTabIndex() - 1);
-
-                tab.trigger('scrollnext', false);
+                $(selectors.days).eq(activeTabIndex() - 1).trigger('scrollnext', false);
+                settings.centerThreshold = settings.centerThresholdBase;
             }
         }
 
         if (centerLimit != null) {
-            if (leftPosition < centerLimit && !state.leftTab)
+            if (leftPosition < centerLimit && state.rightTab)
                 devanceTab();
 
-            if (leftPosition > centerLimit && !state.rightTab)
+            if (leftPosition > centerLimit && state.leftTab)
                 advanceTab();
         }
+    }
+
+    function disableTouch(e) {
+        e.preventDefault();
     }
 
     $(selectors.days).on('scrollnext', scrollnext);
@@ -342,13 +350,17 @@ function changeDateTab() {
                     $(selectors.daysContainer).append(data);
                     $(selectors.days).first().remove();
                 }
-            },
-            complete: function () {
+
                 window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
                 $(selectors.days).on('click', dayClicked);
-                selectors.streamContainer.on('scroll', scrollHandler);
+            },
+            error: function () {
+                window.console && console.log('Rebinding event handlers');
+                $(selectors.days).on('scrollnext', scrollnext);
+                $(selectors.days).on('activate', activateTab);
+                $(selectors.days).on('click', dayClicked);
             }
         });
     }
@@ -368,8 +380,13 @@ function changeDateTab() {
                 $(selectors.daysContainer).append($('li', data));
                 $(selectors.days).eq(1).addClass(settings.activeClassString);
                 liveline();
+
+                window.console && console.log('Rebinding event handlers');
+                $(selectors.days).on('scrollnext', scrollnext);
+                $(selectors.days).on('activate', activateTab);
+                $(selectors.days).on('click', dayClicked);
             },
-            complete: function () {
+            error: function () {
                 window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
@@ -420,17 +437,6 @@ function changeDateTab() {
                 selectors.channelDayContainer.width(settings.baseWidth * daysLoaded());
                 selectors.timeline.width((settings.baseWidth * daysLoaded()) + 40);
 
-
-                if (opts.resetScroll)
-                    selectors.streamContainer.scrollLeft(0);
-                else if (opts.removePast && opts.append)
-                    selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() - settings.baseWidth);
-                else if (opts.removePast || (!opts.append && !opts.removePast))
-                    selectors.streamContainer.scrollLeft(selectors.streamContainer.scrollLeft() + settings.baseWidth);
-                else if (!state.init)
-                    selectors.streamContainer.scrollLeft(settings.baseWidth);
-
-
                 if ((opts.append && opts.removePast) || opts.clear) {
                     state.leftTab = true;
                     state.rightTab = false;
@@ -445,11 +451,36 @@ function changeDateTab() {
                 state.init = false;
 
                 liveline();
+
+                $(document).on('touchstart', disableTouch);
+                var scrollAmount;
+                if (opts.resetScroll)
+                    scrollAmount = 0;
+                else if (opts.removePast && opts.append)
+                    scrollAmount = selectors.streamContainer.scrollLeft() - settings.baseWidth;
+                else if (opts.removePast || (!opts.append && !opts.removePast))
+                    scrollAmount = selectors.streamContainer.scrollLeft() + settings.baseWidth;
+                else if (!state.init)
+                    scrollAmount = settings.baseWidth;
+                window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
+
+                $('.stream-container-inner').trigger('setscroll', scrollAmount);
+
+                window.setTimeout(function () {
+                    document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
+                    window.console && console.log('scrollLeft() value is now ' + $('.stream-container-inner').scrollLeft());
+                    $(document).off('touchstart', disableTouch);
+
+                    window.console && console.log('Rebinding event handlers');
+                    selectors.streamContainer.on('scroll', scrollHandler);
+                    $(selectors.epgInfoLink).on('click', showEpgInfo);
+                }, 1000);
             },
-            complete: function () {
+            error: function () {
                 window.console && console.log('Rebinding event handlers');
                 selectors.streamContainer.on('scroll', scrollHandler);
                 $(selectors.epgInfoLink).on('click', showEpgInfo);
+                $(document).off('touchstart', disableTouch);
             }
         });
     }
