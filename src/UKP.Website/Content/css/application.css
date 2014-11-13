@@ -123,12 +123,12 @@ a.event:hover {
 
 .multiselect-container > li.active > a {
     background-image:none;
-    background-color: #085196;
+    background-color: #292c2d;
 }
 
 .multiselect-container > li.active > a:hover {
     background-image:none;
-    background-color: #05325c;
+    background-color: #292c2d;
 }
 
 .multiselect-container li a label.checkbox input[type=checkbox], .multiselect-container li a label.radio input[type=radio] {
