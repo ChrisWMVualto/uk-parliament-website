@@ -111,7 +111,7 @@ ol.channel-list li::before {
 
 a.event:hover {
     text-decoration: none;
-    color: #d7dfe4;
+    color: #777;
 }
 
 /* Search */
