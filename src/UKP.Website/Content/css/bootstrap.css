@@ -11480,9 +11480,8 @@ ol.channel-list li.event:hover > div {
   padding: 0;
 }
 .stack ol li {
-  color: white!important;
   position: relative;
-  background-color: #292c2d;
+  background-color: #eff2f4;
   margin: 0 0 5px 0;
   padding: 0;
   list-style: none;
@@ -11496,13 +11495,11 @@ ol.channel-list li.event:hover > div {
   left: 0;
 }
 .stack ol li .stack-item {
-  color: white;
   line-height: 18px;
   padding: 10px;
   margin: 0 0 0 50px;
 }
 .stack ol li .stack-item a {
-  color: white;
   display: block;
 }
 .stack ol li .stack-item h4 {
@@ -11546,6 +11543,10 @@ ol.channel-list li.event:hover > div {
   border: 0;
   width: 44px;
   height: 44px;
+    color: black;
+}
+.stack ol li .btn-moment-expand:hover {
+    color: black;
 }
 .stack ol li.active {
   background-color: #292c2d;
