@@ -15,7 +15,7 @@
                     <a href="@Url.Action(MVC.Event.Index(Model.ElementAt(i).Id))">
                         <div class="carousel-light-bg col-xs-8 col-sm-6 col-md-4">
                             <div class="carousel-caption-inner">
-                                <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToLocalTime().ToString(ApplicationConstants.DateFormat, ApplicationConstants.DateTimeFormatter)</h3>
+                                <h3 class="text-uppercase">@Model.ElementAt(i).ScheduledStartTime.ToLocalTime().ToString(ApplicationConstants.YearDateTimeWithoutMeridiemFormat, ApplicationConstants.DateTimeFormatter)<span class="merdiem">@Model.ElementAt(i).ScheduledStartTime.ToLocalTime().ToString(ApplicationConstants.MerdiemFormat, ApplicationConstants.DateTimeFormatter)</span></h3>
                                 <p>@Model.ElementAt(i).Title</p>
                                 
                                 @if (Model.ElementAt(i).HomeFilters.Live)
