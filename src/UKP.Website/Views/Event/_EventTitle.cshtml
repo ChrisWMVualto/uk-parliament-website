@@ -7,18 +7,18 @@
     <h4>
         @if(Model.Event.States.PlayerState == PlayerEventState.PRELIVE)
         {
-            <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting starts at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</span>
+            <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting starts at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</span>
         }
         else
         {
             if(Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
             {
                 <span>
-                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")
+                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)
 
                     @if(Model.Event.ActualEndTime.HasValue)
                     {
-                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt")</text>
+                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</text>
 
                     }
                 </span>
@@ -26,11 +26,11 @@
             else
             {
                 <span>
-                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")
+                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)
 
                     @if(Model.Event.ActualEndTime.HasValue)
                     {
-                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat)</text>
+                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat, ApplicationConstants.DateTimeFormatter)</text>
 
                     }
                 </span>
