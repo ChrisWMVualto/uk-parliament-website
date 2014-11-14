@@ -105,6 +105,7 @@ ol.channel-list li::before {
     position: absolute;
     top: 0;
     overflow-x: hidden;
+    z-index: 60;
 }
 
 .breakpoint-300 .alert-side-detail {
