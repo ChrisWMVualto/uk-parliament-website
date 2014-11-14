@@ -162,3 +162,7 @@ button.multiselect {
     background: #CBCBCB;
     color: #000000;
 }
+
+.merdiem {
+    text-transform: lowercase;
+}
