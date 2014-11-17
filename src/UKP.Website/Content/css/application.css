@@ -170,6 +170,11 @@ button.multiselect {
     text-transform: lowercase;
 }
 
+/* Global Links */
+a, a:link, a:hover, a:visited, a:active {
+    outline: none;
+}
+
 /* Home Archives */
 
 .slick-list {
