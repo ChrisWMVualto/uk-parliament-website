@@ -164,6 +164,17 @@ button.multiselect {
     color: #000000;
 }
 
+/* Global dates */
+
 .merdiem {
     text-transform: lowercase;
+}
+
+/* Home Archives */
+
+.slick-list {
+    overflow: hidden;
+    width: 1140px;
+    left: -280px;
+    padding: 0 280px;
 }
