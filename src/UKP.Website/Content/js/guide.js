@@ -405,7 +405,7 @@ function changeDateTab() {
                 $(selectors.timeline).width((settings.baseWidth * numDaysLoaded) + 40);
                 window.console && console.log('Set channel day container width ' + (settings.baseWidth * numDaysLoaded));
 
-                if ((opts.append && opts.removePast) || opts.clear) {
+                if ((opts.append && opts.removePast) || opts.clear || (opts.append && !opts.removePast)) {
                     state.leftTab = true;
                     state.rightTab = false;
                 } else if (opts.removePast || (!opts.append && !opts.removePast)) {
