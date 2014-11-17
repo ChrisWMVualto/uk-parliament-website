@@ -159,8 +159,8 @@ function changeDateTab() {
 
         baseWidth: 2880,
         limits: {
-            singleUpper: 1910,
-            lower: 150,
+            upper: 1910,
+            lower: 250,
             center: 2880
         }
     }
@@ -175,36 +175,27 @@ function changeDateTab() {
     /// Scrolling Behavior
     ///
 
-    function daysLoaded() {
-        return $(selectors.channelDayContainer).children().length;
-    }
-
     $(selectors.streamContainer).on('scroll', scrollHandler);
     function scrollHandler(e) {
         e.preventDefault();
 
+        var numDaysLoaded = $(selectors.channelDayContainer).children().length;
         var leftPosition = $(this).scrollLeft();
-        var upperLimit = daysLoaded() > 1 ? settings.limits.singleUpper * 2 : settings.limits.singleUpper;
-        var centerLimit = daysLoaded() > 1 ? settings.limits.center : null;
+        var upperLimit = numDaysLoaded > 1 ? settings.limits.upper * 2 : settings.limits.upper;
+        var centerLimit = numDaysLoaded > 1 ? settings.limits.center : null;
+
 
         if (leftPosition < 0)
             return;
 
+
         window.console && console.log('Left position of ' + leftPosition + ' is being compared to a upper limit of ' + upperLimit + ' and a lower limit of ' + settings.limits.lower);
 
-        if (leftPosition >= upperLimit && state.rightTab) {
-            window.console && console.log('Currently active tab: ' + activeTabIndex());
-
+        if (leftPosition >= upperLimit && state.rightTab)
             $(selectors.days).eq(activeTabIndex() + 1).trigger('scrollnext', true);
-        }
 
-        if (leftPosition <= settings.limits.lower && state.leftTab) {
-            window.console && console.log('Currently active tab: ' + activeTabIndex());
-
-            if (activeTabIndex() > 0) {
-                $(selectors.days).eq(activeTabIndex() - 1).trigger('scrollnext', false);
-            }
-        }
+        if ((leftPosition <= settings.limits.lower && state.leftTab) && activeTabIndex() > 0)
+            $(selectors.days).eq(activeTabIndex() - 1).trigger('scrollnext', false);
 
         if (centerLimit != null) {
             if (leftPosition < centerLimit && state.rightTab)
@@ -284,11 +275,7 @@ function changeDateTab() {
     $(selectors.days).eq(1).addClass(settings.activeClass).addClass(settings.todayClass);
 
     function activeTabIndex() {
-        return tabIndex($(selectors.days + ' .' + settings.activeClass));
-    }
-
-    function tabIndex(tab) {
-        return $(selectors.days).index(tab);
+        return $(selectors.days).index($(selectors.days + ('.' + settings.activeClass)));
     }
 
     $(selectors.days).on('activate', activateTab);
@@ -332,7 +319,7 @@ function changeDateTab() {
         window.console && console.log('Loading new day tab: ' + url);
 
         $.ajax(url, {
-            success: function (data) {
+            success: function(data) {
                 if (previousDay) {
                     $(selectors.daysContainer).prepend(data);
                     $(selectors.days).last().remove();
@@ -340,13 +327,8 @@ function changeDateTab() {
                     $(selectors.daysContainer).append(data);
                     $(selectors.days).first().remove();
                 }
-
-                window.console && console.log('Rebinding event handlers');
-                $(selectors.days).on('scrollnext', scrollnext);
-                $(selectors.days).on('activate', activateTab);
-                $(selectors.days).on('click', dayClicked);
             },
-            error: function () {
+            complete: function () {
                 window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
@@ -370,13 +352,8 @@ function changeDateTab() {
                 $(selectors.daysContainer).append($('li', data));
                 $(selectors.days).eq(1).addClass(settings.activeClass);
                 liveline();
-
-                window.console && console.log('Rebinding event handlers');
-                $(selectors.days).on('scrollnext', scrollnext);
-                $(selectors.days).on('activate', activateTab);
-                $(selectors.days).on('click', dayClicked);
             },
-            error: function () {
+            complete: function () {
                 window.console && console.log('Rebinding event handlers');
                 $(selectors.days).on('scrollnext', scrollnext);
                 $(selectors.days).on('activate', activateTab);
@@ -423,9 +400,10 @@ function changeDateTab() {
                     $(selectors.channelDayContainer).prepend(data);
 
 
-                window.console && console.log('Setting channel day container width ' + (settings.baseWidth * daysLoaded()));
-                $(selectors.channelDayContainer).width(settings.baseWidth * daysLoaded());
-                $(selectors.timeline).width((settings.baseWidth * daysLoaded()) + 40);
+                var numDaysLoaded = $(selectors.channelDayContainer).children().length;
+                $(selectors.channelDayContainer).width(settings.baseWidth * numDaysLoaded);
+                $(selectors.timeline).width((settings.baseWidth * numDaysLoaded) + 40);
+                window.console && console.log('Set channel day container width ' + (settings.baseWidth * numDaysLoaded));
 
                 if ((opts.append && opts.removePast) || opts.clear) {
                     state.leftTab = true;
@@ -448,6 +426,8 @@ function changeDateTab() {
                     scrollAmount = 0;
                 else if (opts.removePast && opts.append)
                     scrollAmount = $(selectors.streamContainer).scrollLeft() - settings.baseWidth;
+                else if (opts.append && !opts.removePast)
+                    scrollAmount = $(selectors.streamContainer).scrollLeft();
                 else if (opts.removePast || (!opts.append && !opts.removePast))
                     scrollAmount = $(selectors.streamContainer).scrollLeft() + settings.baseWidth;
                 else if (!state.init)
@@ -459,18 +439,13 @@ function changeDateTab() {
                 window.setTimeout(function () {
                     document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
                     window.console && console.log('scrollLeft() value is now ' + $('.stream-container-inner').scrollLeft());
-                    $(document).off('touchstart', disableTouch);
-
-                    window.console && console.log('Rebinding event handlers');
-                    $(selectors.streamContainer).on('scroll', scrollHandler);
-                    $(selectors.epgInfoLink).on('click', showEpgInfo);
-                }, 1000);
+                }, 100);
+                $(document).off('touchstart', disableTouch);
             },
-            error: function () {
+            complete: function () {
                 window.console && console.log('Rebinding event handlers');
                 $(selectors.streamContainer).on('scroll', scrollHandler);
                 $(selectors.epgInfoLink).on('click', showEpgInfo);
-                $(document).off('touchstart', disableTouch);
             }
         });
     }
@@ -478,7 +453,7 @@ function changeDateTab() {
     function liveline() {
         window.console && console.log('Checking live line status');
 
-        if ($(selectors.channelDayContainer).children().first().data('day') == $(selectors.days).find('.' + settings.todayClass).data('day'))
+        if ($(selectors.days + '.' + settings.activeClass + '.' + settings.todayClass).length)
             $(selectors.liveline).show();
 
         else
