@@ -258,7 +258,9 @@ $(document).ready(function () {
             arrows: false,
             centerPadding: '0',
             slidesToShow: 1,
-            onAfterChange: updateArrowText
+            onAfterChange: updateArrowText,
+            vertical: false,
+            useCSS: false
         });
 
 
