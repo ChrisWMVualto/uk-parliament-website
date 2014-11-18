@@ -59,13 +59,6 @@ $(document).ready(function () {
         floatingNav();
 
 
-
-    ////////////////////////////////////////////
-    //breakpoints
-    ////////////////////////////////////////////
-    enableClickDrag();
-
-
     ////////////////////////////////////////////
     //EPG Time Scroll
     ////////////////////////////////////////////
@@ -130,11 +123,11 @@ function leftPositionFromTime(hour, minute) {
 ////////////////////////////////////////////
 //Enables EPG click + drag
 ////////////////////////////////////////////
-function enableClickDrag() {
-    $('.stream-container-inner').dragscrollable({
+/*function enableClickDrag() {
+    return $('.stream-container-inner').dragscrollable({
         dragSelector: '*'
     });
-}
+}*/
 
 ////////////////////////////////////////////
 //Change the highlighted date tab
@@ -174,6 +167,10 @@ function changeDateTab() {
     ///
     /// Scrolling Behavior
     ///
+
+    var dragger = $('.stream-container-inner').dragscrollable({
+        dragSelector: '*'
+    });
 
     $(selectors.streamContainer).on('scroll', scrollHandler);
     function scrollHandler(e) {
@@ -378,6 +375,7 @@ function changeDateTab() {
         }, options);
 
         $(selectors.streamContainer).off('scroll', scrollHandler);
+        dragger.stop();
 
         $.ajax(opts.dayUrl, {
             success: function (data) {
@@ -422,25 +420,28 @@ function changeDateTab() {
 
                 $(document).on('touchstart', disableTouch);
                 var scrollAmount;
+
                 if (opts.resetScroll)
                     scrollAmount = 0;
+
                 else if (opts.removePast && opts.append)
                     scrollAmount = $(selectors.streamContainer).scrollLeft() - settings.baseWidth;
-                else if (opts.append && !opts.removePast)
-                    scrollAmount = $(selectors.streamContainer).scrollLeft();
-                else if (opts.removePast || (!opts.append && !opts.removePast))
+
+                else if ((opts.removePast && !opts.append) || (!opts.append && !opts.removePast))
                     scrollAmount = $(selectors.streamContainer).scrollLeft() + settings.baseWidth;
-                else if (!state.init)
-                    scrollAmount = settings.baseWidth;
+
+                else
+                    scrollAmount = $(selectors.streamContainer).scrollLeft();
+
                 window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
 
                 $('.stream-container-inner').trigger('setscroll', scrollAmount);
 
                 window.setTimeout(function () {
                     document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
-                    window.console && console.log('scrollLeft() value is now ' + $('.stream-container-inner').scrollLeft());
                 }, 100);
                 $(document).off('touchstart', disableTouch);
+                dragger.start();
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');

@@ -353,7 +353,7 @@ namespace Links
                 public static readonly string bootstrap_select_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-select.min.js") ? Url("bootstrap-select.min.js") : Url("bootstrap-select.js");
                 public static readonly string bootstrap_timepicker_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/bootstrap-timepicker-mod.min.js") ? Url("bootstrap-timepicker-mod.min.js") : Url("bootstrap-timepicker-mod.js");
                 public static readonly string breakpoints_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/breakpoints.min.js") ? Url("breakpoints.min.js") : Url("breakpoints.js");
-                public static readonly string dragscrollable_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dragscrollable.min.js") ? Url("dragscrollable.min.js") : Url("dragscrollable.js");
+                public static readonly string dragscrollable_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dragscrollable.mod.min.js") ? Url("dragscrollable.mod.min.js") : Url("dragscrollable.mod.js");
                 public static readonly string jquery_1_10_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.1.min.js") ? Url("jquery-1.10.1.min.js") : Url("jquery-1.10.1.js");
                 public static readonly string jquery_1_10_1_min_js = Url("jquery-1.10.1.min.js");
                 public static readonly string jQuery_Mobile_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jQuery-Mobile.min.js") ? Url("jQuery-Mobile.min.js") : Url("jQuery-Mobile.js");
