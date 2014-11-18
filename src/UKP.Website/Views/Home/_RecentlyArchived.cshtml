@@ -1,4 +1,6 @@
-﻿@using RestSharp.Extensions
+﻿@using System.Globalization
+@using RestSharp.Extensions
+@using UKP.Website.Application
 @model UKP.Website.Service.Model.VideoCollectionModel
 
 @if(Model.Results.Any())
@@ -13,11 +15,11 @@
             </div>
         </div>
         <div class="archived-wrapper">
-            <a href="#" id="recentNextCommons" class="recent-next visible-lg">
+            <a href="#" id="recentNextCommons" class="recent-next">
                 <div class="inner">
                     <p>
                         @{
-    var elementAtOrDefault = Model.Results.ElementAtOrDefault(1);
+                            var elementAtOrDefault = Model.Results.ElementAtOrDefault(1);
                         }
                         @if(elementAtOrDefault != null)
                         {
@@ -26,7 +28,8 @@
                     </p>
                     <i class="fa fa-arrow-scroll-right"></i>
                 </div>
-            </a> <a href="#" id="recentPrevCommons" class="recent-prev visible-lg">
+            </a>
+            <a href="#" id="recentPrevCommons" class="recent-prev">
                 <div class="inner">
                     <p>@Model.Results.Last().Event.Title</p>
                     <i class="fa fa-arrow-scroll-left"></i>
@@ -54,7 +57,7 @@
                                         <div class="overlay">
                                             <div class="overlay-inner">
                                                 <span class="small-play fa-stack fa-lg hidden-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span> <span class="vr-recently-archived"></span>
-                                                <h5>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("dddd") <span>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy")</span> @Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt")</h5>
+                                                <h5>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> @Model.Results.ElementAt(i).Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</h5>
                                                 <p>@Model.Results.ElementAt(i).Event.Title</p>
                                                 <span class="count">@(i + 1) of @Model.Results.Count()</span>
                                             </div>

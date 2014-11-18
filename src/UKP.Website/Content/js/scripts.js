@@ -188,7 +188,8 @@ $(document).ready(function () {
     if ($(".date-picker").length) {
         $('.date-picker').datepicker({
             weekStart: 1,
-            autoclose: true
+            autoclose: true,
+            zIndex: 2000
         });
     }
 
@@ -257,7 +258,9 @@ $(document).ready(function () {
             arrows: false,
             centerPadding: '0',
             slidesToShow: 1,
-            onAfterChange: updateArrowText
+            onAfterChange: updateArrowText,
+            vertical: false,
+            useCSS: false
         });
 
 
