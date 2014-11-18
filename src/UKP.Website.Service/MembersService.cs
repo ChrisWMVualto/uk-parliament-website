@@ -19,7 +19,7 @@ namespace UKP.Website.Service
 
         public string WildcardLookup(string name)
         {
-            name = "name*" + name;
+            name = "House=All|name*" + name;
             var client = _restClientWrapper.GetClient(_configurationService.GetMemberAutocompleteApi);
             var request = _restClientWrapper.RestRequest(name, Method.GET);
 
