@@ -11154,24 +11154,6 @@ ol.channel-list li .inner.blank:after {
 }
 ol.channel-list li .description {
   overflow: hidden;
-  /*height: 85px;*/
-}
-ol.channel-list li .watch {
-  background-color: #e6ebee;
-  width: 44px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 2px;
-}
-ol.channel-list li .info {
-  background-color: #add0f2;
-  width: 44px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 2px;
-  z-index: 1;
 }
 ol.channel-list li .info .fa-circle {
   opacity: .5;

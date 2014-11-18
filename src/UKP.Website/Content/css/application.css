@@ -18,8 +18,13 @@
 
 /* EPG */
 
+.stream-container-inner {
+    -webkit-overflow-scrolling: none;
+}
+
 .stream-container-inner ol.channel-list {
     width: 2880px;
+    top: -1px;
 }
 
 ol.channel-list {
@@ -76,13 +81,51 @@ ol.channel-list li::before {
 }
 
 @media (max-width: 768px) {
-    .channel-day-container {
-        margin-left: 36px;
-    }
-
     .alert-side-detail {
         width: 100%;
     }
+
+    .channel-name {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .recent-next, .recent-prev {
+        display: none;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    .recent-next, .recent-prev {
+        top: 55px;
+    }
+}
+
+.alert-side-detail {
+    position: absolute;
+    top: 0;
+    overflow-x: hidden;
+    z-index: 60;
+}
+
+.breakpoint-300 .alert-side-detail {
+    position: fixed;
+    top: 250px;
+    width: 290px;
+    margin: 0 15px;
+    height: 318px;
+    overflow-y: scroll;
+}
+
+.breakpoint-300 .fixed-epg .alert-side-detail {
+    top: 174px;
+    height: 394px;
+}
+
+a.event:hover {
+    text-decoration: none;
+    color: #777;
 }
 
 /* Search */
@@ -94,12 +137,12 @@ ol.channel-list li::before {
 
 .multiselect-container > li.active > a {
     background-image:none;
-    background-color: #085196;
+    background-color: #292c2d;
 }
 
 .multiselect-container > li.active > a:hover {
     background-image:none;
-    background-color: #05325c;
+    background-color: #292c2d;
 }
 
 .multiselect-container li a label.checkbox input[type=checkbox], .multiselect-container li a label.radio input[type=radio] {
@@ -119,4 +162,24 @@ button.multiselect {
 .btn-accept, .btn-reject {
     background: #CBCBCB;
     color: #000000;
+}
+
+/* Global dates */
+
+.merdiem {
+    text-transform: lowercase;
+}
+
+/* Global Links */
+a, a:link, a:hover, a:visited, a:active {
+    outline: none;
+}
+
+/* Home Archives */
+
+.slick-list {
+    overflow: hidden;
+    width: 1140px;
+    left: -280px;
+    padding: 0 280px;
 }
