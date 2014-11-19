@@ -225,7 +225,7 @@
     <Content Include="Content\js\vendor\bootstrap-select.js" />
     <Content Include="Content\js\vendor\bootstrap-timepicker-mod.js" />
     <Content Include="Content\js\vendor\breakpoints.js" />
-    <Content Include="Content\js\vendor\dragscrollable.js" />
+    <Content Include="Content\js\vendor\dragscrollable.mod.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.min.js" />
     <Content Include="Content\js\vendor\jQuery-Mobile.js" />

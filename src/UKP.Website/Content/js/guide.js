@@ -197,11 +197,11 @@ changeDateTab.prototype = {
         });
     },
 
+
     ///
     /// Scrolling Behavior
     ///
 
-    
     scrollHandler: function(e) {
         e.preventDefault();
 
@@ -368,11 +368,15 @@ changeDateTab.prototype = {
                 $(that.selectors.daysContainer).append($('li', data));
                 $(that.selectors.days).eq(1).addClass(that.settings.activeClass);
                 that.liveline();
+                $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
+            },
+            error: function () {
+                $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
+                $(that.selectors.days).eq(that.activeTabIndex() + 1).trigger('activate', that);
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
-                $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
             }
         });
