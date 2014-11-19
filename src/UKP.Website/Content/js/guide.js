@@ -451,10 +451,7 @@ changeDateTab.prototype = {
                     scrollAmount = $(that.selectors.streamContainer).scrollLeft();
 
                 window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
-
-                window.setTimeout(function () {
-                    document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
-                }, 100);
+                document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
                 $(document).off('touchstart', that.disableTouch);
                 that.selectors.clickAndDrag.start();
             },
