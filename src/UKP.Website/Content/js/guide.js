@@ -152,8 +152,8 @@ function changeDateTab() {
 
         baseWidth: 2880,
         limits: {
-            upper: 1910,
-            lower: 250,
+            upper: 1880,
+            lower: 500,
             center: 2880
         }
     }
