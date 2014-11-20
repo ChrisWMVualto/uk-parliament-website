@@ -10364,7 +10364,11 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: rgba(255, 255, 255, 0.5);
 }
 .section-home-carousel .carousel-dark-bg span {
-  margin-top: 13px;
+  top: 90px; 
+  position: absolute;
+  width: 100%; 
+  left: 0px; 
+  margin-top: 0px;
 }
 .section-home-carousel .carousel-dark-bg .carousel-caption-inner {
   text-align: center;
