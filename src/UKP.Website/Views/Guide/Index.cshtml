@@ -1,4 +1,6 @@
-﻿@model UKP.Website.Models.Guide.GuideViewModel
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@model UKP.Website.Models.Guide.GuideViewModel
 
 <div class="container main-container">
     <div class="row">
@@ -13,7 +15,7 @@
                     <div class="col-md-12">
                         <div class="jump-container">
                             
-                            <div class="date-nav">
+                            <div class="date-nav" data-start-date="@Configuration.GetEpgStartDate.ToLocalTime().Date.ToISO8601String()">
                                 <div class="input-group bootstrap-datepicker">
                                     <span class="date-picker">
                                         <input type="text" class="form-control hidden">

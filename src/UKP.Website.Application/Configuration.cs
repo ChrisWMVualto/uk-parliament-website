@@ -35,6 +35,11 @@ namespace UKP.Website.Application
             get { return DateTime.Parse(ConfigurationManager.AppSettings["EPGStartDate"]); }
         }
 
+        public static DateTime GetEpgStartDate
+        {
+            get { return DateTime.Parse(ConfigurationManager.AppSettings["EPGStartDate"]); }
+        }
+
         public static string GetRssUrl
         {
             get { return ConfigurationManager.AppSettings["RssUrl"]; }
