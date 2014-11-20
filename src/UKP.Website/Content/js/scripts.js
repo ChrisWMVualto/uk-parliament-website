@@ -186,10 +186,16 @@ $(document).ready(function () {
     //datepicker
     ////////////////////////////////////////////
     if ($(".date-picker").length) {
+        var startDateOb = $('.date-nav').length > 0 ? new Date($('.date-nav').data('start-date')) : null;
+
+        if (startDateOb)
+            startDateOb = new Date(startDateOb.setDate(startDateOb.getDate() + 1));
+
         $('.date-picker').datepicker({
             weekStart: 1,
             autoclose: true,
-            zIndex: 2000
+            zIndex: 2000,
+            startDate: startDateOb
         });
     }
 
