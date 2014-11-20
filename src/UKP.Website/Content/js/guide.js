@@ -487,14 +487,15 @@ changeDateTab.prototype = {
     
     showEpgInfo: function(e) {
         e.stopPropagation();
+        var that = this;
         
         $.ajax($(e.target).parents('li').data('epg-info'), {
             success: function (model) {
-                $(this.selectors.epgPopup).remove();
+                $(that.selectors.epgPopup).remove();
                 $('.stream-container-outer').append(model);
-                $(this.selectors.epgPopup).hide();
-                $(window).trigger('forcescroll', $(this.selectors.streamContainer));
-                $(this.selectors.epgPopup).fadeIn(100);
+                $(that.selectors.epgPopup).hide();
+                $(window).trigger('forcescroll', $(that.selectors.streamContainer));
+                $(that.selectors.epgPopup).fadeIn(100);
             }
         });
 
