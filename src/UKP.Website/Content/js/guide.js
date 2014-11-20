@@ -368,7 +368,6 @@ changeDateTab.prototype = {
                 $(that.selectors.daysContainer).append($('li', data));
                 $(that.selectors.days).eq(1).addClass(that.settings.activeClass);
                 that.liveline();
-                $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
             },
             error: function () {
                 $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
@@ -376,8 +375,10 @@ changeDateTab.prototype = {
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
+                $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
+                that.selectors.clickAndDrag.start();
             }
         });
     },
@@ -457,10 +458,10 @@ changeDateTab.prototype = {
                 window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
                 document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
                 $(document).off('touchstart', that.disableTouch);
-                that.selectors.clickAndDrag.start();
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
+                that.selectors.clickAndDrag.start();
                 $(that.selectors.streamContainer).on('scroll', $.proxy(that.scrollHandler, that));
                 $(that.selectors.epgInfoLink).on('click', $.proxy(that.showEpgInfo, that));
             }
