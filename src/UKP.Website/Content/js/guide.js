@@ -531,7 +531,7 @@ function floatingNav() {
             timeline.hide();
             $(infoPopup).hide();
             clearInterval(triggerFloatTimeoutId);
-            triggerFloatTimeoutId = setTimeout(triggerFloat, 250);
+            triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
         } else {
             epg.show();
             timeline.show();
