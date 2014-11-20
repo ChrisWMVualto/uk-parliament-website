@@ -335,7 +335,7 @@ namespace Links
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string guide_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/guide.min.js") ? Url("guide.min.js") : Url("guide.js");
-            public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
+            public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");
             public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
             public static readonly string jquery_post_message_updated_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.post-message.updated.min.js") ? Url("jquery.post-message.updated.min.js") : Url("jquery.post-message.updated.js");
             public static readonly string log_moments_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/log-moments.min.js") ? Url("log-moments.min.js") : Url("log-moments.js");
