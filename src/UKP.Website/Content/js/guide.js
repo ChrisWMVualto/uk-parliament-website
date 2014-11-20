@@ -456,10 +456,14 @@ changeDateTab.prototype = {
                     scrollAmount = $(that.selectors.streamContainer).scrollLeft();
 
                 window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
-                document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
-                $(document).off('touchstart', that.disableTouch);
 
+                // More stable than jQuery method
+                document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
+
+                // Force iOS/Android to redraw
                 $(that.selectors.streamContainer).hide().show(0);
+
+                $(document).off('touchstart', that.disableTouch);
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
