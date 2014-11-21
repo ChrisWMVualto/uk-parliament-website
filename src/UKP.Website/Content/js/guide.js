@@ -503,7 +503,6 @@ changeDateTab.prototype = {
                 $('.stream-container-outer').append(model);
                 $(that.selectors.epgPopup).hide();
                 $(window).trigger('forcescroll', $(that.selectors.streamContainer));
-                $(that.selectors.epgPopup).fadeIn(100);
             }
         });
 
@@ -547,6 +546,7 @@ function floatingNav() {
         if ($(window).scrollTop() >= 5) {
             triggerFloat();
         } else {
+            epgTop();
             epg.show();
             timeline.show();
             $(infoPopup).show();
@@ -618,24 +618,29 @@ function floatingNav() {
                 'top': 0
             });
 
-            if ($('.epg-info').length) {
-                $('.epg-info').css({
-                    'top': null
-                });
-                $('body:not(.breakpoint-300) .epg-info').css({
-                    'top': $('.timeline').height(),
-                    'height': null
-                });
-
-                $(infoPopup).show();
-                $('body.breakpoint-300 .epg-info').css({
-                    'height': window.screen.height - $('.epg-info').position().top
-                });
-            }
+            epgTop();
         }
         epg.show();
         timeline.show();
         
+    }
+
+    function epgTop()
+    {
+        if ($('.epg-info').length) {
+            $('.epg-info').css({
+                'top': null
+            });
+            $('body:not(.breakpoint-300) .epg-info').css({
+                'top': $('.timeline').height(),
+                'height': null
+            });
+
+            $(infoPopup).show();
+            $('body.breakpoint-300 .epg-info').css({
+                'height': window.screen.height - $('.epg-info').position().top
+            });
+        }
     }
 }
 
