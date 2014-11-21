@@ -90,6 +90,7 @@
 
 		this._process_options(options);
 
+	    this.showing = false;
 		this.element = $(element);
 		this.isInline = false;
 		this.isInput = this.element.is('input');
@@ -407,13 +408,18 @@
 			});
 		},
 
-		show: function(){
-			if (!this.isInline)
-				this.picker.appendTo('body');
-			this.picker.show();
-			this.place();
-			this._attachSecondaryEvents();
-			this._trigger('show');
+		show: function () {
+		    if (!this.showing) {
+		        if (!this.isInline)
+		            this.picker.appendTo('body');
+		        this.picker.show();
+		        this.place();
+		        this._attachSecondaryEvents();
+		        this._trigger('show');
+		        this.showing = true;
+		    } else {
+		        this.hide();
+		    }
 		},
 
 		hide: function(){
@@ -426,6 +432,7 @@
 			this._detachSecondaryEvents();
 			this.viewMode = this.o.startView;
 			this.showMode();
+		    this.showing = false;
 
 			if (
 				this.o.forceParse &&
@@ -1666,7 +1673,7 @@
 			if ($this.data('datepicker'))
 				return;
 			e.preventDefault();
-			// component click requires us to explicitly show it
+		    // component click requires us to explicitly show it
 			$this.datepicker('show');
 		}
 	);
