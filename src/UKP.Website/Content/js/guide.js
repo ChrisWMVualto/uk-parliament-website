@@ -536,6 +536,7 @@ function floatingNav() {
             clearInterval(triggerFloatTimeoutId);
             triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
         } else {
+            epgTop();
             epg.show();
             timeline.show();
             $(infoPopup).show();
@@ -608,16 +609,6 @@ function floatingNav() {
                 });
             }
         } else {
-            container.removeClass(fixedClass);
-
-            epg.css({
-                'position': 'relative',
-                'top': 0
-            });
-            timeline.css({
-                'top': 0
-            });
-
             epgTop();
         }
         epg.show();
@@ -627,6 +618,16 @@ function floatingNav() {
 
     function epgTop()
     {
+        container.removeClass(fixedClass);
+
+        epg.css({
+            'position': 'relative',
+            'top': 0
+        });
+        timeline.css({
+            'top': 0
+        });
+
         if ($('.epg-info').length) {
             $('.epg-info').css({
                 'top': null
