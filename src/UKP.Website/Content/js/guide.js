@@ -62,7 +62,6 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //EPG Time Scroll
     ////////////////////////////////////////////
-    $('#epgScrollRight, #epgScrollLeft').on('click', scrollEpg);
     $('#epgTimeScrollRight, #epgTimeScrollLeft').on('click', scrollEpg);
 
 
@@ -143,7 +142,9 @@ function changeDateTab() {
         epgPrevButton: '#epgDateScrollLeft',
         liveline: '.live-now',
         epgInfoLink: 'a.info',
-        epgPopup: '.epg-info'
+        epgPopup: '.epg-info',
+        leftDayButton: '#epgDateScrollLeft',
+        rightDayButton: '#epgDateScrollRight'
     }
 
     this.settings = {
@@ -195,6 +196,9 @@ changeDateTab.prototype = {
             });
             that.loadNewTabBar(date);
         });
+
+        $(this.selectors.leftDayButton).on('click', $.proxy(this.devanceTab, this));
+        $(this.selectors.rightDayButton).on('click', $.proxy(this.advanceTab, this));
     },
 
 
