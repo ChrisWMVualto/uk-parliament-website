@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@using RestSharp.Extensions
+﻿@using RestSharp.Extensions
 @using UKP.Website.Application
 @model UKP.Website.Service.Model.VideoCollectionModel
 
@@ -46,8 +45,8 @@
                                         @if(Model.Results.ElementAt(i).ThumbnailUrl.HasValue())
                                         {
                                             //TODO  wait for kaltura API
-                                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
-                                            @*<img src="@Model.Results.ElementAt(i).ThumbnailUrl" alt="alt tag here" class="img-responsive">*@
+                                            @*<img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">*@
+                                            <img src="@Model.Results.ElementAt(i).ThumbnailUrl" alt="alt tag here" class="img-responsive">
                                         }
                                         else
                                         {
