@@ -183,3 +183,17 @@ a, a:link, a:hover, a:visited, a:active {
     left: -280px;
     padding: 0 280px;
 }
+
+/* IE9 Recently Archived */
+.lt-ie10 .section-recently-archived  .slider {
+    width: 570px;
+    padding: 0;
+    overflow: hidden;
+    margin: 0 280px;
+}
+
+.lt-ie10 .mini-item p {
+    display: inline-block;
+    height: 1.5em;
+    overflow: hidden;
+}
