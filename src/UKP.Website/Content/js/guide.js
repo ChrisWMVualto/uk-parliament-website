@@ -46,11 +46,7 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //epg-x-axis-movement
     ////////////////////////////////////////////
-    $('.stream-container-inner').scrollLeft(function () {
-        var time = new Date();
-        var leftBuffer = 40;
-        return leftPositionFromTime(time.getHours(), time.getMinutes()) - leftBuffer;
-    });
+    $('.stream-container-inner').scrollLeft($('.live-now').data('start-position'));
     resizeProgrammes($('.stream-container-inner'));
 
     $('.stream-container-inner').on('scroll', triggerProgramResize);
@@ -117,16 +113,6 @@ function changeEpgTime(event) {
 function leftPositionFromTime(hour, minute) {
     return ((hour * globHourWidth) + (globHourWidth * (minute / 60)));
 }
-
-
-////////////////////////////////////////////
-//Enables EPG click + drag
-////////////////////////////////////////////
-/*function enableClickDrag() {
-    return $('.stream-container-inner').dragscrollable({
-        dragSelector: '*'
-    });
-}*/
 
 ////////////////////////////////////////////
 //Change the highlighted date tab
