@@ -171,7 +171,7 @@ changeDateTab.prototype = {
 
         var that = this;
         $(".date-picker").on('changeDate', function(event) {
-            var date = event.date.toISOString();
+            var date = stripTimezone(event.date).toISOString();
             window.console && console.log('Change to datepicker date: ' + date);
 
             that.fetchContent({
@@ -181,6 +181,11 @@ changeDateTab.prototype = {
                 resetScroll: true
             });
             that.loadNewTabBar(date);
+
+
+            function stripTimezone(date) {
+                return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
+            }
         });
 
         $(this.selectors.leftDayButton).on('click', $.proxy(this.devanceTab, this));
