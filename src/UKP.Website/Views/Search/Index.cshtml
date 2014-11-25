@@ -31,16 +31,16 @@
                                 @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        @*<div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="Member"><h4>2. Member</h4></label>
                                 @Html.TextBoxFor(x => x.Member, new { data_ajax_url= Url.Action(MVC.Search.Members()), @class="form-control input-lg" })
                                 @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="House"><h4>3. House</h4></label>
+                                <label for="House"><h4>2. House</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.House, Model.HouseTags, "No House selected", new { @class="multiselect-list" })
                                 </div>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="Business"><h4>4. Business</h4></label>
+                                <label for="Business"><h4>3. Business</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.Business, Model.BusinessTags, "No business selected", new { @class="multiselect-list" })
                                 </div>
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="Start"><h4>5. Start Date</h4></label>
+                                <label for="Start"><h4>4. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="End"><h4>6. End Date</h4></label>
+                                <label for="End"><h4>5. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
