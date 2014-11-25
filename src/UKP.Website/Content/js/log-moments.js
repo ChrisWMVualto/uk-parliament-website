@@ -68,7 +68,7 @@ $(function () {
     $('.log-moment').click(function (e) {
         var time = $(this).parent().find('.time-code').data('time');
         var receiver = $('#UKPPlayer')[0];
-        $.postMessage("seek-program-date-time_" + time, src, receiver.contentWindow);
+        $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
         e.preventDefault();
         return false;
     });
@@ -79,6 +79,8 @@ $(function () {
         if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
 
         var sentTime = Date.parse(messageSplit[1]);
+
+        console.log(messageSplit[1]);
 
         var logs = $('.stack > ol').children().toArray();
         for (var i = 0; i <= logs.length; i++) {
