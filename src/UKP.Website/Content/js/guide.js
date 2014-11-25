@@ -168,30 +168,27 @@ changeDateTab.prototype = {
         $(this.selectors.days).on('click', $.proxy(this.dayClicked, this));
         $(this.selectors.days).on('activate', $.proxy(this.activateTab, this));
         $(this.selectors.epgInfoLink).on('click', $.proxy(this.showEpgInfo, this));
-
-        var that = this;
-        $(".date-picker").on('changeDate', function(event) {
-            var date = stripTimezone(event.date).toISOString();
-            window.console && console.log('Change to datepicker date: ' + date);
-
-            that.fetchContent({
-                clear: true,
-                removePast: false,
-                dayUrl: $(that.selectors.channelDayContainer).data('day-base-url') + '?date=' + date,
-                resetScroll: true
-            });
-            that.loadNewTabBar(date);
-
-
-            function stripTimezone(date) {
-                return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
-            }
-        });
-
+        $(".date-picker").on('changeDate', $.proxy(this.datepickerChange, this));
         $(this.selectors.leftDayButton).on('click', $.proxy(this.devanceTab, this));
         $(this.selectors.rightDayButton).on('click', $.proxy(this.advanceTab, this));
     },
 
+    datepickerChange: function(event) {
+        var date = this.stripTimezone(event.date).toISOString();
+        window.console && console.log('Change to datepicker date: ' + date);
+
+        this.fetchContent({
+            clear: true,
+            removePast: false,
+            dayUrl: $(this.selectors.channelDayContainer).data('day-base-url') + '?date=' + date,
+            resetScroll: true
+        });
+        this.loadNewTabBar(date);
+    },
+
+    stripTimezone: function(date) {
+            return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
+    },
 
     ///
     /// Scrolling Behavior
