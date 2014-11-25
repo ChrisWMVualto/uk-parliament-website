@@ -195,7 +195,8 @@ $(document).ready(function () {
             weekStart: 1,
             autoclose: true,
             zIndex: 2000,
-            startDate: startDateOb
+            startDate: startDateOb,
+            todayHighlight: true
         });
     }
 

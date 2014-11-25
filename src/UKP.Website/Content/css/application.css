@@ -80,6 +80,12 @@ ol.channel-list li::before {
     margin-left: 129px;
 }
 
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover, 
+.datepicker table tr td.today:hover:hover {
+    background-color: #d7dfe4;
+}
+
 @media (max-width: 768px) {
     .alert-side-detail {
         width: 100%;
