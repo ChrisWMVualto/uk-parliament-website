@@ -323,15 +323,12 @@ function updateArrowText() {
         prev = $(this.$list.context).parents().eq(2).find('.recent-prev div p'),
         childrenSelector = 'a div div div p',
         activeIndex = null,
-        slideActive = null,
         nextIndex = null,
         prevIndex = null;
 
 
     for (var i = 0; i < this.$slides.length; i++) {
-        slideActive = this.$slides[i].classList.contains("slick-active");
-
-        if (slideActive) {
+        if ($(this.$slides[i]).hasClass("slick-active")) {
             activeIndex = i;
             break;
         }
