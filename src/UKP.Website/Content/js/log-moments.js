@@ -80,8 +80,6 @@ $(function () {
 
         var sentTime = Date.parse(messageSplit[1]);
 
-        console.log(messageSplit[1]);
-
         var logs = $('.stack > ol').children().toArray();
         for (var i = 0; i <= logs.length; i++) {
             var thisTime = Date.parse($(logs[i]).find('.time-code').data('time'));
