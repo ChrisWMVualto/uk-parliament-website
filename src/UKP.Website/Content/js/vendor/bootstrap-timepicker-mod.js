@@ -46,17 +46,17 @@
       if (this.$element.parent().hasClass('input-group')) {
         if (this.$element.parent('.input-group').find('.input-group-addon').length) {
           this.$element.parent('.input-group').find('.input-group-addon').on({
-            'click.timepicker': $.proxy(this.showWidget, this)
+              'mousedown': $.proxy(this.showWidget, this)
           });
         } else {
           this.$element.closest(this.containerClass).find('.input-group-addon').on({
-            'click.timepicker': $.proxy(this.showWidget, this)
+              'mousedown': $.proxy(this.showWidget, this)
           });
         }
 
         this.$element.on({
           'focus.timepicker': $.proxy(this.highlightUnit, this),
-          'click.timepicker': $.proxy(this.highlightUnit, this),
+          'mousedown': $.proxy(this.highlightUnit, this),
           'keydown.timepicker': $.proxy(this.elementKeydown, this),
           'blur.timepicker': $.proxy(this.blurElement, this)
         });
@@ -64,13 +64,13 @@
         if (this.template) {
           this.$element.on({
             'focus.timepicker': $.proxy(this.showWidget, this),
-            'click.timepicker': $.proxy(this.showWidget, this),
+            'mousedown': $.proxy(this.showWidget, this),
             'blur.timepicker': $.proxy(this.blurElement, this)
           });
         } else {
           this.$element.on({
             'focus.timepicker': $.proxy(this.highlightUnit, this),
-            'click.timepicker': $.proxy(this.highlightUnit, this),
+            'mousedown': $.proxy(this.highlightUnit, this),
             'keydown.timepicker': $.proxy(this.elementKeydown, this),
             'blur.timepicker': $.proxy(this.blurElement, this)
           });
@@ -86,13 +86,50 @@
       if (this.showInputs && this.$widget !== false) {
         this.$widget.find('input').each(function() {
           $(this).on({
-            'click.timepicker': function() { $(this).select(); },
+            'mousedown': function() { $(this).select(); },
             'keydown.timepicker': $.proxy(self.widgetKeydown, self)
           });
         });
       }
 
+      this.bindClickHandlers();
       this.setDefaultTime(this.defaultTime);
+    },
+
+    bindClickHandlers: function() {
+        if (this.$element.parent().hasClass('input-group')) {
+            if (this.$element.parent('.input-group').find('.input-group-addon').length) {
+                this.$element.parent('.input-group').find('.input-group-addon').one({
+                    'mousedown': $.proxy(this.showWidget, this)
+                });
+            } else {
+                this.$element.closest(this.containerClass).find('.input-group-addon').one({
+                    'mousedown': $.proxy(this.showWidget, this)
+                });
+            }
+
+            this.$element.one({
+                'mousedown': $.proxy(this.highlightUnit, this),
+            });
+        } else {
+            if (this.template) {
+                this.$element.one({
+                    'mousedown': $.proxy(this.showWidget, this),
+                });
+            } else {
+                this.$element.one({
+                    'mousedown': $.proxy(this.highlightUnit, this),
+                });
+            }
+        }
+
+        if (this.showInputs && this.$widget !== false) {
+            this.$widget.find('input').each(function () {
+                $(this).one({
+                    'mousedown': function () { $(this).select(); },
+                });
+            });
+        }
     },
 
     blurElement: function() {
@@ -348,7 +385,7 @@
       return this.formatTime(this.hour, this.minute, this.second, this.meridian);
     },
 
-    hideWidget: function() {
+    hideWidget: function () {
       if (this.isOpen === false) {
         return;
       }
@@ -378,6 +415,7 @@
       $(document).off('mousedown.timepicker');
 
       this.isOpen = false;
+      this.bindClickHandlers();
     },
 
     highlightUnit: function() {
@@ -659,7 +697,9 @@
       this.update();
     },
 
-    showWidget: function() {
+    showWidget: function (e) {
+      e.stopPropagation();
+
       if (this.isOpen) {
         return;
       }
