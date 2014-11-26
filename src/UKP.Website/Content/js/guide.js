@@ -171,6 +171,7 @@ changeDateTab.prototype = {
         $(".date-picker").on('changeDate', $.proxy(this.datepickerChange, this));
         $(this.selectors.leftDayButton).on('click', $.proxy(this.devanceTab, this));
         $(this.selectors.rightDayButton).on('click', $.proxy(this.advanceTab, this));
+        this.pollPosition();
     },
 
     datepickerChange: function(event) {
@@ -190,12 +191,23 @@ changeDateTab.prototype = {
             return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
     },
 
+    pollPosition: function () {
+        var that = this;
+
+        window.setTimeout(function () {
+            $(that.selectors.streamContainer).trigger('scroll');
+            that.pollPosition();
+        }, 100);
+    },
+
     ///
     /// Scrolling Behavior
     ///
 
-    scrollHandler: function(e) {
-        e.preventDefault();
+    scrollHandler: function (e) {
+
+        if (typeof e === 'object')
+            e.preventDefault();
 
         var numDaysLoaded = $(this.selectors.channelDayContainer).children().length;
         var leftPosition = $(this.selectors.streamContainer).scrollLeft();
@@ -459,8 +471,8 @@ changeDateTab.prototype = {
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
-                that.selectors.clickAndDrag.start();
                 $(that.selectors.streamContainer).on('scroll', $.proxy(that.scrollHandler, that));
+                that.selectors.clickAndDrag.start();
                 $(that.selectors.epgInfoLink).on('click', $.proxy(that.showEpgInfo, that));
             }
         });
