@@ -67,7 +67,6 @@ $(function () {
 
     $('.log-moment').click(function (e) {
         var time = $(this).parent().find('.time-code').data('time');
-        alert(time);
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
         e.preventDefault();
