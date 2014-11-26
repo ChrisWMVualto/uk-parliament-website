@@ -27,7 +27,7 @@ namespace UKP.Website.Service.Transforms
             if(jObject == null) return null;
 
             var id = (Guid)jObject.id;
-            var title = (string) jObject.title;
+            var title = (string)jObject.title;
             var house = (string)jObject.house;
             var business = (string)jObject.business;
             var planningEventState = (PlanningEventState)jObject.states.planningState;

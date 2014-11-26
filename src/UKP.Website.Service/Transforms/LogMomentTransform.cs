@@ -8,13 +8,12 @@ namespace UKP.Website.Service.Transforms
 {
     public static class LogMomentTransforms
     {
-        public static IEnumerable<LogMomentModel> TransformArray(string jsonArray)
+        public static IEnumerable<LogMomentModel> TransformArray(dynamic jsonArray)
         {
-            dynamic jArray = JArray.Parse(jsonArray);
-            if (jArray == null) return Enumerable.Empty<LogMomentModel>();
+            if(jsonArray == null) return Enumerable.Empty<LogMomentModel>();
 
             var list = new List<LogMomentModel>();
-            foreach (var json in jArray)
+            foreach(var json in jsonArray)
             {
                 list.Add(Transform(json));
             }
@@ -30,23 +29,19 @@ namespace UKP.Website.Service.Transforms
             var total = (int) jObject.totalResults;
             var containsLogMoments = (bool)jObject.containsLogMoments;
             
-            
             if (total > 0)
-                logMoments = TransformArray(jObject.results.ToString());
+                logMoments = TransformArray(jObject.results);
 
             return new LogMomentResultModel(logMoments, total, containsLogMoments);
         }
 
         public static LogMomentModel Transform(dynamic json)
         {
-            dynamic jObject = JObject.Parse(json.ToString());
-            if (jObject == null) return null;
-
-            var id = (Guid)jObject.log.id;
-            var title = (string)jObject.log.title;
-            var thumbnailUrl = (string)jObject.thumbnailImageUrl;
-            var inPoint = (DateTime)jObject.inPoint;
-            var member = (string)jObject.log.member;
+            var id = (Guid)json.log.id;
+            var title = (string)json.log.title;
+            var thumbnailUrl = (string)json.thumbnailImageUrl;
+            var inPoint = (DateTime)json.inPoint;
+            var member = (string)json.log.member;
 
             return new LogMomentModel(id, title, thumbnailUrl, inPoint, member);
         }
