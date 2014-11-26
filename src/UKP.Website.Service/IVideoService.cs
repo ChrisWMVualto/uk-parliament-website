@@ -7,7 +7,6 @@ namespace UKP.Website.Service
     {
         VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null);
         VideoModel GetVideoWithLogs(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null,bool? autoStart = null);
-        VideoModel GetLegacyVideo(int id);
-        
+        VideoModel GetLegacyVideo(int id);   
     }
 }

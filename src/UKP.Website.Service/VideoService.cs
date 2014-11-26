@@ -31,6 +31,7 @@ namespace UKP.Website.Service
             if(outPoint.HasValue) request.AddParameter("out", outPoint.ToISO8601String());
             if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
             if(autoStart.HasValue) request.AddParameter("autoStart", autoStart.Value);
+            request.AddParameter("processLogs", true);
 
             request.AddParameter("format", "json");
 

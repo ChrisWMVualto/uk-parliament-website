@@ -13,6 +13,7 @@
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
     @Html.Hidden("StackPollingInterval", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING ? 10000 : 60000)
+    @Html.Hidden("ProgramDateTime")
 
     <div class="row">
 
@@ -40,12 +41,9 @@
                                 <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
                                 <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
                             </ul>
-                            @if(Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO)
+                            @if(Model.VideoModel.Event.ProductionSource != ProductionSourceConstants.AUDIO && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
                             {
-                                if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
-                                {
-                                    <button id="audioToggle" type="button" class="btn audio-toggle pull-right" data-toggle="button">audio only <i class="fa fa-player-volume fa-2x"></i></button>
-                                }
+                                <button id="audioToggle" type="button" class="btn audio-toggle pull-right" data-audioonly-on-state="@Model.VideoModel.RequestedAudioOnly" data-toggle="button"></button>
                             }
                         </div>
 
@@ -81,7 +79,7 @@
     <script src="@Url.Content("~/Scripts/jquery.signalR-2.1.1.min.js")"></script>
     <script src="~/signalr/hubs"></script>
     <script src="@Url.Content("~/Content/js/event.js")"></script>
-    <script src="@Url.Content("~/Content/js/log-moments.js")"></script>
+    <script src="@Url.Content("~/Content/js/program-date-time.js")"></script>
     <script src="@Url.Content("~/Content/js/responsive-player.js")"></script>
     <script src="@Url.Content("~/Content/js/jquery.post-message.updated.js")"></script>
 }

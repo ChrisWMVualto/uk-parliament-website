@@ -1,5 +1,4 @@
-﻿var auidoOnlyButtonState = false;
-var embedGenTimeoutId = null;
+﻿var embedGenTimeoutId = null;
 var eventTimePollingsInterval = 20000;
 var stackPollingIntervalLive = 10000;
 var stackPollingIntervalNotLive = 60000;
@@ -15,9 +14,17 @@ function initSelectDates() {
 }
 
 function loadPlayer(audioOnly) {
+    var currentProgramDateTime = $('#ProgramDateTime').val();
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly }, function (video) {
         $('#videoContainer').html(video.scriptableEmbedCode);
+
+        if (currentProgramDateTime != '') {
+            setTimeout(function () {
+                var receiver = $('#UKPPlayer')[0];
+                $.postMessage("seek-program-date-time_" + currentProgramDateTime, receiver.src, receiver.contentWindow);
+            }, 5000);
+        }
     });
 }
 
@@ -207,26 +214,30 @@ function updateSocialLinks(e, url) {
     });
 }
 
+function setAudioButtonState() {
+    var audioButton = $('#audioToggle');
+    var offText = 'audio only  <i class="fa fa-player-volume fa-2x"></i>',
+    onText = 'video with audio  <i class="fa fa-player-volume fa-2x"></i>';
+
+    var audioOnState = $(audioButton).data("audioonly-on-state");
+    if (audioOnState == "True") {
+        $(audioButton).data("audioonly-on-state", "False");
+        loadPlayer(true);
+        $(audioButton).html(onText);
+        return;
+    }
+
+    if (audioOnState == "False") {
+        $(audioButton).data("audioonly-on-state", "True");
+        loadPlayer(false);
+        $(audioButton).html(offText);
+        return;
+    }
+}
+
 function audiOnlySwitch() {
-    $(document).on('click', '#audioToggle', null, function () {
-        var offText = 'audio only  <i class="fa fa-player-volume fa-2x"></i>',
-            onText = 'video with audio  <i class="fa fa-player-volume fa-2x"></i>';
-
-
-        if (auidoOnlyButtonState == false) {
-            auidoOnlyButtonState = true;
-            loadPlayer(true);
-            $(this).html(onText);
-            return;
-        }
-
-        if (auidoOnlyButtonState == true) {
-            auidoOnlyButtonState = false;
-            loadPlayer(false);
-            $(this).html(offText);
-            return;
-        }
-    });
+    setAudioButtonState();
+    $(document).on('click', '#audioToggle', null, setAudioButtonState );
 }
 
 

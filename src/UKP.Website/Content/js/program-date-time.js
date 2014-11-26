@@ -67,6 +67,7 @@ $(function () {
 
     $('.log-moment').click(function (e) {
         var time = $(this).parent().find('.time-code').data('time');
+        alert(time);
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
         e.preventDefault();
@@ -78,6 +79,7 @@ $(function () {
         if (messageSplit.length < 2) return;
         if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
 
+        $('#ProgramDateTime').val(messageSplit[1]);
         var sentTime = Date.parse(messageSplit[1]);
 
         var logs = $('.stack > ol').children().toArray();

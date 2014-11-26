@@ -42,11 +42,11 @@ namespace UKP.Website.Service.Transforms
             dynamic jObject = JObject.Parse(json.ToString());
             if (jObject == null) return null;
 
-            var id = jObject.log.id.Value;
-            var title = jObject.log.title.Value;
-            var thumbnailUrl = jObject.thumbnailImageUrl.Value;
-            var inPoint = (DateTime)jObject.inPoint.Value;
-            var member = (string)jObject.log.member.Value;
+            var id = (Guid)jObject.log.id;
+            var title = (string)jObject.log.title;
+            var thumbnailUrl = (string)jObject.thumbnailImageUrl;
+            var inPoint = (DateTime)jObject.inPoint;
+            var member = (string)jObject.log.member;
 
             return new LogMomentModel(id, title, thumbnailUrl, inPoint, member);
         }
