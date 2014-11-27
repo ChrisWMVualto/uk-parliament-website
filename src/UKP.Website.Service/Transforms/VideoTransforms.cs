@@ -26,12 +26,14 @@ namespace UKP.Website.Service.Transforms
             var requestedInPoint = (DateTime?)jObject.requestedInPoint;
             var requestedOutPoint = (DateTime?)jObject.requestedOutPoint;
             var thumbnailUrl = (string)jObject.thumbnailUrl;
+            var requestedAudioOnly = (bool)jObject.requestedAudioOnly;
+            var requestedAutoStart = (bool)jObject.requestedAutoStart;
 
             var eventModel = EventTransforms.Transform(@event.ToString());
             var momentModel = LogMomentTransforms.TransformObject(logMoments.ToString());
             var stacksModels = StackTransforms.TransformArray(stacks.ToString());
 
-            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint, stacksModels, thumbnailUrl, scriptableEmbedCode);
+            return new VideoModel(eventModel, embedCode, legacyEmbedCode, momentModel, pageUrl, shortWebPageUrl, requestedInPoint, requestedOutPoint, stacksModels, thumbnailUrl, scriptableEmbedCode, requestedAudioOnly, requestedAutoStart);
         }
 
         public static VideoCollectionModel TransformArray(string jsonArray)

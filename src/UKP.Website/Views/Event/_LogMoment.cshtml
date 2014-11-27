@@ -1,4 +1,5 @@
-﻿@using UKP.Website.Service.Model
+﻿@using Date.Extensions
+@using UKP.Website.Service.Model
 @model LogMomentResultModel
 @foreach (var log in Model.Results)
 {
@@ -16,7 +17,7 @@
             <div id="@log.Id" class="collapse">
                 <hr />
                 <div class="stack-item">
-                    <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong><span class="time-code" data-time="@log.InPoint.ToString("O")"> @log.InPoint.ToString("T") </span></h5>
+                    <h5><i class="fa fa-circle"></i> <strong>Time Code:</strong><span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @log.InPoint.ToString("T") </span></h5>
 
                     <h5><i class="fa fa-circle"></i> <strong>Member:</strong> @log.Member</h5>
                 </div>

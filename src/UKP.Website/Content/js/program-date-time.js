@@ -78,6 +78,7 @@ $(function () {
         if (messageSplit.length < 2) return;
         if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
 
+        $('#ProgramDateTime').val(messageSplit[1]);
         var sentTime = Date.parse(messageSplit[1]);
 
         var logs = $('.stack > ol').children().toArray();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -27,8 +28,8 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
-            var inPoint = CovertDateTimeFormatFromPattern(id, @in);
-            var outPoint = CovertDateTimeFormatFromPattern(id, @out);
+            var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
+            var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
 
             var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true));
             if(video == null || video.Event.States.RecordedState == RecordedEventState.REVOKE) return RedirectToAction(MVC.Home._404());
@@ -126,7 +127,7 @@ namespace UKP.Website.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        private DateTime? CovertDateTimeFormatFromPattern(Guid id, string value)
+        private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)
         {
             DateTime? dateTimePoint;
 
