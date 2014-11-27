@@ -197,7 +197,7 @@ changeDateTab.prototype = {
         window.setTimeout(function () {
             $(that.selectors.streamContainer).trigger('scroll');
             that.pollPosition();
-        }, 100);
+        }, 250);
     },
 
     ///
