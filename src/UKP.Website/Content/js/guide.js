@@ -1,5 +1,6 @@
 ﻿var globHourWidth = 120,
-    globOneDayWidth = 2920;
+    globOneDayWidth = 2920,
+    resizing = false;
 
 $(document).ready(function () {
 
@@ -195,9 +196,11 @@ changeDateTab.prototype = {
         var that = this;
 
         window.setTimeout(function () {
-            $(that.selectors.streamContainer).trigger('scroll');
+            if (!resizing)
+                $(that.selectors.streamContainer).trigger('scroll');
+
             that.pollPosition();
-        }, 250);
+        }, 500);
     },
 
     ///
@@ -704,6 +707,8 @@ function triggerProgramResize() {
     var that = this;
     clearInterval(resizeProgrammesTimeoutId);
     resizeProgrammesTimeoutId = setTimeout(function () {
+        resizing = true;
         resizeProgrammes(that);
-    }, 250);
+        resizing = false;
+    }, 50);
 }
