@@ -23,7 +23,7 @@ function loadPlayer(audioOnly) {
             setTimeout(function () {
                 var receiver = $('#UKPPlayer')[0];
                 $.postMessage("seek-program-date-time_" + currentProgramDateTime, receiver.src, receiver.contentWindow);
-            }, 5000);
+            }, 6000);
         }
     });
 }
