@@ -197,7 +197,7 @@ changeDateTab.prototype = {
 
         window.setTimeout(function () {
             if (!resizing)
-                $(that.selectors.streamContainer).trigger('scroll');
+                that.scrollHandler();
 
             that.pollPosition();
         }, 500);
