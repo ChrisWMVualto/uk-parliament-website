@@ -9606,11 +9606,6 @@ input {
   outline: none!important;
 }
 .btn-default {
-  background-image: -webkit-linear-gradient(top, #292c2d 0%, #101314 100%);
-  background-image: -o-linear-gradient(top, #292c2d 0%, #101314 100%);
-  background-image: linear-gradient(to bottom, #292c2d 0%, #101314 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff085196', endColorstr='#ff05325c', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   background-repeat: repeat-x;
   border-color: #0A0D0E;
   text-shadow: 0 0 0 #fff;
@@ -9619,9 +9614,6 @@ input {
 .btn-default:hover,
 .btn-default:focus {
   background-color: #292c2d;
-  background-position: 0 -15px;
-  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.125);
   outline: none;
 }
 .btn-default:active,
@@ -11405,10 +11397,8 @@ ol.channel-list li.event:hover > div {
   background-color: #d9e9f9;
 }
 .alert-side-detail {
-  background-color: #303030;
-  /* The Fallback */
-  background-color: rgba(10, 10, 10, 0.9);
-  color: white;
+  background-color: #d7dfe4;
+  color: black;
   padding: 18px;
   position: absolute;
   right: 0;
@@ -11423,15 +11413,15 @@ ol.channel-list li.event:hover > div {
   font-family: 'karlaregular', arial, sans-serif;
   font-size: 138%;
   text-transform: uppercase;
-  color: #292c2d;
-  background-color: white;
+  color: white;
+  background-color: black;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 .alert-side-detail .btn-play:hover {
-  background-color: #e6ebee;
+  background-color: #292c2d;
   opacity: .5;
 }
 .alert-side-detail .btn-play .fa-stack {
@@ -11439,15 +11429,15 @@ ol.channel-list li.event:hover > div {
   font-size: 90%;
 }
 .alert-side-detail .btn-play .fa-stack .fa-circle {
-  color: #292c2d;
+    color: white;
 }
 .alert-side-detail .btn-play .fa-stack .fa-play {
-  color: white;
+  color: black;
   font-size: 88%;
 }
 .alert-side-detail button.close {
   opacity: 1;
-  color: white;
+  color: black;
   margin-top: 11px;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -11461,7 +11451,7 @@ ol.channel-list li.event:hover > div {
   padding-top: 12px;
 }
 .alert-side-detail .detail-inner .title {
-  border-top: 1px solid white;
+  border-top: 1px solid black;
   padding: 15px 0 8px 0;
 }
 .alert-side-detail .detail-inner .title h5 {
@@ -11564,8 +11554,8 @@ ol.channel-list li.event:hover > div {
 dl.description {
   padding-bottom: 7px;
   padding-top: 7px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 dl.description hr {
   border-top: 1px solid #4d4d4d;
@@ -12100,8 +12090,6 @@ a.search-thumb-inner .overlay {
   left: 0;
   width: 100%;
   background-color: #292c2d;
-  /* The Fallback */
-  background-color: rgba(8, 81, 150, 0.8);
 }
 a.search-thumb-inner .overlay strong {
   text-transform: uppercase;
