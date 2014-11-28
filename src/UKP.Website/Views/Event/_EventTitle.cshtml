@@ -1,0 +1,64 @@
+﻿@using UKP.Website.Application
+@using UKP.Website.Service.Model
+@model VideoModel
+
+<header class="col-md-10">
+    <h3>@Model.Event.Title</h3>
+    <h4>
+        @if(Model.Event.States.PlayerState == PlayerEventState.PRELIVE)
+        {
+            <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting starts at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</span>
+        }
+        else
+        {
+            if(Model.Event.DisplayStartDate.ToLocalTime().Date == Model.Event.DisplayEndDate.ToLocalTime().Date)
+            {
+                <span>
+                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)
+
+                    @if(Model.Event.ActualEndTime.HasValue)
+                    {
+                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</text>
+
+                    }
+                </span>
+            }
+            else
+            {
+                <span>
+                    <strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting started at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)
+
+                    @if(Model.Event.ActualEndTime.HasValue)
+                    {
+                        <text>, ended @Model.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat, ApplicationConstants.DateTimeFormatter)</text>
+
+                    }
+                </span>
+            }
+        }
+    </h4>
+</header>
+
+<div class="col-md-2">
+    @if(Model.RequestedOutPoint.HasValue)
+    {
+        <a class="extract-text state-badge pending-badge visible-lg visible-md" href="@Url.Action(MVC.Event.ActionNames.Index, new { id = Model.Event.Id })">
+            <span>VIEW FULL EVENT</span>
+        </a>
+    }
+    else if(Model.Event.States.PlayerState == PlayerEventState.LIVE)
+    {
+        if(Model.Event.ActualEndTime.HasValue)
+        {
+            <span class="state-badge pending-badge visible-lg visible-md">VOD</span>
+        }
+        else
+        {
+            <span class="state-badge pending-badge visible-lg visible-md">Live</span>
+        }
+    }
+    else if(Model.Event.States.PlayerState == PlayerEventState.ARCHIVE)
+    {
+        <span class="state-badge pending-badge visible-lg visible-md">VOD</span>
+    }
+</div>

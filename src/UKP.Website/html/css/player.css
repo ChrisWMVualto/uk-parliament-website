@@ -1,0 +1,98 @@
+.vjs-default-skin .vjs-control-bar {
+    height: 4em;
+    background-color: #dbdbdb;
+    background: rgba(219,219,219,1);
+    border-top: 1px solid rgba(170,168,168,0.5);
+    border-bottom: 3px solid #ececec;
+}
+
+.vjs-default-skin .vjs-play-control,
+.vjs-default-skin .vjs-fullscreen-control,
+.vjs-default-skin .vjs-mute-control,
+.vjs-default-skin .vjs-volume-menu-button {
+    color: #333333;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 1px 1px rgba(25, 25, 25, 0.40);
+    margin: .5em;
+    border-radius: 16%;
+    border: 1px solid #ffffff;
+    width: 3em;
+
+    background: #dbdbdb;
+    background: rgb(191,191,191);
+    background: -moz-linear-gradient(top, rgba(191,191,191,1) 0%, rgba(255,255,255,1) 64%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,191,191,1)), color-stop(64%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: -o-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: -ms-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+}
+
+.vjs-default-skin .vjs-progress-control,
+.vjs-default-skin .vjs-volume-control {
+    top: 50%;
+    margin-top: -.35em;
+    font-size: .9em;
+    height: .9em;
+}
+
+.vjs-default-skin .vjs-progress-control {
+    left: 90px;
+    right: 170px;
+}
+
+.vjs-default-skin .vjs-volume-control {
+    width: 7em;
+    padding: 0 .5em;
+}
+
+.vjs-default-skin .vjs-volume-bar {
+    width: auto;
+    margin: 0;
+    height: 100%;
+}
+
+.vjs-default-skin .vjs-slider {
+    background-color: #888888;
+    background-color: rgb(136,136,136);
+    border: 1px solid #666666;
+}
+
+.vjs-default-skin .vjs-play-progress,
+.vjs-default-skin .vjs-volume-level {
+    background-color: #bee3ed;
+    background-image: none;
+    bottom: 0;
+    height: auto;
+}
+
+.vjs-default-skin .vjs-time-controls {
+    font-size: 1.1em;
+    line-height: 3.9em;
+    color: #333;
+}
+
+.vjs-time-divider,
+.vjs-duration {
+    display: none;
+}
+
+.vjs-default-skin .vjs-slider-handle {
+    width: 4px;
+    height: 1.3em;
+    background: #000;
+    border-radius: 4px;
+    margin-top: -2px;
+}
+
+.vjs-default-skin .vjs-slider-handle:before {
+    content: none;
+}
+
+.vjs-default-skin .vjs-volume-bar .vjs-volume-handle {
+    display: none;
+}
+
+.vjs-default-skin .vjs-control:before {
+    text-shadow: none;
+}
