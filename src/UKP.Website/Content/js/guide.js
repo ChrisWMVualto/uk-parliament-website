@@ -157,6 +157,7 @@ function changeDateTab() {
 changeDateTab.prototype = {
     init: function () {
         $(this.selectors.days).eq(1).addClass(this.settings.activeClass).addClass(this.settings.todayClass);
+        this.setIndexes();
 
         this.selectors.clickAndDrag = $(this.selectors.streamContainer).dragscrollable({
             dragSelector: '*'
@@ -471,6 +472,7 @@ changeDateTab.prototype = {
                 $(that.selectors.streamContainer).hide().show(0);
 
                 $(document).off('touchstart', that.disableTouch);
+                that.setIndexes();
             },
             complete: function () {
                 window.console && console.log('Rebinding event handlers');
@@ -491,6 +493,12 @@ changeDateTab.prototype = {
             $(this.selectors.liveline).hide();
     },
 
+    setIndexes: function() {
+        var days = $(this.selectors.channelDayContainer).children();
+
+        $(days[0]).css('zIndex', 20);
+        $(days[1]).css('zIndex', 10);
+    },
 
     ///
     /// EPG Info Popup

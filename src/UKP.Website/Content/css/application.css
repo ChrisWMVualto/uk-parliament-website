@@ -77,6 +77,7 @@ ol.channel-list li::before {
     width: 2880px;
     float: left;
     clear: none;
+    position: relative;
 }
 
 .timeline {
