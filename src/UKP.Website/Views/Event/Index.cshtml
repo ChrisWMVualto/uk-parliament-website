@@ -16,14 +16,12 @@
     @Html.Hidden("ProgramDateTime")
 
     <div class="row">
-
         <div class="col-md-12">
             <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
-
         <div class="col-md-12 page-title-bar">
-            <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))" class="row">
-                @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id))
+            <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))" class="row">
+                @Html.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
             </div>
         </div>
         <div class="col-md-12">

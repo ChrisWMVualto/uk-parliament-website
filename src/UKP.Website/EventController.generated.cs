@@ -190,6 +190,8 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_EventTitle
         {
             public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_Clipping s_params_Clipping = new ActionParamsClass_Clipping();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -314,14 +316,16 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void EventTitleOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void EventTitleOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult EventTitle(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult EventTitle(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventTitle);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EventTitleOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            EventTitleOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 

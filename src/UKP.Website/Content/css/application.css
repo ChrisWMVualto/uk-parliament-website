@@ -203,3 +203,12 @@ a, a:link, a:hover, a:visited, a:active {
     height: 1.5em;
     overflow: hidden;
 }
+
+a.extract-text {
+    text-decoration: none;
+}
+
+.extract-small-text {
+    width:20px;
+    font-size: 10px;
+}

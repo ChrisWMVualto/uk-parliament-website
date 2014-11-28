@@ -40,7 +40,13 @@
 </header>
 
 <div class="col-md-2">
-    @if(Model.Event.States.PlayerState == PlayerEventState.LIVE)
+    @if(Model.RequestedOutPoint.HasValue)
+    {
+        <a class="extract-text state-badge pending-badge visible-lg visible-md" href="@Url.Action(MVC.Event.ActionNames.Index, new { id = Model.Event.Id })">
+            <span>VIEW FULL EVENT</span>
+        </a>
+    }
+    else if(Model.Event.States.PlayerState == PlayerEventState.LIVE)
     {
         if(Model.Event.ActualEndTime.HasValue)
         {

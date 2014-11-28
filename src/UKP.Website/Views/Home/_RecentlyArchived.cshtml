@@ -40,7 +40,7 @@
                         @for(var i = 0; i < Model.Results.Count(); i++)
                         {
                             <div class="archived-item col-md-6 col-sm-6">
-                                <a href="@Url.Action(MVC.Event.Index(Model.Results.ElementAt(i).Event.Id))" class="clearfix">
+                                <a href="@Url.Action(MVC.Event.ActionNames.Index, MVC.Event.Name, new { id = Model.Results.ElementAt(i).Event.Id })" class="clearfix">
                                     <div class="inner">
                                         @if(Model.Results.ElementAt(i).ThumbnailUrl.HasValue())
                                         {
