@@ -56,7 +56,7 @@ namespace UKP.Website.Service
 
             for (var i = 1; i <= 20; i++)
             {
-                var channelEvents = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x));
+                var channelEvents = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x, dateob));
                 var channel = new EpgChannelModel(i, channelEvents.ToList());
                 epgModel.Add(channel);
             }
