@@ -18,6 +18,10 @@
 
 /* EPG */
 
+.epg-info {
+    padding-bottom: 0;
+}
+
 .stream-container-inner {
     -webkit-overflow-scrolling: none;
 }
