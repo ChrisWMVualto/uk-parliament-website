@@ -409,44 +409,34 @@
 		},
 
 		show: function () {
-		    if (!this.showing) {
-		        if (!this.isInline)
-		            this.picker.appendTo('body');
-		        this.picker.show();
-		        this.place();
-		        this._attachSecondaryEvents();
-		        this._trigger('show');
-		        this.showing = true;
-		    } else {
-		        this.hide();
-		    }
+		    if (!this.isInline)
+		        this.picker.appendTo('body');
+		    this.picker.show();
+		    this.place();
+		    this._attachSecondaryEvents();
+		    this._trigger('show');
 		},
 
 		hide: function () {
-		    if (this.showing) {
-		        this.show();
-		    } else {
-		        if (this.isInline)
-		            return;
-		        if (!this.picker.is(':visible'))
-		            return;
-		        this.focusDate = null;
-		        this.picker.hide(); //.detach();
-		        this._detachSecondaryEvents();
-		        this.viewMode = this.o.startView;
-		        this.showMode();
-		        this.showing = false;
+		    if (this.isInline)
+		        return;
+		    if (!this.picker.is(':visible'))
+		        return;
+		    this.focusDate = null;
+		    this.picker.hide(); //.detach();
+		    this._detachSecondaryEvents();
+		    this.viewMode = this.o.startView;
+		    this.showMode();
 
-		        if (
-		            this.o.forceParse &&
-		            (
-		                this.isInput && this.element.val() ||
-		                    this.hasInput && this.element.find('input').val()
-		            )
+		    if (
+		        this.o.forceParse &&
+		        (
+		            this.isInput && this.element.val() ||
+		                this.hasInput && this.element.find('input').val()
 		        )
-		            this.setValue();
-		        this._trigger('hide');
-		    }
+		    )
+		        this.setValue();
+		    this._trigger('hide');
 		},
 
 		remove: function(){
