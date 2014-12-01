@@ -1,4 +1,8 @@
-﻿/* Keep end time timepicker within view */
+﻿.time {
+    text-transform: lowercase;
+}
+
+/* Keep end time timepicker within view */
 .end-time .dropdown-menu {
     left: -48px;
 }
