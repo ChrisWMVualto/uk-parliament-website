@@ -451,7 +451,7 @@ changeDateTab.prototype = {
         var that = this;
         $.ajax(opts.dayUrl, {
             success: function (data) {
-                //window.console && console.log('Load day:' + opts.dayUrl);
+                window.console && console.log('Load day:' + opts.dayUrl);
 
 
                 if (opts.clear)
@@ -482,9 +482,6 @@ changeDateTab.prototype = {
                     that.state.leftTab = false;
                     that.state.rightTab = true;
                 }
-
-                if (typeof opts.callback === 'function')
-                    opts.callback(data, opts);
 
                 that.liveline();
 
@@ -529,6 +526,9 @@ changeDateTab.prototype = {
 
                 window.console && console.log('Enable scrollnext');
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
+
+                if (typeof opts.callback === 'function')
+                    opts.callback();
             }
         });
     },
