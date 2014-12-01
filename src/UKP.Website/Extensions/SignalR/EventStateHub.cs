@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using UKP.Website.Models.Event;
 using UKP.Website.Service.Model;
 
 namespace UKP.Website.Extensions.SignalR
@@ -40,6 +41,12 @@ namespace UKP.Website.Extensions.SignalR
                 var context = GlobalHost.ConnectionManager.GetHubContext<EventStateHub>();
                 context.Clients.All.eventStateChanged(id, states.PlanningState.ToString(), states.RecordingState.ToString(), states.RecordedState.ToString());
             }
+        }
+
+        public static void LogUpdate(LogUpdateType logUpdateType, Guid eventId, Guid logMomentId, string title, DateTime timecode, string member)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<EventStateHub>();
+            context.Clients.All.logUpdate(logUpdateType.ToString(), eventId, logMomentId, title, timecode, member);
         }
     }
 }

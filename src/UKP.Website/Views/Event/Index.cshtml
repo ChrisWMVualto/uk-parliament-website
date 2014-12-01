@@ -12,8 +12,8 @@
 
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
-    @Html.Hidden("StackPollingInterval", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING ? 10000 : 60000)
     @Html.Hidden("ProgramDateTime")
+    @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
 
     <div class="row">
         <div class="col-md-12">
@@ -56,8 +56,7 @@
                 <div class="col-md-5">
                     @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
                     {
-                        <div id="eventStackContainer" class="stack-and-logs" data-load-new-stack-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id))">
-                            @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
+                        <div id="eventStackContainer" class="stack-and-logs" data-refresh-stack-url="@Url.Action(MVC.Event.StackAndLogs(Model.VideoModel.Event.Id))" data-load-new-stack-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id))">
                             <div class="stack-player">
                                 <div class="stack">
                                     <ol>

@@ -1,8 +1,5 @@
 ﻿var embedGenTimeoutId = null;
 var eventTimePollingsInterval = 20000;
-var stackPollingIntervalLive = 10000;
-var stackPollingIntervalNotLive = 60000;
-
 
 function initSelectDates() {
     if ($(".clip-date").length) {
@@ -64,12 +61,6 @@ function pollEventTimes() {
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
-
-    if (recordingState == "RECORDING") {
-        $('#StackPollingInterval').val(stackPollingIntervalLive);
-    } else {
-        $('#StackPollingInterval').val(stackPollingIntervalNotLive);
-    }
 
     if (recordedState == "REVOKE") {
         window.location.reload();
@@ -246,9 +237,9 @@ $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
 
-    eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, simpleState) {
+    eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, playerState) {
         if (eventId == changedId) {
-            stateChanged(planningState, recordingState, recordedState, simpleState);
+            stateChanged(planningState, recordingState, recordedState, playerState);
         }
     };
 

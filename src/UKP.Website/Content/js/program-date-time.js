@@ -6,7 +6,9 @@ var playerTempTime;
 function scrollStack() {
     if ($(".stack").length) {
 
+        // TODO
         $('.stack-and-logs').removeClass('stack-and-logs');
+
         $('.stack').slimScroll({
             railVisible: true,
             railColor: '#ffffff',
@@ -26,44 +28,65 @@ function scrollStack() {
 }
 
 function scrollStackToBottom() {
-    var scrollTo_val = $('.stack').prop('scrollHeight') + 'px';
-    $('.stack').slimScroll({ scrollTo: scrollTo_val });
-
+    var scrollToVal = $('.stack').prop('scrollHeight') + 'px';
+    $('.stack').slimScroll({ scrollTo: scrollToVal });
 }
 
 
-function updateStacks() {
-    if ($('#ContainsLogMoments').val() == "False") {
-        var stackUrl = $('#eventStackContainer').data("data-load-stack-log-url");
-        $.get(stackUrl, function (data) {
-            $('#eventStackContainer').html(data);
-            scrollStack();
-        });
-    }
-    var stackPollingInterval = parseInt($('#StackPollingInterval').val());
-    // setTimeout(updateStacks, stackPollingInterval);
+function appendLogMoments() {
+
+    var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
+    var logUrl = $('#eventStackContainer').data("load-new-stack-url");
+
+    $.get(logUrl, { startTime: lastLogTime }, function (data) {
+        $('.stack > ol ').append(data);
+
+        if (data.length > 0 || data) {
+            scrollStackToBottom();
+        }     
+    });
 }
 
+function refreshLogMoments() {
 
-function updateLogMoments() {
+    var logUrl = $('#eventStackContainer').data("refresh-stack-url");
+    $.get(logUrl, null, function (data) {
 
-    if ($('#ContainsLogMoments').val() == "True") {
-        var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
-        var logUrl = $('#eventStackContainer').data("load-new-stack-url");
-        logUrl += '?startTime=' + encodeURIComponent(lastLogTime);
-
-        $.get(logUrl, function (data) {
-            $('.stack > ol ').append(data);
-            if (data.length > 0 || data)
-                scrollStackToBottom();
-        });
-    }
+        $('#eventStackContainer ol').html(data);
+        scrollStackToBottom();
+    });
 }
+
 
 $(function () {
+
+    var eventStateHub = $.connection.eventStateHub;
+    var eventId = $('#eventId').val();
+
+    eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
+        if (eventId == changedId) {
+
+            
+            if ($('#ContainsLogMoments').val() == 'False') {
+                $('#ContainsLogMoments').val('True');
+                refreshLogMoments();
+                console.log('firstime');
+                return;
+            }
+            console.log(logUpdateType);
+            
+            if (logUpdateType == 'Add') {
+                appendLogMoments();
+            } else {
+                refreshLogMoments();
+            }
+        }
+    };
+
+    $.connection.hub.start().done(function () { });
+
     scrollStack();
-    //updateStacks();
-    setInterval(updateLogMoments, 3000);
+
 
     $('.log-moment').click(function (e) {
         var time = $(this).parent().find('.time-code').data('time');
@@ -72,6 +95,7 @@ $(function () {
         e.preventDefault();
         return false;
     });
+
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
         var messageSplit = event.data.split('_');
@@ -92,12 +116,12 @@ $(function () {
             }
         }
     });
-    $('.btn-moment-expand').on('click', function() {
+
+    $('.btn-moment-expand').on('click', function () {
         $($(this).children()[1]).toggleClass('fa-plus').toggleClass('fa-minus');
     });
 
 });
-
 
 
 

@@ -102,9 +102,9 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null)
         {
-            var endTime = DateTime.Now.AddSeconds(5);
-            var start = string.IsNullOrEmpty(startTime) ? DateTime.Now : DateTime.Parse(startTime);
-            var logs = _eventService.GetLogsBetween(id, start, endTime);
+            var start = startTime.FromISO8601String() ?? DateTime.Now;
+            var end = DateTime.Now.AddMinutes(10);
+            var logs = _eventService.GetLogsBetween(id, start, end);
             return PartialView(MVC.Event.Views._LogMoment, logs);
 
         }
@@ -126,6 +126,13 @@ namespace UKP.Website.Controllers
         public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
         {
             EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.PlayerState), stateChangeModel.StateChanged);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public virtual HttpStatusCodeResult LogUpdate(LogUpdateModel logUpdateModel)
+        {
+            EventStateHub.LogUpdate(logUpdateModel.LogUpdateType, logUpdateModel.EventId, logUpdateModel.LogMomentId, logUpdateModel.Member, logUpdateModel.Timecode, logUpdateModel.Title);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
