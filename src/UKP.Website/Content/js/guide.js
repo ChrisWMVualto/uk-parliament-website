@@ -177,17 +177,20 @@ changeDateTab.prototype = {
         this.pollPosition();
     },
 
-    datepickerChange: function(event) {
+    datepickerChange: function (event) {
+        window.console && console.log('===> Date Selected');
         var date = this.stripTimezone(event.date).toISOString();
-        //window.console && console.log('Change to datepicker date: ' + date);
+        var that = this;
 
         this.fetchContent({
             clear: true,
             removePast: false,
             dayUrl: $(this.selectors.channelDayContainer).data('day-base-url') + '?date=' + date,
-            resetScroll: true
+            resetScroll: true,
+            callback: function() {
+                that.loadNewTabBar(date);
+            }
         });
-        this.loadNewTabBar(date);
     },
 
     stripTimezone: function(date) {
@@ -385,7 +388,7 @@ changeDateTab.prototype = {
         window.console && console.log('Disable scrollnext');
         $(this.selectors.days).off('scrollnext', this.scrollnext);
 
-        window.console && console.log('Disbale day tab activate');
+        window.console && console.log('Disable day tab activate');
         $(this.selectors.days).off('activate', this.activateTab);
 
         window.console && console.log('Disable day tab click');
@@ -443,7 +446,7 @@ changeDateTab.prototype = {
         window.console && console.log('Disable scrollnext');
         $(this.selectors.days).off('scrollnext', this.scrollnext);
 
-        window.console && console.log('Disabel click-and-drag');
+        window.console && console.log('Disable click-and-drag');
         this.selectors.clickAndDrag.stop();
         var that = this;
         $.ajax(opts.dayUrl, {
