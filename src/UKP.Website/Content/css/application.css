@@ -1,4 +1,8 @@
-﻿/* Keep end time timepicker within view */
+﻿.time {
+    text-transform: lowercase;
+}
+
+/* Keep end time timepicker within view */
 .end-time .dropdown-menu {
     left: -48px;
 }
@@ -77,6 +81,7 @@ ol.channel-list li::before {
     width: 2880px;
     float: left;
     clear: none;
+    position: relative;
 }
 
 .timeline {
