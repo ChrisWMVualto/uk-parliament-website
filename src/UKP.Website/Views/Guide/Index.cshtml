@@ -1,0 +1,167 @@
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@model UKP.Website.Models.Guide.GuideViewModel
+
+<div class="container main-container">
+    <div class="row">
+        <div class="col-md-12 title-container">
+            <header class="title-main title-guide"><h2><i class="fa fa-guide fa-lg"></i> <span>Event Guide</span></h2> <a href="#" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+        </div>
+
+        <div class="col-md-12">
+            <div class="epg-outer">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="jump-container">
+                            
+                            <div class="date-nav" data-start-date="@Configuration.GetEpgStartDate.ToLocalTime().Date.ToISO8601String()">
+                                <div class="input-group bootstrap-datepicker">
+                                    <span class="date-picker">
+                                        <input type="text" class="form-control hidden">
+                                        <button type="button" class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></button>
+                                    </span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-less" id="epgDateScrollLeft"><i class="fa fa-arrow-left-thin  fa-2x"></i></button></span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-more" id="epgDateScrollRight"><i class="fa fa-arrow-right-thin fa-2x"></i></button></span>
+                                </div>
+                            </div>
+
+                            <div class="time-nav">
+                                <div class="input-group bootstrap-timepicker">
+                                    <input id="epgTimepicker" type="text" class="form-control hidden">
+                                    <button type="button" class="input-group-addon">
+                                        <i class="fa fa-time fa-2x"></i>
+                                    </button>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-less" id="epgTimeScrollLeft"><i class="fa fa-arrow-left-thin  fa-2x"></i></button></span>
+                                    <span class="hidden-xs"><button type="button" class="btn btn-more" id="epgTimeScrollRight"><i class="fa fa-arrow-right-thin fa-2x"></i></button></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @Html.Partial(MVC.Guide.Views._DateTabs, Model.BaseDate)
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="drag-wrap">
+
+                <div class="stream-container-outer">
+
+                    <div class="shadow-right">
+                    </div>
+
+                    <ol class="channels">
+                        <li class="channel-1 commons">
+                            <span class="channel-name">Commons Chamber</span>
+                            <span class="channel-number">1</span>
+                        </li>
+                        <li class="channel-2 lords">
+                            <span class="channel-name">Lords Chamber</span>
+                            <span class="channel-number">2</span>
+                        </li>
+                        <li class="channel-3 commons">
+                            <span class="channel-name">Westminster Hall</span>
+                            <span class="channel-number">3</span>
+                        </li>
+                        <li class="channel-4 lords">
+                            <span class="channel-name">Lords Grand Committee</span>
+                            <span class="channel-number">4</span>
+                        </li>
+                        <li class="channel-5">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">5</span>
+                        </li>
+                        <li class="channel-6">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">5</span>
+                        </li>
+                        <li class="channel-5">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">6</span>
+                        </li>
+                        <li class="channel-7">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">7</span>
+                        </li>
+                        <li class="channel-8">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">8</span>
+                        </li>
+                        <li class="channel-9">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">9</span>
+                        </li>
+                        <li class="channel-10">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">10</span>
+                        </li>
+                        <li class="channel-11">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">11</span>
+                        </li>
+                        <li class="channel-12">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">12</span>
+                        </li>
+                        <li class="channel-13">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">13</span>
+                        </li>
+                        <li class="channel-14">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">14</span>
+                        </li>
+                        <li class="channel-5">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">15</span>
+                        </li>
+                        <li class="channel-5">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">15</span>
+                        </li>
+                        <li class="channel-16">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">16</span>
+                        </li>
+                        <li class="channel-17">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">17</span>
+                        </li>
+                        <li class="channel-18">
+                            <span class="channel-name">Parliament</span>
+                            <span class="channel-number">18</span>
+                        </li>
+                    </ol>
+
+
+                    <div class="stream-container-inner">
+                        <div class="timeline clearfix">
+                            <ol class="clearfix">
+                                @Html.Partial(MVC.Guide.Views._ChannelTimes)
+                                @Html.Partial(MVC.Guide.Views._ChannelTimes)
+                            </ol>
+                        </div>
+
+                        <div class="live-now" style="left: @Model.LivePosition()px" data-start-position="@Model.LivePosition()">
+                            <div class="play-line">
+                                <span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="channel-day-container" data-day-base-url="@Url.Action(MVC.Guide.EpgDay())">
+                            @Html.Partial(MVC.Guide.Views._ChannelListing, Model)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="@Url.Content("~/Content/js/vendor/dragscrollable.mod.js")"></script>
+    <script src="@Url.Content("~/Content/js/guide.js")"></script>
+}
