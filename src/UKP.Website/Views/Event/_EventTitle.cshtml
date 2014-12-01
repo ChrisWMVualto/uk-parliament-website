@@ -3,7 +3,12 @@
 @model VideoModel
 
 <header class="col-md-10">
-    <h3>@Model.Event.Title</h3>
+    <h3>@Model.Event.Title
+        @if(Model.RequestedOutPoint.HasValue)
+        {
+            <text> - EXTRACT</text>
+        }
+    </h3>
     <h4>
         @if(Model.Event.States.PlayerState == PlayerEventState.PRELIVE)
         {
