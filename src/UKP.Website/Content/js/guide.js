@@ -163,6 +163,7 @@ changeDateTab.prototype = {
             dragSelector: '*'
         });
 
+        window.console && console.log('Initial Event Bindings');
         $(this.selectors.streamContainer).on('scroll', $.proxy(this.scrollHandler, this));
         $(this.selectors.days).on('scrollnext', $.proxy(this.scrollnext, this));
         $(this.selectors.epgNextButton).on('click', $.proxy(this.changeTab, this));
@@ -178,7 +179,7 @@ changeDateTab.prototype = {
 
     datepickerChange: function(event) {
         var date = this.stripTimezone(event.date).toISOString();
-        window.console && console.log('Change to datepicker date: ' + date);
+        //window.console && console.log('Change to datepicker date: ' + date);
 
         this.fetchContent({
             clear: true,
@@ -223,13 +224,17 @@ changeDateTab.prototype = {
             return;
 
 
-        window.console && console.log('Left position of ' + leftPosition + ' is being compared to a upper limit of ' + upperLimit + ' and a lower limit of ' + this.settings.limits.lower);
+        //window.console && console.log('Left position of ' + leftPosition + ' is being compared to a upper limit of ' + upperLimit + ' and a lower limit of ' + this.settings.limits.lower);
 
-        if (leftPosition >= upperLimit && this.state.rightTab)
+        if (leftPosition >= upperLimit && this.state.rightTab) {
+            window.console && console.log('Trigger scrollnext');
             $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('scrollnext', [true, this]);
+        }
 
-        if ((leftPosition <= this.settings.limits.lower && this.state.leftTab) && this.activeTabIndex() > 0)
+        if ((leftPosition <= this.settings.limits.lower && this.state.leftTab) && this.activeTabIndex() > 0) {
+            window.console && console.log('Trigger scrollnext');
             $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('scrollnext', [false, this]);
+        }
 
         if (centerLimit != null) {
             if (leftPosition < centerLimit && this.state.rightTab)
@@ -245,7 +250,7 @@ changeDateTab.prototype = {
     },
 
     scrollnext: function(e, append) {
-        window.console && console.log('Checking for next day: ' + $(e.target).data('day'));
+        //window.console && console.log('Checking for next day: ' + $(e.target).data('day'));
 
         if ($(this.selectors.channelDayContainer).find('[data-day=\'' + $(e.target).data('day') + '\']').length == 0) {
             this.fetchContent({
@@ -262,11 +267,15 @@ changeDateTab.prototype = {
     ///
 
     changeTab: function(e) {
-        if ($(e.target.parentElement).attr('id') == $(this.selectors.epgNextButton).attr('id'))
+        if ($(e.target.parentElement).attr('id') == $(this.selectors.epgNextButton).attr('id')) {
+            window.console && console.log('Trigger day tab click');
             $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('click', this);
+        }
 
-        if ($(e.target.parentElement).attr('id') == $(this.selectors.epgPrevButton).attr('id'))
+        if ($(e.target.parentElement).attr('id') == $(this.selectors.epgPrevButton).attr('id')) {
+            window.console && console.log('Trigger day tab click');
             $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('click', this);
+        }
     },
 
     dayClicked: function(e) {
@@ -276,6 +285,7 @@ changeDateTab.prototype = {
         while (typeof day.data('day') === 'undefined')
             day = day.parent();
 
+        window.console && console.log('Trigger day tab activate');
         day.trigger('activate', this);
 
         this.fetchContent({
@@ -303,15 +313,16 @@ changeDateTab.prototype = {
         while (typeof day.data('day') === 'undefined')
             day = day.parent();
 
-        window.console && console.log('Activate tab: ' + day.data('day'));
+        //window.console && console.log('Activate tab: ' + day.data('day'));
 
         $(this.selectors.days).removeClass(this.settings.activeClass);
         day.addClass(this.settings.activeClass);
     },
 
     advanceTab: function() {
-        window.console && console.log('Advance tab');
+        //window.console && console.log('Advance tab');
 
+        window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('activate', this);
         this.state.rightTab = true;
         this.state.leftTab = false;
@@ -320,8 +331,9 @@ changeDateTab.prototype = {
     },
 
     devanceTab: function() {
-        window.console && console.log('Devance tab');
+        //window.console && console.log('Devance tab');
 
+        window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('activate', this);
         this.state.rightTab = false;
         this.state.leftTab = true;
@@ -329,16 +341,21 @@ changeDateTab.prototype = {
         this.loadNewTab($(this.selectors.days).first(), true);
     },
 
-    loadNewTab: function(closestDate, previousDay) {
+    loadNewTab: function (closestDate, previousDay) {
+        window.console && console.log('Disable scrollnext');
         $(this.selectors.days).off('scrollnext', this.scrollnext);
+
+        window.console && console.log('Disable tab activate');
         $(this.selectors.days).off('activate', this.activateTab);
+
+        window.console && console.log('Disable day click');
         $(this.selectors.days).off('click', this.dayClicked);
 
         var url = $(this.selectors.daysContainer).data('day-tab-url');
         url += '?date=' + closestDate.data('day');
         url += '&previousDay=' + previousDay;
 
-        window.console && console.log('Loading new day tab: ' + url);
+        //window.console && console.log('Loading new day tab: ' + url);
 
         var that = this;
         $.ajax(url, {
@@ -352,23 +369,32 @@ changeDateTab.prototype = {
                 }
             },
             complete: function () {
-                window.console && console.log('Rebinding event handlers');
+                window.console && console.log('Enable scrollnext');
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
+
+                window.console && console.log('Enable day tab activate');
                 $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
+
+                window.console && console.log('Enable day tab click');
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
             }
         });
     },
 
-    loadNewTabBar: function(date) {
+    loadNewTabBar: function (date) {
+        window.console && console.log('Disable scrollnext');
         $(this.selectors.days).off('scrollnext', this.scrollnext);
+
+        window.console && console.log('Disbale day tab activate');
         $(this.selectors.days).off('activate', this.activateTab);
+
+        window.console && console.log('Disable day tab click');
         $(this.selectors.days).off('click', this.dayClicked);
 
         var url = $(this.selectors.daysContainer).data('date-bar-url');
         url += '?date=' + date;
 
-        window.console && console.log('Loading new date bar: ' + url);
+        //window.console && console.log('Loading new date bar: ' + url);
         var that = this;
         $.ajax(url, {
             success: function (data) {
@@ -378,13 +404,18 @@ changeDateTab.prototype = {
                 that.liveline();
             },
             error: function () {
+                window.console && console.log('Enable day tab click');
                 $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
                 $(that.selectors.days).eq(that.activeTabIndex() + 1).trigger('activate', that);
             },
             complete: function () {
-                window.console && console.log('Rebinding event handlers');
+                window.console && console.log('Enable day tab activate');
                 $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
+
+                window.console && console.log('Enable scrollnext');
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
+
+                window.console && console.log('Enable day tab click');
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
                 that.selectors.clickAndDrag.start();
             }
@@ -406,12 +437,18 @@ changeDateTab.prototype = {
             resetScroll: false
         }, options);
 
+        window.console && console.log('Disable scroll');
         $(this.selectors.streamContainer).off('scroll', this.scrollHandler);
+
+        window.console && console.log('Disable scrollnext');
+        $(this.selectors.days).off('scrollnext', this.scrollnext);
+
+        window.console && console.log('Disabel click-and-drag');
         this.selectors.clickAndDrag.stop();
         var that = this;
         $.ajax(opts.dayUrl, {
             success: function (data) {
-                window.console && console.log('Load day:' + opts.dayUrl);
+                //window.console && console.log('Load day:' + opts.dayUrl);
 
 
                 if (opts.clear)
@@ -433,7 +470,7 @@ changeDateTab.prototype = {
                 var numDaysLoaded = $(that.selectors.channelDayContainer).children().length;
                 $(that.selectors.channelDayContainer).width(that.settings.baseWidth * numDaysLoaded);
                 $(that.selectors.timeline).width((that.settings.baseWidth * numDaysLoaded) + 40);
-                window.console && console.log('Set channel day container width ' + (that.settings.baseWidth * numDaysLoaded));
+                //window.console && console.log('Set channel day container width ' + (that.settings.baseWidth * numDaysLoaded));
 
                 if ((opts.append && opts.removePast) || opts.clear || (opts.append && !opts.removePast)) {
                     that.state.leftTab = true;
@@ -448,6 +485,7 @@ changeDateTab.prototype = {
 
                 that.liveline();
 
+                window.console && console.log('Enable disableTouch');
                 $(document).on('touchstart', $.proxy(that.disableTouch, that));
                 var scrollAmount;
 
@@ -463,7 +501,7 @@ changeDateTab.prototype = {
                 else
                     scrollAmount = $(that.selectors.streamContainer).scrollLeft();
 
-                window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
+                //window.console && console.log('Setting scrollLeft() value to ' + scrollAmount);
 
                 // More stable than jQuery method
                 document.getElementsByClassName('stream-container-inner')[0].scrollLeft = scrollAmount;
@@ -471,20 +509,29 @@ changeDateTab.prototype = {
                 // Force iOS/Android to redraw
                 $(that.selectors.streamContainer).hide().show(0);
 
+                window.console && console.log('Disable disableTouch');
                 $(document).off('touchstart', that.disableTouch);
                 that.setIndexes();
             },
             complete: function () {
-                window.console && console.log('Rebinding event handlers');
+                //window.console && console.log('Rebinding event handlers');
+                window.console && console.log('Enable scroll');
                 $(that.selectors.streamContainer).on('scroll', $.proxy(that.scrollHandler, that));
+
+                window.console && console.log('Enable click-and-drag');
                 that.selectors.clickAndDrag.start();
+
+                window.console && console.log('Enable EPG Info');
                 $(that.selectors.epgInfoLink).on('click', $.proxy(that.showEpgInfo, that));
+
+                window.console && console.log('Enable scrollnext');
+                $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
             }
         });
     },
 
     liveline: function() {
-        window.console && console.log('Checking live line status');
+        //window.console && console.log('Checking live line status');
 
         if ($(this.selectors.days + '.' + this.settings.activeClass + '.' + this.settings.todayClass).length)
             $(this.selectors.liveline).show();
