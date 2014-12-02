@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>OpenTelly HLS-player</title>
+    <style>
+        #player, .video-player {
+            width: 853px;
+            height: 480px;
+        }
+    </style>
+
+    <link href="css/player.css" rel="stylesheet">
+    </head>
+    <body>
+        <video class="video-player" src="http://nafw-live.hls.adaptive.level3.net/a/35764a19-6abe-4e5f-ad7b-969dd154e19a/interpretation/interpretation.isml/interpretation.m3u8?t=2014-11-19T13:30:19" preload="none" controls="controls">
+        </video>
+
+        <div class="description">
+            The current program-date-time is: <span id="currentProgramDateTime" style="color: #f00;">empty</span><br />
+        </div>
+
+        <script>
+            theoplayer = {
+                configuration : {
+                    allowManualQualitySwitch : true
+                }
+            };
+        </script>
+
+        <script type="text/javascript" src="http://cdn.theoplayer.com/60ddaae0-2c60-11e4-8c21-0800200c9a66.js"></script>
+
+        <script>
+            var downloadControl;
+            setTimeout(function () {
+                var container = document.getElementById('currentProgramDateTime'),
+                    player = theoplayer.players[0];
+
+
+                player.addEventListener('timeupdate', function () {
+                    container.innerHTML = JSON.stringify(player.currentProgramDateTime);
+                });
+
+                player.play();
+
+                // In order to seek to a specific program-date-time, you can set a date-object on the currentProgramDateTime-property:
+                //player.currentProgramDateTime = new Date('2014-10-24T09:01:23+02:00');
+
+                Node.prototype.addClass = function(className) {
+                    this.classList.add(className);
+                    return this;
+                }
+
+                Node.prototype.addAttr = function(key, value) {
+                    this.setAttribute(key, value);
+                    return this;
+                }
+
+                downloadControl = document.createElement('div').addClass('vjs-download-control').addClass('vjs-control').addAttr('role', 'button').addAttr('aria-live', 'polite').addAttr('tabindex', 0);
+                var downloadControlInner = new Array(
+                    document.createElement('div').addClass('vjs-control-content'),
+                    document.createElement('span').addClass('vjs-control-text'),
+                    document.createTextNode("Download")
+                );
+
+                downloadControlInner[1].appendChild(downloadControlInner[2]);
+                downloadControlInner[0].appendChild(downloadControlInner[1]);
+                downloadControl.appendChild(downloadControlInner[0]);
+
+                var videos = document.getElementsByClassName('vjs-control-bar')[0].appendChild(downloadControl);
+            }, 500);
+        </script>
+    </body>
+</html>
