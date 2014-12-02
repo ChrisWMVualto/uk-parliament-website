@@ -118,6 +118,8 @@ $(function () {
         var sentTime = new Date(messageSplit[1]);
         $('#ProgramDateTime').val(sentTime.toISOString());
 
+        console.log(sentTime.toISOString());
+
         highlightLogItems(sentTime);
 
     });
