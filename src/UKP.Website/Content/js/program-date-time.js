@@ -3,10 +3,9 @@ var stackPos = 'top';
 var playerTempTime;
 
 
-function scrollStack() {
+function scrollStackAndLogs() {
     if ($(".stack").length) {
 
-        // TODO
         $('.stack-and-logs').removeClass('stack-and-logs');
 
         $('.stack').slimScroll({
@@ -27,7 +26,7 @@ function scrollStack() {
     }
 }
 
-function scrollStackToBottom() {
+function scrollStackAndLogsToBottom() {
     var scrollToVal = $('.stack').prop('scrollHeight') + 'px';
     $('.stack').slimScroll({ scrollTo: scrollToVal });
 }
@@ -42,7 +41,7 @@ function appendLogMoments() {
         $('.stack > ol ').append(data);
 
         if (data.length > 0 || data) {
-            scrollStackToBottom();
+            scrollStackAndLogsToBottom();
         }     
     });
 }
@@ -51,9 +50,26 @@ function refreshLogMoments() {
 
     var logUrl = $('#eventStackContainer').data("refresh-stack-url");
     $.get(logUrl, null, function (data) {
-
         $('#eventStackContainer ol').html(data);
-        scrollStackToBottom();
+        scrollStackAndLogsToBottom();
+    });
+}
+
+function highlightLogItems(sentTime) {
+
+    var logItems = $('.stack > ol li');
+    logItems.removeClass('active');
+
+    logItems.each(function (index, item) {
+
+        var logItem = $(item);
+        var thisTime = new Date(logItem.find('.time-code').data('time'));
+
+        if (sentTime >= thisTime) {
+            $(logItems[index - 1]).removeClass('active');
+            logItem.addClass('active');
+            return;
+        }
     });
 }
 
@@ -65,16 +81,13 @@ $(function () {
 
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
         if (eventId == changedId) {
-
-            
+   
             if ($('#ContainsLogMoments').val() == 'False') {
                 $('#ContainsLogMoments').val('True');
                 refreshLogMoments();
-                console.log('firstime');
                 return;
             }
-            console.log(logUpdateType);
-            
+
             if (logUpdateType == 'Add') {
                 appendLogMoments();
             } else {
@@ -85,7 +98,7 @@ $(function () {
 
     $.connection.hub.start().done(function () { });
 
-    scrollStack();
+    scrollStackAndLogs();
 
 
     $('.log-moment').click(function (e) {
@@ -102,19 +115,11 @@ $(function () {
         if (messageSplit.length < 2) return;
         if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
 
-        $('#ProgramDateTime').val(messageSplit[1]);
-        var sentTime = Date.parse(messageSplit[1]);
+        var sentTime = new Date(messageSplit[1]);
+        $('#ProgramDateTime').val(sentTime.toISOString());
 
-        var logs = $('.stack > ol').children().toArray();
-        for (var i = 0; i <= logs.length; i++) {
-            var thisTime = Date.parse($(logs[i]).find('.time-code').data('time'));
-            var nextTime = i == logs.length ? Date.now() : Date.parse($(logs[i + 1]).find('.time-code').data('time'));
-            if (sentTime >= thisTime && sentTime < nextTime) {
-                $(logs[i]).addClass('active');
-            } else {
-                $(logs[i]).removeClass('active');
-            }
-        }
+        highlightLogItems(sentTime);
+
     });
 
     $('.btn-moment-expand').on('click', function () {
