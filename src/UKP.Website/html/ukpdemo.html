@@ -75,20 +75,6 @@
                 }
                 overrideTheoplayerPlayTime(new Date());
 
-                downloadControl = document.createElement('div').addClass('vjs-download-control').addClass('vjs-control').addAttr('role', 'button').addAttr('aria-live', 'polite').addAttr('tabindex', 0);
-                var downloadControlInner = new Array(
-                    document.createElement('div').addClass('vjs-control-content'),
-                    document.createElement('span').addClass('vjs-control-text'),
-                    document.createTextNode("Download")
-                );
-
-                downloadControlInner[1].appendChild(downloadControlInner[2]);
-                downloadControlInner[0].appendChild(downloadControlInner[1]);
-                downloadControl.appendChild(downloadControlInner[0]);
-
-                var videos = document.getElementsByClassName('vjs-control-bar')[0].appendChild(downloadControl);
-
-
                 /*var videos = document.getElementsByClassName('theoplayer');
                 for (var i = 0; i < videos.length; i++) {
                     var video = videos[i];
