@@ -56,6 +56,25 @@
                     return this;
                 }
 
+                function overrideTheoplayerPlayTime(datetime) {
+                    var timestring = ("0" + datetime.getHours()).slice(-2);
+                    timestring += ':';
+                    timestring += ("0" + datetime.getMinutes()).slice(-2);
+                    timestring += ':';
+                    timestring += ("0" + datetime.getSeconds()).slice(-2);
+
+                    var timeContainers = document.getElementsByClassName('vjs-current-time vjs-time-controls')[0].getElementsByClassName('vjs-current-time-display');
+                    if (timeContainers.length === 1) {
+                        var replacement = document.createElement('div').addClass('vjs-current-time-display').addClass('override-replacement').addAttr('aria-live', 'off');
+                        document.getElementsByClassName('vjs-current-time vjs-time-controls')[0].appendChild(replacement);
+                        timeContainers[0].addAttr('style', 'display: none;');
+                        timeContainers = document.getElementsByClassName('vjs-current-time-display');
+                    }
+
+                    timeContainers[1].textContent = timestring;
+                }
+                overrideTheoplayerPlayTime(new Date());
+
                 downloadControl = document.createElement('div').addClass('vjs-download-control').addClass('vjs-control').addAttr('role', 'button').addAttr('aria-live', 'polite').addAttr('tabindex', 0);
                 var downloadControlInner = new Array(
                     document.createElement('div').addClass('vjs-control-content'),
@@ -68,6 +87,18 @@
                 downloadControl.appendChild(downloadControlInner[0]);
 
                 var videos = document.getElementsByClassName('vjs-control-bar')[0].appendChild(downloadControl);
+
+
+                /*var videos = document.getElementsByClassName('theoplayer');
+                for (var i = 0; i < videos.length; i++) {
+                    var video = videos[i];
+
+                    var qualitySettings = video.getElementsByClassName('theoplayer-resolution-button')[0].getElementsByClassName('vjs-menu-item');
+                    qualitySettings[0].textContent = "High";
+                    qualitySettings[1].textContent = "Medium";
+                    qualitySettings[2].textContent = "Low";
+                }*/
+
             }, 500);
         </script>
     </body>
