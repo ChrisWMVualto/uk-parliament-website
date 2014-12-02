@@ -37,6 +37,10 @@ $(document).ready(function () {
         $('.bootstrap-timepicker-widget.dropdown-menu').show();
     });
 
+    $('.channel-day-container').on('click', function () {
+        $('.datepicker').datepicker('hide');
+    });
+
 
     ////////////////////////////////////////////
     //epg-day tabs
