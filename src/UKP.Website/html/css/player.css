@@ -10,7 +10,6 @@
 .vjs-default-skin .vjs-fullscreen-control,
 .vjs-default-skin .vjs-mute-control,
 .vjs-default-skin .vjs-volume-menu-button,
-.vjs-default-skin .vjs-download-control,
 .vjs-default-skin .theoplayer-resolution-button {
     color: #333333;
     text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
@@ -39,8 +38,8 @@
 }
 
 .vjs-default-skin .vjs-progress-control {
-    left: 90px;
-    right: 262px;
+    left: 93px;
+    right: 224px;
 }
 
 .vjs-default-skin .vjs-volume-control {
@@ -97,15 +96,6 @@
 
 .vjs-default-skin .vjs-control:before {
     text-shadow: none;
-}
-
-.vjs-default-skin .vjs-download-control {
-    position: absolute;
-    right: 0;
-}
-
-.vjs-default-skin .vjs-fullscreen-control {
-    margin-right: 4.5em;
 }
 
 .vjs-default-skin .theoplayer-resolution-button {
