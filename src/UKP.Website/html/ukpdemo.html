@@ -31,6 +31,7 @@
         <script type="text/javascript" src="http://cdn.theoplayer.com/60ddaae0-2c60-11e4-8c21-0800200c9a66.js"></script>
 
         <script>
+            var downloadControl;
             setTimeout(function () {
                 var container = document.getElementById('currentProgramDateTime'),
                     player = theoplayer.players[0];
@@ -44,6 +45,29 @@
 
                 // In order to seek to a specific program-date-time, you can set a date-object on the currentProgramDateTime-property:
                 //player.currentProgramDateTime = new Date('2014-10-24T09:01:23+02:00');
+
+                Node.prototype.addClass = function(className) {
+                    this.classList.add(className);
+                    return this;
+                }
+
+                Node.prototype.addAttr = function(key, value) {
+                    this.setAttribute(key, value);
+                    return this;
+                }
+
+                downloadControl = document.createElement('div').addClass('vjs-download-control').addClass('vjs-control').addAttr('role', 'button').addAttr('aria-live', 'polite').addAttr('tabindex', 0);
+                var downloadControlInner = new Array(
+                    document.createElement('div').addClass('vjs-control-content'),
+                    document.createElement('span').addClass('vjs-control-text'),
+                    document.createTextNode("Download")
+                );
+
+                downloadControlInner[1].appendChild(downloadControlInner[2]);
+                downloadControlInner[0].appendChild(downloadControlInner[1]);
+                downloadControl.appendChild(downloadControlInner[0]);
+
+                var videos = document.getElementsByClassName('vjs-control-bar')[0].appendChild(downloadControl);
             }, 500);
         </script>
     </body>
