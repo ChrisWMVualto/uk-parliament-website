@@ -101,7 +101,7 @@ $(function () {
     scrollStackAndLogs();
 
 
-    $('.log-moment').click(function (e) {
+    $(document).on("click", ".log-moment", function (e) {
         var time = $(this).parent().find('.time-code').data('time');
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
