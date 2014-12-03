@@ -266,15 +266,20 @@ changeDateTab.prototype = {
     ///
 
     changeTab: function(e) {
-        if ($(e.target.parentElement).attr('id') == $(this.selectors.rightDayButton).attr('id')) {
-            window.console && console.log('Trigger day tab click');
-            $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('click', this);
-        }
+        var tab = $(this.selectors.days),
+            index = this.activeTabIndex(),
+            clickedId = $(e.target.parentElement).attr('id');
 
-        if ($(e.target.parentElement).attr('id') == $(this.selectors.leftDayButton).attr('id')) {
-            window.console && console.log('Trigger day tab click');
-            $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('click', this);
-        }
+        if (typeof clickedId === 'undefined')
+            clickedId = $(e.target.parentElement).find('button').attr('id');
+
+        if (clickedId == this.selectors.rightDayButton.replace('#', ''))
+            index++;
+
+        else
+            index--;
+
+        tab.eq(index).trigger('click');
     },
 
     dayClicked: function(e) {
