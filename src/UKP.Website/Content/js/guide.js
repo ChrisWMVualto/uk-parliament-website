@@ -3,7 +3,9 @@
     resizing = false;
 
 $(document).ready(function () {
-
+    $('.btn').mouseup(function() {
+        $(this).blur();
+    });
 
     ////////////////////////////////////////////
     //epg-slimscroll details alert stack area
