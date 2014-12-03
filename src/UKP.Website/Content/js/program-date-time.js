@@ -1,4 +1,5 @@
 ﻿var stackPos = 'top';
+var scrollTimeoutId = null;
 
 function scrollStackAndLogs() {
     if ($(".stack").length) {
@@ -23,11 +24,28 @@ function scrollStackAndLogs() {
     }
 }
 
+
 function scrollStacksAndLogsToActiveItem() {
+
+    if (!$(".stack > ol > li.active").length) return;
+
     var relativeY = $(".stack > ol > li.active").offset().top - $(".stack > ol").offset().top;
     $('.stack').slimScroll({ scrollTo: relativeY + 'px' });
 }
 
+
+function scrollTimer() {
+    clearInterval(scrollTimeoutId);
+    scrollTimeoutId = setInterval(scrollStacksAndLogsToActiveItem, 10000);
+}
+
+function autoScrollStackAndLogs() {
+    scrollTimer();
+
+    $('#eventStackContainer').on('mousemove', function () {
+        scrollTimer();
+    });
+}
 
 function appendLogMoments() {
 
@@ -48,7 +66,7 @@ function refreshLogMoments() {
 
 function highlightLogItems(sentTime) {
 
-    var logItems = $('.stack > ol li');
+    var logItems = $('.stack > ol li.logMoment');
     logItems.removeClass('active');
 
     logItems.each(function (index, item) {
@@ -62,8 +80,6 @@ function highlightLogItems(sentTime) {
             return;
         }
     });
-
-    scrollStacksAndLogsToActiveItem();
 }
 
 
@@ -74,7 +90,7 @@ $(function () {
 
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
         if (eventId == changedId) {
-   
+
             if ($('#ContainsLogMoments').val() == 'False') {
                 $('#ContainsLogMoments').val('True');
                 refreshLogMoments();
@@ -92,7 +108,7 @@ $(function () {
     $.connection.hub.start().done(function () { });
 
     scrollStackAndLogs();
-
+    autoScrollStackAndLogs();
 
     $(document).on("click", ".log-moment", function (e) {
         var time = $(this).parent().find('.time-code').data('time');
@@ -110,8 +126,6 @@ $(function () {
 
         var sentTime = new Date(messageSplit[1]);
         $('#ProgramDateTime').val(sentTime.toISOString());
-
-        console.log(sentTime.toISOString());
 
         highlightLogItems(sentTime);
 
