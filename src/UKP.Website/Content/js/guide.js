@@ -273,15 +273,22 @@ changeDateTab.prototype = {
     /// Change Date Buttons
     ///
 
-    changeTab: function(e) {
+    changeTab: function (e) {
+        window.console && console.log('Changing tab....');
+        window.console && console.log('Disable day change arrows');
+        $(this.selectors.epgNextButton).off('click', $.proxy(this.changeTab, this));
+        $(this.selectors.epgPrevButton).off('click', $.proxy(this.changeTab, this));
+
         if ($(e.target.parentElement).attr('id') == $(this.selectors.epgNextButton).attr('id')) {
             window.console && console.log('Trigger day tab click');
             $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('click', this);
-        }
-
-        if ($(e.target.parentElement).attr('id') == $(this.selectors.epgPrevButton).attr('id')) {
+        } else if ($(e.target.parentElement).attr('id') == $(this.selectors.epgPrevButton).attr('id')) {
             window.console && console.log('Trigger day tab click');
             $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('click', this);
+        } else {
+            window.console && console.log('Enable day change arrows');
+            $(this.selectors.epgNextButton).on('click', $.proxy(this.changeTab, this));
+            $(this.selectors.epgPrevButton).on('click', $.proxy(this.changeTab, this));
         }
     },
 
@@ -291,9 +298,6 @@ changeDateTab.prototype = {
         var day = $(e.target);
         while (typeof day.data('day') === 'undefined')
             day = day.parent();
-
-        window.console && console.log('Trigger day tab activate');
-        day.trigger('activate', this);
 
         this.fetchContent({
             clear: true,
@@ -310,7 +314,9 @@ changeDateTab.prototype = {
     ///
 
     activeTabIndex: function() {
-        return $(this.selectors.days).index($(this.selectors.days + ('.' + this.settings.activeClass)));
+        var active = $(this.selectors.days).index($(this.selectors.days + ('.' + this.settings.activeClass)));
+        window.console && console.log('The active tab index is: ' + active);
+        return active;
     },
     
     activateTab: function(e) {
@@ -452,6 +458,11 @@ changeDateTab.prototype = {
 
         window.console && console.log('Disable click-and-drag');
         this.selectors.clickAndDrag.stop();
+
+        window.console && console.log('Disable day change arrows');
+        $(this.selectors.epgNextButton).off('click', $.proxy(this.changeTab, this));
+        $(this.selectors.epgPrevButton).off('click', $.proxy(this.changeTab, this));
+
         var that = this;
         $.ajax(opts.dayUrl, {
             success: function (data) {
@@ -530,6 +541,10 @@ changeDateTab.prototype = {
 
                 window.console && console.log('Enable scrollnext');
                 $(that.selectors.days).on('scrollnext', $.proxy(that.scrollnext, that));
+
+                window.console && console.log('Enable day change arrows');
+                $(that.selectors.epgNextButton).off('click', $.proxy(that.changeTab, that));
+                $(that.selectors.epgPrevButton).off('click', $.proxy(that.changeTab, that));
 
                 if (typeof opts.callback === 'function')
                     opts.callback();
