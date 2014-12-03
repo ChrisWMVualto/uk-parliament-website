@@ -218,6 +218,8 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_StackAndLogs
         {
             public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_EventLogsBetween s_params_EventLogsBetween = new ActionParamsClass_EventLogsBetween();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -227,6 +229,8 @@ namespace UKP.Website.Controllers
         {
             public readonly string id = "id";
             public readonly string startTime = "startTime";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -360,27 +364,31 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void StackAndLogsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void StackAndLogsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult StackAndLogs(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult StackAndLogs(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.StackAndLogs);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            StackAndLogsOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            StackAndLogsOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 
         [NonAction]
-        partial void EventLogsBetweenOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string startTime);
+        partial void EventLogsBetweenOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string startTime, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult EventLogsBetween(System.Guid id, string startTime)
+        public override System.Web.Mvc.PartialViewResult EventLogsBetween(System.Guid id, string startTime, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventLogsBetween);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "startTime", startTime);
-            EventLogsBetweenOverride(callInfo, id, startTime);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            EventLogsBetweenOverride(callInfo, id, startTime, @in, @out);
             return callInfo;
         }
 

@@ -1,9 +1,9 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Service.Model
-@model LogMomentResultModel
-@foreach (var log in Model.Results)
+@model IEnumerable<LogMomentModel>
+@foreach (var log in Model)
 {
-    <li class="">
+    <li class="logMoment">
         <article>
             <span class="vr-stack"></span>
             <button type="button" class="btn btn-moment-expand" data-toggle="collapse" data-target="#@log.Id"><span class="sr-only"></span> <i class="fa fa-plus fa-lg"></i></button>

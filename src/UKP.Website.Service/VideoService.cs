@@ -22,7 +22,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null)
+        public VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null, bool? processLogs = null)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
@@ -31,6 +31,7 @@ namespace UKP.Website.Service
             if(outPoint.HasValue) request.AddParameter("out", outPoint.ToISO8601String());
             if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
             if(autoStart.HasValue) request.AddParameter("autoStart", autoStart.Value);
+            if(processLogs.HasValue) request.AddParameter("processLogs", processLogs.Value);
 
             request.AddParameter("format", "json");
 
@@ -42,33 +43,6 @@ namespace UKP.Website.Service
             }
 
             if(response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new RestSharpException(response);
-            }
-
-            return VideoTransforms.Transform(response.Content);
-        }
-
-        public VideoModel GetVideoWithLogs(Guid id, DateTime? inPoint = null, DateTime? outPoint = null,
-            bool? audioOnly = null, bool? autoStart = null)
-        {
-            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
-            request.AddUrlSegment("id", id.ToString());
-            if (inPoint.HasValue) request.AddParameter("in", inPoint.ToISO8601String());
-            if (outPoint.HasValue) request.AddParameter("out", outPoint.ToISO8601String());
-            if (audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
-            if (autoStart.HasValue) request.AddParameter("autoStart", autoStart.Value);
-            request.AddParameter("processLogs", true);
-            request.AddParameter("format", "json");
-            var response = client.Execute(request);
-
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-
-            if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new RestSharpException(response);
             }
