@@ -88,25 +88,34 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        public virtual PartialViewResult StackAndLogs(Guid id)
+        public virtual PartialViewResult StackAndLogs(Guid id, string @in = null, string @out = null)
         {
-            var video = _videoService.GetVideoWithLogs(id);
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, processLogs: true);
             if (video.LogMoments.ContainsLogMoments)
             {
-                return PartialView(MVC.Event.Views._LogMoment, video.LogMoments);
+                return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results);
             }
             return PartialView(MVC.Event.Views._Stack, video);
         }
 
 
         [HttpGet]
-        public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null)
+        public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;
-            var end = DateTime.Now.AddMinutes(10);
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+            var end = start.AddMinutes(10);
             var logs = _eventService.GetLogsBetween(id, start, end);
-            return PartialView(MVC.Event.Views._LogMoment, logs);
+            var results = logs.Results;
 
+            if(inPoint.HasValue && outPoint.HasValue)
+                results = results.Where(x => x.InPoint >= inPoint.Value.ToUniversalTime() && x.InPoint < outPoint.Value.ToUniversalTime());
+
+            return PartialView(MVC.Event.Views._LogMoment, results);
         }
 
         [HttpGet]

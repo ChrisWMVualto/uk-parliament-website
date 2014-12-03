@@ -1,7 +1,4 @@
-﻿var playerDateTime;
-var stackPos = 'top';
-var playerTempTime;
-
+﻿var stackPos = 'top';
 
 function scrollStackAndLogs() {
     if ($(".stack").length) {
@@ -26,9 +23,9 @@ function scrollStackAndLogs() {
     }
 }
 
-function scrollStackAndLogsToBottom() {
-    var scrollToVal = $('.stack').prop('scrollHeight') + 'px';
-    $('.stack').slimScroll({ scrollTo: scrollToVal });
+function scrollStacksAndLogsToActiveItem() {
+    var relativeY = $(".stack > ol > li.active").offset().top - $(".stack > ol").offset().top;
+    $('.stack').slimScroll({ scrollTo: relativeY + 'px' });
 }
 
 
@@ -36,22 +33,16 @@ function appendLogMoments() {
 
     var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
     var logUrl = $('#eventStackContainer').data("load-new-stack-url");
-
     $.get(logUrl, { startTime: lastLogTime }, function (data) {
-        $('.stack > ol ').append(data);
-
-        if (data.length > 0 || data) {
-            scrollStackAndLogsToBottom();
-        }     
+        $('.stack > ol').append(data);
     });
 }
 
 function refreshLogMoments() {
 
     var logUrl = $('#eventStackContainer').data("refresh-stack-url");
-    $.get(logUrl, null, function (data) {
+    $.get(logUrl, {}, function (data) {
         $('#eventStackContainer ol').html(data);
-        scrollStackAndLogsToBottom();
     });
 }
 
@@ -71,6 +62,8 @@ function highlightLogItems(sentTime) {
             return;
         }
     });
+
+    scrollStacksAndLogsToActiveItem();
 }
 
 

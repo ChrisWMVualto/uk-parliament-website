@@ -4,7 +4,7 @@
 
 <header class="col-md-10">
     <h3>@Model.Event.Title
-        @if(Model.RequestedOutPoint.HasValue)
+        @if(Model.RequestedInPoint.HasValue && Model.RequestedOutPoint.HasValue)
         {
             <text> - EXTRACT</text>
         }
@@ -45,7 +45,7 @@
 </header>
 
 <div class="col-md-2">
-    @if(Model.RequestedOutPoint.HasValue)
+    @if(Model.RequestedInPoint.HasValue && Model.RequestedOutPoint.HasValue)
     {
         <a class="extract-text state-badge pending-badge visible-lg visible-md" href="@Url.Action(MVC.Event.ActionNames.Index, new { id = Model.Event.Id })">
             <span>VIEW FULL EVENT</span>
