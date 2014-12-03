@@ -108,6 +108,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.State);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.HttpStatusCodeResult LogUpdate()
+        {
+            return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.LogUpdate);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventController Actions { get { return MVC.Event; } }
@@ -133,6 +139,7 @@ namespace UKP.Website.Controllers
             public readonly string EventLogsBetween = "EventLogsBetween";
             public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string State = "State";
+            public readonly string LogUpdate = "LogUpdate";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -147,6 +154,7 @@ namespace UKP.Website.Controllers
             public const string EventLogsBetween = "EventLogsBetween";
             public const string LegacyPageRoute = "LegacyPageRoute";
             public const string State = "State";
+            public const string LogUpdate = "LogUpdate";
         }
 
 
@@ -236,6 +244,14 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_State
         {
             public readonly string stateChangeModel = "stateChangeModel";
+        }
+        static readonly ActionParamsClass_LogUpdate s_params_LogUpdate = new ActionParamsClass_LogUpdate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LogUpdate LogUpdateParams { get { return s_params_LogUpdate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LogUpdate
+        {
+            public readonly string logUpdateModel = "logUpdateModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -390,6 +406,18 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.State);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "stateChangeModel", stateChangeModel);
             StateOverride(callInfo, stateChangeModel);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LogUpdateOverride(T4MVC_System_Web_Mvc_HttpStatusCodeResult callInfo, UKP.Website.Models.Event.LogUpdateModel logUpdateModel);
+
+        [NonAction]
+        public override System.Web.Mvc.HttpStatusCodeResult LogUpdate(UKP.Website.Models.Event.LogUpdateModel logUpdateModel)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.LogUpdate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "logUpdateModel", logUpdateModel);
+            LogUpdateOverride(callInfo, logUpdateModel);
             return callInfo;
         }
 
