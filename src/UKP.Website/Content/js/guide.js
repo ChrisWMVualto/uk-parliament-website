@@ -42,10 +42,6 @@ $(document).ready(function () {
         $('.bootstrap-timepicker-widget.dropdown-menu').show();
     });
 
-    $('.channel-day-container').on('click', function () {
-        $('.datepicker').datepicker('hide');
-    });
-
 
     ////////////////////////////////////////////
     //epg-day tabs
@@ -138,7 +134,8 @@ function changeDateTab() {
         epgInfoLink: 'a.info',
         epgPopup: '.epg-info',
         leftDayButton: '#epgDateScrollLeft',
-        rightDayButton: '#epgDateScrollRight'
+        rightDayButton: '#epgDateScrollRight',
+        channelList: '.channel-list'
     }
 
     this.settings = {
@@ -281,8 +278,6 @@ changeDateTab.prototype = {
     },
 
     dayClicked: function(e) {
-        e.preventDefault();
-
         var day = $(e.target),
             that = this;
         while (typeof day.data('day') === 'undefined')
@@ -506,6 +501,10 @@ changeDateTab.prototype = {
                 window.console && console.log('Disable disableTouch');
                 $(document).off('touchstart', that.disableTouch);
                 that.setIndexes();
+
+                $(that.selectors.channelList).on('click', function () {
+                    $('.datepicker-dropdown').remove();
+                });
             },
             error: function() {
                 that.state.leftTab = false;
