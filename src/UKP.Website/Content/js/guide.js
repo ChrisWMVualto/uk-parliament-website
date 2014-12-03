@@ -288,20 +288,20 @@ changeDateTab.prototype = {
     dayClicked: function(e) {
         e.preventDefault();
 
-        var day = $(e.target);
+        var day = $(e.target),
+            that = this;
         while (typeof day.data('day') === 'undefined')
             day = day.parent();
-
-        window.console && console.log('Trigger day tab activate');
-        day.trigger('activate', this);
 
         this.fetchContent({
             clear: true,
             removePast: false,
             dayUrl: day.data('day-view'),
-            resetScroll: true
+            resetScroll: true,
+            callback: function() {
+                that.loadNewTabBar(day.data('day'));
+            }
         });
-        this.loadNewTabBar(day.data('day'));
     },
 
 
