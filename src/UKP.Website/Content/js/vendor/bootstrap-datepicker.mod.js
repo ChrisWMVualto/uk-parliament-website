@@ -423,7 +423,7 @@
 		    if (!this.picker.is(':visible'))
 		        return;
 		    this.focusDate = null;
-		    this.picker.hide(); //.detach();
+		    this.picker.hide().detach();
 		    this._detachSecondaryEvents();
 		    this.viewMode = this.o.startView;
 		    this.showMode();
