@@ -3,7 +3,7 @@
 <ol class="channel-list channel-@Model.ChannelNum">
     @foreach (var item in Model.Events)
     {
-        <li style="width: @item.TemplateWidth(); left: @item.TemplateLeftPosition()" data-id="@item.EventData.Id" data-epg-info="@Url.Action(MVC.Guide.EpgInfo(item.EventData.Id))" @if (@item.SmallItem()) {@Html.Raw("class=\"event\"")}>
+        <li style="width: @item.TemplateWidth(); left: @item.TemplateLeftPosition()" data-id="@item.EventData.Id" data-epg-info="@Url.Action(MVC.Guide.EpgInfo(item.EventData.Id))">
             <div class="outer" style="width: @item.TemplateWidth()">
                 <div class="inner">
                     <a href="#" class="info">
