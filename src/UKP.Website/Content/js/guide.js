@@ -36,6 +36,8 @@ $(document).ready(function () {
     $('.channel-day').on('click', function () {
         //$('.datepicker-dropdown').hide();
         $('.dropdown-menu').hide();
+        $('.bootstrap-timepicker-widget.dropdown-menu').hide();
+        $('.btn').blur();
     });
 
     $('#epgTimepicker').timepicker().on('show.timepicker', function (e) {
