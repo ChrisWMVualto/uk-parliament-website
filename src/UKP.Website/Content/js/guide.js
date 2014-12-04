@@ -34,10 +34,9 @@ $(document).ready(function () {
         }).on('changeTime.timepicker', changeEpgTime);
     }
     $('.channel-day').on('click', function () {
-        //$('.datepicker-dropdown').hide();
+        $('button').blur();
         $('.dropdown-menu').hide();
         $('.bootstrap-timepicker-widget.dropdown-menu').hide();
-        $('.btn').blur();
     });
 
     $('#epgTimepicker').timepicker().on('show.timepicker', function (e) {
