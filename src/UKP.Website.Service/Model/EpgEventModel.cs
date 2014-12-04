@@ -19,7 +19,7 @@ namespace UKP.Website.Service.Model
             
         }
 
-        private int TemplateWidthInt()
+        public int TemplateWidthInt()
         {
             var difference = EventData.DisplayEndDate.Subtract(EventData.DisplayStartDate);
             return EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
