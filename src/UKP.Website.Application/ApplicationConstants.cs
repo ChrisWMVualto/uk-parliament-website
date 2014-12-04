@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace UKP.Website.Application
 {
@@ -16,5 +11,6 @@ namespace UKP.Website.Application
         public const string MerdiemFormat = "tt";
         public static DateTimeFormatInfo DateTimeFormatter = new DateTimeFormatInfo() { AMDesignator = "am", PMDesignator = "pm" };
         public const string AcceptCookieName = "Cookies";
+        public const int EpgHourWidth = 120;
     }
 }
