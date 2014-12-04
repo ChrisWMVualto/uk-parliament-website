@@ -29,6 +29,21 @@
     background: linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
 }
 
+.vjs-default-skin .vjs-play-control:hover,
+.vjs-default-skin .vjs-fullscreen-control:hover,
+.vjs-default-skin .vjs-mute-control:hover,
+.vjs-default-skin .vjs-volume-menu-button:hover,
+.vjs-default-skin .theoplayer-resolution-button:hover {
+    background: rgb(162,213,225) !important;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+) !important;
+    background: -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1))) !important;
+    background: -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
+    background: -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
+    background: -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
+    background: linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
+}
+
 .vjs-default-skin .vjs-progress-control,
 .vjs-default-skin .vjs-volume-control {
     top: 50%;
