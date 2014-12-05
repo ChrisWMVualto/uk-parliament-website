@@ -11627,7 +11627,7 @@ ol.channel-list li.event:hover > div {
   height: 44px;
 }
 .stack ol li.active {
-  background-color: #292c2d;
+  background-color: #d7dfe4;
 }
 .stack ol li:last-child {
   margin-bottom: 0;
