@@ -62,7 +62,6 @@ function appendLogMoments() {
         });
 
         return false;
-
     });
 
     // TODO: old way before reversal
