@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'icons';
+  src: url('/html/fonts/theoplayer/icomoon.eot'); /* IE9 Compat Modes */
+  src: url('/html/fonts/theoplayer/icomoon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/html/fonts/theoplayer/icomoon.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/html/fonts/theoplayer/icomoon.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/html/fonts/theoplayer/icomoon.svg') format('svg'); /* Legacy iOS */
+}
+
 .vjs-default-skin .vjs-control-bar {
     height: 4em;
     background-color: #dbdbdb;
@@ -34,14 +43,64 @@
 .vjs-default-skin .vjs-mute-control:hover,
 .vjs-default-skin .vjs-volume-menu-button:hover,
 .vjs-default-skin .theoplayer-resolution-button:hover {
-    background: rgb(162,213,225) !important;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+) !important;
-    background: -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%) !important;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1))) !important;
-    background: -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
-    background: -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
-    background: -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
-    background: linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
+    background: rgb(162,213,225);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1)));
+    background: -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+}
+
+.vjs-default-skin .vjs-control:before {
+    font-family: icons;
+}
+
+.vjs-default-skin .vjs-play-control:before {
+    content: "\e60b";
+}
+
+.vjs-default-skin.vjs-playing .vjs-play-control:before {
+    content: "\e60c";
+}
+
+.vjs-default-skin .vjs-mute-control:before, 
+.vjs-default-skin .vjs-volume-menu-button:before {
+    content: "\e602";
+}
+
+.vjs-default-skin .vjs-mute-control.vjs-vol-2:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-2:before,
+.vjs-default-skin .vjs-mute-control.vjs-vol-1:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-1:before {
+    content: "\e601";
+}
+
+.vjs-default-skin .vjs-mute-control.vjs-vol-0:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-0:before {
+    content: "\e600";
+}
+
+.vjs-default-skin .vjs-fullscreen-control {
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif");
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.vjs-default-skin .vjs-fullscreen-control:hover {
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1)));
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-position: 50% 50%, 0 0;
+    background-repeat: no-repeat, repeat;
+}
+
+.vjs-default-skin .vjs-fullscreen-control:before {
+    content: none;
 }
 
 .vjs-default-skin .vjs-menu-button .vjs-menu .vjs-menu-content {
