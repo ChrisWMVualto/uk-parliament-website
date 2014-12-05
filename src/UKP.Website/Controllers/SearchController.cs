@@ -50,8 +50,8 @@ namespace UKP.Website.Controllers
                                   Start = fromDate,
                                   End = toDate,
                                   Member = member,
-                                  BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "DisplayTag", "DisplayTag"),
-                                  HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "DisplayTag", "DisplayTag"),
+                                  BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "Tag", "DisplayTag"),
+                                  HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "Tag", "DisplayTag"),
                                   FirstSearchLoad = firstSearchLoad
                               };
 
