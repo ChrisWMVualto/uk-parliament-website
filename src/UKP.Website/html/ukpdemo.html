@@ -138,7 +138,7 @@
                     override.qualitySettings();
                     selectors.buttons.play.injectTooltip('Pause clip');
 
-                    // TEMP HACK
+                    //TODO: REMOVE TEMP HACK
                     var initEvent = new Event('initialized');
                     player.dispatchEvent(initEvent);
                 });
@@ -167,6 +167,17 @@
                     } else {
                         button.injectTooltip('Mute');
                     }
+                });
+
+                // TODO: Currently dependent on video having started playing as initialized event now thrown by theo
+                // Temp workaround.
+                selectors.buttons.fullscreen.addEventListener('mousedown', function() {
+                    var tip = 'Fullscreen';
+
+                    if (selectors.buttons.fullscreen.readTooltip() == 'Fullscreen')
+                        tip = 'Exit fullscreen';
+
+                    selectors.buttons.fullscreen.injectTooltip(tip);
                 });
 
                 player.play();
