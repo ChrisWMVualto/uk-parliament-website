@@ -40,6 +40,14 @@
                 return this;
             }
 
+            Node.prototype.injectTooltip = function(tooltip) {
+                return this.addAttr('title', tooltip);
+            }
+
+            Node.prototype.readTooltip = function() {
+                return this.getAttribute('title');
+            }
+
             function theoplayerOverrides() {}
 
             theoplayerOverrides.prototype = {
@@ -106,7 +114,15 @@
             setTimeout(function () {
                 var container = document.getElementById('currentProgramDateTime'),
                     player = theoplayer.players[0],
-                    override = new theoplayerOverrides();
+                    override = new theoplayerOverrides(),
+                    selectors = {
+                        buttons: {
+                            play: document.querySelector('.vjs-play-control'),
+                            quality: document.querySelector('.theoplayer-resolution-button'),
+                            mute: document.querySelector('.vjs-mute-control'),
+                            fullscreen: document.querySelector('.vjs-fullscreen-control')
+                        }
+                    };
 
 
                 player.addEventListener('timeupdate', function () {
@@ -115,10 +131,16 @@
 
                 player.addEventListener('play', function() {
                     override.qualitySettings();
+                    selectors.buttons.play.injectTooltip('Pause clip');
                 });
 
                 player.addEventListener('playing', function() {
                     override.qualitySettings();
+                    selectors.buttons.play.injectTooltip('Pause clip');
+
+                    // TEMP HACK
+                    var initEvent = new Event('initialized');
+                    player.dispatchEvent(initEvent);
                 });
 
                 player.addEventListener('qualityChanged', function() {
@@ -127,6 +149,24 @@
 
                 player.addEventListener('pause', function() {
                     override.qualitySettings();
+                    selectors.buttons.play.injectTooltip('Play clip');
+                });
+
+                player.addEventListener('initialized', function() {
+                    selectors.buttons.fullscreen.injectTooltip('Fullscreen');
+
+                    var volEvent = new Event('volumechange');
+                    player.dispatchEvent(volEvent);
+                });
+
+                player.addEventListener('volumechange', function() {
+                    var button = selectors.buttons.mute;
+
+                    if (button.classList.contains('vjs-vol-0')) {
+                        button.injectTooltip('Unmute');
+                    } else {
+                        button.injectTooltip('Mute');
+                    }
                 });
 
                 player.play();
