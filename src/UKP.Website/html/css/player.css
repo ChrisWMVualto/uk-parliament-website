@@ -217,3 +217,12 @@
 .vjs-default-skin .theoplayer-resolution-button span {
     font-size: 1.2em;
 }
+
+.vjs-default-skin .vjs-live-display {
+    line-height: 4em;
+    padding-top: 2px;
+}
+
+.theoplayer-skin.theoplayer-dvr.theoplayer-dvr-now .vjs-live-display {
+    color: #000;
+}

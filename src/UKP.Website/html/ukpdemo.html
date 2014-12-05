@@ -13,7 +13,7 @@
     <link href="css/player.css" rel="stylesheet">
     </head>
     <body>
-        <video class="video-player" src="http://10.196.50.54/live/6697bc05-1195-42c3-aa24-0133c70f2a67/live.isml/live.m3u8?t=2014-12-03T15:59:55" preload="none" controls="controls"></video>
+        <video class="video-player" src="http://10.196.50.54/live/6697bc05-1195-42c3-aa24-0133c70f2a67/live.isml/live.m3u8" preload="none" controls="controls"></video>
 
         <div class="description">
             The current program-date-time is: <span id="currentProgramDateTime" style="color: #f00;">empty</span><br />
@@ -40,8 +40,7 @@
                 return this;
             }
 
-            function theoplayerOverrides() {
-            }
+            function theoplayerOverrides() {}
 
             theoplayerOverrides.prototype = {
                 init: function() {
@@ -100,10 +99,7 @@
                     catch(e) {
                         window.setTimeout(that.qualitySettings, 50);
                     }
-                    // qualitySettings[0].textContent = "High";
-                    // qualitySettings[1].textContent = "Medium";
-                    // qualitySettings[2].textContent = "Low";
-                }
+                },
             }
 
             var downloadControl;
@@ -126,6 +122,10 @@
                 });
 
                 player.addEventListener('qualityChanged', function() {
+                    override.qualitySettings();
+                });
+
+                player.addEventListener('pause', function() {
                     override.qualitySettings();
                 });
 
