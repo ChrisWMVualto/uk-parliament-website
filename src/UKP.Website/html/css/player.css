@@ -44,6 +44,43 @@
     background: linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%) !important;
 }
 
+.vjs-default-skin .vjs-menu-button .vjs-menu .vjs-menu-content {
+    color: #999999;
+    box-shadow: none;
+    width: 7em;
+    position: relative;
+    left: 0;
+}
+
+.vjs-default-skin .vjs-menu {
+    border: none;
+    margin-bottom: 0;
+    left: 4em;
+    width: 7em;
+    bottom: 2.2em;
+    left: -1em;
+    height: auto;
+}
+
+.vjs-default-skin .vjs-menu-button ul li {
+    text-align: left;
+    text-transform: capitalize;
+    padding: 3px 5px;
+    border-top: 1px solid #333;
+}
+
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected,
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected:focus, 
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected:hover, 
+.vjs-default-skin .vjs-menu-button ul li:focus, 
+.vjs-default-skin .vjs-menu-button ul li:hover {
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    box-shadow: none;
+    border-top-color: #333;
+}
+
 .vjs-default-skin .vjs-progress-control,
 .vjs-default-skin .vjs-volume-control {
     top: 50%;
