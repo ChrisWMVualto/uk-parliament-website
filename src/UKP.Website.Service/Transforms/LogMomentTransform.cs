@@ -40,7 +40,7 @@ namespace UKP.Website.Service.Transforms
             var id = (Guid)json.log.id;
             var title = (string)json.log.title;
             var thumbnailUrl = (string)json.thumbnailImageUrl;
-            var inPoint = (DateTime)json.inPoint;
+            var inPoint = (DateTime?)json.inPoint;
             var member = (string)json.log.member;
 
             return new LogMomentModel(id, title, thumbnailUrl, inPoint, member);

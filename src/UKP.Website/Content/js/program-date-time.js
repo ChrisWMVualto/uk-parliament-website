@@ -49,11 +49,29 @@ function autoScrollStackAndLogs() {
 
 function appendLogMoments() {
 
+    $($('.stack > ol > li').get().reverse()).each(function (index, item) {
+
+        var lastLogTime = $(item).find('.time-code').data('time');
+        if (lastLogTime == '') {
+            return true;
+        }
+
+        var logUrl = $('#eventStackContainer').data("load-new-stack-url");
+        $.get(logUrl, { startTime: lastLogTime }, function (data) {
+            $(data).insertAfter($(item));
+        });
+
+        return false;
+
+    });
+
+    // TODO: old way before reversal
+    /*
     var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
     var logUrl = $('#eventStackContainer').data("load-new-stack-url");
     $.get(logUrl, { startTime: lastLogTime }, function (data) {
         $('.stack > ol').append(data);
-    });
+    });*/
 }
 
 function refreshLogMoments() {
@@ -89,6 +107,7 @@ $(function () {
     var eventId = $('#eventId').val();
 
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
+
         if (eventId == changedId) {
 
             if ($('#ContainsLogMoments').val() == 'False') {
@@ -96,6 +115,7 @@ $(function () {
                 refreshLogMoments();
                 return;
             }
+
 
             if (logUpdateType == 'Add') {
                 appendLogMoments();
