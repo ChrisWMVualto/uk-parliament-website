@@ -38,6 +38,7 @@
     cursor: pointer;
     font-weight: 400;
     padding: 3px 20px 3px 30px;
+    text-transform:none;
 }
 
 .multiselect-container > li > a > label.radio, .multiselect-container > li > a > label.checkbox {
