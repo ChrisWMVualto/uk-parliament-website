@@ -83,9 +83,14 @@
 }
 
 .vjs-default-skin .vjs-fullscreen-control {
-    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif");
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -moz-linear-gradient(top, rgba(191,191,191,1) 0%, rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,191,191,1)), color-stop(64%,rgba(255,255,255,1)));
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -o-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -ms-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-position: 50% 50%, 0 0;
+    background-repeat: no-repeat, repeat;
 }
 
 .vjs-default-skin .vjs-fullscreen-control:hover {
@@ -216,4 +221,13 @@
 
 .vjs-default-skin .theoplayer-resolution-button span {
     font-size: 1.2em;
+}
+
+.vjs-default-skin .vjs-live-display {
+    line-height: 4em;
+    padding-top: 2px;
+}
+
+.theoplayer-skin.theoplayer-dvr.theoplayer-dvr-now .vjs-live-display {
+    color: #000;
 }
