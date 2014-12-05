@@ -34,8 +34,9 @@ $(document).ready(function () {
         }).on('changeTime.timepicker', changeEpgTime);
     }
     $('.channel-day').on('click', function () {
-        //$('.datepicker-dropdown').hide();
+        $('button').blur();
         $('.dropdown-menu').hide();
+        $('.bootstrap-timepicker-widget.dropdown-menu').hide();
     });
 
     $('#epgTimepicker').timepicker().on('show.timepicker', function (e) {
@@ -371,6 +372,8 @@ changeDateTab.prototype = {
 
                 window.console && console.log('Enable day tab click');
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
+
+                that.liveline();
             }
         });
     },
@@ -411,6 +414,8 @@ changeDateTab.prototype = {
                 window.console && console.log('Enable day tab click');
                 $(that.selectors.days).on('click', $.proxy(that.dayClicked, that));
                 that.selectors.clickAndDrag.start();
+
+                that.liveline();
             }
         });
     },
@@ -478,8 +483,6 @@ changeDateTab.prototype = {
                     that.state.leftTab = false;
                     that.state.rightTab = true;
                 }
-
-                that.liveline();
 
                 window.console && console.log('Enable disableTouch');
                 $(document).on('touchstart', $.proxy(that.disableTouch, that));
