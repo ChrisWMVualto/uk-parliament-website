@@ -51,7 +51,8 @@
                         },
                         player: playerIn
                     };
-                    this.triggerFullscreen();
+                    this.triggerEventFullscreen();
+                    this.triggerEventVolumechange();
                 },
                 playTime: function(date) {
                     var timestring = ("0" + date.getHours()).slice(-2);
@@ -107,13 +108,18 @@
                         window.setTimeout(that.qualitySettings, 50);
                     }
                 },
-                triggerFullscreen: function() {
+                triggerEventFullscreen: function() {
                     this.selectors.player.dispatchEvent(new Event('fullscreen'));
+                },
+                triggerEventVolumechange: function() {
+                    this.selectors.player.dispatchEvent(new Event('volumechange'));
+                },
+                triggerEventQualityChanged: function() {
+                    this.selectors.player.dispatchEvent(new Event('qualityChanged'));
                 },
                 eventPlaying: function() {
                     this.qualitySettings();
                     this.selectors.buttons.play.injectTooltip('Pause clip');
-                    // this.selectors.buttons.quality.injectTooltip('Quality Settings');
 
                     //TODO: REMOVE TEMP HACK
                     // var initEvent = new Event('initialized');
@@ -131,7 +137,7 @@
                     this.selectors.container.innerHTML = JSON.stringify(this.selectors.player.currentProgramDateTime);
                 },
                 eventVolumeChange: function() {
-                    var button = selectors.buttons.mute;
+                    var button = this.selectors.buttons.mute;
 
                     if (button.classList.contains('vjs-vol-0'))
                         button.injectTooltip('Unmute');
@@ -149,6 +155,7 @@
                 },
                 eventQualityChanged: function() {
                     this.qualitySettings();
+                    //this.selectors.buttons.quality.injectTooltip('Quality Settings');
                 }
             }
 
@@ -165,11 +172,11 @@
                     player.addEventListener('playing', override.eventPlaying.bind(override));
                     player.addEventListener('timeupdate', override.eventTimeUpdate.bind(override));
                     player.addEventListener('qualityChanged', override.eventQualityChanged.bind(override));
+                    player.addEventListener('volumechange', override.eventVolumeChange.bind(override));
                     player.addEventListener('fullscreen', override.eventFullscreen.bind(override));
-                    player.addEventListener('qualityChanged', override.eventQualityChanged.bind(override));
 
                     override.init(player);
-                    override.selectors.buttons.fullscreen.addEventListener('mousedown', override.triggerFullscreen.bind(override));
+                    override.selectors.buttons.fullscreen.addEventListener('mousedown', override.triggerFullscreen);
 
                     player.play();
                 }
@@ -179,23 +186,6 @@
         <script type="text/javascript" src="http://cdn.theoplayer.com/60ddaae0-2c60-11e4-8c21-0800200c9a66.js"></script>
 
         <script>
-            // var downloadControl;
-            // setTimeout(function () {
-            //     var container = document.getElementById('currentProgramDateTime'),
-            //         player = theoplayer.players[0],
-            //         override = new theoplayerOverrides(),
-            //         selectors = {
-            //             buttons: {
-            //                 play: document.querySelector('.vjs-play-control'),
-            //                 quality: document.querySelector('.theoplayer-resolution-button'),
-            //                 mute: document.querySelector('.vjs-mute-control'),
-            //                 fullscreen: document.querySelector('.vjs-fullscreen-control')
-            //             }
-            //         };
-                    
-
-                
-
             //     // In order to seek to a specific program-date-time, you can set a date-object on the currentProgramDateTime-property:
             //     //player.currentProgramDateTime = new Date('2014-10-24T09:01:23+02:00');
             //     //override.playTime(new Date());
