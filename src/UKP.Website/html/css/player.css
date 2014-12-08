@@ -104,6 +104,32 @@
     background-repeat: no-repeat, repeat;
 }
 
+@media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
+  .vjs-default-skin .vjs-fullscreen-control {
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -moz-linear-gradient(top, rgba(191,191,191,1) 0%, rgba(255,255,255,1) 64%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,191,191,1)), color-stop(64%,rgba(255,255,255,1)));
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -webkit-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -o-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -ms-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+        background-position: 50% 50%, 0 0;
+        background-repeat: no-repeat, repeat;
+        background-size: 23px 25px;
+    }
+
+    .vjs-default-skin .vjs-fullscreen-control:hover {
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1)));
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+        background-image: url("/html/img/theoplayer/ukp-fullscreen@2x.gif"), linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+        background-position: 50% 50%, 0 0;
+        background-repeat: no-repeat, repeat;
+        background-size: 23px 25px;
+    }
+}
+
 .vjs-default-skin .vjs-fullscreen-control:before {
     content: none;
 }
