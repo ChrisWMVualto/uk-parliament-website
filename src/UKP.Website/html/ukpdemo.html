@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>OpenTelly HLS-player</title>
+    <style>
+        #player, .video-player {
+            width: 853px;
+            height: 480px;
+        }
+    </style>
+
+    <link href="css/player.css" rel="stylesheet">
+    </head>
+    <body>
+        <video class="video-player" src="http://nafw-live.hls.adaptive.level3.net/a/35764a19-6abe-4e5f-ad7b-969dd154e19a/interpretation/interpretation.isml/interpretation.m3u8?t=2014-11-19T13:30:19" preload="none" controls="controls"></video>
+
+        <div class="description">
+            The current program-date-time is: <span id="currentProgramDateTime" style="color: #f00;">empty</span><br />
+        </div>
+
+        <script>
+            Node.prototype.addClass = function(className) {
+                this.classList.add(className);
+                return this;
+            }
+
+            Node.prototype.addAttr = function(key, value) {
+                this.setAttribute(key, value);
+                return this;
+            }
+
+            Node.prototype.injectTooltip = function(tooltip) {
+                return this.addAttr('title', tooltip);
+            }
+
+            Node.prototype.readTooltip = function() {
+                return this.getAttribute('title');
+            }
+
+            function theoplayerOverrides() {}
+            theoplayerOverrides.prototype = {
+                init: function(playerIn) {
+                    this.selectors = {
+                        container: document.getElementById('currentProgramDateTime'),
+                        buttons: {
+                            play: document.querySelector('.vjs-play-control'),
+                            quality: document.querySelector('.theoplayer-resolution-button'),
+                            mute: document.querySelector('.vjs-mute-control'),
+                            fullscreen: document.querySelector('.vjs-fullscreen-control')
+                        },
+                        player: playerIn
+                    };
+                    this.triggerFullscreen();
+                },
+                playTime: function(date) {
+                    var timestring = ("0" + date.getHours()).slice(-2);
+                    timestring += ':';
+                    timestring += ("0" + date.getMinutes()).slice(-2);
+                    timestring += ':';
+                    timestring += ("0" + date.getSeconds()).slice(-2);
+
+                    var timeContainers = document.getElementsByClassName('vjs-current-time vjs-time-controls')[0].getElementsByClassName('vjs-current-time-display');
+                    if (timeContainers.length === 1) {
+                        var replacement = document.createElement('div').addClass('vjs-current-time-display').addClass('override-replacement').addAttr('aria-live', 'off');
+                        document.getElementsByClassName('vjs-current-time vjs-time-controls')[0].appendChild(replacement);
+                        timeContainers[0].addAttr('style', 'display: none;');
+                        timeContainers = document.getElementsByClassName('vjs-current-time-display');
+                    }
+
+                    timeContainers[1].textContent = timestring;
+                },
+                qualitySettings: function() {
+                    var that = this,
+                        qualitySettingNames = [
+                            'Very High',
+                            'High',
+                            'Medium',
+                            'Low'
+                        ];
+
+                    try {
+                        var qualitySettings = document.querySelector('.theoplayer').querySelector('.theoplayer-resolution-button').querySelector('.vjs-menu-content').getElementsByTagName('li');
+                        if (typeof qualitySettings != 'undefined') {
+                            window.console && console.log(qualitySettings);
+
+                            if (qualitySettings.length == 0)
+                                throw('Exception');
+
+                            if (qualitySettings.length == 4)
+                                iQualitySettingName = 1;
+                            else if (qualitySettings.length == 3)
+                                iQualitySettingName = 0;
+
+                            for (var i = 0; i < qualitySettings.length; i++) {
+                                if (qualitySettings[i].innerText != 'auto') {
+                                    qualitySettings[i].innerText = qualitySettingNames[iQualitySettingName];
+                                    iQualitySettingName++;
+                                }
+                            }
+
+                            return;
+                        }
+                        throw('Exception');
+                    }
+                    catch(e) {
+                        window.setTimeout(that.qualitySettings, 50);
+                    }
+                },
+                triggerFullscreen: function() {
+                    this.selectors.player.dispatchEvent(new Event('fullscreen'));
+                },
+                eventPlaying: function() {
+                    this.qualitySettings();
+                    this.selectors.buttons.play.injectTooltip('Pause clip');
+                    // this.selectors.buttons.quality.injectTooltip('Quality Settings');
+
+                    //TODO: REMOVE TEMP HACK
+                    // var initEvent = new Event('initialized');
+                    // player.dispatchEvent(initEvent);
+                },
+                eventPlay: function() {
+                    this.qualitySettings();
+                    this.selectors.buttons.play.injectTooltip('Pause clip');
+                },
+                eventPause: function() {
+                    this.qualitySettings();
+                    this.selectors.buttons.play.injectTooltip('Play clip');
+                },
+                eventTimeUpdate: function() {
+                    this.selectors.container.innerHTML = JSON.stringify(this.selectors.player.currentProgramDateTime);
+                },
+                eventVolumeChange: function() {
+                    var button = selectors.buttons.mute;
+
+                    if (button.classList.contains('vjs-vol-0'))
+                        button.injectTooltip('Unmute');
+                    
+                    else
+                        button.injectTooltip('Mute');
+                },
+                eventFullscreen: function() {
+                    var tip = 'Fullscreen';
+
+                    if (this.selectors.buttons.fullscreen.readTooltip() == 'Fullscreen')
+                        tip = 'Exit fullscreen';
+
+                    this.selectors.buttons.fullscreen.injectTooltip(tip);
+                },
+                eventQualityChanged: function() {
+                    this.qualitySettings();
+                }
+            }
+
+            theoplayer = {
+                configuration : {
+                    allowManualQualitySwitch : true
+                },
+                onReady: function () {
+                    var player = theoplayer.players[0],
+                        override = new theoplayerOverrides();
+
+                    player.addEventListener('pause',  override.eventPause.bind(override));
+                    player.addEventListener('play', override.eventPlay.bind(override));
+                    player.addEventListener('playing', override.eventPlaying.bind(override));
+                    player.addEventListener('timeupdate', override.eventTimeUpdate.bind(override));
+                    player.addEventListener('qualityChanged', override.eventQualityChanged.bind(override));
+                    player.addEventListener('fullscreen', override.eventFullscreen.bind(override));
+                    player.addEventListener('qualityChanged', override.eventQualityChanged.bind(override));
+
+                    override.init(player);
+                    override.selectors.buttons.fullscreen.addEventListener('mousedown', override.triggerFullscreen.bind(override));
+
+                    player.play();
+                }
+            }
+        </script>
+
+        <script type="text/javascript" src="http://cdn.theoplayer.com/60ddaae0-2c60-11e4-8c21-0800200c9a66.js"></script>
+
+        <script>
+            // var downloadControl;
+            // setTimeout(function () {
+            //     var container = document.getElementById('currentProgramDateTime'),
+            //         player = theoplayer.players[0],
+            //         override = new theoplayerOverrides(),
+            //         selectors = {
+            //             buttons: {
+            //                 play: document.querySelector('.vjs-play-control'),
+            //                 quality: document.querySelector('.theoplayer-resolution-button'),
+            //                 mute: document.querySelector('.vjs-mute-control'),
+            //                 fullscreen: document.querySelector('.vjs-fullscreen-control')
+            //             }
+            //         };
+                    
+
+                
+
+            //     // In order to seek to a specific program-date-time, you can set a date-object on the currentProgramDateTime-property:
+            //     //player.currentProgramDateTime = new Date('2014-10-24T09:01:23+02:00');
+            //     //override.playTime(new Date());
+            // }, 500);
+        </script>
+    </body>
+</html>

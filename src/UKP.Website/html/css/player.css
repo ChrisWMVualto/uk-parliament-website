@@ -1,0 +1,233 @@
+@font-face {
+  font-family: 'icons';
+  src: url('/html/fonts/theoplayer/icomoon.eot'); /* IE9 Compat Modes */
+  src: url('/html/fonts/theoplayer/icomoon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/html/fonts/theoplayer/icomoon.woff') format('woff'), /* Pretty Modern Browsers */
+       url('/html/fonts/theoplayer/icomoon.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/html/fonts/theoplayer/icomoon.svg') format('svg'); /* Legacy iOS */
+}
+
+.vjs-default-skin .vjs-control-bar {
+    height: 4em;
+    background-color: #dbdbdb;
+    background: rgba(219,219,219,1);
+    border-top: 1px solid rgba(170,168,168,0.5);
+    border-bottom: 3px solid #ececec;
+}
+
+.vjs-default-skin .vjs-play-control,
+.vjs-default-skin .vjs-fullscreen-control,
+.vjs-default-skin .vjs-mute-control,
+.vjs-default-skin .vjs-volume-menu-button,
+.vjs-default-skin .theoplayer-resolution-button {
+    color: #333333;
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 1px 1px rgba(25, 25, 25, 0.40);
+    margin: .5em;
+    border-radius: .5em;
+    border: 1px solid #ffffff;
+    width: 3em;
+
+    background: #dbdbdb;
+    background: rgb(191,191,191);
+    background: -moz-linear-gradient(top, rgba(191,191,191,1) 0%, rgba(255,255,255,1) 64%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,191,191,1)), color-stop(64%,rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: -o-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: -ms-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background: linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+}
+
+.vjs-default-skin .vjs-play-control:hover,
+.vjs-default-skin .vjs-fullscreen-control:hover,
+.vjs-default-skin .vjs-mute-control:hover,
+.vjs-default-skin .vjs-volume-menu-button:hover,
+.vjs-default-skin .theoplayer-resolution-button:hover {
+    background: rgb(162,213,225);
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…EiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1)));
+    background: -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background: linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+}
+
+.vjs-default-skin .vjs-control:before {
+    font-family: icons;
+}
+
+.vjs-default-skin .vjs-play-control:before {
+    content: "\e60b";
+}
+
+.vjs-default-skin.vjs-playing .vjs-play-control:before {
+    content: "\e60c";
+}
+
+.vjs-default-skin .vjs-mute-control:before, 
+.vjs-default-skin .vjs-volume-menu-button:before {
+    content: "\e602";
+}
+
+.vjs-default-skin .vjs-mute-control.vjs-vol-2:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-2:before,
+.vjs-default-skin .vjs-mute-control.vjs-vol-1:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-1:before {
+    content: "\e601";
+}
+
+.vjs-default-skin .vjs-mute-control.vjs-vol-0:before, 
+.vjs-default-skin .vjs-volume-menu-button.vjs-vol-0:before {
+    content: "\e600";
+}
+
+.vjs-default-skin .vjs-fullscreen-control {
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -moz-linear-gradient(top, rgba(191,191,191,1) 0%, rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,191,191,1)), color-stop(64%,rgba(255,255,255,1)));
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -o-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -ms-linear-gradient(top, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), linear-gradient(to bottom, rgba(191,191,191,1) 0%,rgba(255,255,255,1) 64%);
+    background-position: 50% 50%, 0 0;
+    background-repeat: no-repeat, repeat;
+}
+
+.vjs-default-skin .vjs-fullscreen-control:hover {
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -moz-linear-gradient(top, rgba(162,213,225,1) 0%, rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(162,213,225,1)), color-stop(100%,rgba(125,185,232,1)));
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -webkit-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -o-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), -ms-linear-gradient(top, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-image: url("/html/img/theoplayer/ukp-fullscreen.gif"), linear-gradient(to bottom, rgba(162,213,225,1) 0%,rgba(125,185,232,1) 100%);
+    background-position: 50% 50%, 0 0;
+    background-repeat: no-repeat, repeat;
+}
+
+.vjs-default-skin .vjs-fullscreen-control:before {
+    content: none;
+}
+
+.vjs-default-skin .vjs-menu-button .vjs-menu .vjs-menu-content {
+    color: #999999;
+    box-shadow: none;
+    width: 7em;
+    position: relative;
+    left: 0;
+}
+
+.vjs-default-skin .vjs-menu {
+    border: none;
+    margin-bottom: 0;
+    left: 4em;
+    width: 7em;
+    bottom: 2.2em;
+    left: -1em;
+    height: auto;
+}
+
+.vjs-default-skin .vjs-menu-button ul li {
+    text-align: left;
+    text-transform: capitalize;
+    padding: 3px 5px;
+    border-top: 1px solid #333;
+}
+
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected,
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected:focus, 
+.vjs-default-skin .vjs-menu-button ul li.vjs-selected:hover, 
+.vjs-default-skin .vjs-menu-button ul li:focus, 
+.vjs-default-skin .vjs-menu-button ul li:hover {
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    box-shadow: none;
+    border-top-color: #333;
+}
+
+.vjs-default-skin .vjs-progress-control,
+.vjs-default-skin .vjs-volume-control {
+    top: 50%;
+    margin-top: -.35em;
+    font-size: .9em;
+    height: .9em;
+}
+
+.vjs-default-skin .vjs-progress-control {
+    left: 93px;
+    right: 224px;
+}
+
+.vjs-default-skin .vjs-volume-control {
+    width: 7em;
+    padding: 0 .5em;
+}
+
+.vjs-default-skin .vjs-volume-bar {
+    width: auto;
+    margin: 0;
+    height: 100%;
+}
+
+.vjs-default-skin .vjs-slider {
+    background-color: #888888;
+    background-color: rgb(136,136,136);
+    border: 1px solid #666666;
+}
+
+.vjs-default-skin .vjs-play-progress,
+.vjs-default-skin .vjs-volume-level {
+    background-color: #bee3ed;
+    background-image: none;
+    bottom: 0;
+    height: auto;
+}
+
+.vjs-default-skin .vjs-time-controls {
+    font-size: 1.1em;
+    line-height: 3.9em;
+    color: #333;
+}
+
+.vjs-time-divider,
+.vjs-duration {
+    display: none;
+}
+
+.vjs-default-skin .vjs-slider-handle {
+    width: 4px;
+    height: 1.3em;
+    background: #000;
+    border-radius: 4px;
+    margin-top: -2px;
+}
+
+.vjs-default-skin .vjs-slider-handle:before {
+    content: none;
+}
+
+.vjs-default-skin .vjs-volume-bar .vjs-volume-handle {
+    display: none;
+}
+
+.vjs-default-skin .vjs-control:before {
+    text-shadow: none;
+}
+
+.vjs-default-skin .theoplayer-resolution-button {
+    width: 5em;
+    text-transform: lowercase;
+}
+
+.vjs-default-skin .theoplayer-resolution-button span {
+    font-size: 1.2em;
+}
+
+.vjs-default-skin .vjs-live-display {
+    line-height: 4em;
+    padding-top: 2px;
+}
+
+.theoplayer-skin.theoplayer-dvr.theoplayer-dvr-now .vjs-live-display {
+    color: #000;
+}
