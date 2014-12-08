@@ -115,6 +115,7 @@
                     this.selectors.player.dispatchEvent(new Event('volumechange'));
                 },
                 triggerEventQualityChanged: function() {
+                    this.qualitySettings();
                     this.selectors.player.dispatchEvent(new Event('qualityChanged'));
                 },
                 eventPlaying: function() {
@@ -155,7 +156,11 @@
                 },
                 eventQualityChanged: function() {
                     this.qualitySettings();
-                    //this.selectors.buttons.quality.injectTooltip('Quality Settings');
+
+                    var that = this;
+                    window.setTimeout(function () {
+                        var node = document.querySelector('.theoplayer-resolution-button').injectTooltip('Quality Settings');
+                    }, 1000);
                 }
             }
 
