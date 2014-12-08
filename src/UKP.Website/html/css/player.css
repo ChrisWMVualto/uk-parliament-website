@@ -231,3 +231,41 @@
 .theoplayer-skin.theoplayer-dvr.theoplayer-dvr-now .vjs-live-display {
     color: #000;
 }
+
+.vjs-default-skin.vjs-has-started .vjs-big-play-button {
+    display: block;
+}
+
+.vjs-default-skin.vjs-playing .vjs-big-play-button {
+    display: none;
+}
+
+.theoplayer-skin .vjs-big-play-button,
+.theoplayer-skin .vjs-big-play-button:hover,
+.theoplayer-skin:hover .vjs-big-play-button,
+.theoplayer-skin:focus .vjs-big-play-button {
+    box-shadow: none;
+    background: #8a8886;
+    color: #403c3b;
+    opacity: 0.75;
+
+    width: 2.2em;
+    height: 1.7em;
+    border-radius: .3em;
+    font-size: 4.2em;
+
+    margin-top: -0.85em;
+    margin-left: -1.1em;
+}
+
+.theoplayer-skin .vjs-big-play-button:hover {
+    opacity: 0.85;
+}
+
+.theoplayer-skin .vjs-big-play-button:before {
+    font-family: 'icons';
+    background: none;
+    content: "\e60b";
+    text-shadow: none;
+    line-height: 1.7em;
+}
