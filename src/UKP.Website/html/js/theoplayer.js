@@ -67,10 +67,7 @@ theoplayerOverrides.prototype = {
                 if (qualitySettings.length == 0)
                     throw('Exception');
 
-                if (qualitySettings.length == 4)
-                    iQualitySettingName = 1;
-                else if (qualitySettings.length == 3)
-                    iQualitySettingName = 0;
+                iQualitySettingName = qualitySettingNames.length - qualitySettings.length;
 
                 for (var i = 0; i < qualitySettings.length; i++) {
                     if (qualitySettings[i].innerText != 'auto') {
@@ -94,19 +91,19 @@ theoplayerOverrides.prototype = {
         this.selectors.player.dispatchEvent(new Event('volumechange'));
     },
     triggerEventQualityChanged: function() {
-        this.qualitySettings();
+        this.eventQualityChanged();
         this.selectors.player.dispatchEvent(new Event('qualityChanged'));
     },
     eventPlaying: function() {
-        this.qualitySettings();
+        this.eventQualityChanged();
         this.selectors.buttons.play.injectTooltip('Pause clip');
     },
     eventPlay: function() {
-        this.qualitySettings();
+        this.eventQualityChanged();
         this.selectors.buttons.play.injectTooltip('Pause clip');
     },
     eventPause: function() {
-        this.qualitySettings();
+        this.eventQualityChanged();
         this.selectors.buttons.play.injectTooltip('Play clip');
     },
     eventTimeUpdate: function() {
@@ -131,11 +128,15 @@ theoplayerOverrides.prototype = {
     },
     eventQualityChanged: function() {
         this.qualitySettings();
-
-        var that = this;
-        window.setTimeout(function () {
-            var node = document.querySelector('.theoplayer-resolution-button').injectTooltip('Quality Settings');
-        }, 1000);
+        this.setQualityTooltip();
+    },
+    setQualityTooltip: function() {
+        try {
+            document.querySelector('.theoplayer-resolution-button').injectTooltip('Quality Settings');
+        }
+        catch(e) {
+            window.setTimeout(this.setQualityTooltip, 50);
+        }
     }
 }
 
