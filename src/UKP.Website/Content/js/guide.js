@@ -735,7 +735,7 @@ function resizeProgrammes(container) {
             var targetMargin = containerPosition - cnxtLeftPos,
                 widthResult = width($(context).innerWidth(), targetMargin);
 
-            if (widthResult <= minWidth && widthResult > $(context).innerWidth())
+            if (widthResult <= minWidth)
                 targetMargin = $(context).innerWidth() - minWidth;
 
             moveTo(targetMargin, context);
