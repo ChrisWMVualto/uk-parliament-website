@@ -720,7 +720,7 @@ function floatingNav() {
 function resizeProgrammes(container) {
     container = $(container);
     var containerPosition = container.scrollLeft(),
-        offset = $('.channels').width() + 40;
+        minWidth = 160;
 
     $.each(container.find('ol.channel-list'), function () {
         $.each($(this).children('li'), function () {
@@ -729,38 +729,39 @@ function resizeProgrammes(container) {
     });
 
     function calculateMove(context) {
-        var leftPos = $(context).position().left + $(context).parent().parent().position().left;
+        var cnxtLeftPos = $(context).position().left + $(context).parent(1).position().left;
 
-        if (leftPos <= containerPosition) {
-            var margin = containerPosition - leftPos,
-                widthResult = width($(context).innerWidth(), margin);
+        if (containerPosition >= cnxtLeftPos) {
+            var targetMargin = containerPosition - cnxtLeftPos,
+                widthResult = width($(context).innerWidth(), targetMargin);
 
-            if (widthResult <= offset) {
-                margin = $(context).innerWidth() - offset;
+            if (widthResult <= minWidth) {
+                targetMargin = $(context).innerWidth() - minWidth;
             }
 
-            moveTo(margin, context);
+            moveTo(targetMargin, context);
         } else
             moveTo(0, context);
     }
 
     function moveTo(amount, context) {
-        if ($(context).outerWidth() > offset) {
+        if ($(context).outerWidth() > minWidth) {
+
             $(context).find('.outer .inner').animate({
                 'marginLeft': amount
             }, 500, 'swing', function () {
-                if (width($(context).innerWidth(), amount) <= offset) {
+                if (width($(context).innerWidth(), amount) <= minWidth) {
                     $(context).addClass('event');
                 }
-                if (width($(context).innerWidth(), amount) > offset) {
+                if (width($(context).innerWidth(), amount) > minWidth) {
                     $(context).removeClass('event');
                 }
             });
         }
     }
 
-    function width(margin, original) {
-        return (original - margin) * -1;
+    function width(inWidth, inMargin) {
+        return (inMargin - inWidth) * -1;
     }
 }
 
