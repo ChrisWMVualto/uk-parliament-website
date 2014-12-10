@@ -40,7 +40,8 @@
         NEW = 1,
         REVOKE = 2,
         HOLD = 3,
-        BASIC = 4
+        BASIC = 4,
+        AVAILABLE = 4
     }
 
     public enum PlayerEventState

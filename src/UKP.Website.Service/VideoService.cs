@@ -47,7 +47,8 @@ namespace UKP.Website.Service
                 throw new RestSharpException(response);
             }
 
-            return VideoTransforms.Transform(response.Content);
+            var videoModel = VideoTransforms.Transform(response.Content);
+            return videoModel.Event.States.RecordedState == RecordedEventState.REVOKE ? null : videoModel;
         }
 
 
