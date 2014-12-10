@@ -735,33 +735,36 @@ function resizeProgrammes(container) {
             var targetMargin = containerPosition - cnxtLeftPos,
                 widthResult = width($(context).innerWidth(), targetMargin);
 
-            if (widthResult <= minWidth) {
+            if (widthResult <= minWidth && widthResult > $(context).innerWidth())
                 targetMargin = $(context).innerWidth() - minWidth;
-            }
 
             moveTo(targetMargin, context);
-        } else
-            moveTo(0, context);
+            return;
+        }
+
+        moveTo(0, context);
     }
 
     function moveTo(amount, context) {
         if ($(context).outerWidth() > minWidth) {
-
             $(context).find('.outer .inner').animate({
-                'marginLeft': amount
-            }, 500, 'swing', function () {
-                if (width($(context).innerWidth(), amount) <= minWidth) {
-                    $(context).addClass('event');
+                    'marginLeft': amount
+                },
+                500,
+                'swing',
+                function () {
+                    if (width($(context).innerWidth(), amount) <= minWidth)
+                        $(context).addClass('event');
+
+                    if (width($(context).innerWidth(), amount) > minWidth)
+                        $(context).removeClass('event');
                 }
-                if (width($(context).innerWidth(), amount) > minWidth) {
-                    $(context).removeClass('event');
-                }
-            });
+            );
         }
     }
 
     function width(inWidth, inMargin) {
-        return (inMargin - inWidth) * -1;
+        return inWidth - inMargin;
     }
 }
 
