@@ -732,9 +732,10 @@ function resizeProgrammes(container) {
         var leftPos = $(context).position().left + $(context).parent().parent().position().left;
 
         if (leftPos <= containerPosition) {
-            var margin = containerPosition - leftPos;
+            var margin = containerPosition - leftPos,
+                widthResult = width($(context).innerWidth(), margin);
 
-            if (width($(context).innerWidth(), margin) <= offset) {
+            if (widthResult <= offset) {
                 margin = $(context).innerWidth() - offset;
             }
 

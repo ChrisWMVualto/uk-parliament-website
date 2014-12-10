@@ -104,6 +104,10 @@ ol.channel-list li::before {
     .channel-name {
         display: none;
     }
+
+    .channel-day-container {
+        margin-left: 40px;
+    }
 }
 
 @media (max-width: 1024px) {
