@@ -27,7 +27,7 @@
             {
                 return (_states.PlanningState == PlanningEventState.CONFIRMED || _states.PlanningState == PlanningEventState.STOP_DVR)
                     && (_states.RecordingState == RecordingEventState.RECORDING || _states.RecordingState == RecordingEventState.COMPLETED)
-                    && (_states.RecordedState == RecordedEventState.NEW || _states.RecordedState == RecordedEventState.HOLD || _states.RecordedState == RecordedEventState.BASIC);
+                    && (_states.RecordedState == RecordedEventState.NEW || _states.RecordedState == RecordedEventState.HOLD || _states.RecordedState == RecordedEventState.BASIC || _states.RecordedState == RecordedEventState.AVAILABLE);
             }
         }
 

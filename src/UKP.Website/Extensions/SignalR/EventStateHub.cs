@@ -24,9 +24,10 @@ namespace UKP.Website.Extensions.SignalR
 
         private static readonly List<RecordedEventState> InterestedRecordedStates = new List<RecordedEventState>()
                                                           {
-                                                              RecordedEventState.BASIC,
                                                               RecordedEventState.HOLD,
-                                                              RecordedEventState.REVOKE
+                                                              RecordedEventState.REVOKE,
+                                                              RecordedEventState.BASIC,
+                                                              RecordedEventState.AVAILABLE,
                                                           };
 
 
