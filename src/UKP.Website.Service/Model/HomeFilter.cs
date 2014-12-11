@@ -35,9 +35,9 @@
         {
             get
             {
-                return _states.PlanningState == PlanningEventState.CONFIRMED &&
-                       _states.RecordingState == RecordingEventState.IDLE &&
-                       _states.RecordedState == RecordedEventState.NEW;
+                return (_states.PlanningState == PlanningEventState.CONFIRMED || _states.PlanningState == PlanningEventState.CONFIRMED) 
+                    && _states.RecordingState == RecordingEventState.IDLE
+                    && _states.RecordedState == RecordedEventState.NEW;
             }
         }
     }
