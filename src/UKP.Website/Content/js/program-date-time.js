@@ -8,9 +8,9 @@ function scrollStackAndLogs() {
 
         $('.stack').slimScroll({
             railVisible: true,
-            railColor: '#ffffff',
+            railColor: '#E6EBEE',
             railOpacity: 0.3,
-            color: '#ffffff',
+            color: '#C1C7C9',
             size: '12px',
             height: 'auto',
             alwaysVisible: false,
@@ -145,9 +145,7 @@ $(function () {
 
         var sentTime = new Date(messageSplit[1]);
         $('#ProgramDateTime').val(sentTime.toISOString());
-
-        highlightLogItems(sentTime);
-
+        highlightLogItems(sentTime);   
     });
 
     $('.btn-moment-expand').on('click', function () {

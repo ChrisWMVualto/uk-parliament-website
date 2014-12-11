@@ -205,30 +205,38 @@ function updateSocialLinks(e, url) {
     });
 }
 
-function setAudioButtonState() {
+function setAudioButtonState(firstLoad) {
     var audioButton = $('#audioToggle');
     var offText = 'audio only  <i class="fa fa-player-volume fa-2x"></i>',
     onText = 'video with audio  <i class="fa fa-player-volume fa-2x"></i>';
 
     var audioOnState = $(audioButton).data("audioonly-on-state");
+
+    
     if (audioOnState == "True") {
         $(audioButton).data("audioonly-on-state", "False");
-        loadPlayer(true);
+
+        if (!firstLoad) {
+            loadPlayer(true);
+        }
+        
         $(audioButton).html(onText);
         return;
     }
 
     if (audioOnState == "False") {
         $(audioButton).data("audioonly-on-state", "True");
-        loadPlayer(false);
+        if (!firstLoad) {
+            loadPlayer(false);
+        }
         $(audioButton).html(offText);
         return;
     }
 }
 
 function audiOnlySwitch() {
-    setAudioButtonState();
-    $(document).on('click', '#audioToggle', null, setAudioButtonState );
+    setAudioButtonState(true); 
+    $(document).on('click', '#audioToggle', null, function () { setAudioButtonState(false); });
 }
 
 
