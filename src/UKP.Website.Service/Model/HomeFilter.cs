@@ -35,7 +35,7 @@
         {
             get
             {
-                return (_states.PlanningState == PlanningEventState.CONFIRMED || _states.PlanningState == PlanningEventState.CONFIRMED) 
+                return (_states.PlanningState == PlanningEventState.PROPOSED || _states.PlanningState == PlanningEventState.CONFIRMED) 
                     && _states.RecordingState == RecordingEventState.IDLE
                     && _states.RecordedState == RecordedEventState.NEW;
             }
