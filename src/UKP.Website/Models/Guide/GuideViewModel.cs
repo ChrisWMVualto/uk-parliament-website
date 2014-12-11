@@ -9,14 +9,16 @@ namespace UKP.Website.Models.Guide
     {
         public List<EpgChannelModel> Events { get; private set; }
         public DateTime BaseDate { get; private set; }
+        public IEnumerable<ChannelModel> Channels { get; private set; }
 
-        public GuideViewModel(List<EpgChannelModel> events, DateTime date)
+        public GuideViewModel(List<EpgChannelModel> events, DateTime date, IEnumerable<ChannelModel> channels)
         {
             Events = events;
             BaseDate = date;
+            Channels = channels;
         }
 
-        public GuideViewModel(List<EpgChannelModel> events) : this(events, DateTime.Now)
+        public GuideViewModel(List<EpgChannelModel> events, IEnumerable<ChannelModel> channels) : this(events, DateTime.Now, channels)
         {
             
         }
