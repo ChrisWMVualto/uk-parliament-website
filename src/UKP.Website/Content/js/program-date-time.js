@@ -9,11 +9,11 @@ function scrollStackAndLogs() {
         $('.stack').slimScroll({
             railVisible: true,
             railColor: '#E6EBEE',
-            railOpacity: 0.8,
+            railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
             height: 'auto',
-            alwaysVisible: true,
+            alwaysVisible: false,
             start: stackPos
         });
 
