@@ -26,10 +26,10 @@ namespace UKP.Website.Service.Transforms
             dynamic jObject = JObject.Parse(json.ToString());
             if(jObject == null) return null;
 
-            var membersNameServiceId = jObject.membersNameServiceId.Value;
-            var fullTitle = jObject.fullTitle.Value;
+            var membersNameServiceId = (int)jObject.membersNameId;
+            var member = (string)jObject.member;
 
-            return new SearchMembersNameModel(membersNameServiceId, fullTitle);
+            return new SearchMembersNameModel(membersNameServiceId, member);
         }
     }
 }
