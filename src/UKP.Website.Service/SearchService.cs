@@ -92,6 +92,9 @@ namespace UKP.Website.Service
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/members", Method.GET, _configuration.IasAuthKey);
 
+            if(keywords.HasValue())
+                request.AddParameter("keywords", keywords + "*");
+
             var response = client.Execute(request);
             if(response.StatusCode == HttpStatusCode.NotFound) return null;
             if(response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);

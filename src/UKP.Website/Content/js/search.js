@@ -5,7 +5,6 @@
         'url': $(this).attr('data-url-base')
     };
 
-
     function init() {
         obj.buttonCont.remove();
         fetchResults();
@@ -25,19 +24,17 @@
 }
 
 
-
 $(function () {
 
     $('.moment-more button').on('click', momentSearch);
 
     $('#Member').autocomplete({
         serviceUrl: $('#Member').attr('data-ajax-url') + '?name=',
-        displayItem: "DisplayAs",
-        objectPath: "Members.Member",
+        displayItem: "Member",
         minChars: 3,
         delimiter: ' ',
         onSelect: function (member) {
-            $('#MemberId').val(member['@Member_Id']);
+            $('#MemberId').val(member['MembersNameId']);
         },
         noCache: false
     });

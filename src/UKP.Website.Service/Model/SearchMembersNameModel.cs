@@ -2,13 +2,13 @@
 {
     public class SearchMembersNameModel
     {
-        public SearchMembersNameModel(int membersNameId, string fullTitle)
+        public SearchMembersNameModel(int membersNameId, string member)
         {
             MembersNameId = membersNameId;
-            FullTitle = fullTitle;
+            Member = member;
         }
 
         public int MembersNameId { get; private set; }
-        public string FullTitle { get; private set; }
+        public string Member { get; private set; }
     }
 }
