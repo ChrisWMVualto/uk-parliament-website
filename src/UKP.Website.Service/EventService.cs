@@ -111,8 +111,8 @@ namespace UKP.Website.Service
             var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
 
             // TODO: Remove hardcoded date
-            var start = new DateTime(2014, 07, 04);
-            //var start = DateTime.Now.Date;
+            //var start = new DateTime(2014, 07, 04);
+            var start = DateTime.Now.Date;
             var end = start.AddMonths(1);
 
             request.AddParameter("date", start.ToISO8601String());
