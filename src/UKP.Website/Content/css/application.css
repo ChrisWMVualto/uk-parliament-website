@@ -105,9 +105,9 @@ ol.channel-list li::before {
         display: none;
     }
 
-    .channel-day-container {
+    /*.channel-day-container {
         margin-left: 40px;
-    }
+    }*/
 }
 
 @media (max-width: 1024px) {
