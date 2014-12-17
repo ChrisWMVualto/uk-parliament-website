@@ -100,6 +100,19 @@ ol.channel-list li::before {
     .channel-name {
         display: none;
     }
+
+    .channel-day-container {
+        left: 0;
+        margin-left: 85px;
+    }
+
+    .timeline {
+        margin-left: 44px;
+    }
+
+    .live-now {
+        margin-left: 90px;
+    }
 }
 
 @media (max-width: 480px) {
