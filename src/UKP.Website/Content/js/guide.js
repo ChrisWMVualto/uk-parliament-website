@@ -562,7 +562,8 @@ changeDateTab.prototype = {
     /// EPG Info Popup
     ///
     
-    showEpgInfo: function(e) {
+    showEpgInfo: function (e) {
+        e.preventDefault();
         e.stopPropagation();
         var that = this;
         
