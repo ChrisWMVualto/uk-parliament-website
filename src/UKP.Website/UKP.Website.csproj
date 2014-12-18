@@ -236,6 +236,7 @@
     <Content Include="Content\js\vendor\slick.js" />
     <Content Include="Content\js\vendor\stickyfloat.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="ping.html" />
     <Content Include="robots.txt" />
     <Content Include="Content\css\fonts\slick.eot" />
     <Content Include="Content\css\fonts\slick.ttf" />
