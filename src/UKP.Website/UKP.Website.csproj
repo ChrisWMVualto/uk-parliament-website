@@ -394,7 +394,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Event\ClippingViewModel.cs" />
-    <Compile Include="Models\Event\EventVIewModel.cs" />
+    <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Event\LogUpdateModel.cs" />
     <Compile Include="Models\Event\SearchMomentModel.cs" />
     <Compile Include="Models\Event\StateChangedModel.cs" />
@@ -408,9 +408,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchApiController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="SearchController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -479,7 +476,6 @@
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
     <Folder Include="Views\Player\" />
-    <Folder Include="Views\SearchApi\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UKP.Website.Application\UKP.Website.Application.csproj">

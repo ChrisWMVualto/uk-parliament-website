@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Date.Extensions;
+using UKP.Website.Application;
 using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
 using UKP.Website.Models.Event;
@@ -42,10 +43,19 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-
             var video =_videoService.GetVideo(id, inPoint, outPoint, null, false);
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public virtual JsonResult ShowAudioOnly(Guid id, string @in = null, string @out = null)
+        {
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false);
+
+            return this.JsonFormatted(EventViewModel.ShowAudioOnly(video), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
