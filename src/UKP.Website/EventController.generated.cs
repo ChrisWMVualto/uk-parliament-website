@@ -68,6 +68,12 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult ShowAudioOnly()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.ShowAudioOnly);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult GetMainVideo()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetMainVideo);
@@ -132,6 +138,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string Index = "Index";
             public readonly string GetShareVideo = "GetShareVideo";
+            public readonly string ShowAudioOnly = "ShowAudioOnly";
             public readonly string GetMainVideo = "GetMainVideo";
             public readonly string EventTitle = "EventTitle";
             public readonly string Clipping = "Clipping";
@@ -147,6 +154,7 @@ namespace UKP.Website.Controllers
         {
             public const string Index = "Index";
             public const string GetShareVideo = "GetShareVideo";
+            public const string ShowAudioOnly = "ShowAudioOnly";
             public const string GetMainVideo = "GetMainVideo";
             public const string EventTitle = "EventTitle";
             public const string Clipping = "Clipping";
@@ -175,6 +183,16 @@ namespace UKP.Website.Controllers
         public ActionParamsClass_GetShareVideo GetShareVideoParams { get { return s_params_GetShareVideo; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetShareVideo
+        {
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
+        }
+        static readonly ActionParamsClass_ShowAudioOnly s_params_ShowAudioOnly = new ActionParamsClass_ShowAudioOnly();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ShowAudioOnly ShowAudioOnlyParams { get { return s_params_ShowAudioOnly; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ShowAudioOnly
         {
             public readonly string id = "id";
             public readonly string @in = "in";
@@ -317,6 +335,20 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             GetShareVideoOverride(callInfo, id, @in, @out);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ShowAudioOnlyOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, System.Guid id, string @in, string @out);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult ShowAudioOnly(System.Guid id, string @in, string @out)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.ShowAudioOnly);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            ShowAudioOnlyOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 

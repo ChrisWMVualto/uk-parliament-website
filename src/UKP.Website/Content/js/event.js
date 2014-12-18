@@ -1,5 +1,5 @@
 ﻿var embedGenTimeoutId = null;
-var eventTimePollingsInterval = 20000;
+var eventPollingsInterval = 40000;
 
 function initSelectDates() {
     if ($(".clip-date").length) {
@@ -43,24 +43,37 @@ function updateClipping() {
     });
 }
 
+function updateAudioButton() {
 
-function pollEventTimes() {
+    if ($('#audioToggle').hasClass('hidden')) {
+        console.log('hidden');
+        var audioUrl = $('#audioToggle').data("load-url");
+        $.get(audioUrl, function (showAudioOnly) {
+            if (showAudioOnly) {
+                $('#audioToggle').removeClass('hidden');
+            } 
+        });
+    }
+}
+
+
+function pollEvent() {
     setTimeout(function () {
         
         updateTitle();
-
+        updateAudioButton();
         if ($('#AllowClippingRefresh').val() == "True") {
             updateClipping();
         }
 
-        pollEventTimes();
-
-    }, eventTimePollingsInterval);
+        pollEvent();
+    }, eventPollingsInterval);
 }
 
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
+    updateAudioButton();
 
     if (recordedState == "REVOKE") {
         window.location.reload();
@@ -267,5 +280,5 @@ $(function () {
     updateClipping();
     selectableEmbedCode();
     audiOnlySwitch();
-    pollEventTimes();
+    pollEvent();
 });

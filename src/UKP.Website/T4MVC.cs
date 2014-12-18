@@ -32,7 +32,6 @@ public static partial class MVC
     public static UKP.Website.Controllers.NotSupportedController NotSupported = new UKP.Website.Controllers.T4MVC_NotSupportedController();
     public static UKP.Website.Controllers.PlayerController Player = new UKP.Website.Controllers.T4MVC_PlayerController();
     public static UKP.Website.Controllers.SearchController Search = new UKP.Website.Controllers.T4MVC_SearchController();
-    public static T4MVC.SearchApiController SearchApi = new T4MVC.SearchApiController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
