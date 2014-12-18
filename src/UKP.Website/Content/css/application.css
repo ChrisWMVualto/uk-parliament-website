@@ -97,18 +97,30 @@ ol.channel-list li::before {
 }
 
 @media (max-width: 768px) {
-    .alert-side-detail {
-        width: 100%;
-    }
-
     .channel-name {
         display: none;
     }
 
     .channel-day-container {
-        margin-left: 40px;
+        left: 0;
+        margin-left: 85px;
+    }
+
+    .timeline {
+        margin-left: 44px;
+    }
+
+    .live-now {
+        margin-left: 90px;
     }
 }
+
+@media (max-width: 480px) {
+    .alert-side-detail {
+        width: 100%;
+    }
+}
+
 
 @media (max-width: 1024px) {
     .recent-next, .recent-prev {
