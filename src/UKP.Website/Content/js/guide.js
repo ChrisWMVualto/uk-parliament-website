@@ -136,7 +136,8 @@ function changeDateTab() {
         epgPopup: '.epg-info',
         leftDayButton: '#epgDateScrollLeft',
         rightDayButton: '#epgDateScrollRight',
-        channelList: '.channel-list'
+        channelList: '.channel-list',
+        datepicker: ".date-picker"
     }
 
     this.settings = {
@@ -176,7 +177,7 @@ changeDateTab.prototype = {
         $(this.selectors.days).on('click', $.proxy(this.dayClicked, this));
         $(this.selectors.days).on('activate', $.proxy(this.activateTab, this));
         $(this.selectors.epgInfoLink).on('click', $.proxy(this.showEpgInfo, this));
-        $(".date-picker").on('changeDate', $.proxy(this.datepickerChange, this));
+        $(this.selectors.datepicker).on('changeDate', $.proxy(this.datepickerChange, this));
         this.pollPosition();
     },
 
@@ -709,7 +710,7 @@ function floatingNav() {
 
             $(infoPopup).show();
             $('body.breakpoint-300 .epg-info').css({
-                'height': window.screen.height - $('.epg-info').position().top
+                'height': window.screen.height - ($('.drag-wrap').offset().top + $('.timeline').height()) - 56  // WOrks when repalceing ($('.stream-container-outer').position().top * -1)  with  - 56
             });
         }
     }
