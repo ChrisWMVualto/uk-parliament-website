@@ -6,7 +6,8 @@ namespace UKP.Website.Service.Model
     {
         public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime displayStartDate, DateTime displayEndDate,
             DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime,
-            DateTime? actualStartTime, DateTime? actualEndTime, string channelName, string room, string eventType, string productionSource, int? legacyMeetingId)
+            DateTime? actualStartTime, DateTime? actualEndTime, string channelName, string room, string eventType, string productionSource, int? legacyMeetingId,
+            string externalLocation, string subTitle)
         {
             Id = id;
             Title = title;
@@ -26,12 +27,9 @@ namespace UKP.Website.Service.Model
             EventType = eventType;
             ProductionSource = productionSource;
             LegacyMeetingId = legacyMeetingId;
+            ExternalLocation = externalLocation;
+            SubTitle = subTitle;
             HomeFilters = new HomeFilter(States);
-        }
-
-        public EventModel(Guid id)
-        {
-            Id = id;
         }
 
         public Guid Id { get; private set; }
@@ -52,6 +50,8 @@ namespace UKP.Website.Service.Model
         public string EventType { get; private set; }
         public string ProductionSource { get; private set; }
         public int? LegacyMeetingId { get; private set; }
+        public string ExternalLocation { get; private set; }
+        public string SubTitle { get; private set; }
         public HomeFilter HomeFilters { get; private set; }
     }
 }
