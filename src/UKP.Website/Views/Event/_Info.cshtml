@@ -19,9 +19,12 @@
         <dt>House:</dt>
         <dd>@Model.VideoModel.Event.House</dd>
         <hr />
-        <dt>Location:</dt>
-        <dd>@Model.VideoModel.Event.Room</dd>
-        <hr />
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.Room))
+        {
+            <dt>Location:</dt>
+            <dd>@Model.VideoModel.Event.Room</dd>
+            <hr />
+        }
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.ExternalLocation))
         {
             <dt>External Location:</dt>
