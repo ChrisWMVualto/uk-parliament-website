@@ -22,15 +22,33 @@
         </div>
 
         <dl class="description">
-            <dt>Channel:</dt>
-            <dd>@Model.Event.ChannelName</dd>
-            <hr />
+            @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
+            {
+                <dt>Subtitle:</dt>
+                <dd>@Model.Event.SubTitle</dd>
+                <hr />
+            }
+            @if(!Model.Event.LegacyMeetingId.HasValue)
+            {
+                <dt>Channel:</dt>
+                <dd>@Model.Event.ChannelName</dd>
+                <hr />
+            }
             <dt>House:</dt>
             <dd>@Model.Event.House</dd>
             <hr />
-            <dt>Location:</dt>
-            <dd>@Model.Event.Room</dd>
-            <hr />
+            @if(!string.IsNullOrWhiteSpace(Model.Event.Room))
+            {
+                <dt>Location:</dt>
+                <dd>@Model.Event.Room</dd>
+                <hr />
+            }
+            @if(!string.IsNullOrWhiteSpace(Model.Event.ExternalLocation))
+            {
+                <dt>External Location:</dt>
+                <dd>@Model.Event.ExternalLocation</dd>
+                <hr />
+            }
             <dt>Event Type:</dt>
             <dd>@Model.Event.EventType</dd>
             <hr />
