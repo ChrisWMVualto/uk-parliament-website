@@ -11564,6 +11564,9 @@ dl.description hr {
 }
 dl.description dd {
   margin-left: 104px;
+  white-space:nowrap;
+  text-overflow:clip;
+  overflow:hidden;
 }
 dl.description dt {
   float: left;
