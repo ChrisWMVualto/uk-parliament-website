@@ -60,7 +60,8 @@ $(function () {
             finishedMsg: '',
             finished: function() {
                 $('.moment-more button').on('click', momentSearch);
-            }
+            },
+            msgText: ''
         }
     });
 
