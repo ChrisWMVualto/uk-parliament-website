@@ -92,10 +92,10 @@ namespace UKP.Website.Service
 
         public VideoCollectionModel GetRecentlyArchived(EventFilter eventFilter = EventFilter.COMMONS, int numEvents = 10)
         {
-            var url = string.Format(String.Format("api/event/archived/{0}/filter/{1}", numEvents, eventFilter.GetEventType()).ToLower(), numEvents);
-
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/event/archived/{numEvents}/filter/{eventFilter}", Method.GET, _configuration.IasAuthKey);
+            request.AddUrlSegment("numEvents", numEvents.ToString());
+            request.AddUrlSegment("eventFilter", eventFilter.ToString());
 
             var response = client.Execute(request);
 
@@ -152,6 +152,7 @@ namespace UKP.Website.Service
 
         }
 
+        // TODO move into IAS as an EPG param filter
         private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
         {
             if(filter == EventFilter.COMMONS)
@@ -162,8 +163,11 @@ namespace UKP.Website.Service
                 return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
                              .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
 
-            return events.Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE))
-                         .Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT));
+            if(filter == EventFilter.COMMITTEES)
+                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
+                         .Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
+
+            return Enumerable.Empty<EventModel>();
         }
     }
 }
