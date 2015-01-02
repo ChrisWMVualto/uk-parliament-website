@@ -24,34 +24,11 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public IEnumerable<EventModel> GetEpg(DateTime? date)
+        public IEnumerable<EpgChannelModel> GetFullGuide(DateTime? date)
         {
             var dateob = date.HasValue ? date.Value : DateTime.Now;
 
-            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
-            var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
-
-            var start = dateob.Date;
-            var end = start.AddDays(1);
-
-            request.AddParameter("date", start.ToISO8601String());
-            request.AddParameter("endDate", end.ToISO8601String());
-            request.AddParameter("format", "json");
-
-            var response = client.Execute(request);
-
-            if (response.StatusCode == HttpStatusCode.NotFound) return null;
-            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
-
-            return EventTransforms.TransformEPG(response.Content);;
-        }
-
-        public List<EpgChannelModel> GetEpgEvents(DateTime? date)
-        {
-            var dateob = date.HasValue ? date.Value : DateTime.Now;
-
-            var events = GetEpg(dateob);
+            var events = GetFullGuideEPG(dateob).ToList();
             var epgModel = new List<EpgChannelModel>();
 
             for (var i = 1; i <= 20; i++)
@@ -66,7 +43,7 @@ namespace UKP.Website.Service
 
         public NowAndNextModel GetNowEvents(EventFilter eventFilter = EventFilter.COMMONS, int target = 6)
         {
-            var events = RunEventFilter(GetEvents(), eventFilter).ToList();
+            var events = GetMiniGuideEPG(eventFilter).ToList();
             var nowEvents = events.Where(x => x.HomeFilters.Live).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
@@ -80,9 +57,9 @@ namespace UKP.Website.Service
             return new NowAndNextModel(nowEvents.Take(target), false, live);
         }
 
-        public IEnumerable<EventModel> GetGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
+        public IEnumerable<EventModel> GetMiniGuide(EventFilter eventFilter = EventFilter.COMMONS, int target = 12)
         {
-            var events = RunEventFilter(GetEvents(), eventFilter).ToList();
+            var events = GetMiniGuideEPG(eventFilter).ToList();
             var nowEvents = events.Where(x => x.HomeFilters.LiveAndArchive).OrderBy(x => x.DisplayStartDate).Take(target);
             var nextEvents = events.Where(x => x.HomeFilters.Next).OrderBy(x => x.DisplayStartDate);
 
@@ -105,18 +82,57 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content);
         }
 
-        private IEnumerable<EventModel> GetEvents()
+        public LogMomentResultModel GetLogsBetween(Guid id, DateTime startTime, DateTime endTime)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/event/logs/{id}", Method.GET, _configuration.IasAuthKey);
+            request.AddUrlSegment("id", id.ToString());
+            request.AddParameter("startTime", startTime.ToISO8601String());
+            request.AddParameter("endTime", endTime.ToISO8601String());
+            request.AddParameter("format", "json");
+            var response = client.Execute(request);
 
+            if(response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
+            if(response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new RestSharpException(response);
+            }
+            return LogMomentTransforms.TransformObject(response.Content);
+
+        }
+
+        private IEnumerable<EventModel> GetFullGuideEPG(DateTime? date)
+        {
+            var start = date.HasValue ? date.Value : DateTime.Now;
+            var end = start.AddDays(1);
+            return GetEPG(start, end, null);
+        }
+
+        private IEnumerable<EventModel> GetMiniGuideEPG(EventFilter? eventFilter)
+        {
             // TODO: Remove hardcoded date
             //var start = new DateTime(2014, 07, 04);
             var start = DateTime.Now.Date;
             var end = start.AddMonths(1);
 
+            return GetEPG(start, end, eventFilter);
+        }
+
+
+        private IEnumerable<EventModel> GetEPG(DateTime start, DateTime end, EventFilter? eventFilter)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            //client.Proxy = new WebProxy("127.0.0.1", 8888); // <- Fiddler
+            var request = _restClientWrapper.AuthRestRequest("api/epg/", Method.GET, _configuration.IasAuthKey);
+
             request.AddParameter("date", start.ToISO8601String());
             request.AddParameter("endDate", end.ToISO8601String());
+            if(eventFilter != null) request.AddParameter("eventFilter", eventFilter);
+
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);
@@ -127,47 +143,5 @@ namespace UKP.Website.Service
             return EventTransforms.TransformEPG(response.Content); ;
         }
 
-
-        public LogMomentResultModel GetLogsBetween(Guid id, DateTime startTime, DateTime endTime)
-        {
-            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/event/logs/{id}", Method.GET,
-                _configuration.IasAuthKey);
-            request.AddUrlSegment("id", id.ToString());
-            request.AddParameter("startTime", startTime.ToISO8601String());
-            request.AddParameter("endTime", endTime.ToISO8601String());
-            request.AddParameter("format", "json");
-            var response = client.Execute(request);
-
-            if (response.StatusCode == HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new RestSharpException(response);
-            }
-            return LogMomentTransforms.TransformObject(response.Content);
-
-        }
-
-        // TODO move into IAS as an EPG param filter
-        private IEnumerable<EventModel> RunEventFilter(IEnumerable<EventModel> events, EventFilter filter)
-        {
-            if(filter == EventFilter.COMMONS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            if(filter == EventFilter.LORDS)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                             .Where(x => x.Business.Equals(EventConstants.BUSINESS_CHAMBER) || x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            if(filter == EventFilter.COMMITTEES)
-                return events.Where(x => x.House.Equals(EventConstants.HOUSE_COMMONS) || x.House.Equals(EventConstants.HOUSE_LORDS) || x.House.Equals(EventConstants.HOUSE_JOINT))
-                         .Where(x => x.Business.Equals(EventConstants.BUSINESS_COMMITTEE));
-
-            return Enumerable.Empty<EventModel>();
-        }
     }
 }
