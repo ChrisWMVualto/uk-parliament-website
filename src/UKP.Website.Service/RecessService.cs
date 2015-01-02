@@ -19,12 +19,11 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public RecessMessageModel GetRecessMessage(EventFilter eventFilter = EventFilter.COMMONS)
+        public RecessMessageModel GetRecessMessage(RecessMessageType type)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-
-            var url = string.Format("api/recess/{0}", (int)eventFilter.GetRecessMessageType());
-            var request = _restClientWrapper.AuthRestRequest(url, Method.GET, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/recess/{type}", Method.GET, _configuration.IasAuthKey);
+            request.AddUrlSegment("type", type.ToString());
 
             var response = client.Execute(request);
 
