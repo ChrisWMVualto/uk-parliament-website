@@ -4,6 +4,6 @@ namespace UKP.Website.Service
 {
     public interface IRecessService
     {
-        RecessMessageModel GetRecessMessage(EventFilter eventFilter = EventFilter.COMMONS);
+        RecessMessageModel GetRecessMessage(RecessMessageType type);
     }
 }
