@@ -114,11 +114,8 @@ namespace UKP.Website.Service
 
         private IEnumerable<EventModel> GetMiniGuideEPG(EventFilter? eventFilter)
         {
-            // TODO: Remove hardcoded date
-            //var start = new DateTime(2014, 07, 04);
             var start = DateTime.Now.Date;
             var end = start.AddMonths(1);
-
             return GetEPG(start, end, eventFilter);
         }
 
