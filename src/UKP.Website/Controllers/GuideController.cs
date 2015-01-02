@@ -12,14 +12,12 @@ namespace UKP.Website.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IVideoService _videoService;
-        private readonly IConfiguration _configurationService;
         private readonly IChannelService _channelService;
 
-        public GuideController(IEventService eventService, IVideoService videoService, IConfiguration configurationService, IChannelService channelService)
+        public GuideController(IEventService eventService, IVideoService videoService, IChannelService channelService)
         {
             _eventService = eventService;
             _videoService = videoService;
-            _configurationService = configurationService;
             _channelService = channelService;
         }
 
@@ -29,7 +27,7 @@ namespace UKP.Website.Controllers
             // TODO: Remove datetime
             //var date = new DateTime(2014, 07, 07);
             var date = DateTime.Today;
-            var events = _eventService.GetEpgEvents(date);
+            var events = _eventService.GetFullGuide(date);
             var channels = _channelService.GetChannels();
             var model = new GuideViewModel(events, date, channels);
 
@@ -48,7 +46,7 @@ namespace UKP.Website.Controllers
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
 
-            var events = _eventService.GetEpgEvents(dateob);
+            var events = _eventService.GetFullGuide(dateob);
             var channels = _channelService.GetChannels();
             var model = new GuideViewModel(events, dateob.Value, channels);
             return PartialView(MVC.Guide.Views._ChannelListing, model);

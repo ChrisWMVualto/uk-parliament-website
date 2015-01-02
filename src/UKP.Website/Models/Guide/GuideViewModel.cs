@@ -7,18 +7,15 @@ namespace UKP.Website.Models.Guide
 {
     public class GuideViewModel
     {
-        public List<EpgChannelModel> Events { get; private set; }
-        public DateTime BaseDate { get; private set; }
-        public IEnumerable<ChannelModel> Channels { get; private set; }
-
-        public GuideViewModel(List<EpgChannelModel> events, DateTime date, IEnumerable<ChannelModel> channels)
+        public GuideViewModel(IEnumerable<EpgChannelModel> events, DateTime date, IEnumerable<ChannelModel> channels)
         {
             Events = events;
             BaseDate = date;
             Channels = channels;
         }
 
-        public GuideViewModel(List<EpgChannelModel> events, IEnumerable<ChannelModel> channels) : this(events, DateTime.Now, channels)
+        public GuideViewModel(IEnumerable<EpgChannelModel> events, IEnumerable<ChannelModel> channels)
+            : this(events, DateTime.Now, channels)
         {
             
         }
@@ -28,5 +25,9 @@ namespace UKP.Website.Models.Guide
             var timespan = DateTime.Now.ToLocalTime().Subtract(DateTime.Today);
             return Convert.ToInt32(timespan.TotalMinutes * EventConstants.EPG_MINUTE_SIZE);
         }
+
+        public IEnumerable<EpgChannelModel> Events { get; private set; }
+        public DateTime BaseDate { get; private set; }
+        public IEnumerable<ChannelModel> Channels { get; private set; }
     }
 }
