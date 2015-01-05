@@ -490,7 +490,7 @@ changeDateTab.prototype = {
                 var scrollAmount;
 
                 if (opts.resetScroll)
-                    scrollAmount = 0;
+                    scrollAmount = leftPositionFromTime(8, 0);
 
                 else if (opts.removePast && opts.append)
                     scrollAmount = $(that.selectors.streamContainer).scrollLeft() - that.settings.baseWidth;
