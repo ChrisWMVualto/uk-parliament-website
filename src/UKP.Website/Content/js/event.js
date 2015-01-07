@@ -12,18 +12,18 @@ function initSelectDates() {
 
 function loadPlayer(audioOnly, autoStart) {
     var currentProgramDateTime = $('#ProgramDateTime').val();
-    $('#ProgramDateTime').val('');
+    
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly, autoStart: autoStart }, function (video) {
         $('#videoContainer').html(video.scriptableEmbedCode);
-
+        $('#ProgramDateTime').val('');
         if (currentProgramDateTime != '') {
 
             var clearSeekingIntervalId = setInterval(function () {
 
                 if ($('#ProgramDateTime').val() != '') { // having a ProgramDateTime means the player has finished loading
                     var receiver = $('#UKPPlayer')[0];
-                    $.postMessage("seek-program-date-time_" + currentProgramDateTime, receiver.src, receiver.contentWindow);
+                    $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow);
                     clearInterval(clearSeekingIntervalId);
                 }
 
