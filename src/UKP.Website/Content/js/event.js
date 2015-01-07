@@ -12,15 +12,22 @@ function initSelectDates() {
 
 function loadPlayer(audioOnly, autoStart) {
     var currentProgramDateTime = $('#ProgramDateTime').val();
+    $('#ProgramDateTime').val('');
     var url = $('#getVideoUrl').val();
     $.getJSON(url, { audioOnly: audioOnly, autoStart: autoStart }, function (video) {
         $('#videoContainer').html(video.scriptableEmbedCode);
 
         if (currentProgramDateTime != '') {
-            setTimeout(function () {
-                var receiver = $('#UKPPlayer')[0];
-                $.postMessage("seek-program-date-time_" + currentProgramDateTime, receiver.src, receiver.contentWindow);
-            }, 5000);
+
+            var clearSeekingIntervalId = setInterval(function () {
+
+                if ($('#ProgramDateTime').val() != '') { // having a ProgramDateTime means the player has finished loading
+                    var receiver = $('#UKPPlayer')[0];
+                    $.postMessage("seek-program-date-time_" + currentProgramDateTime, receiver.src, receiver.contentWindow);
+                    clearInterval(clearSeekingIntervalId);
+                }
+
+            }, 200);
         }
     });
 }
@@ -229,7 +236,7 @@ function setAudioButtonState(firstLoad) {
         $(audioButton).data("audioonly-on-state", "False");
 
         if (!firstLoad) {
-            loadPlayer(true, false);
+            loadPlayer(true, true);
         }
         
         $(audioButton).html(onText);
@@ -239,7 +246,7 @@ function setAudioButtonState(firstLoad) {
     if (audioOnState == "False") {
         $(audioButton).data("audioonly-on-state", "True");
         if (!firstLoad) {
-            loadPlayer(false, false);
+            loadPlayer(false, true);
         }
         $(audioButton).html(offText);
         return;
