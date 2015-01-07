@@ -553,7 +553,6 @@
 
             case 'index':
                 var index = event.data.index || $(event.target).parent().index() * _.options.slidesToScroll;
-                console.log(index);
                 _.slideHandler(index);
                 if(asNavFor != null)  asNavFor.slideHandler(index);
 

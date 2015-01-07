@@ -242,7 +242,6 @@ $(document).ready(function () {
     });
 
     $(window).on('exitBreakpoint300', function () {
-        //console.log('exit');
         // $('#miniGuideCommons, #miniGuideLords, #miniGuideCommittees').unslick();
         $("#searchPanel").addClass('in').css("height", "auto");
     });

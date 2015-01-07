@@ -59,12 +59,12 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null)
+        public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, true);
+            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart);
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
