@@ -31,6 +31,7 @@ namespace UKP.Website.Extensions
 
                 if(BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 6, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent))
                 {
+                    ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     filterContext.Result = NotSuppotedRouteResult();
                 }
             }
