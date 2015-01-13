@@ -1,0 +1,20 @@
+﻿@model UKP.Website.Models.Home.HomeViewsModel
+
+@{
+    ViewBag.Title = "Committees";
+}
+
+<div class="container main-container home-container">
+
+    @Html.Partial(MVC.Home.Views._TitleTabs, Model)
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="committees">
+
+            <div class="theme-bg theme-committees">
+                @Html.Partial(MVC.Home.Views._HomeBody, Model)
+            </div>
+
+        </div>
+    </div>
+</div>
