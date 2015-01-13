@@ -180,11 +180,8 @@
     <Content Include="Content\img\arrow-scroll-left.png" />
     <Content Include="Content\img\arrow-scroll-right.png" />
     <Content Include="Content\img\blank.png" />
-    <Content Include="Content\img\channel-five-logo.png" />
-    <Content Include="Content\img\channel-four-logo.png" />
-    <Content Include="Content\img\channel-one-logo.png" />
-    <Content Include="Content\img\channel-three-logo.png" />
-    <Content Include="Content\img\channel-two-logo.png" />
+    <Content Include="Content\img\channel-bg-alt.png" />
+    <Content Include="Content\img\channel-bg.png" />
     <Content Include="Content\img\favicons\apple-touch-icon-114x114-precomposed.png" />
     <Content Include="Content\img\favicons\apple-touch-icon-144x144-precomposed.png" />
     <Content Include="Content\img\favicons\apple-touch-icon-57x57-precomposed.png" />
@@ -205,8 +202,10 @@
     <Content Include="Content\img\share.jpg" />
     <Content Include="Content\img\theme-committees-blurred.jpg" />
     <Content Include="Content\img\theme-committees-normal.jpg" />
+    <Content Include="Content\img\theme-committees-normal_original.jpg" />
     <Content Include="Content\img\theme-commons-blurred.jpg" />
     <Content Include="Content\img\theme-commons-normal.jpg" />
+    <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
     <Content Include="Content\js\jquery.post-message.updated.js" />
