@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UKP.Website", "UKP.Website\UKP.Website.csproj", "{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FA733108-7D93-42B3-9393-A9E32354E490}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UKP.Website.Service", "UKP.Website.Service\UKP.Website.Service.csproj", "{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UKP.Website.Application", "UKP.Website.Application\UKP.Website.Application.csproj", "{0A379715-B411-4454-AD57-6B05C404BABF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		UAT|Any CPU = UAT|Any CPU
+		UKPLive|Any CPU = UKPLive|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.UKPLive|Any CPU.ActiveCfg = UKPLive|Any CPU
+		{5BD09F95-B5E9-48F2-8B32-D67CA581EFB5}.UKPLive|Any CPU.Build.0 = UKPLive|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.UKPLive|Any CPU.ActiveCfg = UKPLive|Any CPU
+		{3A5894F4-B78D-448F-99F4-0F8C8B306DA2}.UKPLive|Any CPU.Build.0 = UKPLive|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.UKPLive|Any CPU.ActiveCfg = UKPLive|Any CPU
+		{0A379715-B411-4454-AD57-6B05C404BABF}.UKPLive|Any CPU.Build.0 = UKPLive|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
