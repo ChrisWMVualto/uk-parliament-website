@@ -1,4 +1,5 @@
-﻿var embedGenTimeoutId = null;
+﻿
+var embedGenTimeoutId = null;
 var eventPollingsInterval = 40000;
 
 function initSelectDates() {
@@ -220,7 +221,14 @@ function updateSocialLinks(e, url) {
     ];
 
     $.each(buttons, function () {
-        $(this).attr('href', $(this).data('share-url') + url);
+        var text = $(this).data('share-url');
+
+        if (this.hasClass('btn-twitter'))
+            text += "Parliamentlive.tv ";
+
+        text += url;
+
+        $(this).attr('href', text);
     });
 }
 
