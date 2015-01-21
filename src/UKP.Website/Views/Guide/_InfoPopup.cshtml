@@ -1,0 +1,79 @@
+﻿@using UKP.Website.Application
+@model UKP.Website.Service.Model.VideoModel
+
+<div id="epgInfoPopup" class="alert alert-side-detail fade in epg-info" role="alert">
+    <button type="button" class="close" data-hide="alert">
+        <span aria-hidden="true"><i class="fa fa-close fa-lg"></i></span><span class="sr-only">Close</span>
+    </button>
+
+
+
+    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, autoStart:true))" type="button" class="btn btn-generic btn-play">
+        Play <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-play fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <div class="detail-inner">
+        <div class="title">
+            <h4>@Model.Event.Title</h4>
+            <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> <span class="time">@Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt", ApplicationConstants.DateTimeFormatter)</span></h5>
+
+        </div>
+
+        <dl class="description">
+            @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
+            {
+                <dt>Subtitle:</dt>
+                <dd>@Model.Event.SubTitle</dd>
+                <hr />
+            }
+            @if(!Model.Event.LegacyMeetingId.HasValue)
+            {
+                <dt>Channel:</dt>
+                <dd>@Model.Event.ChannelName</dd>
+                <hr />
+            }
+            <dt>House:</dt>
+            <dd>@Model.Event.House</dd>
+            <hr />
+            @if(!string.IsNullOrWhiteSpace(Model.Event.Room))
+            {
+                <dt>Location:</dt>
+                <dd>@Model.Event.Room</dd>
+                <hr />
+            }
+            @if(!string.IsNullOrWhiteSpace(Model.Event.ExternalLocation))
+            {
+                <dt>External Location:</dt>
+                <dd>@Model.Event.ExternalLocation</dd>
+                <hr />
+            }
+            <dt>Event Type:</dt>
+            <dd>@Model.Event.EventType</dd>
+            <hr />
+            <dt>Production:</dt>
+            <dd>@Model.Event.ProductionSource</dd>
+        </dl>
+
+    </div>
+
+    <!--<div class="stack-guide">
+        <div class="stack">
+            <ol>
+                @foreach (var stack in Model.Stacks)
+                {
+                    <li>
+                        <article>
+                            <span class="vr-stack"></span>
+                            <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                            <header class="stack-item">
+                                <h4>@stack.Title</h4>
+                            </header>
+                        </article>
+                    </li>
+                }
+            </ol>
+        </div>
+    </div>-->
+</div>
