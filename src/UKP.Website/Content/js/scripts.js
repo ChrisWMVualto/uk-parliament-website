@@ -194,7 +194,7 @@ $(document).ready(function () {
         $('.date-picker').datepicker({
             weekStart: 1,
             autoclose: true,
-            zIndex: 50,
+            zIndex: 2000,
             startDate: startDateOb,
             todayHighlight: true
         });
