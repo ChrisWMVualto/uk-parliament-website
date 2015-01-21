@@ -11,7 +11,7 @@
     }
 </h3>
 <h4>
-    @if (Model.Event.States.PlayerState == PlayerEventState.PRELIVE)
+    @if (Model.Event.States.PlayerState == PlayerEventState.PRELIVE || !Model.Event.PublishedStartTime.HasValue || Model.Event.PublishedStartTime.Value > DateTime.UtcNow)
     {
         <span><strong>@Model.Event.DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateFormat, ApplicationConstants.DateTimeFormatter)</strong> Meeting starts at @Model.Event.DisplayStartDate.ToLocalTime().ToString("h.mmtt", ApplicationConstants.DateTimeFormatter)</span>
     }
