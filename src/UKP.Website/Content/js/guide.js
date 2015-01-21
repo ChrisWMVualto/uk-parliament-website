@@ -636,10 +636,6 @@ function floatingNav() {
         return datesOffset(freeze) + 109;
     }
 
-    function epgInfoOffset(freeze) {
-        return timesOffset(freeze) + (timeline.height() * 1);
-    }
-
     function triggerFloat() {
         applyStyles($(window).scrollTop() >= title.height());
     }
@@ -664,20 +660,28 @@ function floatingNav() {
                 'top': timesOffset(freezeMenu())
             });
 
-
             if ($('.epg-info').length) {
-                $('body:not(.breakpoint-300) .epg-info').css({
-                    'top': epgInfoOffset(freezeMenu()),
-                    'height': null
+                // EPG Info Exists
+                var infoTop = timesOffset(freezeMenu()) + $('.timeline').height();
+                    infoHeight = null,
+                    position = 'absolute';
+
+                if ($('body').hasClass('breakpoint-300')) {
+                    infoTop = header.height() + epg.height();
+                    infoHeight = $(window).height() - infoTop;
+                    position = null;
+                }
+
+
+                console.log(infoTop);
+
+                $('.epg-info').css({
+                    'top': infoTop,
+                    'height': infoHeight,
+                    'position': position
                 });
 
-                $('body.breakpoint-300 .epg-info').css({
-                    'top': null
-                });
                 $(infoPopup).show();
-                $('body.breakpoint-300 .epg-info').css({
-                    'height': window.screen.height - $('.epg-info').position().top
-                });
             }
         } else {
             epgTop();
@@ -700,19 +704,20 @@ function floatingNav() {
         });
 
         if ($('.epg-info').length) {
-            $('.epg-info').css({
-                'top': null
-            });
-            $('body:not(.breakpoint-300) .epg-info').css({
-                'top': $('.timeline').height(),
-                'height': null
-            });
+            var infoTop = $('.timeline').height(),
+                infoHeight = null;
 
-            $(infoPopup).show();
-            $('body.breakpoint-300 .epg-info').css({
-                'height': window.screen.height - ($('.drag-wrap').offset().top + $('.timeline').height()) - 56  // WOrks when repalceing ($('.stream-container-outer').position().top * -1)  with  - 56
+            if ($('body').hasClass('breakpoint-300')) {
+                infoTop = timeline.offset().top + timeline.height();
+                infoHeight = $(window).height() - infoTop;
+            }
+
+            $('.epg-info').css({
+                'top': infoTop,
+                'height': infoHeight
             });
         }
+        $(infoPopup).show();
     }
 }
 
