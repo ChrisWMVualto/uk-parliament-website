@@ -19,14 +19,14 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Index()
         {
             return RedirectToAction(MVC.Home.Commons());
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Commons()
         {
             var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetMiniGuide(), _recessService.GetRecessMessage(RecessMessageType.HOUSE_OF_COMMONS), EventFilter.COMMONS);
@@ -34,7 +34,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Lords()
         {
             var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.LORDS), _eventService.GetMiniGuide(EventFilter.LORDS), _recessService.GetRecessMessage(RecessMessageType.HOUSE_OF_LORDS), EventFilter.LORDS);
@@ -42,7 +42,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Committees()
         {
             var model = new HomeViewsModel(_eventService.GetNowEvents(EventFilter.COMMITTEES), _eventService.GetMiniGuide(EventFilter.COMMITTEES), _recessService.GetRecessMessage(RecessMessageType.ALL_COMMITTEES), EventFilter.COMMITTEES);

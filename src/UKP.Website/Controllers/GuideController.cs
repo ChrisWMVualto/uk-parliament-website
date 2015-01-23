@@ -22,7 +22,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Index()
         {
             // TODO: Remove datetime
@@ -36,7 +36,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="id")]
+        [OutputCache(Duration=45, VaryByParam="id")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
             var result = _videoService.GetVideo(id);
@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="date")]
+        [OutputCache(Duration=45, VaryByParam="date")]
         public virtual PartialViewResult EpgDay(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
@@ -56,7 +56,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="date")]
+        [OutputCache(Duration=45, VaryByParam="date")]
         public virtual PartialViewResult EpgDateBar(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
