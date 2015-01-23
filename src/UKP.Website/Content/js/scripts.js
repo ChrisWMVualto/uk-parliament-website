@@ -198,6 +198,10 @@ $(document).ready(function () {
             startDate: startDateOb,
             todayHighlight: true
         });
+
+        $('.input-group-addon').on('click', function () {
+            $(this).parent().find('.date-picker').datepicker('show');
+        });
     }
 
 
