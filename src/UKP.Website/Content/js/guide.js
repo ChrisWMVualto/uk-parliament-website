@@ -672,9 +672,6 @@ function floatingNav() {
                     position = null;
                 }
 
-
-                console.log(infoTop);
-
                 $('.epg-info').css({
                     'top': infoTop,
                     'height': infoHeight,
