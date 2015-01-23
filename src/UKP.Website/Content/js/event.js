@@ -1,5 +1,4 @@
-﻿
-var embedGenTimeoutId = null;
+﻿var embedGenTimeoutId = null;
 var eventPollingsInterval = 40000;
 
 function initSelectDates() {
@@ -23,9 +22,12 @@ function loadPlayer(audioOnly, autoStart) {
             var clearSeekingIntervalId = setInterval(function () {
 
                 if ($('#ProgramDateTime').val() != '') { // having a ProgramDateTime means the player has finished loading
-                    var receiver = $('#UKPPlayer')[0];
-                    $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow);
                     clearInterval(clearSeekingIntervalId);
+
+                    setTimeout(function() {
+                        var receiver = $('#UKPPlayer')[0];
+                        $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow);
+                    }, 400);    
                 }
 
             }, 200);
