@@ -23,8 +23,11 @@ function loadPlayer(audioOnly, autoStart) {
 
                 if ($('#ProgramDateTime').val() != '') { // having a ProgramDateTime means the player has finished loading
                     clearInterval(clearSeekingIntervalId);
-                    var receiver = $('#UKPPlayer')[0];
-                    $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow); 
+
+                    setTimeout(function() {
+                        var receiver = $('#UKPPlayer')[0];
+                        $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow);
+                    }, 300);
                 }
 
             }, 200);
