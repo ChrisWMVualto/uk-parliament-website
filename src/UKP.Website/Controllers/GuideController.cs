@@ -22,6 +22,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=30, VaryByParam="none")]
         public virtual ActionResult Index()
         {
             // TODO: Remove datetime
