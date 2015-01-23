@@ -4,7 +4,7 @@
 
 <header class="col-md-10">
     <h3>
-        @Model.Event.Title
+        @Html.FormatText(Model.Event.Title)
     @if (Model.RequestedInPoint.HasValue && Model.RequestedOutPoint.HasValue)
     {
         <text> - EXTRACT</text>

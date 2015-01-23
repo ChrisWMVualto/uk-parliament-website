@@ -139,5 +139,12 @@ namespace System.Web.Mvc.Html
 
             return false;
         }
+
+        public static MvcHtmlString FormatText(this HtmlHelper helper, string text)
+        {
+            if(text == null) return null;
+            text = text.Replace("\\r\\n\n", Environment.NewLine);
+            return new MvcHtmlString(text.Replace(Environment.NewLine, "</br>"));
+        }
     }
 }

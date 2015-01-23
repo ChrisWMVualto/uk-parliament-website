@@ -1,4 +1,5 @@
-﻿@model UKP.Website.Models.Event.ClippingViewModel
+﻿@using UKP.Website.Service.Model
+@model UKP.Website.Models.Event.ClippingViewModel
 
 @Html.Hidden("AllowClippingRefresh", !Model.VideoModel.Event.PublishedStartTime.HasValue)
 
@@ -10,7 +11,7 @@
     hiddenDateDropdown = "hidden";
 }
 
-@if(Model.VideoModel.Event.PublishedStartTime.HasValue)
+@if(Model.VideoModel.Event.PublishedStartTime.HasValue && Model.VideoModel.Event.States.PlanningState != PlanningEventState.STOP_DVR && Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
 {
     <div class="row">
         <div class="col-md-12">

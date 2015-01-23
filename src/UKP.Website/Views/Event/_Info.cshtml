@@ -7,34 +7,34 @@
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.SubTitle))
         {
             <dt>Subtitle:</dt>
-            <dd>@Model.VideoModel.Event.SubTitle</dd>
+            <dd>@Html.FormatText(Model.VideoModel.Event.SubTitle)</dd>
             <hr />
         }
         @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
         {
             <dt>Channel:</dt>
-            <dd>@Model.VideoModel.Event.ChannelName</dd>
+            <dd>@Html.FormatText(Model.VideoModel.Event.ChannelName)</dd>
             <hr />
         }
         <dt>House:</dt>
-        <dd>@Model.VideoModel.Event.House</dd>
+        <dd>@Html.FormatText(Model.VideoModel.Event.House)</dd>
         <hr />
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.Room))
         {
             <dt>Location:</dt>
-            <dd>@Model.VideoModel.Event.Room</dd>
+            <dd>@Html.FormatText(Model.VideoModel.Event.Room)</dd>
             <hr />
         }
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.ExternalLocation))
         {
             <dt>External Location:</dt>
-            <dd>@Model.VideoModel.Event.ExternalLocation</dd>
+            <dd>@Html.FormatText(Model.VideoModel.Event.ExternalLocation)</dd>
             <hr />
         }
         <dt>Event Type:</dt>
-        <dd>@Model.VideoModel.Event.EventType</dd>
+        <dd>@Html.FormatText(Model.VideoModel.Event.EventType)</dd>
         <hr />
         <dt>Production:</dt>
-        <dd>@Model.VideoModel.Event.ProductionSource</dd>
+        <dd>@Html.FormatText(Model.VideoModel.Event.ProductionSource)</dd>
     </dl>
 </div>
