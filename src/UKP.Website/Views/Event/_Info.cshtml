@@ -1,0 +1,40 @@
+﻿@model UKP.Website.Models.Event.EventViewModel
+
+<div class="tab-pane fade in active" id="info">
+    <dl class="description">
+        <a href="#" class="close-pane close-info hidden">close</a>
+        
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.SubTitle))
+        {
+            <dt>Subtitle:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.SubTitle)</dd>
+            <hr />
+        }
+        @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)
+        {
+            <dt>Channel:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.ChannelName)</dd>
+            <hr />
+        }
+        <dt>House:</dt>
+        <dd>@Html.FormatText(Model.VideoModel.Event.House)</dd>
+        <hr />
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.Room))
+        {
+            <dt>Location:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.Room)</dd>
+            <hr />
+        }
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.ExternalLocation))
+        {
+            <dt>External Location:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.ExternalLocation)</dd>
+            <hr />
+        }
+        <dt>Event Type:</dt>
+        <dd>@Html.FormatText(Model.VideoModel.Event.EventType)</dd>
+        <hr />
+        <dt>Production:</dt>
+        <dd>@Html.FormatText(Model.VideoModel.Event.ProductionSource)</dd>
+    </dl>
+</div>
