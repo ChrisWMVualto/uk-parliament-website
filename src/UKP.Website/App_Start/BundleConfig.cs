@@ -34,6 +34,8 @@ namespace UKP.Website
                     "~/Content/js/jquery.infinitescroll.js",
                     "~/Content/js/scripts.js"
                 ));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
