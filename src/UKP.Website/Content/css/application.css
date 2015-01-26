@@ -1,4 +1,9 @@
-﻿.bootstrap-timepicker-meridian,
+﻿.title-main h2:before {
+    width: auto;
+    left: 45px;
+}
+
+.bootstrap-timepicker-meridian,
 .time {
     text-transform: lowercase;
 }
@@ -46,7 +51,7 @@ ol.channel-list {
     left: 0;
 
     background-color: white;
-    background-image: url("../img/blank.png");
+    background-image: url("/Content/img/blank.png");
     background-repeat: repeat;
 }
 

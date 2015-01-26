@@ -6260,7 +6260,7 @@ label.bootstrap-checkbox.disabled {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/icons.png");
+  background-image: url("/Content/img/icons.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -7451,7 +7451,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   outline: none;
 }
 .slick-loading .slick-list {
-  background: #ffffff url("ajax-loader.gif") center center no-repeat;
+  background: #ffffff url("/Content/css/ajax-loader.gif") center center no-repeat;
 }
 .slick-list.dragging {
   cursor: pointer;
@@ -10402,7 +10402,7 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   background-repeat: no-repeat;
 }
 .theme-all-events {
-  background-image: url("../img/theme-all-events.jpg");
+  background-image: url("/Content/img/theme-all-events.jpg");
 }
 .theme-all-events .carousel-caption h3 {
   color: #6e6095;
@@ -10420,10 +10420,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #6e6095;
 }
 .theme-lords .section-home-carousel {
-  background-image: url("../img/theme-lords-normal.jpg");
+  background-image: url("/Content/img/theme-lords-normal.jpg");
 }
 .theme-lords .section-mini-guide {
-  background-image: url("../img/theme-lords-blurred.jpg");
+  background-image: url("/Content/img/theme-lords-blurred.jpg");
   background-position: center -200px;
 }
 .theme-lords .carousel-caption h3 {
@@ -10442,10 +10442,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #a1070f;
 }
 .theme-commons .section-home-carousel {
-  background-image: url("../img/theme-commons-normal.jpg");
+  background-image: url("/Content/img/theme-commons-normal.jpg");
 }
 .theme-commons .section-mini-guide {
-  background-image: url("../img/theme-commons-blurred.jpg");
+  background-image: url("/Content/img/theme-commons-blurred.jpg");
   background-position: center -366px;
 }
 .theme-commons .carousel-caption h3 {
@@ -10464,10 +10464,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #016131;
 }
 .theme-committees .section-home-carousel {
-  background-image: url("../img/theme-committees-normal.jpg");
+  background-image: url("/Content/img/theme-committees-normal.jpg");
 }
 .theme-committees .section-mini-guide {
-  background-image: url("../img/theme-committees-blurred.jpg");
+  background-image: url("/Content/img/theme-committees-blurred.jpg");
   background-position: center -315px;
 }
 .theme-committees .carousel-caption h3 {
@@ -11203,7 +11203,7 @@ ol.channel-list li.event:hover > div {
     text-align: center;
     background-color: #d7dfe4;
     position: relative;
-    background-image: url("../img/channel-bg-alt.png");
+    background-image: url("/Content/img/channel-bg-alt.png");
     color: black;
 }
 .channels li span.channel-number {
@@ -11226,7 +11226,7 @@ ol.channel-list li.event:hover > div {
 }
 .channels li:nth-of-type(odd) {
     background-color: #eff2f4;
-    /*background-image: url("../img/channel-bg.png");
+    /*background-image: url("/Content/img/channel-bg.png");
     color: white;*/
 }
 
@@ -11577,7 +11577,7 @@ dl.description dt {
 .shadow-right {
   width: 6px;
   height: 1540p;
-  background-image: url("../img/shadow-right.png");
+  background-image: url("/Content/img/shadow-right.png");
   position: absolute;
   right: 0;
   top: -55px;
