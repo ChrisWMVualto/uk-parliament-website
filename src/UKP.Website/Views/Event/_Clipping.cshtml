@@ -13,8 +13,8 @@
 
 @if(Model.VideoModel.Event.PublishedStartTime.HasValue 
     && Model.VideoModel.Event.States.PlanningState != PlanningEventState.STOP_DVR 
-    && Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE 
-    && Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE)
+    && (Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE 
+    || Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE))
 {
     <div class="row">
         <div class="col-md-12">
