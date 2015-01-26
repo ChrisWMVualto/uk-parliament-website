@@ -82,7 +82,6 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual PartialViewResult Clipping(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
