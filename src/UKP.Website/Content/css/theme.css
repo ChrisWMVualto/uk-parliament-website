@@ -6260,7 +6260,7 @@ label.bootstrap-checkbox.disabled {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../img/icons.png");
+  background-image: url("/Content/img/icons.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -10409,7 +10409,7 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   background-repeat: no-repeat;
 }
 .theme-all-events {
-  background-image: url("../img/theme-all-events.jpg");
+  background-image: url("/Content/img/theme-all-events.jpg");
 }
 .theme-all-events .carousel-caption h3 {
   color: #6e6095;
@@ -10427,10 +10427,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #6e6095;
 }
 .theme-lords .section-home-carousel {
-  background-image: url("../img/theme-lords-normal.jpg");
+  background-image: url("/Content/img/theme-lords-normal.jpg");
 }
 .theme-lords .section-mini-guide {
-  background-image: url("../img/theme-lords-blurred.jpg");
+  background-image: url("/Content/img/theme-lords-blurred.jpg");
   background-position: center -200px;
 }
 .theme-lords .carousel-caption h3 {
@@ -10449,10 +10449,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #a1070f;
 }
 .theme-commons .section-home-carousel {
-  background-image: url("../img/theme-commons-normal.jpg");
+  background-image: url("/Content/img/theme-commons-normal.jpg");
 }
 .theme-commons .section-mini-guide {
-  background-image: url("../img/theme-commons-blurred.jpg");
+  background-image: url("/Content/img/theme-commons-blurred.jpg");
   background-position: center -200px;
 }
 .theme-commons .carousel-caption h3 {
@@ -10471,10 +10471,10 @@ ul.main-nav li.active a .fa-stack .fa-circle {
   color: #016131;
 }
 .theme-committees .section-home-carousel {
-  background-image: url("../img/theme-committees-normal.jpg");
+  background-image: url("/Content/img/theme-committees-normal.jpg");
 }
 .theme-committees .section-mini-guide {
-  background-image: url("../img/theme-committees-blurred.jpg");
+  background-image: url("/Content/img/theme-committees-blurred.jpg");
   background-position: center -200px;
 }
 .theme-committees .carousel-caption h3 {
@@ -11136,7 +11136,7 @@ ol.channel-list li .soft-ending {
 }
 ol.channel-list li .blank {
   background-color: white;
-  background-image: url("../img/blank.png");
+  background-image: url("/Content/img/blank.png");
   background-repeat: repeat;
 }
 ol.channel-list li .inner:after {
@@ -11235,83 +11235,83 @@ ol.channel-list li.event:hover > div {
 }
 .channel-1-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-one-logo.png");
+  background-image: url("/Content/img/channel-one-logo.png");
 }
 .channel-2-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-two-logo.png");
+  background-image: url("/Content/img/channel-two-logo.png");
 }
 .channel-3-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-three-logo.png");
+  background-image: url("/Content/img/channel-three-logo.png");
 }
 .channel-4-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-four-logo.png");
+  background-image: url("/Content/img/channel-four-logo.png");
 }
 .channel-5-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-6-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-7-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-8-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-9-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-10-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-11-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-12-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-13-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-14-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-15-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-16-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-17-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-18-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-19-logo {
   background-color: #292c2d;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .channel-20-logo {
   background-color: #35393a;
-  background-image: url("../img/channel-five-logo.png");
+  background-image: url("/Content/img/channel-five-logo.png");
 }
 .time-nav,
 .date-nav {
@@ -11660,7 +11660,7 @@ dl.description dt {
 .shadow-right {
   width: 6px;
   height: 2100px;
-  background-image: url("../img/shadow-right.png");
+  background-image: url("/Content/img/shadow-right.png");
   position: absolute;
   right: 0;
   top: -55px;
