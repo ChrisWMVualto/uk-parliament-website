@@ -46,7 +46,7 @@ ol.channel-list {
     left: 0;
 
     background-color: white;
-    background-image: url("../img/blank.png");
+    background-image: url("/Content/img/blank.png");
     background-repeat: repeat;
 }
 
