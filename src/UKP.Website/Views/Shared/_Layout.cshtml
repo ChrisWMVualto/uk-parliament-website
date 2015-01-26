@@ -1,4 +1,5 @@
-﻿@using UKP.Website.Application
+﻿@using System.Web.Optimization
+@using UKP.Website.Application
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -22,18 +23,15 @@
     <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-114x114-precomposed.png")" rel="apple-touch-icon-precomposed" sizes="114x114" />
     <!-- [144x144 (precomposed) for iPad 3rd and 4th generation]-->
     <link href="@Url.Content("~/Content/img/favicons/apple-touch-icon-144x144-precomposed.png")" rel="apple-touch-icon-precomposed" sizes="144x144" />
-    <link rel="icon" href="@Url.Content("~/Content//img/favicons/favicon.png")">
+    <link rel="icon" href="@Url.Content("~/Content/img/favicons/favicon.png")">
     <!--[if IE]><link rel="shortcut icon" href="@Url.Content("~/Content/img/favicons/favicon.ico")"><![endif]-->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="@Url.Content("~/Content/img/favicons/metro-tileicon.png")">
     <meta property="og:image" content="@Url.Content("~/Content/img/share.jpg")" />
     <meta property="og:title" content="@ViewBag.FBTitle" />
     <meta property="og:description" content="@ViewBag.Description" />
-    <!-- Bootstrap -->
-    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/bootstrap-multiselect.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/autocomplete.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/application.css")" rel="stylesheet">
+    
+    @Styles.Render("~/bundles/css")
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,9 +40,6 @@
             <![endif]-->
     <script src="@Url.Content("~/Content/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js")"></script>
     <script src="@Url.Content("~/Content/js/vendor/jquery-1.10.1.js")"></script>
-
-
-
 </head>
 
 <body>
