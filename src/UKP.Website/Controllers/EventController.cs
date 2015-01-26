@@ -62,7 +62,6 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=10, VaryByParam="*")]
         public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
             var inPoint = @in.FromISO8601String();
