@@ -7451,7 +7451,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   outline: none;
 }
 .slick-loading .slick-list {
-  background: #ffffff url("ajax-loader.gif") center center no-repeat;
+  background: #ffffff url("/Content/css/ajax-loader.gif") center center no-repeat;
 }
 .slick-list.dragging {
   cursor: pointer;
