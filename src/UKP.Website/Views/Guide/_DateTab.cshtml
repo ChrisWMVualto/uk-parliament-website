@@ -1,0 +1,6 @@
+﻿@using Date.Extensions
+@model DateTime
+           
+<li data-day-view="@Url.Action(MVC.Guide.EpgDay(@Model.ToLocalTime().Date.ToISO8601String()))" data-day="@Model.ToLocalTime().Date.ToISO8601String()">
+    <a href="#">@Model.ToLocalTime().ToString("ddd d") <span>@Model.ToLocalTime().ToString("MMM")</span></a>
+</li>
