@@ -288,11 +288,8 @@ namespace Links
             public static readonly string arrow_scroll_left_png = Url("arrow-scroll-left.png");
             public static readonly string arrow_scroll_right_png = Url("arrow-scroll-right.png");
             public static readonly string blank_png = Url("blank.png");
-            public static readonly string channel_five_logo_png = Url("channel-five-logo.png");
-            public static readonly string channel_four_logo_png = Url("channel-four-logo.png");
-            public static readonly string channel_one_logo_png = Url("channel-one-logo.png");
-            public static readonly string channel_three_logo_png = Url("channel-three-logo.png");
-            public static readonly string channel_two_logo_png = Url("channel-two-logo.png");
+            public static readonly string channel_bg_alt_png = Url("channel-bg-alt.png");
+            public static readonly string channel_bg_png = Url("channel-bg.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class favicons {
                 private const string URLPATH = "~/Content/img/favicons";
@@ -320,8 +317,10 @@ namespace Links
             public static readonly string share_jpg = Url("share.jpg");
             public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
             public static readonly string theme_committees_normal_jpg = Url("theme-committees-normal.jpg");
+            public static readonly string theme_committees_normal_original_jpg = Url("theme-committees-normal_original.jpg");
             public static readonly string theme_commons_blurred_jpg = Url("theme-commons-blurred.jpg");
             public static readonly string theme_commons_normal_jpg = Url("theme-commons-normal.jpg");
+            public static readonly string theme_commons_normal_original_jpg = Url("theme-commons-normal_original.jpg");
             public static readonly string theme_lords_blurred_jpg = Url("theme-lords-blurred.jpg");
             public static readonly string theme_lords_normal_jpg = Url("theme-lords-normal.jpg");
         }
