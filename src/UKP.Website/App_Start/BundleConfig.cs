@@ -9,7 +9,6 @@ namespace UKP.Website
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                     "~/Content/css/bootstrap.css",
                     "~/Content/css/bootstrap-multiselect.css",
-                    "~/Content/css/theme.css",
                     "~/Content/css/autocomplete.css",
                     "~/Content/css/application.css"));
 

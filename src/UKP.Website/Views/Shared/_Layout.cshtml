@@ -31,22 +31,14 @@
     <meta property="og:title" content="@ViewBag.FBTitle" />
     <meta property="og:description" content="@ViewBag.Description" />
     
-    @*@Styles.Render("~/bundles/css")*@
-    <link href="@Url.Content("~/Content/css/bootstrap.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/bootstrap-multiselect.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/autocomplete.css")" rel="stylesheet">
-    <link href="@Url.Content("~/Content/css/application.css")" rel="stylesheet">
-
+    @Styles.Render("~/bundles/css")
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
-    @*@Scripts.Render("~/bundles/headJs")*@
-
-    <script src="@Url.Content("~/Content/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/jquery-1.10.1.js")"></script>
+    @Scripts.Render("~/bundles/headJs")
 </head>
 
 <body>
@@ -128,25 +120,7 @@
         </footer>
     </div>
 
-    @*@Scripts.Render("~/bundles/footJs")*@
-
-    <script src="@Url.Content("~/Content/js/vendor/jQuery-Mobile.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/jquery.succinct.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/bootstrap-checkbox.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/jquery.pep.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/breakpoints.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/jquery.slimscroll.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/slick.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/bootstrap-timepicker-mod.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/bootstrap-datepicker.mod.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/bootstrap-select.js")"></script>
-    <script src="@Url.Content("~/Content/js/vendor/bootstrap-multiselect.js")"></script>
-    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.autocomplete.mod.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.infinitescroll.js")"></script>
-    <script src="@Url.Content("~/Content/js/scripts.js")"></script>
-
-
+    @Scripts.Render("~/bundles/footJs")
     @RenderSection("scripts", false)
 
 
