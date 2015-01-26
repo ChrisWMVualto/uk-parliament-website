@@ -1,4 +1,9 @@
-﻿.bootstrap-timepicker-meridian,
+﻿.title-main h2:before {
+    width: auto;
+    left: 45px;
+}
+
+.bootstrap-timepicker-meridian,
 .time {
     text-transform: lowercase;
 }
