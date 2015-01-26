@@ -127,7 +127,7 @@ namespace System.Web.Mvc.Html
 
         public static bool CookieStateSet(this HttpRequestBase request)
         {
-            return (request.Cookies.Get(ApplicationConstants.AcceptCookieName) != null || HttpContext.Current.Session[ApplicationConstants.AcceptCookieName] != null);
+            return request.Cookies.Get(ApplicationConstants.AcceptCookieName) != null;
         }
 
         public static bool CookiesAllowed(this HttpRequestBase request)
