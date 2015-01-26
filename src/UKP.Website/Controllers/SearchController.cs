@@ -11,6 +11,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
+    [OutputCache(Duration=600, VaryByParam="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;

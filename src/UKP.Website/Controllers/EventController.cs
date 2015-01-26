@@ -27,6 +27,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=10, VaryByParam="*")]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
@@ -39,6 +40,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual JsonResult GetShareVideo(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -49,6 +51,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual JsonResult ShowAudioOnly(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -59,6 +62,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=10, VaryByParam="*")]
         public virtual JsonResult GetMainVideo(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -69,6 +73,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=10, VaryByParam="*")]
         public virtual PartialViewResult EventTitle(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -78,6 +83,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual PartialViewResult Clipping(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -98,6 +104,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
+        [OutputCache(Duration=2, VaryByParam="*")]
         public virtual PartialViewResult StackAndLogs(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -113,6 +120,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
+        [OutputCache(Duration=2, VaryByParam="*")]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;
@@ -129,6 +137,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
