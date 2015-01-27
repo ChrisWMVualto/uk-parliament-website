@@ -33,6 +33,10 @@ namespace UKP.Website
                 "~/Content/js/jquery.infinitescroll.js",
                 "~/Content/js/scripts.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/guideJs").Include(
+                "~/Content/js/vendor/dragscrollable.mod.js",
+                "~/Content/js/guide.js"));
+
             BundleTable.EnableOptimizations = true;
         }
     }
