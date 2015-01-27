@@ -210,7 +210,8 @@ function reloadEmbedData() {
 function selectableEmbedCode() {
     var inputs = $('#embed, #smallUrl, #url');
     inputs.bind('click', function () {
-        this.select();
+        this.focus();
+        this.setSelectionRange(0, 9999);
     });
 }
 
