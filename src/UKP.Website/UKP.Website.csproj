@@ -400,6 +400,7 @@
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\SetBundlerOptimisation.cs" />
     <Compile Include="Extensions\BrowserFilterAttribute.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\JsonDotNetResult.cs" />

@@ -8,6 +8,8 @@ using UAParser;
 
 namespace UKP.Website.Extensions
 {
+    using System.Web.Optimization;
+
     public class BrowserFilterAttribute : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
