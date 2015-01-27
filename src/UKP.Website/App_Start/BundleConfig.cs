@@ -37,6 +37,16 @@ namespace UKP.Website
                 "~/Content/js/vendor/dragscrollable.mod.js",
                 "~/Content/js/guide.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/searchJs").Include(
+                "~/Content/js/search.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/playerJs").Include(
+                "~/Scripts/jquery.signalR-2.1.1.min.js",
+                "~/Content/js/jquery.post-message.updated.js",
+                "~/Content/js/responsive-player.js",
+                "~/Content/js/event.js",
+                "~/Content/js/program-date-time.js"));
+
             BundleTable.EnableOptimizations = true;
         }
     }
