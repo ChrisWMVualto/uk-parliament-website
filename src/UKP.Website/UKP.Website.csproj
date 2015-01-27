@@ -194,6 +194,7 @@
     <Content Include="Content\fonts\karla\fonts\karla-regular-webfont.svg" />
     <Content Include="Content\img\arrow-scroll-left.png" />
     <Content Include="Content\img\arrow-scroll-right.png" />
+    <Content Include="Content\img\logo-main.png" />
     <Content Include="Content\img\blank.png" />
     <Content Include="Content\img\channel-bg-alt.png" />
     <Content Include="Content\img\channel-bg.png" />
@@ -211,7 +212,6 @@
     <Content Include="Content\img\filler-thumb-3.jpg" />
     <Content Include="Content\img\filler-thumb-4.jpg" />
     <Content Include="Content\img\icons.png" />
-    <Content Include="Content\img\logo-main.png" />
     <Content Include="Content\img\rotate.png" />
     <Content Include="Content\img\shadow-right.png" />
     <Content Include="Content\img\share.jpg" />
