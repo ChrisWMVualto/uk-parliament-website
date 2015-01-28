@@ -26,14 +26,17 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Index(string keywords, int? memberId, string member, string house, string business, string start, string end, int page = 1)
         {
             DateTime fromDate;
-            if(!DateTime.TryParse(start, out fromDate))
+            if (!DateTime.TryParse(start, out fromDate))
             {
                 fromDate = DateTime.Today.AddMonths(-1);
+                return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), end, page));
             }
+
             DateTime toDate;
-            if(!DateTime.TryParse(end, out toDate))
+            if (!DateTime.TryParse(end, out toDate))
             {
                 toDate = DateTime.Today;
+                return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), toDate.ToShortDateString(), page));
             }
 
             if (fromDate > toDate)
