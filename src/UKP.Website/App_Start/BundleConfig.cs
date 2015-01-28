@@ -45,8 +45,7 @@ namespace UKP.Website
                 "~/Content/js/jquery.post-message.updated.js",
                 "~/Content/js/responsive-player.js",
                 "~/Content/js/event.js",
-                "~/Content/js/program-date-time.js",
-                "~/signalr/hubs"));
+                "~/Content/js/program-date-time.js"));
 
             BundleTable.EnableOptimizations = true;
         }
