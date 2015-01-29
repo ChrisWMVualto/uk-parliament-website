@@ -13547,6 +13547,7 @@ ol.channel-list {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        line-height: 1.3;
     }
 
     ol.channel-list p {
