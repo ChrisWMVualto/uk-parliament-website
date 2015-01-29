@@ -13,6 +13,8 @@ namespace UKP.Website
 {
     using System.Web.Optimization;
 
+    using UKP.Website.Extensions;
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -20,6 +22,7 @@ namespace UKP.Website
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalFilters.Filters.Add(new SetBundlerOptimisation());
         }
     }
 }
