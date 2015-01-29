@@ -596,7 +596,8 @@ function floatingNav() {
         title = $('.title-container'),
         streamContainer = $('.stream-container-inner'),
         freezeFrom = $('.channel-18'),
-        infoPopup = '#epgInfoPopup';
+        infoPopup = '#epgInfoPopup',
+        channelDay = '.channel-day';
 
 
     $(window).on('scroll', function () {
@@ -655,6 +656,9 @@ function floatingNav() {
             epg.css({
                 'position': 'absolute',
                 'top': datesOffset(freezeMenu())
+            });
+            $(channelDay).css({
+                'top': 2
             });
             timeline.css({
                 'top': timesOffset(freezeMenu())
