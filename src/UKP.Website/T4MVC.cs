@@ -313,6 +313,7 @@ namespace Links
             public static readonly string icons_png = Url("icons.png");
             public static readonly string logo_main_png = Url("logo-main.png");
             public static readonly string rotate_png = Url("rotate.png");
+            public static readonly string screenshot_png = Url("screenshot.png");
             public static readonly string shadow_right_png = Url("shadow-right.png");
             public static readonly string share_jpg = Url("share.jpg");
             public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
