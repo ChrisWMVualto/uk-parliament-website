@@ -213,6 +213,7 @@
     <Content Include="Content\img\filler-thumb-4.jpg" />
     <Content Include="Content\img\icons.png" />
     <Content Include="Content\img\rotate.png" />
+    <Content Include="Content\img\screenshot.png" />
     <Content Include="Content\img\shadow-right.png" />
     <Content Include="Content\img\share.jpg" />
     <Content Include="Content\img\theme-committees-blurred.jpg" />
