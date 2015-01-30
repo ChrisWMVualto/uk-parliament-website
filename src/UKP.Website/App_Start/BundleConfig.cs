@@ -24,7 +24,6 @@ namespace UKP.Website
                 "~/Content/js/vendor/breakpoints.js",
                 "~/Content/js/vendor/jquery.slimscroll.js",
                 "~/Content/js/vendor/slick.js",
-                "~/Content/js/vendor/bootstrap-timepicker-mod.js",
                 "~/Content/js/vendor/bootstrap-datepicker.mod.js",
                 "~/Content/js/vendor/bootstrap-select.js",
                 "~/Content/js/vendor/bootstrap-multiselect.js",
@@ -34,13 +33,15 @@ namespace UKP.Website
                 "~/Content/js/scripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/guideJs").Include(
+                "~/Content/js/vendor/bootstrap-timepicker-guide-mod.js",
                 "~/Content/js/vendor/dragscrollable.mod.js",
                 "~/Content/js/guide.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/searchJs").Include(
+                "~/Content/js/vendor/bootstrap-timepicker-event-mod.js",
                 "~/Content/js/search.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/playerJs").Include(
+            bundles.Add(new ScriptBundle("~/bundles/eventJs").Include(
                 "~/Scripts/jquery.signalR-2.1.1.min.js",
                 "~/Content/js/jquery.post-message.updated.js",
                 "~/Content/js/responsive-player.js",
