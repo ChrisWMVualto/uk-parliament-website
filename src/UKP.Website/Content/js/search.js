@@ -54,7 +54,7 @@ $(function () {
         nextSelector: $('.pagination a'),
         navSelector: $('.pagination'),
         path: function (pageNum) {
-            return window.location.href + '&page=' + pageNum;
+            return window.location.href + '&page=' + pageNum + '&firstLoad=false';;
         },
         loading: {
             finishedMsg: '',

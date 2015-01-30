@@ -29,16 +29,12 @@ namespace UKP.Website.Controllers
             if (!DateTime.TryParse(start, out fromDate))
             {
                 fromDate = DateTime.Today.AddMonths(-1);
-                //ModelState.AddModelError("start", "Invalid start date.");
-                //return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), end, page));
             }
 
             DateTime toDate;
             if (!DateTime.TryParse(end, out toDate))
             {
                 toDate = DateTime.Today;
-                //ModelState.AddModelError("end", "Invalid end date.");
-                //return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), toDate.ToShortDateString(), page));
             }
 
             if (fromDate > toDate)
