@@ -238,7 +238,8 @@
     <Content Include="Content\js\search.js" />
     <Content Include="Content\js\vendor\bootstrap-checkbox.js" />
     <Content Include="Content\js\vendor\bootstrap-select.js" />
-    <Content Include="Content\js\vendor\bootstrap-timepicker-mod.js" />
+    <Content Include="Content\js\vendor\bootstrap-timepicker-event-mod.js" />
+    <Content Include="Content\js\vendor\bootstrap-timepicker-guide-mod.js" />
     <Content Include="Content\js\vendor\breakpoints.js" />
     <Content Include="Content\js\vendor\dragscrollable.mod.js" />
     <Content Include="Content\js\vendor\jquery-1.10.1.js" />
