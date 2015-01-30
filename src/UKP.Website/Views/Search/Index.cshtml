@@ -26,9 +26,6 @@
             {
                 <div class="col-md-12">
                     <div class="row">
-                        @Html.ValidationSummary()
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="Keywords"><h4>1. Keywords</h4></label>
@@ -36,12 +33,12 @@
                             </div>
                         </div>
                         @*<div class="col-md-4">
-                            <div class="form-group search-param">
-                                <label for="Member"><h4>2. Member</h4></label>
-                                @Html.TextBoxFor(x => x.Member, new { data_ajax_url= Url.Action(MVC.Search.Members()), @class="form-control input-lg" })
-                                @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
-                            </div>
-                        </div>*@
+                                <div class="form-group search-param">
+                                    <label for="Member"><h4>2. Member</h4></label>
+                                    @Html.TextBoxFor(x => x.Member, new { data_ajax_url= Url.Action(MVC.Search.Members()), @class="form-control input-lg" })
+                                    @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
+                                </div>
+                            </div>*@
                         <div class="col-md-2">
                             <div class="form-group search-param">
                                 <label for="House"><h4>2. House</h4></label>
@@ -88,6 +85,11 @@
                     <div>
                         <button type="submit" class="btn btn-default btn-go btn-lg">Search <i class="fa fa-arrow-right-thin fa-lg"></i></button>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    <br/>
+                    @Html.ValidationSummary()
+
                 </div>
             }
         </div>
