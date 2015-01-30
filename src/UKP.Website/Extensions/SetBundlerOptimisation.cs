@@ -6,11 +6,10 @@ using Elmah;
 using Ninject.Activation;
 using RestSharp.Extensions;
 using UAParser;
+using System.Web.Optimization;
 
 namespace UKP.Website.Extensions
 {
-    using System.Web.Optimization;
-
     public class SetBundlerOptimisation : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
