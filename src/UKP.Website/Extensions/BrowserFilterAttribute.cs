@@ -31,7 +31,7 @@ namespace UKP.Website.Extensions
                         filterContext.Result = NotSuppotedRouteResult();
                 }
 
-                if (BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 5, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent) || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent))
+                if (BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 5, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent) || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent) || BrowserNotSupported("Android", null, ua.UserAgent))
                 {
                     ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     filterContext.Result = NotSuppotedRouteResult();
@@ -43,9 +43,9 @@ namespace UKP.Website.Extensions
             }
         }
 
-        private static bool BrowserNotSupported(string browserName, int minVersion, UserAgent userAgent)
+        private static bool BrowserNotSupported(string browserName, int? minVersion, UserAgent userAgent)
         {
-            return userAgent.Family.ToLower() == browserName.ToLower() && int.Parse(userAgent.Major) < minVersion;
+            return userAgent.Family.ToLower() == browserName.ToLower() && (int.Parse(userAgent.Major) < minVersion || minVersion == null);
         }
 
         private static ActionResult NotSuppotedRouteResult()
