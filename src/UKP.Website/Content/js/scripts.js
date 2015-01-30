@@ -290,32 +290,6 @@ $(document).ready(function () {
     });
 
 
-    ////////////////////////////////////////////
-    //Embed terms
-    ////////////////////////////////////////////
-    $('.embed-code').hide();
-    $('.embed-terms .btn-agree').on('click', function (e) {
-        e.preventDefault();
-
-        $('.embed-terms').fadeOut();
-        $('.embed-code').fadeIn();
-    });
-
-
-    ////////////////////////////////////////////
-    //Embed timepickers
-    ////////////////////////////////////////////
-    var opts = {
-        defaultTime: false,
-        showSeconds: true,
-        showMeridian: true,
-        minuteStep: 1,
-        secondStep: 1
-    };
-    $('#startTime').timepicker(opts);
-    $('#endTime').timepicker(opts);
-
-
 });
 
 

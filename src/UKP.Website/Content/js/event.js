@@ -283,6 +283,27 @@ $(function () {
 
     $.connection.hub.start().done(function () { });
 
+
+    $('.embed-code').hide();
+    $('.embed-terms .btn-agree').on('click', function (e) {
+        e.preventDefault();
+
+        $('.embed-terms').fadeOut();
+        $('.embed-code').fadeIn();
+    });
+
+
+    var opts = {
+        defaultTime: false,
+        showSeconds: true,
+        showMeridian: true,
+        minuteStep: 1,
+        secondStep: 1
+    };
+    $('#startTime').timepicker(opts);
+    $('#endTime').timepicker(opts);
+
+
     $('.embed-code').hide();
     $('.embed-terms .btn-agree').bind('click', function (e) {
         e.preventDefault();
