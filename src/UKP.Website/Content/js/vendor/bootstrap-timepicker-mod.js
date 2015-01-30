@@ -271,8 +271,10 @@
       }
     },
 
-    formatTime: function(hour, minute, second, meridian) {
-      return hour + ':' + minute + (this.showSeconds ? ':' + second : '') + (this.showMeridian ? ' ' + meridian : '');
+    formatTime: function (hour, minute, second, meridian) {
+        minute = minute < 10 ? '0' + minute : minute;
+        second = second < 10 ? '0' + second : second;
+        return hour + ':' + minute + (this.showSeconds ? ':' + second : '') + (this.showMeridian ? ' ' + meridian : '');
     },
 
     getCursorPosition: function() {
@@ -780,8 +782,8 @@
       }
 
         var hour = this.hour,
-            minute = this.minute,
-            second = this.second;
+            minute = this.minute < 10 ? '0' + this.minute : this.minute,
+            second = this.second < 10 ? '0' + this.second : this.second;
 
       if (this.showInputs) {
         this.$widget.find('input.bootstrap-timepicker-hour').val(hour);
