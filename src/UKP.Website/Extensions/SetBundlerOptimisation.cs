@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Elmah;
+using Ninject.Activation;
 using RestSharp.Extensions;
 using UAParser;
 
@@ -14,6 +15,12 @@ namespace UKP.Website.Extensions
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            if(filterContext.RequestContext.HttpContext.IsDebuggingEnabled)
+            {
+                BundleTable.EnableOptimizations = false;
+                return;
+            }
+
             try
             {
                 var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
