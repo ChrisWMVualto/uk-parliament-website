@@ -29,18 +29,20 @@ namespace UKP.Website.Controllers
             if (!DateTime.TryParse(start, out fromDate))
             {
                 fromDate = DateTime.Today.AddMonths(-1);
-                return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), end, page));
+                //ModelState.AddModelError("start", "Invalid start date.");
+                //return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), end, page));
             }
 
             DateTime toDate;
             if (!DateTime.TryParse(end, out toDate))
             {
                 toDate = DateTime.Today;
-                return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), toDate.ToShortDateString(), page));
+                //ModelState.AddModelError("end", "Invalid end date.");
+                //return RedirectToAction(MVC.Search.Index(keywords, memberId, member, house, business, fromDate.ToShortDateString(), toDate.ToShortDateString(), page));
             }
 
             if (fromDate > toDate)
-                ModelState.AddModelError("end", "End date cannot occur before the start date");
+                ModelState.AddModelError("end", "End date cannot occur before the start date.");
 
             var firstSearchLoad = string.IsNullOrWhiteSpace(start);
             var searchModel = new SearchViewModel()
