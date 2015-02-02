@@ -1,0 +1,31 @@
+﻿@using Links
+@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Browser not supported";
+}
+
+<div class="container main-container">
+    <br />
+    <br />
+    <h3>Sorry, your browser is not supported</h3>
+    <br />
+    <p>
+        To view this website you must upgrade your web browser. The following browsers are officially supported:
+    </p>
+    <br />
+    <ul>
+        <li>Internet Explorer 9+</li>
+        <li>Chrome 38+</li>
+        <li>Firefox 30+</li>
+        <li>Opera 23+</li>
+        <li>Safari 6+</li>
+        <li>Chrome for Android</li>
+        <li>Safari and Chrome for iOS</li>
+    </ul>
+    <br />
+    <p>
+        Upgrading your browser will allow you access to the full website, as well as providing an improved web experience. 
+    </p>
+    <img src="@Content.Url("img/screenshot.png")" class="img-responsive"  alt="Screenshot of UK Parliament Live working properly. "/>
+    <br />
+</div>
