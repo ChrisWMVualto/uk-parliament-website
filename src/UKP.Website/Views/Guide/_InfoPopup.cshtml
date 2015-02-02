@@ -22,8 +22,8 @@
         <dl class="description">
             @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
             {
-                <dt>Subtitle:</dt>
-                <dd>@Html.FormatText(Model.Event.SubTitle)</dd>
+                <dt class="subtitle-dt">Subtitle:</dt>
+                <dd class="subtitle-dd">@Html.FormatText(Model.Event.SubTitle)</dd>
                 <hr />
             }
             @if(!Model.Event.LegacyMeetingId.HasValue)
@@ -57,21 +57,21 @@
     </div>
 
     @*<div class="stack-guide">
-        <div class="stack">
-            <ol>
-                @foreach (var stack in Model.Stacks)
-                {
-                    <li>
-                        <article>
-                            <span class="vr-stack"></span>
-                            <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                            <header class="stack-item">
-                                <h4>@stack.Title</h4>
-                            </header>
-                        </article>
-                    </li>
-                }
-            </ol>
-        </div>
-    </div>*@
+            <div class="stack">
+                <ol>
+                    @foreach (var stack in Model.Stacks)
+                    {
+                        <li>
+                            <article>
+                                <span class="vr-stack"></span>
+                                <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                                <header class="stack-item">
+                                    <h4>@stack.Title</h4>
+                                </header>
+                            </article>
+                        </li>
+                    }
+                </ol>
+            </div>
+        </div>*@
 </div>
