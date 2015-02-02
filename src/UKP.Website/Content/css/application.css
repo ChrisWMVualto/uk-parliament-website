@@ -244,3 +244,10 @@ a.extract-text {
 .hrborder {
     border-top: 7px solid #000000;
 }
+
+dl.description dt.subtitle-dt {
+    width:50px;
+}
+dl.description dd.subtitle-dd {
+    margin-left: 80px;
+}
