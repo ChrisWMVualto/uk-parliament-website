@@ -6,8 +6,7 @@
 
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.SubTitle))
         {
-            <dt>Subtitle:</dt>
-            <dd>@Html.FormatText(Model.VideoModel.Event.SubTitle)</dd>
+            @Html.FormatText(Model.VideoModel.Event.SubTitle)
             <hr />
         }
         @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue)

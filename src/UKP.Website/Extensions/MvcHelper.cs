@@ -146,5 +146,10 @@ namespace System.Web.Mvc.Html
             text = text.Replace("\\r\\n\n", Environment.NewLine);
             return new MvcHtmlString(text.Replace(Environment.NewLine, "</br>"));
         }
+
+        public static string TrimText(this HtmlHelper helper, string input, int wordCount)
+        {
+            return string.Join(" ", input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Take(wordCount));
+        }
     }
 }
