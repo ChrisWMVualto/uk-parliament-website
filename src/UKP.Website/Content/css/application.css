@@ -240,3 +240,7 @@ a.extract-text {
     width: 20px;
     font-size: 10px;
 }
+
+.hrborder {
+    border-top: 7px solid #000000;
+}
