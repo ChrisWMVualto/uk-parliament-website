@@ -25,41 +25,54 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(string keywords, int? memberId, string member, string house, string business, string start, string end, int page = 1)
         {
+            var firstSearchLoad = string.IsNullOrWhiteSpace(start) && string.IsNullOrWhiteSpace(end);
             DateTime fromDate;
-            if (!DateTime.TryParse(start, out fromDate))
+            DateTime toDate;
+
+            if (firstSearchLoad)
             {
                 fromDate = DateTime.Today.AddMonths(-1);
-            }
-
-            DateTime toDate;
-            if (!DateTime.TryParse(end, out toDate))
-            {
                 toDate = DateTime.Today;
             }
-
-            if (fromDate > toDate)
-                ModelState.AddModelError("end", "End date cannot occur before the start date.");
-
-            var firstSearchLoad = string.IsNullOrWhiteSpace(start);
-            var searchModel = new SearchViewModel()
-                              {
-                                  Keywords = keywords,
-                                  MemberId = memberId,
-                                  House = house,
-                                  Business = business,
-                                  Start = fromDate,
-                                  End = toDate,
-                                  Member = member,
-                                  BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "Tag", "DisplayTag"),
-                                  HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "Tag", "DisplayTag"),
-                                  FirstSearchLoad = firstSearchLoad
-                              };
-
-            if(!firstSearchLoad)
+            else
             {
-                searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
+                if(!DateTime.TryParse(start, out fromDate))
+                {
+                    ModelState.AddModelError("start", "Start date must be valid.");
+                }
+  
+                if(!DateTime.TryParse(end, out toDate))
+                {        
+                    ModelState.AddModelError("end", "End date must be valid.");
+                }
+
+                if(fromDate > toDate)
+                    ModelState.AddModelError("dates", "End date cannot occur before the start date.");
             }
 
+            var searchModel = new SearchViewModel()
+            {
+                Keywords = keywords,
+                MemberId = memberId,
+                House = house,
+                Business = business,
+                Start = fromDate,
+                End = toDate,
+                Member = member,
+                BusinessTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "Business"), "Tag", "DisplayTag"),
+                HouseTags = new SelectList(_searchService.GetTags().Where(x => x.Category == "House"), "Tag", "DisplayTag"),
+                FirstSearchLoad = firstSearchLoad
+            };
+
+            if (ModelState.IsValid)
+            {
+                if(!firstSearchLoad)
+                {
+                    searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
+                }
+            }
+
+           
             return View(searchModel);
         }
 

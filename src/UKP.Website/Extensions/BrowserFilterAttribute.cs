@@ -5,11 +5,10 @@ using System.Web.Mvc;
 using Elmah;
 using RestSharp.Extensions;
 using UAParser;
+using System.Web.Optimization;
 
 namespace UKP.Website.Extensions
 {
-    using System.Web.Optimization;
-
     public class BrowserFilterAttribute : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
