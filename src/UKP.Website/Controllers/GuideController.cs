@@ -22,7 +22,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        //[OutputCache(Duration=45, VaryByParam="none")]
+        [OutputCache(Duration=45, VaryByParam="none")]
         public virtual ActionResult Index()
         {
             // TODO: Remove datetime
@@ -36,7 +36,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        //[OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
             var result = _videoService.GetVideo(id);
