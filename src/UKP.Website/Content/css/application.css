@@ -85,6 +85,7 @@ ol.channel-list {
     float: left;
     clear: none;
     position: relative;
+    padding-bottom: 2px;
 }
 
 .timeline {
