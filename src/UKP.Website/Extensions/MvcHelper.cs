@@ -147,9 +147,12 @@ namespace System.Web.Mvc.Html
             return new MvcHtmlString(text.Replace(Environment.NewLine, "</br>"));
         }
 
-        public static MvcHtmlString TrimText(this HtmlHelper helper, string input, int wordCount)
+        public static MvcHtmlString TrimText(this HtmlHelper helper, string input, int wordCount, string elipsesUrl)
         {
-            return new MvcHtmlString(string.Join(" ", input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Take(wordCount)));
+            var allWords = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var trimmed = string.Join(" ", allWords.Take(wordCount));
+            if(allWords.Count > wordCount) trimmed += string.Format("<a href='{0}'>...</a>", elipsesUrl);  
+            return new MvcHtmlString(trimmed);
         }
     }
 }
