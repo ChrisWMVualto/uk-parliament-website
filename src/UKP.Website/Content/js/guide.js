@@ -166,7 +166,8 @@ changeDateTab.prototype = {
         this.setIndexes();
 
         this.selectors.clickAndDrag = $(this.selectors.streamContainer).dragscrollable({
-            dragSelector: '*'
+            dragSelector: '*',
+            allowY: false
         });
 
         window.console && console.log('Initial Event Bindings');
