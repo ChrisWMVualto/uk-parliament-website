@@ -247,7 +247,7 @@ a.extract-text {
 }
 
 .subtitle-text {
-    max-height: 35px;
+    max-height: 70px;
     overflow-y:auto;
     overflow-x:hidden;
 }
