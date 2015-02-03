@@ -147,9 +147,9 @@ namespace System.Web.Mvc.Html
             return new MvcHtmlString(text.Replace(Environment.NewLine, "</br>"));
         }
 
-        public static string TrimText(this HtmlHelper helper, string input, int wordCount)
+        public static MvcHtmlString TrimText(this HtmlHelper helper, string input, int wordCount)
         {
-            return string.Join(" ", input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Take(wordCount));
+            return new MvcHtmlString(string.Join(" ", input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Take(wordCount)));
         }
     }
 }
