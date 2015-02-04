@@ -20,7 +20,7 @@
         <dl class="description">
             @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
             {
-                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 60, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
+                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 26, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
                 <hr />
             }
             @if(!Model.Event.LegacyMeetingId.HasValue)
