@@ -80,12 +80,16 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string CookieStateSet = "CookieStateSet";
+            public readonly string CookiesAllowed = "CookiesAllowed";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string CookieStateSet = "CookieStateSet";
+            public const string CookiesAllowed = "CookiesAllowed";
         }
 
 
@@ -125,6 +129,28 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "accepted", accepted);
             IndexOverride(callInfo, accepted);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CookieStateSetOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult CookieStateSet()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.CookieStateSet);
+            CookieStateSetOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CookiesAllowedOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult CookiesAllowed()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.CookiesAllowed);
+            CookiesAllowedOverride(callInfo);
             return callInfo;
         }
 

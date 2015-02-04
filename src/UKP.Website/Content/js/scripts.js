@@ -25,10 +25,11 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //Cookies
     ////////////////////////////////////////////
+    /*
     $('#cookies').modal({
         show: true
     });
-
+    */
     $('#cookiesAccept, #cookiesReject').bind('click', function () {
 
         var url = '/Cookie?accepted=';
@@ -40,6 +41,15 @@ $(document).ready(function () {
 
         $.ajax(url);
     });
+
+    var cookieStateSetUrl = $('#CookieStateSetUrl').val();
+
+    $.getJSON(cookieStateSetUrl, {}, function (data) {
+        $('#cookies').modal({
+            show: !data.CookieSet
+        });
+    });
+
 
 
     ////////////////////////////////////////////

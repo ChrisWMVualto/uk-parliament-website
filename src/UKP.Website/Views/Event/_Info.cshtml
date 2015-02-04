@@ -15,9 +15,12 @@
             <dd>@Html.FormatText(Model.VideoModel.Event.ChannelName)</dd>
             <hr />
         }
-        <dt>House:</dt>
-        <dd>@Html.FormatText(Model.VideoModel.Event.House)</dd>
-        <hr />
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.House))
+        {
+            <dt>House:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.House)</dd>
+            <hr />
+        }
         @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.Room))
         {
             <dt>Location:</dt>
@@ -30,10 +33,16 @@
             <dd>@Html.FormatText(Model.VideoModel.Event.ExternalLocation)</dd>
             <hr />
         }
-        <dt>Event Type:</dt>
-        <dd>@Html.FormatText(Model.VideoModel.Event.EventType)</dd>
-        <hr />
-        <dt>Production:</dt>
-        <dd>@Html.FormatText(Model.VideoModel.Event.ProductionSource)</dd>
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.EventType))
+        {
+            <dt>Event Type:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.EventType)</dd>
+            <hr />
+        }
+        @if(!string.IsNullOrWhiteSpace(Model.VideoModel.Event.ProductionSource))
+        {
+            <dt>Production:</dt>
+            <dd>@Html.FormatText(Model.VideoModel.Event.ProductionSource)</dd>
+        }
     </dl>
 </div>

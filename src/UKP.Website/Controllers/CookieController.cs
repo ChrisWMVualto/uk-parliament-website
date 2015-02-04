@@ -27,6 +27,25 @@ namespace UKP.Website.Controllers
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
+
+        [HttpGet]
+        public virtual JsonResult CookieStateSet()
+        {
+            var cookie = Request.Cookies.Get(ApplicationConstants.AcceptCookieName);
+            return Json(new { CookieSet = cookie != null }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public virtual JsonResult CookiesAllowed()
+        {
+            var cookie = Request.Cookies.Get(ApplicationConstants.AcceptCookieName);
+            var allowed = false;
+
+            if(cookie != null)
+                allowed = cookie.Value.ToLower() == "true";
+
+            return Json(new { CookiesAllowed = allowed }, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }

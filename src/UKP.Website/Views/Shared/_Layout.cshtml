@@ -36,118 +36,134 @@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <![endif]-->
-        @Scripts.Render("~/bundles/headJs")
-    </head>
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <![endif]-->
+    @Scripts.Render("~/bundles/headJs")
+</head>
 
-    <body>
+<body>
 
-        @if(!Request.CookieStateSet())
-    {
-            <div class="modal fade in" id="cookies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <header class="title-main">
+    @Html.Hidden("CookieStateSetUrl", Url.Action(MVC.Cookie.CookieStateSet()))
+    @Html.Hidden("CookiesAllowedUrl", Url.Action(MVC.Cookie.CookiesAllowed()))
 
-                                    <h2><i class="fa fa-circle-tick fa-lg"></i> <span>Cookies Policy</span></h2>
-                                </header>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we'll assume that you are happy to receive all cookies on the parliamentlive.tv website.
-                            </p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button id="cookiesAccept" class="btn btn-lg btn-block btn-generic btn-accept close-modal" data-dismiss="modal">Accept <i class="fa fa-lg fa-tick fa-fw"></i></button>
-                                </div>
-                                <div class="col-md-6">
-                                    <button id="cookiesReject" class="btn btn-lg btn-block  btn-generic btn-reject close-modal" data-dismiss="modal">Reject<i class="fa fa-lg fa-close fa-fw"></i></button>
-                                </div>
-                            </div>
-                        </div>
+    <div class="modal fade in" id="cookies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <header class="title-main">
+                            <h2><i class="fa fa-circle-tick fa-lg"></i> <span>Cookies Policy</span></h2>
+                        </header>
                     </div>
                 </div>
-            </div>
-    }
-
-
-
-        <header class="header-main">
-            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-                <div class="container">
+                <div class="modal-body">
+                    <p>
+                        We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we'll assume that you are happy to receive all cookies on the parliamentlive.tv website.
+                    </p>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 col-xs-9 clearfix">
-                            <h1><a class="" href="@Url.Action(MVC.Home.Index())"><img class="img-responsive" alt="Parliamentlive.tv" src="@Url.Content("~/Content/img/logo-main.png")"></a></h1>
+                        <div class="col-md-6">
+                            <button id="cookiesAccept" class="btn btn-lg btn-block btn-generic btn-accept close-modal" data-dismiss="modal">Accept <i class="fa fa-lg fa-tick fa-fw"></i></button>
                         </div>
-                        <button type="button" class="navbar-toggle collapsed col-xs-2" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <i class="fa fa-hamburger fa-2x"></i> </button>
-                        <div class="col-lg-9 col-sm-8 col-xs-12">
-                            <div class="navbar-collapse collapse">
-                                <ul class="main-nav row">
-                                    <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Home.Commons(), MVC.Home.Lords(), MVC.Home.Committees() })"><a href="/"><i class="page-icon fa fa-home fa-lg"></i> Home <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                    <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Guide.Index() })"><a href="@Url.Action(MVC.Guide.Index())"><i class="page-icon fa fa-guide fa-lg"></i> Event Guide <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                    <li class="col-sm-3"><a href="http://www.parliament.uk/site-information/using-this-website/help/parliamentlivetv-help/"><i class="page-icon fa fa-help-nav fa-lg"></i> Help <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                    <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Search.Index() })"><a href="@Url.Action(MVC.Search.Index())"><i class="page-icon fa fa-search fa-lg"></i> Search <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
-                                    <li class="col-sm-3 visible-xs"><a href="@Configuration.GetRssUrl" class="rss-link"><i class="fa fa-rss fa-2x"></i> RSS</a></li>
-                                </ul>
-                            </div>
-                            <!--/.nav-collapse -->
+                        <div class="col-md-6">
+                            <button id="cookiesReject" class="btn btn-lg btn-block  btn-generic btn-reject close-modal" data-dismiss="modal">Reject<i class="fa fa-lg fa-close fa-fw"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-
-
-        @RenderBody()
-
-
-        <div class="container">
-            <footer class="footer-main">
-                <ul>
-                    <li><a target="_blank" href="http://www.parliament.uk/"> <i class="fa fa-external fa-lg"></i> UKParliament Site</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/azindex/"> <i class="fa fa-external fa-lg"></i> A-Z index</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/glossary/"> <i class="fa fa-external fa-lg"></i> Glossary</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/contact-us/"> <i class="fa fa-external fa-lg"></i> Contact us</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/foi/"> <i class="fa fa-external fa-lg"></i> Freedom of Information</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/job-opportunities/"> <i class="fa fa-external fa-lg"></i> Jobs</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/using-this-website/"> <i class="fa fa-external fa-lg"></i> Using this website</a></li>
-                    <li><a target="_blank" href="http://www.parliament.uk/site-information/copyright/"> <i class="fa fa-external fa-lg"></i> Copyright</a></li>
-                </ul>
-            </footer>
         </div>
-
-        @Scripts.Render("~/bundles/footJs")
-        @RenderSection("scripts", false)
+    </div>
 
 
-        @if(!Request.CookiesAllowed())
-    {
-            <script>
+
+
+    <header class="header-main">
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-xs-9 clearfix">
+                        <h1><a class="" href="@Url.Action(MVC.Home.Index())"><img class="img-responsive" alt="Parliamentlive.tv" src="@Url.Content("~/Content/img/logo-main.png")"></a></h1>
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed col-xs-2" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <i class="fa fa-hamburger fa-2x"></i> </button>
+                    <div class="col-lg-9 col-sm-8 col-xs-12">
+                        <div class="navbar-collapse collapse">
+                            <ul class="main-nav row">
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Home.Commons(), MVC.Home.Lords(), MVC.Home.Committees() })"><a href="/"><i class="page-icon fa fa-home fa-lg"></i> Home <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Guide.Index() })"><a href="@Url.Action(MVC.Guide.Index())"><i class="page-icon fa fa-guide fa-lg"></i> Event Guide <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3"><a href="http://www.parliament.uk/site-information/using-this-website/help/parliamentlivetv-help/"><i class="page-icon fa fa-help-nav fa-lg"></i> Help <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 @Html.IsActiveRoute(new[] { MVC.Search.Index() })"><a href="@Url.Action(MVC.Search.Index())"><i class="page-icon fa fa-search fa-lg"></i> Search <span class="fa-stack fa-lg pull-right visible-xs"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-tick fa-stack-1x fa-inverse"></i> </span></a></li>
+                                <li class="col-sm-3 visible-xs"><a href="@Configuration.GetRssUrl" class="rss-link"><i class="fa fa-rss fa-2x"></i> RSS</a></li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    @RenderBody()
+
+
+    <div class="container">
+        <footer class="footer-main">
+            <ul>
+                <li><a target="_blank" href="http://www.parliament.uk/"> <i class="fa fa-external fa-lg"></i> UKParliament Site</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/azindex/"> <i class="fa fa-external fa-lg"></i> A-Z index</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/glossary/"> <i class="fa fa-external fa-lg"></i> Glossary</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/contact-us/"> <i class="fa fa-external fa-lg"></i> Contact us</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/foi/"> <i class="fa fa-external fa-lg"></i> Freedom of Information</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/job-opportunities/"> <i class="fa fa-external fa-lg"></i> Jobs</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/using-this-website/"> <i class="fa fa-external fa-lg"></i> Using this website</a></li>
+                <li><a target="_blank" href="http://www.parliament.uk/site-information/copyright/"> <i class="fa fa-external fa-lg"></i> Copyright</a></li>
+            </ul>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/footJs")
+    @RenderSection("scripts", false)
+
+    <script>
+
+        var cookiesAllowedUrl = $('#CookiesAllowedUrl').val();
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '@Configuration.GetGoogleAnalyticsId']);
+
+        $.getJSON(cookiesAllowedUrl, {}, function (data) {
+
+            if (data.CookiesAllowed) {
+                _gaq.push(['_trackPageview']);
+
+                console.log('logged');
+
+            } else {
+
+                console.log('no cookie');
                 window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = true;
 
                 $('#cookiesAccept').bind('click', function () {
                     window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = false;
                     _gaq.push(['_trackPageview']);
                 });
-            </script>
-    }
+            }
 
-        <script>
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '@Configuration.GetGoogleAnalyticsId']);
-            _gaq.push(['_trackPageview']);
 
-            (function () {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+        });
 
-    </body>
+
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+</script>
+
+</body>
 </html>
