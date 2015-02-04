@@ -29,9 +29,12 @@
                 <dd>@Html.FormatText(Model.Event.ChannelName)</dd>
                 <hr />
             }
-            <dt>House:</dt>
-            <dd>@Html.FormatText(Model.Event.House)</dd>
-            <hr />
+            @if(!string.IsNullOrWhiteSpace(Model.Event.House))
+            {
+                <dt>House:</dt>
+                <dd>@Html.FormatText(Model.Event.House)</dd>
+                <hr />
+            }
             @if(!string.IsNullOrWhiteSpace(Model.Event.Room))
             {
                 <dt>Location:</dt>
@@ -44,11 +47,17 @@
                 <dd>@Html.FormatText(Model.Event.ExternalLocation)</dd>
                 <hr />
             }
-            <dt>Event Type:</dt>
-            <dd>@Html.FormatText(Model.Event.EventType)</dd>
-            <hr />
-            <dt>Production:</dt>
-            <dd>@Html.FormatText(Model.Event.ProductionSource)</dd>
+            @if(!string.IsNullOrWhiteSpace(Model.Event.EventType))
+            {
+                <dt>Event Type:</dt>
+                <dd>@Html.FormatText(Model.Event.EventType)</dd>
+                <hr />
+            }
+            @if(!string.IsNullOrWhiteSpace(Model.Event.ProductionSource))
+            {
+                <dt>Production:</dt>
+                <dd>@Html.FormatText(Model.Event.ProductionSource)</dd>
+            }
         </dl>
 
     </div>
