@@ -135,12 +135,7 @@
 
             if (data.CookiesAllowed) {
                 _gaq.push(['_trackPageview']);
-
-                console.log('logged');
-
             } else {
-
-                console.log('no cookie');
                 window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = true;
 
                 $('#cookiesAccept').bind('click', function () {
@@ -151,8 +146,6 @@
 
 
         });
-
-
 
         (function () {
             var ga = document.createElement('script');
