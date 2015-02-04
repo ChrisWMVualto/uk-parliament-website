@@ -6,7 +6,7 @@
         <span aria-hidden="true"><i class="fa fa-close fa-lg"></i></span><span class="sr-only">Close</span>
     </button>
 
-    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, autoStart:true))" type="button" class="btn btn-generic btn-play">
+    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id))" type="button" class="btn btn-generic btn-play">
         Play <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-play fa-stack-1x fa-inverse"></i>
@@ -20,7 +20,7 @@
         <dl class="description">
             @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
             {
-                <div class="subtitle-text">@Html.TrimText(Html.FormatText(Model.Event.SubTitle).ToHtmlString(), 10)<a href="@Url.Action(MVC.Event.Index(Model.Event.Id, autoStart:true))">...</a></div>
+                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 60, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
                 <hr />
             }
             @if(!Model.Event.LegacyMeetingId.HasValue)
