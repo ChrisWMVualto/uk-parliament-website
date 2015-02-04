@@ -13820,7 +13820,7 @@ ol.channel-list {
 .alert-side-detail {
     background-color: #d7dfe4;
     color: black;
-    padding: 18px;
+    padding: 10px;
     position: absolute;
     right: 0;
     top: 45px;
@@ -13882,7 +13882,7 @@ ol.channel-list {
 
         .alert-side-detail .detail-inner .title {
             border-top: 1px solid black;
-            padding: 15px 0 8px 0;
+            padding: 5px 0 1px 0;
         }
 
             .alert-side-detail .detail-inner .title h5 {
