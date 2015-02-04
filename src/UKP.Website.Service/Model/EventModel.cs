@@ -6,7 +6,7 @@ namespace UKP.Website.Service.Model
     {
         public EventModel(Guid id, string title, string house, string business, EventStates states, DateTime displayStartDate, DateTime displayEndDate,
             DateTime? actualLiveStartTime, DateTime scheduledStartTime, DateTime scheduledEndTime, DateTime? publishedStartTime,
-            DateTime? actualStartTime, DateTime? actualEndTime, string channelName, string room, string eventType, string productionSource, int? legacyMeetingId,
+            DateTime? actualStartTime, DateTime? actualEndTime, string channelName, int? internalChannelId, string room, string eventType, string productionSource, int? legacyMeetingId,
             string externalLocation, string subTitle)
         {
             Id = id;
@@ -23,6 +23,7 @@ namespace UKP.Website.Service.Model
             ActualStartTime = actualStartTime;
             ActualEndTime = actualEndTime;
             ChannelName = channelName;
+            InternalChannelId = internalChannelId;
             Room = room;
             EventType = eventType;
             ProductionSource = productionSource;
@@ -46,6 +47,7 @@ namespace UKP.Website.Service.Model
         public DateTime? ActualStartTime { get; private set; }
         public DateTime? ActualEndTime { get; private set; }
         public string ChannelName { get; private set; }
+        public int? InternalChannelId { get; set; }
         public string Room { get; private set; }
         public string EventType { get; private set; }
         public string ProductionSource { get; private set; }

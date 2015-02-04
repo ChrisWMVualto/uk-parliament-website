@@ -44,6 +44,7 @@ namespace UKP.Website.Service.Transforms
             var actualStartTime = (DateTime?)jObject.actualStartTime;
             var actualEndTime = (DateTime?)jObject.actualEndTime;
             var channelName = (string)jObject.channelName;
+            var internalChannelId = (int?)jObject.internalChannelId;
             var room = (string)jObject.room;
             var externalLocation = (string)jObject.externalLocation;
             var eventType = (string)jObject.eventType;
@@ -51,7 +52,7 @@ namespace UKP.Website.Service.Transforms
             var legacyMeetingId = (int?)jObject.legacyMeetingId;
 
             return new EventModel(id, title, house, business, new EventStates(planningEventState, recordingEventState, recordedEventState, playerEventState), displayStartDate, displayEndDate, actualLiveStartTime,
-                scheduledStartTime, scheduledEndTime, publishedStartTime, actualStartTime, actualEndTime, channelName, room, eventType, productionSource, legacyMeetingId, externalLocation, subTitle);
+                scheduledStartTime, scheduledEndTime, publishedStartTime, actualStartTime, actualEndTime, channelName, internalChannelId, room, eventType, productionSource, legacyMeetingId, externalLocation, subTitle);
         }
 
         public static IEnumerable<EventModel> TransformEPG(dynamic json)

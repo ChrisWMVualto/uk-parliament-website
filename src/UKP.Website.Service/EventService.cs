@@ -17,11 +17,13 @@ namespace UKP.Website.Service
     {
         private readonly IRestClientWrapper _restClientWrapper;
         private readonly IConfiguration _configuration;
+        private readonly IChannelService _channelService;
 
-        public EventService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
+        public EventService(IRestClientWrapper restClientWrapper, IConfiguration configuration, IChannelService channelService)
         {
             _restClientWrapper = restClientWrapper;
             _configuration = configuration;
+            _channelService = channelService;
         }
 
         public IEnumerable<EpgChannelModel> GetFullGuide(DateTime? date)
@@ -29,13 +31,13 @@ namespace UKP.Website.Service
             var dateob = date.HasValue ? date.Value : DateTime.Now;
 
             var events = GetFullGuideEPG(dateob).ToList();
+            var channels = _channelService.GetChannels();
             var epgModel = new List<EpgChannelModel>();
 
-            for (var i = 1; i <= 20; i++)
+            foreach (var channel in channels)
             {
-                var channelEvents = events.Where(x => x.ChannelName.Equals(i.ToString())).Select(x => new EpgEventModel(x, dateob));
-                var channel = new EpgChannelModel(i, channelEvents.ToList());
-                epgModel.Add(channel);
+                var channelEvents = events.Where(x => x.InternalChannelId.Equals(channel.InternalId)).Select(x => new EpgEventModel(x, dateob));
+                epgModel.Add(new EpgChannelModel(channel.InternalId, channelEvents.ToList()));
             }
 
             return epgModel;

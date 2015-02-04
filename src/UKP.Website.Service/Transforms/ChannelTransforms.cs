@@ -27,8 +27,9 @@ namespace UKP.Website.Service.Transforms
 
             var name = (string)Object.name;
             var externalId = (string)Object.externalChannelId;
+            var internalId = (int)Object.internalChannelId;
 
-            return new ChannelModel(name, externalId);
+            return new ChannelModel(name, externalId, internalId);
         }
     }
 }
