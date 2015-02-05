@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Date.Extensions;
 using UKP.Website.Application;
 using UKP.Website.Extensions;
@@ -31,8 +32,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
-
-            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true));
+            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
@@ -43,7 +43,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false);
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed(), Request.CookiesAllowed());
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
@@ -53,7 +53,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false);
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed());
 
             return this.JsonFormatted(EventViewModel.ShowAudioOnly(video), JsonRequestBehavior.AllowGet);
         }
@@ -64,7 +64,7 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart);
+            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart, Request.CookiesAllowed());
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
@@ -74,7 +74,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, inPoint, outPoint);
+            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
             return PartialView(MVC.Event.Views._EventTitle, video);
         }
 
@@ -83,7 +83,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, inPoint, outPoint);
+            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
 
             TimeSpan? inPointTime = null;
             if(video.RequestedInPoint.HasValue) inPointTime = video.RequestedInPoint.Value.ToLocalTime().TimeOfDay;
@@ -105,7 +105,7 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, processLogs: true);
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
             if (video.LogMoments.ContainsLogMoments)
             {
                 return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results);
