@@ -21,15 +21,9 @@ function initCheckbox() {
 
 $(document).ready(function () {
 
-
     ////////////////////////////////////////////
     //Cookies
     ////////////////////////////////////////////
-    /*
-    $('#cookies').modal({
-        show: true
-    });
-    */
     $('#cookiesAccept, #cookiesReject').bind('click', function () {
 
         var url = '/Cookie?accepted=';
