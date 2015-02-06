@@ -28,14 +28,14 @@ namespace UKP.Website.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        [HttpGet]
+        [HttpPost]
         public virtual JsonResult CookieStateSet()
         {
             var cookie = Request.Cookies.Get(ApplicationConstants.AcceptCookieName);
-            return Json(new { CookieSet = cookie != null }, JsonRequestBehavior.AllowGet);
+            return Json(new { CookieSet = cookie != null });
         }
 
-        [HttpGet]
+        [HttpPost]
         public virtual JsonResult CookiesAllowed()
         {
             var cookie = Request.Cookies.Get(ApplicationConstants.AcceptCookieName);
@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
             if(cookie != null)
                 allowed = cookie.Value.ToLower() == "true";
 
-            return Json(new { CookiesAllowed = allowed }, JsonRequestBehavior.AllowGet);
+            return Json(new { CookiesAllowed = allowed });
         }
     }
 

@@ -36,9 +36,8 @@ $(document).ready(function () {
         $.ajax(url);
     });
 
-    var cookieStateSetUrl = $('#CookieStateSetUrl').val();
-
-    $.getJSON(cookieStateSetUrl, {}, function (data) {
+    var cookieStateSetUrl = $('#CookieStateSetUrl').val(); 
+    $.post(cookieStateSetUrl, {}, function (data) {
         $('#cookies').modal({
             show: !data.CookieSet
         });
