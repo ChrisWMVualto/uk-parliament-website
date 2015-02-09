@@ -539,6 +539,8 @@ changeDateTab.prototype = {
                 window.console && console.log('Enable tab activate');
                 $(that.selectors.days).on('activate', $.proxy(that.activateTab, that));
 
+                $(window).trigger('forcescroll');
+
                 if (typeof opts.callback === 'function' && response.status == 200)
                     opts.callback();
             }
@@ -703,6 +705,9 @@ function floatingNav() {
         });
         timeline.css({
             'top': 0
+        });
+        $(channelDay).css({
+            'top': 2
         });
 
         if ($('.epg-info').length) {
