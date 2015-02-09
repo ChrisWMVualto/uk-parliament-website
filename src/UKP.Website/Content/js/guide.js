@@ -11,21 +11,6 @@ $(document).ready(function () {
     });
 
     ////////////////////////////////////////////
-    //epg-slimscroll details alert stack area
-    ////////////////////////////////////////////
-    if ($(".stack").length) {
-        $('.stack').slimScroll({
-            railVisible: true,
-            railColor: '#ffffff',
-            railOpacity: 0.3,
-            color: '#ffffff',
-            size: '12px',
-            height: 'auto'
-        });
-    }
-
-
-    ////////////////////////////////////////////
     //epg-date/timepicker
     ////////////////////////////////////////////
     if ($("#epgTimepicker").length) {
