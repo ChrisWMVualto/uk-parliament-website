@@ -668,17 +668,20 @@ FloatingNav.prototype = {
             if ($(this.selectors.epgInfo).length) {
                 var infoTop = this.timesOffset() + $(this.selectors.timeline).height(),
                     infoHeight = null,
-                    position = 'absolute';
+                    position = 'absolute',
+                    maxHeight = null;
 
                 if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
                     infoTop = $(this.selectors.headerMain).height() + $(this.selectors.epgOuter).height();
                     infoHeight = $(window).height() - infoTop;
                     position = null;
+                    maxHeight = 350;
                 }
 
                 if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
                     infoTop = (parseInt($(this.selectors.epgOuter).css('top')) + 200) - $(this.selectors.timeline).height();
                     position = null;
+                    maxHeight = 350;
                 }
 
                 $(this.selectors.epgInfo).css({
@@ -701,7 +704,7 @@ FloatingNav.prototype = {
                 infoHeight = infoHeight < 0 ? infoHeight * -1 : infoHeight;
                 $(this.selectors.epgInfo).css({
                     'height': infoHeight,
-                    'maxHeight': 350
+                    'maxHeight': maxHeight
                 });
             }
         } else {
