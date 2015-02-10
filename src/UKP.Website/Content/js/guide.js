@@ -43,9 +43,6 @@ $(document).ready(function () {
 
     $('.stream-container-inner').on('scroll', triggerProgramResize);
 
-    if ($('.epg-outer').length > 0)
-        floatingNav();
-
 
     ////////////////////////////////////////////
     //EPG Time Scroll
@@ -574,144 +571,178 @@ changeDateTab.prototype = {
 ////////////////////////////////////////////
 //Controls the floating EPG dates and times
 ////////////////////////////////////////////
-var triggerFloatTimeoutId;
-function floatingNav() {
-    var fixedClass = 'fixed-epg',
-        container = $('.main-container'),
-        epg = $('.epg-outer'),
-        timeline = $('.timeline'),
-        header = $('.header-main div'),
-        title = $('.title-container'),
-        streamContainer = $('.stream-container-inner'),
-        freezeFrom = $('.channel-18'),
-        infoPopup = '#epgInfoPopup',
-        channelDay = '.channel-day';
+window.floatingNavScrollTimeoutId = null;
 
+function FloatingNav() {
+    this.selectors = {
+        body: 'body',
+        mainContainer: '.main-container',
+        epgOuter: '.epg-outer',
+        timeline: '.timeline',
+        headerMain: '.header-main div',
+        titleContainer: '.title-container',
+        streamContainerInner: '.stream-container-inner',
+        epgInfo: '.epg-info',
+        channelDay: '.channel-day'
+    }
 
-    $(window).on('scroll', function () {
-        if ($(window).scrollTop() >= 5) {
-            epg.hide();
-            timeline.hide();
-            $(infoPopup).hide();
-            clearInterval(triggerFloatTimeoutId);
-            triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
-        } else {
-            epgTop();
-            epg.show();
-            timeline.show();
-            $(infoPopup).show();
-        }
+    this.breakpoints = {
+        300: 'breakpoint-300',
+        768: 'breakpoint-768'
+    }
+
+    this.queryClasses = {
+        'fixed': 'fixed-epg'
+    }
+
+    $(window).on('scroll', $.proxy(this.scrollEvent, this));
+    $(window).on('forcescroll', $.proxy(this.forcescrollEvent, this));
+
+    var orientationEvent = window.onorientationchange !== 'undefined' ? 'resize' : 'orientationchange';
+    $(window).on(orientationEvent, function () {
+        $(window).trigger('forcescroll');
     });
+}
 
-    $(window).on('forcescroll', function() {
+FloatingNav.prototype = {
+    scrollEvent: function() {
         if ($(window).scrollTop() >= 5) {
-            triggerFloat();
+            this.hideFloatingItems();
+            clearInterval(window.floatingNavScrollTimeoutId);
+            window.floatingNavScrollTimeoutId = setTimeout($.proxy(this.triggerFloat, this), 500);
         } else {
-            epgTop();
-            epg.show();
-            timeline.show();
-            $(infoPopup).show();
+            this.epgTop();
+            this.showFloatingItems();
         }
-    });
+    },
+    forcescrollEvent: function() {
+        if ($(window).scrollTop() >= 5) {
+            this.triggerFloat();
+        } else {
+            this.epgTop();
+            this.showFloatingItems();
+        }
+    },
+    hideFloatingItems: function() {
+        $(this.selectors.epgOuter).hide();
+        $(this.selectors.timeline).hide();
 
-    function datesOffset(freeze) {
-        if (freeze)
-            return freezeFrom.offset().top - freezeFrom.parent().parent().offset().top + header.outerHeight();
-        else
-            return ($(window).scrollTop() - epg.parent().offset().top) + header.outerHeight();
-    }
+        if ($(this.selectors.epgInfo).length)
+            $(this.selectors.epgInfo).hide();
+    },
+    showFloatingItems: function () {
+        $(this.selectors.epgOuter).show();
+        $(this.selectors.timeline).show();
 
-    function timesOffset(freeze) {
-        return datesOffset(freeze) + 109;
-    }
-
-    function triggerFloat() {
-        applyStyles($(window).scrollTop() >= title.height());
-    }
-
-    function freezeMenu() {
-        return $(window).scrollTop() >= freezeFrom.offset().top;
-    }
-
-    function applyStyles(isActive) {
-        streamContainer.css({
-            'paddingTop': timeline.height()
+        if ($(this.selectors.epgInfo).length)
+            $(this.selectors.epgInfo).show();
+    },
+    datesOffset: function() {
+        return ($(window).scrollTop() - $(this.selectors.epgOuter).parent().offset().top) + $(this.selectors.headerMain).outerHeight();
+    },
+    timesOffset: function() {
+        return this.datesOffset() + 109;
+    },
+    triggerFloat: function() {
+        this.applyStyles($(window).scrollTop() >= $(this.selectors.titleContainer).height());
+    },
+    applyStyles: function(isActive) {
+        $(this.selectors.streamContainerInner).css({
+            'paddingTop': $(this.selectors.timeline).height()
         });
 
         if (isActive) {
-            container.addClass(fixedClass);
+            $(this.selectors.mainContainer).addClass(this.queryClasses.fixed);
 
-            epg.css({
+            $(this.selectors.epgOuter).css({
                 'position': 'absolute',
-                'top': datesOffset(freezeMenu())
+                'top': this.datesOffset()
             });
-            $(channelDay).css({
+            $(this.selectors.channelDay).css({
                 'top': 2
             });
-            timeline.css({
-                'top': timesOffset(freezeMenu())
+            $(this.selectors.timeline).css({
+                'top': this.timesOffset()
             });
 
-            if ($('.epg-info').length) {
-                // EPG Info Exists
-                var infoTop = timesOffset(freezeMenu()) + $('.timeline').height();
+            if ($(this.selectors.epgInfo).length) {
+                var infoTop = this.timesOffset() + $(this.selectors.timeline).height(),
                     infoHeight = null,
                     position = 'absolute';
 
-                if ($('body').hasClass('breakpoint-300')) {
-                    infoTop = header.height() + epg.height();
+                if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
+                    infoTop = $(this.selectors.headerMain).height() + $(this.selectors.epgOuter).height();
                     infoHeight = $(window).height() - infoTop;
                     position = null;
                 }
 
-                $('.epg-info').css({
+                if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
+                    infoTop = (parseInt($(this.selectors.epgOuter).css('top')) + 200) - $(this.selectors.timeline).height();
+                    position = null;
+                }
+
+                $(this.selectors.epgInfo).css({
                     'top': infoTop,
-                    'height': infoHeight,
                     'position': position
                 });
 
-                $(infoPopup).show();
+                if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
+                    var windowHeight;
+                    if (window.screen)
+                        windowHeight = window.screen.availHeight;
+                    else
+                        windowHeight = window.height();
+
+                    $(this.selectors.epgInfo).show();
+                    infoHeight = $(this.selectors.epgInfo)[0].getBoundingClientRect().top - $(window).height();
+                    $(this.selectors.epgInfo).hide();
+                }
+
+                infoHeight = infoHeight < 0 ? infoHeight * -1 : infoHeight;
+                $(this.selectors.epgInfo).css({
+                    'height': infoHeight,
+                    'maxHeight': 350
+                });
             }
         } else {
-            epgTop();
+            $.proxy(this.epgTop, this);
         }
-        epg.show();
-        timeline.show();
-        
-    }
 
-    function epgTop()
-    {
-        container.removeClass(fixedClass);
+        this.showFloatingItems();
+    },
+    epgTop: function() {
+        $(this.selectors.mainContainer).removeClass(this.queryClasses.fixed);
 
-        epg.css({
+        $(this.selectors.epgOuter).css({
             'position': 'relative',
             'top': 0
         });
-        timeline.css({
+        $(this.selectors.timeline).css({
             'top': 0
         });
-        $(channelDay).css({
+        $(this.selectors.channelDay).css({
             'top': 2
         });
 
-        if ($('.epg-info').length) {
-            var infoTop = $('.timeline').height(),
+        if ($(this.selectors.epgInfo).length) {
+            var infoTop = $(this.selectors.timeline).height(),
                 infoHeight = null;
 
-            if ($('body').hasClass('breakpoint-300')) {
-                infoTop = timeline.offset().top + timeline.height();
+            if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
+                infoTop = $(this.selectors.timeline).offset().top + $(this.selectors.timeline).height();
                 infoHeight = $(window).height() - infoTop;
             }
 
-            $('.epg-info').css({
+            $(this.selectors.epgInfo).css({
                 'top': infoTop,
                 'height': infoHeight
             });
+
+            $(this.selectors.epgInfo).show();
         }
-        $(infoPopup).show();
     }
 }
+new FloatingNav();
 
 ////////////////////////////////////////////
 //Resizes the programmes to keep them on screen
