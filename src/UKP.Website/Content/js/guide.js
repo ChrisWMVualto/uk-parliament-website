@@ -686,7 +686,9 @@ FloatingNav.prototype = {
 
                 $(this.selectors.epgInfo).css({
                     'top': infoTop,
-                    'position': position
+                    'position': position,
+                    'marginLeft': '',
+                    'marginRight': ''
                 });
 
                 if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
@@ -736,6 +738,18 @@ FloatingNav.prototype = {
                 'height': infoHeight,
                 'position': 'absolute'
             });
+
+            if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
+                $(this.selectors.epgInfo).css({
+                    'marginLeft': 0,
+                    'marginRight': 0
+                });
+            } else {
+                $(this.selectors.epgInfo).css({
+                    'marginLeft': '',
+                    'marginRight': ''
+                });
+            }
 
             $(this.selectors.epgInfo).show();
         }
