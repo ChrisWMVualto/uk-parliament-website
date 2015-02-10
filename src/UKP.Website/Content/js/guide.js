@@ -674,13 +674,13 @@ FloatingNav.prototype = {
                 if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
                     infoTop = $(this.selectors.headerMain).height() + $(this.selectors.epgOuter).height();
                     infoHeight = $(window).height() - infoTop;
-                    position = null;
+                    position = '';
                     maxHeight = 350;
                 }
 
                 if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
                     infoTop = (parseInt($(this.selectors.epgOuter).css('top')) + 200) - $(this.selectors.timeline).height();
-                    position = null;
+                    position = '';
                     maxHeight = 350;
                 }
 
@@ -738,7 +738,8 @@ FloatingNav.prototype = {
 
             $(this.selectors.epgInfo).css({
                 'top': infoTop,
-                'height': infoHeight
+                'height': infoHeight,
+                'position': 'absolute'
             });
 
             $(this.selectors.epgInfo).show();
