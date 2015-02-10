@@ -731,11 +731,6 @@ FloatingNav.prototype = {
             var infoTop = $(this.selectors.timeline).height(),
                 infoHeight = null;
 
-            if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
-                infoTop = $(this.selectors.timeline).offset().top + $(this.selectors.timeline).height();
-                infoHeight = $(window).height() - infoTop;
-            }
-
             $(this.selectors.epgInfo).css({
                 'top': infoTop,
                 'height': infoHeight,
