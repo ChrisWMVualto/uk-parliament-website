@@ -50,7 +50,7 @@ namespace UKP.Website.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration=600, VaryByParam="none")]
+        [OutputCache(Duration=600, VaryByParam="*")]
         public virtual PartialViewResult RecentlyArchive(EventFilter eventFilter)
         {
             var model = _eventService.GetRecentlyArchived(eventFilter);
