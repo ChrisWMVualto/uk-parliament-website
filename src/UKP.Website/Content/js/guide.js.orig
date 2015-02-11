@@ -6,7 +6,7 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     // Force bootstrap to release button focus state after click
     ////////////////////////////////////////////
-    $('.btn').mouseup(function() {
+    $('.btn').mouseup(function () {
         $(this).blur();
     });
 
@@ -192,14 +192,14 @@ changeDateTab.prototype = {
             removePast: false,
             dayUrl: $(this.selectors.channelDayContainer).data('day-base-url') + '?date=' + date,
             resetScroll: true,
-            callback: function() {
+            callback: function () {
                 that.loadNewTabBar(date);
             }
         });
     },
 
-    stripTimezone: function(date) {
-            return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
+    stripTimezone: function (date) {
+        return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
     },
 
     pollPosition: function () {
@@ -249,11 +249,11 @@ changeDateTab.prototype = {
         }
     },
 
-    disableTouch: function(e) {
+    disableTouch: function (e) {
         e.preventDefault();
     },
 
-    scrollnext: function(e, append) {
+    scrollnext: function (e, append) {
         if ($(this.selectors.channelDayContainer).find('[data-day=\'' + $(e.target).data('day') + '\']').length == 0) {
             this.fetchContent({
                 removePast: $(this.selectors.channelDayContainer).children().length != 1,
@@ -268,7 +268,7 @@ changeDateTab.prototype = {
     /// Change Date Buttons
     ///
 
-    changeTab: function(e) {
+    changeTab: function (e) {
         var tab = $(this.selectors.days),
             index = this.activeTabIndex(),
             clickedId = $(e.target.parentElement).attr('id');
@@ -285,7 +285,7 @@ changeDateTab.prototype = {
         tab.eq(index).trigger('click');
     },
 
-    dayClicked: function(e) {
+    dayClicked: function (e) {
         var day = $(e.target),
             that = this;
         while (typeof day.data('day') === 'undefined')
@@ -296,7 +296,7 @@ changeDateTab.prototype = {
             removePast: false,
             dayUrl: day.data('day-view'),
             resetScroll: true,
-            callback: function() {
+            callback: function () {
                 that.loadNewTabBar(day.data('day'));
             }
         });
@@ -307,11 +307,11 @@ changeDateTab.prototype = {
     /// Tab Activation
     ///
 
-    activeTabIndex: function() {
+    activeTabIndex: function () {
         return $(this.selectors.days).index($(this.selectors.days + ('.' + this.settings.activeClass)));
     },
-    
-    activateTab: function(e) {
+
+    activateTab: function (e) {
         e.preventDefault();
 
         var day = $(e.target);
@@ -322,7 +322,7 @@ changeDateTab.prototype = {
         day.addClass(this.settings.activeClass);
     },
 
-    advanceTab: function() {
+    advanceTab: function () {
         window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('activate', this);
         this.state.rightTab = true;
@@ -331,7 +331,7 @@ changeDateTab.prototype = {
         this.loadNewTab($(this.selectors.days).last(), false);
     },
 
-    devanceTab: function() {
+    devanceTab: function () {
         window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('activate', this);
         this.state.rightTab = false;
@@ -356,7 +356,7 @@ changeDateTab.prototype = {
 
         var that = this;
         $.ajax(url, {
-            success: function(data) {
+            success: function (data) {
                 if (previousDay) {
                     $(that.selectors.daysContainer).prepend(data);
                     $(that.selectors.days).last().remove();
@@ -427,7 +427,7 @@ changeDateTab.prototype = {
     /// Fetch Content
     ///
 
-    fetchContent: function(options) {
+    fetchContent: function (options) {
         var opts = $.extend({
             clear: false,
             append: true,
@@ -516,7 +516,7 @@ changeDateTab.prototype = {
                     $('.datepicker-dropdown').remove();
                 });
             },
-            error: function() {
+            error: function () {
                 that.state.leftTab = false;
                 that.state.rightTab = true;
             },
@@ -547,7 +547,7 @@ changeDateTab.prototype = {
         });
     },
 
-    liveline: function() {
+    liveline: function () {
         if ($(this.selectors.days + '.' + this.settings.activeClass + '.' + this.settings.todayClass).length)
             $(this.selectors.liveline).show();
 
@@ -555,7 +555,7 @@ changeDateTab.prototype = {
             $(this.selectors.liveline).hide();
     },
 
-    setIndexes: function() {
+    setIndexes: function () {
         var days = $(this.selectors.channelDayContainer).children();
 
         $(days[0]).css('zIndex', 20);
@@ -565,12 +565,12 @@ changeDateTab.prototype = {
     ///
     /// EPG Info Popup
     ///
-    
+
     showEpgInfo: function (e) {
         e.preventDefault();
         e.stopPropagation();
         var that = this;
-        
+
         $.ajax($(e.target).parents('li').data('epg-info'), {
             success: function (model) {
                 $(that.selectors.epgPopup).remove();
@@ -618,7 +618,7 @@ function floatingNav() {
         }
     });
 
-    $(window).on('forcescroll', function() {
+    $(window).on('forcescroll', function () {
         if ($(window).scrollTop() >= 5) {
             triggerFloat();
         } else {
@@ -670,8 +670,8 @@ function floatingNav() {
             if ($('.epg-info').length) {
                 // EPG Info Exists
                 var infoTop = timesOffset(freezeMenu()) + $('.timeline').height();
-                    infoHeight = null,
-                    position = 'absolute';
+                infoHeight = null,
+                position = 'absolute';
 
                 if ($('body').hasClass('breakpoint-300')) {
                     infoTop = header.height() + epg.height();
@@ -692,11 +692,10 @@ function floatingNav() {
         }
         epg.show();
         timeline.show();
-        
+
     }
 
-    function epgTop()
-    {
+    function epgTop() {
         container.removeClass(fixedClass);
 
         epg.css({
@@ -762,8 +761,8 @@ function resizeProgrammes(container) {
     function moveTo(amount, context) {
         if ($(context).outerWidth() > minWidth) {
             $(context).find('.outer .inner').animate({
-                    'marginLeft': amount
-                },
+                'marginLeft': amount
+            },
                 500,
                 'swing',
                 function () {
