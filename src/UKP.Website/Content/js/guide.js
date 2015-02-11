@@ -6,24 +6,9 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     // Force bootstrap to release button focus state after click
     ////////////////////////////////////////////
-    $('.btn').mouseup(function() {
+    $('.btn').mouseup(function () {
         $(this).blur();
     });
-
-    ////////////////////////////////////////////
-    //epg-slimscroll details alert stack area
-    ////////////////////////////////////////////
-    if ($(".stack").length) {
-        $('.stack').slimScroll({
-            railVisible: true,
-            railColor: '#ffffff',
-            railOpacity: 0.3,
-            color: '#ffffff',
-            size: '12px',
-            height: 'auto'
-        });
-    }
-
 
     ////////////////////////////////////////////
     //epg-date/timepicker
@@ -57,9 +42,6 @@ $(document).ready(function () {
     resizeProgrammes($('.stream-container-inner'));
 
     $('.stream-container-inner').on('scroll', triggerProgramResize);
-
-    if ($('.epg-outer').length > 0)
-        floatingNav();
 
 
     ////////////////////////////////////////////
@@ -192,14 +174,14 @@ changeDateTab.prototype = {
             removePast: false,
             dayUrl: $(this.selectors.channelDayContainer).data('day-base-url') + '?date=' + date,
             resetScroll: true,
-            callback: function() {
+            callback: function () {
                 that.loadNewTabBar(date);
             }
         });
     },
 
-    stripTimezone: function(date) {
-            return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
+    stripTimezone: function (date) {
+        return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0));
     },
 
     pollPosition: function () {
@@ -249,11 +231,11 @@ changeDateTab.prototype = {
         }
     },
 
-    disableTouch: function(e) {
+    disableTouch: function (e) {
         e.preventDefault();
     },
 
-    scrollnext: function(e, append) {
+    scrollnext: function (e, append) {
         if ($(this.selectors.channelDayContainer).find('[data-day=\'' + $(e.target).data('day') + '\']').length == 0) {
             this.fetchContent({
                 removePast: $(this.selectors.channelDayContainer).children().length != 1,
@@ -268,7 +250,7 @@ changeDateTab.prototype = {
     /// Change Date Buttons
     ///
 
-    changeTab: function(e) {
+    changeTab: function (e) {
         var tab = $(this.selectors.days),
             index = this.activeTabIndex(),
             clickedId = $(e.target.parentElement).attr('id');
@@ -285,7 +267,7 @@ changeDateTab.prototype = {
         tab.eq(index).trigger('click');
     },
 
-    dayClicked: function(e) {
+    dayClicked: function (e) {
         var day = $(e.target),
             that = this;
         while (typeof day.data('day') === 'undefined')
@@ -296,7 +278,7 @@ changeDateTab.prototype = {
             removePast: false,
             dayUrl: day.data('day-view'),
             resetScroll: true,
-            callback: function() {
+            callback: function () {
                 that.loadNewTabBar(day.data('day'));
             }
         });
@@ -307,11 +289,11 @@ changeDateTab.prototype = {
     /// Tab Activation
     ///
 
-    activeTabIndex: function() {
+    activeTabIndex: function () {
         return $(this.selectors.days).index($(this.selectors.days + ('.' + this.settings.activeClass)));
     },
-    
-    activateTab: function(e) {
+
+    activateTab: function (e) {
         e.preventDefault();
 
         var day = $(e.target);
@@ -322,7 +304,7 @@ changeDateTab.prototype = {
         day.addClass(this.settings.activeClass);
     },
 
-    advanceTab: function() {
+    advanceTab: function () {
         window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('activate', this);
         this.state.rightTab = true;
@@ -331,7 +313,7 @@ changeDateTab.prototype = {
         this.loadNewTab($(this.selectors.days).last(), false);
     },
 
-    devanceTab: function() {
+    devanceTab: function () {
         window.console && console.log('Trigger day tab click');
         $(this.selectors.days).eq(this.activeTabIndex() - 1).trigger('activate', this);
         this.state.rightTab = false;
@@ -356,7 +338,7 @@ changeDateTab.prototype = {
 
         var that = this;
         $.ajax(url, {
-            success: function(data) {
+            success: function (data) {
                 if (previousDay) {
                     $(that.selectors.daysContainer).prepend(data);
                     $(that.selectors.days).last().remove();
@@ -427,7 +409,7 @@ changeDateTab.prototype = {
     /// Fetch Content
     ///
 
-    fetchContent: function(options) {
+    fetchContent: function (options) {
         var opts = $.extend({
             clear: false,
             append: true,
@@ -516,7 +498,7 @@ changeDateTab.prototype = {
                     $('.datepicker-dropdown').remove();
                 });
             },
-            error: function() {
+            error: function () {
                 that.state.leftTab = false;
                 that.state.rightTab = true;
             },
@@ -547,7 +529,7 @@ changeDateTab.prototype = {
         });
     },
 
-    liveline: function() {
+    liveline: function () {
         if ($(this.selectors.days + '.' + this.settings.activeClass + '.' + this.settings.todayClass).length)
             $(this.selectors.liveline).show();
 
@@ -555,7 +537,7 @@ changeDateTab.prototype = {
             $(this.selectors.liveline).hide();
     },
 
-    setIndexes: function() {
+    setIndexes: function () {
         var days = $(this.selectors.channelDayContainer).children();
 
         $(days[0]).css('zIndex', 20);
@@ -565,12 +547,12 @@ changeDateTab.prototype = {
     ///
     /// EPG Info Popup
     ///
-    
+
     showEpgInfo: function (e) {
         e.preventDefault();
         e.stopPropagation();
         var that = this;
-        
+
         $.ajax($(e.target).parents('li').data('epg-info'), {
             success: function (model) {
                 $(that.selectors.epgPopup).remove();
@@ -589,144 +571,191 @@ changeDateTab.prototype = {
 ////////////////////////////////////////////
 //Controls the floating EPG dates and times
 ////////////////////////////////////////////
-var triggerFloatTimeoutId;
-function floatingNav() {
-    var fixedClass = 'fixed-epg',
-        container = $('.main-container'),
-        epg = $('.epg-outer'),
-        timeline = $('.timeline'),
-        header = $('.header-main div'),
-        title = $('.title-container'),
-        streamContainer = $('.stream-container-inner'),
-        freezeFrom = $('.channel-18'),
-        infoPopup = '#epgInfoPopup',
-        channelDay = '.channel-day';
+window.floatingNavScrollTimeoutId = null;
 
+function FloatingNav() {
+    this.selectors = {
+        body: 'body',
+        mainContainer: '.main-container',
+        epgOuter: '.epg-outer',
+        timeline: '.timeline',
+        headerMain: '.header-main div',
+        titleContainer: '.title-container',
+        streamContainerInner: '.stream-container-inner',
+        epgInfo: '.epg-info',
+        channelDay: '.channel-day'
+    }
 
-    $(window).on('scroll', function () {
-        if ($(window).scrollTop() >= 5) {
-            epg.hide();
-            timeline.hide();
-            $(infoPopup).hide();
-            clearInterval(triggerFloatTimeoutId);
-            triggerFloatTimeoutId = setTimeout(triggerFloat, 500);
-        } else {
-            epgTop();
-            epg.show();
-            timeline.show();
-            $(infoPopup).show();
-        }
+    this.breakpoints = {
+        300: 'breakpoint-300',
+        768: 'breakpoint-768'
+    }
+
+    this.queryClasses = {
+        'fixed': 'fixed-epg'
+    }
+
+    $(window).on('scroll', $.proxy(this.scrollEvent, this));
+    $(window).on('forcescroll', $.proxy(this.forcescrollEvent, this));
+
+    var orientationEvent = window.onorientationchange !== 'undefined' ? 'resize' : 'orientationchange';
+    $(window).on(orientationEvent, function () {
+        $(window).trigger('forcescroll');
     });
+}
 
-    $(window).on('forcescroll', function() {
+FloatingNav.prototype = {
+    scrollEvent: function () {
         if ($(window).scrollTop() >= 5) {
-            triggerFloat();
+            this.hideFloatingItems();
+            clearInterval(window.floatingNavScrollTimeoutId);
+            window.floatingNavScrollTimeoutId = setTimeout($.proxy(this.triggerFloat, this), 500);
         } else {
-            epgTop();
-            epg.show();
-            timeline.show();
-            $(infoPopup).show();
+            this.epgTop();
+            this.showFloatingItems();
         }
-    });
+    },
+    forcescrollEvent: function () {
+        if ($(window).scrollTop() >= 5) {
+            this.triggerFloat();
+        } else {
+            this.epgTop();
+            this.showFloatingItems();
+        }
+    },
+    hideFloatingItems: function () {
+        $(this.selectors.epgOuter).hide();
+        $(this.selectors.timeline).hide();
 
-    function datesOffset(freeze) {
-        if (freeze)
-            return freezeFrom.offset().top - freezeFrom.parent().parent().offset().top + header.outerHeight();
-        else
-            return ($(window).scrollTop() - epg.parent().offset().top) + header.outerHeight();
-    }
+        if ($(this.selectors.epgInfo).length)
+            $(this.selectors.epgInfo).hide();
+    },
+    showFloatingItems: function () {
+        $(this.selectors.epgOuter).show();
+        $(this.selectors.timeline).show();
 
-    function timesOffset(freeze) {
-        return datesOffset(freeze) + 109;
-    }
-
-    function triggerFloat() {
-        applyStyles($(window).scrollTop() >= title.height());
-    }
-
-    function freezeMenu() {
-        return $(window).scrollTop() >= freezeFrom.offset().top;
-    }
-
-    function applyStyles(isActive) {
-        streamContainer.css({
-            'paddingTop': timeline.height()
+        if ($(this.selectors.epgInfo).length)
+            $(this.selectors.epgInfo).show();
+    },
+    datesOffset: function () {
+        return ($(window).scrollTop() - $(this.selectors.epgOuter).parent().offset().top) + $(this.selectors.headerMain).outerHeight();
+    },
+    timesOffset: function () {
+        return this.datesOffset() + 109;
+    },
+    triggerFloat: function () {
+        this.applyStyles($(window).scrollTop() >= $(this.selectors.titleContainer).height());
+    },
+    applyStyles: function (isActive) {
+        $(this.selectors.streamContainerInner).css({
+            'paddingTop': $(this.selectors.timeline).height()
         });
 
         if (isActive) {
-            container.addClass(fixedClass);
+            $(this.selectors.mainContainer).addClass(this.queryClasses.fixed);
 
-            epg.css({
+            $(this.selectors.epgOuter).css({
                 'position': 'absolute',
-                'top': datesOffset(freezeMenu())
+                'top': this.datesOffset()
             });
-            $(channelDay).css({
+            $(this.selectors.channelDay).css({
                 'top': 2
             });
-            timeline.css({
-                'top': timesOffset(freezeMenu())
+            $(this.selectors.timeline).css({
+                'top': this.timesOffset()
             });
 
-            if ($('.epg-info').length) {
-                // EPG Info Exists
-                var infoTop = timesOffset(freezeMenu()) + $('.timeline').height();
+            if ($(this.selectors.epgInfo).length) {
+                var infoTop = this.timesOffset() + $(this.selectors.timeline).height(),
                     infoHeight = null,
-                    position = 'absolute';
+                    position = 'absolute',
+                    maxHeight = null;
 
-                if ($('body').hasClass('breakpoint-300')) {
-                    infoTop = header.height() + epg.height();
+                if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
+                    infoTop = $(this.selectors.headerMain).height() + $(this.selectors.epgOuter).height();
                     infoHeight = $(window).height() - infoTop;
-                    position = null;
+                    position = '';
+                    maxHeight = 350;
                 }
 
-                $('.epg-info').css({
+                if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
+                    infoTop = (parseInt($(this.selectors.epgOuter).css('top')) + 200) - $(this.selectors.timeline).height();
+                    position = '';
+                    maxHeight = 350;
+                }
+
+                $(this.selectors.epgInfo).css({
                     'top': infoTop,
-                    'height': infoHeight,
-                    'position': position
+                    'position': position,
+                    'marginLeft': '',
+                    'marginRight': ''
                 });
 
-                $(infoPopup).show();
+                if ($(this.selectors.body).hasClass(this.breakpoints[768])) {
+                    var windowHeight;
+                    if (window.screen)
+                        windowHeight = window.screen.availHeight;
+                    else
+                        windowHeight = window.height();
+
+                    $(this.selectors.epgInfo).show();
+                    infoHeight = $(this.selectors.epgInfo)[0].getBoundingClientRect().top - $(window).height();
+                    $(this.selectors.epgInfo).hide();
+                }
+
+                infoHeight = infoHeight < 0 ? infoHeight * -1 : infoHeight;
+                $(this.selectors.epgInfo).css({
+                    'height': infoHeight,
+                    'maxHeight': maxHeight
+                });
             }
         } else {
-            epgTop();
+            $.proxy(this.epgTop, this);
         }
-        epg.show();
-        timeline.show();
-        
-    }
 
-    function epgTop()
-    {
-        container.removeClass(fixedClass);
+        this.showFloatingItems();
+    },
+    epgTop: function () {
+        $(this.selectors.mainContainer).removeClass(this.queryClasses.fixed);
 
-        epg.css({
+        $(this.selectors.epgOuter).css({
             'position': 'relative',
             'top': 0
         });
-        timeline.css({
+        $(this.selectors.timeline).css({
             'top': 0
         });
-        $(channelDay).css({
+        $(this.selectors.channelDay).css({
             'top': 2
         });
 
-        if ($('.epg-info').length) {
-            var infoTop = $('.timeline').height(),
+        if ($(this.selectors.epgInfo).length) {
+            var infoTop = $(this.selectors.timeline).height(),
                 infoHeight = null;
 
-            if ($('body').hasClass('breakpoint-300')) {
-                infoTop = timeline.offset().top + timeline.height();
-                infoHeight = $(window).height() - infoTop;
+            $(this.selectors.epgInfo).css({
+                'top': infoTop,
+                'height': infoHeight,
+                'position': 'absolute'
+            });
+
+            if ($(this.selectors.body).hasClass(this.breakpoints[300])) {
+                $(this.selectors.epgInfo).css({
+                    'marginLeft': 0,
+                    'marginRight': 0
+                });
+            } else {
+                $(this.selectors.epgInfo).css({
+                    'marginLeft': '',
+                    'marginRight': ''
+                });
             }
 
-            $('.epg-info').css({
-                'top': infoTop,
-                'height': infoHeight
-            });
+            $(this.selectors.epgInfo).show();
         }
-        $(infoPopup).show();
     }
 }
+new FloatingNav();
 
 ////////////////////////////////////////////
 //Resizes the programmes to keep them on screen
@@ -762,8 +791,8 @@ function resizeProgrammes(container) {
     function moveTo(amount, context) {
         if ($(context).outerWidth() > minWidth) {
             $(context).find('.outer .inner').animate({
-                    'marginLeft': amount
-                },
+                'marginLeft': amount
+            },
                 500,
                 'swing',
                 function () {
