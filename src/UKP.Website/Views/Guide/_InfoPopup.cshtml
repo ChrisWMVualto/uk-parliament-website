@@ -17,46 +17,11 @@
             <h4>@Html.FormatText(Model.Event.Title)</h4>
             <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> <span class="time">@Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt", ApplicationConstants.DateTimeFormatter)</span></h5>
         </div>
+
         <dl class="description">
             @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
             {
-                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 26, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
-                <hr />
-            }
-            @if(!Model.Event.LegacyMeetingId.HasValue)
-            {
-                <dt>Channel:</dt>
-                <dd>@Html.FormatText(Model.Event.ChannelName)</dd>
-                <hr />
-            }
-            @if(!string.IsNullOrWhiteSpace(Model.Event.House))
-            {
-                <dt>House:</dt>
-                <dd>@Html.FormatText(Model.Event.House)</dd>
-                <hr />
-            }
-            @if(!string.IsNullOrWhiteSpace(Model.Event.Room))
-            {
-                <dt>Location:</dt>
-                <dd>@Html.FormatText(Model.Event.Room)</dd>
-                <hr />
-            }
-            @if(!string.IsNullOrWhiteSpace(Model.Event.ExternalLocation))
-            {
-                <dt>External Location:</dt>
-                <dd>@Html.FormatText(Model.Event.ExternalLocation)</dd>
-                <hr />
-            }
-            @if(!string.IsNullOrWhiteSpace(Model.Event.EventType))
-            {
-                <dt>Event Type:</dt>
-                <dd>@Html.FormatText(Model.Event.EventType)</dd>
-                <hr />
-            }
-            @if(!string.IsNullOrWhiteSpace(Model.Event.ProductionSource))
-            {
-                <dt>Production:</dt>
-                <dd>@Html.FormatText(Model.Event.ProductionSource)</dd>
+                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 40, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
             }
         </dl>
 
