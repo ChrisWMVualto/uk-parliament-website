@@ -276,10 +276,6 @@ $(document).ready(function () {
             useCSS: false,
             lazyLoad: 'progressive'
         });
-
-        setTimeout(function() {
-            $('.archived-wrapper').removeClass('archived-hidden');
-        }, 1500);
         
 
         //terms box height
@@ -297,6 +293,9 @@ $(document).ready(function () {
 
     });
 
+    setTimeout(function () {
+        $('.archived-wrapper').removeClass('archived-hidden');
+    }, 1500);
 
 });
 
