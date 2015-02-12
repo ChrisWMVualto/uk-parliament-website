@@ -8,6 +8,20 @@
     text-transform: lowercase;
 }
 
+.player-tabs .audio-toggle {
+    float: right;
+}
+
+.breakpoint-300 .player-tabs .audio-toggle {
+    clear: both;
+    float: left;
+    margin: -10px 20px 10px 0;
+}
+
+.tab-content {
+    clear: both;
+}
+
 /* Keep end time timepicker within view */
 .end-time .dropdown-menu {
     left: -48px;
