@@ -273,9 +273,14 @@ $(document).ready(function () {
             slidesToShow: 1,
             onAfterChange: updateArrowText,
             vertical: false,
-            useCSS: false
+            useCSS: false,
+            lazyLoad: 'progressive'
         });
 
+        setTimeout(function() {
+            $('.archived-wrapper').removeClass('archived-hidden');
+        }, 1500);
+        
 
         //terms box height
         $('.tc-box, .tc-box-container .slimScrollDiv').css({
