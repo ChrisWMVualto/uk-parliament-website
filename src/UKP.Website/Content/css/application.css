@@ -167,13 +167,10 @@ ol.channel-list {
     top: 250px;
     width: 290px;
     margin: 0 15px;
-    /*height: 318px;*/
-    /*overflow-y: scroll;*/
 }
 
 .breakpoint-300 .fixed-epg .alert-side-detail {
     top: 174px;
-    /*height: 394px;*/
 }
 
 a.event:hover {
