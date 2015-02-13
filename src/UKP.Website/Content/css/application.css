@@ -12,6 +12,10 @@
     float: right;
 }
 
+.breakpoint-300 .player-tabs .nav-tabs {
+    float: left;
+}
+
 .breakpoint-300 .player-tabs .audio-toggle {
     clear: both;
     float: left;
