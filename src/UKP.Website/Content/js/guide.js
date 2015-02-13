@@ -705,7 +705,7 @@ FloatingNav.prototype = {
 
                 infoHeight = infoHeight < 0 ? infoHeight * -1 : infoHeight;
                 $(this.selectors.epgInfo).css({
-                    'height': infoHeight,
+                    //'height': infoHeight,
                     'maxHeight': maxHeight
                 });
             }
