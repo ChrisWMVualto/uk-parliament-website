@@ -17,8 +17,8 @@ namespace UKP.Website.Models.Event
 
         public static bool ShowAudioOnly(VideoModel video)
         {
-            return (!video.Event.LegacyMeetingId.HasValue && video.Event.ProductionSource != ProductionSourceConstants.AUDIO)
-                   || (video.Event.States.PlayerState == PlayerEventState.LIVE || video.Event.States.PlayerState == PlayerEventState.ARCHIVE)
+            return (!video.Event.LegacyMeetingId.HasValue || video.Event.ProductionSource != ProductionSourceConstants.AUDIO)
+                   && (video.Event.States.PlayerState == PlayerEventState.LIVE || video.Event.States.PlayerState == PlayerEventState.ARCHIVE)
                    && video.Event.PublishedStartTime.HasValue;
         }
     }
