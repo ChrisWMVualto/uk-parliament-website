@@ -273,9 +273,10 @@ $(document).ready(function () {
             slidesToShow: 1,
             onAfterChange: updateArrowText,
             vertical: false,
-            useCSS: false
+            useCSS: false,
+            lazyLoad: 'progressive'
         });
-
+        
 
         //terms box height
         $('.tc-box, .tc-box-container .slimScrollDiv').css({
@@ -292,6 +293,9 @@ $(document).ready(function () {
 
     });
 
+    setTimeout(function () {
+        $('.archived-wrapper').removeClass('archived-hidden');
+    }, 1500);
 
 });
 

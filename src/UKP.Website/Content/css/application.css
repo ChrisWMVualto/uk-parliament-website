@@ -269,3 +269,8 @@ a.extract-text {
     overflow-y:hidden;
     overflow-x:hidden;
 }
+
+
+.archived-hidden {
+    visibility: collapse;
+}
