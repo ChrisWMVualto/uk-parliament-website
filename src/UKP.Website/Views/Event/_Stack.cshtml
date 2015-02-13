@@ -1,0 +1,20 @@
+﻿@using UKP.Website.Service.Model
+@model VideoModel
+
+@if (!Model.LogMoments.ContainsLogMoments)
+{
+    foreach (var stack in Model.Stacks)
+    {
+        <li>
+            <article>
+                <span class="vr-stack"></span>
+                <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                <header class="stack-item">
+                    <h4>
+                        @stack.Title
+                    </h4>
+                </header>
+            </article>
+        </li>
+    }
+}
