@@ -13,7 +13,7 @@
                 </header>
             </div>
         </div>
-        <div class="archived-wrapper">
+        <div class="archived-wrapper archived-hidden">
             <a href="#" id="recentNextCommons" class="recent-next">
                 <div class="inner">
                     <p>
@@ -44,12 +44,11 @@
                                     <div class="inner">
                                         @if(Model.Results.ElementAt(i).ThumbnailUrl.HasValue())
                                         {
-                                            @*<img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">*@
-                                            <img src="@Model.Results.ElementAt(i).ThumbnailUrl" alt="alt tag here" class="img-responsive">
+                                            <img src="@Model.Results.ElementAt(i).ThumbnailUrl" alt="@Model.Results.ElementAt(i).Event.Title" class="img-responsive">
                                         }
                                         else
                                         {
-                                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="@Model.Results.ElementAt(i).Event.Title" class="img-responsive">
                                         }
                                         <div class="overlay">
                                             <div class="overlay-inner">
@@ -67,6 +66,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-12">
             <a href="@Url.Action(MVC.Search.Index())" class="btn btn-lg btn-generic btn-title btn-block btn-backup visible-xs">View Archive <i class="fa fa-lg fa-angle-double-right"></i></a>
         </div>
