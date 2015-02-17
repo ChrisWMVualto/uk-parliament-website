@@ -22,9 +22,7 @@ namespace UKP.Website.Service.Model
         public int TemplateWidthInt()
         {
             var difference = EventData.DisplayEndDate.Subtract(EventData.DisplayStartDate);
-            var calculatedWidth = EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
-
-            return calculatedWidth > ApplicationConstants.EpgItemMinWidth ? calculatedWidth : ApplicationConstants.EpgItemMinWidth;
+            return EventConstants.EPG_MINUTE_SIZE * (int)difference.TotalMinutes;
         }
 
         public string TemplateWidth()
