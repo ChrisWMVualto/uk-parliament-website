@@ -11,6 +11,6 @@ namespace UKP.Website.Application
         public const string MerdiemFormat = "tt";
         public static DateTimeFormatInfo DateTimeFormatter = new DateTimeFormatInfo() { AMDesignator = "am", PMDesignator = "pm" };
         public const string AcceptCookieName = "Cookies";
-        public const int EpgHourWidth = 120;
+        public const int EpgItemMinWidth = 240;
     }
 }

@@ -763,7 +763,7 @@ new FloatingNav();
 function resizeProgrammes(container) {
     container = $(container);
     var containerPosition = container.scrollLeft(),
-        minWidth = 320;
+        minWidth = 240;
 
     $.each(container.find('ol.channel-list'), function () {
         $.each($(this).children('li'), function () {
