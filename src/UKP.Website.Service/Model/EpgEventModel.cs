@@ -46,7 +46,7 @@ namespace UKP.Website.Service.Model
 
         public bool SmallItem()
         {
-            return TemplateWidthInt() <= (90 * EventConstants.EPG_MINUTE_SIZE);
+            return TemplateWidthInt() <= (120 * EventConstants.EPG_MINUTE_SIZE);
         }
     }
 }
