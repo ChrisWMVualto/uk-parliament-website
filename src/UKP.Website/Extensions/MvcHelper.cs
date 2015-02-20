@@ -152,7 +152,7 @@ namespace System.Web.Mvc.Html
         {
             var allWords = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries).ToList();
             var trimmed = string.Join(" ", allWords.Take(wordCount));
-            if(allWords.Count > wordCount) trimmed += string.Format("<a href='{0}'>....more</a>", elipsesUrl);  
+            if(allWords.Count > wordCount) trimmed += string.Format("<a href='{0}'>....<strong>more</strong></a>", elipsesUrl);  
             return new MvcHtmlString(trimmed);
         }
     }
