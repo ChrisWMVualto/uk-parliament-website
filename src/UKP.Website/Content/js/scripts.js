@@ -191,6 +191,10 @@ $(document).ready(function () {
     if ($(".date-picker").length) {
         var startDateOb = $('.date-nav').length > 0 ? new Date($('.date-nav').data('start-date')) : null;
 
+        if (startDateOb == null) {
+            startDateOb = $('#searchPanel').length > 0 ? new Date($('#searchPanel').data('start-date')) : null;
+        }
+
         if (startDateOb)
             startDateOb = new Date(startDateOb.setDate(startDateOb.getDate() + 1));
 
