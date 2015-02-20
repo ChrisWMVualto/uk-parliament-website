@@ -90,7 +90,7 @@ function changeEpgTime(event) {
         minutes = event.time.minutes,
         container = $('.stream-container-inner');
 
-    if (meridian == "PM")
+    if ((meridian == "PM" && hours < 12) || (meridian == "AM" && hours == 12))
         hours += 12;
 
     container.scrollLeft(leftPositionFromTime(hours, minutes));
