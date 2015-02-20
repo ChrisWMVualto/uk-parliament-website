@@ -12488,6 +12488,7 @@ ul.main-nav {
         bottom: auto;
         text-align: left;
         text-shadow: 0 0 0 rgba(0, 0, 0, 0.6);
+        overflow: hidden;
     }
 
         .section-home-carousel .carousel-caption h3 {
@@ -12505,6 +12506,13 @@ ul.main-nav {
             left: 20px;
             height: 80%;
             top: 10%;
+        }
+
+        .section-home-carousel .carousel-play-button {
+            position: relative;
+            bottom: 0px;
+            top: 0px;
+            right: 0;
         }
 
         .section-home-carousel .carousel-caption a {
@@ -14965,6 +14973,10 @@ ol.channel-list {
 
     .timeline ol {
         margin-left: 0;
+    }
+
+    .section-home-carousel .carousel-play-button {
+        position: absolute;
     }
 }
 
