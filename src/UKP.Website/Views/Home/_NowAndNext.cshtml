@@ -1,0 +1,48 @@
+﻿@using UKP.Website.Application
+@model IEnumerable<UKP.Website.Service.Model.EventModel>
+
+
+
+
+<section id="carouselCommons" class="carousel section-home-carousel slide" data-ride="carousel" data-interval="false">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <!--item-->
+            <div class="item @if (i == 0) { @Html.Raw("active") }">
+                <div class="carousel-caption row-no-padding">
+                    <a href="@Url.Action(MVC.Event.Index(Model.ElementAt(i).Id))">
+                        <div class="carousel-light-bg col-xs-8 col-sm-6 col-md-4">
+                            <div class="carousel-caption-inner">
+                                <h3 class="text-uppercase">@Model.ElementAt(i).DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeWithoutMeridiemFormat, ApplicationConstants.DateTimeFormatter)<span class="merdiem">@Model.ElementAt(i).DisplayStartDate.ToLocalTime().ToString(ApplicationConstants.MerdiemFormat, ApplicationConstants.DateTimeFormatter)</span></h3>
+                                <p>@Model.ElementAt(i).Title</p>
+                                
+                                @if (Model.ElementAt(i).HomeFilters.Live)
+                                {
+                                    <span class="live-badge"><i class="fa fa-live-badge fa-2x"></i> Live</span>
+                                    <span class="vr-caption"></span>
+                                }
+                            </div>
+                        </div>
+                        <div class="carousel-dark-bg col-xs-4 col-sm-2 col-md-2 carousel-play-button">
+                            <div class="carousel-caption-inner">
+                                <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                <span class="text-uppercase visible-md visible-lg visible-sm">Play Event</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 pull-right text-right hidden-xs"> </div>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <li data-target="#carouselCommons" data-slide-to="@i" @if(i == 0) { @Html.Raw("class=\"active\"") }></li>
+        }
+    </ol>
+</section>
