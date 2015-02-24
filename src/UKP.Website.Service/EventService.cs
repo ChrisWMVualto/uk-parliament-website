@@ -139,7 +139,7 @@ namespace UKP.Website.Service
             if(response.StatusCode == HttpStatusCode.NotFound) return null;
             if(response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
 
-            return EventTransforms.TransformEPG(response.Content); ;
+            return EventTransforms.TransformEPG(response.Content);
         }
 
     }
