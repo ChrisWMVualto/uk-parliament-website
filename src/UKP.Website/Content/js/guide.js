@@ -136,7 +136,8 @@ function changeDateTab() {
 
     this.state = {
         leftTab: true,
-        rightTab: true
+        rightTab: true,
+        singleTab: true
     }
 
     this.init();
@@ -212,7 +213,7 @@ changeDateTab.prototype = {
         if (leftPosition < 0)
             return;
 
-        if (leftPosition >= upperLimit && this.state.rightTab) {
+        if (leftPosition >= upperLimit && (this.state.rightTab || this.state.singleTab)) {
             window.console && console.log('Trigger scrollnext');
             $(this.selectors.days).eq(this.activeTabIndex() + 1).trigger('scrollnext', [true, this]);
         }
@@ -459,6 +460,8 @@ changeDateTab.prototype = {
                 var numDaysLoaded = $(that.selectors.channelDayContainer).children().length;
                 $(that.selectors.channelDayContainer).width(that.settings.baseWidth * numDaysLoaded);
                 $(that.selectors.timeline).width((that.settings.baseWidth * numDaysLoaded) + 40);
+
+                that.state.singleTab = opts.clear;
 
                 if ((opts.append && opts.removePast) || opts.clear || (opts.append && !opts.removePast)) {
                     that.state.leftTab = true;
