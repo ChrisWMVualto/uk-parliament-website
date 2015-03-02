@@ -9,7 +9,7 @@
 <div class="container main-container">
     <div class="row">
         <div class="col-md-12">
-            <header class="title-main title-search"><h2><i class="fa fa-search"></i> <span>Search</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+            <header class="title-main title-search"><h2><i class="fa fa-search"></i> <span>Search (beta)</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
         <div class="col-md-12">
             <button type="button" class="btn btn-default btn-go btn-lg btn-search-panel btn-block visible-xs" data-toggle="collapse" data-target="#searchPanel">
@@ -19,7 +19,7 @@
         <div id="searchPanel" data-start-date="2007-12-03T00:00:00+00:00" class="collapse in">
             <div class="col-md-12 page-title-bar">
                 <header>
-                    <h3>Enter a Keyword and use the other fields to refine the results if required:</h3>
+                    <h3>Enter the Event Title and use the other fields to refine the search.  Search only applies to archived events. Use the Event Guide to locate a scheduled event.</h3>
                 </header>
             </div>
             @using(Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="Keywords"><h4>1. Keywords</h4></label>
+                                <label for="Keywords"><h4>1. Event Title (Committee name, House of Commons or House of Lords)</h4></label>
                                 @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
