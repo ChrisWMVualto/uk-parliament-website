@@ -46,7 +46,7 @@
     {
         if (Model.Event.ActualEndTime.HasValue)
         {
-            <span class="state-badge pending-badge visible-lg visible-md">VOD</span>
+            @*<span class="state-badge pending-badge visible-lg visible-md">VOD</span>*@
         }
         else
         {
@@ -55,6 +55,6 @@
     }
     else if (Model.Event.States.PlayerState == PlayerEventState.ARCHIVE)
     {
-        <span class="state-badge pending-badge visible-lg visible-md">VOD</span>
+        @*<span class="state-badge pending-badge visible-lg visible-md">VOD</span>*@
     }
 </div>
