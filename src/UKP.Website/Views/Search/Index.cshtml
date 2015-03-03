@@ -19,7 +19,8 @@
         <div id="searchPanel" data-start-date="2007-12-03T00:00:00+00:00" class="collapse in">
             <div class="col-md-12 page-title-bar">
                 <header>
-                    <h3>Enter the Event Title and use the other fields to refine the search.  Search only applies to archived events. Use the Event Guide to locate a scheduled event.</h3>
+                    <h3>Enter the Event Title and use the other fields to refine the search.</h3>
+                    <h3>Search only applies to archived events. Use the Event Guide to locate a scheduled event.</h3>
                 </header>
             </div>
             @using(Html.BeginForm(MVC.Search.Index(), FormMethod.Get))
@@ -28,7 +29,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="Keywords"><h4>1. Event Title (Committee name, House of Commons or House of Lords)</h4></label>
+                                <label for="Keywords"><h4>1. Event Title</h4></label>
                                 @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
