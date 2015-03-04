@@ -69,5 +69,10 @@ namespace UKP.Website.Application
         {
             get { return ConfigurationManager.AppSettings["GoogleAnalyticsId"]; }
         }
+
+        public bool RobotsAllow
+        {
+            get { return bool.Parse(ConfigurationManager.AppSettings["RobotsAllow"]); }
+        }
     }
 }

@@ -8,13 +8,12 @@ using System.Web.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System.Web.Optimization;
+
+using UKP.Website.Extensions;
 
 namespace UKP.Website
 {
-    using System.Web.Optimization;
-
-    using UKP.Website.Extensions;
-
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

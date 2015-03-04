@@ -9,5 +9,6 @@ namespace UKP.Website.Application
         string RssUrl { get; }
         DateTime EpgStartDate { get; }
         string GetMemberAutocompleteApi { get; }
+        bool RobotsAllow { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using UKP.Website.Application;
 using UKP.Website.Extensions;
 using UKP.Website.Models;
 using UKP.Website.Models.Home;
@@ -11,11 +12,13 @@ namespace UKP.Website.Controllers
     {
         private readonly IEventService _eventService;
         private readonly IRecessService _recessService;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IEventService eventService, IRecessService recessService)
+        public HomeController(IEventService eventService, IRecessService recessService, IConfiguration configuration)
         {
             _eventService = eventService;
             _recessService = recessService;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -60,6 +63,18 @@ namespace UKP.Website.Controllers
         public virtual ActionResult _404()
         {
             return View();
+        }
+
+
+        //[OutputCache(Duration=45, VaryByParam="none")]
+        public ActionResult Robots()
+        {
+            var robotsFile = "~/robots.txt.disallow";
+            if (_configuration.RobotsAllow)
+            {
+                robotsFile = "~/robots.txt.allow";
+            }
+            return File(robotsFile, "text/plain");
         }
     }
 }

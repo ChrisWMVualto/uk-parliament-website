@@ -25,7 +25,6 @@ namespace UKP.Website
                 defaults: new { controller = "Player", action = "LegacyPlayerRoute", id = UrlParameter.Optional }
             );
 
-
             routes.MapRoute(
                 name: "CommonsRoute",
                 url: "Commons",
@@ -43,6 +42,13 @@ namespace UKP.Website
                 url: "Committees",
                 defaults: new { controller = "Home", action = "Committees", id = UrlParameter.Optional }
                 );
+
+
+            routes.MapRoute(
+                name: "robots",
+                url: "robots.txt",
+                defaults: new { controller = "Home", action = "Robots" }
+);
 
             routes.MapRoute(
                 name: "Default",
