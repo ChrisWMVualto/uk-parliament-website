@@ -33,6 +33,11 @@ namespace UKP.Website.Controllers
        // [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.Server)]
         public virtual ActionResult Commons()
         {
+            if (Request.UrlReferrer != null)
+            {
+                if(Request.UrlReferrer.ToString().ToLower().Contains("parliament.uk")) return RedirectToAction(MVC.Home.Commons());
+            }
+
             var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetMiniGuide(), _recessService.GetRecessMessage(RecessMessageType.HOUSE_OF_COMMONS), EventFilter.COMMONS);
             return View(model);
         }
