@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.UI;
 using Date.Extensions;
 using RestSharp.Extensions;
 using UKP.Website.Application;
@@ -22,7 +23,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByCustom="*")]
+        [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual ActionResult Index()
         {
             // TODO: Remove datetime
@@ -36,7 +37,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
             var result = _videoService.GetVideo(id);
@@ -44,7 +45,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EpgDay(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
@@ -56,7 +57,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EpgDateBar(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
@@ -65,7 +66,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EpgDayTab(string date, bool previousDay)
         {
             return PartialView(MVC.Guide.Views._DateTab, previousDay ? date.FromISO8601String().Value.AddDays(-1) : date.FromISO8601String().Value.AddDays(1));
