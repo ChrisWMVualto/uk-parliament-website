@@ -15,24 +15,10 @@ namespace UKP.Website.Extensions
         {
             try
             {
-                var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
-
                 if(filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipBrowserFilterAttribute), false).Any()) return;
 
-                if(ua.OS.Family == "Linux")
+                if (!IsSupported())
                 {
-                    if(BrowserNotSupported("Opera", 10, ua.UserAgent))
-                        filterContext.Result = NotSuppotedRouteResult();
-                }
-                else
-                {
-                    if(BrowserNotSupported("Opera", 23, ua.UserAgent))
-                        filterContext.Result = NotSuppotedRouteResult();
-                }
-
-                if (BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 5, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent) || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent) || BrowserNotSupported("Android", null, ua.UserAgent))
-                {
-                    ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     filterContext.Result = NotSuppotedRouteResult();
                 }
             }
@@ -40,6 +26,39 @@ namespace UKP.Website.Extensions
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
             }
+        }
+
+        public static bool IsSupported()
+        {
+            var supported = true;
+
+            try
+            {
+                var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
+
+                if(ua.OS.Family == "Linux")
+                {
+                    if (BrowserNotSupported("Opera", 10, ua.UserAgent))
+                        supported = false;
+                }
+                else
+                {
+                    if(BrowserNotSupported("Opera", 23, ua.UserAgent))
+                        supported = false;
+                }
+
+                if(BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 5, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent) || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent) || BrowserNotSupported("Android", null, ua.UserAgent))
+                {
+                    ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
+                    supported = false;
+                }
+            }
+            catch(Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+
+            return supported;
         }
 
         private static bool BrowserNotSupported(string browserName, int? minVersion, UserAgent userAgent)
