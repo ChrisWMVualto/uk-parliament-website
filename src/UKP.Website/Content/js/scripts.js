@@ -299,7 +299,7 @@ $(document).ready(function () {
 
     setTimeout(function () {
         $('.archived-wrapper').removeClass('archived-hidden');
-    }, 1200);
+    }, 1000);
 
 });
 
