@@ -26,8 +26,6 @@ namespace UKP.Website.Controllers
         [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual ActionResult Index()
         {
-            // TODO: Remove datetime
-            //var date = new DateTime(2014, 07, 07);
             var date = DateTime.Today;
             var events = _eventService.GetFullGuide(date);
             var channels = _channelService.GetChannels();
