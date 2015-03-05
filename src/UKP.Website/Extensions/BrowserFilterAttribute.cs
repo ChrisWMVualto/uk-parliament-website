@@ -21,7 +21,8 @@ namespace UKP.Website.Extensions
                 {
                     if (filterContext.RequestContext.HttpContext.Request.UrlReferrer.ToString().ToLower().Contains("parliament.uk"))
                     {
-                        filterContext.Result = new RedirectToRouteResult(MVC.Home.Commons().GetRouteValueDictionary());
+                        HttpContext.Current.Response.Redirect("/", true);
+                        //filterContext.Result = new RedirectToRouteResult(MVC.Home.Commons().GetRouteValueDictionary());
                         return;
                     }
                 }
