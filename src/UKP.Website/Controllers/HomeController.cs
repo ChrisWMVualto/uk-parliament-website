@@ -23,14 +23,14 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.Server)]
+        //[OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.Server)]
         public virtual ActionResult Index()
         {
             return RedirectToAction(MVC.Home.Commons());
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.Server)]
+       // [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.Server)]
         public virtual ActionResult Commons()
         {
             var model = new HomeViewsModel(_eventService.GetNowEvents(), _eventService.GetMiniGuide(), _recessService.GetRecessMessage(RecessMessageType.HOUSE_OF_COMMONS), EventFilter.COMMONS);
