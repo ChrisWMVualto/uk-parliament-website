@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System.Web.Optimization;
-
 using UKP.Website.Extensions;
 
 namespace UKP.Website
@@ -22,6 +21,15 @@ namespace UKP.Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new SetBundlerOptimisation());
+        }
+
+        public override string GetVaryByCustomString(HttpContext context, string arg)
+        {
+            if(arg.ToLower() == "*")
+            {
+                return BrowserFilterAttribute.IsSupported().ToString() + Request.QueryString;
+            }
+            return base.GetVaryByCustomString(context, arg);
         }
     }
 }
