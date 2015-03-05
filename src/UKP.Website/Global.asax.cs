@@ -27,7 +27,7 @@ namespace UKP.Website
         {
             if(arg.ToLower() == "*")
             {
-                return BrowserFilterAttribute.IsSupported().ToString() + Request.QueryString;
+                return BrowserFilterAttribute.IsSupported().ToString() + Request.QueryString + Request.Form;
             }
             return base.GetVaryByCustomString(context, arg);
         }
