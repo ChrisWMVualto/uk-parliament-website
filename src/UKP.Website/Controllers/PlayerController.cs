@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
@@ -19,7 +20,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam="*")]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual ActionResult LegacyPlayerRoute()
         {
             if(Request.Url != null)

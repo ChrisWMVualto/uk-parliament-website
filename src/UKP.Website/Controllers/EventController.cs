@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.UI;
 using Date.Extensions;
 using UKP.Website.Application;
 using UKP.Website.Extensions;
@@ -69,7 +70,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=10, VaryByParam="*")]
+        [OutputCache(Duration=10, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EventTitle(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -99,7 +100,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*")]
+        [OutputCache(Duration=2, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult StackAndLogs(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -115,7 +116,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*")]
+        [OutputCache(Duration=2, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;

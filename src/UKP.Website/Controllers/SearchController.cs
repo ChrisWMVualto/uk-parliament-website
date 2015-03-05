@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using UKP.Website.Models;
 using UKP.Website.Models.Event;
 using UKP.Website.Models.Search;
@@ -11,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    [OutputCache(Duration=600, VaryByCustom="*")]
+    [OutputCache(Duration=600, VaryByCustom="*", Location = OutputCacheLocation.ServerAndClient)]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
