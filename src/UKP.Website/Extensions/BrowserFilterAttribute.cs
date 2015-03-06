@@ -17,8 +17,6 @@ namespace UKP.Website.Extensions
             try
             {
                 if(filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipBrowserFilterAttribute), false).Any()) return;
-                if(filterContext.RequestContext.HttpContext.Request.UserAgent != null && filterContext.RequestContext.HttpContext.Request.UserAgent.ToLower().Contains("compatible;")) return;
-
 
                 if(!IsSupported())
                 {
@@ -55,6 +53,9 @@ namespace UKP.Website.Extensions
                     ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     supported = false;
                 }
+
+                // IE Compatibility override
+                if(HttpContext.Current.Request.UserAgent != null && HttpContext.Current.Request.UserAgent.ToLower().Contains("compatible;")) supported = true;
             }
             catch(Exception ex)
             {
