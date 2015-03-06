@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,7 +37,7 @@ namespace UKP.Website.Extensions
             try
             {
                 var ua = Parser.GetDefault().Parse(HttpContext.Current.Request.UserAgent);
-
+               
                 if(ua.OS.Family == "Linux")
                 {
                     if(BrowserNotSupported("Opera", 10, ua.UserAgent))
@@ -48,14 +49,19 @@ namespace UKP.Website.Extensions
                         supported = false;
                 }
 
-                if(BrowserNotSupported("Firefox", 30, ua.UserAgent) || BrowserNotSupported("Safari", 5, ua.UserAgent) || BrowserNotSupported("IE", 9, ua.UserAgent) || BrowserNotSupported("Chrome", 0, ua.UserAgent) || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent) || BrowserNotSupported("Android", null, ua.UserAgent))
+                if(BrowserNotSupported("Firefox", 30, ua.UserAgent)
+                    || BrowserNotSupported("Safari", 5, ua.UserAgent)
+                    || BrowserNotSupported("IE", 9, ua.UserAgent)
+                    || BrowserNotSupported("Chrome", 0, ua.UserAgent)
+                    || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent)
+                    || BrowserNotSupported("Android", null, ua.UserAgent))
                 {
                     ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     supported = false;
                 }
 
                 // IE Compatibility override
-                if(HttpContext.Current.Request.UserAgent != null && HttpContext.Current.Request.UserAgent.ToLower().Contains("compatible;")) supported = true;
+                
             }
             catch(Exception ex)
             {
@@ -65,9 +71,33 @@ namespace UKP.Website.Extensions
             return supported;
         }
 
+        private static bool IsNotSupportedIECompatibilityMode()
+        {
+            if (HttpContext.Current.Request.UserAgent != null)
+            {
+                var ua = HttpContext.Current.Request.UserAgent.ToLower();
+                if (ua.Contains("trident/7.0")) return false; // 11
+                if(ua.Contains("trident/6.0") && ua.Contains("msie 7.0")) return false; // 10
+                if(ua.Contains("trident/5.0") && ua.Contains("msie 7.0")) return false; // 9
+            }
+            else
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         private static bool BrowserNotSupported(string browserName, int? minVersion, UserAgent userAgent)
         {
-            return userAgent.Family.ToLower() == browserName.ToLower() && (int.Parse(userAgent.Major) < minVersion || minVersion == null);
+            var result = userAgent.Family.ToLower() == browserName.ToLower() && (int.Parse(userAgent.Major) < minVersion || minVersion == null);
+
+            if(browserName == "IE" && !result)
+            {
+                result = IsNotSupportedIECompatibilityMode();
+            }
+
+            return result;
         }
 
         private static ActionResult NotSuppotedRouteResult()
