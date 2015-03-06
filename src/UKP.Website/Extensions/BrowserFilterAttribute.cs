@@ -59,9 +59,6 @@ namespace UKP.Website.Extensions
                     ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     supported = false;
                 }
-
-                // IE Compatibility override
-                
             }
             catch(Exception ex)
             {
