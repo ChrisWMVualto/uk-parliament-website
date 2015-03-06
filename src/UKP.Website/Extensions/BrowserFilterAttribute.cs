@@ -92,7 +92,7 @@ namespace UKP.Website.Extensions
         {
             var result = userAgent.Family.ToLower() == browserName.ToLower() && (int.Parse(userAgent.Major) < minVersion || minVersion == null);
 
-            if(browserName == "IE" && !result)
+            if(browserName == "IE" && result)
             {
                 result = IsNotSupportedIECompatibilityMode();
             }
