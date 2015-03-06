@@ -100,7 +100,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
+        [OutputCache(Duration=2, VaryByParam="*")]
         public virtual PartialViewResult StackAndLogs(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -116,7 +116,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
+        [OutputCache(Duration=2, VaryByParam="*")]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;
