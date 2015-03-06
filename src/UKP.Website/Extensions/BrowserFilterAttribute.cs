@@ -76,16 +76,16 @@ namespace UKP.Website.Extensions
             if (HttpContext.Current.Request.UserAgent != null)
             {
                 var ua = HttpContext.Current.Request.UserAgent.ToLower();
-                if (ua.Contains("trident/7.0")) return false; // 11
+                if(ua.Contains("trident/7.0")) return false; // 11
                 if(ua.Contains("trident/6.0") && ua.Contains("msie 7.0")) return false; // 10
                 if(ua.Contains("trident/5.0") && ua.Contains("msie 7.0")) return false; // 9
             }
             else
             {
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         private static bool BrowserNotSupported(string browserName, int? minVersion, UserAgent userAgent)
