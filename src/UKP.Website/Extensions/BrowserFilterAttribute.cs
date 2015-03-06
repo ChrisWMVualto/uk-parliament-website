@@ -17,22 +17,15 @@ namespace UKP.Website.Extensions
             try
             {
                 if(filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipBrowserFilterAttribute), false).Any()) return;
-                if(filterContext.RequestContext.HttpContext.Request.UrlReferrer != null)
-                {
-                    if (filterContext.RequestContext.HttpContext.Request.UrlReferrer.ToString().ToLower().Contains("parliament.uk"))
-                    {
-                        HttpContext.Current.Response.Redirect("/", true);
-                        //filterContext.Result = new RedirectToRouteResult(MVC.Home.Commons().GetRouteValueDictionary());
-                        return;
-                    }
-                }
+                if(filterContext.RequestContext.HttpContext.Request.UserAgent != null && filterContext.RequestContext.HttpContext.Request.UserAgent.ToLower().Contains("compatible;")) return;
 
-                if (!IsSupported())
+
+                if(!IsSupported())
                 {
                     filterContext.Result = NotSuppotedRouteResult();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ErrorSignal.FromCurrentContext().Raise(ex);
             }
@@ -48,7 +41,7 @@ namespace UKP.Website.Extensions
 
                 if(ua.OS.Family == "Linux")
                 {
-                    if (BrowserNotSupported("Opera", 10, ua.UserAgent))
+                    if(BrowserNotSupported("Opera", 10, ua.UserAgent))
                         supported = false;
                 }
                 else
