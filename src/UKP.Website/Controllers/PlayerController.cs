@@ -21,7 +21,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByParam= "*", Location = OutputCacheLocation.ServerAndClient)]
+        [OutputCache(Duration=45, VaryByParam= "*")]
         [SkipBrowserFilter]
         public virtual ActionResult LegacyPlayerRoute()
         {
