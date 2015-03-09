@@ -28,7 +28,6 @@ namespace UKP.Website.Controllers
             _eventService = eventService;
         }
 
-        [OutputCache(Duration=10, VaryByParam="*")]
         [HttpGet]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
         {
