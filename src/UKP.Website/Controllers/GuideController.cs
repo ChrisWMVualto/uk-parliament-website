@@ -23,7 +23,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=45, VaryByCustom="*", Location = OutputCacheLocation.ServerAndClient)]
+        [OutputCache(Duration=45, VaryByParam="*", Location = OutputCacheLocation.ServerAndClient)]
         public virtual ActionResult Index()
         {
             var date = DateTime.Today;
