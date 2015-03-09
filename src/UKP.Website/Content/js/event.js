@@ -1,5 +1,5 @@
 ﻿var embedGenTimeoutId = null;
-var eventPollingsInterval = 40000;
+var eventPollingsInterval = 45000;
 
 function initSelectDates() {
     if ($(".clip-date").length) {
