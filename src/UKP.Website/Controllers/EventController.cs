@@ -70,7 +70,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=10, VaryByParam="*")]
+        [OutputCache(Duration=20, VaryByParam="*")]
         public virtual PartialViewResult EventTitle(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
