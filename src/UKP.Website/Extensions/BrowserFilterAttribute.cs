@@ -56,7 +56,6 @@ namespace UKP.Website.Extensions
                     || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent)
                     || BrowserNotSupported("Android", null, ua.UserAgent))
                 {
-                    ErrorSignal.FromCurrentContext().Raise(new Exception("BrowserNotSupported: " + HttpContext.Current.Request.UserAgent));
                     supported = false;
                 }
             }
