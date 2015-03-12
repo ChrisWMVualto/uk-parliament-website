@@ -33,7 +33,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
-            var video = _videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id,, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, null, false, Request.CookiesAllowed(), Request.CookiesAllowed());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed(), Request.CookiesAllowed(), Request.IPAddress());
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
@@ -54,7 +54,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, null, false, Request.CookiesAllowed());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed());
 
             return this.JsonFormatted(EventViewModel.ShowAudioOnly(video), JsonRequestBehavior.AllowGet);
         }
@@ -65,7 +65,7 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video =_videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, audioOnly, autoStart, Request.CookiesAllowed());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart, Request.CookiesAllowed());
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
@@ -75,7 +75,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
             return PartialView(MVC.Event.Views._EventTitle, video);
         }
 
@@ -84,7 +84,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, Request.IPAddress(), inPoint, outPoint, Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
 
             TimeSpan? inPointTime = null;
             if(video.RequestedInPoint.HasValue) inPointTime = video.RequestedInPoint.Value.ToLocalTime().TimeOfDay;
@@ -106,7 +106,7 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video = _videoService.GetVideo(id, Request.IPAddress(), inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
             if (video.LogMoments.ContainsLogMoments)
             {
                 return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results);
@@ -168,7 +168,7 @@ namespace UKP.Website.Controllers
                 if(value.Length < 19)
                 {
                     // HH:mm:ss
-                    var tempVideo = _videoService.GetVideo(id, Request.IPAddress());
+                    var tempVideo = _videoService.GetVideo(id);
                     var timeOfDay = TimeSpan.Parse(value);
                     dateTimePoint = tempVideo.Event.DisplayStartDate.ToLocalTime().Date.Add(timeOfDay);
                 }
