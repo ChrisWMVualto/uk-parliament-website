@@ -39,10 +39,6 @@
     left: 61px;
 }
 
-.video-container iframe {
-    width: 100%;
-    height: 100%;
-}
 
 /* EPG */
 
@@ -270,4 +266,9 @@ a.extract-text {
 
 .archived-hidden {
     visibility: collapse;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
 }
