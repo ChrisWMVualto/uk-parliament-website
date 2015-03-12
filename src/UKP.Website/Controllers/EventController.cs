@@ -33,7 +33,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
-            var video = _videoService.GetVideo(id,, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
