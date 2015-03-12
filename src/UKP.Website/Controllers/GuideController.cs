@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using System.Web.UI;
 using Date.Extensions;
 using RestSharp.Extensions;
@@ -38,7 +39,7 @@ namespace UKP.Website.Controllers
         [OutputCache(Duration=60, VaryByParam="*")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
-            var result = _videoService.GetVideo(id);
+            var result = _videoService.GetVideo(id, Request.IPAddress());
             return PartialView(MVC.Guide.Views._InfoPopup, result);
         }
 

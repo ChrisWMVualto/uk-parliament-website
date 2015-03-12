@@ -68,13 +68,6 @@ namespace System.Web.Mvc.Html
             return MvcHtmlString.Create("");
         }
 
-        private static readonly long DatetimeMinTimeTicks = (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).Ticks;
-
-        public static double ToJavaScriptMilliSeconds(this DateTime dateTime)
-        {
-            var ticks = (dateTime.ToUniversalTime().Ticks - DatetimeMinTimeTicks);
-            return new TimeSpan(ticks).TotalMilliseconds;
-        }
 
         public static List<SelectListItem> ToSelectList<T>(this IEnumerable<T> enumerable, Func<T, string> text, Func<T, string> value, string defaultText, string defaultValue)
         {
@@ -155,5 +148,15 @@ namespace System.Web.Mvc.Html
             if(allWords.Count > wordCount) trimmed += string.Format("<a href='{0}'>....<strong>more</strong></a>", elipsesUrl);  
             return new MvcHtmlString(trimmed);
         }
+
+        public static string IPAddress(this HttpRequestBase request)
+        {
+            var userIp = request.UserHostAddress;
+            var forwardedHeaderIP = request.Headers["X-Forwarded-For"];
+            if(forwardedHeaderIP != null) userIp = forwardedHeaderIP; // overwrite if load balancer IP exists 
+            return userIp;
+        }
+
+ 
     }
 }

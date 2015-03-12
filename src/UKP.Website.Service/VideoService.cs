@@ -22,18 +22,19 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null, bool? statsEnabled = false, bool? processLogs = null)
+        public VideoModel GetVideo(Guid id, string requestedUsersIPAddress, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null, bool? statsEnabled = false, bool? processLogs = null)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
             request.AddUrlSegment("id", id.ToString());
+            request.AddParameter("requestedUsersIPAddress", requestedUsersIPAddress);
             if(inPoint.HasValue) request.AddParameter("in", inPoint.ToISO8601String());
             if(outPoint.HasValue) request.AddParameter("out", outPoint.ToISO8601String());
             if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
             if(autoStart.HasValue) request.AddParameter("autoStart", autoStart.Value);
             if(processLogs.HasValue) request.AddParameter("processLogs", processLogs.Value);
             if(statsEnabled.HasValue) request.AddParameter("statsEnabled", statsEnabled.Value);
-
+             
             request.AddParameter("format", "json");
 
             var response = client.Execute(request);
