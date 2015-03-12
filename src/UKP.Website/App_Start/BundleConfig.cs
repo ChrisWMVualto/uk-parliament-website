@@ -41,10 +41,10 @@ namespace UKP.Website
                 "~/Content/js/search.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/eventJs").Include(
+                "~/Content/js/responsive-player.js",
                 "~/Scripts/jquery.signalR-2.1.1.min.js",
                 "~/Content/js/jquery.post-message.updated.js",
                 "~/Content/js/vendor/bootstrap-timepicker-event-mod.js",
-                "~/Content/js/responsive-player.js",
                 "~/Content/js/event.js",
                 "~/Content/js/program-date-time.js"));
 
