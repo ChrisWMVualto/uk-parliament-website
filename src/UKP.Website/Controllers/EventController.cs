@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed(), Request.CookiesAllowed(), Request.IPAddress());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, statsEnabled: Request.CookiesAllowed(), requestedUsersIPAddress: Request.IPAddress());
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
@@ -54,7 +54,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, Request.CookiesAllowed());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, statsEnabled: Request.CookiesAllowed());
 
             return this.JsonFormatted(EventViewModel.ShowAudioOnly(video), JsonRequestBehavior.AllowGet);
         }
@@ -65,7 +65,7 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart, Request.CookiesAllowed());
+            var video =_videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart, statsEnabled: Request.CookiesAllowed());
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
 
@@ -75,7 +75,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint, outPoint, statsEnabled: Request.CookiesAllowed());
             return PartialView(MVC.Event.Views._EventTitle, video);
         }
 
@@ -84,7 +84,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint, outPoint, statsEnabled: Request.CookiesAllowed());
 
             TimeSpan? inPointTime = null;
             if(video.RequestedInPoint.HasValue) inPointTime = video.RequestedInPoint.Value.ToLocalTime().TimeOfDay;
