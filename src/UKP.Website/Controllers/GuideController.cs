@@ -39,7 +39,7 @@ namespace UKP.Website.Controllers
         [OutputCache(Duration=60, VaryByParam="*")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
-            var result = _videoService.GetVideo(id, Request.IPAddress());
+            var result = _videoService.GetVideo(id);
             return PartialView(MVC.Guide.Views._InfoPopup, result);
         }
 

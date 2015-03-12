@@ -22,7 +22,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoModel GetVideo(Guid id, string requestedUsersIPAddress, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null, bool? statsEnabled = false, bool? processLogs = null)
+        public VideoModel GetVideo(Guid id, DateTime? inPoint = null, DateTime? outPoint = null, bool? audioOnly = null, bool? autoStart = null, bool? statsEnabled = false, bool? processLogs = null, string requestedUsersIPAddress = null)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/video/{id}", Method.GET, _configuration.IasAuthKey);
