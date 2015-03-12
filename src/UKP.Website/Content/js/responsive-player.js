@@ -4,8 +4,10 @@
 }
 
 $(function () {
-    resizePlayer();
-    $(window).resize(function () {
+    setTimeout(function() {
         resizePlayer();
-    });
+        $(window).resize(function() {
+            resizePlayer();
+        });
+    }, 300);
 });
