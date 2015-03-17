@@ -52,7 +52,7 @@ namespace UKP.Website.Extensions
                 if(BrowserNotSupported("Firefox", 30, ua.UserAgent)
                     || BrowserNotSupported("Safari", 5, ua.UserAgent)
                     || BrowserNotSupported("IE", 9, ua.UserAgent)
-                    || BrowserNotSupported("Chrome", 0, ua.UserAgent)
+                    || BrowserNotSupported("Chrome", 38, ua.UserAgent)
                     || BrowserNotSupported("Chrome Mobile iOS", 0, ua.UserAgent)
                     || BrowserNotSupported("Android", null, ua.UserAgent))
                 {
