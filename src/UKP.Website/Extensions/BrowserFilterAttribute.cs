@@ -61,7 +61,8 @@ namespace UKP.Website.Extensions
             }
             catch(Exception ex)
             {
-                ErrorSignal.FromCurrentContext().Raise(ex);
+                // removed for now as creating large log files 
+                //ErrorSignal.FromCurrentContext().Raise(ex);
             }
 
             return supported;
