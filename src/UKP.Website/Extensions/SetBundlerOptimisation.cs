@@ -32,7 +32,9 @@ namespace UKP.Website.Extensions
             }
             catch (Exception ex)
             {
-                ErrorSignal.FromCurrentContext().Raise(ex);
+                // removed logging for now
+                //ErrorSignal.FromCurrentContext().Raise(ex);
+                BundleTable.EnableOptimizations = true;
             }
         }
 
