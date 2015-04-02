@@ -82,6 +82,7 @@ namespace UKP.Website.Controllers
             public readonly string Committees = "Committees";
             public readonly string RecentlyArchive = "RecentlyArchive";
             public readonly string _404 = "_404";
+            public readonly string Robots = "Robots";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -93,6 +94,7 @@ namespace UKP.Website.Controllers
             public const string Committees = "Committees";
             public const string RecentlyArchive = "RecentlyArchive";
             public const string _404 = "_404";
+            public const string Robots = "Robots";
         }
 
 
@@ -203,6 +205,17 @@ namespace UKP.Website.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames._404);
             _404Override(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void RobotsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Robots()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Robots);
+            RobotsOverride(callInfo);
             return callInfo;
         }
 
