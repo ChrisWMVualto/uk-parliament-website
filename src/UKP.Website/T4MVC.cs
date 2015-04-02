@@ -297,6 +297,7 @@ namespace Links
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string apple_touch_icon_114x114_precomposed_png = Url("apple-touch-icon-114x114-precomposed.png");
                 public static readonly string apple_touch_icon_144x144_precomposed_png = Url("apple-touch-icon-144x144-precomposed.png");
+                public static readonly string apple_touch_icon_180x180_precomposed_png = Url("apple-touch-icon-180x180-precomposed.png");
                 public static readonly string apple_touch_icon_57x57_precomposed_png = Url("apple-touch-icon-57x57-precomposed.png");
                 public static readonly string apple_touch_icon_72x72_precomposed_png = Url("apple-touch-icon-72x72-precomposed.png");
                 public static readonly string apple_touch_icon_precomposed_png = Url("apple-touch-icon-precomposed.png");

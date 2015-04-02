@@ -68,7 +68,7 @@ namespace UKP.Website.Controllers
 
 
         [OutputCache(Duration=60, VaryByParam="*")]
-        public ActionResult Robots()
+        public virtual ActionResult Robots()
         {
             var robotsFile = "~/robots.txt.disallow";
             if (_configuration.RobotsAllow)
