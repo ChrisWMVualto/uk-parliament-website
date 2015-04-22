@@ -1,0 +1,33 @@
+﻿@using Date.Extensions
+@using UKP.Website.Service.Model
+@model IEnumerable<LogMomentModel>
+@foreach (var log in Model)
+{
+
+    <li class="stackouter logouter">
+        <article>
+            <header class="stack-item">
+                <h4>@log.Title - <span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @(log.InPoint.HasValue ? log.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</span> </h4>
+            </header>
+            <footer>
+                <ul>
+
+                    <li>@log.Member</li>
+                    @if (!string.IsNullOrEmpty(log.MemberRole))
+                    {
+                        <li>@log.MemberRole</li>
+                    }
+                    @if (!string.IsNullOrEmpty(log.MemberParty))
+                    {
+                        <li>@log.MemberParty</li>
+                    }
+                    @if (!string.IsNullOrEmpty(log.MemberConstituency))
+                    {
+                        <li>@log.MemberConstituency</li>
+                    }
+
+                </ul>
+            </footer>
+        </article>
+    </li>
+}
