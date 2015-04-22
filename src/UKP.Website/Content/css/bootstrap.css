@@ -4483,6 +4483,35 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
             left: auto;
         }
 
+
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+}
+
+.nav-tabs.nav-justified {
+    width: 100%;
+    border-bottom: 0;
+}
+
+    .nav-tabs.nav-justified > li {
+        float: none;
+    }
+
+        .nav-tabs.nav-justified > li > a {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+    .nav-tabs.nav-justified > .dropdown .dropdown-menu {
+        top: auto;
+        left: auto;
+    }
+
+
 @media (min-width: 768px) {
     .nav-tabs.nav-justified > li {
         display: table-cell;
@@ -12508,34 +12537,34 @@ ul.main-nav {
             top: 10%;
         }
 
-        .section-home-carousel .carousel-play-button {
-            position: relative;
-            bottom: 0px;
-            top: 0px;
-            right: 0;
+    .section-home-carousel .carousel-play-button {
+        position: relative;
+        bottom: 0px;
+        top: 0px;
+        right: 0;
+    }
+
+    .section-home-carousel .carousel-caption a {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+
+        .section-home-carousel .carousel-caption a:hover {
+            opacity: .7;
         }
 
-        .section-home-carousel .carousel-caption a {
-            -webkit-transition: all 0.5s ease;
-            -moz-transition: all 0.5s ease;
-            -o-transition: all 0.5s ease;
-            transition: all 0.5s ease;
+    .section-home-carousel .carousel-caption .live-badge {
+        font-size: 134%;
+        text-transform: uppercase;
+        font-family: 'karlaregular', arial, sans-serif;
+        margin-top: -5px;
+    }
+
+        .section-home-carousel .carousel-caption .live-badge i {
+            vertical-align: -8px;
         }
-
-            .section-home-carousel .carousel-caption a:hover {
-                opacity: .7;
-            }
-
-        .section-home-carousel .carousel-caption .live-badge {
-            font-size: 134%;
-            text-transform: uppercase;
-            font-family: 'karlaregular', arial, sans-serif;
-            margin-top: -5px;
-        }
-
-            .section-home-carousel .carousel-caption .live-badge i {
-                vertical-align: -8px;
-            }
 
     .section-home-carousel .carousel-light-bg,
     .section-home-carousel .carousel-dark-bg {

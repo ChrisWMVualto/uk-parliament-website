@@ -1,20 +1,35 @@
 ﻿@using UKP.Website.Service.Model
 @model VideoModel
 
-@if (!Model.LogMoments.ContainsLogMoments)
+
+@foreach (var stack in Model.Stacks)
 {
-    foreach (var stack in Model.Stacks)
-    {
-        <li>
-            <article>
-                <span class="vr-stack"></span>
-                <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                <header class="stack-item">
-                    <h4>
-                        @stack.Title
-                    </h4>
-                </header>
-            </article>
-        </li>
-    }
+    <li class="stackouter">
+        <article>
+            <header class="stack-item">
+                <h4>@stack.Title</h4>
+            </header>
+            <footer>
+                <ul>
+                    <li>@stack.Member</li>
+                    @if (!string.IsNullOrEmpty(stack.MemberRole))
+                    {
+                        <li>@stack.MemberRole</li>
+                    }
+                    @if (!string.IsNullOrEmpty(stack.MemberParty))
+                    {
+                        <li>@stack.MemberParty</li>
+                    }
+                    @if (!string.IsNullOrEmpty(stack.MemberConstituency))
+                    {
+                        <li>@stack.MemberConstituency</li>
+                    }
+                    @if (!string.IsNullOrEmpty(stack.MemberContext))
+                    {
+                        <li>@stack.MemberContext</li>
+                    }
+                </ul>
+            </footer>
+        </article>
+    </li>
 }

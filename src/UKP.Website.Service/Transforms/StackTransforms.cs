@@ -33,11 +33,13 @@ namespace UKP.Website.Service.Transforms
             var member = (string)jObject.stack.member;
             var memberRole = (string)jObject.stack.memberRole;
             var memberContext = (string)jObject.stack.memberContext;
+            var memeberConstituency = (string)jObject.stack.constituency;
+            var memberParty = (string)jObject.stack.party;
             var noneMember = (string)jObject.stack.noneMember;
             var noneMemberContext = (string)jObject.stack.noneMemberContext;
             var sortOrder = (int?)jObject.stack.sortOrder;
 
-            return new StackModel(id, eventId, title, member, memberRole, memberContext, noneMember, noneMemberContext, sortOrder);
+            return new StackModel(id, eventId, title, member, memberRole, memberContext,memeberConstituency, memberParty, noneMember, noneMemberContext, sortOrder);
         }
     }
 }

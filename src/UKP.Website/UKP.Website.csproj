@@ -254,6 +254,7 @@
     <Content Include="Content\js\vendor\stickyfloat.min.js" />
     <Content Include="Global.asax" />
     <Content Include="ping.html" />
+    <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <None Include="robots.txt.allow" />
     <None Include="robots.txt.disallow" />
     <Content Include="Content\css\fonts\slick.eot" />

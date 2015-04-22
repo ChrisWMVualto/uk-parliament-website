@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using System.Web.UI;
 using Date.Extensions;
-using UKP.Website.Application;
 using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
 using UKP.Website.Models.Event;
@@ -100,23 +95,31 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*")]
-        public virtual PartialViewResult StackAndLogs(Guid id, string @in = null, string @out = null)
+        public virtual PartialViewResult Logs(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
             var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
-            if (video.LogMoments.ContainsLogMoments)
-            {
+          
                 return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results);
-            }
+           
+        }
+
+        [HttpGet]
+        [OutputCache(Duration = 2, VaryByParam = "*")]
+        public virtual PartialViewResult Stack(Guid id, string @in = null, string @out = null)
+        {
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+
+            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed(), true);
             return PartialView(MVC.Event.Views._Stack, video);
         }
 
 
         [HttpGet]
-        [OutputCache(Duration=2, VaryByParam="*")]
+        [OutputCache(Duration=1, VaryByParam="*")]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;

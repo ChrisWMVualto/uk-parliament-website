@@ -32,6 +32,7 @@ namespace UKP.Website.Service
             if(audioOnly.HasValue) request.AddParameter("audioOnly", audioOnly.Value);
             if(autoStart.HasValue) request.AddParameter("autoStart", autoStart.Value);
             if(processLogs.HasValue) request.AddParameter("processLogs", processLogs.Value);
+            if (processLogs.HasValue && processLogs.Value) request.AddParameter("noCache", true);
             if(statsEnabled.HasValue) request.AddParameter("statsEnabled", statsEnabled.Value);
             if(!string.IsNullOrWhiteSpace(requestedUsersIPAddress)) request.AddParameter("requestedUsersIPAddress", requestedUsersIPAddress);
              
