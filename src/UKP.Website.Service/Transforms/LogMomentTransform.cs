@@ -38,17 +38,17 @@ namespace UKP.Website.Service.Transforms
         public static LogMomentModel Transform(dynamic json)
         {
             var id = (Guid)json.log.id;
-            var title = (string)json.log.title;
+            var description = (string)json.log.description;
             var thumbnailUrl = (string)json.thumbnailImageUrl;
             var inPoint = (DateTime?)json.inPoint;
 
-            var member = (string)json.log.member;
+            var displayAs = (string)json.log.displayAs;
             var memberParty = (string) json.log.party;
             var memberConstituency = (string) json.log.constituency;
-            var memberRole = (string) json.log.memberRole;
+            var House = (string)json.log.House;
 
 
-            return new LogMomentModel(id, title, thumbnailUrl, inPoint, member, memberParty, memberConstituency, memberRole);
+            return new LogMomentModel(id, description, thumbnailUrl, inPoint, displayAs, memberParty, memberConstituency, House);
         }
     }
 }
