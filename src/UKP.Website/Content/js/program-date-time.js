@@ -4,8 +4,23 @@ var scrollTimeoutId = null;
 
 function scrollStackAndLogs() {
 
-    if ($('.log-list').length)
-    {
+    if ($('.stack-list').length) {
+        $('.stack-list').slimScroll({
+            railVisible: true,
+            railColor: '#E6EBEE',
+            railOpacity: 1,
+            color: '#C1C7C9',
+            size: '12px',
+            height: '625px',
+            alwaysVisible: false,
+            start: logPos
+        });
+        $('.stack-list').slimScroll().bind('slimscroll', function (e, pos) {
+            stackPos = pos;
+        });
+    }
+
+    if ($('.log-list').length) {
         $('.log-list').slimScroll({
             railVisible: true,
             railColor: '#E6EBEE',
@@ -17,7 +32,7 @@ function scrollStackAndLogs() {
             start: logPos
         });
         $('.log-list').slimScroll().bind('slimscroll', function (e, pos) {
-            stackPos = pos;
+            logPos = pos;
         });
     }
 }
@@ -103,6 +118,18 @@ $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
 
+    var state = $('#is_live').val().toLowerCase();
+    var hasLogs = $('#ContainsLogMoments').val().toLowerCase();
+
+
+    if (state == 'true' && hasLogs == 'true') {
+        $('#stacks').removeClass('active').removeClass('in');
+        $('#logs').addClass('active').addClass('in');
+
+
+
+    }
+
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
 
         if (eventId == changedId) {
@@ -146,7 +173,7 @@ $(function () {
 
         var sentTime = new Date(messageSplit[1]);
         $('#ProgramDateTime').val(sentTime.toISOString());
-        highlightLogItems(sentTime);   
+        highlightLogItems(sentTime);
     });
 
     $('.btn-moment-expand').on('click', function () {
