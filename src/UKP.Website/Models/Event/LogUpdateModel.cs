@@ -10,6 +10,8 @@ namespace UKP.Website.Models.Event
         public string Title { get; set; }
         public DateTime Timecode { get; set; }
         public string Member { get; set; }
+
+
     }
 
     public enum LogUpdateType

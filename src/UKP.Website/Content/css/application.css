@@ -302,7 +302,6 @@ a.extract-text {
             line-height: 50px;
             text-align: center;
             display: block;
-              border-left: 1px solid #e7e8e9;
             box-sizing: border-box;
             width: 100%;
 
@@ -320,6 +319,11 @@ a.extract-text {
             }
 
 
+            .stack-and-logs-tabs li:first-of-type {
+                
+              border-left: 1px solid #e7e8e9;
+            border-right: 1px solid #e7e8e9;
+        }
         .stack-and-logs-tabs li:last-of-type {
             border-right: 1px solid #e7e8e9;
         }
@@ -336,7 +340,7 @@ a.extract-text {
 
 
 
-.log-list {
+.log-list, .stack-list {
     height: 625px;
 }
 
@@ -352,6 +356,8 @@ a.extract-text {
 .stackouter {
     border-top: thin solid #959CA6;
     padding: 5px;
+    overflow: hidden;
+
 }
 
     .stackouter:last-of-type {
