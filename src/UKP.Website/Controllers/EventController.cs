@@ -101,9 +101,7 @@ namespace UKP.Website.Controllers
             var outPoint = @out.FromISO8601String();
 
             var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
-          
-                return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results);
-           
+            return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results.Reverse());
         }
 
         [HttpGet]
@@ -139,7 +137,7 @@ namespace UKP.Website.Controllers
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);
-            if (legacyVideo == null) return RedirectToAction(MVC.Home._404());
+            if(legacyVideo == null) return RedirectToAction(MVC.Home._404());
 
             if(st.HasValue)
             {
