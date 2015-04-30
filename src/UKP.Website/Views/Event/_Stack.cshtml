@@ -2,34 +2,21 @@
 @model VideoModel
 
 
-@foreach (var stack in Model.Stacks)
+@foreach(var stack in Model.Stacks)
 {
     <li class="stackouter">
         <article>
             <header class="stack-item">
-                <h4>@stack.Title</h4>
+                <h4>
+                    @if(!string.IsNullOrWhiteSpace(stack.Title))
+                    {
+                        @stack.Title
+                        <br /><br />
+                    }
+
+                    @stack.Member
+                </h4>
             </header>
-            <footer>
-                <ul>
-                    <li>@stack.Member</li>
-                    @if (!string.IsNullOrEmpty(stack.MemberRole))
-                    {
-                        <li>@stack.MemberRole</li>
-                    }
-                    @if (!string.IsNullOrEmpty(stack.MemberParty))
-                    {
-                        <li>@stack.MemberParty</li>
-                    }
-                    @if (!string.IsNullOrEmpty(stack.MemberConstituency))
-                    {
-                        <li>@stack.MemberConstituency</li>
-                    }
-                    @if (!string.IsNullOrEmpty(stack.MemberContext))
-                    {
-                        <li>@stack.MemberContext</li>
-                    }
-                </ul>
-            </footer>
         </article>
     </li>
 }

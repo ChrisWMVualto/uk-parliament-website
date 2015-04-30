@@ -1,17 +1,25 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Service.Model
 @model IEnumerable<LogMomentModel>
-@foreach (var log in Model)
+@foreach(var log in Model)
 {
 
-    <li class="stackouter logouter">
+    <li class="logouter">
         <div class="col-md-2">
-             <h4><span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @(log.InPoint.HasValue ? log.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</span></h4>
+            <h4><span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @(log.InPoint.HasValue ? log.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</span></h4>
         </div>
         <div class="col-md-10">
             <article>
                 <header class="stack-item">
-                    <h4>@log.Title <br/> @log.MemberDisplay </h4>
+                    <h4>
+                        @if(!string.IsNullOrWhiteSpace(log.Title))
+                        {
+                            @log.Title
+                            <br /><br />
+                        }
+
+                        @log.MemberDisplay
+                    </h4>
                 </header>
             </article>
         </div>

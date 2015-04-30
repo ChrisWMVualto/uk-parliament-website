@@ -48,7 +48,7 @@ namespace UKP.Website
                 name: "robots",
                 url: "robots.txt",
                 defaults: new { controller = "Home", action = "Robots" }
-);
+                );
 
             routes.MapRoute(
                 name: "Default",

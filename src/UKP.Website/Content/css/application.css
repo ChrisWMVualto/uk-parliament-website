@@ -304,7 +304,6 @@ a.extract-text {
             display: block;
             box-sizing: border-box;
             width: 100%;
-
         }
 
             .stack-and-logs-tabs li a span {
@@ -318,12 +317,11 @@ a.extract-text {
                 vertical-align: -6px;
             }
 
-
-            .stack-and-logs-tabs li:first-of-type {
-                
-              border-left: 1px solid #e7e8e9;
+        .stack-and-logs-tabs li:first-of-type {
+            border-left: 1px solid #e7e8e9;
             border-right: 1px solid #e7e8e9;
         }
+
         .stack-and-logs-tabs li:last-of-type {
             border-right: 1px solid #e7e8e9;
         }
@@ -338,36 +336,45 @@ a.extract-text {
             text-decoration: none;
         }
 
-
-
 .log-list, .stack-list {
-    height: 625px;
+    height: 425px;
 }
 
 .logouter, .stackouter {
-    list-style: none;
-    width: 100%;
-}
-
-    .logouter li, .stackouter li {
-        list-style: none;
-    }
-
-.stackouter {
     border-top: thin solid #959CA6;
     padding: 5px;
     overflow: hidden;
+    list-style: none;
+    width: 100%;
+    font-family: 'karlaregular', arial, sans-serif;
+}
+
+.stackouter {
 
 }
 
-    .stackouter:last-of-type {
-        border-bottom: thin solid #959CA6;
-    }
-
 .logouter {
+
     cursor: pointer;
-    font-family: 'karlaregular', arial, sans-serif;
-                font-size: 110%;
+}
+
+.stackouter:last-of-type {
+    border-bottom: thin solid #959CA6;
+}
+
+.logouter:last-of-type {
+    border-bottom: thin solid #959CA6;
+}
+
+.logouter ul, .stackouter ul {
+    list-style: none;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.logouter li, .stackouter li {
+    list-style: none;
 }
 
 .log-list li.active {
@@ -375,10 +382,6 @@ a.extract-text {
     color: white;
 }
 
-
 .invisable {
     visibility: hidden !important;
 }
-
-
-

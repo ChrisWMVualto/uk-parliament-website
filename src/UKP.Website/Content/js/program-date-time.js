@@ -11,7 +11,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '625px',
+            height: '560px',
             alwaysVisible: false,
             start: logPos
         });
@@ -27,7 +27,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '625px',
+            height: '560px',
             alwaysVisible: false,
             start: logPos
         });
@@ -62,6 +62,7 @@ function autoScrollStackAndLogs() {
 
 function appendLogMoments() {
 
+    
     $($('.log-list > li').get().reverse()).each(function (index, item) {
 
         var lastLogTime = $(item).find('.time-code').data('time');
@@ -78,7 +79,7 @@ function appendLogMoments() {
     });
 
     // TODO: old way before reversal
-    /*
+  /*
     var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
     var logUrl = $('#eventStackContainer').data("load-new-stack-url");
     $.get(logUrl, { startTime: lastLogTime }, function (data) {
@@ -96,7 +97,7 @@ function refreshLogMoments() {
 
 function highlightLogItems(sentTime) {
 
-    var logItems = $('.log-list > li.stackouter');
+    var logItems = $('.log-list > li.logouter');
     logItems.removeClass('active');
 
     logItems.each(function (index, item) {
@@ -125,8 +126,6 @@ $(function () {
     if (state == 'true' && hasLogs == 'true') {
         $('#stacks').removeClass('active').removeClass('in');
         $('#logs').addClass('active').addClass('in');
-
-
 
     }
 
@@ -158,7 +157,7 @@ $(function () {
         var time = $(this).find('.time-code').data('time');
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
-        var logItems = $('.log-list > li.stackouter');
+        var logItems = $('.log-list > li.logouter');
         logItems.removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
