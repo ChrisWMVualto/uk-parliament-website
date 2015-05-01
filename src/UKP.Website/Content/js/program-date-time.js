@@ -1,6 +1,5 @@
 ﻿var stackPos = 'top';
 var logPos = 'top';
-var scrollTimeoutId = null;
 
 function scrollStackAndLogs() {
 
@@ -11,7 +10,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '530px',
+            height: '550px',
             alwaysVisible: false,
             start: logPos
         });
@@ -27,7 +26,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '530px',
+            height: '550px',
             alwaysVisible: false,
             start: logPos
         });
@@ -37,33 +36,7 @@ function scrollStackAndLogs() {
     }
 }
 
-// currently not used
-/*
-function scrollStacksAndLogsToActiveItem() {
-
-    if (!$(".log-list > ul > li.active").length) return;
-
-    var relativeY = $(".log-list > ul > li.active").offset().top - $(".log-list > ul").offset().top;
-    $('.log-list').slimScroll({ scrollTo: relativeY + 'px' });
-}
-
-
-function scrollTimer() {
-    clearInterval(scrollTimeoutId);
-    scrollTimeoutId = setInterval(scrollStacksAndLogsToActiveItem, 10000);
-}
-
-function autoScrollStackAndLogs() {
-    scrollTimer();
-
-    $('#logs').on('mousemove', function () {
-        scrollTimer();
-    });
-}*/
-
-function appendLogMoments() {
-
-    
+function appendArchiveLog() {
     $($('.log-list > li').get().reverse()).each(function (index, item) {
 
         var lastLogTime = $(item).find('.time-code').data('time');
@@ -78,18 +51,27 @@ function appendLogMoments() {
 
         return false;
     });
+}
 
-    // TODO: old way before reversal
-  /*
-    var lastLogTime = $('.stack > ol > li').last().find('.time-code').data('time');
-    var logUrl = $('#eventStackContainer').data("load-new-stack-url");
+
+function appendLiveLog() {
+    var lastLogTime = $('.log-list > li').first().find('.time-code').data('time');
+    var logUrl = $('#logTab').data("load-new-log-url");
     $.get(logUrl, { startTime: lastLogTime }, function (data) {
-        $('.stack > ol').append(data);
-    });*/
+        $('.log-list').prepend(data);
+    });
+}
+
+function appendLogMoments() {
+
+    if ($('#LiveLogging').val() == "True") {
+        appendLiveLog();
+    } else {
+        appendArchiveLog();
+    }
 }
 
 function refreshLogMoments() {
-    $('#logTab').removeClass('invisible');
     var logUrl = $('#logTab').data("refresh-log-url");
     $.get(logUrl, {}, function (data) {
         $('.log-list').html(data);
@@ -97,7 +79,26 @@ function refreshLogMoments() {
     });
 }
 
-function highlightLogItems(sentTime) {
+function highlightLiveLog(sentTime) {
+
+    var logItems = $('.log-list > li.logouter');
+    logItems.removeClass('active');
+    logItems = $('.log-list > li.logouter').get().reverse();
+
+    $(logItems).each(function (index, item) {
+
+        var logItem = $(item);
+        var thisTime = new Date(logItem.find('.time-code').data('time'));
+
+        if (sentTime >= thisTime) {
+            $(logItems[index - 1]).removeClass('active');
+            logItem.addClass('active');
+            return;
+        }
+    });
+}
+
+function highlightArchiveLog(sentTime) {
 
     var logItems = $('.log-list > li.logouter');
     logItems.removeClass('active');
@@ -115,6 +116,15 @@ function highlightLogItems(sentTime) {
     });
 }
 
+function highlightLogItems(sentTime) {
+
+    if ($('#LiveLogging').val() == "True") {
+        highlightLiveLog(sentTime);
+    } else {
+        highlightArchiveLog(sentTime);
+    }
+}
+
 
 $(function () {
 
@@ -130,8 +140,12 @@ $(function () {
 
         if (eventId == changedId) {
 
+            // first log item goes in!
             if ($('#ContainsLogMoments').val() == 'False') {
                 $('#ContainsLogMoments').val('True');
+                $('#logTab').removeClass('invisible');
+                $('#logTab a').tab('show');
+                
                 refreshLogMoments();
                 return;
             }
@@ -148,7 +162,6 @@ $(function () {
     $.connection.hub.start().done(function () { });
 
     scrollStackAndLogs();
-    //autoScrollStackAndLogs();
 
     $(document).on("click", ".logouter", function (e) {
         var time = $(this).find('.time-code').data('time');
@@ -171,15 +184,6 @@ $(function () {
         $('#ProgramDateTime').val(sentTime.toISOString());
         highlightLogItems(sentTime);
     });
-
-    $('.btn-moment-expand').on('click', function () {
-        $($(this).children()[1]).toggleClass('fa-plus').toggleClass('fa-minus');
-    });
-
-    //$('#logTab').on('click', function() {
-    //    setTimeout(scrollStackAndLogs(),2000);
-    //});
-
 });
 
 
