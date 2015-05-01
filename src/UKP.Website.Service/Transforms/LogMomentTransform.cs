@@ -41,12 +41,10 @@ namespace UKP.Website.Service.Transforms
             var description = (string)json.log.description;
             var thumbnailUrl = (string)json.thumbnailImageUrl;
             var inPoint = (DateTime?)json.inPoint;
-
             var displayAs = (string)json.log.displayAs;
             var memberParty = (string) json.log.party;
             var memberConstituency = (string) json.log.constituency;
             var House = (string)json.log.House;
-
 
             return new LogMomentModel(id, description, thumbnailUrl, inPoint, displayAs, memberParty, memberConstituency, House);
         }

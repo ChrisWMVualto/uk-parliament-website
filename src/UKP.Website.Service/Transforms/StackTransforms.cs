@@ -29,17 +29,15 @@ namespace UKP.Website.Service.Transforms
 
             var id = (Guid)jObject.stack.id;
             var eventId = (Guid)jObject.stack.eventId;
-            var title = (string)jObject.stack.title;
-            var member = (string)jObject.stack.member;
-            var memberRole = (string)jObject.stack.memberRole;
-            var memberContext = (string)jObject.stack.memberContext;
+            var description = (string)jObject.stack.description;
+            var member = (string)jObject.stack.displayAs;
+            var memberRole = (string)jObject.stack.party;
+            var house = (string)jObject.stack.house;
             var memeberConstituency = (string)jObject.stack.constituency;
             var memberParty = (string)jObject.stack.party;
-            var noneMember = (string)jObject.stack.noneMember;
-            var noneMemberContext = (string)jObject.stack.noneMemberContext;
             var sortOrder = (int?)jObject.stack.sortOrder;
 
-            return new StackModel(id, eventId, title, member, memberRole, memberContext,memeberConstituency, memberParty, noneMember, noneMemberContext, sortOrder);
+            return new StackModel(id, eventId, description, member, memberRole, house, memeberConstituency, memberParty, "", "", sortOrder);
         }
     }
 }
