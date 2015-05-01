@@ -10,14 +10,13 @@
     ViewBag.FBTitle = "Parliamentlive.tv";
     ViewBag.Description = Model.VideoModel.Event.Title;
     var showAudioButton = EventViewModel.ShowAudioOnly(Model.VideoModel) ? string.Empty : "hidden";
-    var showLogTab = "invisable";
+    var showLogTab = "invisible";
     var stackTab = "active";
     if (Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
     {
         showLogTab = "active";
         stackTab = "";
     }
-
 }
 
 
@@ -27,7 +26,6 @@
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
     @Html.Hidden("ProgramDateTime")
     @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
-    @Html.Hidden("is_live", Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE)
     <div class="row">
         <div class="col-md-12">
             <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
@@ -43,7 +41,6 @@
                     <div id="videoContainer" class="video-container">
                         @Html.Raw(Model.VideoModel.ScriptableEmbedCode)
                     </div>
-
                     <!--start: player tabs-->
                     <!-- Nav tabs -->
                     <div class="player-tabs">
@@ -65,7 +62,6 @@
                 <div class="col-md-5">
                     @if (!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
                     {
-
                         <div class="row ">
                             <ul class="col-md-12 stack-and-logs-tabs">
                                 <li class="@stackTab">
@@ -76,25 +72,19 @@
                                     data-refresh-log-url="@Url.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
                                     <a href="#logs" data-toggle="tab"><span>LOG</span></a>
                                 </li>
-
-
                             </ul>
                         </div>
-
                         <div class="tab-content player-tabs-content">
                             <div class="tab-pane fade active in stacks-logs" id="stacks">
-                                <div class="stack-list">
+                                <ul class="stack-list">
                                     @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToString(), Model.VideoModel.RequestedOutPoint.ToString()))
-                                </div>
+                                </ul>
                             </div>
                             <div class="tab-pane fade stacks-logs" id="logs">
-                                <div class="log-list">
-
+                                <ul class="log-list">
                                     @Html.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToString(), Model.VideoModel.RequestedOutPoint.ToString()))
-
-                                </div>
+                                </ul>
                             </div>
-
                         </div>
                     }
                 </div>

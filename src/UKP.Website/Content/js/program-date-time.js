@@ -11,7 +11,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '560px',
+            height: '530px',
             alwaysVisible: false,
             start: logPos
         });
@@ -27,7 +27,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '560px',
+            height: '530px',
             alwaysVisible: false,
             start: logPos
         });
@@ -37,7 +37,8 @@ function scrollStackAndLogs() {
     }
 }
 
-
+// currently not used
+/*
 function scrollStacksAndLogsToActiveItem() {
 
     if (!$(".log-list > ul > li.active").length) return;
@@ -58,7 +59,7 @@ function autoScrollStackAndLogs() {
     $('#logs').on('mousemove', function () {
         scrollTimer();
     });
-}
+}*/
 
 function appendLogMoments() {
 
@@ -88,10 +89,11 @@ function appendLogMoments() {
 }
 
 function refreshLogMoments() {
-    $('#logTab').removeClass('invisable');
+    $('#logTab').removeClass('invisible');
     var logUrl = $('#logTab').data("refresh-log-url");
     $.get(logUrl, {}, function (data) {
-        $('#logs').html(data);
+        $('.log-list').html(data);
+        scrollStackAndLogs();
     });
 }
 
@@ -119,14 +121,9 @@ $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
 
-    var state = $('#is_live').val().toLowerCase();
-    var hasLogs = $('#ContainsLogMoments').val().toLowerCase();
-
-
-    if (state == 'true' && hasLogs == 'true') {
+    if ($('#ContainsLogMoments').val() == 'True') {
         $('#stacks').removeClass('active').removeClass('in');
         $('#logs').addClass('active').addClass('in');
-
     }
 
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {
@@ -151,7 +148,7 @@ $(function () {
     $.connection.hub.start().done(function () { });
 
     scrollStackAndLogs();
-    autoScrollStackAndLogs();
+    //autoScrollStackAndLogs();
 
     $(document).on("click", ".logouter", function (e) {
         var time = $(this).find('.time-code').data('time');

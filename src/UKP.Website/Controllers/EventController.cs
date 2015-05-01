@@ -28,10 +28,23 @@ namespace UKP.Website.Controllers
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
-            var video = _videoService.GetVideo(id, inPoint, outPoint, audioOnly, autoStart.GetValueOrDefault(true), Request.CookiesAllowed());
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, audioOnly: audioOnly, autoStart: autoStart.GetValueOrDefault(true), statsEnabled:Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
             return View(new EventViewModel(video));
+        }
+
+        [HttpGet]
+        public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
+        {
+            var legacyVideo = _videoService.GetLegacyVideo(meetingId);
+            if(legacyVideo == null) return RedirectToAction(MVC.Home._404());
+
+            if(st.HasValue)
+            {
+                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, st.ToString()));
+            }
+            return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id));
         }
 
         [HttpGet]
@@ -39,7 +52,7 @@ namespace UKP.Website.Controllers
         {
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var video =_videoService.GetVideo(id, inPoint, outPoint, null, false, statsEnabled: Request.CookiesAllowed(), requestedUsersIPAddress: Request.IPAddress());
+            var video =_videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, audioOnly: null, autoStart: false, statsEnabled: Request.CookiesAllowed(), requestedUsersIPAddress: Request.IPAddress());
 
             return this.JsonFormatted(video, JsonRequestBehavior.AllowGet);
         }
@@ -100,24 +113,14 @@ namespace UKP.Website.Controllers
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
 
-            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true);
-            return PartialView(MVC.Event.Views._LogMoment, video.LogMoments.Results.Reverse());
-        }
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed(), processLogs: true, noCache: true);
+            var logRestuls = video.LogMoments.Results;
 
-        [HttpGet]
-        [OutputCache(Duration = 2, VaryByParam = "*")]
-        public virtual PartialViewResult Stack(Guid id, string @in = null, string @out = null)
-        {
-            var inPoint = @in.FromISO8601String();
-            var outPoint = @out.FromISO8601String();
-
-            var video = _videoService.GetVideo(id, inPoint, outPoint, Request.CookiesAllowed(), true);
-            return PartialView(MVC.Event.Views._Stack, video);
+            return PartialView(MVC.Event.Views._LogMoment, logRestuls);
         }
 
 
         [HttpGet]
-        [OutputCache(Duration=1, VaryByParam="*")]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;
@@ -129,22 +132,21 @@ namespace UKP.Website.Controllers
 
             if(inPoint.HasValue && outPoint.HasValue)
                 results = results.Where(x => x.InPoint >= inPoint.Value.ToUniversalTime() && x.InPoint < outPoint.Value.ToUniversalTime());
-
+  
             return PartialView(MVC.Event.Views._LogMoment, results);
         }
 
         [HttpGet]
-        public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
+        [OutputCache(Duration = 45, VaryByParam = "*")]
+        public virtual PartialViewResult Stack(Guid id, string @in = null, string @out = null)
         {
-            var legacyVideo = _videoService.GetLegacyVideo(meetingId);
-            if(legacyVideo == null) return RedirectToAction(MVC.Home._404());
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
 
-            if(st.HasValue)
-            {
-                return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id, st.ToString()));
-            }
-            return RedirectToActionPermanent(MVC.Event.Index(legacyVideo.Event.Id));
+            var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, statsEnabled: Request.CookiesAllowed());
+            return PartialView(MVC.Event.Views._Stack, video);
         }
+
 
         [HttpPost]
         public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
