@@ -1,5 +1,7 @@
 ﻿var stackPos = 'top';
 var logPos = 'top';
+var lastClickedTimecode = null;
+var highlightItem = false;
 
 function scrollStackAndLogs() {
 
@@ -92,7 +94,6 @@ function refreshLogMoments() {
 }
 
 function highlightLiveLog(sentTime) {
-
     var logItems = $('.log-list > li.logouter');
     logItems.removeClass('active');
     logItems = $('.log-list > li.logouter').get().reverse();
@@ -179,12 +180,19 @@ $(function () {
     refreshStackInterval();
 
     $(document).on("click", ".logouter", function (e) {
-        var time = $(this).find('.time-code').data('time');
+        var self = $(this);
+        var time = self.find('.time-code').data('time');
+        lastClickedTimecode = new Date(time);
+        highlightItem = false;
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
-        var logItems = $('.log-list > li.logouter');
-        logItems.removeClass('active');
-        $(this).addClass('active');
+        
+        setTimeout(function() {
+            var logItems = $('.log-list > li.logouter');
+            logItems.removeClass('active');
+            self.addClass('active');
+        }, 600);
+
         e.preventDefault();
         return false;
     });
@@ -197,7 +205,13 @@ $(function () {
 
         var sentTime = new Date(messageSplit[1]);
         $('#ProgramDateTime').val(sentTime.toISOString());
-        highlightLogItems(sentTime);
+
+       
+        if (lastClickedTimecode == null || sentTime > lastClickedTimecode) {
+            highlightItem = true;
+            highlightLogItems(sentTime);
+        }
+        
     });
 });
 

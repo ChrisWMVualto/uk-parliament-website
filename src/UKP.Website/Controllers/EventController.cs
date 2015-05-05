@@ -158,7 +158,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual HttpStatusCodeResult LogUpdate(LogUpdateModel logUpdateModel)
         {
-            EventStateHub.LogUpdate(logUpdateModel.LogUpdateType, logUpdateModel.EventId, logUpdateModel.LogMomentId, logUpdateModel.Member, logUpdateModel.Timecode, logUpdateModel.Title);
+            EventStateHub.LogUpdate(logUpdateModel.LogUpdateType, logUpdateModel.EventId, logUpdateModel.LogMomentId, logUpdateModel.Description, logUpdateModel.Timecode, logUpdateModel.DisplayAs);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

@@ -44,10 +44,10 @@ namespace UKP.Website.Extensions.SignalR
             }
         }
 
-        public static void LogUpdate(LogUpdateType logUpdateType, Guid eventId, Guid logMomentId, string title, DateTime timecode, string member)
+        public static void LogUpdate(LogUpdateType logUpdateType, Guid eventId, Guid logMomentId, string description, DateTime timecode, string displayAs)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<EventStateHub>();
-            context.Clients.All.logUpdate(logUpdateType.ToString(), eventId, logMomentId, title, timecode, member);
+            context.Clients.All.logUpdate(logUpdateType.ToString(), eventId, logMomentId, description, timecode, displayAs);
         }
     }
 }

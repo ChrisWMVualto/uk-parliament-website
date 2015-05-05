@@ -7,9 +7,9 @@ namespace UKP.Website.Models.Event
         public Guid EventId { get; set; }
         public LogUpdateType LogUpdateType { get; set; }
         public Guid LogMomentId { get; set; }
-        public string Title { get; set; }
+        public string Description { get; set; }
         public DateTime Timecode { get; set; }
-        public string Member { get; set; }
+        public string DisplayAs { get; set; }
 
 
     }
