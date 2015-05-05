@@ -4,10 +4,10 @@
 @foreach(var log in Model)
 {
     <li class="logouter">
-        <div class="col-md-2">
+        <div class="col-md-2 nopadding">
             <h4><span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @(log.InPoint.HasValue ? log.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</span></h4>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 nopadding">
             <article>
                 <header class="stack-item">
                     <h4>

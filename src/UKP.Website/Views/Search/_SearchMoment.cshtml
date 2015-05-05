@@ -12,18 +12,18 @@
                         <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         @if(moment.ThumbnailUrl.HasValue())
                         {
-                            @*@<img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">*@
-                            <img src="@moment.ThumbnailUrl" alt="alt tag here" class="img-responsive">
+                            <img src="@moment.ThumbnailUrl" alt="@moment.Description" class="img-responsive">
                         }
                         else
                         {
-                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="alt tag here" class="img-responsive">
+                            <img src="@Url.Content("~/Content/img/filler-thumb-1.jpg")" alt="@moment.Description" class="img-responsive">
                         }
                     </div>
                 </div>
                 <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
                     <div class="inner">
-                        <p><strong>@moment.Description</strong></p>
+                        <p>@moment.Description</p>
+                        <p>@moment.IasDisplayAs</p>
                         <span class="moment-play visible-md visible-lg">
                             Play item
                             <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
