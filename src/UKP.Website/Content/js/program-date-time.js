@@ -36,6 +36,18 @@ function scrollStackAndLogs() {
     }
 }
 
+function refreshStackItems() {
+    var stackUrl = $('#stackTab').data("refresh-stack-url");
+    $.get(stackUrl, {}, function (data) {
+        $('.stack-list').html(data);
+        scrollStackAndLogs();
+    });
+}
+
+function refreshStackInterval() {
+    setInterval(refreshStackItems, 240000);
+}
+
 function appendArchiveLog() {
     $($('.log-list > li').get().reverse()).each(function (index, item) {
 
@@ -126,6 +138,8 @@ function highlightLogItems(sentTime) {
 }
 
 
+
+
 $(function () {
 
     var eventStateHub = $.connection.eventStateHub;
@@ -162,6 +176,7 @@ $(function () {
     $.connection.hub.start().done(function () { });
 
     scrollStackAndLogs();
+    refreshStackInterval();
 
     $(document).on("click", ".logouter", function (e) {
         var time = $(this).find('.time-code').data('time');

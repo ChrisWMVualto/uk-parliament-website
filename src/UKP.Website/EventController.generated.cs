@@ -62,6 +62,12 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult LegacyPageRoute()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult GetShareVideo()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetShareVideo);
@@ -98,21 +104,15 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult Stack()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult EventLogsBetween()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.EventLogsBetween);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult LegacyPageRoute()
+        public virtual System.Web.Mvc.PartialViewResult Stack()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -143,15 +143,15 @@ namespace UKP.Website.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string LegacyPageRoute = "LegacyPageRoute";
             public readonly string GetShareVideo = "GetShareVideo";
             public readonly string ShowAudioOnly = "ShowAudioOnly";
             public readonly string GetMainVideo = "GetMainVideo";
             public readonly string EventTitle = "EventTitle";
             public readonly string Clipping = "Clipping";
             public readonly string Logs = "Logs";
-            public readonly string Stack = "Stack";
             public readonly string EventLogsBetween = "EventLogsBetween";
-            public readonly string LegacyPageRoute = "LegacyPageRoute";
+            public readonly string Stack = "Stack";
             public readonly string State = "State";
             public readonly string LogUpdate = "LogUpdate";
         }
@@ -160,15 +160,15 @@ namespace UKP.Website.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string LegacyPageRoute = "LegacyPageRoute";
             public const string GetShareVideo = "GetShareVideo";
             public const string ShowAudioOnly = "ShowAudioOnly";
             public const string GetMainVideo = "GetMainVideo";
             public const string EventTitle = "EventTitle";
             public const string Clipping = "Clipping";
             public const string Logs = "Logs";
-            public const string Stack = "Stack";
             public const string EventLogsBetween = "EventLogsBetween";
-            public const string LegacyPageRoute = "LegacyPageRoute";
+            public const string Stack = "Stack";
             public const string State = "State";
             public const string LogUpdate = "LogUpdate";
         }
@@ -185,6 +185,15 @@ namespace UKP.Website.Controllers
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
             public readonly string autoStart = "autoStart";
+        }
+        static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LegacyPageRoute LegacyPageRouteParams { get { return s_params_LegacyPageRoute; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LegacyPageRoute
+        {
+            public readonly string meetingId = "meetingId";
+            public readonly string st = "st";
         }
         static readonly ActionParamsClass_GetShareVideo s_params_GetShareVideo = new ActionParamsClass_GetShareVideo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -248,16 +257,6 @@ namespace UKP.Website.Controllers
             public readonly string @in = "in";
             public readonly string @out = "out";
         }
-        static readonly ActionParamsClass_Stack s_params_Stack = new ActionParamsClass_Stack();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Stack StackParams { get { return s_params_Stack; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Stack
-        {
-            public readonly string id = "id";
-            public readonly string @in = "in";
-            public readonly string @out = "out";
-        }
         static readonly ActionParamsClass_EventLogsBetween s_params_EventLogsBetween = new ActionParamsClass_EventLogsBetween();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_EventLogsBetween EventLogsBetweenParams { get { return s_params_EventLogsBetween; } }
@@ -269,14 +268,15 @@ namespace UKP.Website.Controllers
             public readonly string @in = "in";
             public readonly string @out = "out";
         }
-        static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
+        static readonly ActionParamsClass_Stack s_params_Stack = new ActionParamsClass_Stack();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_LegacyPageRoute LegacyPageRouteParams { get { return s_params_LegacyPageRoute; } }
+        public ActionParamsClass_Stack StackParams { get { return s_params_Stack; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_LegacyPageRoute
+        public class ActionParamsClass_Stack
         {
-            public readonly string meetingId = "meetingId";
-            public readonly string st = "st";
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_State s_params_State = new ActionParamsClass_State();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -340,6 +340,19 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "autoStart", autoStart);
             IndexOverride(callInfo, id, @in, @out, audioOnly, autoStart);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LegacyPageRouteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int meetingId, System.TimeSpan? st);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult LegacyPageRoute(int meetingId, System.TimeSpan? st)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "meetingId", meetingId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "st", st);
+            LegacyPageRouteOverride(callInfo, meetingId, st);
             return callInfo;
         }
 
@@ -430,20 +443,6 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void StackOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult Stack(System.Guid id, string @in, string @out)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
-            StackOverride(callInfo, id, @in, @out);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void EventLogsBetweenOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string startTime, string @in, string @out);
 
         [NonAction]
@@ -459,15 +458,16 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void LegacyPageRouteOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int meetingId, System.TimeSpan? st);
+        partial void StackOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult LegacyPageRoute(int meetingId, System.TimeSpan? st)
+        public override System.Web.Mvc.PartialViewResult Stack(System.Guid id, string @in, string @out)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.LegacyPageRoute);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "meetingId", meetingId);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "st", st);
-            LegacyPageRouteOverride(callInfo, meetingId, st);
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Stack);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            StackOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 

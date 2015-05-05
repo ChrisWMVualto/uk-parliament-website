@@ -3,7 +3,6 @@
 @model IEnumerable<LogMomentModel>
 @foreach(var log in Model)
 {
-
     <li class="logouter">
         <div class="col-md-2">
             <h4><span class="time-code" data-time="@log.InPoint.ToISO8601String()"> @(log.InPoint.HasValue ? log.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</span></h4>
@@ -12,13 +11,13 @@
             <article>
                 <header class="stack-item">
                     <h4>
-                        @if(!string.IsNullOrWhiteSpace(log.Title))
+                        @if(!string.IsNullOrWhiteSpace(log.Description))
                         {
-                            @log.Title
+                            @log.Description
                             <br /><br />
                         }
 
-                        @log.MemberDisplay
+                        @log.IasDisplayAs
                     </h4>
                 </header>
             </article>

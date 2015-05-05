@@ -28,16 +28,11 @@ namespace UKP.Website.Service.Transforms
             if(jObject == null) return null;
 
             var id = (Guid)jObject.stack.id;
-            var eventId = (Guid)jObject.stack.eventId;
             var description = (string)jObject.stack.description;
-            var member = (string)jObject.stack.displayAs;
-            var memberRole = (string)jObject.stack.party;
-            var house = (string)jObject.stack.house;
-            var memeberConstituency = (string)jObject.stack.constituency;
-            var memberParty = (string)jObject.stack.party;
+            var iasDisplayAs = (string)jObject.stack.iasDisplayAs;
             var sortOrder = (int?)jObject.stack.sortOrder;
 
-            return new StackModel(id, eventId, description, member, memberRole, house, memeberConstituency, memberParty, "", "", sortOrder);
+            return new StackModel(id, description, iasDisplayAs, sortOrder);
         }
     }
 }
