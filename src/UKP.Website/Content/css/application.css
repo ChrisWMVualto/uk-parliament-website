@@ -337,7 +337,7 @@ a.extract-text {
         }
 
 .log-list, .stack-list {
-    height: 550px;
+    height: 525px;
     padding:0;
     margin:0;
     list-style: none;
@@ -348,16 +348,14 @@ a.extract-text {
     padding: 5px;
     overflow: hidden;
     list-style: none;
-    width: 100%;
+    width: 99%;
     font-family: 'karlaregular', arial, sans-serif;
 }
 
 .stackouter {
-
 }
 
 .logouter {
-
     cursor: pointer;
 }
 
@@ -387,4 +385,9 @@ a.extract-text {
 
 .invisible {
     visibility: hidden !important;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }

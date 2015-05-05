@@ -10,7 +10,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '550px',
+            height: '525px',
             alwaysVisible: false,
             start: logPos
         });
@@ -26,7 +26,7 @@ function scrollStackAndLogs() {
             railOpacity: 1,
             color: '#C1C7C9',
             size: '12px',
-            height: '550px',
+            height: '525px',
             alwaysVisible: false,
             start: logPos
         });
