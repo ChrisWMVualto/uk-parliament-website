@@ -5,22 +5,6 @@ var highlightItem = false;
 
 function scrollStackAndLogs() {
 
-    if ($('.stack-list').length) {
-        $('.stack-list').slimScroll({
-            railVisible: true,
-            railColor: '#E6EBEE',
-            railOpacity: 1,
-            color: '#C1C7C9',
-            size: '12px',
-            height: '525px',
-            alwaysVisible: false,
-            start: logPos
-        });
-        $('.stack-list').slimScroll().bind('slimscroll', function (e, pos) {
-            stackPos = pos;
-        });
-    }
-
     if ($('.log-list').length) {
         $('.log-list').slimScroll({
             railVisible: true,
@@ -34,6 +18,29 @@ function scrollStackAndLogs() {
         });
         $('.log-list').slimScroll().bind('slimscroll', function (e, pos) {
             logPos = pos;
+        });
+    }
+
+
+    // Do not scroll stacks on mobile / small width devices
+    var mql = window.matchMedia("(max-width: 480px)");
+    if (mql.matches) {
+        return;
+    }
+
+    if ($('.stack-list').length) {
+        $('.stack-list').slimScroll({
+            railVisible: true,
+            railColor: '#E6EBEE',
+            railOpacity: 1,
+            color: '#C1C7C9',
+            size: '12px',
+            height: '525px',
+            alwaysVisible: false,
+            start: logPos
+        });
+        $('.stack-list').slimScroll().bind('slimscroll', function (e, pos) {
+            stackPos = pos;
         });
     }
 }

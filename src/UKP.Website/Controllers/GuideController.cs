@@ -36,7 +36,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        //[OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=60, VaryByParam="*")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
             var result = _videoService.GetVideo(id);
