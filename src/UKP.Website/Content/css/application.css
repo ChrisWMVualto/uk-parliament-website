@@ -391,3 +391,7 @@ a.extract-text {
    padding: 0 !important;
    margin: 0 !important;
 }
+
+.stack ol li .stack-item h4 {
+    line-height: 14px;
+}
