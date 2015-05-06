@@ -139,6 +139,12 @@ ol.channel-list {
 }
 
 
+@media (max-width: 800px) {
+    #logs {
+        width:90%; 
+    }
+}
+
 @media (max-width: 1024px) {
     .recent-next, .recent-prev {
         display: none;
@@ -337,7 +343,6 @@ a.extract-text {
         }
 
 .log-list, .stack-list {
-    height: 525px;
     padding:0;
     margin:0;
     list-style: none;
@@ -394,4 +399,12 @@ a.extract-text {
 
 .stack ol li .stack-item h4 {
     line-height: 14px;
+}
+
+.stackouter h4, .logouter h4 {
+    font-size: 14px;
+}
+
+.player-tabs-content {
+    margin-bottom:20px;
 }
