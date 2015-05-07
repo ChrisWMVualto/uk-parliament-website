@@ -23,34 +23,37 @@
             </dl>
         }
     </div>
-    <div class="stack-guide">
-        <div class="stack">
-            <ol>
-                @foreach(var stack in Model.Stacks.Take(3))
-                {
-                    <li>
-                        <article>
-                            <span class="vr-stack"></span>
-                            <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                            <header class="stack-item">
-                                <h4>@stack.Description</h4>
-                            </header>
-                        </article>
-                    </li>
-                }
-                @if(Model.Stacks.Count() > 3)
-                {
-                    <li>
-                        <article>
-                            <span class="vr-stack"></span>
-                            <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
-                            <header class="stack-item">
-                                <h4><strong><a href="@Url.Action(MVC.Event.Index(Model.Event.Id))">See all...</a></strong></h4>
-                            </header>
-                        </article>
-                    </li>
-                }
-            </ol>
+    @if (Model.Stacks.Any())
+    {
+        <div class="stack-guide">
+            <div class="stack">
+                <ol>
+                    @foreach (var stack in Model.Stacks.Take(3))
+                    {
+                        <li>
+                            <article>
+                                <span class="vr-stack"></span>
+                                <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                                <header class="stack-item">
+                                    <h4>@stack.Description</h4>
+                                </header>
+                            </article>
+                        </li>
+                    }
+                    @if (Model.Stacks.Count() > 3)
+                    {
+                        <li>
+                            <article>
+                                <span class="vr-stack"></span>
+                                <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
+                                <header class="stack-item">
+                                    <h4><strong><a href="@Url.Action(MVC.Event.Index(Model.Event.Id))">See all...</a></strong></h4>
+                                </header>
+                            </article>
+                        </li>
+                    }
+                </ol>
+            </div>
         </div>
-    </div>
+    }
 </div>
