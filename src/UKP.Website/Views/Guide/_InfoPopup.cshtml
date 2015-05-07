@@ -16,12 +16,6 @@
             <h4>@Html.FormatText(Model.Event.Title)</h4>
             <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> <span class="time">@Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt", ApplicationConstants.DateTimeFormatter)</span></h5>
         </div>
-        @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
-        {
-            <dl class="description">
-                <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 40, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
-            </dl>
-        }
     </div>
     @if (Model.Stacks.Any())
     {
@@ -47,7 +41,7 @@
                                 <span class="vr-stack"></span>
                                 <span class="stack-number"><i class="fa fa-dot moment-marker"></i></span>
                                 <header class="stack-item">
-                                    <h4><strong><a href="@Url.Action(MVC.Event.Index(Model.Event.Id))">See all...</a></strong></h4>
+                                    <h4><strong><a href="@Url.Action(MVC.Event.Index(Model.Event.Id))">...more</a></strong></h4>
                                 </header>
                             </article>
                         </li>
