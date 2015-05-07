@@ -16,20 +16,17 @@
             <h4>@Html.FormatText(Model.Event.Title)</h4>
             <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> <span class="time">@Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt", ApplicationConstants.DateTimeFormatter)</span></h5>
         </div>
-
-
         @if(!string.IsNullOrWhiteSpace(Model.Event.SubTitle))
         {
             <dl class="description">
                 <div class="subtitle-text">@Html.TrimText((Html.FormatText(Model.Event.SubTitle).ToHtmlString()), 40, @Url.Action(MVC.Event.Index(Model.Event.Id)))</div>
             </dl>
         }
-
     </div>
     <div class="stack-guide">
         <div class="stack">
             <ol>
-                @foreach(var stack in Model.Stacks.Take(4))
+                @foreach(var stack in Model.Stacks.Take(3))
                 {
                     <li>
                         <article>
@@ -41,7 +38,7 @@
                         </article>
                     </li>
                 }
-                @if(Model.Stacks.Count() > 4)
+                @if(Model.Stacks.Count() > 3)
                 {
                     <li>
                         <article>
