@@ -61,12 +61,12 @@
                         <div class="row ">
                             <ul class="col-md-12 stack-and-logs-tabs" role="tablist">
                                 <li id="stackTab" class="@stackTab" data-refresh-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
-                                    <a href="#stacks" role="tab" data-toggle="tab"><span>STACK</span></a>
+                                    <a href="#stacks" role="tab" data-toggle="tab"><span>Agenda</span></a>
                                 </li>
                                 <li id="logTab" class="@showLogTab"
                                     data-load-new-log-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id, @in: Model.VideoModel.RequestedInPoint.ToISO8601String(), @out: Model.VideoModel.RequestedOutPoint.ToISO8601String()))"
                                     data-refresh-log-url="@Url.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
-                                    <a href="#logs" role="tab" data-toggle="tab"><span>LOG</span></a>
+                                    <a href="#logs" role="tab" data-toggle="tab"><span>Index</span></a>
                                 </li>
                             </ul>
                         </div>
