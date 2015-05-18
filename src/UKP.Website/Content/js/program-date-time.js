@@ -164,6 +164,7 @@ $(function () {
 
             // first log item goes in!
             if ($('#ContainsLogMoments').val() == 'False') {
+                $('#LiveLogging').val('True');
                 $('#ContainsLogMoments').val('True');
                 $('#logTab').removeClass('invisible');
                 $('#logTab a').tab('show');
