@@ -12,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    //[OutputCache(Duration=600, VaryByCustom="*")]
+    [OutputCache(Duration=600, VaryByCustom="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
@@ -87,7 +87,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Members(string name)
         {
-            if(name.Length <= 3) return null;
+            if(name.Length <= 2) return null;
             var results = _searchService.SearchMembers(name);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
