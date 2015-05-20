@@ -11,9 +11,9 @@
             <article>
                 <header class="stack-item">
                     <h4>
-                        @if(!string.IsNullOrWhiteSpace(log.Description))
+                        @log.Description
+                        @if(!string.IsNullOrWhiteSpace(log.Description) && !string.IsNullOrWhiteSpace(log.IasDisplayAs))
                         {
-                            @log.Description
                             <br /><br />
                         }
                         @log.IasDisplayAs

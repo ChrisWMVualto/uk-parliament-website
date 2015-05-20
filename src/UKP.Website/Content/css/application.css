@@ -279,6 +279,10 @@ a.extract-text {
     height: 100%;
 }
 
+.stack-guide .stack-more {
+    margin-top:10px;
+}
+
 /*STACK AND LOG TABS*/
 
 .stack-and-logs-tabs {

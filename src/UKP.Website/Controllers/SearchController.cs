@@ -12,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    [OutputCache(Duration=600, VaryByCustom="*")]
+    //[OutputCache(Duration=600, VaryByCustom="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
@@ -21,7 +21,6 @@ namespace UKP.Website.Controllers
         {
             _searchService = searchService;
         }
-
 
         [HttpGet]
         public virtual ActionResult Index(string keywords, int? memberId, string member, string house, string business, string start, string end, int page = 1)
