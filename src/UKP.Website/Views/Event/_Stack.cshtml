@@ -7,9 +7,9 @@
         <article>
             <header class="stack-item">
                 <h4>
-                    @if(!string.IsNullOrWhiteSpace(stack.Description))
+                    @stack.Description
+                    @if(!string.IsNullOrWhiteSpace(stack.Description) && !string.IsNullOrWhiteSpace(stack.IasDisplayAs))
                     {
-                        @stack.Description
                         <br /><br />
                     }
                     @stack.IasDisplayAs

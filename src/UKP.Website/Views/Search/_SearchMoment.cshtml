@@ -2,12 +2,12 @@
 @using RestSharp.Extensions
 @model UKP.Website.Models.Event.SearchMomentModel
 
-@foreach (var moment in @Model.LogMomentResultModel.Results.Skip(Model.SkipCount))
+@foreach(var moment in @Model.LogMomentResultModel.Results.Skip(Model.SkipCount))
 {
     <div class="col-md-12 moment-item">
         <a href="@Url.Action(MVC.Event.Index(@Model.EventId, moment.InPoint.ToISO8601String()))" class="outer-border">
             <div class="row">
-                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
                     <div class="moment-thumb">
                         <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
                         @if(moment.ThumbnailUrl.HasValue())
@@ -20,10 +20,21 @@
                         }
                     </div>
                 </div>
-                <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">
                     <div class="inner">
-                        <p>@moment.Description</p>
-                        <p>@moment.IasDisplayAs</p>
+                        <p>@(moment.InPoint.HasValue ? moment.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-7 col-md-9 col-lg-9">
+                    <div class="inner">
+                        @if(!string.IsNullOrWhiteSpace(moment.Description))
+                        {
+                            <p>@moment.Description</p>
+                        }
+                        @if(!string.IsNullOrWhiteSpace(moment.IasDisplayAs))
+                        {
+                            <p>@moment.IasDisplayAs</p>
+                        }
                         <span class="moment-play visible-md visible-lg">
                             Play item
                             <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>

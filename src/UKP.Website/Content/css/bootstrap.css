@@ -13967,7 +13967,7 @@ ol.channel-list {
         .stack ol li .stack-item {
             line-height: 18px;
             padding: 10px;
-            margin: 0 0 0 50px;
+            margin: 0 0 0 0px;
         }
 
             .stack ol li .stack-item a {
@@ -13998,9 +13998,6 @@ ol.channel-list {
             left: 44px;
             height: 100%;
             top: 0;
-            background-color: #000000;
-            /* The Fallback */
-            background-color: rgba(0, 0, 0, 0.2);
             width: 1px;
         }
 
