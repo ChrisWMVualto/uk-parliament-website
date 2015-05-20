@@ -12,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    //[OutputCache(Duration=600, VaryByCustom="*")]
+    [OutputCache(Duration=600, VaryByCustom="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
