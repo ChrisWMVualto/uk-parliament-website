@@ -98,20 +98,15 @@
                     <h4>
                         @if(Model.SearchResult.TotalCount == 1)
                         {
-                            <strong>@Model.SearchResult.TotalCount Search Result for:</strong>
+                            <strong>@Model.SearchResult.TotalCount Search Result:</strong>
                         }
                         else if(Model.SearchResult.TotalCount > 0)
                         {
-                            <strong>@Model.SearchResult.TotalCount Search Results for:</strong>
+                            <strong>@Model.SearchResult.TotalCount Search Results:</strong>
                         }
                         else if(!Model.FirstSearchLoad)
                         {
                             <strong>No Search Results found.</strong>
-                        }
-
-                        @if(Model.SearchResult.TotalCount > 0)
-                        {
-                            @Model.Keywords
                         }
                     </h4>
                 </div>
