@@ -42,8 +42,9 @@ namespace UKP.Website.Service.Transforms
             var thumbnailUrl = (string)json.thumbnailImageUrl;
             var inPoint = (DateTime?)json.inPoint;
             var iasDisplayAs = (string)json.log.iasDisplayAs;
+            var webPageUrl = (string)json.log.webPageUrl;
 
-            return new LogMomentModel(id, description, thumbnailUrl, inPoint, iasDisplayAs);
+            return new LogMomentModel(id, description, thumbnailUrl, inPoint, iasDisplayAs, webPageUrl);
         }
     }
 }
