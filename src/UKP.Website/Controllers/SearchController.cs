@@ -12,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    [OutputCache(Duration=600, VaryByCustom="*")]
+    //[OutputCache(Duration=600, VaryByCustom="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
@@ -50,7 +50,7 @@ namespace UKP.Website.Controllers
                     ModelState.AddModelError("dates", "End date cannot occur before the start date.");
             }
 
-            if(!memberId.HasValue) keywords = " " + member;
+            if(!memberId.HasValue) keywords += " " + member;
 
             var searchModel = new SearchViewModel()
             {
