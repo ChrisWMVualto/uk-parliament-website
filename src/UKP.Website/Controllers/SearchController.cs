@@ -50,7 +50,7 @@ namespace UKP.Website.Controllers
                     ModelState.AddModelError("dates", "End date cannot occur before the start date.");
             }
 
-            if (!memberId.HasValue) member = null;
+            if(!memberId.HasValue) keywords = " " + member;
 
             var searchModel = new SearchViewModel()
             {
