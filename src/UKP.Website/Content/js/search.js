@@ -39,7 +39,7 @@ $(function () {
         noCache: false
     });
     
-    $('#Member').change(function () {
+    $('#Member').keypress(function () {
         if ($('#Member').val() == '') {
             $('#MemberId').val('');
         }
