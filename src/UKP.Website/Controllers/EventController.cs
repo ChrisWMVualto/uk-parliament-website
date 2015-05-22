@@ -24,14 +24,14 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null)
+        public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null, bool? stack = null)
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
             var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, audioOnly: audioOnly, autoStart: autoStart.GetValueOrDefault(true), statsEnabled:Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
-            return View(new EventViewModel(video));
+            return View(new EventViewModel(video, stack.GetValueOrDefault()));
         }
 
         [HttpGet]

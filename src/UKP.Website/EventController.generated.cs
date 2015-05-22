@@ -185,6 +185,7 @@ namespace UKP.Website.Controllers
             public readonly string @out = "out";
             public readonly string audioOnly = "audioOnly";
             public readonly string autoStart = "autoStart";
+            public readonly string stack = "stack";
         }
         static readonly ActionParamsClass_LegacyPageRoute s_params_LegacyPageRoute = new ActionParamsClass_LegacyPageRoute();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -328,10 +329,10 @@ namespace UKP.Website.Controllers
         public T4MVC_EventController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart, bool? stack);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart)
+        public override System.Web.Mvc.ActionResult Index(System.Guid id, string @in, string @out, bool? audioOnly, bool? autoStart, bool? stack)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -339,7 +340,8 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "audioOnly", audioOnly);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "autoStart", autoStart);
-            IndexOverride(callInfo, id, @in, @out, audioOnly, autoStart);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "stack", stack);
+            IndexOverride(callInfo, id, @in, @out, audioOnly, autoStart, stack);
             return callInfo;
         }
 

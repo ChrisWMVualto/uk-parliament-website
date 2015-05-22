@@ -12,10 +12,20 @@
     var showAudioButton = EventViewModel.ShowAudioOnly(Model.VideoModel) ? string.Empty : "hidden";
     var showLogTab = "invisible";
     var stackTab = "active";
-    if (Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
+
+
+    if(Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
     {
-        showLogTab = "active";
-        stackTab = "";
+        if(Model.DefaultToStackTab)
+        {
+            showLogTab = "";
+            stackTab = "active";
+        }
+        else
+        {
+            showLogTab = "active";
+            stackTab = "";
+        }
     }
 }
 
@@ -25,6 +35,7 @@
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
     @Html.Hidden("ProgramDateTime")
     @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
+    @Html.Hidden("DefaultToStackTab", Model.DefaultToStackTab)
     @Html.Hidden("LiveLogging", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING)
     <div class="row">
         <div class="col-md-12">
@@ -56,7 +67,7 @@
                     </div>
                 </div>
                 <div class="col-md-5">
-                    @if (!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
+                    @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
                     {
                         <div class="row ">
                             <ul class="col-md-12 stack-and-logs-tabs" role="tablist">
