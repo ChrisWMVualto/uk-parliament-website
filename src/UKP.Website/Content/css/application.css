@@ -141,7 +141,7 @@ ol.channel-list {
 
 @media (max-width: 800px) {
     #logs {
-        width:90%; 
+        width: 90%;
     }
 }
 
@@ -280,13 +280,14 @@ a.extract-text {
 }
 
 .stack-guide .stack-more {
-    margin-top:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .stack-guide .stack-more a {
     font-size: 15px;
     z-index: 9999;
-    margin-bottom: 10px;
+    display: block;
 }
 
 
@@ -354,8 +355,8 @@ a.extract-text {
         }
 
 .log-list, .stack-list {
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     list-style: none;
 }
 
@@ -404,8 +405,8 @@ a.extract-text {
 }
 
 .nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .stack ol li .stack-item h4 {
@@ -417,5 +418,5 @@ a.extract-text {
 }
 
 .player-tabs-content {
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
