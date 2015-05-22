@@ -283,6 +283,12 @@ a.extract-text {
     margin-top:10px;
 }
 
+.stack-guide .stack-more a {
+    font-size: 14px;
+    z-index: 9999;
+}
+
+
 /*STACK AND LOG TABS*/
 
 .stack-and-logs-tabs {
