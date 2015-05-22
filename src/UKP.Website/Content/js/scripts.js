@@ -253,14 +253,10 @@ $(document).ready(function () {
     });
 
     $(window).on('exitBreakpoint300', function () {
-        // $('#miniGuideCommons, #miniGuideLords, #miniGuideCommittees').unslick();
         $("#searchPanel").addClass('in').css("height", "auto");
     });
 
     $(window).on('enterBreakpoint768', function () {
-
-
-        // $(".stack").slimScroll({destroy: true});
     });
 
     $(window).on('exitBreakpoint768', function () {

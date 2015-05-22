@@ -154,8 +154,10 @@ $(function () {
     var eventId = $('#eventId').val();
 
     if ($('#ContainsLogMoments').val() == 'True') {
-        $('#stacks').removeClass('active').removeClass('in');
-        $('#logs').addClass('active').addClass('in');
+        if ($('#DefaultToStackTab').val() == 'False') {
+            $('#stacks').removeClass('active').removeClass('in');
+            $('#logs').addClass('active').addClass('in');
+        }
     }
 
     eventStateHub.client.logUpdate = function (logUpdateType, changedId, logMomentId) {

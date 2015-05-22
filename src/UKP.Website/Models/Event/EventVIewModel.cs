@@ -8,12 +8,11 @@ namespace UKP.Website.Models.Event
 {
     public class EventViewModel
     {
-        public EventViewModel(VideoModel videoModel)
+        public EventViewModel(VideoModel videoModel, bool defaultToStackTab)
         {
             VideoModel = videoModel;
+            DefaultToStackTab = defaultToStackTab;
         }
-
-        public VideoModel VideoModel { get; private set; }
 
         public static bool ShowAudioOnly(VideoModel video)
         {
@@ -21,5 +20,8 @@ namespace UKP.Website.Models.Event
                    && (video.Event.States.PlayerState == PlayerEventState.LIVE || video.Event.States.PlayerState == PlayerEventState.ARCHIVE)
                    && video.Event.PublishedStartTime.HasValue;
         }
+
+        public VideoModel VideoModel { get; private set; }
+        public bool DefaultToStackTab { get; private set; }
     }
 }
