@@ -12,7 +12,7 @@
     var showAudioButton = EventViewModel.ShowAudioOnly(Model.VideoModel) ? string.Empty : "hidden";
     var showLogTab = "invisible";
     var stackTab = "active";
-
+    var indexMessageClass = "hidden";
 
     if(Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
     {
@@ -26,6 +26,11 @@
             showLogTab = "active";
             stackTab = "";
         }
+    }
+
+    if (Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING)
+    {
+        indexMessageClass = "";
     }
 }
 
@@ -69,7 +74,7 @@
                 <div class="col-md-5">
                     @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
                     {
-                        <div class="row ">
+                        <div class="row">
                             <ul class="col-md-12 stack-and-logs-tabs" role="tablist">
                                 <li id="stackTab" class="@stackTab" data-refresh-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
                                     <a href="#stacks" role="tab" data-toggle="tab"><span>Agenda</span></a>
@@ -88,10 +93,7 @@
                                 </ul>
                             </div>
                             <div class="tab-pane fade stacks-logs" id="logs">
-                                @if(Model.VideoModel.Event.States.PlayerState != PlayerEventState.ARCHIVE)
-                                {
-                                    <p class="text-center"><strong>New indexes will appear before the video</strong></p>
-                                }
+                                <p id="index-message" class="text-center @indexMessageClass"><strong>New indexes will appear before the video stream</strong></p>
                                 <ul class="log-list">
                                     @Html.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
                                 </ul>

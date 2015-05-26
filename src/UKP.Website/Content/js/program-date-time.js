@@ -1,7 +1,7 @@
 ﻿var stackPos = 'top';
 var logPos = 'top';
 var lastClickedTimecode = null;
-var highlightItem = false;
+var highlightItem = true;
 
 function scrollStackAndLogs() {
 
@@ -145,6 +145,28 @@ function highlightLogItems(sentTime) {
     }
 }
 
+function logItemClicked(e) {
+    var self = $(this);
+    highlightItem = false;
+    var time = self.find('.time-code').data('time');
+    lastClickedTimecode = new Date(time);
+
+    
+    var logItems = $('.log-list > li.logouter');
+    logItems.removeClass('active');
+    self.addClass('active');
+
+    var receiver = $('#UKPPlayer')[0];
+    $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
+
+    setTimeout(function () {
+        highlightItem = true;
+    }, 6000);
+
+    e.preventDefault();
+    return false;
+}
+
 
 
 
@@ -167,6 +189,7 @@ $(function () {
             // first log item goes in!
             if ($('#ContainsLogMoments').val() == 'False') {
                 $('#LiveLogging').val('True');
+                $('#index-message').show();
                 $('#ContainsLogMoments').val('True');
                 $('#logTab').removeClass('invisible');
                 $('#logTab a').tab('show');
@@ -189,26 +212,10 @@ $(function () {
     scrollStackAndLogs();
     refreshStackInterval();
 
-    $(document).on("click", ".logouter", function (e) {
-        var self = $(this);
-        var time = self.find('.time-code').data('time');
-        lastClickedTimecode = new Date(time);
-        highlightItem = false;
+    
 
-        var logItems = $('.log-list > li.logouter');
-        logItems.removeClass('active');
-        self.addClass('active');
-
-        var receiver = $('#UKPPlayer')[0];
-        $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
-        
-        setTimeout(function() {
-
-        }, 10);
-
-        e.preventDefault();
-        return false;
-    });
+    $(document).on("tap", ".logouter", logItemClicked);
+    $(document).on("click", ".logouter", logItemClicked);
 
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
@@ -221,8 +228,10 @@ $(function () {
 
        
         if (lastClickedTimecode == null || sentTime > lastClickedTimecode) {
-            highlightItem = true;
-            highlightLogItems(sentTime);
+            if (highlightItem) {
+                highlightLogItems(sentTime);
+            }
+            
         }
         
     });
