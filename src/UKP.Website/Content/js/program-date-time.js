@@ -167,6 +167,11 @@ function logItemClicked(e) {
     return false;
 }
 
+function seekToLiveClicked() {
+    var receiver = $('#UKPPlayer')[0];
+    $.postMessage("seek-to-live", receiver.src, receiver.contentWindow);
+}
+
 
 
 
@@ -216,6 +221,7 @@ $(function () {
 
     $(document).on("tap", ".logouter", logItemClicked);
     $(document).on("click", ".logouter", logItemClicked);
+    $(document).on("click", "#seekToLiveButton", seekToLiveClicked);
 
     //This is the receive message event for the highlighting of current log items
     $.receiveMessage(function (event) {
