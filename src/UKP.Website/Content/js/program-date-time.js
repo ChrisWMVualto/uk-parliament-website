@@ -194,13 +194,16 @@ $(function () {
         var time = self.find('.time-code').data('time');
         lastClickedTimecode = new Date(time);
         highlightItem = false;
+
+        var logItems = $('.log-list > li.logouter');
+        logItems.removeClass('active');
+        self.addClass('active');
+
         var receiver = $('#UKPPlayer')[0];
         $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
         
         setTimeout(function() {
-            var logItems = $('.log-list > li.logouter');
-            logItems.removeClass('active');
-            self.addClass('active');
+
         }, 10);
 
         e.preventDefault();
