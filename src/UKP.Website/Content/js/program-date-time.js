@@ -201,7 +201,7 @@ $(function () {
             var logItems = $('.log-list > li.logouter');
             logItems.removeClass('active');
             self.addClass('active');
-        }, 600);
+        }, 50);
 
         e.preventDefault();
         return false;

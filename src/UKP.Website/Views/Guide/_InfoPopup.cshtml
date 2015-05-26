@@ -38,7 +38,7 @@
             @if(Model.Stacks.Count() > 3)
             {
                 <div class="stack-more">
-                    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, stack: true))" type="button"><strong>...more</strong></a>
+                    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, agenda: true))" type="button"><strong>...more</strong></a>
                 </div>
             }
         </div>
