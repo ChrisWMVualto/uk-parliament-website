@@ -65,6 +65,11 @@ function updateAudioButton() {
     }
 }
 
+// use this fuction to state changes for stacks and logs
+function updateStacksAndLogs() {
+    $('#index-message').addClass('hidden');
+}
+
 
 function pollEvent() {
     setTimeout(function () {
@@ -86,6 +91,10 @@ function stateChanged(planningState, recordingState, recordedState) {
 
     if (recordedState == "REVOKE") {
         window.location.reload();
+    }
+
+    if (recordingState == "COMPLETED") {
+        updateStacksAndLogs();
     }
 }
 
