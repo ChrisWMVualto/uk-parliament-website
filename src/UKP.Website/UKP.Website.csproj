@@ -382,6 +382,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.UKPLive.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -466,7 +467,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Index_new.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\_TitleTabs.cshtml" />
