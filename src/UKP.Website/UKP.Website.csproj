@@ -467,7 +467,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Search\Index_new.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\_TitleTabs.cshtml" />
