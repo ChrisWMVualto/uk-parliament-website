@@ -32,13 +32,13 @@
                                 @Html.TextBoxFor(x => x.Keywords, new { @class = "form-control input-lg" })
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        @*<div class="col-md-4">
                             <div class="form-group search-param">
                                 <label for="Member"><h4>2. Member</h4></label>
                                 @Html.TextBoxFor(x => x.Member, new { data_ajax_url= Url.Action(MVC.Search.Members()), @class="form-control input-lg" })
                                 @Html.HiddenFor(x => x.MemberId, new { @class = "form-control input-lg" })
                             </div>
-                        </div>
+                        </div>*@
                         <div class="col-md-2">
                             <div class="form-group search-param">
                                 <label for="House"><h4>3. House</h4></label>
