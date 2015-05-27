@@ -24,7 +24,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByCustom="*")]
+        [OutputCache(Duration=120, VaryByCustom="*")]
         public virtual ActionResult Index()
         {
             var date = DateTime.Today;
@@ -36,7 +36,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual PartialViewResult EpgInfo(Guid id)
         {
             var result = _videoService.GetVideo(id);
@@ -44,7 +44,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual PartialViewResult EpgDay(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
@@ -56,7 +56,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual PartialViewResult EpgDateBar(string date)
         {
             var dateob = date.HasValue() ? date.FromISO8601String() : DateTime.Today;
@@ -65,7 +65,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual PartialViewResult EpgDayTab(string date, bool previousDay)
         {
             return PartialView(MVC.Guide.Views._DateTab, previousDay ? date.FromISO8601String().Value.AddDays(-1) : date.FromISO8601String().Value.AddDays(1));
