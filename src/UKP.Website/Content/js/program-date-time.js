@@ -194,7 +194,7 @@ $(function () {
             // first log item goes in!
             if ($('#ContainsLogMoments').val() == 'False') {
                 $('#LiveLogging').val('True');
-                $('#index-message').show();
+                $('#index-message').removeClass('hidden');
                 $('#ContainsLogMoments').val('True');
                 $('#logTab').removeClass('invisible');
                 $('#logTab a').tab('show');
