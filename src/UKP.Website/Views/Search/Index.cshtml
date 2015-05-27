@@ -41,7 +41,7 @@
                         </div>*@
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="House"><h4>3. House</h4></label>
+                                <label for="House"><h4>2. House</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.House, Model.HouseTags, "All", new { @class="multiselect-list" })
                                 </div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group search-param">
-                                <label for="Business"><h4>4. Business</h4></label>
+                                <label for="Business"><h4>3. Business</h4></label>
                                 <div>
                                     @Html.DropDownListFor(x => x.Business, Model.BusinessTags, "All", new { @class="multiselect-list" })
                                 </div>
@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="Start"><h4>5. Start Date</h4></label>
+                                <label for="Start"><h4>4. Start Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.Start, Model.Start.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control start-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group search-param">
-                                <label for="End"><h4>6. End Date</h4></label>
+                                <label for="End"><h4>5. End Date</h4></label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></div>
                                     @Html.TextBoxFor(x => x.End, Model.End.ToLocalTime().ToString("dd/MM/yyyy"), new { @class = "form-control end-date date-picker input-lg", data_date_format="dd/mm/yyyy" })
