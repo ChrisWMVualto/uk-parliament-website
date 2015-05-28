@@ -104,7 +104,7 @@ function appendLogMoments() {
 function refreshLogMoments() {
     var logUrl = $('#logTab').data("refresh-log-url");
 
-    var playerStateLiveReloadTime = randomIntFromInterval(1, 15) * 1000;
+    var playerStateLiveReloadTime = randomIntFromInterval(1, 20) * 1000;
     // Why do we do this? This stops many concurrent users all hitting the api at once.
     setTimeout(function () {
         $.get(logUrl, {}, function (data) {
