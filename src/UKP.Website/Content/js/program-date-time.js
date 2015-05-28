@@ -3,6 +3,10 @@ var logPos = 'top';
 var lastClickedTimecode = null;
 var highlightItem = true;
 
+function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function scrollStackAndLogs() {
 
     if ($('.log-list').length) {
@@ -78,9 +82,14 @@ function appendArchiveLog() {
 function appendLiveLog() {
     var lastLogTime = $('.log-list > li').first().find('.time-code').data('time');
     var logUrl = $('#logTab').data("load-new-log-url");
-    $.get(logUrl, { startTime: lastLogTime }, function (data) {
-        $('.log-list').prepend(data);
-    });
+
+    var playerStateLiveReloadTime = randomIntFromInterval(1, 5) * 1000;
+    // Why do we do this? This stops many concurrent users all hitting the api at once.
+    setTimeout(function () {
+        $.get(logUrl, { startTime: lastLogTime }, function (data) {
+            $('.log-list').prepend(data);
+        });
+    }, playerStateLiveReloadTime);
 }
 
 function appendLogMoments() {
@@ -94,10 +103,15 @@ function appendLogMoments() {
 
 function refreshLogMoments() {
     var logUrl = $('#logTab').data("refresh-log-url");
-    $.get(logUrl, {}, function (data) {
-        $('.log-list').html(data);
-        scrollStackAndLogs();
-    });
+
+    var playerStateLiveReloadTime = randomIntFromInterval(1, 15) * 1000;
+    // Why do we do this? This stops many concurrent users all hitting the api at once.
+    setTimeout(function () {
+        $.get(logUrl, {}, function (data) {
+            $('.log-list').html(data);
+            scrollStackAndLogs();
+        });
+    }, playerStateLiveReloadTime);
 }
 
 function highlightLiveLog(sentTime) {
