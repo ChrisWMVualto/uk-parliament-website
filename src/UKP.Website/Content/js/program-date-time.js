@@ -184,6 +184,11 @@ function logItemClicked(e) {
 function seekToLive() {
     var receiver = $('#UKPPlayer')[0];
     $.postMessage("seek-to-live_true", receiver.src, receiver.contentWindow);
+
+    setTimeout(function() {
+        var logItems = $('.log-list > li.logouter');
+        logItems.removeClass('active');
+    }, 2000);
 }
 
 
