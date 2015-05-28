@@ -108,7 +108,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration = 6, VaryByParam = "*")]
+        [OutputCache(Duration = 12, VaryByParam = "*")]
         public virtual PartialViewResult Logs(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
