@@ -52,21 +52,35 @@
                                 <span><strong>End Time:</strong> @item.Event.DisplayEndDate.ToLocalTime().ToString(ApplicationConstants.YearDateTimeFormat, ApplicationConstants.DateTimeFormatter)</span>
                             }
                         </h5>
-                        <p><strong>@Html.Raw(highlightTitle)</strong></p>
-                        <p>
+                        <p><strong>@item.Event.Title</strong></p>
+                        <div class="row">
                             @if(highlights != null)
                             {
-                                if (highlights.Fields.Any())
+                                var matchedDisplayFields = highlights.Fields.Where(x => x.Name == "alias"
+                                                                                        || x.Name == "business"
+                                                                                        || x.Name == "eventType"
+                                                                                        || x.Name == "house"
+                                                                                        || x.Name == "room"
+                                                                                        || x.Name == "subTitle"
+                                                                                        || x.Name == "subTitle"
+                                                                                        || x.Name == "esStackDocuments.description"
+                                                                                        || x.Name == "esStackDocuments.iasDisplayAs").ToList();
+
+                                if(matchedDisplayFields.Any())
                                 {
-                                    <text>Matches: </text> 
-                                }
-                                foreach(var field in highlights.Fields)
-                                {
-                                    @Html.Raw(field.Name)<br/>
-                                    @Html.Raw(field.Value)
+                                    <div class="col-md-1">
+                                        <strong>Matches: </strong>
+                                    </div>
+                                    <div class="col-md-11">
+                                        @foreach(var field in matchedDisplayFields)
+                                        {
+                                            @Html.Raw(field.Value)
+                                            <br />
+                                        }
+                                    </div>
                                 }
                             }
-                        </p>
+                        </div>
                         <div class="row moments">
                             @Html.Partial(MVC.Search.Views._SearchMoment, new SearchMomentModel(item.Event.Id, item.LogMoments, 0))
 
