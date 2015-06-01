@@ -28,6 +28,12 @@ $(function () {
 
     $('.moment-more button').on('click', momentSearch);
 
+    $('#Member').keypress(function () {
+        if ($('#Member').val() == '') {
+            $('#MemberId').val('');
+        }
+    });
+
     $('#Member').autocomplete({
         serviceUrl: $('#Member').attr('data-ajax-url') + '?name=',
         displayItem: "Member",
@@ -39,12 +45,6 @@ $(function () {
         noCache: false
     });
     
-    $('#Member').keypress(function () {
-        if ($('#Member').val() == '') {
-            $('#MemberId').val('');
-        }
-    });
-
 
     $('#searchResultsContainer').append('<span class="pagination"><a href="' + window.location + '"></a></span>');
     $('#searchResultsContainer').infinitescroll({

@@ -27,12 +27,11 @@ namespace UKP.Website.Service.Transforms
 
             var logMoments = Enumerable.Empty<LogMomentModel>();
             var total = (int) jObject.totalResults;
-            var containsLogMoments = (bool)jObject.containsLogMoments;
-            
-            if (total > 0)
-                logMoments = TransformArray(jObject.results);
+            var containsLogMoments = (bool)jObject.containsLogMoments;  
+            if (total > 0) logMoments = TransformArray(jObject.results);
+            var searchHighlightList = SearchHighlightTransforms.TransformArray(jObject.searchHighlights.ToString());
 
-            return new LogMomentResultModel(logMoments, total, containsLogMoments);
+            return new LogMomentResultModel(logMoments, total, containsLogMoments, searchHighlightList);
         }
 
         public static LogMomentModel Transform(dynamic json)

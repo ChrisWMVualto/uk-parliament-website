@@ -39,19 +39,20 @@ namespace UKP.Website.Service.Transforms
         public static VideoCollectionModel TransformArray(string jsonArray)
         {
             dynamic jObject = JObject.Parse(jsonArray);
-            if(jObject == null) return new VideoCollectionModel(Enumerable.Empty<VideoModel>(), 0, 0);
+            if(jObject == null) return new VideoCollectionModel(Enumerable.Empty<VideoModel>(), 0, 0, Enumerable.Empty<SearchHighlightCollectionModel>());
 
-            var jArray = JArray.Parse(jObject.results.ToString());
-            var list = new List<VideoModel>();
-            foreach(var json in jArray)
+            var videoArray = JArray.Parse(jObject.results.ToString());
+            var videoList = new List<VideoModel>();
+            foreach(var json in videoArray)
             {
-                list.Add(VideoTransforms.Transform(json));
+                videoList.Add(VideoTransforms.Transform(json));
             }
 
             var totalCount = (int)jObject.totalCount.Value;
             var pageSize = (int)jObject.pageSize.Value;
+            var searchHighlightList = SearchHighlightTransforms.TransformArray(jObject.searchHighlights.ToString());
 
-            return new VideoCollectionModel(list, totalCount, pageSize);
+            return new VideoCollectionModel(videoList, totalCount, pageSize, searchHighlightList);
         }
     }
 }

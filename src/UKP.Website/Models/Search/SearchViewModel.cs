@@ -10,6 +10,7 @@ namespace UKP.Website.Models.Search
         private VideoCollectionModel _results;
 
         public string Keywords { get; set; }
+        public string KeywordsOrMember { get; set; }
         public int? MemberId { get; set; }
         public string Business { get; set; }
         public string House { get; set; }
@@ -24,7 +25,7 @@ namespace UKP.Website.Models.Search
 
         public VideoCollectionModel SearchResult
         {
-            get { return _results ?? (_results = new VideoCollectionModel(Enumerable.Empty<VideoModel>(), 0, 0)); }
+            get { return _results ?? (_results = new VideoCollectionModel(Enumerable.Empty<VideoModel>(), 0, 0, Enumerable.Empty<SearchHighlightCollectionModel>())); }
             set { _results = value; }
         }
     }
