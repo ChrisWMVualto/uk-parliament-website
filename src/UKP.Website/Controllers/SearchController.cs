@@ -12,7 +12,7 @@ using UKP.Website.Service.Model;
 
 namespace UKP.Website.Controllers
 {
-    [OutputCache(Duration=600, VaryByCustom="*")]
+    //[OutputCache(Duration=600, VaryByCustom="*")]
     public partial class SearchController : Controller
     {
         private readonly ISearchService _searchService;
@@ -50,11 +50,13 @@ namespace UKP.Website.Controllers
                     ModelState.AddModelError("dates", "End date cannot occur before the start date.");
             }
 
-            if(!firstSearchLoad && !memberId.HasValue && !string.IsNullOrWhiteSpace(member)) keywords += " " + "\"" + member + "\"";
+            var keyWordsOrMember = keywords;
+            if(!firstSearchLoad && !string.IsNullOrWhiteSpace(member)) keyWordsOrMember += " " + "\"" + member + "\"";
 
             var searchModel = new SearchViewModel()
             {
                 Keywords = keywords,
+                KeywordsOrMember = keyWordsOrMember,
                 MemberId = memberId,
                 House = house,
                 Business = business,
@@ -70,7 +72,7 @@ namespace UKP.Website.Controllers
             {
                 if(!firstSearchLoad)
                 {
-                    searchModel.SearchResult = _searchService.Search(keywords, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
+                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, null, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
                 }
             }
 
@@ -79,9 +81,9 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments(Guid eventId, string keywords, int? memberId)
+        public virtual PartialViewResult Moments(Guid eventId, string keyWordsOrMember)
         {
-            var results = _searchService.SearchMoments(eventId, keywords, memberId);
+            var results = _searchService.SearchMoments(eventId, keyWordsOrMember, null);
             var searchMomentModel = new SearchMomentModel(eventId, results, 5);
             return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
         }
