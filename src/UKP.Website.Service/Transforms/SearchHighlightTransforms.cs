@@ -23,11 +23,17 @@ namespace UKP.Website.Service.Transforms
             {
                 var name = (string)fieldJson.name;
                 var value = (string)fieldJson.value;
-
                 searchHighlightList.Add(new SearchHighlightFieldModel(name, value));
             }
 
-            return new SearchHighlightCollectionModel(id, searchHighlightList);
+            dynamic keywordsArray = JArray.Parse(jObject.keywordMatches.ToString());
+            var keywordList = new List<string>();
+            foreach(var keyword in keywordsArray)
+            {
+                keywordList.Add((string)keyword);
+            }
+
+            return new SearchHighlightCollectionModel(id, searchHighlightList, keywordList);
         }
 
         public static IEnumerable<SearchHighlightCollectionModel> TransformArray(string jsonArray)
