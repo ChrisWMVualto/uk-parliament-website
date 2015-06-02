@@ -7,17 +7,8 @@
 {
     foreach(var item in Model.SearchResult.Results)
     {
-        var highlightTitle = Html.Encode(@item.Event.Title);
         var highlights = Model.SearchResult.SearchHighlights.FirstOrDefault(x => x.Id == item.Event.Id);
 
-        if(highlights != null)
-        {
-            var field = highlights.Fields.FirstOrDefault(x => x.Name == "title");
-            if(field != null)
-            {
-                highlightTitle = field.Value;
-            }
-        }
         <div class="col-md-12 search-item">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-5">
@@ -56,26 +47,17 @@
                         <div class="row">
                             @if(highlights != null)
                             {
-                                var matchedDisplayFields = highlights.Fields.Where(x => x.Name == "alias"
-                                                                                        || x.Name == "business"
-                                                                                        || x.Name == "eventType"
-                                                                                        || x.Name == "house"
-                                                                                        || x.Name == "room"
-                                                                                        || x.Name == "subTitle"
-                                                                                        || x.Name == "subTitle"
-                                                                                        || x.Name == "esStackDocuments.description"
-                                                                                        || x.Name == "esStackDocuments.iasDisplayAs").ToList();
-
-                                if(matchedDisplayFields.Any())
+                                if(highlights.KeywordMatches.Any())
                                 {
                                     <div class="col-lg-1 col-md-2 col-sm-2">
                                         <strong>Matches: </strong>
                                     </div>
                                     <div class="col-lg-11 col-md-10 col-sm-10">
-                                        @foreach(var field in matchedDisplayFields)
+
+                                        @for(int i = 0; i < highlights.KeywordMatches.Count(); i++)
                                         {
-                                            @Html.Raw(field.Value)
-                                            <br />
+                                            @highlights.KeywordMatches.ElementAt(i)if(i < highlights.KeywordMatches.Count() - 1)
+                                                                                   {<text>, </text>}
                                         }
                                     </div>
                                 }
