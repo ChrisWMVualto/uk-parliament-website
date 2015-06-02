@@ -23,5 +23,6 @@ namespace UKP.Website.Models.Event
 
         public VideoModel VideoModel { get; private set; }
         public bool DefaultToStackTab { get; private set; }
+        public bool IsClipped { get { return VideoModel.RequestedInPoint.HasValue && VideoModel.RequestedOutPoint.HasValue; } }
     }
 }

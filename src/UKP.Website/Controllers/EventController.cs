@@ -133,6 +133,7 @@ namespace UKP.Website.Controllers
             var logs = _eventService.GetLogsBetween(id, start, end);
             var results = logs.Results;
 
+            // Don't add new logs that don't fit in the clipped range.
             if(inPoint.HasValue && outPoint.HasValue)
                 results = results.Where(x => x.InPoint >= inPoint.Value.ToUniversalTime() && x.InPoint < outPoint.Value.ToUniversalTime());
   
