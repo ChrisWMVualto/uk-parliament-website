@@ -422,7 +422,7 @@ a.extract-text {
 }
 
 .btn-seek-to-live-grey {
-  color: #ffffff;
-  background-color: #ccc;
-  border-color: #ccc;
+  color: #ffffff !important;
+  background-color: #ccc !important;
+  border-color: #ccc !important;
 }
