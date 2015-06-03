@@ -170,7 +170,7 @@ function logItemClicked(e) {
     logItems.removeClass('active');
     self.addClass('active');
 
-    $('#seekToLiveButton').addClass('btn-seek-to-live-grey');
+    $('#seekToLiveButton').removeClass('btn-seek-to-live-grey');
     
     var receiver = $('#UKPPlayer')[0];
     $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
@@ -185,7 +185,7 @@ function logItemClicked(e) {
 
 function seekToLive() {
 
-    $('#seekToLiveButton').removeClass('btn-seek-to-live-grey');
+    $('#seekToLiveButton').addClass('btn-seek-to-live-grey');
 
     var receiver = $('#UKPPlayer')[0];
     $.postMessage("seek-to-live_true", receiver.src, receiver.contentWindow);
@@ -193,7 +193,7 @@ function seekToLive() {
     setTimeout(function() {
         var logItems = $('.log-list > li.logouter');
         logItems.removeClass('active');
-    }, 1600);
+    }, 2000);
 }
 
 
