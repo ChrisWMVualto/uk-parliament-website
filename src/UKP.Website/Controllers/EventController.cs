@@ -129,7 +129,7 @@ namespace UKP.Website.Controllers
             var start = startTime.FromISO8601String() ?? DateTime.Now;
             var inPoint = @in.FromISO8601String();
             var outPoint = @out.FromISO8601String();
-            var end = start.AddMinutes(10);
+            var end = start.AddHours(3);
             var logs = _eventService.GetLogsBetween(id, start, end);
             var results = logs.Results;
 
