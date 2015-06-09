@@ -198,8 +198,8 @@ a.event:hover {
     }
 
 .multiselect-container li a label.checkbox input[type=checkbox], .multiselect-container li a label.radio input[type=radio] {
-    -webkit-appearance: checkbox;
-    -moz-appearance: checkbox;
+    -webkit-appearance: radio;
+    -moz-appearance: radio;
 }
 
 button.multiselect {
