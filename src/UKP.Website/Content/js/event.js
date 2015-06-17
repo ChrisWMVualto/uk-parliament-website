@@ -278,15 +278,22 @@ function audiOnlySwitch() {
     $(document).on('click', '#audioToggle', null, function () { setAudioButtonState(false); });
 }
 
+function triggerStop() {
+    $.connection.hub.stop();
+
+};
 
 
 $(function () {
     var eventStateHub = $.connection.eventStateHub;
     var eventId = $('#eventId').val();
+    var stopInterval = setTimeout(triggerStop, 21600000);
 
     eventStateHub.client.eventStateChanged = function (changedId, planningState, recordingState, recordedState, playerState) {
         if (eventId == changedId) {
             stateChanged(planningState, recordingState, recordedState, playerState);
+            clearTimeout(stopInterval);
+            stopInterval = setTimeout(triggerStop, 21600000);
         }
     };
 
