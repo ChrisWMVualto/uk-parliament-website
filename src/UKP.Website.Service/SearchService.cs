@@ -55,7 +55,7 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content);
         }
 
-        public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId)
+        public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId, int pageSize)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/logs/{eventId}", Method.GET, _configuration.IasAuthKey);
@@ -67,6 +67,8 @@ namespace UKP.Website.Service
 
             if(memberId.HasValue)
                 request.AddParameter("memberId", memberId);
+
+            request.AddParameter("pageSize", pageSize);
 
             var response = client.Execute(request);
             if(response.StatusCode == HttpStatusCode.NotFound) return null;

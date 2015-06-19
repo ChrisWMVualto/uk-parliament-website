@@ -83,7 +83,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual PartialViewResult Moments(Guid eventId, string keyWordsOrMember)
         {
-            var results = _searchService.SearchMoments(eventId, keyWordsOrMember, null);
+            var results = _searchService.SearchMoments(eventId, keyWordsOrMember, null, 10000);
             var searchMomentModel = new SearchMomentModel(eventId, results, 5);
             return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
         }
