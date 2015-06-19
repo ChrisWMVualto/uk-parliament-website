@@ -92,7 +92,7 @@ namespace UKP.Website.Controllers
         public virtual ActionResult Members(string name)
         {
             if(name.Length <= 2) return null;
-            var results = _searchService.SearchMembers(name);
+            var results = _searchService.SearchMembers(name.Trim());
             return Json(results, JsonRequestBehavior.AllowGet);
         }
     }
