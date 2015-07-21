@@ -69,7 +69,7 @@
                             @if(item.LogMoments.Results.Count() < item.LogMoments.Total)
                             {
                                 <div class="col-md-12 moment-more">
-                                    <button type="button" class="btn btn-default btn-show-more btn-lg pull-right" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments(item.Event.Id, Model.KeywordsOrMember))">Show More <i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-default btn-show-more btn-lg pull-right" data-event-id="@item.Event.Id" data-item-skip="@item.LogMoments.Results.Count()" data-url-base="@Url.Action(MVC.Search.Moments(item.Event.Id, Model.KeywordsOrMember, Model.Member))">Show More <i class="fa fa-plus"></i></button>
                                 </div>
                             }
                         </div>

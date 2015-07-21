@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? from, DateTime? to, int pageNum)
+        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? from, DateTime? to, int pageNum, bool isMemberKeywordSearch)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
@@ -44,6 +44,9 @@ namespace UKP.Website.Service
             if(to.HasValue)
                 request.AddParameter("to", to.ToISO8601String());
 
+            if(isMemberKeywordSearch)
+                request.AddParameter("isMemberKeywordSearch", true);
+
             request.AddParameter("archiveOnly", true);
             request.AddParameter("format", "json");
             request.AddParameter("pageNumber", pageNum);
@@ -55,7 +58,7 @@ namespace UKP.Website.Service
             return VideoTransforms.TransformArray(response.Content);
         }
 
-        public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId, int pageSize)
+        public LogMomentResultModel SearchMoments(Guid eventId, string keywords, int? memberId, int pageSize, bool isMemberKeywordSearch)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/logs/{eventId}", Method.GET, _configuration.IasAuthKey);
@@ -69,6 +72,9 @@ namespace UKP.Website.Service
                 request.AddParameter("memberId", memberId);
 
             request.AddParameter("pageSize", pageSize);
+
+            if(isMemberKeywordSearch)
+                request.AddParameter("isMemberKeywordSearch", true);
 
             var response = client.Execute(request);
             if(response.StatusCode == HttpStatusCode.NotFound) return null;
