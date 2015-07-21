@@ -51,7 +51,8 @@ namespace UKP.Website.Controllers
             }
 
             var keyWordsOrMember = keywords;
-            if(!firstSearchLoad && !string.IsNullOrWhiteSpace(member)) keyWordsOrMember += " " + "\"" + member + "\"";
+            var isMemberKeywordSearch = !string.IsNullOrWhiteSpace(member);
+            if(!firstSearchLoad && isMemberKeywordSearch) keyWordsOrMember += " " + "\"" + member + "\"";
 
             var searchModel = new SearchViewModel()
             {
@@ -72,7 +73,7 @@ namespace UKP.Website.Controllers
             {
                 if(!firstSearchLoad)
                 {
-                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, null, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page);
+                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, null, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page, isMemberKeywordSearch);
                 }
             }
 
@@ -81,9 +82,10 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult Moments(Guid eventId, string keyWordsOrMember)
+        public virtual PartialViewResult Moments(Guid eventId, string keyWordsOrMember, string member)
         {
-            var results = _searchService.SearchMoments(eventId, keyWordsOrMember, null, 10000);
+            var isMemberKeywordSearch = !string.IsNullOrWhiteSpace(member);
+            var results = _searchService.SearchMoments(eventId, keyWordsOrMember, null, 10000, isMemberKeywordSearch);
             var searchMomentModel = new SearchMomentModel(eventId, results, 5);
             return PartialView(MVC.Search.Views._SearchMoment, searchMomentModel);
         }

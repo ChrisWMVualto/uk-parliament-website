@@ -125,6 +125,7 @@ namespace UKP.Website.Controllers
         {
             public readonly string eventId = "eventId";
             public readonly string keyWordsOrMember = "keyWordsOrMember";
+            public readonly string member = "member";
         }
         static readonly ActionParamsClass_Members s_params_Members = new ActionParamsClass_Members();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -179,15 +180,16 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid eventId, string keyWordsOrMember);
+        partial void MomentsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid eventId, string keyWordsOrMember, string member);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Moments(System.Guid eventId, string keyWordsOrMember)
+        public override System.Web.Mvc.PartialViewResult Moments(System.Guid eventId, string keyWordsOrMember, string member)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Moments);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "eventId", eventId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "keyWordsOrMember", keyWordsOrMember);
-            MomentsOverride(callInfo, eventId, keyWordsOrMember);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "member", member);
+            MomentsOverride(callInfo, eventId, keyWordsOrMember, member);
             return callInfo;
         }
 
