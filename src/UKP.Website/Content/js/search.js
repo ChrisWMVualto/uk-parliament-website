@@ -65,6 +65,13 @@ $(function () {
         }
     });
 
+
+    $('.start-date').datepicker().on('changeDate', function (e) {
+
+        $('.end-date').datepicker('update', e.date);
+    });
+
+
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         $('#Start, #End').attr('readonly', true);
     }
