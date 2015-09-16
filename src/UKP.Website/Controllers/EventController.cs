@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Date.Extensions;
+using Elmah;
 using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
 using UKP.Website.Models.Event;
@@ -24,6 +26,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [OutputCache(Duration=120, VaryByCustom= "*")]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null, bool? agenda = null)
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
@@ -155,6 +158,15 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual HttpStatusCodeResult State(StateChangeModel stateChangeModel)
         {
+            try
+            {
+                HttpResponse.RemoveOutputCacheItem(string.Format("/Event/Index/{0}", stateChangeModel.EventId));
+            }
+            catch(Exception ex)
+            {
+                ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+
             EventStateHub.EventStateChanged(stateChangeModel.EventId, new EventStates(stateChangeModel.PlanningState, stateChangeModel.RecordingState, stateChangeModel.RecordedState, stateChangeModel.PlayerState), stateChangeModel.StateChanged);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
