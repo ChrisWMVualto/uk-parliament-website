@@ -80,12 +80,12 @@ function appendArchiveLog() {
 
 
 function appendLiveLog() {
-    var lastLogTime = $('.log-list > li').first().find('.time-code').data('time');
-    var logUrl = $('#logTab').data("load-new-log-url");
-
-    var playerStateLiveReloadTime = randomIntFromInterval(1, 5) * 1000;
+    var playerStateLiveReloadTime = randomIntFromInterval(1, 15) * 1000;
     // Why do we do this? This stops many concurrent users all hitting the api at once.
     setTimeout(function () {
+        var lastLogTime = $('.log-list > li').first().find('.time-code').data('time');
+        var logUrl = $('#logTab').data("load-new-log-url");
+
         $.get(logUrl, { startTime: lastLogTime }, function (data) {
             $('.log-list').prepend(data);
         });
@@ -104,7 +104,7 @@ function appendLogMoments() {
 function refreshLogMoments() {
     var logUrl = $('#logTab').data("refresh-log-url");
 
-    var playerStateLiveReloadTime = randomIntFromInterval(1, 20) * 1000;
+    var playerStateLiveReloadTime = randomIntFromInterval(1, 45) * 1000;
     // Why do we do this? This stops many concurrent users all hitting the api at once.
     setTimeout(function () {
         $.get(logUrl, {}, function (data) {

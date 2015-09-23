@@ -61,7 +61,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual JsonResult ShowAudioOnly(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -82,7 +82,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=60, VaryByParam="*")]
+        [OutputCache(Duration=120, VaryByParam="*")]
         public virtual PartialViewResult EventTitle(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -144,7 +144,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration = 45, VaryByParam = "*")]
+        [OutputCache(Duration = 120, VaryByParam = "*")]
         public virtual PartialViewResult Stack(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
