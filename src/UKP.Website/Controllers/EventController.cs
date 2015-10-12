@@ -26,7 +26,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=120, VaryByCustom= "*")]
+        [OutputCache(Duration=30, VaryByCustom= "*")]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null, bool? agenda = null)
         {
             var inPoint = ConvertDateTimeFormatFromPattern(id, @in);
@@ -61,7 +61,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        [OutputCache(Duration=120, VaryByParam="*")]
+        [OutputCache(Duration=30, VaryByParam="*")]
         public virtual JsonResult ShowAudioOnly(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -126,7 +126,7 @@ namespace UKP.Website.Controllers
 
 
         [HttpGet]
-        [OutputCache(Duration = 45, VaryByParam = "*")]
+        [OutputCache(Duration = 30, VaryByParam = "*")]
         public virtual PartialViewResult EventLogsBetween(Guid id, string startTime = null, string @in = null, string @out = null)
         {
             var start = startTime.FromISO8601String() ?? DateTime.Now;
