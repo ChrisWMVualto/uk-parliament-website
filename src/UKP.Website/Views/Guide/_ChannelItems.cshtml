@@ -16,7 +16,9 @@
                     <div class="description">
                         <h4><a href="@Url.Action(MVC.Event.Index(@item.EventData.Id))" class="event">@item.EventData.Title</a></h4>
                         <p>
-                            @item.EventData.Room <br />
+                            @if(!string.IsNullOrWhiteSpace(@item.EventData.Room)){@item.EventData.Room}
+                            @if(!string.IsNullOrWhiteSpace(@item.EventData.ExternalLocation)){@item.EventData.ExternalLocation}
+                            <br />
                             @item.EventData.House
                         </p>
                     </div>
