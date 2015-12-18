@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? from, DateTime? to, int pageNum, bool isMemberKeywordSearch)
+        public VideoCollectionModel Search(string keywords, int? memberId, string house, string business, DateTime? from, DateTime? to, int pageNum, bool isMemberKeywordSearch, bool archiveOnly)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/search/", Method.GET, _configuration.IasAuthKey);
@@ -44,10 +44,9 @@ namespace UKP.Website.Service
             if(to.HasValue)
                 request.AddParameter("to", to.ToISO8601String());
 
-            if(isMemberKeywordSearch)
-                request.AddParameter("isMemberKeywordSearch", true);
+            if(isMemberKeywordSearch) request.AddParameter("isMemberKeywordSearch", true);
 
-            request.AddParameter("archiveOnly", true);
+            request.AddParameter("archiveOnly", archiveOnly);
             request.AddParameter("format", "json");
             request.AddParameter("pageNumber", pageNum);
 
