@@ -195,6 +195,7 @@
     <Content Include="Content\img\arrow-scroll-left.png" />
     <Content Include="Content\img\arrow-scroll-right.png" />
     <Content Include="Content\img\favicons\apple-touch-icon-180x180-precomposed.png" />
+    <Content Include="Content\img\filler-thumb-5.jpg" />
     <Content Include="Content\img\logo-main.png" />
     <Content Include="Content\img\blank.png" />
     <Content Include="Content\img\channel-bg-alt.png" />
