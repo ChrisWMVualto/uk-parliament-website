@@ -167,11 +167,11 @@ $(document).ready(function () {
     if ($(".tc-box ").length) {
         $('.tc-box ').slimScroll({
             railVisible: true,
-            railColor: '#E6EBEE',
+            railColor: '#9c9c9c',
             railOpacity: 0.3,
-            color: '#C1C7C9',
-            size: '12px',
-            height: '300'
+            color: '#000',
+            size: '15px',
+            height: '300px'
         });
     }
 

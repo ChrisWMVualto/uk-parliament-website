@@ -426,3 +426,7 @@ a.extract-text {
   background-color: #ccc !important;
   border-color: #ccc !important;
 }
+
+.slimScrollBar {
+    min-height: 100px;
+}
