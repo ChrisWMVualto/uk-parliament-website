@@ -1,6 +1,7 @@
 ﻿@using RestSharp.Extensions
 @using UKP.Website.Application
 @using UKP.Website.Models.Event
+@using UKP.Website.Service.Model
 @model UKP.Website.Models.Search.SearchViewModel
 
 @if(Model.SearchResult.Results.Any())
@@ -21,10 +22,13 @@
                         {
                             <img src="@Url.Content("~/Content/img/filler-thumb-5.jpg")" alt="@item.Event.Title" class="img-responsive">
                         }
-                        <div class="overlay">
-                            <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
-                            <strong>Play event from start</strong>
-                        </div>
+                        @if(item.Event.States.PlayerState != PlayerEventState.PRELIVE)
+                        {
+                            <div class="overlay">
+                                <span class="overlay-stack fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                                <strong>Play event from start</strong>
+                            </div>
+                        }
                     </a>
                 </div>
                 <div class="col-lg-9 col-md-8 col-sm-7">

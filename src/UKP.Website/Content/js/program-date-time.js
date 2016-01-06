@@ -17,7 +17,7 @@ function scrollStackAndLogs() {
             color: '#000',
             size: '15px',
             height: '525px',
-            alwaysVisible: false,
+            alwaysVisible: true,
             disableFadeOut: true,
             start: logPos
         });
@@ -41,7 +41,7 @@ function scrollStackAndLogs() {
             color: '#000',
             size: '15px',
             height: '525px',
-            alwaysVisible: false,
+            alwaysVisible: true,
             disableFadeOut: true,
             start: logPos
         });
