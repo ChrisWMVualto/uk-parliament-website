@@ -36,12 +36,13 @@ function scrollStackAndLogs() {
     if ($('.stack-list').length) {
         $('.stack-list').slimScroll({
             railVisible: true,
-            railColor: '#E6EBEE',
+            railColor: '#9c9c9c',
             railOpacity: 1,
-            color: '#C1C7C9',
-            size: '12px',
+            color: '#000',
+            size: '15px',
             height: '525px',
             alwaysVisible: false,
+            disableFadeOut: true,
             start: logPos
         });
         $('.stack-list').slimScroll().bind('slimscroll', function (e, pos) {
