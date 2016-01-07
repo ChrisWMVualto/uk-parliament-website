@@ -194,6 +194,7 @@
     <Content Include="Content\fonts\karla\fonts\karla-regular-webfont.svg" />
     <Content Include="Content\img\arrow-scroll-left.png" />
     <Content Include="Content\img\arrow-scroll-right.png" />
+    <Content Include="Content\img\arrow-up.png" />
     <Content Include="Content\img\favicons\apple-touch-icon-180x180-precomposed.png" />
     <Content Include="Content\img\filler-thumb-5.jpg" />
     <Content Include="Content\img\logo-main.png" />
@@ -219,9 +220,11 @@
     <Content Include="Content\img\shadow-right.png" />
     <Content Include="Content\img\share.jpg" />
     <Content Include="Content\img\theme-committees-blurred.jpg" />
+    <Content Include="Content\img\theme-committees-blurred_original.jpg" />
     <Content Include="Content\img\theme-committees-normal.jpg" />
     <Content Include="Content\img\theme-committees-normal_original.jpg" />
     <Content Include="Content\img\theme-commons-blurred.jpg" />
+    <Content Include="Content\img\theme-commons-blurred_original.jpg" />
     <Content Include="Content\img\theme-commons-normal.jpg" />
     <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />

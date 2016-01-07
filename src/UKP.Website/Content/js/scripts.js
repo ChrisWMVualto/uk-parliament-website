@@ -168,10 +168,12 @@ $(document).ready(function () {
         $('.tc-box ').slimScroll({
             railVisible: true,
             railColor: '#9c9c9c',
-            railOpacity: 0.3,
+            railOpacity: 1,
             color: '#000',
-            size: '15px',
-            height: '300px'
+            size: '16px',
+            height: '300px',
+            alwaysVisible: true,
+            disableFadeOut: true
         });
     }
 
