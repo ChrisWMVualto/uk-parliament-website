@@ -284,11 +284,11 @@ a.extract-text {
     padding-bottom: 10px;
 }
 
-.stack-guide .stack-more a {
-    font-size: 15px;
-    z-index: 9999;
-    display: block;
-}
+    .stack-guide .stack-more a {
+        font-size: 15px;
+        z-index: 9999;
+        display: block;
+    }
 
 
 /*STACK AND LOG TABS*/
@@ -365,7 +365,7 @@ a.extract-text {
     padding: 5px;
     overflow: hidden;
     list-style: none;
-    width: 98%;
+    width: 97%;
     font-family: 'karlaregular', arial, sans-serif;
 }
 
@@ -422,11 +422,43 @@ a.extract-text {
 }
 
 .btn-seek-to-live-grey {
-  color: #ffffff !important;
-  background-color: #ccc !important;
-  border-color: #ccc !important;
+    color: #ffffff !important;
+    background-color: #ccc !important;
+    border-color: #ccc !important;
 }
 
 .slimScrollBar {
     min-height: 100px;
+}
+
+.slimScrollRailTop div {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid black;
+    margin: auto;
+    margin-top: 30%;
+}
+
+.slimScrollRailBottom div {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+    margin: auto;
+    margin-top: 30%;
+}
+
+.slimScrollBarInner {
+    padding-top:40px;
+}
+
+.slimScrollBarInner hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    width:60%
 }
