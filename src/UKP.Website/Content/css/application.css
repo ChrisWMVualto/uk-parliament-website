@@ -429,6 +429,7 @@ a.extract-text {
 
 .slimScrollBar {
     min-height: 100px;
+    margin-top:12px;
 }
 
 .slimScrollRailTop div {
