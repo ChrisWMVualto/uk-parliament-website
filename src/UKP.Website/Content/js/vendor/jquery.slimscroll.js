@@ -138,6 +138,7 @@
                     return;
                 }
 
+      
                 // optionally set height to the parent's height
                 o.height = (o.height == 'auto') ? me.parent().height() : o.height;
 
@@ -148,7 +149,7 @@
                       position: 'relative',
                       overflow: 'hidden',
                       width: o.width,
-                      height: o.height
+                      height: ((parseInt(o.height) + 26) + 'px')
                   });
 
                 // update style for the div
@@ -157,6 +158,7 @@
                     width: o.width,
                     height: o.height
                 });
+
 
                 // create scrollbar rail
                 var rail = $(divS)

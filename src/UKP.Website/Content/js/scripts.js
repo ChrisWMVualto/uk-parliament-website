@@ -164,14 +164,14 @@ $(document).ready(function () {
     ////////////////////////////////////////////
     //terms & conditions - share
     ////////////////////////////////////////////
-    if ($(".tc-box ").length) {
-        $('.tc-box ').slimScroll({
+    if ($(".tc-box").length) {
+        $('.tc-box').slimScroll({
             railVisible: true,
             railColor: '#9c9c9c',
             railOpacity: 1,
             color: '#000',
             size: '16px',
-            height: '300px',
+            height: '325px',
             alwaysVisible: true,
             disableFadeOut: true
         });
@@ -279,12 +279,6 @@ $(document).ready(function () {
             lazyLoad: 'progressive'
         });
         
-
-        //terms box height
-        $('.tc-box, .tc-box-container .slimScrollDiv').css({
-            height: '300px'
-        });
-
 
     });
 
