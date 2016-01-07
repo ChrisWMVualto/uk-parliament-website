@@ -184,7 +184,7 @@
     <Content Include="Content\css\bootstrap-multiselect.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\fonts\slick.svg" />
-    <Content Include="Content\css\ie10.css" />
+    <Content Include="Content\css\ie9.css" />
     <Content Include="Content\css\theme.css" />
     <Content Include="Content\fonts\font-app\fonts\app.svg" />
     <Content Include="Content\fonts\font-awesome\css\font-awesome.css" />
