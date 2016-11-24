@@ -3,9 +3,9 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  height: 250px;
+  height: 150px;
   margin-left: -3px;
-  margin-bottom: 0.2%;
+  margin-bottom: 0.3%;
   z-index: 1000;
 }
 
