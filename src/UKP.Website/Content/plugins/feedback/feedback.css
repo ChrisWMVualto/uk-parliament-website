@@ -5,7 +5,8 @@
   bottom: 0;
   height: 250px;
   margin-left: -3px;
-  margin-bottom: 500px;
+  margin-bottom: 0.2%;
+  z-index: 1000;
 }
 
 #feedback-form {
