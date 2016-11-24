@@ -23,6 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -257,8 +258,14 @@
     <Content Include="Content\js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="Content\js\vendor\slick.js" />
     <Content Include="Content\js\vendor\stickyfloat.min.js" />
+    <Content Include="Content\plugins\feedback\feedback.css" />
+    <Content Include="Content\plugins\feedback\feedback.html" />
+    <Content Include="Content\plugins\feedback\feedback.js" />
+    <Content Include="Content\plugins\feedback\test.html" />
     <Content Include="Global.asax" />
     <Content Include="ping.html" />
+    <Content Include="Content\plugins\feedback\LICENSE" />
+    <Content Include="Content\plugins\feedback\README.md" />
     <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <None Include="robots.txt.allow" />
     <None Include="robots.txt.disallow" />
