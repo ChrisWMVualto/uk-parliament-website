@@ -10,8 +10,7 @@ namespace UKP.Website
                 "~/Content/css/bootstrap.css",
                 "~/Content/css/bootstrap-multiselect.css",
                 "~/Content/css/autocomplete.css",
-                "~/Content/css/application.css",
-                "~/Content/plugins/feedback/feedback.css"));
+                "~/Content/css/application.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/headJs").Include(
                 "~/Content/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js",
@@ -31,7 +30,6 @@ namespace UKP.Website
                 "~/Content/js/bootstrap.min.js",
                 "~/Content/js/jquery.autocomplete.mod.js",
                 "~/Content/js/jquery.infinitescroll.js",
-                "~/Content/plugins/feedback/feedback.js",
                 "~/Content/js/scripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/guideJs").Include(
