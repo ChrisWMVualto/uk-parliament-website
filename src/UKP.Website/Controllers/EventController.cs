@@ -178,6 +178,12 @@ namespace UKP.Website.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
+        [HttpGet]
+        public virtual ActionResult CreateDownload()
+        {
+            return RedirectToAction(MVC.Home.Commons());
+        }
+
         private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)
         {
             DateTime? dateTimePoint;
