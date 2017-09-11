@@ -93,7 +93,7 @@ internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.P
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_HttpStatusCodeResult : System.Web.Mvc.HttpStatusCodeResult, IT4MVCActionResult
 {
-    public T4MVC_System_Web_Mvc_HttpStatusCodeResult(string area, string controller, string action, string protocol = null): base(default(System.Net.HttpStatusCode))
+    public T4MVC_System_Web_Mvc_HttpStatusCodeResult(string area, string controller, string action, string protocol = null): base(default(int))
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
@@ -152,6 +152,8 @@ namespace Links
                 public static readonly string slick_woff = Url("slick.woff");
             }
         
+            public static readonly string ie9_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ie9.min.css") ? Url("ie9.min.css") : Url("ie9.css");
+                 
             public static readonly string theme_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/theme.min.css") ? Url("theme.min.css") : Url("theme.css");
                  
         }
@@ -287,6 +289,7 @@ namespace Links
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string arrow_scroll_left_png = Url("arrow-scroll-left.png");
             public static readonly string arrow_scroll_right_png = Url("arrow-scroll-right.png");
+            public static readonly string arrow_up_png = Url("arrow-up.png");
             public static readonly string blank_png = Url("blank.png");
             public static readonly string channel_bg_alt_png = Url("channel-bg-alt.png");
             public static readonly string channel_bg_png = Url("channel-bg.png");
@@ -311,6 +314,7 @@ namespace Links
             public static readonly string filler_thumb_2_jpg = Url("filler-thumb-2.jpg");
             public static readonly string filler_thumb_3_jpg = Url("filler-thumb-3.jpg");
             public static readonly string filler_thumb_4_jpg = Url("filler-thumb-4.jpg");
+            public static readonly string filler_thumb_5_jpg = Url("filler-thumb-5.jpg");
             public static readonly string icons_png = Url("icons.png");
             public static readonly string logo_main_png = Url("logo-main.png");
             public static readonly string rotate_png = Url("rotate.png");
@@ -318,9 +322,11 @@ namespace Links
             public static readonly string shadow_right_png = Url("shadow-right.png");
             public static readonly string share_jpg = Url("share.jpg");
             public static readonly string theme_committees_blurred_jpg = Url("theme-committees-blurred.jpg");
+            public static readonly string theme_committees_blurred_original_jpg = Url("theme-committees-blurred_original.jpg");
             public static readonly string theme_committees_normal_jpg = Url("theme-committees-normal.jpg");
             public static readonly string theme_committees_normal_original_jpg = Url("theme-committees-normal_original.jpg");
             public static readonly string theme_commons_blurred_jpg = Url("theme-commons-blurred.jpg");
+            public static readonly string theme_commons_blurred_original_jpg = Url("theme-commons-blurred_original.jpg");
             public static readonly string theme_commons_normal_jpg = Url("theme-commons-normal.jpg");
             public static readonly string theme_commons_normal_original_jpg = Url("theme-commons-normal_original.jpg");
             public static readonly string theme_lords_blurred_jpg = Url("theme-lords-blurred.jpg");
@@ -464,6 +470,27 @@ namespace Links
             public static readonly string utilities_less = Url("utilities.less");
             public static readonly string variables_less = Url("variables.less");
             public static readonly string wells_less = Url("wells.less");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class plugins {
+            private const string URLPATH = "~/Content/plugins";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class feedback {
+                private const string URLPATH = "~/Content/plugins/feedback";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string feedback_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/feedback.min.css") ? Url("feedback.min.css") : Url("feedback.css");
+                     
+                public static readonly string feedback_html = Url("feedback.html");
+                public static readonly string feedback_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/feedback.min.js") ? Url("feedback.min.js") : Url("feedback.js");
+                public static readonly string LICENSE = Url("LICENSE");
+                public static readonly string README_md = Url("README.md");
+                public static readonly string test_html = Url("test.html");
+            }
+        
         }
     
     }

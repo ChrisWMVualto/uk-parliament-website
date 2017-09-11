@@ -154,6 +154,7 @@ namespace UKP.Website.Controllers
             public readonly string Stack = "Stack";
             public readonly string State = "State";
             public readonly string LogUpdate = "LogUpdate";
+            public readonly string CreateDownload = "CreateDownload";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -171,6 +172,7 @@ namespace UKP.Website.Controllers
             public const string Stack = "Stack";
             public const string State = "State";
             public const string LogUpdate = "LogUpdate";
+            public const string CreateDownload = "CreateDownload";
         }
 
 
@@ -494,6 +496,17 @@ namespace UKP.Website.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.LogUpdate);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "logUpdateModel", logUpdateModel);
             LogUpdateOverride(callInfo, logUpdateModel);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CreateDownloadOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult CreateDownload()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateDownload);
+            CreateDownloadOverride(callInfo);
             return callInfo;
         }
 
