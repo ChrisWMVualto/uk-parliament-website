@@ -18,11 +18,13 @@ namespace UKP.Website.Controllers
     {
         private readonly IVideoService _videoService;
         private readonly IEventService _eventService;
+        private readonly IDownloadService _downloadService;
 
-        public EventController(IVideoService videoService, IEventService eventService)
+        public EventController(IVideoService videoService, IEventService eventService, IDownloadService downloadService)
         {
             _videoService = videoService;
             _eventService = eventService;
+            _downloadService = downloadService;
         }
 
         [HttpGet]
@@ -181,6 +183,8 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult CreateDownload()
         {
+            _downloadService.CreateDownload("owen.hallett@vualto.com");
+
             return RedirectToAction(MVC.Home.Commons());
         }
 
