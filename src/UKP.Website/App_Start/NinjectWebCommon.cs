@@ -70,6 +70,7 @@ namespace UKP.Web.App_Start
             kernel.Bind<ISearchService>().To<SearchService>();
             kernel.Bind<IMembersService>().To<MembersService>();
             kernel.Bind<IChannelService>().To<ChannelService>();
+            kernel.Bind<IDownloadService>().To<DownloadService>();
 
             kernel.BindFilter<BrowserFilterAttribute>(FilterScope.Global, 0);
         }        
