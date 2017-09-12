@@ -24,7 +24,7 @@ namespace UKP.Website.Service
         public void CreateDownload(string emailAddress)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/download/", Method.POST, _configuration.IasAuthKey);
+            var request = _restClientWrapper.AuthRestRequest("api/download", Method.GET, _configuration.IasAuthKey);
             request.AddParameter("emailAddress", emailAddress);
 
             var response = client.Execute(request);
