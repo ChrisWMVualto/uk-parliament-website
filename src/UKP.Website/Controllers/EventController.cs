@@ -183,7 +183,15 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult CreateDownload()
         {
-            _downloadService.CreateDownload("owen.hallett@vualto.com");
+            _downloadService.CreateDownload("corrie.barton@vualto.com");
+
+            return RedirectToAction(MVC.Home.Commons());
+        }
+
+        [HttpGet]
+        public virtual ActionResult DownloadCallback()
+        {
+            _downloadService.DownloadCallback("corrie.barton@vualto.com");
 
             return RedirectToAction(MVC.Home.Commons());
         }
