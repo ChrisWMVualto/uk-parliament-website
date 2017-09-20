@@ -30,5 +30,15 @@ namespace UKP.Website.Service
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
         }
+
+        public void DownloadCallback(string emailAddress)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest("api/download/callback", Method.GET, _configuration.IasAuthKey);
+            request.AddParameter("emailAddress", emailAddress);
+
+            var response = client.Execute(request);
+            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+        }
     }
 }
