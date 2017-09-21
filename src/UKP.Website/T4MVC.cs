@@ -103,6 +103,19 @@ internal partial class T4MVC_System_Web_Mvc_HttpStatusCodeResult : System.Web.Mv
     public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_ContentResult : System.Web.Mvc.ContentResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ContentResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -339,6 +352,7 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
+            public static readonly string download_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/download.min.js") ? Url("download.min.js") : Url("download.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string guide_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/guide.min.js") ? Url("guide.min.js") : Url("guide.js");
             public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");

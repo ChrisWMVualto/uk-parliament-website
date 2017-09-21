@@ -46,7 +46,8 @@ namespace UKP.Website
                 "~/Content/js/jquery.post-message.updated.js",
                 "~/Content/js/vendor/bootstrap-timepicker-event-mod.js",
                 "~/Content/js/event.js",
-                "~/Content/js/program-date-time.js"));
+                "~/Content/js/program-date-time.js",
+                "~/Content/js/download.js"));
 
             BundleTable.EnableOptimizations = true;
         }
