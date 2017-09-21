@@ -21,21 +21,16 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public void CreateDownload(string emailAddress)
+        public void CreateDownload(Guid eventId, int startTime, int endTime, string emailAddress, bool audioOnly)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/download", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("emailAddress", emailAddress);
+            var request = _restClientWrapper.AuthRestRequest("api/download", Method.POST, _configuration.IasAuthKey);
+            request.AddParameter("EventId", eventId);
+            request.AddParameter("StartTime", startTime);
+            request.AddParameter("EndTime", endTime);
+            request.AddParameter("Email", emailAddress);
+            request.AddParameter("AudioOnly", audioOnly);
 
-            var response = client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
-        }
-
-        public void DownloadCallback(string emailAddress)
-        {
-            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
-            var request = _restClientWrapper.AuthRestRequest("api/download/callback", Method.GET, _configuration.IasAuthKey);
-            request.AddParameter("emailAddress", emailAddress);
 
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
