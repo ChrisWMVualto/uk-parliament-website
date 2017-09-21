@@ -21,13 +21,13 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public void CreateDownload(Guid eventId, int startTime, int endTime, string emailAddress, bool audioOnly)
+        public void CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/download", Method.POST, _configuration.IasAuthKey);
             request.AddParameter("EventId", eventId);
-            request.AddParameter("StartTime", startTime);
-            request.AddParameter("EndTime", endTime);
+            request.AddParameter("StartTime", startTime.ToISO8601String());
+            request.AddParameter("EndTime", endTime.ToISO8601String());
             request.AddParameter("Email", emailAddress);
             request.AddParameter("AudioOnly", audioOnly);
 

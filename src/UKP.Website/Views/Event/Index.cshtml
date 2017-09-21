@@ -41,6 +41,13 @@
     @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
     @Html.Hidden("DefaultToStackTab", Model.DefaultToStackTab)
     @Html.Hidden("LiveLogging", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING)
+    <form id="createDownloadForm">
+        @Html.Hidden("EventId", Model.VideoModel.Event.Id)
+        @Html.Hidden("StartTime", Model.VideoModel.Event.ActualLiveStartTime.Value.AddMinutes(5).ToISO8601String())
+        @Html.Hidden("EndTime", Model.VideoModel.Event.ActualLiveStartTime.Value.AddMinutes(10).ToISO8601String())
+        @Html.Hidden("EmailAddress", "owen.hallett@vualto.com")
+        @Html.Hidden("AudioOnly", Model.VideoModel.RequestedAudioOnly)
+    </form>
     <div class="row">
         <div class="col-md-12">
             <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>

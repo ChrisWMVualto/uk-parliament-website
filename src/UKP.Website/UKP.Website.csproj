@@ -230,6 +230,7 @@
     <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
+    <Content Include="Content\js\download.js" />
     <Content Include="Content\js\jquery.post-message.updated.js" />
     <Content Include="Content\js\vendor\bootstrap-datepicker.mod.js" />
     <Content Include="Content\js\vendor\bootstrap-multiselect.js" />
@@ -432,7 +433,9 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event\CreateDownloadModel.cs" />
     <Compile Include="Models\Event\ClippingViewModel.cs" />
+    <Compile Include="Models\Event\DownloadResponseModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Event\LogUpdateModel.cs" />
     <Compile Include="Models\Event\SearchMomentModel.cs" />

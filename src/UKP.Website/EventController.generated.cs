@@ -126,6 +126,12 @@ namespace UKP.Website.Controllers
         {
             return new T4MVC_System_Web_Mvc_HttpStatusCodeResult(Area, Name, ActionNames.LogUpdate);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ContentResult CreateDownload()
+        {
+            return new T4MVC_System_Web_Mvc_ContentResult(Area, Name, ActionNames.CreateDownload);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public EventController Actions { get { return MVC.Event; } }
@@ -296,6 +302,14 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_LogUpdate
         {
             public readonly string logUpdateModel = "logUpdateModel";
+        }
+        static readonly ActionParamsClass_CreateDownload s_params_CreateDownload = new ActionParamsClass_CreateDownload();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateDownload CreateDownloadParams { get { return s_params_CreateDownload; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateDownload
+        {
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -500,13 +514,14 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void CreateDownloadOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void CreateDownloadOverride(T4MVC_System_Web_Mvc_ContentResult callInfo, UKP.Website.Models.Event.CreateDownloadModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult CreateDownload()
+        public override System.Web.Mvc.ContentResult CreateDownload(UKP.Website.Models.Event.CreateDownloadModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.CreateDownload);
-            CreateDownloadOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ContentResult(Area, Name, ActionNames.CreateDownload);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            CreateDownloadOverride(callInfo, model);
             return callInfo;
         }
 

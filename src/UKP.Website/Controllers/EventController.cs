@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Script.Serialization;
 using Date.Extensions;
 using Elmah;
 using UKP.Website.Extensions;
@@ -180,12 +181,20 @@ namespace UKP.Website.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        [HttpGet]
-        public virtual ActionResult CreateDownload()
+        [HttpPost]
+        public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
-            _downloadService.CreateDownload(new Guid("f8f1c550-d587-4383-8e58-09c8aa84e77a"),5,10,"corrie.barton@vualto.com",false);
+            var startTime = DateTime.Parse(model.StartTime);
+            var endTime = DateTime.Parse(model.EndTime);
 
-            return RedirectToAction(MVC.Home.Commons());
+            //TODO Return true/false
+            //_downloadService.CreateDownload(new Guid("f8f1c550-d587-4383-8e58-09c8aa84e77a"), , ,"corrie.barton@vualto.com",false);
+            _downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
+
+            var response = new DownloadResponseModel(true);
+            var json = new JavaScriptSerializer().Serialize(response);
+
+            return Content(json);
         }
 
         private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)
