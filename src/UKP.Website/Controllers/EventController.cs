@@ -184,13 +184,23 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
-            var startTime = DateTime.Parse(model.StartTime);
-            var endTime = DateTime.Parse(model.EndTime);
-
-            //TODO Return true/false
-            _downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
-
             var response = new DownloadResponseModel(true);
+            try
+            {
+                var startTime = DateTime.Parse(model.StartTime);
+                response.InPointHasError = false;
+                var endTime = DateTime.Parse(model.EndTime);
+                response.OutPointHasError = false;
+
+                //TODO Return true/false
+                _downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+
             var json = new JavaScriptSerializer().Serialize(response);
 
             return Content(json);
@@ -222,5 +232,6 @@ namespace UKP.Website.Controllers
             }
             return dateTimePoint;
         }
+
     }
 }
