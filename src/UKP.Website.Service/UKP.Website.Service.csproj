@@ -86,6 +86,7 @@
     <Compile Include="IVideoService.cs" />
     <Compile Include="MembersService.cs" />
     <Compile Include="Model\ChannelModel.cs" />
+    <Compile Include="Model\DownloadResponseModel.cs" />
     <Compile Include="Model\EpgChannelModel.cs" />
     <Compile Include="Model\EpgEventModel.cs" />
     <Compile Include="Model\EventFilter.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="RecessService.cs" />
     <Compile Include="DownloadService.cs" />
     <Compile Include="SearchService.cs" />
+    <Compile Include="Transforms\DownloadTransforms.cs" />
     <Compile Include="Transforms\ChannelTransforms.cs" />
     <Compile Include="Transforms\LogMomentTransform.cs" />
     <Compile Include="Transforms\EventTransforms.cs" />

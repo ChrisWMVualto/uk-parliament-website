@@ -8,7 +8,8 @@
         url: "/Event/CreateDownload",
         data: data,
         success: function (data) {
-            debugger;
+            var response = JSON.parse(data);
+            alert(response.Message);
         }
     });
 
