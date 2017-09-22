@@ -188,7 +188,6 @@ namespace UKP.Website.Controllers
             var endTime = DateTime.Parse(model.EndTime);
 
             //TODO Return true/false
-            //_downloadService.CreateDownload(new Guid("f8f1c550-d587-4383-8e58-09c8aa84e77a"), , ,"corrie.barton@vualto.com",false);
             _downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
 
             var response = new DownloadResponseModel(true);
