@@ -11,8 +11,12 @@ namespace UKP.Website.Models.Event
         {
             Success = success;
             Message = message;
+            InPointHasError = true;
+            OutPointHasError = true;
         }
         public bool Success { get; set; }
+        public bool InPointHasError { get; set; }
+        public bool OutPointHasError { get; set; }
         public string Message { get; set; }
     }
 }
