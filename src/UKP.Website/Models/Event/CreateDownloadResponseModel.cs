@@ -5,9 +5,9 @@ using System.Web;
 
 namespace UKP.Website.Models.Event
 {
-    public class DownloadResponseModel
+    public class CreateDownloadResponseModel
     {
-        public DownloadResponseModel(bool success = false, string message = null)
+        public CreateDownloadResponseModel(bool success = false, string message = null)
         {
             Success = success;
             Message = message;

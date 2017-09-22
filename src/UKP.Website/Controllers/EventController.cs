@@ -184,7 +184,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
-            var response = new DownloadResponseModel(true);
+            var response = new CreateDownloadResponseModel(true);
             try
             {
                 var startTime = DateTime.Parse(model.StartTime);
@@ -192,8 +192,9 @@ namespace UKP.Website.Controllers
                 var endTime = DateTime.Parse(model.EndTime);
                 response.OutPointHasError = false;
 
-                //TODO Return true/false
-                _downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
+                var apiResponse =_downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
+                response.Success = apiResponse.Successful;
+                response.Message = apiResponse.Message;
             }
             catch (Exception ex)
             {

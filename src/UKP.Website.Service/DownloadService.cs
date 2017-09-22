@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public void CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly)
+        public DownloadResponseModel CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/download", Method.POST, _configuration.IasAuthKey);
@@ -34,6 +34,7 @@ namespace UKP.Website.Service
 
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+            return DownloadTransforms.Transform(response.Content);
         }
     }
 }

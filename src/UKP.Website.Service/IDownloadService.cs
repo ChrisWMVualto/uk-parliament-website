@@ -6,6 +6,6 @@ namespace UKP.Website.Service
 {
     public interface IDownloadService
     {
-        void CreateDownload(Guid evenId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly);
+        DownloadResponseModel CreateDownload(Guid evenId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly);
     }
 }
