@@ -19,7 +19,7 @@ namespace UKP.Website.Service.Transforms
             var email = (string)Object.email;
             var downloadsRemaining = (int)Object.downloadsRemaining;
 
-            return new DownloadResponseModel(success, message,resetHours,resetMinutes,email,downloadsRemaining);
+            return new DownloadResponseModel(success, message, resetHours, resetMinutes, email, downloadsRemaining);
         }
     }
 }
