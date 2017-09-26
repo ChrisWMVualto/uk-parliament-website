@@ -14,8 +14,12 @@ namespace UKP.Website.Service.Transforms
 
             var success = (bool)Object.successful;
             var message = (string)Object.message;
+            var resetHours = (int)Object.resetHours;
+            var resetMinutes = (int)Object.resetMinutes;
+            var email = (string)Object.email;
+            var downloadsRemaining = (int)Object.downloadsRemaining;
 
-            return new DownloadResponseModel(success, message);
+            return new DownloadResponseModel(success, message,resetHours,resetMinutes,email,downloadsRemaining);
         }
     }
 }

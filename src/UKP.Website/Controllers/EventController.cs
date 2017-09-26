@@ -194,7 +194,11 @@ namespace UKP.Website.Controllers
 
                 var apiResponse =_downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
                 response.Success = apiResponse.Successful;
-                response.Message = apiResponse.Message;
+                response.Message = String.Format("{0} You have {1} downloads remaining. This will reset in {2} hours",apiResponse.Message,apiResponse.DownloadsRemaining,apiResponse.ResetHours);
+                if (apiResponse.ResetMinutes > 0)
+                {
+                    response.Message += String.Format(" & {0} minutes", apiResponse.ResetMinutes);
+                }
             }
             catch (Exception ex)
             {
