@@ -43,9 +43,9 @@
     @Html.Hidden("LiveLogging", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING)
     <form id="createDownloadForm">
         @Html.Hidden("EventId", Model.VideoModel.Event.Id)
-        @Html.Hidden("StartTime", Model.VideoModel.Event.ActualLiveStartTime.Value.AddMinutes(5).ToISO8601String())
-        @Html.Hidden("EndTime", Model.VideoModel.Event.ActualLiveStartTime.Value.AddMinutes(8).ToISO8601String())
-        @Html.Hidden("EmailAddress", "owen.hallett@vualto.com")
+        @Html.Hidden("StartTime", Model.VideoModel.Event.PublishedStartTime.Value.AddMinutes(0).ToISO8601String())
+        @Html.Hidden("EndTime", Model.VideoModel.Event.PublishedStartTime.Value.AddMinutes(10).ToISO8601String())
+        @Html.Hidden("EmailAddress", "corrie.barton@vualto.com")
         @Html.Hidden("AudioOnly", Model.VideoModel.RequestedAudioOnly)
     </form>
     <div class="row">
