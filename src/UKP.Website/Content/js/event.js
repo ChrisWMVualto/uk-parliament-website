@@ -26,7 +26,12 @@ function loadPlayer(audioOnly, autoStart) {
 
                     setTimeout(function() {
                         var receiver = $('#UKPPlayer')[0];
-                        $.postMessage("seek-program-date-time_" + currentProgramDateTime + "_delaystart", receiver.src, receiver.contentWindow);
+                        var message = {
+                            'function': 'seekPostMessage',
+                            'sender': document.location.href,
+                            'data': "seek-program-date-time_" + currentProgramDateTime + "_delaystart"
+                        }
+                        $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
                     }, 600);
                 }
 
