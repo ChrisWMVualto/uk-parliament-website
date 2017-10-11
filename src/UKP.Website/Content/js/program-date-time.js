@@ -175,7 +175,12 @@ function logItemClicked(e) {
     $('#seekToLiveButton').removeClass('btn-seek-to-live-grey');
     
     var receiver = $('#UKPPlayer')[0];
-    $.postMessage("seek-program-date-time_" + time, receiver.src, receiver.contentWindow);
+    var message = {
+        'function': 'seekPostMessage',
+        'sender': document.location.href,
+        'data': "seek-program-date-time_" + time
+    }
+    $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 
     setTimeout(function () {
         highlightItem = true;
@@ -190,7 +195,12 @@ function seekToLive() {
     $('#seekToLiveButton').addClass('btn-seek-to-live-grey');
 
     var receiver = $('#UKPPlayer')[0];
-    $.postMessage("seek-to-live_true", receiver.src, receiver.contentWindow);
+    var message = {
+        'function': 'seekPostMessage',
+        'sender': document.location.href,
+        'data': "seek-to-live_true"
+    }
+    $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 
     setTimeout(function() {
         var logItems = $('.log-list > li.logouter');
@@ -250,24 +260,24 @@ $(function () {
     $(document).on("click", "#seekToLiveButton", seekToLive);
 
     //This is the receive message event for the highlighting of current log items
-    $.receiveMessage(function (event) {
-        var messageSplit = event.data.split('_');
-        if (messageSplit.length < 2) return;
-        if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
-
-        var sentTime = new Date(messageSplit[1]);
-        $('#ProgramDateTime').val(sentTime.toISOString());
-
-       
-        if (lastClickedTimecode == null || sentTime > lastClickedTimecode) {
-            if (highlightItem) {
-                highlightLogItems(sentTime);
-            }
-            
-        }
-        
-    });
 });
+
+function timeUpdate(data) {
+    var messageSplit = data.timeUpdateString.split('_');
+    if (messageSplit.length < 2) return;
+    if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
+
+    var sentTime = new Date(messageSplit[1]);
+    $('#ProgramDateTime').val(sentTime.toISOString());
+
+
+    if (lastClickedTimecode == null || sentTime > lastClickedTimecode) {
+        if (highlightItem) {
+            highlightLogItems(sentTime);
+        }
+
+    }
+}
 
 
 

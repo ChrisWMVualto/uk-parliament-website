@@ -21,7 +21,7 @@ namespace UKP.Website.Service
             _configuration = configuration;
         }
 
-        public DownloadResponseModel CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly)
+        public DownloadResponseModel CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly, string streamUrl = null)
         {
             var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
             var request = _restClientWrapper.AuthRestRequest("api/download", Method.POST, _configuration.IasAuthKey);
@@ -30,6 +30,7 @@ namespace UKP.Website.Service
             request.AddParameter("EndTime", endTime.ToISO8601String());
             request.AddParameter("Email", emailAddress);
             request.AddParameter("AudioOnly", audioOnly);
+            if (streamUrl != null) request.AddParameter("StreamUrl", streamUrl);
 
 
             var response = client.Execute(request);
