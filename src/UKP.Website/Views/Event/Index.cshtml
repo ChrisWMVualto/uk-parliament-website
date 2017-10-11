@@ -47,6 +47,7 @@
         @Html.Hidden("EndTime", Model.VideoModel.Event.PublishedStartTime.Value.AddMinutes(10).ToISO8601String())
         @Html.Hidden("EmailAddress", "corrie.barton@vualto.com")
         @Html.Hidden("AudioOnly", Model.VideoModel.RequestedAudioOnly)
+        @Html.Hidden("StreamUrl")
     </form>
     <div class="row">
         <div class="col-md-12">
@@ -116,6 +117,10 @@
 </div>
 
 @section scripts {
+    @if (Model.VideoModel.Event.States.RecordedState.Equals(RecordedEventState.NEW) || Model.VideoModel.Event.States.RecordedState.Equals(RecordedEventState.HOLD))
+    {
+        <script type="text/javascript" src="@Url.Content("~/Content/js/theoplayer.js")"></script>
+    }
     @Scripts.Render("~/bundles/eventJs")
     <script src="~/signalr/hubs"></script>
 }

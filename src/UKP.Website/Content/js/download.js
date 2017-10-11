@@ -1,5 +1,4 @@
 ﻿function createDownload() {
-    var url = $("#createDownloadUrl");
     var form = $("#createDownloadForm");
     var data = $(form).serialize();
 
