@@ -121,6 +121,10 @@
     {
         <script type="text/javascript" src="@Url.Content("~/Content/js/theoplayer.js")"></script>
     }
+    else
+    {
+        <script type="text/javascript" src="@Url.Content("~/Content/js/groovy.js")"></script>
+    }
     @Scripts.Render("~/bundles/eventJs")
     <script src="~/signalr/hubs"></script>
 }
