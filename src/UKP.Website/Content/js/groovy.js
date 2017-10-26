@@ -10,6 +10,6 @@ function getTime(elementId) {
     document.getElementById(elementId).value = time.toJSON();
 }
 
-function getStreamUrl() {
+function getStreamUrlOnLoad() {
     //this is here to stop a console error
 }
