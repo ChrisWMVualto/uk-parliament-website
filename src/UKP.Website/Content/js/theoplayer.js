@@ -25,15 +25,18 @@ function getTime(elementId) {
     $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 }
 
+function getStreamUrlOnLoad() {
+    getStreamUrl();
+    setTimeout(getStreamUrl, 5000);
+}
+
 function getStreamUrl() {
     var receiver = $('#UKPPlayer')[0];
     var message = {
-        'function': 'getTime',
+        'function': 'getStreamUrl',
         'sender': document.location.href,
         'callback': 'setStreamUrl'
     };
-    message.function = "getStreamUrl";
-    message.sender = document.location.href;
     $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 }
 
