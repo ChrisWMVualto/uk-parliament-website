@@ -408,6 +408,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\CookieController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\GuideController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -518,6 +519,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
+    <Folder Include="Views\Download\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
