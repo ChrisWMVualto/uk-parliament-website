@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using UKP.Website.Service;
 
 namespace UKP.Website.Controllers
 {
-    public class DownloadController : Controller
+    public partial class DownloadController : Controller
     {
-        [HttpGet]
-        public ActionResult Index(Guid id)
+        private readonly IDownloadService _downloadService;
+
+        public DownloadController(IDownloadService downloadService)
         {
+            _downloadService = downloadService;
+        }
 
-
-            return Redirect("https://www.google.com");
+        [HttpGet]
+        public virtual ActionResult Index(Guid id)
+        {
+            var model =_downloadService.GetDownloadUrl(id);
+            return Redirect(model.Url);
         }
     }
 }
