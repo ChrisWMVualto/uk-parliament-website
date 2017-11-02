@@ -418,6 +418,9 @@
     <Compile Include="CookieController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="DownloadController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
