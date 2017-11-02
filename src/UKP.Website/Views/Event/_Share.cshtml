@@ -3,7 +3,7 @@
 @model UKP.Website.Models.Event.EventViewModel
 
 <div class="tab-pane fade" id="share" data-url="@Url.Action(MVC.Event.GetShareVideo())">
-    <form role="form">
+@*<form role="form">
         <a href="#" class="close-pane close-share hidden">close</a>
         <div class="row">
             <div class="col-xs-12 col-md-7">
@@ -176,5 +176,110 @@
                 </div>
             </div>
         </div>
-    </form>
-</div>
+    </form>*@
+<form role="form">
+    <a href="#" class="close-pane close-share hidden">close</a>
+    <div id="clippingContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
+        <input id="AllowClippingRefresh" name="AllowClippingRefresh" type="hidden" value="False">
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-push-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Share</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="share-container">
+                        <a href="@Configuration.GetShareFacebook" data-share-url="@Configuration.GetShareFacebook" class="btn-facebook" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+                        <a href="@Configuration.GetShareTwitter" data-share-url="@Configuration.GetShareTwitter" class="btn-twitter" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+                        <a href="@Configuration.GetShareGooglePlus" data-share-url="@Configuration.GetShareGooglePlus" class="btn-google" target="_blank"><i class="fa fa-google fa-2x"></i></a>
+                        <a href="@Configuration.GetShareLinkedIn" data-share-url="@Configuration.GetShareLinkedIn" class="btn-linkedin" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="smallUrl"><h4>Small Url</h4></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <div class="form-group has-copy small-url">
+                            <input type="text" class="form-control input-lg" id="smallUrl" value="" spellcheck="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="url"><h4>Url</h4></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group has-copy url">
+                        <input type="text" class="form-control input-lg" id="url" value="" spellcheck="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row terms">
+        <div class="col-md-12">
+            <label for="embed"><h4>Embed</h4></label>
+        </div>
+        <div class="col-md-12">
+            <p>Please read and agree to the following terms and conditions before continuing.</p>
+        </div>
+        <div class="col-md-12">
+            <div class="tc-box-container">
+                <div class="tc-box clearfix">
+                    <p>The use of Parliamentlive.tv and all interactive download features is subject to specific and detailed <a href="http://www.parliament.uk/site-information/using-this-website/privacy-policy/" target="_blank">Terms and Conditions.</a></p>
+                    <p>By clicking continue you acknowledge that you have read and understood these Terms and Conditions, accept these Terms and Conditions and agree to be bound by them.</p>
+                    <p>We draw your attention to this content being subject to Conditions of Use, specific to UK Parliament and we retain the right and privilege to find users in contempt of Parliament if a reproduction or use is in breach of the Conditions of Use.</p>
+                    <div class="custom-checkbox">
+                        <input type="checkbox" name="acceptance" class="acceptance" id="shareAcceptance" data-continue-id="shareContinue" value="1"/>
+                        <label for="shareAcceptance"> 
+                            <span class="hidden-xs">I have read and agree to the above terms and conditions</span>
+                            <span class="visible-xs">I have read and agree to the above t's &amp; c's</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button class="btn btn-generic btn-black btn-wide continue" id="shareContinue" type="button" disabled>Continue</button>
+        </div>
+    </div>
+    <div class="row embed-code">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="embed"><h4>Embed</h4></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group has-copy embed">
+                        <textarea class="form-control input-lg" rows="4" id="embed" spellcheck="false"></textarea>
+                        <p id="responseMsg" class="response-message"></p>
+                        <i class="fa fa-clipboard fa-lg"></i>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr>
+<p class="further-info">You can find out more information and instructions on our <a href="@Configuration.UKPHelpUrl"><i class="fa fa-external"></i>Help page.</a></p>
+</div> 

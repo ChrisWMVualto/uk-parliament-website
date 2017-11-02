@@ -10,6 +10,12 @@ function getTime(elementId) {
     document.getElementById(elementId).value = time.toJSON();
 }
 
+function getShareTime(e) {
+    var time = new Date(document.getElementById("ProgramDateTime").value).toTimeString();
+    document.getElementById(e.target.dataset.textboxId).value = time.split(' ')[0];
+    reloadEmbedData();
+}
+
 function getStreamUrlOnLoad() {
     //this is here to stop a console error
 }

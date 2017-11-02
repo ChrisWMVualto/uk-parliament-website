@@ -55,6 +55,7 @@ function updateClipping() {
         initSelectDates();
         initCheckbox();
         reloadEmbedData();
+        initSetShareTime();
     });
 }
 
@@ -174,8 +175,8 @@ function reloadEmbedData() {
                 end = settings.options.end.date.val() + 'T' + end;
             }
 
-           
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
+
             $.ajax(url, {
                 success: updateEmbedCodes
             });
