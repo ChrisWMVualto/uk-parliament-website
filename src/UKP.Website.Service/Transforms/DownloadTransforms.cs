@@ -25,7 +25,7 @@ namespace UKP.Website.Service.Transforms
         {
             dynamic Object = JObject.Parse(json.ToString());
 
-            var id = (Guid)Object.Id;
+            var id = (Guid)Object.id;
             var url = (string)Object.url;
 
             return new DownloadUrlModel(id, url);
