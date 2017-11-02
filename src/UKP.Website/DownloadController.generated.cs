@@ -26,9 +26,6 @@ namespace UKP.Website.Controllers
     public partial class DownloadController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public DownloadController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected DownloadController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
