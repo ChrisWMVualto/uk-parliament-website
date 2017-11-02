@@ -2,6 +2,7 @@
     initTermsAndConditions();
     initEnableEmbed();
     initSetShareTime();
+    initSetDownloadTime();
     initSetClipboard();
 });
 
@@ -19,6 +20,11 @@ function initEnableEmbed() {
 function initSetShareTime() {
     var setTimes = $(".set-share-time");
     setTimes.on("click", getShareTime);
+}
+
+function initSetDownloadTime() {
+    var setTimes = $(".set-download-time");
+    setTimes.on("click", getDownloadTime);
 }
 
 function initSetClipboard() {
