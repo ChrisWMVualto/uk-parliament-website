@@ -37,5 +37,16 @@ namespace UKP.Website.Service
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
             return DownloadTransforms.Transform(response.Content);
         }
+
+        public DownloadUrlModel GetDownloadUrl(Guid id)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest("api/downloadurl/{id}", Method.GET, _configuration.IasAuthKey);
+            request.AddUrlSegment("id", id.ToString());
+
+            var response = client.Execute(request);
+
+            return DownloadTransforms.TransformDownloadUrl(response.Content);
+        }
     }
 }
