@@ -5,15 +5,24 @@ function updateCurrentTime(event) {
     document.getElementById("ProgramDateTime").value = messageSplit[1];
 }
 
-function getTime(elementId) {
-    var time = new Date(document.getElementById("ProgramDateTime").value);
-    document.getElementById(elementId).value = time.toJSON();
+function getTime() {
+    return new Date(document.getElementById("ProgramDateTime").value);
 }
 
 function getShareTime(e) {
-    var time = new Date(document.getElementById("ProgramDateTime").value).toTimeString();
-    document.getElementById(e.target.dataset.textboxId).value = time.split(' ')[0];
+
+    var timeString = getTime().toTimeString();
+    document.getElementById(e.target.dataset.textboxId).value = timeString.split(' ')[0];
+
     reloadEmbedData();
+}
+
+function getDownloadTime(e) {
+    var time = getTime();
+    var timeString = time.toTimeString();
+    document.getElementById(e.target.dataset.textboxId).value = timeString.split(' ')[0];
+
+    document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }
 
 function getStreamUrlOnLoad() {
