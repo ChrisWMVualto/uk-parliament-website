@@ -22,6 +22,7 @@ syntax: glob
 *.lib
 *.sbr
 *.scc
+*.orig
 *.DotSettings
 [Bb]in
 [Dd]ebug*/**

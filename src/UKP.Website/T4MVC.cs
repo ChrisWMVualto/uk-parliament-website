@@ -26,6 +26,7 @@ using T4MVC;
 public static partial class MVC
 {
     public static UKP.Website.Controllers.CookieController Cookie = new UKP.Website.Controllers.T4MVC_CookieController();
+    public static UKP.Website.Controllers.DownloadController Download = new UKP.Website.Controllers.T4MVC_DownloadController();
     public static UKP.Website.Controllers.EventController Event = new UKP.Website.Controllers.T4MVC_EventController();
     public static UKP.Website.Controllers.GuideController Guide = new UKP.Website.Controllers.T4MVC_GuideController();
     public static UKP.Website.Controllers.HomeController Home = new UKP.Website.Controllers.T4MVC_HomeController();
@@ -354,6 +355,7 @@ namespace Links
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             public static readonly string download_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/download.min.js") ? Url("download.min.js") : Url("download.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
+            public static readonly string groovy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/groovy.min.js") ? Url("groovy.min.js") : Url("groovy.js");
             public static readonly string guide_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/guide.min.js") ? Url("guide.min.js") : Url("guide.js");
             public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");
             public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
@@ -362,6 +364,7 @@ namespace Links
             public static readonly string responsive_player_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/responsive-player.min.js") ? Url("responsive-player.min.js") : Url("responsive-player.js");
             public static readonly string scripts_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/scripts.min.js") ? Url("scripts.min.js") : Url("scripts.js");
             public static readonly string search_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/search.min.js") ? Url("search.min.js") : Url("search.js");
+            public static readonly string theoplayer_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/theoplayer.min.js") ? Url("theoplayer.min.js") : Url("theoplayer.js");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class vendor {
                 private const string URLPATH = "~/Content/js/vendor";
