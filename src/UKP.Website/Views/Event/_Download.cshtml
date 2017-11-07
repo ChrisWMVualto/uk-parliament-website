@@ -1,155 +1,173 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Application
-@model UKP.Website.Models.Event.EventViewModel
+@using UKP.Website.Service.Model
+@model VideoModel
 
-<div class="tab-pane fade" id="download">
-<form role="form">
-    <a href="#" class="close-pane close-share hidden">close</a>
-    <div id="downloadContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
-        <input id="AllowClippingRefresh" name="AllowClippingRefresh" type="hidden" value="False">
-        <div class="row">
+
+@if (Model.Event.PublishedStartTime.HasValue
+     && Model.Event.States.PlanningState != PlanningEventState.STOP_DVR
+     && (Model.Event.States.PlayerState == PlayerEventState.ARCHIVE
+         || Model.Event.States.PlayerState == PlayerEventState.LIVE))
+{
+    <form role="form">
+        <a href="#" class="close-pane close-share hidden">close</a>
+        <div id="downloadContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.Event.Id, Model.RequestedInPoint.ToISO8601String(), Model.RequestedOutPoint.ToISO8601String()))">
+            <input id="AllowClippingRefresh" name="AllowClippingRefresh" type="hidden" value="False">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row form-inline time-start-end">
+                        <div class="col-xs-6 start-time-container time-container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadStartTime" data-form-id="StartTime" type="button" id="downloadStartTimeSet">Set Start Time</button>
+                                    </div>
+                                    <div class="form-group start-time">
+                                        <span class="bootstrap-timepicker">
+                                            <input id="downloadHiddenStart" name="downloadHiddenStart" type="hidden" value="09:33:41">
+                                            <input type="text" class="form-control input-lg time-input" id="downloadStartTime" data-form-id="StartTime" value="">
+                                        </span>
+                                    </div>
+                                    <div class="form-group start-day">
+                                        <label class="hide" for="downloadStartClipDate">
+                                            <h5>Day:</h5>
+                                        </label>
+                                        <span class="day-dropdown">
+                                            <select class="clip-date hidden" id="downloadStartClipDate" name="startClipDate" style="display: none;">
+                                                <option selected="selected" value="2017-10-26">26 October 2017</option>
+                                                <option value="2017-10-27">27 October 2017</option>
+                                            </select>
+                                            <div class="btn-group bootstrap-select clip-date hidden"><button type="button" class="btn dropdown-toggle selectpicker btn-clip-date form-control input-lg" data-toggle="dropdown" data-id="downloadStartClipDate" title="26 October 2017"><span class="filter-option pull-left">26 October 2017</span>&nbsp;<i class="fa fa-arrow-down fa-lg"></i></button>
+                                                <div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="26 October 2017"><span class="text">26 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="27 October 2017"><span class="text">27 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li></ul>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 end-time-container time-container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="pipe"></span>
+                                    <div class="form-group">
+                                        <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadEndTime" data-form-id="EndTime" type="button" id="downloadEndTimeSet">Set End Time</button>
+                                    </div>
+                                    <div class="form-group end-time">
+                                        <span class="bootstrap-timepicker">
+                                            <input id="downloadHiddenEnd" name="downloadHiddenEnd" type="hidden" value="17:19:11">
+                                            <input type="text" class="form-control input-lg time-input" data-form-id="EndTime" id="downloadEndTime" value="">
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group end-day">
+                                        <label class="hide" for="downloadEndClipDate">
+                                            <h5>Day:</h5>
+                                        </label>
+                                        <span class="day-dropdown">
+                                            <select class="clip-date hidden" id="downloadEndClipDate" name="endClipDate" style="display: none;"><option selected="selected" value="2017-10-26">26 October 2017</option>
+                                                <option value="2017-10-27">27 October 2017</option>
+                                            </select>
+                                            <div class="btn-group bootstrap-select clip-date hidden"><button type="button" class="btn dropdown-toggle selectpicker btn-clip-date form-control input-lg" data-toggle="dropdown" data-id="downloadEndClipDate" title="26 October 2017"><span class="filter-option pull-left">26 October 2017</span>&nbsp;<i class="fa fa-arrow-down fa-lg"></i></button>
+                                                <div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="26 October 2017"><span class="text">26 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="27 October 2017"><span class="text">27 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li></ul>
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Select a section of the video and recieve a download link via email.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row form-inline video-audio">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h5>File Type</h5>
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="custom-radio fileType">
+                                                <input type="radio" name="filetype[]" id="fileType1" value="Video"/>
+                                                <label for="fileType1">
+                                                    <span>Video</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="custom-radio fileType">
+                                                <input type="radio" name="filetype[]" id="fileType2" value="Audio" disabled/>
+                                                <label for="fileType2">
+                                                    <span>Audio</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row download-terms">
             <div class="col-md-12">
-                <div class="row form-inline time-start-end">
-                    <div class="col-xs-6 start-time-container time-container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadStartTime" data-form-id="StartTime" type="button" id="downloadStartTimeSet">Set Start Time</button>
-                                </div>
-                                <div class="form-group start-time">
-                                    <span class="bootstrap-timepicker">
-                                        <input id="downloadHiddenStart" name="downloadHiddenStart" type="hidden" value="09:33:41">
-                                        <input type="text" class="form-control input-lg time-input" id="downloadStartTime" data-form-id="StartTime" value="">
-                                    </span>
-                                </div>
-                                <div class="form-group start-day">
-                                    <label class="hide" for="downloadStartClipDate">
-                                        <h5>Day:</h5>
-                                    </label>
-                                    <span class="day-dropdown">
-                                        <select class="clip-date hidden" id="downloadStartClipDate" name="startClipDate" style="display: none;">
-                                            <option selected="selected" value="2017-10-26">26 October 2017</option>
-                                            <option value="2017-10-27">27 October 2017</option>
-                                        </select>
-                                        <div class="btn-group bootstrap-select clip-date hidden"><button type="button" class="btn dropdown-toggle selectpicker btn-clip-date form-control input-lg" data-toggle="dropdown" data-id="downloadStartClipDate" title="26 October 2017"><span class="filter-option pull-left">26 October 2017</span>&nbsp;<i class="fa fa-arrow-down fa-lg"></i></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="26 October 2017"><span class="text">26 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="27 October 2017"><span class="text">27 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li></ul></div></div>
-                                    </span>
-                                </div>
-                            </div>
+                <p>Please read and agree to the following terms and conditions before continuing.</p>
+            </div>
+            <div class="col-md-12">
+                <div class="tc-box-container">
+                    <div class="tc-box clearfix">
+                        <p>The use of Parliamentlive.tv and all interactive download features is subject to specific and detailed <a href="http://www.parliament.uk/site-information/using-this-website/privacy-policy/" target="_blank">Terms and Conditions.</a>
+                        </p>
+                        <p>By clicking continue you acknowledge that you have read and understood these Terms and Conditions, accept these Terms and Conditions and agree to be bound by them.</p>
+                        <p>We draw your attention to this content being subject to Conditions of Use, specific to UK Parliament and we retain the right and privilege to find users in contempt of Parliament if a reproduction or use is in breach of the Conditions of Use.</p>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" name="acceptance" class="acceptance" id="downloadAcceptance" data-continue-id="downloadContinue" value="1"/>
+                            <label for="downloadAcceptance">
+                                <span class="hidden-xs">I have read and agree to the above terms and conditions</span>
+                                <span class="visible-xs">I have read and agree to the above t's &amp; c's</span>
+                            </label>
                         </div>
                     </div>
-                    <div class="col-xs-6 end-time-container time-container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="pipe"></span>
-                                <div class="form-group">
-                                    <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadEndTime" data-form-id="EndTime" type="button" id="downloadEndTimeSet">Set End Time</button>
-                                </div>
-                                <div class="form-group end-time">
-                                    <span class="bootstrap-timepicker">
-                                        <input id="downloadHiddenEnd" name="downloadHiddenEnd" type="hidden" value="17:19:11">
-                                        <input type="text" class="form-control input-lg time-input" data-form-id="EndTime" id="downloadEndTime" value="">
-                                    </span>
-                                </div>
-
-                                <div class="form-group end-day">
-                                    <label class="hide" for="downloadEndClipDate">
-                                        <h5>Day:</h5>
-                                    </label>
-                                    <span class="day-dropdown">
-                                        <select class="clip-date hidden" id="downloadEndClipDate" name="endClipDate" style="display: none;"><option selected="selected" value="2017-10-26">26 October 2017</option>
-                                            <option value="2017-10-27">27 October 2017</option>
-                                        </select><div class="btn-group bootstrap-select clip-date hidden"><button type="button" class="btn dropdown-toggle selectpicker btn-clip-date form-control input-lg" data-toggle="dropdown" data-id="downloadEndClipDate" title="26 October 2017"><span class="filter-option pull-left">26 October 2017</span>&nbsp;<i class="fa fa-arrow-down fa-lg"></i></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li data-original-index="0" class="selected"><a tabindex="0" class="" data-normalized-text="26 October 2017"><span class="text">26 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li><li data-original-index="1"><a tabindex="0" class="" data-normalized-text="27 October 2017"><span class="text">27 October 2017</span><span class="fa glyphicon-ok check-mark"></span></a></li></ul></div></div>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-generic btn-black btn-wide continue" id="downloadContinue" type="button" disabled>Continue</button>
+            </div>
+        </div>
+        <div class="row email-me" style="display: none;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-9 col-md-12 col-lg-9">
+                        <label for="email"><h4>Your Email</h4></label>
+                        <a href="" class="email-me-link" target="_blank">View Privacy Statement</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <p>Select a section of the video and recieve a download link via email.</p>
+                    <div class="col-sm-9 col-md-12 col-lg-9">
+                        <input type="text" class="form-control input-lg" name="email" id="email" placeholder="user@parliamentlive.tv"/>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="row form-inline video-audio">
-                            <div class="col-md-12">
-                                <label>
-                                    <h5>File Type</h5>
-                                </label>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="custom-radio">
-                                            <input type="radio" name="filetype[]" id="fileType1" value="Video"/>
-                                            <label for="fileType1">
-                                                <span>Video</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="custom-radio">
-                                            <input type="radio" name="filetype[]" id="fileType2" value="Audio" disabled/>
-                                            <label for="fileType2"> 
-                                                <span>Audio</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-5 col-md-6 col-lg-5">
+                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-expired-callback="expCallback" data-sitekey="6LflGjcUAAAAANFEjZGF-Uch_Gy2G3KCyqPXvU42"></div>
+                    </div>
+                    <div class="col-sm-4 col-md-6 col-lg-4">
+                        <input id="downloadSubmit" class="btn btn-generic btn-black btn-wide right btn-submit" type="button" value="Make Clip" disabled/>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row terms">
-        <div class="col-md-12">
-            <p>Please read and agree to the following terms and conditions before continuing.</p>
-        </div>
-        <div class="col-md-12">
-            <div class="tc-box-container">
-                <div class="tc-box clearfix">
-                    <p>The use of Parliamentlive.tv and all interactive download features is subject to specific and detailed <a href="http://www.parliament.uk/site-information/using-this-website/privacy-policy/" target="_blank">Terms and Conditions.</a></p>
-                    <p>By clicking continue you acknowledge that you have read and understood these Terms and Conditions, accept these Terms and Conditions and agree to be bound by them.</p>
-                    <p>We draw your attention to this content being subject to Conditions of Use, specific to UK Parliament and we retain the right and privilege to find users in contempt of Parliament if a reproduction or use is in breach of the Conditions of Use.</p>
-                    <div class="custom-checkbox">
-                        <input type="checkbox" name="acceptance" class="acceptance" id="downloadAcceptance" value="1"/>
-                        <label for="downloadAcceptance"> 
-                            <span class="hidden-xs">I have read and agree to the above terms and conditions</span>
-                            <span class="visible-xs">I have read and agree to the above t's &amp; c's</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <button class="btn btn-generic btn-black btn-wide continue" disabled>Continue</button>
-        </div>
-    </div>
-    <div class="row email-me">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-sm-9 col-md-12 col-lg-9">
-                    <label for="email"><h4>Your Email</h4></label>
-                    <a href="" class="email-me-link" target="_blank">View Privacy Statement</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-9 col-md-12 col-lg-9">
-                    <input type="text" class="form-control input-lg" name="email" id="email" placeholder="user@parliamentlive.tv"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5 col-md-6 col-lg-5">
-                    <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LegfzYUAAAAAPCICUhWsQW2kUjhaOKWgDFPxf8_"></div>
-                </div>
-                <div class="col-sm-4 col-md-6 col-lg-4">
-                    <input type="submit" id="downloadSubmit" class="btn btn-generic btn-black btn-wide right btn-submit" value="Make Clip" disabled/>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+}
+else
+{
+    <p class="no-download">Download currently not available for this meeting.</p>
+}
 <hr>
 <p class="further-info">You can find out more information and instructions on our <a href=""><i class="fa fa-external"></i>Help</a> page.</p>
-</div>
