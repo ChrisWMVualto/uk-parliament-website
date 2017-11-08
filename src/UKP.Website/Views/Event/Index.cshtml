@@ -14,9 +14,9 @@
     var stackTab = "active";
     var indexMessageClass = "hidden";
 
-    if(Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
+    if (Model.VideoModel.Event.States.PlayerState != PlayerEventState.PRELIVE && Model.VideoModel.LogMoments.ContainsLogMoments)
     {
-        if(Model.DefaultToStackTab)
+        if (Model.DefaultToStackTab)
         {
             showLogTab = "";
             stackTab = "active";
@@ -28,7 +28,7 @@
         }
     }
 
-    if(Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING && !Model.IsClipped)
+    if (Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING && !Model.IsClipped)
     {
         indexMessageClass = "";
     }
@@ -41,14 +41,9 @@
     @Html.Hidden("ContainsLogMoments", Model.VideoModel.LogMoments.ContainsLogMoments)
     @Html.Hidden("DefaultToStackTab", Model.DefaultToStackTab)
     @Html.Hidden("LiveLogging", Model.VideoModel.Event.States.RecordingState == RecordingEventState.RECORDING)
-    <form id="createDownloadForm">
-        @Html.Hidden("EventId", Model.VideoModel.Event.Id)
-        @Html.Hidden("StartTime", Model.VideoModel.Event.PublishedStartTime.Value.AddMinutes(0).ToISO8601String())
-        @Html.Hidden("EndTime", Model.VideoModel.Event.PublishedStartTime.Value.AddMinutes(10).ToISO8601String())
-        @Html.Hidden("EmailAddress", "corrie.barton@vualto.com")
-        @Html.Hidden("AudioOnly", Model.VideoModel.RequestedAudioOnly)
-        @Html.Hidden("StreamUrl")
-    </form>
+    <div id="downloadFormContainer" data-load-url="@Url.Action(MVC.Event.DownloadForm(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
+        @Html.Partial(MVC.Event.Views._DownloadForm, Model.VideoModel)
+    </div>
     <div class="row">
         <div class="col-md-12">
             <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
@@ -69,47 +64,51 @@
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
                                 <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                                <li id="download-tab"><a href="#download" role="tab" data-toggle="tab"><span class="hidden-xs">download</span> <i class="fa fa-player-download fa-2x"></i></a></li>
                             </ul>
                             <button id="audioToggle" type="button" class="btn audio-toggle @showAudioButton" data-load-url="@Url.Action(MVC.Event.ShowAudioOnly(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))" data-audioonly-on-state="@Model.VideoModel.RequestedAudioOnly" data-toggle="button"></button>
                         </div>
                         <div class="tab-content">
                             @Html.Partial(MVC.Event.Views._Info, Model)
                             @Html.Partial(MVC.Event.Views._Share, Model)
+                            <div class="tab-pane fade" data-load-url="@Url.Action(MVC.Event.DownloadTab(Model.VideoModel.Event.Id))" id="download">
+                                @Html.Partial(MVC.Event.Views._Download, Model.VideoModel)
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    @if(!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
-                    {
-                        <div class="row">
-                            <ul class="col-md-12 stack-and-logs-tabs" role="tablist">
-                                <li id="stackTab" class="@stackTab" data-refresh-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
-                                    <a href="#stacks" role="tab" data-toggle="tab"><span>Agenda</span></a>
-                                </li>
-                                <li id="logTab" class="@showLogTab"
-                                    data-load-new-log-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id, @in: Model.VideoModel.RequestedInPoint.ToISO8601String(), @out: Model.VideoModel.RequestedOutPoint.ToISO8601String()))"
-                                    data-refresh-log-url="@Url.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
-                                    <a href="#logs" role="tab" data-toggle="tab"><span>Index</span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-content player-tabs-content">
-                            <div class="tab-pane fade active in stacks-logs" id="stacks">
-                                <ul class="stack-list">
-                                    @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
+                    <div class="col-md-5">
+                        @if (!Model.VideoModel.Event.LegacyMeetingId.HasValue && Model.VideoModel.Stacks.Any())
+                        {
+                            <div class="row">
+                                <ul class="col-md-12 stack-and-logs-tabs" role="tablist">
+                                    <li id="stackTab" class="@stackTab" data-refresh-stack-url="@Url.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
+                                        <a href="#stacks" role="tab" data-toggle="tab"><span>Agenda</span></a>
+                                    </li>
+                                    <li id="logTab" class="@showLogTab"
+                                        data-load-new-log-url="@Url.Action(MVC.Event.EventLogsBetween(Model.VideoModel.Event.Id, @in: Model.VideoModel.RequestedInPoint.ToISO8601String(), @out: Model.VideoModel.RequestedOutPoint.ToISO8601String()))"
+                                        data-refresh-log-url="@Url.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
+                                        <a href="#logs" role="tab" data-toggle="tab"><span>Index</span></a>
+                                    </li>
                                 </ul>
                             </div>
-                            <div class="tab-pane fade stacks-logs" id="logs">
-                                <div id="index-message" class="@indexMessageClass">
-                                    <p>Note: Latency in the video stream means index items will appear first.</p>
-                                    <p><button id="seekToLiveButton" type="submit" class="btn btn-default btn-seek-to-live-grey">Back to live <i class="fa fa-play"></i></button></p>
+                            <div class="tab-content player-tabs-content">
+                                <div class="tab-pane fade active in stacks-logs" id="stacks">
+                                    <ul class="stack-list">
+                                        @Html.Action(MVC.Event.Stack(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
+                                    </ul>
                                 </div>
-                                <ul class="log-list">
-                                    @Html.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
-                                </ul>
+                                <div class="tab-pane fade stacks-logs" id="logs">
+                                    <div id="index-message" class="@indexMessageClass">
+                                        <p>Note: Latency in the video stream means index items will appear first.</p>
+                                        <p><button id="seekToLiveButton" type="submit" class="btn btn-default btn-seek-to-live-grey">Back to live <i class="fa fa-play"></i></button></p>
+                                    </div>
+                                    <ul class="log-list">
+                                        @Html.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,4 +126,5 @@
     }
     @Scripts.Render("~/bundles/eventJs")
     <script src="~/signalr/hubs"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 }

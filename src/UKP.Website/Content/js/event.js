@@ -47,6 +47,20 @@ function updateTitle() {
     });
 }
 
+function updateDownloadForm() {
+    var formUrl = $("#downloadFormContainer").data("load-url");
+    $.get(formUrl, function(data) {
+        $("#downloadFormContainer").html(data);
+    });
+}
+
+function updateDownloadTab() {
+    var tabUrl = $("#download").data("load-url");
+    $.get(tabUrl, function (data) {
+        $("#download").html(data);
+    });
+}
+
 function updateClipping() {
     var clippingUrl = $('#clippingContainer').data("load-url");
     $.get(clippingUrl, function (data) {
@@ -55,6 +69,7 @@ function updateClipping() {
         initSelectDates();
         initCheckbox();
         reloadEmbedData();
+        initSetShareTime();
     });
 }
 
@@ -93,6 +108,9 @@ function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
     updateClipping();
     updateAudioButton();
+
+    updateDownloadForm();
+    updateDownloadTab();
 
     if (recordedState == "REVOKE") {
         window.location.reload();
@@ -174,8 +192,8 @@ function reloadEmbedData() {
                 end = settings.options.end.date.val() + 'T' + end;
             }
 
-           
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
+
             $.ajax(url, {
                 success: updateEmbedCodes
             });

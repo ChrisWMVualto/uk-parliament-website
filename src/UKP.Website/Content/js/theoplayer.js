@@ -12,6 +12,34 @@ function receiveMessage(event) {
     if(message.sender === sender) window[message.function](message.data);
 }
 
+function getShareTime(e) {
+    var receiver = $('#UKPPlayer')[0];
+    var message = {
+        'function': 'getTime',
+        'sender': document.location.href,
+        'callback': 'setShareTime',
+        'data': {
+            'elementId': e.target.dataset.textboxId
+        }
+    };
+    $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
+
+}
+
+function getDownloadTime(e) {
+    var receiver = $('#UKPPlayer')[0];
+    var message = {
+        'function': 'getTime',
+        'sender': document.location.href,
+        'callback': 'setDownloadTime',
+        'data': {
+            'elementId': e.target.dataset.textboxId
+        }
+    };
+    $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
+
+}
+
 function getTime(elementId) {
     var receiver = $('#UKPPlayer')[0];
     var message = {
@@ -42,6 +70,20 @@ function getStreamUrl() {
 
 function setTime(data) {
     document.getElementById(data.elementId).value = data.time;
+}
+
+function setShareTime(data) {
+    var time = new Date(data.time).toTimeString();
+    document.getElementById(data.elementId).value = time.split(' ')[0];
+    reloadEmbedData();
+}
+
+function setDownloadTime(data) {
+    var time = new Date(data.time);
+    var timeString = time.toTimeString();
+    var textbox = document.getElementById(data.elementId);
+    textbox.value = timeString.split(' ')[0];
+    document.getElementById(textbox.dataset.formId).value = time.toJSON();
 }
 
 function setStreamUrl(data) {

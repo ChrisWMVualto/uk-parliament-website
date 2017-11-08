@@ -230,6 +230,7 @@
     <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
+    <Content Include="Content\js\app.js" />
     <Content Include="Content\js\groovy.js" />
     <Content Include="Content\js\theoplayer.js" />
     <Content Include="Content\js\download.js" />
@@ -397,6 +398,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Event\_Download.cshtml" />
+    <Content Include="Views\Event\_DownloadForm.cshtml" />
     <None Include="Web.UKPLive.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -439,6 +442,7 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event\CaptchaVerifyModel.cs" />
     <Compile Include="Models\Event\CreateDownloadModel.cs" />
     <Compile Include="Models\Event\ClippingViewModel.cs" />
     <Compile Include="Models\Event\CreateDownloadResponseModel.cs" />
