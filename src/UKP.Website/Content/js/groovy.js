@@ -1,5 +1,14 @@
 ﻿window.addEventListener("message", updateCurrentTime);
 
+$(function() {
+    enableAudioOnly();
+});
+
+function enableAudioOnly() {
+    var radio = $("#fileType2");
+    radio.removeAttr("disabled");
+}
+
 function updateCurrentTime(event) {
     var messageSplit = event.data.split("_");
     document.getElementById("ProgramDateTime").value = messageSplit[1];
