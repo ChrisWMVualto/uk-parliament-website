@@ -108,8 +108,8 @@ function copyToClipbloard() {
 
 function checkMakeClip() {
     var valid = false;
-    var radioChecked = $(".fileType").prop("checked", true);
-    if (radioChecked.length > 0 && isValidEmail() && captchaValid) {
+
+    if (isRadioChecked() && isValidEmail() && captchaValid) {
         valid = true;
     }
 
@@ -118,6 +118,18 @@ function checkMakeClip() {
     } else {
         $("#downloadSubmit").prop("disabled", true);
     }
+}
+
+function isRadioChecked() {
+    var checkedRadio = $("input:radio.radioFileType:checked");
+
+    if (checkedRadio.length > 0) {
+        $("#AudioOnly").val(checkedRadio[0].id === "fileType2");
+        return true;
+    }
+
+    return false;
+
 }
 
 function isValidEmail() {
