@@ -55,5 +55,18 @@ namespace UKP.Website.Service
 
             return content.success;
         }
+
+        public DownloadUrlModel GetDownloadUrl(Guid id)
+        {
+            var client = _restClientWrapper.GetClient(_configuration.IasBaseUrl);
+            var request = _restClientWrapper.AuthRestRequest("api/download/downloadurl/{id}", Method.GET, _configuration.IasAuthKey);
+            request.AddUrlSegment("id", id.ToString());
+
+            var response = client.Execute(request);
+
+            if (response.StatusCode.Equals(HttpStatusCode.OK)) return DownloadTransforms.TransformDownloadUrl(response.Content);
+            if (response.StatusCode.Equals(HttpStatusCode.NoContent)) return null;
+            throw new RestSharpException(response);
+        }
     }
 }

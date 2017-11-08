@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Newtonsoft.Json.Linq;
 using UKP.Website.Service.Model;
 
@@ -20,6 +19,16 @@ namespace UKP.Website.Service.Transforms
             var downloadsRemaining = (int)Object.downloadsRemaining;
 
             return new DownloadResponseModel(success, message, resetHours, resetMinutes, email, downloadsRemaining);
+        }
+
+        public static DownloadUrlModel TransformDownloadUrl(dynamic json)
+        {
+            dynamic Object = JObject.Parse(json.ToString());
+
+            var id = (Guid)Object.id;
+            var url = (string)Object.url;
+
+            return new DownloadUrlModel(id, url);
         }
     }
 }
