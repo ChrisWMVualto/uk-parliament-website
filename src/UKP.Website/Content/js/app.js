@@ -290,7 +290,8 @@ function inputMask(e) {
     } else {
         var replace = key + mask.substr(to + 1, from - 1);
         input = text.substring(0, to) + replace;
-        input += text.substr(input.length, 8);
+        var length = input.length;
+        input += text.substr(length, 8);
     }
 
     ApplyMask(e.target, input, mask, to + 1);
