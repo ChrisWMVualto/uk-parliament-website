@@ -84,6 +84,13 @@ function setDownloadTime(data) {
     var textbox = document.getElementById(data.elementId);
     textbox.value = timeString.split(' ')[0];
     document.getElementById(textbox.dataset.formId).value = time.toJSON();
+
+    if (data.elementId === "downloadStartTime") {
+        checkStartTime();
+    }
+    else if (data.elementId === "downloadEndTime") {
+        checkEndTime();
+    }
 }
 
 function setStreamUrl(data) {
