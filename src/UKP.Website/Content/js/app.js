@@ -10,6 +10,9 @@ $(function () {
     initSetFileType();
     initCreateDownload();
     initEmailValid();
+    initDownloadStartEndKeyPress();
+    initMakeAnotherClip();
+    initInputMask();
 });
 
 function initTermsAndConditions() {
@@ -58,6 +61,68 @@ function initEmailValid() {
     email.on("keyup", checkMakeClip);
 }
 
+function initDownloadStartEndKeyPress() {
+    var startTimeBox = $("#downloadStartTime");
+    var endTimeBox = $("#downloadEndTime");
+
+    startTimeBox.on("focusout", checkStartTime);
+    endTimeBox.on("focusout", checkEndTime);
+}
+
+function initMakeAnotherClip() {
+    var makeAnotherClip = $("#newClip");
+    makeAnotherClip.on("click", resetDownloadTab);
+}
+
+function checkStartTime() {
+
+    var startTimeArray = $("#downloadStartTime").val().split(":");
+    var startDateString = $('[data-id="startDownloadDate"]')[0];
+
+    var startDate = new Date(Date.parse(startDateString.title));
+    startDate.setHours(startDate.getHours() + startTimeArray[0]);
+    startDate.setMinutes(startDate.getMinutes() + startTimeArray[1]);
+    startDate.setSeconds(startDate.getSeconds() + startTimeArray[2]);
+
+    if (isNaN(startDate.valueOf())) {
+        return;
+    }
+
+    var startTime = startDate.toISOString();
+    var endTime = $("#EndTime").val();
+
+    if (startTime < endTime) {
+        setDownloadTime("StartTime", startTime);
+    } else {
+        var formStartTime = new Date($("#StartTime").val()).toTimeString().split(" ")[0];
+        $("#downloadStartTime").val(formStartTime);
+    }
+}
+
+function checkEndTime() {
+    var endTimeArray = $("#downloadEndTime").val().split(":");
+    var endDateString = $('[data-id="endDownloadDate"]')[0];
+
+    var endDate = new Date(Date.parse(endDateString.title));
+    endDate.setHours(endDate.getHours() + endTimeArray[0]);
+    endDate.setMinutes(endDate.getMinutes() + endTimeArray[1]);
+    endDate.setSeconds(endDate.getSeconds() + endTimeArray[2]);
+
+    if (isNaN(endDate.valueOf())) {
+        return;
+    }
+
+    var endTime = endDate.toISOString();
+    var startTime = $("#StartTime").val();
+
+    if (endTime > startTime) {
+        setDownloadTime("EndTime", endTime);
+    } else {
+        var formEndTime = new Date($("#EndTime").val()).toTimeString().split(" ")[0];
+        $("#downloadEndTime").val(formEndTime);
+    }
+}
+
 function termsAndConditionsClickHandler(e) {
     var id = e.target.dataset.continueId;
 
@@ -104,6 +169,12 @@ function copyToClipbloard() {
     } catch (err) {
         log.text('unable to copy');
     }
+}
+
+function resetDownloadTab() {
+    $(".thankyou").prop("hidden", true);
+    $(".download-form").removeAttr("hidden");
+    $("#email").val("");
 }
 
 function checkMakeClip() {
@@ -166,4 +237,68 @@ function recaptchaCallback(e) {
             checkMakeClip();
         }
     });
+}
+
+function initInputMask() {
+    var start = document.getElementById("downloadStartTime");
+    var end = document.getElementById("downloadEndTime");
+
+    start.addEventListener("keydown", inputMask);
+    end.addEventListener("keydown", inputMask);
+}
+
+function inputMask(e) {
+    var mask = "00:00:00";
+    var text = e.target.value;
+    var to = this.selectionStart;
+    var from = this.selectionEnd;
+    var input = "";
+
+    //Arrow Keys
+    if (e.keyCode < 41 && e.keyCode > 36) return;
+    e.preventDefault();
+
+    //Backspace
+    if (e.keyCode === 8) {
+        if (to === from) to--;
+        input = text.substring(0, to) + mask.substring(to, from) + text.substring(from, text.length);
+        ApplyMask(e.target, input, mask, to);
+    }
+
+    //Delete
+    if (e.keyCode === 46) {
+        if (to === from && e.keyCode === 46) from++;
+        input = text.substring(0, to) + mask.substring(to, from) + text.substring(from, text.length);
+        ApplyMask(e.target, input, mask, from);
+    }
+
+    //Numbers
+    var key = parseInt(e.key);
+    if (isNaN(key)) return;
+    if (to === 8) return;
+
+    if (to === 0 && key > 2) key = 2;
+    if (to === 1 && text.substr(0, 1) === "2" && key > 3) key = 3;
+    if ((to === 3 || to === 6 || to === 2 || to === 5) && key > 5) key = 5;
+
+    if (text.substring(to, to + 1) === ":") {
+        to++;
+        from++;
+    }
+    if (to === from) {
+        input = text.substr(0, to) + key + text.substr(from + 1, text.length);
+    } else {
+        var replace = key + mask.substr(to + 1, from - 1);
+        input = text.substring(0, to) + replace;
+        input += text.substr(input.length, 8);
+    }
+
+    ApplyMask(e.target, input, mask, to + 1);
+}
+
+function ApplyMask(element, value, mask, cursor) {
+    value += mask.substr(value.length, mask.length);
+    element.value = value;
+    element.selectionStart = cursor;
+    element.selectionEnd = element.selectionStart;
 }
