@@ -72,7 +72,7 @@
                             @Html.Partial(MVC.Event.Views._Info, Model)
                             @Html.Partial(MVC.Event.Views._Share, Model)
                             <div class="tab-pane fade" data-load-url="@Url.Action(MVC.Event.DownloadTab(Model.VideoModel.Event.Id))" id="download">
-                                @Html.Partial(MVC.Event.Views._Download, Model.VideoModel)
+                                @Html.Partial(MVC.Event.Views._Download, new DownloadViewModel(Model.VideoModel))
                             </div>
                         </div>
                     </div>

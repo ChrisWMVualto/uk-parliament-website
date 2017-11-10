@@ -446,6 +446,7 @@
     <Compile Include="Models\Event\CreateDownloadModel.cs" />
     <Compile Include="Models\Event\ClippingViewModel.cs" />
     <Compile Include="Models\Event\CreateDownloadResponseModel.cs" />
+    <Compile Include="Models\Event\DownloadViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Event\LogUpdateModel.cs" />
     <Compile Include="Models\Event\SearchMomentModel.cs" />

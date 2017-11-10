@@ -34,9 +34,13 @@ function getDownloadTime(e) {
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }
 
+function setDownloadTime(id, time) {
+    $("#"+id).val(time);
+}
+
 function initSetDownloadTime(e) {
     var time = getTime();
-
+    debugger;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }
 

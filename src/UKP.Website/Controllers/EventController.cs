@@ -200,7 +200,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
-            var response = new CreateDownloadResponseModel(true);
+            var response = new CreateDownloadResponseModel(model.EmailAddress,true);
             try
             {
                 var startTime = DateTime.Parse(model.StartTime);

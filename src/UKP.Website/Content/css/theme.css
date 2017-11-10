@@ -12981,6 +12981,16 @@ a.extract-text {
         padding-right: 0;
         margin-right: 0.75em;
     }
+
+    .end-time-container {
+        width: auto;
+        width: auto;
+        float: left;
+        padding-left: 15px;
+        padding-right: 0;
+        margin-right: 0.75em;
+    }
+
 }
 @media (min-width: 992px) and (max-width: 1200px) {
     .time-container .time-input {
@@ -13148,11 +13158,15 @@ a.extract-text {
     left: 50%;
     margin-left: -20px;
 }
-.thankyou p:nth-child(3) {
+.thankyou-message {
     color: #666666;
 }
 .thankyou .btn {
     margin-top: 1em;
+}
+.error-message {
+    color: red;
+    font-size: 150%;
 }
 @media (min-width: 768px) {
     .thankyou {
