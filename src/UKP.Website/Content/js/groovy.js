@@ -30,12 +30,15 @@ function getDownloadTime(e) {
     var time = getTime();
     var timeString = time.toTimeString();
     document.getElementById(e.target.dataset.textboxId).value = timeString.split(' ')[0];
-
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
-}
 
-function setDownloadTime(id, time) {
-    $("#"+id).val(time);
+    if (e.target.id === "downloadStartTimeSet") {
+        checkStartTime();
+    }
+    else if (e.target.id === "downloadEndTimeSet") {
+        checkEndTime();
+    }
+
 }
 
 function initSetDownloadTime(e) {

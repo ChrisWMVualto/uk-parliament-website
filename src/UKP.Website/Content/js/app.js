@@ -1,4 +1,5 @@
 ﻿var captchaValid = false;
+var timesValid = true;
 
 $(function () {
     initTermsAndConditions();
@@ -92,11 +93,20 @@ function checkStartTime() {
     var endTime = $("#EndTime").val();
 
     if (startTime < endTime) {
-        setDownloadTime("StartTime", startTime);
+        setDownloadTimeForm("StartTime", startTime);
+        timesValid = true;
+        $(".error-message").prop("hidden", true);
+        checkMakeClip();
     } else {
-        var formStartTime = new Date($("#StartTime").val()).toTimeString().split(" ")[0];
-        $("#downloadStartTime").val(formStartTime);
+        $(".error-message").text("Start Time cannot be later than the End Time");
+        $(".error-message").removeAttr("hidden");
+        timesValid = false;
+        checkMakeClip();
     }
+}
+
+function setDownloadTimeForm(id, time) {
+    document.getElementById(id).value = time;
 }
 
 function checkEndTime() {
@@ -116,10 +126,16 @@ function checkEndTime() {
     var startTime = $("#StartTime").val();
 
     if (endTime > startTime) {
-        setDownloadTime("EndTime", endTime);
+        //theo doesnt like this
+        setDownloadTimeForm("EndTime", endTime);
+        timesValid = true;
+        $(".error-message").prop("hidden", true);
+        checkMakeClip();
     } else {
-        var formEndTime = new Date($("#EndTime").val()).toTimeString().split(" ")[0];
-        $("#downloadEndTime").val(formEndTime);
+        $(".error-message").text("End Time cannot be earlier than the Start Time");
+        $(".error-message").removeAttr("hidden");
+        timesValid = false;
+        checkMakeClip();
     }
 }
 
@@ -180,7 +196,7 @@ function resetDownloadTab() {
 function checkMakeClip() {
     var valid = false;
 
-    if (isRadioChecked() && isValidEmail() && captchaValid) {
+    if (isRadioChecked() && isValidEmail() && captchaValid && timesValid) {
         valid = true;
     }
 
