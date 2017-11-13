@@ -11647,7 +11647,7 @@ dl.description dt {
 .has-copy i.fa-clipboard {
     position: absolute;
     right: 22px;
-    top: 55px;
+    bottom: 45px;
     font-size: 1.6em;
     background: #ffffff;
     height: 34px;
