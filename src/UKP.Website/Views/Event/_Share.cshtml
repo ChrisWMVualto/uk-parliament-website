@@ -2,7 +2,7 @@
 @using UKP.Website.Application
 @model UKP.Website.Models.Event.EventViewModel
 
-<div class="tab-pane fade" id="share" data-url="@Url.Action(MVC.Event.GetShareVideo())">
+<div class="tab-pane fade in active" id="share" data-url="@Url.Action(MVC.Event.GetShareVideo())">
 <form role="form">
     <a href="#" class="close-pane close-share hidden">close</a>
     <div id="clippingContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
