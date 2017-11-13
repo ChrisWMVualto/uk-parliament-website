@@ -13182,3 +13182,7 @@ a.extract-text {
         top: 5em;
     }
 }
+
+textarea {
+    resize: none;
+}
