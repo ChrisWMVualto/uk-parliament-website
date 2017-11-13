@@ -62,18 +62,18 @@
                     <div class="player-tabs">
                         <div>
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="active" id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
-                                <li id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
+                                <li class="active" id="share-tab"><a href="#share" role="tab" data-toggle="tab"><span class="hidden-xs">share</span> <i class="fa fa-share fa-2x"></i></a></li>
                                 <li id="download-tab"><a href="#download" role="tab" data-toggle="tab"><span class="hidden-xs">download</span> <i class="fa fa-player-download fa-2x"></i></a></li>
+                                <li id="info-tab"><a href="#info" role="tab" data-toggle="tab" class="info-tab"><span class="hidden-xs">info</span> <i class="fa fa-help fa-2x"></i></a></li>
                             </ul>
                             <button id="audioToggle" type="button" class="btn audio-toggle @showAudioButton" data-load-url="@Url.Action(MVC.Event.ShowAudioOnly(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))" data-audioonly-on-state="@Model.VideoModel.RequestedAudioOnly" data-toggle="button"></button>
                         </div>
                         <div class="tab-content">
-                            @Html.Partial(MVC.Event.Views._Info, Model)
                             @Html.Partial(MVC.Event.Views._Share, Model)
                             <div class="tab-pane fade" data-load-url="@Url.Action(MVC.Event.DownloadTab(Model.VideoModel.Event.Id))" id="download">
                                 @Html.Partial(MVC.Event.Views._Download, new DownloadViewModel(Model.VideoModel))
                             </div>
+                            @Html.Partial(MVC.Event.Views._Info, Model)
                         </div>
                     </div>
                     <div class="col-md-5">
