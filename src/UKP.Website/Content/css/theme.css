@@ -11741,6 +11741,7 @@ padding: 5px;
     margin: 0 0 20px 0;
     height: auto;
 }
+
 .tc-box h5 {
     font-size: 120%;
     margin-bottom: 20px;
@@ -12844,7 +12845,6 @@ a.extract-text {
 }
 .slimScrollBar {
     min-height: 100px;
-    margin-top: 12px;
 }
 .slimScrollRailTop div {
     width: 0;
