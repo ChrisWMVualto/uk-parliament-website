@@ -126,7 +126,6 @@ function checkEndTime() {
     var startTime = $("#StartTime").val();
 
     if (endTime > startTime) {
-        //theo doesnt like this
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
@@ -180,7 +179,7 @@ function copyToClipbloard() {
     try {
         var successful = document.execCommand('copy');
         var msg = successful ? 'successful' : 'unsuccessful';
-        log.text("Copied to Clip Board");
+        log.text("Copied to Clipboard");
         log.addClass("show");
     } catch (err) {
         log.text('unable to copy');
