@@ -147,7 +147,7 @@ function checkEndTime() {
         if (endTime <= startTime) {
             setErrorMessage("End Time cannot be earlier than the Start Time");
         } else {
-            setErrorMessage("End Time cannont be later than the meeting end time");
+            setErrorMessage("End Time cannot be later than the meeting end time");
         }
     }
 }
