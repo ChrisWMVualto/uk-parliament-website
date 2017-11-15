@@ -55,8 +55,10 @@ function updateDownloadForm() {
 }
 
 function updateDownloadTab() {
+    //todo resolve error
     var tabUrl = $("#download").data("load-url");
     $.get(tabUrl, function (data) {
+        debugger;
         $("#download").html(data);
     });
 }
@@ -70,6 +72,8 @@ function updateClipping() {
         initCheckbox();
         reloadEmbedData();
         initSetShareTime();
+        initShareInputMask();
+        initShareUpdateEmbed();
     });
 }
 
@@ -126,13 +130,13 @@ function reloadEmbedData() {
     var settings = {
         options: {
             start: {
-                input: $('#startTime'),
+                input: $('#shareStartTime'),
                 date: $('#startClipDate'),
                 hiddenStart: $('#hiddenStart'),
                 checkbox: $('#startTimeCheck')
             },
             end: {
-                input: $('#endTime'),
+                input: $('#shareEndTime'),
                 date: $('#endClipDate'),
                 hiddenEnd: $('#hiddenEnd'),
                 checkbox: $('#endTimeCheck')
@@ -156,7 +160,6 @@ function reloadEmbedData() {
 
     $.each(settings.options, function () {
         if (this.hasOwnProperty('input')) {
-            this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }
         if (this.hasOwnProperty('date')) {

@@ -34,6 +34,7 @@ function initEnableEmail() {
 
 function initSetShareTime() {
     var setTimes = $(".set-share-time");
+
     setTimes.on("click", getShareTime);
 }
 
@@ -85,6 +86,8 @@ function checkStartTime() {
     startDate.setMinutes(startDate.getMinutes() + startTimeArray[1]);
     startDate.setSeconds(startDate.getSeconds() + startTimeArray[2]);
 
+    var meetingStartTime = document.getElementById("MeetingStartTime").value;
+
     if (isNaN(startDate.valueOf())) {
         return;
     }
@@ -92,17 +95,25 @@ function checkStartTime() {
     var startTime = startDate.toISOString();
     var endTime = $("#EndTime").val();
 
-    if (startTime < endTime) {
+    if (startTime < endTime && startTime >= meetingStartTime) {
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
         checkMakeClip();
     } else {
-        $(".error-message").text("Start Time cannot be later than the End Time");
-        $(".error-message").removeAttr("hidden");
-        timesValid = false;
-        checkMakeClip();
+        if (startTime >= endTime) {
+            setErrorMessage("Start Time cannot be later than the End Time");
+        } else {
+            setErrorMessage("Start Time cannot be earlier than the meeting start time");
+        }
     }
+}
+
+function setErrorMessage(message) {
+    $(".error-message").text(message);
+    $(".error-message").removeAttr("hidden");
+    timesValid = false;
+    checkMakeClip();
 }
 
 function setDownloadTimeForm(id, time) {
@@ -118,6 +129,8 @@ function checkEndTime() {
     endDate.setMinutes(endDate.getMinutes() + endTimeArray[1]);
     endDate.setSeconds(endDate.getSeconds() + endTimeArray[2]);
 
+    var meetingEndTime = document.getElementById("MeetingEndTime").value;
+
     if (isNaN(endDate.valueOf())) {
         return;
     }
@@ -125,16 +138,17 @@ function checkEndTime() {
     var endTime = endDate.toISOString();
     var startTime = $("#StartTime").val();
 
-    if (endTime > startTime) {
+    if (endTime > startTime && endTime < meetingEndTime) {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
         checkMakeClip();
     } else {
-        $(".error-message").text("End Time cannot be earlier than the Start Time");
-        $(".error-message").removeAttr("hidden");
-        timesValid = false;
-        checkMakeClip();
+        if (endTime <= startTime) {
+            setErrorMessage("End Time cannot be earlier than the Start Time");
+        } else {
+            setErrorMessage("End Time cannont be later than the meeting end time");
+        }
     }
 }
 
@@ -255,11 +269,28 @@ function recaptchaCallback(e) {
 }
 
 function initInputMask() {
-    var start = document.getElementById("downloadStartTime");
-    var end = document.getElementById("downloadEndTime");
+    var startDownload = document.getElementById("downloadStartTime");
+    var endDownload = document.getElementById("downloadEndTime");
 
-    start.addEventListener("keydown", inputMask);
-    end.addEventListener("keydown", inputMask);
+    startDownload.addEventListener("keydown", inputMask);
+    endDownload.addEventListener("keydown", inputMask);
+
+}
+
+function initShareInputMask() {
+    var startShare = document.getElementById("shareStartTime");
+    var endShare = document.getElementById("shareEndTime");
+
+    startShare.addEventListener("keydown", inputMask);
+    endShare.addEventListener("keydown", inputMask);
+}
+
+function initShareUpdateEmbed() {
+    var startShare = document.getElementById("shareStartTime");
+    var endShare = document.getElementById("shareEndTime");
+
+    startShare.addEventListener("focusout", reloadEmbedData);
+    endShare.addEventListener("focusout", reloadEmbedData);
 }
 
 function inputMask(e) {
