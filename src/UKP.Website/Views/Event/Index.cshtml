@@ -35,6 +35,8 @@
 }
 
 <div class="container main-container">
+    @Html.Hidden("MeetingStartTime", Model.VideoModel.Event.DisplayStartDate.ToISO8601String())
+    @Html.Hidden("MeetingEndTime", Model.VideoModel.Event.DisplayEndDate.ToISO8601String())
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
     @Html.Hidden("ProgramDateTime")
@@ -46,7 +48,9 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <header class="title-main title-player"><h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span></h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
+            <header class="title-main title-player">
+                <h2><i class="fa fa-play-solid fa-lg"></i> <span>Player</span>
+                </h2><a href="@Configuration.GetRssUrl" target="_blank" class="rss-link pull-right hidden-xs">RSS <i class="fa fa-rss fa-2x"></i></a></header>
         </div>
         <div class="col-md-12 page-title-bar">
             <div id="eventTitleContainer" data-load-url="@Url.Action(MVC.Event.EventTitle(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))" class="row">
@@ -101,7 +105,8 @@
                             <div class="tab-pane fade stacks-logs" id="logs">
                                 <div id="index-message" class="@indexMessageClass">
                                     <p>Note: Latency in the video stream means index items will appear first.</p>
-                                    <p><button id="seekToLiveButton" type="submit" class="btn btn-default btn-seek-to-live-grey">Back to live <i class="fa fa-play"></i></button></p>
+                                    <p><button id="seekToLiveButton" type="submit" class="btn btn-default btn-seek-to-live-grey">Back to live <i class="fa fa-play"></i></button>
+                                    </p>
                                 </div>
                                 <ul class="log-list">
                                     @Html.Action(MVC.Event.Logs(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))
