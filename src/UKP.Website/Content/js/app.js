@@ -179,7 +179,7 @@ function enableEmbed() {
     terms.fadeOut();
     embed.fadeIn();
 
-    urlPageNavigation("#embed");
+    urlPageNavigation("#player-tabs");
 }
 
 function enableEmail() {
@@ -189,7 +189,7 @@ function enableEmail() {
     terms.fadeOut();
     emailMe.fadeIn();
 
-    urlPageNavigation("#email");
+    urlPageNavigation("#player-tabs");
 }
 
 function urlPageNavigation(tag) {
