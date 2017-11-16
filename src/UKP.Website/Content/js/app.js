@@ -92,7 +92,7 @@ function checkStartTime() {
         return;
     }
 
-    var startTime = startDate.toISOString();
+    var startTime = startDate.toISOString().split(".")[0] + "Z";
     var endTime = $("#EndTime").val();
 
     if (startTime < endTime && startTime >= meetingStartTime) {
@@ -137,10 +137,10 @@ function checkEndTime() {
         return;
     }
 
-    var endTime = endDate.toISOString();
+    var endTime = endDate.toISOString().split(".")[0] + "Z";
     var startTime = $("#StartTime").val();
 
-    if (endTime > startTime && endTime < meetingEndTime) {
+    if (endTime > startTime && endTime <= meetingEndTime) {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
