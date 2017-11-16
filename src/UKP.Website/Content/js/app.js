@@ -101,9 +101,11 @@ function checkStartTime() {
         $(".error-message").prop("hidden", true);
         checkMakeClip();
     } else {
-        if (startTime >= endTime) {
+        if (startTime > endTime) {
             setErrorMessage("Start Time cannot be later than the End Time");
-        } else {
+        } else if (startTime === endTime) {
+            setErrorMessage("Start Time cannot be equal to the End Time");
+        }else {
             setErrorMessage("Start Time cannot be earlier than the meeting start time");
         }
     }
@@ -144,8 +146,10 @@ function checkEndTime() {
         $(".error-message").prop("hidden", true);
         checkMakeClip();
     } else {
-        if (endTime <= startTime) {
+        if (endTime < startTime) {
             setErrorMessage("End Time cannot be earlier than the Start Time");
+        } else if (endTime === startTime) {
+            setErrorMessage("End Time cannot be equal to the Start Time");
         } else {
             setErrorMessage("End Time cannot be later than the meeting end time");
         }
@@ -174,6 +178,8 @@ function enableEmbed() {
 
     terms.fadeOut();
     embed.fadeIn();
+
+    window.location.href += "#embed";
 }
 
 function enableEmail() {
@@ -182,6 +188,8 @@ function enableEmail() {
 
     terms.fadeOut();
     emailMe.fadeIn();
+
+    window.location.href += "#email";
 }
 
 function copyToClipbloard() {
