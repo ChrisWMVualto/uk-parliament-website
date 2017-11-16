@@ -20,7 +20,8 @@
                 $(".download-form").prop("hidden", true);
                 $(".thankyou").removeAttr("hidden");
 
-                window.location.href += "#thankyou";
+                urlPageNavigation("#thankyou");
+
             } else {
                 $(".error-message").removeAttr("hidden");
                 $(".error-message").text(response.Message);
