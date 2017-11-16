@@ -20,7 +20,7 @@
                 $(".download-form").prop("hidden", true);
                 $(".thankyou").removeAttr("hidden");
 
-                urlPageNavigation("#thankyou");
+                urlPageNavigation("#player-tabs");
 
             } else {
                 $(".error-message").removeAttr("hidden");
