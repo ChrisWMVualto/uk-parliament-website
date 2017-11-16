@@ -400,6 +400,8 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Event\_Download.cshtml" />
     <Content Include="Views\Event\_DownloadForm.cshtml" />
+    <Content Include="Views\Download\DownloadExpired.cshtml" />
+    <Content Include="Views\Download\Index.cshtml" />
     <None Include="Web.UKPLive.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -527,7 +529,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Download\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
