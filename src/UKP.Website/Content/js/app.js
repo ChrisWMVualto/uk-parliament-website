@@ -99,6 +99,7 @@ function checkStartTime() {
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
+        checkEndTime();
         checkMakeClip();
     } else {
         if (startTime > endTime) {
@@ -144,6 +145,7 @@ function checkEndTime() {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
+        checkStartTime();
         checkMakeClip();
     } else {
         if (endTime < startTime) {
