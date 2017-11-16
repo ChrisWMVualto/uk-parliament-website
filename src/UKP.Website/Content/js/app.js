@@ -179,7 +179,7 @@ function enableEmbed() {
     terms.fadeOut();
     embed.fadeIn();
 
-    window.location.href += "#embed";
+    urlPageNavigation("#embed");
 }
 
 function enableEmail() {
@@ -189,7 +189,19 @@ function enableEmail() {
     terms.fadeOut();
     emailMe.fadeIn();
 
-    window.location.href += "#email";
+    urlPageNavigation("#email");
+}
+
+function urlPageNavigation(tag) {
+    var url = window.location.href;
+
+    if (url.indexOf("#") !== -1) {
+        url = (url.substring(0, url.indexOf("#")) + tag);
+    } else {
+        url += tag;
+    }
+
+    window.location.href = url;
 }
 
 function copyToClipbloard() {
