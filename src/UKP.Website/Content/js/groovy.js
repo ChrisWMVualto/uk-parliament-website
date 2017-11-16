@@ -1,6 +1,4 @@
-﻿window.addEventListener("message", updateCurrentTime);
-
-$(function() {
+﻿$(function() {
     enableAudioOnly();
 });
 
