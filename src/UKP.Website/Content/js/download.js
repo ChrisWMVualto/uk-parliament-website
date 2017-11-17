@@ -1,4 +1,10 @@
 ﻿function createDownload() {
+
+    var endTime = document.getElementById("EndTime");
+    if (endTime.value === "") {
+        endTime.value = document.getElementById("MeetingEndTime").value;
+    }
+
     var form = $("#createDownloadForm");
     var data = $(form).serialize();
 
@@ -31,9 +37,8 @@
 
 }
 
-window.addEventListener("message", updateCurrentTime);
-
 function updateCurrentTime(event) {
+    debugger;
     var messageSplit = event.data.split("_");
     document.getElementById("ProgramDateTime").value = messageSplit[1];
 }

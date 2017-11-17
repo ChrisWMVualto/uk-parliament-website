@@ -8,7 +8,7 @@
                          || Model.Event.States.PlayerState == PlayerEventState.LIVE))
 {
     var startTime = Model.RequestedInPoint ?? Model.Event.PublishedStartTime.Value;
-    var endTime = Model.Event.ActualEndTime ?? new DateTime();
+    var endTime = Model.Event.ActualEndTime ?? null;
 
     if (Model.RequestedOutPoint.HasValue)
     {
