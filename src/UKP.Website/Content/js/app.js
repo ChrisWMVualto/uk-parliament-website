@@ -95,11 +95,15 @@ function checkStartTime() {
     var startTime = startDate.toISOString().split(".")[0] + "Z";
     var endTime = $("#EndTime").val();
 
+    if (endTime === "") {
+        endTime = document.getElementById("MeetingEndTime").value;
+    }
+
     if (startTime < endTime && startTime >= meetingStartTime) {
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
-        checkEndTime();
+        //checkEndTime();
         checkMakeClip();
     } else {
         if (startTime > endTime) {
@@ -145,7 +149,7 @@ function checkEndTime() {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
-        checkStartTime();
+        //checkStartTime();
         checkMakeClip();
     } else {
         if (endTime < startTime) {

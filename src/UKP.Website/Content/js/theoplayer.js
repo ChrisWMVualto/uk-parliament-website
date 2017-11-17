@@ -12,6 +12,13 @@ function receiveMessage(event) {
     if(message.sender === sender) window[message.function](message.data);
 }
 
+function liveEdgeUpdate(data) {
+
+    document.getElementById("MeetingEndTime").value = data.liveEdgeUpdateString;
+    checkStartTime();
+    checkEndTime();
+}
+
 function getShareTime(e) {
     var receiver = $('#UKPPlayer')[0];
     var message = {
