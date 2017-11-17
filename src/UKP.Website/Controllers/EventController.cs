@@ -104,10 +104,13 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
-        public virtual PartialViewResult DownloadTab(Guid id)
+        public virtual PartialViewResult DownloadTab(Guid id, string @in = null, string @out = null)
         {
-            var video = _videoService.GetVideo(id);
-            return PartialView(MVC.Event.Views._Download, video);
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+            var video = _videoService.GetVideo(id, inPoint, outPoint, statsEnabled: Request.CookiesAllowed());
+
+            return PartialView(MVC.Event.Views._Download, new DownloadViewModel(video));
         }
 
         [HttpGet]

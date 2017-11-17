@@ -55,10 +55,8 @@ function updateDownloadForm() {
 }
 
 function updateDownloadTab() {
-    //todo resolve error
     var tabUrl = $("#download").data("load-url");
     $.get(tabUrl, function (data) {
-        debugger;
         $("#download").html(data);
     });
 }
@@ -67,7 +65,6 @@ function updateClipping() {
     var clippingUrl = $('#clippingContainer').data("load-url");
     $.get(clippingUrl, function (data) {
         $('#clippingContainer').html(data);
-
         initSelectDates();
         initCheckbox();
         reloadEmbedData();
@@ -110,11 +107,12 @@ function pollEvent() {
 
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
+    updateDownloadTab();
     updateClipping();
     updateAudioButton();
 
     updateDownloadForm();
-    updateDownloadTab();
+
 
     if (recordedState == "REVOKE") {
         window.location.reload();

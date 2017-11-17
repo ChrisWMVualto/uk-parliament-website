@@ -279,6 +279,8 @@ namespace UKP.Website.Controllers
         public class ActionParamsClass_DownloadTab
         {
             public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
         }
         static readonly ActionParamsClass_Clipping s_params_Clipping = new ActionParamsClass_Clipping();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -485,14 +487,16 @@ namespace UKP.Website.Controllers
         }
 
         [NonAction]
-        partial void DownloadTabOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id);
+        partial void DownloadTabOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult DownloadTab(System.Guid id)
+        public override System.Web.Mvc.PartialViewResult DownloadTab(System.Guid id, string @in, string @out)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.DownloadTab);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            DownloadTabOverride(callInfo, id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            DownloadTabOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 
