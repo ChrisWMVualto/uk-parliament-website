@@ -7,7 +7,8 @@
                      && (Model.Event.States.PlayerState == PlayerEventState.ARCHIVE
                          || Model.Event.States.PlayerState == PlayerEventState.LIVE))
 {
-    var startTime = Model.RequestedInPoint ?? Model.Event.PublishedStartTime.Value;
+    //todo fix issue with times being slightly out of sync
+    var startTime = Model.RequestedInPoint ?? Model.Event.PublishedStartTime.Value.AddSeconds(1);
     var endTime = Model.Event.ActualEndTime ?? null;
 
     if (Model.RequestedOutPoint.HasValue)
