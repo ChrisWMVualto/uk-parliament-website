@@ -67,6 +67,9 @@ function initDownloadStartEndKeyPress() {
     var startTimeBox = $("#downloadStartTime");
     var endTimeBox = $("#downloadEndTime");
 
+    startTimeBox.val(new Date(document.getElementById("StartTime").value).toTimeString().split(" ")[0]);
+    endTimeBox.val(new Date(document.getElementById("EndTime").value).toTimeString().split(" ")[0]);
+
     startTimeBox.on("focusout", checkStartTime);
     endTimeBox.on("focusout", checkEndTime);
 }
