@@ -36,7 +36,6 @@ function getDownloadTime(e) {
 
 function initSetDownloadTime(e) {
     var time = getTime();
-    debugger;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }
 
