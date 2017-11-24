@@ -304,7 +304,9 @@ function initInputMask() {
     var endDownload = document.getElementById("downloadEndTime");
 
     startDownload.addEventListener("keydown", inputMask);
+    startDownload.addEventListener("input", mobileMask);
     endDownload.addEventListener("keydown", inputMask);
+    endDownload.addEventListener("input", mobileMask);
 
 }
 
@@ -313,7 +315,9 @@ function initShareInputMask() {
     var endShare = document.getElementById("shareEndTime");
 
     startShare.addEventListener("keydown", inputMask);
+    startShare.addEventListener("input", mobileMask);
     endShare.addEventListener("keydown", inputMask);
+    endShare.addEventListener("input", mobileMask);
 }
 
 function initShareUpdateEmbed() {
@@ -324,12 +328,61 @@ function initShareUpdateEmbed() {
     endShare.addEventListener("focusout", reloadEmbedData);
 }
 
+var androidInput = false;
+
+function mobileMask(e) {
+    var mask = "00:00:00";
+    var beforeInput = e.target.dataset.lastInput;
+    if (androidInput) {
+        var to = this.selectionStart;
+        var from = this.selectionEnd;
+        var input = e.target.value.substring(to, from);
+        if (beforeInput !== e.target.value) {
+            var key = parseInt(input);
+            if (isNaN(key) || to === 8) {
+                e.target.value = beforeInput;
+                return;
+            }
+            if (beforeInput.substring(to, to + 1) === ":") {
+                to++;
+                from++;
+            }
+            if (e.target.value.substring(to + 1, to + 2) === ":") {
+                to++;
+                from++;
+            }
+
+            if (to === 0 && key > 2) key = 2;
+            if (parseInt(e.target.value.substr(to + 1, to + 2)) > 3 && key > 1) {
+                key = 1;
+            }
+            if (to === 1 && e.target.value.substr(0, 1) === "2" && key > 3) key = 3;
+            if ((to === 3 || to === 6 || to === 2 || to === 5) && key > 5) key = 5;
+
+
+            e.target.value = beforeInput.substring(0, to) + key + beforeInput.substring(from, beforeInput.length);
+            e.target.value += mask.substr(e.target.value.length, mask.length);
+
+            beforeInput = e.target.value;
+            e.target.dataset.lastInput = beforeInput;
+            this.selectionStart = to + 1;
+            this.selectionEnd = to + 1;
+        }
+        androidInput = false;
+    }
+}
+
 function inputMask(e) {
     var mask = "00:00:00";
     var text = e.target.value;
     var to = this.selectionStart;
     var from = this.selectionEnd;
     var input = "";
+
+    if (e.keyCode === 229) {
+        androidInput = true;
+        return;
+    }
 
     //Arrow Keys
     if (e.keyCode < 41 && e.keyCode > 36) return;
@@ -354,7 +407,12 @@ function inputMask(e) {
     if (isNaN(key)) return;
     if (to === 8) return;
 
-    if (to === 0 && key > 2) key = 2;
+    if (to === 0 && key > 2) {
+        key = 2;
+    }
+    if (parseInt(text.substr(to + 1, to + 2)) > 3 && key > 1) {
+        key = 1;
+    }
     if (to === 1 && text.substr(0, 1) === "2" && key > 3) key = 3;
     if ((to === 3 || to === 6 || to === 2 || to === 5) && key > 5) key = 5;
 
@@ -379,4 +437,5 @@ function ApplyMask(element, value, mask, cursor) {
     element.value = value;
     element.selectionStart = cursor;
     element.selectionEnd = element.selectionStart;
+    element.dataset.lastInput = element.value;
 }
