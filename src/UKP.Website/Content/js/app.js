@@ -233,12 +233,14 @@ function resetDownloadTab() {
     $(".thankyou").prop("hidden", true);
     $(".download-form").removeAttr("hidden");
     $("#email").val("");
+    document.getElementById("ClipRequested").value = false;
 }
 
 function checkMakeClip() {
     var valid = false;
+    var clipRequested = (document.getElementById("ClipRequested").value === "true");
 
-    if (isRadioChecked() && isValidEmail() && captchaValid && timesValid) {
+    if (isRadioChecked() && isValidEmail() && captchaValid && timesValid && !clipRequested) {
         valid = true;
     }
 
