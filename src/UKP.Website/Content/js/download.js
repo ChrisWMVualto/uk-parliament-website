@@ -1,5 +1,9 @@
 ﻿function createDownload() {
 
+    if (document.getElementById("ClipRequested") === true) {
+        return;
+    }
+
     var endTime = document.getElementById("EndTime");
     if (endTime.value === "") {
         endTime.value = document.getElementById("MeetingEndTime").value;
@@ -10,6 +14,8 @@
 
     $(".error-message").prop("hidden", true);
     $("#downloadSubmit").prop("disabled", true);
+
+    document.getElementById("ClipRequested").value = true;
 
     $.ajax({
         method: 'POST',

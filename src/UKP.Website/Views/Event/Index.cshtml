@@ -35,6 +35,7 @@
 }
 
 <div class="container main-container">
+    @Html.Hidden("ClipRequested",false)
     @Html.Hidden("MeetingStartTime", Model.VideoModel.Event.DisplayStartDate.ToISO8601String())
     @Html.Hidden("MeetingEndTime", Model.VideoModel.Event.DisplayEndDate.ToISO8601String())
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
