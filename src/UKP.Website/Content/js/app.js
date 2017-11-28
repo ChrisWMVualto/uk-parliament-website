@@ -336,7 +336,11 @@ function mobileMask(e) {
     if (androidInput) {
         var to = this.selectionStart;
         var from = this.selectionEnd;
-        var input = e.target.value.substring(to, from);
+        var input;
+        if (to === from) {
+            input = e.target.value.substring(to - 1, from);
+            to--;
+        } else input = e.target.value.substring(to, from);
         if (beforeInput !== e.target.value) {
             var key = parseInt(input);
             if (isNaN(key) || to === 8) {
@@ -352,9 +356,11 @@ function mobileMask(e) {
                 from++;
             }
 
-            if (to === 0 && key > 2) key = 2;
-            if (parseInt(e.target.value.substr(to + 1, to + 2)) > 3 && key > 1) {
-                key = 1;
+            if (to === 0 && key > 2) {
+                key = 2;
+                if (parseInt(e.target.value.substr(to + 1, to + 2)) > 3 && key > 1) {
+                    key = 1;
+                }
             }
             if (to === 1 && e.target.value.substr(0, 1) === "2" && key > 3) key = 3;
             if ((to === 3 || to === 6 || to === 2 || to === 5) && key > 5) key = 5;
