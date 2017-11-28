@@ -14,7 +14,9 @@ function getTime() {
 function getShareTime(e) {
 
     var timeString = getTime().toTimeString();
-    document.getElementById(e.target.dataset.textboxId).value = timeString.split(' ')[0];
+    var textbox = document.getElementById(e.target.dataset.textboxId);
+    textbox.value = timeString.split(' ')[0];
+    textbox.dataset.lastInput = textbox.value;
 
     reloadEmbedData();
 }
@@ -22,7 +24,9 @@ function getShareTime(e) {
 function getDownloadTime(e) {
     var time = getTime();
     var timeString = time.toTimeString();
-    document.getElementById(e.target.dataset.textboxId).value = timeString.split(' ')[0];
+    var textbox = document.getElementById(e.target.dataset.textboxId);
+    textbox.value = timeString.split(' ')[0];
+    textbox.dataset.lastInput = textbox.value;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 
     if (e.target.id === "downloadStartTimeSet") {
