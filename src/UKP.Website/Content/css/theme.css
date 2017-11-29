@@ -2731,8 +2731,8 @@ fieldset[disabled] .btn {
 }
 .btn-default {
     color: #fff;
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-default:hover,
 .btn-default:focus,
@@ -2740,8 +2740,8 @@ fieldset[disabled] .btn {
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
     color: #fff;
-    background-color: #053766;
-    border-color: #05325c;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-default:active,
 .btn-default.active,
@@ -2763,17 +2763,17 @@ fieldset[disabled] .btn-default:active,
 .btn-default.disabled.active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-default .badge {
-    color: #085196;
+    color: #292c2d;
     background-color: #fff;
 }
 .btn-primary {
     color: #fff;
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2804,11 +2804,11 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-primary .badge {
-    color: #085196;
+    color: #292c2d;
     background-color: #fff;
 }
 .btn-success {
@@ -6763,8 +6763,8 @@ fieldset[disabled] .datepicker table tr td.selected.disabled:hover.active {
 .datepicker table tr td.active.disabled,
 .datepicker table tr td.active.disabled:hover {
     color: #fff;
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .datepicker table tr td.active:hover,
@@ -6865,14 +6865,14 @@ fieldset[disabled] .datepicker table tr td.active.active,
 fieldset[disabled] .datepicker table tr td.active:hover.active,
 fieldset[disabled] .datepicker table tr td.active.disabled.active,
 fieldset[disabled] .datepicker table tr td.active.disabled:hover.active {
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .datepicker table tr td.active .badge,
 .datepicker table tr td.active:hover .badge,
 .datepicker table tr td.active.disabled .badge,
 .datepicker table tr td.active.disabled:hover .badge {
-    color: #085196;
+    color: #292c2d;
     background-color: #fff;
 }
 .datepicker table tr td span {
@@ -6899,8 +6899,8 @@ fieldset[disabled] .datepicker table tr td.active.disabled:hover.active {
 .datepicker table tr td span.active.disabled,
 .datepicker table tr td span.active.disabled:hover {
     color: #fff;
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .datepicker table tr td span.active:hover,
@@ -7001,14 +7001,14 @@ fieldset[disabled] .datepicker table tr td span.active.active,
 fieldset[disabled] .datepicker table tr td span.active:hover.active,
 fieldset[disabled] .datepicker table tr td span.active.disabled.active,
 fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .datepicker table tr td span.active .badge,
 .datepicker table tr td span.active:hover .badge,
 .datepicker table tr td span.active.disabled .badge,
 .datepicker table tr td span.active.disabled:hover .badge {
-    color: #085196;
+    color: #292c2d;
     background-color: #fff;
 }
 .datepicker table tr td span.old,
@@ -9282,7 +9282,7 @@ input {
     transition: all 0.5s ease;
 }
 .no-flexbox .footer-main ul li a:hover {
-    color: #085196;
+    color: #292c2d;
     background-color: white;
 }
 .no-flexbox .footer-main ul li:last-child {
@@ -9290,7 +9290,7 @@ input {
 }
 .no-flexbox .btn-tag {
     font-size: 100%;
-    color: #085196;
+    color: #292c2d;
     background-color: #add0f2;
     border: 0;
     border-radius: 0;
@@ -9342,7 +9342,7 @@ input {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #085196;
+    background-color: #292c2d;
     /* The Fallback */
     background-color: rgba(8, 81, 150, 0.8);
 }
@@ -9365,7 +9365,7 @@ input {
 .no-flexbox a.search-thumb-inner .overlay .overlay-stack .fa-play {
     font-size: 88%;
     margin-left: 2px;
-    color: #085196;
+    color: #292c2d;
 }
 .no-flexbox a.search-thumb-inner .img-stack {
     font-size: 222%;
@@ -9401,7 +9401,7 @@ input {
     font-size: 64%;
     vertical-align: 2px;
     margin-right: 10px;
-    color: #085196;
+    color: #292c2d;
 }
 .no-flexbox .moments {
     margin-top: 20px;
@@ -9453,7 +9453,7 @@ input {
     position: absolute;
     right: -142px;
     top: 0;
-    color: #085196;
+    color: #292c2d;
 }
 .no-flexbox .moments .inner .moment-play .fa-stack {
     font-size: 106%;
@@ -9470,7 +9470,7 @@ input {
     margin-bottom: 20px;
     text-align: left;
     background-color: #d9e9f9;
-    color: #085196;
+    color: #292c2d;
     transition: all 0.5s ease;
 }
 .no-flexbox .btn-search-panel i {
@@ -9478,16 +9478,16 @@ input {
     right: 27px;
     top: 12px;
     font-size: 119%;
-    color: #085196;
+    color: #292c2d;
     text-shadow: none;
 }
 .no-flexbox .btn-search-panel.active {
     background-color: #add0f2;
-    color: #085196;
+    color: #292c2d;
 }
 .no-flexbox .btn-search-panel:focus {
     background-color: #d9e9f9;
-    color: #085196;
+    color: #292c2d;
 }
 .no-flexbox .btn-show-more {
     border: 0;
@@ -9544,8 +9544,8 @@ input {
     outline: none!important;
 }
 .btn-default {
-    background-image: linear-gradient(to bottom, #085196 0%, #05325c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff085196', endColorstr='#ff05325c', GradientType=0);
+    background-image: linear-gradient(to bottom, #292c2d 0%, #292c2d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff292c2d', endColorstr='#ff292c2d', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
     background-repeat: repeat-x;
     border-color: #042c52;
@@ -9554,24 +9554,24 @@ input {
 }
 .btn-default:hover,
 .btn-default:focus {
-    background-color: #05325c;
+    background-color: #292c2d;
     background-position: 0 -15px;
     box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.125);
     outline: none;
 }
 .btn-default:active,
 .btn-default.active {
-    background-color: #05325c;
-    border-color: #042c52;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 .btn-default:disabled,
 .btn-default[disabled] {
-    background-color: #05325c;
+    background-color: #292c2d;
     background-image: none;
 }
 .btn-primary {
-    background-image: linear-gradient(to bottom, #085196 0%, #05325c 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff085196', endColorstr='#ff05325c', GradientType=0);
+    background-image: linear-gradient(to bottom, #292c2d 0%, #05325c 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff292c2d', endColorstr='#ff292c2d', GradientType=0);
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
     background-repeat: repeat-x;
     border-color: #042c52;
@@ -10019,8 +10019,8 @@ h3 {
     border-color: #add0f2;
 }
 .navbar-default .navbar-toggle:focus {
-    background-color: #085196;
-    border-color: #085196;
+    background-color: #292c2d;
+    border-color: #292c2d;
 }
 ul.main-nav {
     border-top: 1px solid #b3b3b3;
@@ -10054,9 +10054,9 @@ ul.main-nav li a .fa-stack .fa-circle {
     color: #d4d4d4;
 }
 ul.main-nav li a:hover {
-    border-bottom: 1px solid #085196;
+    border-bottom: 1px solid #292c2d;
     text-decoration: none;
-    color: #085196;
+    color: #292c2d;
 }
 ul.main-nav li.active a {
     color: #000000;
@@ -11062,7 +11062,7 @@ ol.channel-list li.event:hover > div {
     display: block;
 }
 .date-nav {
-    border-bottom: 10px solid #085196;
+    border-bottom: 10px solid #292c2d;
 }
 .time-nav {
     border-bottom: 2px solid #000000;
@@ -11102,7 +11102,7 @@ ol.channel-list li.event:hover > div {
 .jump-container button i,
 .jump-container span i {
     font-size: 241%;
-    color: #085196;
+    color: #292c2d;
     width: auto!important;
     height: auto!important;
     transition: all 0.5s ease;
@@ -11121,7 +11121,7 @@ ol.channel-list li.event:hover > div {
     opacity: .5;
 }
 .days-tab {
-    border-bottom: 10px solid #085196;
+    border-bottom: 10px solid #292c2d;
     width: 8000px;
 }
 .days-tab ol {
@@ -11156,7 +11156,7 @@ ol.channel-list li.event:hover > div {
     text-decoration: none;
 }
 .days-tab ol li.active a {
-    background-color: #085196;
+    background-color: #292c2d;
     color: white;
 }
 .days-tab ol li.active a span {
@@ -11225,7 +11225,7 @@ ol.channel-list li.event:hover > div {
     font-family: 'karlaregular', arial, sans-serif;
     font-size: 138%;
     text-transform: uppercase;
-    color: #085196;
+    color: #292c2d;
     background-color: white;
     transition: all 0.5s ease;
 }
@@ -11238,7 +11238,7 @@ ol.channel-list li.event:hover > div {
     font-size: 90%;
 }
 .alert-side-detail .btn-play .fa-stack .fa-circle {
-    color: #085196;
+    color: #292c2d;
 }
 .alert-side-detail .btn-play .fa-stack .fa-play {
     color: white;
@@ -11282,7 +11282,7 @@ ol.channel-list li.event:hover > div {
 .stack ol li {
     color: white!important;
     position: relative;
-    background-color: #085196;
+    background-color: #292c2d;
     margin: 0 0 5px 0;
     padding: 0;
     list-style: none;
@@ -11404,7 +11404,7 @@ dl.description dt {
 }
 .internal-scroll:hover,
 .internal-scroll:focus {
-    background-color: #085196;
+    background-color: #292c2d;
     outline: 0;
 }
 .left-scroll {
@@ -11439,7 +11439,7 @@ dl.description dt {
     background-color: #e6e6e6;
 }
 .footer-main ul li a i {
-    color: #085196;
+    color: #292c2d;
 }
 .footer-main ul li:last-child {
     border-bottom: none;
@@ -11765,7 +11765,7 @@ padding: 5px;
 }
 .btn-tag {
     font-size: 100%;
-    color: #085196;
+    color: #292c2d;
     background-color: #add0f2;
     border: 0;
     border-radius: 0;
@@ -11793,7 +11793,7 @@ padding: 5px;
     font-size: 203%;
     margin-left: -20px;
     margin-top: 3px;
-    color: #085196;
+    color: #292c2d;
 }
 .select-filter .btn-filter:hover {
     color: #292c2d;
@@ -11894,7 +11894,7 @@ a.search-thumb-inner .overlay .overlay-stack .fa-circle {
 a.search-thumb-inner .overlay .overlay-stack .fa-play {
     font-size: 88%;
     margin-left: 2px;
-    color: #085196;
+    color: #292c2d;
 }
 a.search-thumb-inner .img-stack {
     font-size: 222%;
@@ -11930,7 +11930,7 @@ a.search-thumb-inner:hover {
     font-size: 64%;
     vertical-align: 2px;
     margin-right: 10px;
-    color: #085196;
+    color: #292c2d;
 }
 .moments {
     margin-top: 20px;
@@ -11982,7 +11982,7 @@ a.search-thumb-inner:hover {
     position: absolute;
     right: -142px;
     top: 0;
-    color: #085196;
+    color: #292c2d;
 }
 .moments .inner .moment-play .fa-stack {
     font-size: 106%;
@@ -11999,7 +11999,7 @@ a.search-thumb-inner:hover {
     margin-bottom: 20px;
     text-align: left;
     background-color: #d9e9f9;
-    color: #085196;
+    color: #292c2d;
     transition: all 0.5s ease;
 }
 .btn-search-panel i {
@@ -12007,16 +12007,16 @@ a.search-thumb-inner:hover {
     right: 27px;
     top: 12px;
     font-size: 119%;
-    color: #085196;
+    color: #292c2d;
     text-shadow: none;
 }
 .btn-search-panel.active {
     background-color: #add0f2;
-    color: #085196;
+    color: #292c2d;
 }
 .btn-search-panel:focus {
     background-color: #d9e9f9;
-    color: #085196;
+    color: #292c2d;
 }
 .btn-show-more {
     border: 0;
@@ -12244,7 +12244,7 @@ ol.channel-list {
         transition: all 0.5s ease;
     }
     .footer-main ul li a:hover {
-        color: #085196;
+        color: #292c2d;
         background-color: white;
     }
     .footer-main ul li:last-child {
@@ -12340,7 +12340,7 @@ ol.channel-list {
         background-color: #e6e6e6;
     }
     .footer-main ul li a i {
-        color: #085196;
+        color: #292c2d;
     }
     .footer-main ul li:last-child {
         border-bottom: none;
