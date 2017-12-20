@@ -269,6 +269,7 @@
     <Content Include="ping.html" />
     <Content Include="Content\plugins\feedback\LICENSE" />
     <Content Include="Content\plugins\feedback\README.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <None Include="robots.txt.allow" />
     <None Include="robots.txt.disallow" />
@@ -429,6 +430,7 @@
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ConfigurationHelper.cs" />
     <Compile Include="Extensions\SetBundlerOptimisation.cs" />
     <Compile Include="Extensions\BrowserFilterAttribute.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
