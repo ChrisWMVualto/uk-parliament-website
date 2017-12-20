@@ -1,4 +1,6 @@
-﻿
+﻿$(function() {
+    setTimeout(getStreamUrl, 5000);
+});
 
 function liveEdgeUpdate(data) {
 
@@ -46,11 +48,6 @@ function getTime(elementId) {
         }
 };
     $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
-}
-
-function getStreamUrlOnLoad() {
-    getStreamUrl();
-    setTimeout(getStreamUrl, 5000);
 }
 
 function getStreamUrl() {

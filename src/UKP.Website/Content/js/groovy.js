@@ -42,7 +42,3 @@ function initSetDownloadTime(e) {
     var time = getTime();
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }
-
-function getStreamUrlOnLoad() {
-    //this is here to stop a console error
-}
