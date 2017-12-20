@@ -1,5 +1,6 @@
 ﻿@using Date.Extensions
 @using UKP.Website.Application
+@using UKP.Website.Extensions
 @using UKP.Website.Service.Model
 @model UKP.Website.Models.Event.DownloadViewModel
 
@@ -159,7 +160,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-5 col-md-6 col-lg-5">
-                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-expired-callback="expCallback" data-sitekey="6LflGjcUAAAAANFEjZGF-Uch_Gy2G3KCyqPXvU42"></div>
+                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-expired-callback="expCallback" data-sitekey="@Html.GetValue("RecaptchaKey","void")"></div>
                     </div>
                     <div class="col-sm-4 col-md-6 col-lg-4">
                         <input id="downloadSubmit" class="btn btn-generic btn-black btn-wide right btn-submit" type="button" value="Make Clip" disabled />
