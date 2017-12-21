@@ -21,6 +21,7 @@ namespace UKP.Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new SetBundlerOptimisation());
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         public override string GetVaryByCustomString(HttpContext context, string arg)
@@ -30,6 +31,11 @@ namespace UKP.Website
                 return BrowserFilterAttribute.IsSupported().ToString() + Request.QueryString + Request.Form;
             }
             return base.GetVaryByCustomString(context, arg);
+        }
+
+        protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.Headers.Remove("Server");
         }
     }
 }
