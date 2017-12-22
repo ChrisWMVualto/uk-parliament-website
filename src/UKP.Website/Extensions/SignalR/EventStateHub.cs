@@ -33,11 +33,11 @@ namespace UKP.Website.Extensions.SignalR
 
         public static void EventStateChanged(Guid id, EventStates states, bool stateChanged)
         {
-            if(!stateChanged) return;
+            if (!stateChanged) return;
 
-            if(InterestedPlanningStates.Contains(states.PlanningState)
+            if (InterestedPlanningStates.Contains(states.PlanningState)
                 || InterestedRecordingStates.Contains(states.RecordingState)
-                || InterestedRecordedStates.Contains(states.RecordedState)) ;
+                || InterestedRecordedStates.Contains(states.RecordedState))
             {
                 var context = GlobalHost.ConnectionManager.GetHubContext<EventStateHub>();
                 context.Clients.All.eventStateChanged(id, states.PlanningState.ToString(), states.RecordingState.ToString(), states.RecordedState.ToString());

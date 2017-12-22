@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using Date.Extensions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Extensions;
 using UKP.Website.Application;
@@ -36,6 +38,22 @@ namespace UKP.Website.Service
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
             return DownloadTransforms.Transform(response.Content);
+        }
+
+        public bool VerifyCaptcha(string secret, string token)
+        {
+            string url = "https://www.google.com/recaptcha/api/siteverify";
+
+            var client = _restClientWrapper.GetClient(url);
+            var request = _restClientWrapper.RestRequest("", Method.POST);
+            request.AddParameter("secret", secret);
+            request.AddParameter("response", token);
+
+            var response = client.Execute(request);
+
+            dynamic content = JsonConvert.DeserializeObject(response.Content);
+
+            return content.success;
         }
 
         public DownloadUrlModel GetDownloadUrl(Guid id)

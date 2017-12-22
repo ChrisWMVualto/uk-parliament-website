@@ -230,6 +230,7 @@
     <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
+    <Content Include="Content\js\app.js" />
     <Content Include="Content\js\groovy.js" />
     <Content Include="Content\js\theoplayer.js" />
     <Content Include="Content\js\download.js" />
@@ -268,6 +269,7 @@
     <Content Include="ping.html" />
     <Content Include="Content\plugins\feedback\LICENSE" />
     <Content Include="Content\plugins\feedback\README.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <None Include="robots.txt.allow" />
     <None Include="robots.txt.disallow" />
@@ -397,6 +399,13 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Event\_Download.cshtml" />
+    <Content Include="Views\Event\_DownloadForm.cshtml" />
+    <Content Include="Views\Download\DownloadExpired.cshtml" />
+    <Content Include="Views\Download\Index.cshtml" />
+    <None Include="Web.Staging.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.UKPLive.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -424,6 +433,7 @@
     <Compile Include="EventController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ConfigurationHelper.cs" />
     <Compile Include="Extensions\SetBundlerOptimisation.cs" />
     <Compile Include="Extensions\BrowserFilterAttribute.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
@@ -439,9 +449,11 @@
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Event\CaptchaVerifyModel.cs" />
     <Compile Include="Models\Event\CreateDownloadModel.cs" />
     <Compile Include="Models\Event\ClippingViewModel.cs" />
     <Compile Include="Models\Event\CreateDownloadResponseModel.cs" />
+    <Compile Include="Models\Event\DownloadViewModel.cs" />
     <Compile Include="Models\Event\EventViewModel.cs" />
     <Compile Include="Models\Event\LogUpdateModel.cs" />
     <Compile Include="Models\Event\SearchMomentModel.cs" />
@@ -522,7 +534,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\karla\css\" />
     <Folder Include="Views\Cookie\" />
-    <Folder Include="Views\Download\" />
     <Folder Include="Views\Player\" />
   </ItemGroup>
   <ItemGroup>
@@ -559,6 +570,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
