@@ -42,9 +42,7 @@ namespace UKP.Website.Service
 
         public bool VerifyCaptcha(string secret, string token)
         {
-            string url = "https://www.google.com/recaptcha/api/siteverify";
-
-            var client = _restClientWrapper.GetClient(url);
+            var client = _restClientWrapper.GetClient(_configuration.GoogleRecaptchaVerifyUrl);
             var request = _restClientWrapper.RestRequest("", Method.POST);
             request.AddParameter("secret", secret);
             request.AddParameter("response", token);

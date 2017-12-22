@@ -76,5 +76,10 @@ namespace UKP.Website.Application
         {
             get { return bool.Parse(ConfigurationManager.AppSettings["RobotsAllow"]); }
         }
+
+        public string GoogleRecaptchaVerifyUrl
+        {
+            get { return ConfigurationManager.AppSettings["GoogleRecaptchaVerifyUrl"]; }
+        }
     }
 }
