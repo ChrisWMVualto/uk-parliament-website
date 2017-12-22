@@ -1,15 +1,44 @@
-﻿window.addEventListener("message", updateCurrentTime);
+﻿$(function() {
+    enableAudioOnly();
+});
 
-function updateCurrentTime(event) {
-    var messageSplit = event.data.split("_");
-    document.getElementById("ProgramDateTime").value = messageSplit[1];
+function enableAudioOnly() {
+    var radio = $("#fileType2");
+    radio.removeAttr("disabled");
 }
 
-function getTime(elementId) {
-    var time = new Date(document.getElementById("ProgramDateTime").value);
-    document.getElementById(elementId).value = time.toJSON();
+function getTime() {
+    return new Date(document.getElementById("ProgramDateTime").value);
 }
 
-function getStreamUrlOnLoad() {
-    //this is here to stop a console error
+function getShareTime(e) {
+
+    var timeString = getTime().toTimeString();
+    var textbox = document.getElementById(e.target.dataset.textboxId);
+    textbox.value = timeString.split(' ')[0];
+    textbox.dataset.lastInput = textbox.value;
+
+    reloadEmbedData();
+}
+
+function getDownloadTime(e) {
+    var time = getTime();
+    var timeString = time.toTimeString();
+    var textbox = document.getElementById(e.target.dataset.textboxId);
+    textbox.value = timeString.split(' ')[0];
+    textbox.dataset.lastInput = textbox.value;
+    document.getElementById(e.target.dataset.formId).value = time.toJSON();
+
+    if (e.target.id === "downloadStartTimeSet") {
+        checkStartTime();
+    }
+    else if (e.target.id === "downloadEndTimeSet") {
+        checkEndTime();
+    }
+
+}
+
+function initSetDownloadTime(e) {
+    var time = getTime();
+    document.getElementById(e.target.dataset.formId).value = time.toJSON();
 }

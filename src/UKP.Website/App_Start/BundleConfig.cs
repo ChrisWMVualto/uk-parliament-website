@@ -7,7 +7,7 @@ namespace UKP.Website
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/bundles/css").Include(
-                "~/Content/css/bootstrap.css",
+                "~/Content/css/theme.css",
                 "~/Content/css/bootstrap-multiselect.css",
                 "~/Content/css/autocomplete.css",
                 "~/Content/css/application.css"));
@@ -47,7 +47,8 @@ namespace UKP.Website
                 "~/Content/js/vendor/bootstrap-timepicker-event-mod.js",
                 "~/Content/js/event.js",
                 "~/Content/js/program-date-time.js",
-                "~/Content/js/download.js"));
+                "~/Content/js/download.js",
+                "~/Content/js/app.js"));
 
             BundleTable.EnableOptimizations = true;
         }

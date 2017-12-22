@@ -164,13 +164,12 @@
                 var rail = $(divS)
                   .addClass(o.railClass)
                   .css({
-                      width: o.size,
-                      height: '100%',
+                      width: "10px",
+                      height: '93%',
                       position: 'absolute',
                       top: 0,
                       display: (o.alwaysVisible && o.railVisible) ? 'none' : 'none',
-                      'border-radius': o.railBorderRadius,
-                      background: o.railColor,
+                      background: "#c6c6c6",
                       opacity: o.railOpacity,
                       zIndex: 90
                   });
@@ -179,16 +178,11 @@
                 var bar = $(divS)
                   .addClass(o.barClass)
                   .css({
-                      background: o.color,
-                      width: o.size,
+                      background: "#282828",
+                      width: "10px",
                       position: 'absolute',
                       top: 0,
-                      opacity: o.opacity,
                       display: o.alwaysVisible ? 'block' : 'none',
-                      'border-radius': o.borderRadius,
-                      BorderRadius: o.borderRadius,
-                      MozBorderRadius: o.borderRadius,
-                      WebkitBorderRadius: o.borderRadius,
                       zIndex: 99
                   });
 
@@ -206,7 +200,7 @@
                     height: o.size,
                     position: 'absolute',
                     top: 0,
-                    display: (o.alwaysVisible && o.railVisible) ? 'block' : 'none',
+                    display: 'none',
                     opacity: o.railOpacity,
                     zIndex: 90
                 });
@@ -217,13 +211,13 @@
                     height: o.size,
                     position: 'absolute',
                     bottom: 0,
-                    display: (o.alwaysVisible && o.railVisible) ? 'block' : 'none',
+                    display: 'none',
                     opacity: o.railOpacity,
                     zIndex: 90
                 });
                 rail.append(bottom);
 
-                var lines = $('<div><hr/><hr/><hr/></div>').addClass('slimScrollBarInner').css({
+                var lines = $('<div></div>').addClass('slimScrollBarInner').css({
                     display: o.alwaysVisible ? 'block' : 'none',
                     zIndex: 99
                 });
