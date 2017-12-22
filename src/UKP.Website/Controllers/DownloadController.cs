@@ -16,8 +16,14 @@ namespace UKP.Website.Controllers
         [HttpGet]
         public virtual ActionResult Index(Guid id)
         {
-            var model =_downloadService.GetDownloadUrl(id);
-            return Redirect(model.Url);
+            var model = _downloadService.GetDownloadUrl(id);
+
+            if (model == null)
+            {
+                return View(MVC.Download.Views.DownloadExpired);
+            }
+
+            return View(model);
         }
     }
 }

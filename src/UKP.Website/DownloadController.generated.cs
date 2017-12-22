@@ -104,7 +104,11 @@ namespace UKP.Website.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string DownloadAvailable = "DownloadAvailable";
+                public readonly string DownloadExpired = "DownloadExpired";
             }
+            public readonly string DownloadAvailable = "~/Views/Download/DownloadAvailable.cshtml";
+            public readonly string DownloadExpired = "~/Views/Download/DownloadExpired.cshtml";
         }
     }
 

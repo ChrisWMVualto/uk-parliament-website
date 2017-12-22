@@ -92,6 +92,18 @@ namespace UKP.Website.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult DownloadForm()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.DownloadForm);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult DownloadTab()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.DownloadTab);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult Clipping()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Clipping);
@@ -154,6 +166,8 @@ namespace UKP.Website.Controllers
             public readonly string ShowAudioOnly = "ShowAudioOnly";
             public readonly string GetMainVideo = "GetMainVideo";
             public readonly string EventTitle = "EventTitle";
+            public readonly string DownloadForm = "DownloadForm";
+            public readonly string DownloadTab = "DownloadTab";
             public readonly string Clipping = "Clipping";
             public readonly string Logs = "Logs";
             public readonly string EventLogsBetween = "EventLogsBetween";
@@ -172,6 +186,8 @@ namespace UKP.Website.Controllers
             public const string ShowAudioOnly = "ShowAudioOnly";
             public const string GetMainVideo = "GetMainVideo";
             public const string EventTitle = "EventTitle";
+            public const string DownloadForm = "DownloadForm";
+            public const string DownloadTab = "DownloadTab";
             public const string Clipping = "Clipping";
             public const string Logs = "Logs";
             public const string EventLogsBetween = "EventLogsBetween";
@@ -241,6 +257,26 @@ namespace UKP.Website.Controllers
         public ActionParamsClass_EventTitle EventTitleParams { get { return s_params_EventTitle; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_EventTitle
+        {
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
+        }
+        static readonly ActionParamsClass_DownloadForm s_params_DownloadForm = new ActionParamsClass_DownloadForm();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DownloadForm DownloadFormParams { get { return s_params_DownloadForm; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DownloadForm
+        {
+            public readonly string id = "id";
+            public readonly string @in = "in";
+            public readonly string @out = "out";
+        }
+        static readonly ActionParamsClass_DownloadTab s_params_DownloadTab = new ActionParamsClass_DownloadTab();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DownloadTab DownloadTabParams { get { return s_params_DownloadTab; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DownloadTab
         {
             public readonly string id = "id";
             public readonly string @in = "in";
@@ -322,6 +358,8 @@ namespace UKP.Website.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _Clipping = "_Clipping";
+                public readonly string _Download = "_Download";
+                public readonly string _DownloadForm = "_DownloadForm";
                 public readonly string _EventTitle = "_EventTitle";
                 public readonly string _Info = "_Info";
                 public readonly string _LogMoment = "_LogMoment";
@@ -330,6 +368,8 @@ namespace UKP.Website.Controllers
                 public readonly string Index = "Index";
             }
             public readonly string _Clipping = "~/Views/Event/_Clipping.cshtml";
+            public readonly string _Download = "~/Views/Event/_Download.cshtml";
+            public readonly string _DownloadForm = "~/Views/Event/_DownloadForm.cshtml";
             public readonly string _EventTitle = "~/Views/Event/_EventTitle.cshtml";
             public readonly string _Info = "~/Views/Event/_Info.cshtml";
             public readonly string _LogMoment = "~/Views/Event/_LogMoment.cshtml";
@@ -429,6 +469,34 @@ namespace UKP.Website.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
             EventTitleOverride(callInfo, id, @in, @out);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DownloadFormOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult DownloadForm(System.Guid id, string @in, string @out)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.DownloadForm);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            DownloadFormOverride(callInfo, id, @in, @out);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DownloadTabOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, System.Guid id, string @in, string @out);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult DownloadTab(System.Guid id, string @in, string @out)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.DownloadTab);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "in", @in);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "out", @out);
+            DownloadTabOverride(callInfo, id, @in, @out);
             return callInfo;
         }
 
