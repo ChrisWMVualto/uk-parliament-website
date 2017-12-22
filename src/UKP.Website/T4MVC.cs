@@ -352,6 +352,7 @@ namespace Links
             private const string URLPATH = "~/Content/js";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string app_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/app.min.js") ? Url("app.min.js") : Url("app.js");
             public static readonly string bootstrap_min_js = Url("bootstrap.min.js");
             public static readonly string download_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/download.min.js") ? Url("download.min.js") : Url("download.js");
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
