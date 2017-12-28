@@ -20,6 +20,8 @@ namespace UKP.Website.Application
             get { return ConfigurationManager.AppSettings["IasAuthKey"]; }
         }
 
+        public static string UKPHelpUrl { get { return ConfigurationManager.AppSettings["UKPHelpUrl"]; } }
+
         public string GetMemberAutocompleteApi
         {
             get { return ConfigurationManager.AppSettings["MemberAutocompleteApi"]; }
@@ -73,6 +75,11 @@ namespace UKP.Website.Application
         public bool RobotsAllow
         {
             get { return bool.Parse(ConfigurationManager.AppSettings["RobotsAllow"]); }
+        }
+
+        public string GoogleRecaptchaVerifyUrl
+        {
+            get { return ConfigurationManager.AppSettings["GoogleRecaptchaVerifyUrl"]; }
         }
     }
 }

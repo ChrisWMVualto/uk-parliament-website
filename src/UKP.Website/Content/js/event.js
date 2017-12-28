@@ -47,14 +47,30 @@ function updateTitle() {
     });
 }
 
+function updateDownloadForm() {
+    var formUrl = $("#downloadFormContainer").data("load-url");
+    $.get(formUrl, function(data) {
+        $("#downloadFormContainer").html(data);
+    });
+}
+
+function updateDownloadTab() {
+    var tabUrl = $("#download").data("load-url");
+    $.get(tabUrl, function (data) {
+        $("#download").html(data);
+    });
+}
+
 function updateClipping() {
     var clippingUrl = $('#clippingContainer').data("load-url");
     $.get(clippingUrl, function (data) {
         $('#clippingContainer').html(data);
-
         initSelectDates();
         initCheckbox();
         reloadEmbedData();
+        initSetShareTime();
+        initShareInputMask();
+        initShareUpdateEmbed();
     });
 }
 
@@ -91,8 +107,12 @@ function pollEvent() {
 
 function stateChanged(planningState, recordingState, recordedState) {
     updateTitle();
+    updateDownloadTab();
     updateClipping();
     updateAudioButton();
+
+    updateDownloadForm();
+
 
     if (recordedState == "REVOKE") {
         window.location.reload();
@@ -108,13 +128,13 @@ function reloadEmbedData() {
     var settings = {
         options: {
             start: {
-                input: $('#startTime'),
+                input: $('#shareStartTime'),
                 date: $('#startClipDate'),
                 hiddenStart: $('#hiddenStart'),
                 checkbox: $('#startTimeCheck')
             },
             end: {
-                input: $('#endTime'),
+                input: $('#shareEndTime'),
                 date: $('#endClipDate'),
                 hiddenEnd: $('#hiddenEnd'),
                 checkbox: $('#endTimeCheck')
@@ -138,7 +158,6 @@ function reloadEmbedData() {
 
     $.each(settings.options, function () {
         if (this.hasOwnProperty('input')) {
-            this.input.timepicker(settings.timepickerOpts);
             this.input.on('changeTime.timepicker', generateEmbedCode);
         }
         if (this.hasOwnProperty('date')) {
@@ -174,8 +193,8 @@ function reloadEmbedData() {
                 end = settings.options.end.date.val() + 'T' + end;
             }
 
-           
             var url = settings.urlBase + "/" + settings.eventId + "?in=" + start + "&out=" + end;
+
             $.ajax(url, {
                 success: updateEmbedCodes
             });

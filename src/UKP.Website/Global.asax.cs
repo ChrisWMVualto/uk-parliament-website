@@ -35,7 +35,7 @@ namespace UKP.Website
 
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
-            HttpContext.Current.Response.Headers.Remove("Server");
+            if(HttpContext.Current != null) HttpContext.Current.Response.Headers.Remove("Server");
         }
     }
 }

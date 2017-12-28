@@ -10,5 +10,6 @@ namespace UKP.Website.Application
         DateTime EpgStartDate { get; }
         string GetMemberAutocompleteApi { get; }
         bool RobotsAllow { get; }
+        string GoogleRecaptchaVerifyUrl { get; }
     }
 }
