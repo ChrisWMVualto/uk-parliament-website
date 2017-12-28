@@ -266,7 +266,6 @@ function timeUpdate(data) {
     var messageSplit = data.timeUpdateString.split('_');
     if (messageSplit.length < 2) return;
     if ((messageSplit[0].indexOf("program-date-time") == -1)) return;
-
     var sentTime = new Date(messageSplit[1]);
     $('#ProgramDateTime').val(sentTime.toISOString());
 
