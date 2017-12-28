@@ -1,0 +1,46 @@
+﻿@using UKP.Website.Application
+@model UKP.Website.Service.Model.VideoModel
+
+<div id="epgInfoPopup" class="alert alert-side-detail fade in epg-info" role="alert">
+    <button type="button" class="close" data-hide="alert">
+        <span aria-hidden="true"><i class="fa fa-close fa-lg"></i></span><span class="sr-only">Close</span>
+    </button>
+    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id))" type="button" class="btn btn-generic btn-play">
+        Play <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-play fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+    <div class="detail-inner">
+        <div class="title">
+            <h4>@Html.FormatText(Model.Event.Title)</h4>
+            <h5>@Model.Event.DisplayStartDate.ToLocalTime().ToString("dddd", ApplicationConstants.DateTimeFormatter) <span>@Model.Event.DisplayStartDate.ToLocalTime().ToString("d MMMM yyyy", ApplicationConstants.DateTimeFormatter)</span> <span class="time">@Model.Event.DisplayStartDate.ToLocalTime().ToString("h:mmtt", ApplicationConstants.DateTimeFormatter)</span></h5>
+        </div>
+    </div>
+    @if(Model.Stacks.Any())
+    {
+        <div class="stack-guide">
+            <div class="stack">
+                <ol>
+                    @foreach(var stack in Model.Stacks.Take(3))
+                    {
+                        <li>
+                            <article>
+                                <span class="vr-stack"></span>
+                                <header class="stack-item">
+                                    <h4>@stack.Description</h4>
+                                </header>
+                            </article>
+                        </li>
+                    }
+                </ol>
+            </div>
+            @if(Model.Stacks.Count() > 3)
+            {
+                <div class="stack-more">
+                    <a href="@Url.Action(MVC.Event.Index(Model.Event.Id, agenda: true))" type="button"><strong>...more</strong></a>
+                </div>
+            }
+        </div>
+    }
+</div>
