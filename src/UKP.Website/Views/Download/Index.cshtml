@@ -1,0 +1,28 @@
+﻿@model UKP.Website.Service.Model.DownloadUrlModel
+@{
+    ViewBag.Title = "Download Available";
+}
+
+@Html.Hidden("DownloadUrl", Model.Url)
+<div class="container main-container">
+    <br />
+    <br />
+    <h3>Download Available</h3>
+    <br />
+    <p>
+        Thank you for using <b>parliamentlive.tv</b>. Your download should start automatically. If it does not, <a href="@Model.Url">Click here</a>.
+    </p>
+    <br />
+    <br />
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        setTimeout(startDownload, 2000);
+
+        function startDownload()
+        {
+            window.location.href = "@Model.Url";
+        }
+    </script>
+}

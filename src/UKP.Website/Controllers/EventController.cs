@@ -95,6 +95,25 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        public virtual PartialViewResult DownloadForm(Guid id, string @in = null, string @out = null)
+        {
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+            var video = _videoService.GetVideo(id, inPoint, outPoint, statsEnabled: Request.CookiesAllowed());
+            return PartialView(MVC.Event.Views._DownloadForm, video);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult DownloadTab(Guid id, string @in = null, string @out = null)
+        {
+            var inPoint = @in.FromISO8601String();
+            var outPoint = @out.FromISO8601String();
+            var video = _videoService.GetVideo(id, inPoint, outPoint, statsEnabled: Request.CookiesAllowed());
+
+            return PartialView(MVC.Event.Views._Download, new DownloadViewModel(video));
+        }
+
+        [HttpGet]
         public virtual PartialViewResult Clipping(Guid id, string @in = null, string @out = null)
         {
             var inPoint = @in.FromISO8601String();
@@ -184,7 +203,7 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
-            var response = new CreateDownloadResponseModel(true);
+            var response = new CreateDownloadResponseModel(model.EmailAddress,true);
             try
             {
                 var startTime = DateTime.Parse(model.StartTime);
@@ -213,6 +232,14 @@ namespace UKP.Website.Controllers
             var json = new JavaScriptSerializer().Serialize(response);
 
             return Content(json);
+        }
+
+        [HttpPost]
+        public virtual bool ValidateCaptchaToken(CaptchaVerifyModel data)
+        {
+            bool valid = _downloadService.VerifyCaptcha(data.Secret, data.Response);
+
+            return valid;
         }
 
         private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)
