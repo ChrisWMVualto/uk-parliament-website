@@ -291,6 +291,11 @@ function isValidCaptcha() {
 
 function expCallback() {
     captchaValid = false;
+
+    $.ajax({
+        url: "/Event/ResetCaptcha"
+    });
+
     checkMakeClip();
 }
 
