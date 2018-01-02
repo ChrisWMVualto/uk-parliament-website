@@ -4,6 +4,12 @@
         return;
     }
 
+    if (!isValidCaptcha()) {
+        $(".error-message").removeAttr("hidden");
+        $(".error-message").text("Please complete the captcha before continuing");
+        return;
+    }
+
     var endTime = document.getElementById("EndTime");
     if (endTime.value === "") {
         endTime.value = document.getElementById("MeetingEndTime").value;

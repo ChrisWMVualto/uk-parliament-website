@@ -275,6 +275,20 @@ function isValidEmail() {
     return result;
 }
 
+function isValidCaptcha() {
+    var result = false;
+    $.ajax({
+        method: 'GET',
+        url: "/Event/ValidateCaptcha",
+        success: function (response) {
+            result = response.captchaCompleted;
+        },
+        async: false
+    });
+
+    return result;
+}
+
 function expCallback() {
     captchaValid = false;
     checkMakeClip();
@@ -284,8 +298,7 @@ function recaptchaCallback(e) {
     //API Post, pass in e & secret key
 
     var data = {
-        response: e,
-        secret: "6LflGjcUAAAAAPuiIW9PDdfEPZvGhoCMUQx4izQ9"
+        response: e
     };
 
     $.ajax({
