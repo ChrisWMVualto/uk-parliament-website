@@ -252,6 +252,11 @@ namespace UKP.Website.Controllers
             return valid;
         }
 
+        public virtual void ResetCaptcha()
+        {
+            Session["CaptchaCompleted"] = false;
+        }
+
         [HttpGet]
         public virtual JsonResult ValidateCaptcha()
         {
