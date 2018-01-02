@@ -21,6 +21,8 @@ namespace UKP.Website.Application
         }
 
         public static string UKPHelpUrl { get { return ConfigurationManager.AppSettings["UKPHelpUrl"]; } }
+        
+        public string RecaptchaSecret { get { return ConfigurationManager.AppSettings["RecaptchaSecret"]; } }
 
         public string GetMemberAutocompleteApi
         {

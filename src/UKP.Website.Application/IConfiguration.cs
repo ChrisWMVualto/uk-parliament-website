@@ -11,5 +11,6 @@ namespace UKP.Website.Application
         string GetMemberAutocompleteApi { get; }
         bool RobotsAllow { get; }
         string GoogleRecaptchaVerifyUrl { get; }
+        string RecaptchaSecret { get; }
     }
 }

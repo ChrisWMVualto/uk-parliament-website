@@ -37,5 +37,11 @@ namespace UKP.Website
         {
             if(HttpContext.Current != null) HttpContext.Current.Response.Headers.Remove("Server");
         }
+
+        protected void Session_Start()
+        {
+            Session["CaptchaCompleted"] = false;
+        }
+
     }
 }
