@@ -50,7 +50,7 @@ function initSetClipboard() {
 
 function initSetFileType() {
     var fileType = $(".fileType");
-    fileType.on("click", checkMakeClip);
+    fileType.on("change", checkMakeClip);
 }
 
 function initCreateDownload() {
@@ -247,9 +247,12 @@ function checkMakeClip() {
 
     if (valid) {
         $("#downloadSubmit").removeAttr("disabled");
+        $(".error-message").prop("hidden", true);
     } else {
         $("#downloadSubmit").prop("disabled", true);
     }
+
+    return valid;
 }
 
 function isRadioChecked() {
