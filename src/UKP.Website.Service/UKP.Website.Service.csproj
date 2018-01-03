@@ -125,7 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\VideoCollectionModel.cs" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UKP.Website.Application\UKP.Website.Application.csproj">

@@ -7,6 +7,7 @@ using System.Web.Mvc.Html;
 using System.Web.Script.Serialization;
 using Date.Extensions;
 using Elmah;
+using UKP.Website.Application;
 using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
 using UKP.Website.Models.Event;
@@ -20,12 +21,14 @@ namespace UKP.Website.Controllers
         private readonly IVideoService _videoService;
         private readonly IEventService _eventService;
         private readonly IDownloadService _downloadService;
+        private readonly IConfiguration _configuration;
 
-        public EventController(IVideoService videoService, IEventService eventService, IDownloadService downloadService)
+        public EventController(IVideoService videoService, IEventService eventService, IDownloadService downloadService, IConfiguration configuration)
         {
             _videoService = videoService;
             _eventService = eventService;
             _downloadService = downloadService;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -36,6 +39,8 @@ namespace UKP.Website.Controllers
             var outPoint = ConvertDateTimeFormatFromPattern(id, @out);
             var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, audioOnly: audioOnly, autoStart: autoStart.GetValueOrDefault(true), statsEnabled:Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
+
+            Session["CaptchaCompleted"] = false;
 
             return View(new EventViewModel(video, agenda.GetValueOrDefault()));
         }
@@ -237,9 +242,26 @@ namespace UKP.Website.Controllers
         [HttpPost]
         public virtual bool ValidateCaptchaToken(CaptchaVerifyModel data)
         {
-            bool valid = _downloadService.VerifyCaptcha(data.Secret, data.Response);
+            bool valid = _downloadService.VerifyCaptcha(_configuration.RecaptchaSecret, data.Response);
+
+            if (valid)
+            {
+                Session["CaptchaCompleted"] = true;
+            }
 
             return valid;
+        }
+
+        public virtual void ResetCaptcha()
+        {
+            Session["CaptchaCompleted"] = false;
+        }
+
+        [HttpGet]
+        public virtual JsonResult ValidateCaptcha()
+        {
+            var temp = this.Json(new { captchaCompleted = (bool)Session["CaptchaCompleted"] });
+            return this.Json(new { captchaCompleted = (bool)Session["CaptchaCompleted"]}, JsonRequestBehavior.AllowGet);
         }
 
         private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)

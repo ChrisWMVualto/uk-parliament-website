@@ -50,7 +50,7 @@ function initSetClipboard() {
 
 function initSetFileType() {
     var fileType = $(".fileType");
-    fileType.on("click", checkMakeClip);
+    fileType.on("change", checkMakeClip);
 }
 
 function initCreateDownload() {
@@ -234,6 +234,7 @@ function resetDownloadTab() {
     $(".download-form").removeAttr("hidden");
     $("#email").val("");
     document.getElementById("ClipRequested").value = false;
+    document.getElementById("EmailAddress").value = "";
 }
 
 function checkMakeClip() {
@@ -246,9 +247,12 @@ function checkMakeClip() {
 
     if (valid) {
         $("#downloadSubmit").removeAttr("disabled");
+        $(".error-message").prop("hidden", true);
     } else {
         $("#downloadSubmit").prop("disabled", true);
     }
+
+    return valid;
 }
 
 function isRadioChecked() {
@@ -275,8 +279,27 @@ function isValidEmail() {
     return result;
 }
 
+function isValidCaptcha() {
+    var result = false;
+    $.ajax({
+        method: 'GET',
+        url: "/Event/ValidateCaptcha",
+        success: function (response) {
+            result = response.captchaCompleted;
+        },
+        async: false
+    });
+
+    return result;
+}
+
 function expCallback() {
     captchaValid = false;
+
+    $.ajax({
+        url: "/Event/ResetCaptcha"
+    });
+
     checkMakeClip();
 }
 
@@ -284,8 +307,7 @@ function recaptchaCallback(e) {
     //API Post, pass in e & secret key
 
     var data = {
-        response: e,
-        secret: "6LflGjcUAAAAAPuiIW9PDdfEPZvGhoCMUQx4izQ9"
+        response: e
     };
 
     $.ajax({
