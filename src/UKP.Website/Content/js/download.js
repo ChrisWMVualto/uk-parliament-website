@@ -12,8 +12,9 @@
         return;
     }
 
-    //todo check form, return if incomplete
-    checkMakeClip();
+    if (!checkMakeClip()) {
+        return;
+    }
 
     var endTime = document.getElementById("EndTime");
     if (endTime.value === "") {
