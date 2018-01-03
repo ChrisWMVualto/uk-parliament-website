@@ -234,6 +234,7 @@ function resetDownloadTab() {
     $(".download-form").removeAttr("hidden");
     $("#email").val("");
     document.getElementById("ClipRequested").value = false;
+    document.getElementById("EmailAddress").value = "";
 }
 
 function checkMakeClip() {

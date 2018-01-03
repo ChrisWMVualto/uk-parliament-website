@@ -1,6 +1,8 @@
 ﻿function createDownload() {
 
-    if (document.getElementById("ClipRequested") === true) {
+    var clipRequested = document.getElementById("ClipRequested");
+
+    if (clipRequested.value === true) {
         return;
     }
 
@@ -9,6 +11,9 @@
         $(".error-message").text("Please complete the captcha before continuing");
         return;
     }
+
+    //todo check form, return if incomplete
+    checkMakeClip();
 
     var endTime = document.getElementById("EndTime");
     if (endTime.value === "") {
@@ -21,7 +26,7 @@
     $(".error-message").prop("hidden", true);
     $("#downloadSubmit").prop("disabled", true);
 
-    document.getElementById("ClipRequested").value = true;
+    clipRequested.value = true;
 
     $.ajax({
         method: 'POST',
@@ -43,6 +48,7 @@
             } else {
                 $(".error-message").removeAttr("hidden");
                 $(".error-message").text(response.Message);
+                clipRequested.value = false;
             }
         }
     });
