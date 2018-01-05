@@ -70,12 +70,16 @@ namespace UKP.Website.Controllers
         [OutputCache(Duration=60, VaryByParam="*")]
         public virtual ActionResult Robots()
         {
-            var robotsFile = "~/robots.txt.disallow";
-            if (_configuration.RobotsAllow)
+            var robotsFileName = _configuration.RobotsAllow 
+                ? "~/robots.txt.allow" 
+                : "~/robots.txt.disallow";
+            var robotsFilePath = Server.MapPath(robotsFileName);
+            if (System.IO.File.Exists(robotsFilePath))
             {
-                robotsFile = "~/robots.txt.allow";
+                return File(robotsFilePath, "text/plain");
             }
-            return File(robotsFile, "text/plain");
+
+            return new HttpNotFoundResult();
         }
     }
 }
