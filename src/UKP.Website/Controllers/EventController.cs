@@ -231,7 +231,7 @@ namespace UKP.Website.Controllers
             catch (Exception ex)
             {
                 response.Success = false;
-                response.Message = ex.Message;
+                response.Message = "An error has occurred.";
             }
 
             var json = new JavaScriptSerializer().Serialize(response);
