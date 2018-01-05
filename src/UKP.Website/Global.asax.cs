@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Web.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -22,6 +23,17 @@ namespace UKP.Website
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new SetBundlerOptimisation());
             MvcHandler.DisableMvcResponseHeader = true;
+            GlobalFilters.Filters.Add(new RequireHttpsAttribute());
+        }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            if (!Request.IsLocal && !Request.IsSecureConnection)
+            {
+                string path = string.Format("https{0}", Request.Url.AbsoluteUri.Substring(4));
+
+                Response.Redirect(path);
+            }
         }
 
         public override string GetVaryByCustomString(HttpContext context, string arg)
