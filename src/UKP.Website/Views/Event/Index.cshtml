@@ -36,7 +36,7 @@
 
 <div class="container main-container">
     @Html.Hidden("ClipRequested",false)
-    @Html.Hidden("MeetingStartTime", Model.VideoModel.Event.ActualLiveStartTime.ToISO8601String() ?? Model.VideoModel.Event.DisplayStartDate.ToISO8601String())
+    @Html.Hidden("MeetingStartTime", Model.VideoModel.Event.DisplayStartDate.ToISO8601String())
     @Html.Hidden("MeetingEndTime", Model.VideoModel.Event.DisplayEndDate.ToISO8601String())
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
     @Html.Hidden("getVideoUrl", @Url.Action(MVC.Event.GetMainVideo(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String())))
