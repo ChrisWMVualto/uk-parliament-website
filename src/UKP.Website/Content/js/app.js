@@ -103,6 +103,14 @@ function checkStartTime() {
     }
 
     if (startTime < endTime && startTime >= meetingStartTime) {
+
+        var endDate = new Date(endTime);
+
+        if (endDate - startDate >= 32400000) {
+            setErrorMessage("Clip cannot exceed 9 hours");
+            return;
+        }
+
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
         $(".error-message").prop("hidden", true);
