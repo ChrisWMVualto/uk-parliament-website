@@ -49,6 +49,7 @@
             } else {
                 $(".error-message").removeAttr("hidden");
                 $(".error-message").text(response.Message);
+                keepError = true;
                 clipRequested.value = false;
             }
         }
