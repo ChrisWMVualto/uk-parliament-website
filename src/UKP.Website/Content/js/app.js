@@ -114,6 +114,9 @@ function checkStartTime() {
 
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
         checkMakeClip();
     } else {
         keepError = false;
@@ -159,6 +162,9 @@ function checkEndTime() {
     if (endTime > startTime && endTime <= meetingEndTime) {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
         checkMakeClip();
     } else {
         keepError = false;
