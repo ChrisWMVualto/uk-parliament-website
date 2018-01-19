@@ -1,5 +1,6 @@
 ﻿var captchaValid = false;
 var timesValid = true;
+var keepError = false;
 
 $(function () {
     initTermsAndConditions();
@@ -113,10 +114,9 @@ function checkStartTime() {
 
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
-        $(".error-message").prop("hidden", true);
-        //checkEndTime();
         checkMakeClip();
     } else {
+        keepError = false;
         if (startTime > endTime) {
             setErrorMessage("Start Time cannot be later than the End Time");
         } else if (startTime === endTime) {
@@ -159,10 +159,9 @@ function checkEndTime() {
     if (endTime > startTime && endTime <= meetingEndTime) {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
-        $(".error-message").prop("hidden", true);
-        //checkStartTime();
         checkMakeClip();
     } else {
+        keepError = false;
         if (endTime < startTime) {
             setErrorMessage("End Time cannot be earlier than the Start Time");
         } else if (endTime === startTime) {
@@ -255,7 +254,10 @@ function checkMakeClip() {
 
     if (valid) {
         $("#downloadSubmit").removeAttr("disabled");
-        $(".error-message").prop("hidden", true);
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
+        
     } else {
         $("#downloadSubmit").prop("disabled", true);
     }
