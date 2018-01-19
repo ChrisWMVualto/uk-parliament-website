@@ -372,7 +372,7 @@ function initShareUpdateEmbed() {
     endShare.addEventListener("focusout", updateElement);
 }
 
-function updateElement(e) {
+function updatePartnerElement(e) {
     document.getElementById(e.target.dataset.partnerId).value = e.target.value;
     reloadEmbedData();
 }
