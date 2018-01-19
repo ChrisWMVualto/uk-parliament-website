@@ -18,6 +18,8 @@ function getShareTime(e) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
 
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+
     reloadEmbedData();
 }
 
@@ -28,6 +30,8 @@ function getDownloadTime(e) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
+
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
 
     if (e.target.id === "downloadStartTimeSet") {
         checkStartTime();
