@@ -69,6 +69,9 @@ function setShareTime(data) {
     var textbox = document.getElementById(data.elementId);
     textbox.value = time.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
+
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+
     reloadEmbedData();
 }
 
@@ -79,6 +82,9 @@ function setDownloadTime(data) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(textbox.dataset.formId).value = time.toJSON();
+
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+    reloadEmbedData();
 
     if (data.elementId === "downloadStartTime") {
         checkStartTime();

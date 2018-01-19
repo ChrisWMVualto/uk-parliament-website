@@ -73,6 +73,9 @@ function initDownloadStartEndKeyPress() {
 
     startTimeBox.on("focusout", checkStartTime);
     endTimeBox.on("focusout", checkEndTime);
+
+    startTimeBox.on("focusout", updateElement);
+    endTimeBox.on("focusout", updateElement);
 }
 
 function initMakeAnotherClip() {
@@ -364,6 +367,14 @@ function initShareUpdateEmbed() {
 
     startShare.addEventListener("focusout", reloadEmbedData);
     endShare.addEventListener("focusout", reloadEmbedData);
+
+    startShare.addEventListener("focusout", updateElement);
+    endShare.addEventListener("focusout", updateElement);
+}
+
+function updatePartnerElement(e) {
+    document.getElementById(e.target.dataset.partnerId).value = e.target.value;
+    reloadEmbedData();
 }
 
 var androidInput = false;
