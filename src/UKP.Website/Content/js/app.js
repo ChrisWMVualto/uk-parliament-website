@@ -251,6 +251,7 @@ function resetDownloadTab() {
     $("#email").val("");
     document.getElementById("ClipRequested").value = false;
     document.getElementById("EmailAddress").value = "";
+    grecaptcha.reset();
 }
 
 function checkMakeClip() {
@@ -300,14 +301,38 @@ function isValidEmail() {
 
 function isValidCaptcha() {
     var result = false;
+
+    var response = grecaptcha.getResponse();
+
+    var data = {
+        response: response
+    };
+
     $.ajax({
-        method: 'GET',
-        url: "/Event/ValidateCaptcha",
+        method: 'POST',
+        url: "/Event/ValidateCaptchaToken",
+        data: data,
         success: function (response) {
-            result = response.captchaCompleted;
+            debugger;
+            result = response === "True";
         },
         async: false
     });
+
+    //$.ajax({
+    //    method: 'GET',
+    //    url: "/Event/ValidateCaptcha",
+    //    success: function (response) {
+    //        result = response.captchaCompleted;
+    //    },
+    //    async: false
+    //});
+
+    if (!result) {
+        $(".error-message").removeAttr("hidden");
+        $(".error-message").text("Please complete the captcha before continuing");
+        captchaValid = false;
+    }
 
     return result;
 }
@@ -325,19 +350,22 @@ function expCallback() {
 function recaptchaCallback(e) {
     //API Post, pass in e & secret key
 
-    var data = {
-        response: e
-    };
+    captchaValid = true;
+    checkMakeClip();
 
-    $.ajax({
-        method: 'POST',
-        url: "/Event/ValidateCaptchaToken",
-        data: data,
-        success: function (response) {
-            captchaValid = response;
-            checkMakeClip();
-        }
-    });
+    //var data = {
+    //    response: e
+    //};
+
+    //$.ajax({
+    //    method: 'POST',
+    //    url: "/Event/ValidateCaptchaToken",
+    //    data: data,
+    //    success: function (response) {
+    //        captchaValid = response;
+    //        checkMakeClip();
+    //    }
+    //});
 }
 
 function initInputMask() {
