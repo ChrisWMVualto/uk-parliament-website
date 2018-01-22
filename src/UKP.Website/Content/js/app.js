@@ -74,13 +74,13 @@ function initDownloadStartEndKeyPress() {
     startTimeBox.on("focusout", checkStartTime);
     endTimeBox.on("focusout", checkEndTime);
 
-    startTimeBox.on("focusout", updateElement);
-    endTimeBox.on("focusout", updateElement);
+    startTimeBox.on("focusout", updatePartnerElement);
+    endTimeBox.on("focusout", updatePartnerElement);
 }
 
 function initMakeAnotherClip() {
-    var makeAnotherClip = $("#newClip");
-    makeAnotherClip.on("click", resetDownloadTab);
+
+    document.getElementById("newClip").addEventListener("click", resetDownloadTab);
 }
 
 function checkStartTime() {
@@ -368,8 +368,8 @@ function initShareUpdateEmbed() {
     startShare.addEventListener("focusout", reloadEmbedData);
     endShare.addEventListener("focusout", reloadEmbedData);
 
-    startShare.addEventListener("focusout", updateElement);
-    endShare.addEventListener("focusout", updateElement);
+    startShare.addEventListener("focusout", updatePartnerElement);
+    endShare.addEventListener("focusout", updatePartnerElement);
 }
 
 function updatePartnerElement(e) {
