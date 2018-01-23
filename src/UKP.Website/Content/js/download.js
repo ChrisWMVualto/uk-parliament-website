@@ -8,17 +8,6 @@
 
     isValidCaptcha();
 
-    //if (!isValidCaptcha()) {
-    //    debugger;
-    //    $(".error-message").removeAttr("hidden");
-    //    $(".error-message").text("Please complete the captcha before continuing");
-    //    return;
-    //} else {
-    //    debugger;
-    //}
-
-    //debugger;
-
     if (!checkMakeClip()) {
         return;
     }
