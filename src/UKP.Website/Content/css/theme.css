@@ -10961,6 +10961,7 @@ ol.channel-list li .description {
     line-height: 170%;
 }
 ol.channel-list li .info {
+    background-color: #e6ebee;
     width: 44px;
     height: 100%;
     position: absolute;
@@ -10970,15 +10971,12 @@ ol.channel-list li .info {
 }
 ol.channel-list li .info .fa-circle {
     opacity: .5;
-    color: #e6ebee;
+    color: #292c2d;
 }
 ol.channel-list li .fa-stack {
     margin-left: 5px;
-    margin-top: 33px;
+    margin-top: 22px;
     transition: all 0.5s ease;
-}
-ol.channel-list li a:hover .fa-stack {
-    opacity: .3;
 }
 ol.channel-list h4 {
     font-family: Verdana, Geneva, sans-serif;
@@ -11146,6 +11144,7 @@ ol.channel-list li.event:hover > div {
     border-top-right-radius: 5px;
     white-space: nowrap;
     transition: all 0.5s ease;
+    cursor: pointer;
 }
 .days-tab ol li a span {
     font-family: 'karlaregular', arial, sans-serif;
@@ -11225,12 +11224,12 @@ ol.channel-list li.event:hover > div {
     font-family: 'karlaregular', arial, sans-serif;
     font-size: 138%;
     text-transform: uppercase;
-    color: #292c2d;
-    background-color: white;
+    color: #fff;
+    background-color: #000;
     transition: all 0.5s ease;
 }
 .alert-side-detail .btn-play:hover {
-    background-color: #e6ebee;
+    background-color: #292c2d;
     opacity: .5;
 }
 .alert-side-detail .btn-play .fa-stack {
@@ -11238,10 +11237,10 @@ ol.channel-list li.event:hover > div {
     font-size: 90%;
 }
 .alert-side-detail .btn-play .fa-stack .fa-circle {
-    color: #292c2d;
+    color: #fff;
 }
 .alert-side-detail .btn-play .fa-stack .fa-play {
-    color: white;
+    color: #000;
     font-size: 88%;
 }
 .alert-side-detail button.close {
