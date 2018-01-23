@@ -284,7 +284,6 @@ function isRadioChecked() {
     }
 
     return false;
-
 }
 
 function isValidEmail() {
@@ -319,15 +318,6 @@ function isValidCaptcha() {
         async: false
     });
 
-    //$.ajax({
-    //    method: 'GET',
-    //    url: "/Event/ValidateCaptcha",
-    //    success: function (response) {
-    //        result = response.captchaCompleted;
-    //    },
-    //    async: false
-    //});
-
     if (!result) {
         $(".error-message").removeAttr("hidden");
         $(".error-message").text("Please complete the captcha before continuing");
@@ -339,33 +329,12 @@ function isValidCaptcha() {
 
 function expCallback() {
     captchaValid = false;
-
-    $.ajax({
-        url: "/Event/ResetCaptcha"
-    });
-
     checkMakeClip();
 }
 
 function recaptchaCallback(e) {
-    //API Post, pass in e & secret key
-
     captchaValid = true;
     checkMakeClip();
-
-    //var data = {
-    //    response: e
-    //};
-
-    //$.ajax({
-    //    method: 'POST',
-    //    url: "/Event/ValidateCaptchaToken",
-    //    data: data,
-    //    success: function (response) {
-    //        captchaValid = response;
-    //        checkMakeClip();
-    //    }
-    //});
 }
 
 function initInputMask() {
