@@ -167,7 +167,7 @@ function checkEndTime() {
         var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
         var endSeconds = endDate.getTime() / 1000;
         if (liveSeconds - endSeconds <= 30) {
-            setErrorMessage("End Time cannot be within 30 seconds of the live end time");
+            setErrorMessage("End Time cannot be within 30 seconds of the live edge");
             timesValid = false;
             return;
         }
