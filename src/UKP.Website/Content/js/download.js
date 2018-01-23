@@ -6,11 +6,7 @@
         return;
     }
 
-    if (!isValidCaptcha()) {
-        $(".error-message").removeAttr("hidden");
-        $(".error-message").text("Please complete the captcha before continuing");
-        return;
-    }
+    isValidCaptcha();
 
     if (!checkMakeClip()) {
         return;
@@ -51,6 +47,7 @@
                 $(".error-message").text(response.Message);
                 keepError = true;
                 clipRequested.value = false;
+                grecaptcha.reset();
             }
         }
     });
