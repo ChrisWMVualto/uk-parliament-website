@@ -251,6 +251,7 @@ function resetDownloadTab() {
     $("#email").val("");
     document.getElementById("ClipRequested").value = false;
     document.getElementById("EmailAddress").value = "";
+    grecaptcha.reset();
 }
 
 function checkMakeClip() {
@@ -283,7 +284,6 @@ function isRadioChecked() {
     }
 
     return false;
-
 }
 
 function isValidEmail() {
@@ -300,33 +300,11 @@ function isValidEmail() {
 
 function isValidCaptcha() {
     var result = false;
-    $.ajax({
-        method: 'GET',
-        url: "/Event/ValidateCaptcha",
-        success: function (response) {
-            result = response.captchaCompleted;
-        },
-        async: false
-    });
 
-    return result;
-}
-
-function expCallback() {
-    captchaValid = false;
-
-    $.ajax({
-        url: "/Event/ResetCaptcha"
-    });
-
-    checkMakeClip();
-}
-
-function recaptchaCallback(e) {
-    //API Post, pass in e & secret key
+    var response = grecaptcha.getResponse();
 
     var data = {
-        response: e
+        response: response
     };
 
     $.ajax({
@@ -334,10 +312,29 @@ function recaptchaCallback(e) {
         url: "/Event/ValidateCaptchaToken",
         data: data,
         success: function (response) {
-            captchaValid = response;
-            checkMakeClip();
-        }
+            debugger;
+            result = response === "True";
+        },
+        async: false
     });
+
+    if (!result) {
+        $(".error-message").removeAttr("hidden");
+        $(".error-message").text("Please complete the captcha before continuing");
+        captchaValid = false;
+    }
+
+    return result;
+}
+
+function expCallback() {
+    captchaValid = false;
+    checkMakeClip();
+}
+
+function recaptchaCallback(e) {
+    captchaValid = true;
+    checkMakeClip();
 }
 
 function initInputMask() {
