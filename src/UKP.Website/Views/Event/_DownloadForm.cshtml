@@ -9,7 +9,7 @@
 {
     //todo fix issue with times being slightly out of sync
     var startTime = Model.RequestedInPoint ?? Model.Event.PublishedStartTime.Value.AddSeconds(1);
-    var endTime = Model.Event.ActualEndTime ?? null;
+    var endTime = Model.Event.ActualEndTime ?? Model.Event.PublishedStartTime.Value.AddSeconds(2);
 
     if (Model.RequestedOutPoint.HasValue)
     {
