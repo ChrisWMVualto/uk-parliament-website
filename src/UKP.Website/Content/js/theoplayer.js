@@ -78,7 +78,6 @@ function setShareTime(data) {
 }
 
 function setDownloadTime(data) {
-    debugger;
     var time = new Date(data.time);
     var timeString = time.toTimeString();
     var textbox = document.getElementById(data.elementId);
