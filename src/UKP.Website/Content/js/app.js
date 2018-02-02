@@ -71,8 +71,8 @@ function initDownloadStartEndKeyPress() {
     startTimeBox.val(new Date(document.getElementById("StartTime").value).toTimeString().split(" ")[0]);
     endTimeBox.val(new Date(document.getElementById("EndTime").value).toTimeString().split(" ")[0]);
 
-    startTimeBox.on("focusout", checkStartTime);
-    endTimeBox.on("focusout", checkEndTime);
+    startTimeBox.on("focusout", compareTimes);
+    endTimeBox.on("focusout", compareTimes);
 
     startTimeBox.on("focusout", updatePartnerElement);
     endTimeBox.on("focusout", updatePartnerElement);
@@ -164,12 +164,14 @@ function checkEndTime() {
 
     if (endTime > startTime && endTime <= meetingEndTime) {
 
-        var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
-        var endSeconds = endDate.getTime() / 1000;
-        if (liveSeconds - endSeconds <= 30) {
-            setErrorMessage("End Time cannot be within 30 seconds of the live edge");
-            timesValid = false;
-            return;
+        if (isLivePlayer()) {
+            var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
+            var endSeconds = endDate.getTime() / 1000;
+            if (liveSeconds - endSeconds <= 30) {
+                setErrorMessage("End Time cannot be within 30 seconds of the live edge");
+                timesValid = false;
+                return;
+            }
         }
 
         setDownloadTimeForm("EndTime", endTime);
@@ -187,6 +189,89 @@ function checkEndTime() {
         } else {
             setErrorMessage("End Time cannot be later than the meeting end time");
         }
+    }
+}
+
+function compareTimes() {
+    var startTimeArray = $("#downloadStartTime").val().split(":");
+    var startDateString = $('[data-id="startDownloadDate"]')[0];
+
+    var endTimeArray = $("#downloadEndTime").val().split(":");
+    var endDateString = $('[data-id="endDownloadDate"]')[0];
+
+    var startDate = getDate(startTimeArray, startDateString);
+    var endDate = getDate(endTimeArray, endDateString);
+
+    var meetingStartTime = document.getElementById("MeetingStartTime").value;
+    var meetingEndTime = document.getElementById("MeetingEndTime").value;
+
+    if (isNaN(endDate.valueOf()) || isNaN(startDate.valueOf())) {
+        return;
+    }
+
+    var startTime = startDate.toISOString().split(".")[0] + "Z";
+    var endTime = endDate.toISOString().split(".")[0] + "Z";
+
+    if (endTime > startTime && endTime <= meetingEndTime && startTime >= meetingStartTime) {
+
+        if (endDate - startDate >= 32400000) {
+            setErrorMessage("Clip cannot exceed 9 hours");
+            return;
+        }
+
+        if (!checkLive(meetingEndTime, endDate)) {
+            return;
+        }
+
+        setDownloadTimeForm("StartTime", startTime);
+        setDownloadTimeForm("EndTime", endTime);
+        timesValid = true;
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
+        checkMakeClip();
+    } else {
+        keepError = false;
+        setTimeError(startTime, endTime, meetingStartTime);
+    }
+
+}
+
+function getDate(timeArray, dateString) {
+    var date = new Date(Date.parse(dateString.title));
+    date.setHours(date.getHours() + timeArray[0]);
+    date.setMinutes(date.getMinutes() + timeArray[1]);
+    date.setSeconds(date.getSeconds() + timeArray[2]);
+
+    return date;
+}
+
+function checkLive(meetingEndTime, endDate) {
+
+    if (isLivePlayer()) {
+        var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
+        var endSeconds = endDate.getTime() / 1000;
+        if (liveSeconds - endSeconds <= 30) {
+            setErrorMessage("End Time cannot be within 30 seconds of the live edge");
+            timesValid = false;
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function setTimeError(startTime, endTime, meetingStartTime) {
+    if (startTime > endTime) {
+        setErrorMessage("Start Time cannot be later than the End Time");
+    } else if (startTime === endTime) {
+        setErrorMessage("Start Time cannot be equal to the End Time");
+    } else if (startTime < meetingStartTime) {
+        setErrorMessage("Start Time cannot be earlier than the meeting start time");
+    } else if (endTime < startTime) {
+        setErrorMessage("End Time cannot be earlier than the Start Time");
+    } else {
+        setErrorMessage("End Time cannot be later than the meeting end time");
     }
 }
 
@@ -273,6 +358,7 @@ function checkMakeClip() {
 
     if (valid) {
         $("#downloadSubmit").removeAttr("disabled");
+
         if (!keepError) {
             $(".error-message").prop("hidden", true);
         }

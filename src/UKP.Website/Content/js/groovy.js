@@ -34,10 +34,12 @@ function getDownloadTime(e) {
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
 
     if (e.target.id === "downloadStartTimeSet") {
-        checkStartTime();
+        //checkStartTime();
+        compareTimes();
     }
     else if (e.target.id === "downloadEndTimeSet") {
-        checkEndTime();
+        //checkEndTime();
+        compareTimes();
     }
 
 }
@@ -45,4 +47,8 @@ function getDownloadTime(e) {
 function initSetDownloadTime(e) {
     var time = getTime();
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
+}
+
+function isLivePlayer() {
+    return false;
 }

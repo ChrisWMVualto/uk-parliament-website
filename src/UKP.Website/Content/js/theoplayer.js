@@ -5,8 +5,9 @@
 function liveEdgeUpdate(data) {
 
     document.getElementById("MeetingEndTime").value = data.liveEdgeUpdateString;
-    checkStartTime();
-    checkEndTime();
+    //checkStartTime();
+    //checkEndTime();
+    compareTimes();
 }
 
 function getShareTime(e) {
@@ -46,7 +47,8 @@ function getTime(elementId) {
         'data' : {
             'elementId': elementId
         }
-};
+    };
+
     $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 }
 
@@ -76,6 +78,7 @@ function setShareTime(data) {
 }
 
 function setDownloadTime(data) {
+    debugger;
     var time = new Date(data.time);
     var timeString = time.toTimeString();
     var textbox = document.getElementById(data.elementId);
@@ -87,13 +90,19 @@ function setDownloadTime(data) {
     reloadEmbedData();
 
     if (data.elementId === "downloadStartTime") {
-        checkStartTime();
+        //checkStartTime();
+        compareTimes();
     }
     else if (data.elementId === "downloadEndTime") {
-        checkEndTime();
+        //checkEndTime();
+        compareTimes();
     }
 }
 
 function setStreamUrl(data) {
     document.getElementById("StreamUrl").value = data.streamUrl;
+}
+
+function isLivePlayer() {
+    return true;
 }
