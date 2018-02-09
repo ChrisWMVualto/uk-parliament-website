@@ -212,7 +212,7 @@ function compareTimes() {
     var startTime = startDate.toISOString().split(".")[0] + "Z";
     var endTime = endDate.toISOString().split(".")[0] + "Z";
 
-    if (endTime > startTime && endTime <= meetingEndTime && startTime >= meetingStartTime) {
+    if ((endDate - startDate >= 10000) && endTime <= meetingEndTime && startTime >= meetingStartTime) {
 
         if (endDate - startDate >= 32400000) {
             setErrorMessage("Clip cannot exceed 9 hours");
@@ -262,10 +262,14 @@ function checkLive(meetingEndTime, endDate) {
 }
 
 function setTimeError(startTime, endTime, meetingStartTime) {
+
+    startDate = new Date(startTime);
+    endDate = new Date(endTime);
+
     if (startTime > endTime) {
         setErrorMessage("Start Time cannot be later than the End Time");
-    } else if (startTime === endTime) {
-        setErrorMessage("Start Time cannot be equal to the End Time");
+    } else if (endDate - startDate < 10000) {
+        setErrorMessage("Start Time and End Time must be at least 10 seconds apart");
     } else if (startTime < meetingStartTime) {
         setErrorMessage("Start Time cannot be earlier than the meeting start time");
     } else if (endTime < startTime) {
