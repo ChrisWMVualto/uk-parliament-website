@@ -73,6 +73,7 @@ function setShareTime(data) {
     textbox.dataset.lastInput = textbox.value;
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+    compareTimes();
 
     reloadEmbedData();
 }
