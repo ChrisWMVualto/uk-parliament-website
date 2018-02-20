@@ -61,7 +61,7 @@ function initCreateDownload() {
 
 function initEmailValid() {
     var email = $("#email");
-    email.on("keyup", checkMakeClip);
+    email.on("change", checkMakeClip);
 }
 
 function initDownloadStartEndKeyPress() {
