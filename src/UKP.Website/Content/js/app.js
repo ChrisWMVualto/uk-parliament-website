@@ -193,11 +193,11 @@ function checkEndTime() {
 }
 
 function compareTimes() {
-    var startTimeArray = $("#downloadStartTime").val().split(":");
-    var startDateString = $('[data-id="startDownloadDate"]')[0];
+    var startTimeArray = document.getElementById("downloadStartTime").value.split(":");
+    var startDateString = document.querySelectorAll('[data-id="startDownloadDate"]')[0];
 
-    var endTimeArray = $("#downloadEndTime").val().split(":");
-    var endDateString = $('[data-id="endDownloadDate"]')[0];
+    var endTimeArray = document.getElementById("downloadEndTime").value.split(":");
+    var endDateString = document.querySelectorAll('[data-id="endDownloadDate"]')[0];
 
     var startDate = getDate(startTimeArray, startDateString);
     var endDate = getDate(endTimeArray, endDateString);
@@ -219,7 +219,7 @@ function compareTimes() {
             return;
         }
 
-        if (!checkLive(meetingEndTime, endDate)) {
+        if (!checkLiveEdge(meetingEndTime, endDate)) {
             return;
         }
 
@@ -227,7 +227,7 @@ function compareTimes() {
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
         if (!keepError) {
-            $(".error-message").prop("hidden", true);
+            document.getElementsByClassName("error-message")[0]["hidden"] = true;
         }
         checkMakeClip();
     } else {
@@ -242,11 +242,10 @@ function getDate(timeArray, dateString) {
     date.setHours(date.getHours() + timeArray[0]);
     date.setMinutes(date.getMinutes() + timeArray[1]);
     date.setSeconds(date.getSeconds() + timeArray[2]);
-
     return date;
 }
 
-function checkLive(meetingEndTime, endDate) {
+function checkLiveEdge(meetingEndTime, endDate) {
 
     if (isLivePlayer()) {
         var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
