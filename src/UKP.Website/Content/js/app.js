@@ -281,13 +281,13 @@ function setTimeError(startTime, endTime, meetingStartTime) {
 function termsAndConditionsClickHandler(e) {
     var id = e.target.dataset.continueId;
 
-    enableDisableButton(id);
+    enableDisableButton(id, e.target.checked);
 }
 
-function enableDisableButton(id) {
+function enableDisableButton(id, checked) {
     var button = document.getElementById(id);
 
-    if (button.hasAttribute("disabled")) {
+    if (checked) {
         $(button).removeAttr("disabled");
     } else {
         $(button).prop("disabled", true);
