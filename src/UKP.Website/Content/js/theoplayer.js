@@ -2,8 +2,6 @@
     setTimeout(getStreamUrl, 5000);
 });
 
-var isCurrentlyLive = true;
-
 function liveEdgeUpdate(data) {
 
     document.getElementById("MeetingEndTime").value = data.liveEdgeUpdateString;
