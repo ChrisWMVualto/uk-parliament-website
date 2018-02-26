@@ -108,7 +108,3 @@ function setStreamUrl(data) {
 function isLivePlayer() {
     return true;
 }
-
-function isLiveState(data) {
-    isCurrentlyLive = data;
-}
