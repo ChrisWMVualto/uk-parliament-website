@@ -1,0 +1,79 @@
+﻿@using UKP.Website.Service.Model
+@model UKP.Website.Models.Event.ClippingViewModel
+
+@Html.Hidden("AllowClippingRefresh", !Model.VideoModel.Event.PublishedStartTime.HasValue)
+
+@{
+    var hiddenDateDropdown = "";
+}
+@if(Model.VideoModel.Event.DisplayStartDate.Date == Model.VideoModel.Event.DisplayEndDate.Date)
+{
+    hiddenDateDropdown = "hidden";
+}
+
+@if(Model.VideoModel.Event.PublishedStartTime.HasValue 
+    && Model.VideoModel.Event.States.PlanningState != PlanningEventState.STOP_DVR 
+    && (Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE 
+    || Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row form-inline time-start-end">
+                <div class="col-xs-6 start-time-container time-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button class="btn btn-generic btn-black set-share-time" data-textbox-id="shareStartTime" type="button" id="startTimeSet">Set Start Time</button>
+                            </div>
+                            <div class="form-group start-time">
+                                <span class="bootstrap-timepicker">
+                                    @Html.Hidden("hiddenStart", Model.DefaultStartDate.ToLocalTime().TimeOfDay)
+                                    <input type="text" class="form-control input-lg time-input" data-last-input="" data-partner-id="downloadStartTime" id="shareStartTime" onPaste="return false" onDrop="return false" value="">
+                                </span>
+                            </div>
+                            <div class="form-group start-day">
+                                <label class="hide" for="startClipDate">
+                                    <h5>Day:</h5>
+                                </label>
+                                <span class="day-dropdown">
+                                    @Html.DropDownList("startClipDate", Model.StartDates, new { @class = "clip-date " + hiddenDateDropdown })
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 end-time-container time-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="pipe"></span>
+                            <div class="form-group">
+                                <button class="btn btn-generic btn-black set-share-time" data-textbox-id="shareEndTime" type="button" id="endTimeSet">Set End Time</button>
+                            </div>
+                            <div class="form-group end-time">
+                                <span class="bootstrap-timepicker">
+                                    @Html.Hidden("hiddenEnd", Model.DefaultEndDate.ToLocalTime().TimeOfDay)
+                                    <input type="text" class="form-control input-lg time-input" data-last-input="" data-partner-id="downloadEndTime" id="shareEndTime" onPaste="return false" onDrop="return false" value="">
+                                </span>
+                            </div>
+
+                            <div class="form-group end-day">
+                                <label class="hide" for="endClipDate">
+                                    <h5>Day:</h5>
+                                </label>
+                                <span class="day-dropdown">
+                                    @Html.DropDownList("endClipDate", Model.EndDates, new { @class = "clip-date " + hiddenDateDropdown })
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Select a section of the video to share.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
