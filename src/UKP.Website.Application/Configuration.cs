@@ -22,6 +22,8 @@ namespace UKP.Website.Application
 
         public static string UKPHelpUrl { get { return ConfigurationManager.AppSettings["UKPHelpUrl"]; } }
 
+        public static string UKPPrivacyStatement { get { return ConfigurationManager.AppSettings["UKPPrivacyStatement"];} }
+
         public static string UKPPrivilegeUrl { get { return ConfigurationManager.AppSettings["UKPPrivilegeUrl"]; } }
 
 
