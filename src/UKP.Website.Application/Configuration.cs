@@ -26,6 +26,7 @@ namespace UKP.Website.Application
 
         public static string UKPPrivilegeUrl { get { return ConfigurationManager.AppSettings["UKPPrivilegeUrl"]; } }
 
+        public static string UKPTermsAndConditionsUrl { get { return ConfigurationManager.AppSettings["UKPTermsAndConditionsUrl"];} }
 
         public string RecaptchaSecret { get { return ConfigurationManager.AppSettings["RecaptchaSecret"]; } }
 
