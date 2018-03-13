@@ -206,7 +206,7 @@ function compareTimes() {
     var meetingEndTime = document.getElementById("MeetingEndTime").value;
 
     if (isNaN(endDate.valueOf()) || isNaN(startDate.valueOf())) {
-        return;
+        return false;
     }
 
     var startTime = startDate.toISOString().split(".")[0] + "Z";
@@ -216,11 +216,11 @@ function compareTimes() {
 
         if (endDate - startDate >= 32400000) {
             setErrorMessage("Clip cannot exceed 9 hours");
-            return;
+            return false;
         }
 
         if (!checkLiveEdge(meetingEndTime, endDate)) {
-            return;
+            return false;
         }
 
         setDownloadTimeForm("StartTime", startTime);
@@ -229,10 +229,12 @@ function compareTimes() {
         if (!keepError) {
             document.getElementsByClassName("error-message")[0]["hidden"] = true;
         }
-        checkMakeClip();
+        return checkMakeClip();
+        
     } else {
         keepError = false;
         setTimeError(startTime, endTime, meetingStartTime);
+        return false;
     }
 
 }
