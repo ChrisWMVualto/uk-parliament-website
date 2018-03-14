@@ -8,7 +8,7 @@
 
     isValidCaptcha();
 
-    if (!checkMakeClip()) {
+    if (!compareTimes()) {
         return;
     }
 
