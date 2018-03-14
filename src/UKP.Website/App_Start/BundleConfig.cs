@@ -50,6 +50,12 @@ namespace UKP.Website
                 "~/Content/js/download.js",
                 "~/Content/js/app.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/theoJs").Include(
+                "~/Content/js/theoplayer.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/groovyJs").Include(
+                "~/Content/js/groovy.js"));
+
             BundleTable.EnableOptimizations = true;
         }
     }
