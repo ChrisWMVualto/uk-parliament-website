@@ -11281,7 +11281,7 @@ ol.channel-list li.event:hover > div {
 .stack ol li {
     color: white!important;
     position: relative;
-    background-color: #292c2d;
+    background-color: #eff2f4;
     margin: 0 0 5px 0;
     padding: 0;
     list-style: none;
@@ -11295,10 +11295,9 @@ ol.channel-list li.event:hover > div {
     left: 0;
 }
 .stack ol li .stack-item {
-    color: white;
+    color: black;
     line-height: 18px;
     padding: 10px;
-    margin: 0 0 0 50px;
 }
 .stack ol li .stack-item a {
     color: white;
