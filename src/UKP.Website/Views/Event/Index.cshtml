@@ -35,7 +35,7 @@
 }
 
 <div class="container main-container">
-    @Html.Hidden("ClipRequested",false)
+    @Html.Hidden("ClipRequested", false)
     @Html.Hidden("MeetingStartTime", Model.VideoModel.Event.ActualLiveStartTime.ToISO8601String() ?? Model.VideoModel.Event.DisplayStartDate.ToISO8601String())
     @Html.Hidden("MeetingEndTime", Model.VideoModel.Event.DisplayEndDate.ToISO8601String())
     @Html.Hidden("eventId", Model.VideoModel.Event.Id)
@@ -124,11 +124,11 @@
 @section scripts {
     @if (Model.VideoModel.Event.States.RecordedState.Equals(RecordedEventState.NEW) || Model.VideoModel.Event.States.RecordedState.Equals(RecordedEventState.HOLD))
     {
-        <script type="text/javascript" src="@Url.Content("~/Content/js/theoplayer.js")"></script>
+        @Scripts.Render("~/bundles/theoJs")
     }
     else
     {
-        <script type="text/javascript" src="@Url.Content("~/Content/js/groovy.js")"></script>
+        @Scripts.Render("~/bundles/groovyJs")
     }
     @Scripts.Render("~/bundles/eventJs")
     <script src="~/signalr/hubs"></script>
