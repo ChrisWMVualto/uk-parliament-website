@@ -18,6 +18,9 @@ function getShareTime(e) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
 
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+    compareTimes();
+
     reloadEmbedData();
 }
 
@@ -29,11 +32,15 @@ function getDownloadTime(e) {
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
 
+    document.getElementById(textbox.dataset.partnerId).value = textbox.value;
+
     if (e.target.id === "downloadStartTimeSet") {
-        checkStartTime();
+        //checkStartTime();
+        compareTimes();
     }
     else if (e.target.id === "downloadEndTimeSet") {
-        checkEndTime();
+        //checkEndTime();
+        compareTimes();
     }
 
 }
@@ -41,4 +48,8 @@ function getDownloadTime(e) {
 function initSetDownloadTime(e) {
     var time = getTime();
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
+}
+
+function isLivePlayer() {
+    return false;
 }

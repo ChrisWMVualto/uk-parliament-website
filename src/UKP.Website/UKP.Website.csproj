@@ -54,7 +54,7 @@
       <HintPath>..\packages\BundlerMiddleware.System.Web.0.3.2\lib\net45\BundlerMiddleware.System.Web.dll</HintPath>
     </Reference>
     <Reference Include="Date.Extensions, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Date.Extensions.0.14.0\lib\Date.Extensions.dll</HintPath>
+      <HintPath>..\packages\Date.Extensions.2.15.0\lib\Date.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="dotless.Core">
       <HintPath>..\packages\dotless.1.4.1.0\lib\dotless.Core.dll</HintPath>
@@ -230,6 +230,8 @@
     <Content Include="Content\img\theme-commons-normal_original.jpg" />
     <Content Include="Content\img\theme-lords-blurred.jpg" />
     <Content Include="Content\img\theme-lords-normal.jpg" />
+    <Content Include="Content\img\tick-circle.png" />
+    <Content Include="Content\img\tick.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\groovy.js" />
     <Content Include="Content\js\theoplayer.js" />
@@ -272,8 +274,8 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\UAT.pubxml" />
     <None Include="Properties\PublishProfiles\UKP Staging.pubxml" />
-    <None Include="robots.txt.allow" />
-    <None Include="robots.txt.disallow" />
+    <Content Include="robots.txt.allow" />
+    <Content Include="robots.txt.disallow" />
     <Content Include="Content\css\fonts\slick.eot" />
     <Content Include="Content\css\fonts\slick.ttf" />
     <Content Include="Content\css\fonts\slick.woff" />

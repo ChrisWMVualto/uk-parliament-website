@@ -1,5 +1,6 @@
 ﻿var captchaValid = false;
 var timesValid = true;
+var keepError = false;
 
 $(function () {
     initTermsAndConditions();
@@ -60,7 +61,7 @@ function initCreateDownload() {
 
 function initEmailValid() {
     var email = $("#email");
-    email.on("keyup", checkMakeClip);
+    email.on("change", checkMakeClip);
 }
 
 function initDownloadStartEndKeyPress() {
@@ -70,13 +71,16 @@ function initDownloadStartEndKeyPress() {
     startTimeBox.val(new Date(document.getElementById("StartTime").value).toTimeString().split(" ")[0]);
     endTimeBox.val(new Date(document.getElementById("EndTime").value).toTimeString().split(" ")[0]);
 
-    startTimeBox.on("focusout", checkStartTime);
-    endTimeBox.on("focusout", checkEndTime);
+    startTimeBox.on("focusout", compareTimes);
+    endTimeBox.on("focusout", compareTimes);
+
+    startTimeBox.on("focusout", updatePartnerElement);
+    endTimeBox.on("focusout", updatePartnerElement);
 }
 
 function initMakeAnotherClip() {
-    var makeAnotherClip = $("#newClip");
-    makeAnotherClip.on("click", resetDownloadTab);
+
+    document.getElementById("newClip").addEventListener("click", resetDownloadTab);
 }
 
 function checkStartTime() {
@@ -103,12 +107,22 @@ function checkStartTime() {
     }
 
     if (startTime < endTime && startTime >= meetingStartTime) {
+
+        var endDate = new Date(endTime);
+
+        if (endDate - startDate >= 32400000) {
+            setErrorMessage("Clip cannot exceed 9 hours");
+            return;
+        }
+
         setDownloadTimeForm("StartTime", startTime);
         timesValid = true;
-        $(".error-message").prop("hidden", true);
-        //checkEndTime();
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
         checkMakeClip();
     } else {
+        keepError = false;
         if (startTime > endTime) {
             setErrorMessage("Start Time cannot be later than the End Time");
         } else if (startTime === endTime) {
@@ -149,12 +163,25 @@ function checkEndTime() {
     var startTime = $("#StartTime").val();
 
     if (endTime > startTime && endTime <= meetingEndTime) {
+
+        if (isLivePlayer()) {
+            var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
+            var endSeconds = endDate.getTime() / 1000;
+            if (liveSeconds - endSeconds <= 11) {
+                setErrorMessage("End Time cannot be within 10 seconds of the live edge");
+                timesValid = false;
+                return;
+            }
+        }
+
         setDownloadTimeForm("EndTime", endTime);
         timesValid = true;
-        $(".error-message").prop("hidden", true);
-        //checkStartTime();
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
         checkMakeClip();
     } else {
+        keepError = false;
         if (endTime < startTime) {
             setErrorMessage("End Time cannot be earlier than the Start Time");
         } else if (endTime === startTime) {
@@ -165,16 +192,104 @@ function checkEndTime() {
     }
 }
 
+function compareTimes() {
+    var startTimeArray = document.getElementById("downloadStartTime").value.split(":");
+    var startDateString = document.querySelectorAll('[data-id="startDownloadDate"]')[0];
+
+    var endTimeArray = document.getElementById("downloadEndTime").value.split(":");
+    var endDateString = document.querySelectorAll('[data-id="endDownloadDate"]')[0];
+
+    var startDate = getDate(startTimeArray, startDateString);
+    var endDate = getDate(endTimeArray, endDateString);
+
+    var meetingStartTime = document.getElementById("MeetingStartTime").value;
+    var meetingEndTime = document.getElementById("MeetingEndTime").value;
+
+    if (isNaN(endDate.valueOf()) || isNaN(startDate.valueOf())) {
+        return false;
+    }
+
+    var startTime = startDate.toISOString().split(".")[0] + "Z";
+    var endTime = endDate.toISOString().split(".")[0] + "Z";
+
+    if ((endDate - startDate >= 10000) && endTime <= meetingEndTime && startTime >= meetingStartTime) {
+
+        if (endDate - startDate >= 32400000) {
+            setErrorMessage("Clip cannot exceed 9 hours");
+            return false;
+        }
+
+        if (!checkLiveEdge(meetingEndTime, endDate)) {
+            return false;
+        }
+
+        setDownloadTimeForm("StartTime", startTime);
+        setDownloadTimeForm("EndTime", endTime);
+        timesValid = true;
+        if (!keepError) {
+            document.getElementsByClassName("error-message")[0]["hidden"] = true;
+        }
+        return checkMakeClip();
+        
+    } else {
+        keepError = false;
+        setTimeError(startTime, endTime, meetingStartTime);
+        return false;
+    }
+
+}
+
+function getDate(timeArray, dateString) {
+    var date = new Date(Date.parse(dateString.title));
+    date.setHours(date.getHours() + timeArray[0]);
+    date.setMinutes(date.getMinutes() + timeArray[1]);
+    date.setSeconds(date.getSeconds() + timeArray[2]);
+    return date;
+}
+
+function checkLiveEdge(meetingEndTime, endDate) {
+
+    if (isLivePlayer()) {
+        var liveSeconds = new Date(meetingEndTime).getTime() / 1000;
+        var endSeconds = endDate.getTime() / 1000;
+        if (liveSeconds - endSeconds <= 11) {
+            setErrorMessage("End Time cannot be within 10 seconds of the live edge");
+            timesValid = false;
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function setTimeError(startTime, endTime, meetingStartTime) {
+
+    startDate = new Date(startTime);
+    endDate = new Date(endTime);
+
+    if (startTime > endTime) {
+        setErrorMessage("Start Time cannot be later than the End Time");
+    } else if (endDate - startDate < 10000) {
+        setErrorMessage("Start Time and End Time must be at least 10 seconds apart");
+    } else if (startTime < meetingStartTime) {
+        setErrorMessage("Start Time cannot be earlier than the meeting start time");
+    } else if (endTime < startTime) {
+        setErrorMessage("End Time cannot be earlier than the Start Time");
+    } else {
+        setErrorMessage("End Time cannot be later than the meeting end time");
+    }
+}
+
 function termsAndConditionsClickHandler(e) {
     var id = e.target.dataset.continueId;
 
-    enableDisableButton(id);
+    enableDisableButton(id, e.target.checked);
 }
 
-function enableDisableButton(id) {
+function enableDisableButton(id, checked) {
     var button = document.getElementById(id);
 
-    if (button.hasAttribute("disabled")) {
+    if (checked) {
         $(button).removeAttr("disabled");
     } else {
         $(button).prop("disabled", true);
@@ -235,6 +350,7 @@ function resetDownloadTab() {
     $("#email").val("");
     document.getElementById("ClipRequested").value = false;
     document.getElementById("EmailAddress").value = "";
+    grecaptcha.reset();
 }
 
 function checkMakeClip() {
@@ -247,7 +363,11 @@ function checkMakeClip() {
 
     if (valid) {
         $("#downloadSubmit").removeAttr("disabled");
-        $(".error-message").prop("hidden", true);
+
+        if (!keepError) {
+            $(".error-message").prop("hidden", true);
+        }
+        
     } else {
         $("#downloadSubmit").prop("disabled", true);
     }
@@ -264,7 +384,6 @@ function isRadioChecked() {
     }
 
     return false;
-
 }
 
 function isValidEmail() {
@@ -281,33 +400,11 @@ function isValidEmail() {
 
 function isValidCaptcha() {
     var result = false;
-    $.ajax({
-        method: 'GET',
-        url: "/Event/ValidateCaptcha",
-        success: function (response) {
-            result = response.captchaCompleted;
-        },
-        async: false
-    });
 
-    return result;
-}
-
-function expCallback() {
-    captchaValid = false;
-
-    $.ajax({
-        url: "/Event/ResetCaptcha"
-    });
-
-    checkMakeClip();
-}
-
-function recaptchaCallback(e) {
-    //API Post, pass in e & secret key
+    var response = grecaptcha.getResponse();
 
     var data = {
-        response: e
+        response: response
     };
 
     $.ajax({
@@ -315,10 +412,29 @@ function recaptchaCallback(e) {
         url: "/Event/ValidateCaptchaToken",
         data: data,
         success: function (response) {
-            captchaValid = response;
-            checkMakeClip();
-        }
+            debugger;
+            result = response === "True";
+        },
+        async: false
     });
+
+    if (!result) {
+        $(".error-message").removeAttr("hidden");
+        $(".error-message").text("Please complete the captcha before continuing");
+        captchaValid = false;
+    }
+
+    return result;
+}
+
+function expCallback() {
+    captchaValid = false;
+    checkMakeClip();
+}
+
+function recaptchaCallback(e) {
+    captchaValid = true;
+    checkMakeClip();
 }
 
 function initInputMask() {
@@ -348,6 +464,17 @@ function initShareUpdateEmbed() {
 
     startShare.addEventListener("focusout", reloadEmbedData);
     endShare.addEventListener("focusout", reloadEmbedData);
+
+    startShare.addEventListener("focusout", updatePartnerElement);
+    endShare.addEventListener("focusout", updatePartnerElement);
+
+    startShare.addEventListener("focusout", compareTimes);
+    endShare.addEventListener("focusout", compareTimes);
+}
+
+function updatePartnerElement(e) {
+    document.getElementById(e.target.dataset.partnerId).value = e.target.value;
+    reloadEmbedData();
 }
 
 var androidInput = false;

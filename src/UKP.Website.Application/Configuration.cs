@@ -21,7 +21,13 @@ namespace UKP.Website.Application
         }
 
         public static string UKPHelpUrl { get { return ConfigurationManager.AppSettings["UKPHelpUrl"]; } }
-        
+
+        public static string UKPPrivacyStatement { get { return ConfigurationManager.AppSettings["UKPPrivacyStatement"];} }
+
+        public static string UKPPrivilegeUrl { get { return ConfigurationManager.AppSettings["UKPPrivilegeUrl"]; } }
+
+        public static string UKPTermsAndConditionsUrl { get { return ConfigurationManager.AppSettings["UKPTermsAndConditionsUrl"];} }
+
         public string RecaptchaSecret { get { return ConfigurationManager.AppSettings["RecaptchaSecret"]; } }
 
         public string GetMemberAutocompleteApi

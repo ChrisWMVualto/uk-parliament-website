@@ -244,24 +244,7 @@ namespace UKP.Website.Controllers
         {
             bool valid = _downloadService.VerifyCaptcha(_configuration.RecaptchaSecret, data.Response);
 
-            if (valid)
-            {
-                Session["CaptchaCompleted"] = true;
-            }
-
             return valid;
-        }
-
-        public virtual void ResetCaptcha()
-        {
-            Session["CaptchaCompleted"] = false;
-        }
-
-        [HttpGet]
-        public virtual JsonResult ValidateCaptcha()
-        {
-            var temp = this.Json(new { captchaCompleted = (bool)Session["CaptchaCompleted"] });
-            return this.Json(new { captchaCompleted = (bool)Session["CaptchaCompleted"]}, JsonRequestBehavior.AllowGet);
         }
 
         private DateTime? ConvertDateTimeFormatFromPattern(Guid id, string value)
