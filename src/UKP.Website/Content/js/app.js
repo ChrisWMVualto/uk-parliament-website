@@ -467,6 +467,9 @@ function initShareUpdateEmbed() {
 
     startShare.addEventListener("focusout", updatePartnerElement);
     endShare.addEventListener("focusout", updatePartnerElement);
+
+    startShare.addEventListener("focusout", compareTimes);
+    endShare.addEventListener("focusout", compareTimes);
 }
 
 function updatePartnerElement(e) {
