@@ -24,6 +24,8 @@ syntax: glob
 *.scc
 *.orig
 *.DotSettings
+*.lock
+*ide*
 [Bb]in
 [Dd]ebug*/**
 obj/

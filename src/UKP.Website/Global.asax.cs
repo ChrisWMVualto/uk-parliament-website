@@ -26,19 +26,9 @@ namespace UKP.Website
             GlobalFilters.Filters.Add(new RequireHttpsAttribute());
         }
 
-        protected void Application_BeginRequest(Object sender, EventArgs e)
-        {
-            if (!Request.IsLocal && !Request.IsSecureConnection)
-            {
-                string path = string.Format("https{0}", Request.Url.AbsoluteUri.Substring(4));
-
-                Response.Redirect(path);
-            }
-        }
-
         public override string GetVaryByCustomString(HttpContext context, string arg)
         {
-            if(arg.ToLower() == "*")
+            if (arg.ToLower() == "*")
             {
                 return BrowserFilterAttribute.IsSupported().ToString() + Request.QueryString + Request.Form;
             }
@@ -47,7 +37,7 @@ namespace UKP.Website
 
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
-            if(HttpContext.Current != null) HttpContext.Current.Response.Headers.Remove("Server");
+            if (HttpContext.Current != null) HttpContext.Current.Response.Headers.Remove("Server");
         }
 
         protected void Session_Start()
