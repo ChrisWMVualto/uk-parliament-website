@@ -40,8 +40,6 @@ namespace UKP.Website.Controllers
             var video = _videoService.GetVideo(id, inPoint: inPoint, outPoint: outPoint, audioOnly: audioOnly, autoStart: autoStart.GetValueOrDefault(true), statsEnabled:Request.CookiesAllowed());
             if(video == null) return RedirectToAction(MVC.Home._404());
 
-            Session["CaptchaCompleted"] = false;
-
             return View(new EventViewModel(video, agenda.GetValueOrDefault()));
         }
 
