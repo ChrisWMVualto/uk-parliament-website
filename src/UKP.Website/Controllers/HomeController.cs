@@ -23,6 +23,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=120, VaryByCustom= "*")]
         public virtual ActionResult Index()
         {
@@ -30,6 +31,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=120, VaryByCustom="*")]
         public virtual ActionResult Commons()
         {
@@ -38,6 +40,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=120, VaryByCustom="*")]
         public virtual ActionResult Lords()
         {
@@ -46,6 +49,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=120, VaryByCustom="*")]
         public virtual ActionResult Committees()
         {
@@ -61,6 +65,7 @@ namespace UKP.Website.Controllers
             return PartialView(MVC.Home.Views._RecentlyArchived, model);
         }
 
+        [RequireHttps]
         public virtual ActionResult _404()
         {
             return View();

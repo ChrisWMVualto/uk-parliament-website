@@ -23,6 +23,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         public virtual ActionResult Index(string keywords, int? memberId, string member, string house, string business, string start, string end, int page = 1)
         {
             var firstSearchLoad = string.IsNullOrWhiteSpace(start) && string.IsNullOrWhiteSpace(end);
@@ -91,6 +92,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         public virtual ActionResult Members(string name)
         {
             if(name.Length <= 2) return null;

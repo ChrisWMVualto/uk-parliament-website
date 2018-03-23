@@ -7,6 +7,7 @@ namespace UKP.Website.Controllers
     {
         [HttpGet]
         [SkipBrowserFilter]
+        [RequireHttps]
         public virtual ActionResult Index()
         {
             Response.StatusCode = 403;

@@ -23,6 +23,7 @@ namespace UKP.Website.Controllers
         [HttpGet]
         [OutputCache(Duration=60, VaryByParam= "*")]
         [SkipBrowserFilter]
+        [RequireHttps]
         public virtual ActionResult LegacyPlayerRoute()
         {
             if(Request.Url != null)

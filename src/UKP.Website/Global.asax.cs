@@ -23,7 +23,6 @@ namespace UKP.Website
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalFilters.Filters.Add(new SetBundlerOptimisation());
             MvcHandler.DisableMvcResponseHeader = true;
-            GlobalFilters.Filters.Add(new RequireHttpsAttribute());
         }
 
         public override string GetVaryByCustomString(HttpContext context, string arg)

@@ -14,6 +14,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         public virtual ActionResult Index(Guid id)
         {
             var model = _downloadService.GetDownloadUrl(id);

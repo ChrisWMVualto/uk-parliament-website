@@ -32,6 +32,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=20, VaryByCustom= "*")]
         public virtual ActionResult Index(Guid id, string @in = null, string @out = null, bool? audioOnly = null, bool? autoStart = null, bool? agenda = null)
         {
@@ -44,6 +45,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         public virtual ActionResult LegacyPageRoute(int meetingId, TimeSpan? st)
         {
             var legacyVideo = _videoService.GetLegacyVideo(meetingId);

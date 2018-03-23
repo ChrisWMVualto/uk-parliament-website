@@ -24,6 +24,7 @@ namespace UKP.Website.Controllers
         }
 
         [HttpGet]
+        [RequireHttps]
         [OutputCache(Duration=120, VaryByCustom="*")]
         public virtual ActionResult Index()
         {
