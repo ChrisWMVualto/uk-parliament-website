@@ -29,9 +29,7 @@ $(function () {
     $('.moment-more button').on('click', momentSearch);
 
     $('#Member').keypress(function () {
-        if ($('#Member').val() == '') {
-            $('#MemberId').val('');
-        }
+        $('#MemberId').val('');
     });
 
     $('#Member').autocomplete({
@@ -44,7 +42,7 @@ $(function () {
         },
         noCache: false
     });
-    
+
 
     $('#searchResultsContainer').append('<span class="pagination"><a href="' + window.location + '"></a></span>');
     $('#searchResultsContainer').infinitescroll({
@@ -58,7 +56,7 @@ $(function () {
         },
         loading: {
             finishedMsg: '',
-            finished: function() {
+            finished: function () {
                 $('.moment-more button').on('click', momentSearch);
             },
             msgText: ''
