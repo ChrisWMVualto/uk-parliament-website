@@ -53,7 +53,10 @@ namespace UKP.Website.Controllers
 
             var keyWordsOrMember = keywords;
             var isMemberKeywordSearch = !string.IsNullOrWhiteSpace(member);
-            if(!firstSearchLoad && isMemberKeywordSearch) keyWordsOrMember += " " + "\"" + member + "\"";
+
+            //TODO: Removed because search should work on members id and not keyword
+            //if(!firstSearchLoad && isMemberKeywordSearch) keyWordsOrMember += " " + "\"" + member.Trim() + "\"";
+            //if (!firstSearchLoad && isMemberKeywordSearch) keyWordsOrMember += " " + member.Trim();
 
             var searchModel = new SearchViewModel()
             {
@@ -74,7 +77,7 @@ namespace UKP.Website.Controllers
             {
                 if(!firstSearchLoad)
                 {
-                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, null, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page, false, false);
+                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page, isMemberKeywordSearch, false);
                 }
             }
 
