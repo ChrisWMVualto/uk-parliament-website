@@ -74,7 +74,7 @@ namespace UKP.Website.Controllers
             {
                 if(!firstSearchLoad)
                 {
-                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, memberId, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page, isMemberKeywordSearch, false);
+                    searchModel.SearchResult = _searchService.Search(keyWordsOrMember, null, house, business, fromDate.Date, toDate.AddDays(1).AddSeconds(1), page, false, false);
                 }
             }
 
