@@ -36,7 +36,7 @@ $(function () {
         serviceUrl: $('#Member').attr('data-ajax-url') + '?name=',
         displayItem: "Member",
         minChars: 3,
-        delimiter: ' ',
+        delimiter: '',
         onSelect: function (member) {
             $('#MemberId').val(member['MembersNameId']);
         },
