@@ -7,6 +7,7 @@ using System.Web.Mvc.Html;
 using System.Web.Script.Serialization;
 using Date.Extensions;
 using Elmah;
+using Newtonsoft.Json;
 using UKP.Website.Application;
 using UKP.Website.Extensions;
 using UKP.Website.Extensions.SignalR;
@@ -209,6 +210,17 @@ namespace UKP.Website.Controllers
         public virtual ContentResult CreateDownload(CreateDownloadModel model)
         {
             var response = new CreateDownloadResponseModel(model.EmailAddress,true);
+
+            var data = new CaptchaVerifyModel(model.CaptchaToken);
+            if (!ValidateCaptchaToken(data))
+            {
+                response.Success = false;
+                response.Message = "Please complete the captcha before continuing";
+                return Content(new JavaScriptSerializer().Serialize(response));
+            }
+
+
+
             try
             {
                 var startTime = DateTime.Parse(model.StartTime);

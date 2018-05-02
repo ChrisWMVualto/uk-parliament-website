@@ -6,8 +6,6 @@
         return;
     }
 
-    isValidCaptcha();
-
     if (!compareTimes()) {
         return;
     }
@@ -16,7 +14,8 @@
     if (endTime.value === "") {
         endTime.value = document.getElementById("MeetingEndTime").value;
     }
-
+    var captchaToken = captchaResponse();
+    $("#CaptchaToken").val(captchaToken);
     var form = $("#createDownloadForm");
     var data = $(form).serialize();
 
