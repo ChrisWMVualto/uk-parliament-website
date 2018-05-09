@@ -345,6 +345,8 @@ namespace Links
             public static readonly string theme_commons_normal_original_jpg = Url("theme-commons-normal_original.jpg");
             public static readonly string theme_lords_blurred_jpg = Url("theme-lords-blurred.jpg");
             public static readonly string theme_lords_normal_jpg = Url("theme-lords-normal.jpg");
+            public static readonly string tick_circle_png = Url("tick-circle.png");
+            public static readonly string tick_png = Url("tick.png");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -358,8 +360,8 @@ namespace Links
             public static readonly string event_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/event.min.js") ? Url("event.min.js") : Url("event.js");
             public static readonly string groovy_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/groovy.min.js") ? Url("groovy.min.js") : Url("groovy.js");
             public static readonly string guide_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/guide.min.js") ? Url("guide.min.js") : Url("guide.js");
-            public static readonly string jquery_autocomplete_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.mod.min.js") ? Url("jquery.autocomplete.mod.min.js") : Url("jquery.autocomplete.mod.js");
-            public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.infinitescroll.min.js") ? Url("jquery.infinitescroll.min.js") : Url("jquery.infinitescroll.js");
+            public static readonly string jquery_autocomplete_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.autocomplete.min.js") ? Url("jquery.autocomplete.min.js") : Url("jquery.autocomplete.js");
+            public static readonly string jquery_infinitescroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/infinite-scroll.pkgd.min.js") ? Url("infinite-scroll.pkgd.min.js") : Url("infinite-scroll.pkgd.js");
             public static readonly string jquery_post_message_updated_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.post-message.updated.min.js") ? Url("jquery.post-message.updated.min.js") : Url("jquery.post-message.updated.js");
             public static readonly string program_date_time_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/program-date-time.min.js") ? Url("program-date-time.min.js") : Url("program-date-time.js");
             public static readonly string responsive_player_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/responsive-player.min.js") ? Url("responsive-player.min.js") : Url("responsive-player.js");
@@ -381,7 +383,7 @@ namespace Links
                 public static readonly string dragscrollable_mod_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/dragscrollable.mod.min.js") ? Url("dragscrollable.mod.min.js") : Url("dragscrollable.mod.js");
                 public static readonly string jquery_1_10_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.10.1.min.js") ? Url("jquery-1.10.1.min.js") : Url("jquery-1.10.1.js");
                 public static readonly string jquery_1_10_1_min_js = Url("jquery-1.10.1.min.js");
-                public static readonly string jQuery_Mobile_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jQuery-Mobile.min.js") ? Url("jQuery-Mobile.min.js") : Url("jQuery-Mobile.js");
+                public static readonly string jQuery_Mobile_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.mobile-1.4.5.js") ? Url("jquery.mobile-1.4.5.js") : Url("jquery.mobile-1.4.5.js");
                 public static readonly string jquery_pep_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.pep.min.js") ? Url("jquery.pep.min.js") : Url("jquery.pep.js");
                 public static readonly string jquery_slimscroll_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.slimscroll.min.js") ? Url("jquery.slimscroll.min.js") : Url("jquery.slimscroll.js");
                 public static readonly string jquery_succinct_min_js = Url("jquery.succinct.min.js");

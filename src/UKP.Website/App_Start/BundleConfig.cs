@@ -17,7 +17,7 @@ namespace UKP.Website
                 "~/Content/js/vendor/jquery-1.10.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/footJs").Include(
-                "~/Content/js/vendor/jQuery-Mobile.js",
+                "~/Content/js/vendor/jquery.mobile-1.4.5.js",
                 "~/Content/js/vendor/jquery.succinct.min.js",
                 "~/Content/js/vendor/bootstrap-checkbox.js",
                 "~/Content/js/vendor/jquery.pep.js",
@@ -28,8 +28,8 @@ namespace UKP.Website
                 "~/Content/js/vendor/bootstrap-select.js",
                 "~/Content/js/vendor/bootstrap-multiselect.js",
                 "~/Content/js/bootstrap.min.js",
-                "~/Content/js/jquery.autocomplete.mod.js",
-                "~/Content/js/jquery.infinitescroll.js",
+                "~/Content/js/jquery.autocomplete.js",
+                "~/Content/js/infinite-scroll.pkgd.js",
                 "~/Content/js/scripts.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/guideJs").Include(
