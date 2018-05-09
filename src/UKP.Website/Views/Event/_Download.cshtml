@@ -1,0 +1,183 @@
+﻿@using Date.Extensions
+@using UKP.Website.Application
+@using UKP.Website.Extensions
+@using UKP.Website.Service.Model
+@model UKP.Website.Models.Event.DownloadViewModel
+
+@{
+    var hiddenDateDropdown = "";
+}
+@if (Model.VideoModel.Event.DisplayStartDate.ToLocalTime().Date == Model.VideoModel.Event.DisplayEndDate.ToLocalTime().Date)
+{
+    hiddenDateDropdown = "hidden";
+}
+
+@if (Model.VideoModel.Event.PublishedStartTime.HasValue
+                                         && Model.VideoModel.Event.States.PlanningState != PlanningEventState.STOP_DVR
+                                         && (Model.VideoModel.Event.States.PlayerState == PlayerEventState.ARCHIVE
+                                             || Model.VideoModel.Event.States.PlayerState == PlayerEventState.LIVE))
+{
+    <form class="download-form" role="form">
+        <a href="#" class="close-pane close-share hidden">close</a>
+        <div id="downloadContainer" data-load-url="@Url.Action(MVC.Event.Clipping(Model.VideoModel.Event.Id, Model.VideoModel.RequestedInPoint.ToISO8601String(), Model.VideoModel.RequestedOutPoint.ToISO8601String()))">
+            <input id="AllowClippingRefresh" name="AllowClippingRefresh" type="hidden" value="False">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row form-inline time-start-end">
+                        <div class="col-xs-6 start-time-container time-container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadStartTime" data-form-id="StartTime" type="button" id="downloadStartTimeSet">Set Start Time</button>
+                                    </div>
+                                    <div class="form-group start-time">
+                                        <span class="bootstrap-timepicker">
+                                            <input id="downloadHiddenStart" name="downloadHiddenStart" type="hidden" value="09:33:41">
+                                            <input type="text" class="form-control input-lg time-input" data-last-input="" id="downloadStartTime" data-form-id="StartTime" data-partner-id="shareStartTime" onPaste="return false" onDrop="return false" value="">
+                                        </span>
+                                    </div>
+                                    <div class="form-group start-day">
+                                        <label class="hide" for="downloadStartClipDate">
+                                            <h5>Day:</h5>
+                                        </label>
+                                        <span class="day-dropdown">
+                                            @Html.DropDownList("startDownloadDate", Model.StartDates, new { @class = "clip-date " + hiddenDateDropdown })
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 end-time-container time-container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="pipe"></span>
+                                    <div class="form-group">
+                                        <button class="btn btn-generic btn-black set-download-time" data-textbox-id="downloadEndTime" data-form-id="EndTime" type="button" id="downloadEndTimeSet">Set End Time</button>
+                                    </div>
+                                    <div class="form-group end-time">
+                                        <span class="bootstrap-timepicker">
+                                            <input id="downloadHiddenEnd" name="downloadHiddenEnd" type="hidden" value="17:19:11">
+                                            <input type="text" class="form-control input-lg time-input" data-last-input="" data-form-id="EndTime" data-partner-id="shareEndTime" id="downloadEndTime" onPaste="return false" onDrop="return false" value="">
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group end-day">
+                                        <label class="hide" for="downloadEndClipDate">
+                                            <h5>Day:</h5>
+                                        </label>
+                                        <span class="day-dropdown">
+                                            @Html.DropDownList("endDownloadDate", Model.EndDates, new { @class = "clip-date " + hiddenDateDropdown })
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p hidden class="error-message"></p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>Select a section of the video and receive a download link via email.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row form-inline video-audio">
+                                <div class="col-md-12">
+                                    <label>
+                                        <h5>File Type</h5>
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="custom-radio fileType">
+                                                <input type="radio" class="radioFileType" name="filetype[]" id="fileType1" value="Video" />
+                                                <label for="fileType1">
+                                                    <span>Video</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-3">
+                                            <div class="custom-radio fileType">
+                                                <input type="radio" class="radioFileType" name="filetype[]" id="fileType2" value="Audio" disabled />
+                                                <label for="fileType2">
+                                                    <span>Audio</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row download-terms">
+            <div class="col-md-12">
+                <p>Please read and agree to the following terms and conditions before continuing.</p>
+            </div>
+            <div class="col-md-12">
+                <div class="tc-box-container">
+                    <div class="tc-box clearfix">
+                        <p><b>Use of audio-visual recordings of parliamentary proceedings</b></p>
+                        <p>This material is published on <a href="http://parliamentlive.tv"><b>parliamentlive.tv</b></a> tv with the authority of the House of Commons and/or the House of Lords. It is protected by parliamentary copyright and all rights are reserved.</p>
+                        <p>You are permitted to reproduce this material only if you comply with the <a href="@Configuration.UKPTermsAndConditionsUrl"><b>Terms and Conditions</b></a>.</p>
+                        <p>In particular you may not:</p>
+                        <ul>
+                            <li>alter the video or audio of the recording in any way;</li>
+                            <li>use this material for satire, advertising, entertainment content or productions or to suggest endorsement; or</li>
+                            <li>use this material on websites or social media platforms that promote, encourage or facilitate illegal activity, encourage hatred or anti-social behaviour.</li>
+                        </ul>
+                        <p><a href="@Configuration.UKPPrivilegeUrl"><b>Parliamentary privilege</b></a> protects freedom of speech during parliamentary proceedings. Please be aware that republishing footage of those proceedings is unlikely to be protected. If you choose to republish this material, you do so at your own discretion and risk.</p>
+                        <p>Reasonable care has been taken to make sure that this material and any related software code contains no errors, viruses, or defects, but no warranty is given that this is the case.</p>
+                        <p>By clicking ‘continue’ you acknowledge that you have read and understood the Terms and Conditions and agree to be bound by them.</p>
+                        <div class="custom-checkbox">
+                            <input type="checkbox" name="acceptance" class="acceptance" id="downloadAcceptance" data-continue-id="downloadContinue" value="1" />
+                            <label for="downloadAcceptance">
+                                <span class="hidden-xs">I have read and agree to the Terms and Conditions</span>
+                                <span class="visible-xs">I have read and agree to the above t's &amp; c's</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-generic btn-black btn-wide continue" id="downloadContinue" type="button" disabled>Continue</button>
+            </div>
+        </div>
+        <div class="row email-me" style="display: none;">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-9 col-md-12 col-lg-9">
+                        <label for="email"><h4>Your Email</h4></label>
+                        <a href="@Configuration.UKPPrivacyStatement" class="email-me-link" target="_blank">View Privacy Statement</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9 col-md-12 col-lg-9">
+                        <input type="text" class="form-control input-lg" name="email" id="email" placeholder="user@parliamentlive.tv" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-md-6 col-lg-5">
+                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-expired-callback="expCallback" data-sitekey="@Html.GetValue("RecaptchaKey","void")"></div>
+                    </div>
+                    <div class="col-sm-4 col-md-6 col-lg-4">
+                        <input id="downloadSubmit" class="btn btn-generic btn-black btn-wide right btn-submit" type="button" value="Make Clip" disabled />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div hidden class="thankyou" id="thankyou">
+        <h4 class="thankyou-header"></h4>
+        <p>A confirmation of your clip has been sent to your <strong class="thankyou-email">joe@parliamentlive.tv</strong> email</p>
+        <p class="thankyou-message">test test</p>
+        <button id="newClip" class="btn btn-generic btn-black">Make Another Clip</button>
+    </div>
+}
+else
+{
+    <p class="no-download">Download currently not available for this meeting.</p>
+}
+<hr>
+<p class="further-info">You can find out more information and instructions on our <a href="@Configuration.UKPHelpUrl"><i class="fa fa-external"></i>Help</a> page.</p>
