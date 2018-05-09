@@ -6,7 +6,7 @@
 @{
     var hiddenDateDropdown = "";
 }
-@if(Model.VideoModel.Event.DisplayStartDate.Date == Model.VideoModel.Event.DisplayEndDate.Date)
+@if(Model.VideoModel.Event.DisplayStartDate.ToLocalTime().Date == Model.VideoModel.Event.DisplayEndDate.ToLocalTime().Date)
 {
     hiddenDateDropdown = "hidden";
 }
