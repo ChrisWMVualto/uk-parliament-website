@@ -398,33 +398,10 @@ function isValidEmail() {
     return result;
 }
 
-function isValidCaptcha() {
-    var result = false;
-
+function captchaResponse() {
     var response = grecaptcha.getResponse();
 
-    var data = {
-        response: response
-    };
-
-    $.ajax({
-        method: 'POST',
-        url: "/Event/ValidateCaptchaToken",
-        data: data,
-        success: function (response) {
-            debugger;
-            result = response === "True";
-        },
-        async: false
-    });
-
-    if (!result) {
-        $(".error-message").removeAttr("hidden");
-        $(".error-message").text("Please complete the captcha before continuing");
-        captchaValid = false;
-    }
-
-    return result;
+    return response;
 }
 
 function expCallback() {
