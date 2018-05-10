@@ -1,2 +1,7 @@
 User-agent: *
-Allow: /
+Allow: /Commons
+Allow: /Lords
+Allow: /Committees
+Allow: /Guide
+Allow: /Search
+Disallow: /
