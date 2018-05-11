@@ -1,0 +1,65 @@
+﻿@using Date.Extensions
+@using RestSharp.Extensions
+@model UKP.Website.Models.Event.SearchMomentModel
+
+@foreach(var moment in @Model.LogMomentResultModel.Results.Skip(Model.SkipCount))
+{
+    var highlightDescription = Html.Encode(@moment.Description);
+    var highlightIasDisplayAs = Html.Encode(@moment.IasDisplayAs);
+    var highlights = Model.LogMomentResultModel.SearchHighlights.FirstOrDefault(x => x.Id == moment.Id);
+
+    if(highlights != null)
+    {
+        var fieldDescription = highlights.Fields.FirstOrDefault(x => x.Name == "description");
+        if(fieldDescription != null)
+        {
+            highlightDescription = fieldDescription.Value;
+        }
+        var fieldIasDisplayAs = highlights.Fields.FirstOrDefault(x => x.Name == "iasDisplayAs");
+        if(fieldIasDisplayAs != null)
+        {
+            highlightIasDisplayAs = fieldIasDisplayAs.Value;
+        }
+    }
+    
+    <div class="col-md-12 moment-item">
+        <a href="@moment.WebPageUrl" class="outer-border">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+                    <div class="moment-thumb">
+                        <span class="fa-stack fa-lg visible-xs visible-sm"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        @if(moment.ThumbnailUrl.HasValue())
+                        {
+                            <img src="@moment.ThumbnailUrl" alt="@moment.Description" class="img-responsive">
+                        }
+                        else
+                        {
+                            <img src="@Url.Content("~/Content/img/filler-thumb-5.jpg")" alt="@moment.Description" class="img-responsive">
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">
+                    <div class="inner">
+                        <p>@(moment.InPoint.HasValue ? moment.InPoint.Value.ToLocalTime().ToString("T") : string.Empty)</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-7 col-md-9 col-lg-9">
+                    <div class="inner">
+                        @if(!string.IsNullOrWhiteSpace(highlightDescription))
+                        {
+                            <p>@Html.Raw(highlightDescription)</p>
+                        }
+                        @if(!string.IsNullOrWhiteSpace(highlightIasDisplayAs))
+                        {
+                            <p>@Html.Raw(highlightIasDisplayAs)</p>
+                        }
+                        <span class="moment-play visible-md visible-lg">
+                            Play item
+                            <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-play fa-stack-1x fa-inverse"></i> </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

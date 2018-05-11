@@ -1,0 +1,13 @@
+﻿@model UKP.Website.Models.Home.HomeViewsModel
+
+@if (Model.NowNext.Events.Any())
+{
+    @Html.Partial(MVC.Home.Views._NowAndNext, Model.NowNext.Events)
+}
+
+@if (Model.Epg.Any())
+{
+    @Html.Partial(MVC.Home.Views._Guide, Model.Epg)
+}
+
+@Html.Action(MVC.Home.RecentlyArchive(Model.EventFilter))
