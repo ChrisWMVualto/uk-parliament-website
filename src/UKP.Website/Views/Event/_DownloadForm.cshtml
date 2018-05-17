@@ -1,0 +1,29 @@
+﻿@using Date.Extensions
+@using UKP.Website.Service.Model
+@model VideoModel
+
+@if (Model.Event.PublishedStartTime.HasValue
+                     && Model.Event.States.PlanningState != PlanningEventState.STOP_DVR
+                     && (Model.Event.States.PlayerState == PlayerEventState.ARCHIVE
+                         || Model.Event.States.PlayerState == PlayerEventState.LIVE))
+{
+    //todo fix issue with times being slightly out of sync
+    var time = new TimeSpan(0);
+    var startTime = Model.Event.PublishedStartTime.Value.Date + time;
+    var endTime = Model.Event.PublishedStartTime.Value.Date + time;
+
+    if (Model.RequestedOutPoint.HasValue)
+    {
+        endTime = Model.RequestedOutPoint.Value;
+    }
+
+    <form id="createDownloadForm">
+        @Html.Hidden("EventId", Model.Event.Id)
+        @Html.Hidden("StartTime", startTime.ToISO8601String())
+        @Html.Hidden("EndTime", endTime.ToISO8601String())
+        @Html.Hidden("EmailAddress", "")
+        @Html.Hidden("AudioOnly", false)
+        @Html.Hidden("StreamUrl")
+        @Html.Hidden("CaptchaToken")
+    </form>
+}
