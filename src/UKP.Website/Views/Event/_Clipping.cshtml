@@ -36,7 +36,7 @@
                                     <h5>Day:</h5>
                                 </label>
                                 <span class="day-dropdown">
-                                    @Html.DropDownList("startClipDate", Model.StartDates, new { @class = "clip-date selectpicker" + hiddenDateDropdown, onchange = "compareTimes()" })
+                                    @Html.DropDownList("startClipDate", Model.StartDates, new { @class = "clip-date " + hiddenDateDropdown, onchange = "compareTimes()" })
                                 </span>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                     <h5>Day:</h5>
                                 </label>
                                 <span class="day-dropdown">
-                                    @Html.DropDownList("endClipDate", Model.EndDates, new { @class = "clip-date selectpicker" + hiddenDateDropdown, onchange = "compareTimes()" })
+                                    @Html.DropDownList("endClipDate", Model.EndDates, new { @class = "clip-date " + hiddenDateDropdown, onchange = "compareTimes()" })
                                 </span>
                             </div>
                         </div>

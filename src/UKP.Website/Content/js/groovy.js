@@ -12,13 +12,11 @@ function getTime() {
 }
 
 function getShareTime(e) {
-    var time = getTime();
-    var timeString = time.toTimeString();
+
+    var timeString = getTime().toTimeString();
     var textbox = document.getElementById(e.target.dataset.textboxId);
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
-
-    updateDatePickers(time, textbox);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
     compareTimes();
@@ -33,8 +31,6 @@ function getDownloadTime(e) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
-
-    updateDatePickers(time, textbox);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
 
