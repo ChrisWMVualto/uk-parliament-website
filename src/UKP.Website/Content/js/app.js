@@ -234,6 +234,17 @@ function compareTimes() {
     } else {
         keepError = false;
         setTimeError(startTime, endTime, meetingStartTime);
+
+        var start = new Date(meetingStartTime);
+        var meetingStartDate = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+
+        var end = new Date(meetingEndTime);
+        var meetingEndDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+        if (Math.floor((meetingEndDate.getTime() - meetingStartDate.getTime()) / (1000 * 3600 * 24)) > 0) {
+            $(".error-message").append(" Please ensure you have selected the correct date");
+        }
+
         return false;
     }
 
@@ -268,15 +279,15 @@ function setTimeError(startTime, endTime, meetingStartTime) {
     endDate = new Date(endTime);
 
     if (startTime > endTime) {
-        setErrorMessage("Start Time cannot be later than the End Time");
+        setErrorMessage("Start Time cannot be later than the End Time.");
     } else if (endDate - startDate < 10000) {
-        setErrorMessage("Start Time and End Time must be at least 10 seconds apart");
+        setErrorMessage("Start Time and End Time must be at least 10 seconds apart.");
     } else if (startTime < meetingStartTime) {
-        setErrorMessage("Start Time cannot be earlier than the meeting start time");
+        setErrorMessage("Start Time cannot be earlier than the meeting start time.");
     } else if (endTime < startTime) {
-        setErrorMessage("End Time cannot be earlier than the Start Time");
+        setErrorMessage("End Time cannot be earlier than the Start Time.");
     } else {
-        setErrorMessage("End Time cannot be later than the meeting end time");
+        setErrorMessage("End Time cannot be later than the meeting end time.");
     }
 }
 
