@@ -84,7 +84,7 @@ function generateDateString(date) {
 
 function updateDatePickers(time, textbox) {
     var dateSelect = document.getElementById(textbox.dataset.dateSelectId);
-    var partnerSelect = document.getElementById(textbox.partnerDateSelectId);
+    var partnerSelect = document.getElementById(textbox.dataset.partnerDateSelectId);
 
     var dateString = generateDateString(time);
     $(dateSelect).selectpicker('val', dateString);
