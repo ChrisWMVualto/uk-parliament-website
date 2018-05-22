@@ -12,11 +12,18 @@ function getTime() {
 }
 
 function getShareTime(e) {
-
-    var timeString = getTime().toTimeString();
+    var time = getTime();
+    var timeString = time.toTimeString();
     var textbox = document.getElementById(e.target.dataset.textboxId);
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
+
+    var dateSelect = document.getElementById(e.target.dataset.dateSelectId);
+    var partnerSelect = document.getElementById(e.target.dataset.partnerDateSelectId);
+
+    var dateString = generateDateString(time);
+    $(dateSelect).selectpicker('val', dateString);
+    $(partnerSelect).selectpicker('val', dateString);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
     compareTimes();
@@ -31,6 +38,13 @@ function getDownloadTime(e) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(e.target.dataset.formId).value = time.toJSON();
+
+    var dateSelect = document.getElementById(e.target.dataset.dateSelectId);
+    var partnerSelect = document.getElementById(e.target.dataset.partnerDateSelectId);
+
+    var dateString = generateDateString(time);
+    $(dateSelect).selectpicker('val', dateString);
+    $(partnerSelect).selectpicker('val', dateString);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
 

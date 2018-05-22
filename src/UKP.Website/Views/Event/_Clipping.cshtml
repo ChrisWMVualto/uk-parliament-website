@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <button class="btn btn-generic btn-black set-share-time" data-textbox-id="shareStartTime" type="button" id="startTimeSet">Set Start Time</button>
+                                <button class="btn btn-generic btn-black set-share-time" data-date-select-id="startClipDate" data-partner-date-select-id="startDownloadDate" data-textbox-id="shareStartTime" type="button" id="startTimeSet">Set Start Time</button>
                             </div>
                             <div class="form-group start-time">
                                 <span class="bootstrap-timepicker">
@@ -36,7 +36,7 @@
                                     <h5>Day:</h5>
                                 </label>
                                 <span class="day-dropdown">
-                                    @Html.DropDownList("startClipDate", Model.StartDates, new { @class = "clip-date " + hiddenDateDropdown, onchange = "compareTimes()" })
+                                    @Html.DropDownList("startClipDate", Model.StartDates, new { @class = "clip-date selectpicker" + hiddenDateDropdown, onchange = "compareTimes()" })
                                 </span>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <span class="pipe"></span>
                             <div class="form-group">
-                                <button class="btn btn-generic btn-black set-share-time" data-textbox-id="shareEndTime" type="button" id="endTimeSet">Set End Time</button>
+                                <button class="btn btn-generic btn-black set-share-time" data-date-select-id="endClipDate" data-partner-date-select-id="endDownloadDate" data-textbox-id="shareEndTime" type="button" id="endTimeSet">Set End Time</button>
                             </div>
                             <div class="form-group end-time">
                                 <span class="bootstrap-timepicker">
@@ -61,7 +61,7 @@
                                     <h5>Day:</h5>
                                 </label>
                                 <span class="day-dropdown">
-                                    @Html.DropDownList("endClipDate", Model.EndDates, new { @class = "clip-date " + hiddenDateDropdown, onchange = "compareTimes()" })
+                                    @Html.DropDownList("endClipDate", Model.EndDates, new { @class = "clip-date selectpicker" + hiddenDateDropdown, onchange = "compareTimes()" })
                                 </span>
                             </div>
                         </div>
