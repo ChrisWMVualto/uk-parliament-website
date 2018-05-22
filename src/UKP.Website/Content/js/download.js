@@ -81,3 +81,12 @@ function generateDateString(date) {
 
     return dateString;
 }
+
+function updateDatePickers(time, textbox) {
+    var dateSelect = document.getElementById(textbox.dataset.dateSelectId);
+    var partnerSelect = document.getElementById(textbox.partnerDateSelectId);
+
+    var dateString = generateDateString(time);
+    $(dateSelect).selectpicker('val', dateString);
+    $(partnerSelect).selectpicker('val', dateString);
+}
