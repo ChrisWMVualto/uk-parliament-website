@@ -67,10 +67,13 @@ function setTime(data) {
 }
 
 function setShareTime(data) {
-    var time = new Date(data.time).toTimeString();
+    var time = new Date(data.time);
+    var timeString = time.toTimeString();
     var textbox = document.getElementById(data.elementId);
-    textbox.value = time.split(' ')[0];
+    textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
+
+    updateDatePickers(time, textbox);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
     compareTimes();
@@ -85,6 +88,8 @@ function setDownloadTime(data) {
     textbox.value = timeString.split(' ')[0];
     textbox.dataset.lastInput = textbox.value;
     document.getElementById(textbox.dataset.formId).value = time.toJSON();
+
+    updateDatePickers(time, textbox);
 
     document.getElementById(textbox.dataset.partnerId).value = textbox.value;
     reloadEmbedData();
