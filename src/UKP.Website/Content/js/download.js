@@ -66,22 +66,6 @@ function updateCurrentTime(data) {
     document.getElementById("ProgramDateTime").value = messageSplit[1];
 }
 
-function generateDateString(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-
-    var dateString = year + "-";
-
-    if (month < 10) dateString += "0";
-    dateString += month + "-";
-
-    if (day < 10) dateString += "0";
-    dateString += day;
-
-    return dateString;
-}
-
 function updateDatePickers(time, textbox) {
     var dateSelect = document.getElementById(textbox.dataset.dateSelectId);
     var partnerSelect = document.getElementById(textbox.partnerDateSelectId);
