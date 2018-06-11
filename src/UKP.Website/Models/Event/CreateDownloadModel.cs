@@ -14,7 +14,6 @@ namespace UKP.Website.Models.Event
         public string EndTime { get; set; }
         public string EmailAddress { get; set; }
         public bool AudioOnly { get; set; }
-        public string StreamUrl { get; set; }
         public string CaptchaToken { get; set; }
 
     }

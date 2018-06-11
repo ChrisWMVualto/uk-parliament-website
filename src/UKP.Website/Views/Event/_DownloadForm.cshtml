@@ -1,4 +1,5 @@
 ﻿@using Date.Extensions
+@using UKP.Website.Models.Event
 @using UKP.Website.Service.Model
 @model VideoModel
 
@@ -17,13 +18,12 @@
         endTime = Model.RequestedOutPoint.Value;
     }
 
-    <form id="createDownloadForm">
+    <form id="createDownloadForm" data-post-url="@Url.Action(MVC.Event.CreateDownload())">
         @Html.Hidden("EventId", Model.Event.Id)
         @Html.Hidden("StartTime", startTime.ToISO8601String())
         @Html.Hidden("EndTime", endTime.ToISO8601String())
         @Html.Hidden("EmailAddress", "")
         @Html.Hidden("AudioOnly", false)
-        @Html.Hidden("StreamUrl")
         @Html.Hidden("CaptchaToken")
     </form>
 }
