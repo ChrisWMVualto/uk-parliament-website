@@ -16,8 +16,9 @@
     }
     var captchaToken = captchaResponse();
     $("#CaptchaToken").val(captchaToken);
-    var form = $("#createDownloadForm");
+    var form = document.getElementById("createDownloadForm");
     var data = $(form).serialize();
+    var url = form.dataset.postUrl;
 
     $(".error-message").prop("hidden", true);
     $("#downloadSubmit").prop("disabled", true);
@@ -26,7 +27,7 @@
 
     $.ajax({
         method: 'POST',
-        url: "/Event/CreateDownload",
+        url: url,
         data: data,
         success: function (data) {
             var response = JSON.parse(data);

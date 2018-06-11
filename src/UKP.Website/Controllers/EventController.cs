@@ -228,7 +228,7 @@ namespace UKP.Website.Controllers
                 var endTime = DateTime.Parse(model.EndTime);
                 response.OutPointHasError = false;
 
-                var apiResponse =_downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly, model.StreamUrl);
+                var apiResponse =_downloadService.CreateDownload(model.EventId, startTime, endTime, model.EmailAddress, model.AudioOnly);
                 response.Success = apiResponse.Successful;
                 response.Message = apiResponse.Message;
                 if (apiResponse.Successful)

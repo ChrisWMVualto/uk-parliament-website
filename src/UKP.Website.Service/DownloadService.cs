@@ -32,7 +32,6 @@ namespace UKP.Website.Service
             request.AddParameter("EndTime", endTime.ToISO8601String());
             request.AddParameter("Email", emailAddress);
             request.AddParameter("AudioOnly", audioOnly);
-            if (streamUrl != null) request.AddParameter("StreamUrl", streamUrl);
 
 
             var response = client.Execute(request);
