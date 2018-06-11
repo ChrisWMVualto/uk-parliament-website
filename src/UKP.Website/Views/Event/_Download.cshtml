@@ -1,4 +1,5 @@
-﻿@using Date.Extensions
+﻿@using System.Web.Optimization
+@using Date.Extensions
 @using UKP.Website.Application
 @using UKP.Website.Extensions
 @using UKP.Website.Service.Model
@@ -174,6 +175,11 @@
         <p class="thankyou-message">test test</p>
         <button id="newClip" class="btn btn-generic btn-black">Make Another Clip</button>
     </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/downloadJs")
+}
+
 }
 else
 {

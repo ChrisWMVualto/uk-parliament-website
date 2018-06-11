@@ -47,14 +47,17 @@ namespace UKP.Website
                 "~/Content/js/vendor/bootstrap-timepicker-event-mod.js",
                 "~/Content/js/event.js",
                 "~/Content/js/program-date-time.js",
-                "~/Content/js/download.js",
-                "~/Content/js/app.js"));
+                "~/Content/js/app.js",
+                "~/Content/js/inputMask.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/theoJs").Include(
                 "~/Content/js/theoplayer.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/groovyJs").Include(
                 "~/Content/js/groovy.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/downloadJs").Include(
+                "~/Content/js/download.js"));
 
             BundleTable.EnableOptimizations = true;
         }

@@ -234,6 +234,7 @@
     <Content Include="Content\img\tick.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\groovy.js" />
+    <Content Include="Content\js\inputMask.js" />
     <Content Include="Content\js\theoplayer.js" />
     <Content Include="Content\js\download.js" />
     <Content Include="Content\js\jquery.post-message.updated.js" />

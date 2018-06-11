@@ -90,3 +90,41 @@ function updateDatePickers(time, textbox) {
     $(dateSelect).selectpicker('val', dateString);
     $(partnerSelect).selectpicker('val', dateString);
 }
+
+$(function () {
+    initInputMask();
+    initEnableEmail();
+    initCreateDownload();
+    initDownloadStartEndKeyPress();
+    initMakeAnotherClip();
+});
+
+
+
+function initEnableEmail() {
+    var downloadContinueButton = document.getElementById("downloadContinue");
+    downloadContinueButton.addEventListener("click", enableEmail);
+}
+
+function initCreateDownload() {
+    var makeClip = $("#downloadSubmit");
+    makeClip.on("click", createDownload);
+}
+
+function initDownloadStartEndKeyPress() {
+    var startTimeBox = $("#downloadStartTime");
+    var endTimeBox = $("#downloadEndTime");
+
+    startTimeBox.val(new Date(document.getElementById("StartTime").value).toTimeString().split(" ")[0]);
+    endTimeBox.val(new Date(document.getElementById("EndTime").value).toTimeString().split(" ")[0]);
+
+    startTimeBox.on("focusout", compareTimes);
+    endTimeBox.on("focusout", compareTimes);
+
+    startTimeBox.on("focusout", updatePartnerElement);
+    endTimeBox.on("focusout", updatePartnerElement);
+}
+
+function initMakeAnotherClip() {
+    document.getElementById("newClip").addEventListener("click", resetDownloadTab);
+}

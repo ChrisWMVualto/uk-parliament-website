@@ -1,6 +1,4 @@
-﻿$(function() {
-    setTimeout(getStreamUrl, 5000);
-});
+﻿
 
 function liveEdgeUpdate(data) {
 
@@ -52,15 +50,6 @@ function getTime(elementId) {
     $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
 }
 
-function getStreamUrl() {
-    var receiver = $('#UKPPlayer')[0];
-    var message = {
-        'function': 'getStreamUrl',
-        'sender': document.location.href,
-        'callback': 'setStreamUrl'
-    };
-    $.postMessage(JSON.stringify(message), receiver.src, receiver.contentWindow);
-}
 
 function setTime(data) {
     document.getElementById(data.elementId).value = data.time;
