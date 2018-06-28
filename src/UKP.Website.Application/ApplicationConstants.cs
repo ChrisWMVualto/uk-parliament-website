@@ -10,7 +10,7 @@ namespace UKP.Website.Application
         public const string YearDateTimeWithoutMeridiemFormat = "dddd d MMMM yyyy h.mm";
         public const string MerdiemFormat = "tt";
         public static DateTimeFormatInfo DateTimeFormatter = new DateTimeFormatInfo() { AMDesignator = "am", PMDesignator = "pm" };
-        public const string AcceptCookieName = "Cookies";
+        public const string AcceptCookieName = "Cookies_80709178-f878-4b24-9345-d928521c5c30";
         public const int EpgItemMinWidth = 240;
     }
 }
