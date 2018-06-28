@@ -1,0 +1,9 @@
+﻿@using Date.Extensions
+@model UKP.Website.Models.Guide.GuideViewModel
+
+<div class="channel-day" data-day="@Model.BaseDate.ToLocalTime().Date.ToISO8601String()">
+    @foreach (var channel in @Model.Events)
+    {
+        @Html.Partial(MVC.Guide.Views._ChannelItems, channel)
+    }
+</div>
