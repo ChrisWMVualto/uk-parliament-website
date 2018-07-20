@@ -13,6 +13,9 @@
         Thank you for using <b>parliamentlive.tv</b>. Your download should start automatically. If it does not, <a href="@Model.Url">Click here</a>.
     </p>
     <br />
+    <div>
+        <b id="deviceMessage"></b>
+    </div>
     <br />
 </div>
 
@@ -25,4 +28,6 @@
             window.location.href = "@Model.Url";
         }
     </script>
+
+    <script src="~/Content/js/downloadAvailable.js"></script>
 }
