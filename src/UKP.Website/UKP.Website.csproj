@@ -233,6 +233,7 @@
     <Content Include="Content\img\tick-circle.png" />
     <Content Include="Content\img\tick.png" />
     <Content Include="Content\js\app.js" />
+    <Content Include="Content\js\downloadAvailable.js" />
     <Content Include="Content\js\groovy.js" />
     <Content Include="Content\js\inputMask.js" />
     <Content Include="Content\js\theoplayer.js" />
