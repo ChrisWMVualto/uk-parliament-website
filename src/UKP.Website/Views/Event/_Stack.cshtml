@@ -1,0 +1,20 @@
+﻿@using UKP.Website.Service.Model
+@model VideoModel
+
+@foreach(var stack in Model.Stacks)
+{
+    <li class="stackouter">
+        <article>
+            <header class="stack-item">
+                <h4>
+                    @stack.Description
+                    @if(!string.IsNullOrWhiteSpace(stack.Description) && !string.IsNullOrWhiteSpace(stack.IasDisplayAs))
+                    {
+                        <br /><br />
+                    }
+                    @stack.IasDisplayAs
+                </h4>
+            </header>
+        </article>
+    </li>
+}
