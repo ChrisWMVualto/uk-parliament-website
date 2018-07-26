@@ -4,6 +4,6 @@
     if (iOS) {
         $("#deviceMessage")
             .text(
-                "It is not possible to download to iOS devices (e.g. Apple iPhones, iPads), we recommend saving to an alternative device.");
+                "Unfortunately, it is not currently possible to save parliamentlive.tv downloads on an iOS device (e.g. Apple iPhones, iPads). Please return to this page from an alternative device to save your download.");
     }
 });
