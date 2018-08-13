@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Net;
 using Date.Extensions;
+using log4net;
+using log4net.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -16,11 +18,13 @@ namespace UKP.Website.Service
     {
         private readonly IRestClientWrapper _restClientWrapper;
         private readonly IConfiguration _configuration;
+        private ILog _logger;
 
         public DownloadService(IRestClientWrapper restClientWrapper, IConfiguration configuration)
         {
             _restClientWrapper = restClientWrapper;
             _configuration = configuration;
+            _logger = LogManager.GetLogger(typeof(DownloadService));
         }
 
         public DownloadResponseModel CreateDownload(Guid eventId, DateTime startTime, DateTime endTime, string emailAddress, bool audioOnly, string streamUrl = null)
@@ -36,6 +40,7 @@ namespace UKP.Website.Service
 
             var response = client.Execute(request);
             if (response.StatusCode != HttpStatusCode.OK) throw new RestSharpException(response);
+            _logger.Info("UKP Web Create Download Successfully Sent To IAS");
             return DownloadTransforms.Transform(response.Content);
         }
 
