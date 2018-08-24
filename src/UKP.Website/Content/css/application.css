@@ -216,6 +216,10 @@ button.multiselect {
     color: #000000;
 }
 
+.modal-content a {
+    text-decoration: underline;
+}
+
 /* Global dates */
 
 .merdiem {
