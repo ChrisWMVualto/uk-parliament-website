@@ -58,6 +58,7 @@ window.addEventListener("message", receiveMessage, false);
 
 function receiveMessage(event) {
     var message = JSON.parse(event.data);
+    if (message === null) return;
     var sender = $('#UKPPlayer')[0].src;
     if (message.sender === sender) window[message.function](message.data);
 }
