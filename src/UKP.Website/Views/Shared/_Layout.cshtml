@@ -42,7 +42,22 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <![endif]-->
     @Scripts.Render("~/bundles/headJs")
+    
+    <!-- Google Tag Manager -->
 
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+
+        })(window,document,'script','dataLayer','GTM-NCKKFNS');
+    </script>
+
+    <!-- End Google Tag Manager -->
 
 </head>
 
@@ -126,40 +141,48 @@
 
     @RenderSection("scripts", false)
 
-    <script>
+<script>
 
-        var cookiesAllowedUrl = $('#CookiesAllowedUrl').val();
+    var cookiesAllowedUrl = $('#CookiesAllowedUrl').val();
 
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '@Configuration.GetGoogleAnalyticsId']);
-        _gaq.push(['_gat._anonymizeIp']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '@Configuration.GetGoogleAnalyticsId']);
+    _gaq.push(['_gat._anonymizeIp']);
 
-        $.post(cookiesAllowedUrl, {}, function (data) {
+    $.post(cookiesAllowedUrl, {}, function (data) {
 
-            if (data.CookiesAllowed) {
+        if (data.CookiesAllowed) {
+            _gaq.push(['_trackPageview']);
+        } else {
+            window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = true;
+
+            $('#cookiesAccept').bind('click', function () {
+                window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = false;
                 _gaq.push(['_trackPageview']);
-            } else {
-                window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = true;
-
-                $('#cookiesAccept').bind('click', function () {
-                    window['ga-disable-@Configuration.GetGoogleAnalyticsId'] = false;
-                    _gaq.push(['_trackPageview']);
-                });
-            }
+            });
+        }
 
 
-        });
+    });
 
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
 
-    </script>
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCKKFNS"height="0" width="0" style="display: none; visibility: hidden"></iframe>
+</noscript>
+
+<!-- End Google Tag Manager (noscript) -->
 
 </body>
 </html>
